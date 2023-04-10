@@ -56,7 +56,9 @@ namespace Internal.Runtime
             if (numExtraBytes > MaxExtraPayloadBytes)
                 throw new InvalidOperationException(); // decoder can only decode this many extra bytes
 
-            buffer[0] = (byte)(command | ((MaxShortPayload + numExtraBytes) << DehydratedDataCommandPayloadShift));
+            buffer[0] = (byte)(
+                command | ((MaxShortPayload + numExtraBytes) << DehydratedDataCommandPayloadShift)
+            );
             return 1 + numExtraBytes;
         }
 

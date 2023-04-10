@@ -3,7 +3,8 @@
 
 using System.Runtime.InteropServices;
 
-[Guid ("aaa")]
-class X {
-static void Main () {}
+[Guid("aaa")]
+class X
+{
+    static void Main() { }
 }

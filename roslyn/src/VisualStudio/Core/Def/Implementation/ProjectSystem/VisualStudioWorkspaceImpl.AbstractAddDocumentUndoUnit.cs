@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             protected AbstractAddDocumentUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
                 DocumentInfo docInfo,
-                SourceText text)
+                SourceText text
+            )
                 : base(workspace, docInfo.Id.ProjectId)
             {
                 DocumentInfo = docInfo;
@@ -39,8 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             protected abstract Project AddDocument(Project fromProject);
 
-            public override void GetDescription(out string pBstr)
-                => pBstr = string.Format(FeaturesResources.Add_document_0, DocumentInfo.Name);
+            public override void GetDescription(out string pBstr) =>
+                pBstr = string.Format(FeaturesResources.Add_document_0, DocumentInfo.Name);
         }
     }
 }

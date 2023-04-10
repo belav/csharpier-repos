@@ -17,7 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             protected AbstractAddRemoveUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
-                ProjectId fromProjectId)
+                ProjectId fromProjectId
+            )
             {
                 Workspace = workspace;
                 FromProjectId = fromProjectId;
@@ -26,12 +27,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             public abstract void Do(IOleUndoManager pUndoManager);
             public abstract void GetDescription(out string pBstr);
 
-            public void GetUnitType(out Guid pClsid, out int plID)
-                => throw new NotImplementedException();
+            public void GetUnitType(out Guid pClsid, out int plID) =>
+                throw new NotImplementedException();
 
-            public void OnNextAdd()
-            {
-            }
+            public void OnNextAdd() { }
         }
     }
 }

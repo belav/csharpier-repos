@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,185 +32,200 @@ using System.Xml;
 
 namespace System.Configuration
 {
-	public sealed class SectionInformation
-	{
-		ConfigurationSection parent;
-		
-		ConfigurationAllowDefinition allow_definition = ConfigurationAllowDefinition.Everywhere;
-		ConfigurationAllowExeDefinition allow_exe_definition = ConfigurationAllowExeDefinition.MachineToApplication;
-		bool allow_location, allow_override;
-		bool inherit_on_child_apps;
-		bool restart_on_external_changes;
-		bool require_permission;
+    public sealed class SectionInformation
+    {
+        ConfigurationSection parent;
 
-		string config_source = String.Empty;
-		bool force_update;
-		string name, type_name;
-		string raw_xml;
-		
-		ProtectedConfigurationProvider protection_provider;
-		
+        ConfigurationAllowDefinition allow_definition = ConfigurationAllowDefinition.Everywhere;
+        ConfigurationAllowExeDefinition allow_exe_definition =
+            ConfigurationAllowExeDefinition.MachineToApplication;
+        bool allow_location,
+            allow_override;
+        bool inherit_on_child_apps;
+        bool restart_on_external_changes;
+        bool require_permission;
 
-		[MonoTODO ("default value for require_permission")]
-		internal SectionInformation ()
-		{
-			allow_definition = ConfigurationAllowDefinition.Everywhere;
-			allow_location = true;
-			allow_override = true;
-			inherit_on_child_apps = true;
-			restart_on_external_changes = true;
-		}
+        string config_source = String.Empty;
+        bool force_update;
+        string name,
+            type_name;
+        string raw_xml;
 
-		internal string ConfigFilePath {
-			get;
-			set;
-		}
-		
-		public ConfigurationAllowDefinition AllowDefinition {
-			get { return allow_definition; }
-			set { allow_definition = value; }
-		}
+        ProtectedConfigurationProvider protection_provider;
 
-		public ConfigurationAllowExeDefinition AllowExeDefinition {
-			get { return allow_exe_definition; }
-			set { allow_exe_definition = value; }
-		}
+        [MonoTODO("default value for require_permission")]
+        internal SectionInformation()
+        {
+            allow_definition = ConfigurationAllowDefinition.Everywhere;
+            allow_location = true;
+            allow_override = true;
+            inherit_on_child_apps = true;
+            restart_on_external_changes = true;
+        }
 
-		public bool AllowLocation {
-			get { return allow_location; }
-			set { allow_location = value; }
-		}
+        internal string ConfigFilePath { get; set; }
 
-		public bool AllowOverride {
-			get { return allow_override; }
-			set { allow_override = value; }
-		}
+        public ConfigurationAllowDefinition AllowDefinition
+        {
+            get { return allow_definition; }
+            set { allow_definition = value; }
+        }
 
-		public string ConfigSource {
-			get { return config_source; }
-			set {
-				if (value == null)
-					value = String.Empty;
+        public ConfigurationAllowExeDefinition AllowExeDefinition
+        {
+            get { return allow_exe_definition; }
+            set { allow_exe_definition = value; }
+        }
 
-				config_source = value; 
-			}
-		}
+        public bool AllowLocation
+        {
+            get { return allow_location; }
+            set { allow_location = value; }
+        }
 
-		public bool ForceSave {
-			get { return force_update; }
-			set { force_update = value; }
-		}
+        public bool AllowOverride
+        {
+            get { return allow_override; }
+            set { allow_override = value; }
+        }
 
-		public bool InheritInChildApplications {
-			get { return inherit_on_child_apps; }
-			set { inherit_on_child_apps = value; }
-		}
+        public string ConfigSource
+        {
+            get { return config_source; }
+            set
+            {
+                if (value == null)
+                    value = String.Empty;
 
-		[MonoTODO]
-		public bool IsDeclarationRequired {
-			get { throw new NotImplementedException (); }
-		}
+                config_source = value;
+            }
+        }
 
-		[MonoTODO]
-		public bool IsDeclared {
-			get { return false; }
-		}
+        public bool ForceSave
+        {
+            get { return force_update; }
+            set { force_update = value; }
+        }
 
-		[MonoTODO]
-		public bool IsLocked {
-			get { return false; }
-		}
+        public bool InheritInChildApplications
+        {
+            get { return inherit_on_child_apps; }
+            set { inherit_on_child_apps = value; }
+        }
 
-		public bool IsProtected {
-			get { return protection_provider != null; }
-		}
+        [MonoTODO]
+        public bool IsDeclarationRequired
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        [MonoTODO]
+        public bool IsDeclared
+        {
+            get { return false; }
+        }
 
-		public ProtectedConfigurationProvider ProtectionProvider {
-			get { return protection_provider; }
-		}
+        [MonoTODO]
+        public bool IsLocked
+        {
+            get { return false; }
+        }
 
-		[MonoTODO]
-		public bool RequirePermission {
-			get { return require_permission; }
-			set { require_permission = value; }
-		}
+        public bool IsProtected
+        {
+            get { return protection_provider != null; }
+        }
 
-		[MonoTODO]
-		public bool RestartOnExternalChanges {
-			get { return restart_on_external_changes; }
-			set { restart_on_external_changes = value; }
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		[MonoTODO]
-		public string SectionName {
-			get { return name; }
-		}
+        public ProtectedConfigurationProvider ProtectionProvider
+        {
+            get { return protection_provider; }
+        }
 
-		public string Type {
-			get { return type_name; }
-			set {
-				if (value == null || value.Length == 0)
-					throw new ArgumentException ("Value cannot be null or empty.");
+        [MonoTODO]
+        public bool RequirePermission
+        {
+            get { return require_permission; }
+            set { require_permission = value; }
+        }
 
-				type_name = value; 
-			}
-		}
+        [MonoTODO]
+        public bool RestartOnExternalChanges
+        {
+            get { return restart_on_external_changes; }
+            set { restart_on_external_changes = value; }
+        }
 
-		public ConfigurationSection GetParentSection ()
-		{
-			return parent;
-		}
+        [MonoTODO]
+        public string SectionName
+        {
+            get { return name; }
+        }
 
-		internal void SetParentSection (ConfigurationSection parent)
-		{
-			this.parent = parent;
-		}
+        public string Type
+        {
+            get { return type_name; }
+            set
+            {
+                if (value == null || value.Length == 0)
+                    throw new ArgumentException("Value cannot be null or empty.");
 
-		public string GetRawXml ()
-		{
-			return raw_xml;
-		}
+                type_name = value;
+            }
+        }
 
-		public void ProtectSection (string protectionProvider)
-		{
-			protection_provider = ProtectedConfiguration.GetProvider (protectionProvider, true);
-		}
+        public ConfigurationSection GetParentSection()
+        {
+            return parent;
+        }
 
-		[MonoTODO]
-		public void ForceDeclaration (bool force)
-		{
-		}
+        internal void SetParentSection(ConfigurationSection parent)
+        {
+            this.parent = parent;
+        }
 
-		public void ForceDeclaration ()
-		{
-			ForceDeclaration (true);
-		}
+        public string GetRawXml()
+        {
+            return raw_xml;
+        }
 
-		[MonoTODO]
-		public void RevertToParent ()
-		{
-			throw new NotImplementedException ();
-		}
+        public void ProtectSection(string protectionProvider)
+        {
+            protection_provider = ProtectedConfiguration.GetProvider(protectionProvider, true);
+        }
 
-		public void UnprotectSection ()
-		{
-			protection_provider = null;
-		}
+        [MonoTODO]
+        public void ForceDeclaration(bool force) { }
 
-		public void SetRawXml (string rawXml)
-		{
-			raw_xml = rawXml;
-		}
+        public void ForceDeclaration()
+        {
+            ForceDeclaration(true);
+        }
 
-		[MonoTODO]
-		internal void SetName (string name)
-		{
-			this.name = name;
-		}
-	}
+        [MonoTODO]
+        public void RevertToParent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnprotectSection()
+        {
+            protection_provider = null;
+        }
+
+        public void SetRawXml(string rawXml)
+        {
+            raw_xml = rawXml;
+        }
+
+        [MonoTODO]
+        internal void SetName(string name)
+        {
+            this.name = name;
+        }
+    }
 }
-

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,9 +28,11 @@ namespace Castle.DynamicProxy.Tests
         public void InterfaceInheritance()
         {
             ICameraService proxy = (ICameraService)
-                                   generator.CreateInterfaceProxyWithTarget(typeof (ICameraService),
-                                                                            new CameraService(),
-                                                                            new StandardInterceptor());
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(ICameraService),
+                    new CameraService(),
+                    new StandardInterceptor()
+                );
 
             Assert.IsNotNull(proxy);
 
@@ -42,9 +44,11 @@ namespace Castle.DynamicProxy.Tests
         public void ProxyInterfaceWithSetterOnly()
         {
             IHaveOnlySetter proxy = (IHaveOnlySetter)
-                                    generator.CreateInterfaceProxyWithTarget(typeof (IHaveOnlySetter),
-                                                                             new HaveOnlySetter(),
-                                                                             new DoNothingInterceptor());
+                generator.CreateInterfaceProxyWithTarget(
+                    typeof(IHaveOnlySetter),
+                    new HaveOnlySetter(),
+                    new DoNothingInterceptor()
+                );
 
             Assert.IsNotNull(proxy);
 
@@ -54,15 +58,18 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void CallingProceedWithInterceptorOnAbstractMethodShouldThrowException()
         {
-            var proxy = generator.CreateClassProxy<AbstractClass>(ProxyGenerationOptions.Default, new StandardInterceptor());
+            var proxy = generator.CreateClassProxy<AbstractClass>(
+                ProxyGenerationOptions.Default,
+                new StandardInterceptor()
+            );
             Assert.IsNotNull(proxy);
 
             var ex = Assert.Throws(typeof(NotImplementedException), () => proxy.Foo());
 
             var message =
-                "This is a DynamicProxy2 error: The interceptor attempted to 'Proceed' for method 'System.String Foo()' which is abstract. " +
-                "When calling an abstract method there is no implementation to 'proceed' to " +
-                "and it is the responsibility of the interceptor to mimic the implementation (set return value, out arguments etc)";
+                "This is a DynamicProxy2 error: The interceptor attempted to 'Proceed' for method 'System.String Foo()' which is abstract. "
+                + "When calling an abstract method there is no implementation to 'proceed' to "
+                + "and it is the responsibility of the interceptor to mimic the implementation (set return value, out arguments etc)";
             Assert.AreEqual(message, ex.Message);
         }
 
@@ -75,24 +82,30 @@ namespace Castle.DynamicProxy.Tests
             var ex = Assert.Throws<NotImplementedException>(() => proxy.Foo());
 
             var message =
-                "This is a DynamicProxy2 error: There are no interceptors specified for method 'System.String Foo()' which is abstract. " +
-                "When calling an abstract method there is no implementation to 'proceed' to " +
-                "and it is the responsibility of the interceptor to mimic the implementation (set return value, out arguments etc)";
+                "This is a DynamicProxy2 error: There are no interceptors specified for method 'System.String Foo()' which is abstract. "
+                + "When calling an abstract method there is no implementation to 'proceed' to "
+                + "and it is the responsibility of the interceptor to mimic the implementation (set return value, out arguments etc)";
             Assert.AreEqual(message, ex.Message);
         }
 
         [Test]
         public void ProxyTypeThatInheritFromGenericType()
         {
-            var proxy = generator.CreateInterfaceProxyWithoutTarget<IUserRepository>(new DoNothingInterceptor());
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IUserRepository>(
+                new DoNothingInterceptor()
+            );
             Assert.IsNotNull(proxy);
         }
 
         [Test]
         public void DYNPROXY_51_GenericMarkerInterface()
         {
-            WithMixin p =
-                (WithMixin) generator.CreateClassProxy(typeof (WithMixin), new Type[] {typeof (Marker<int>)}, new IInterceptor[0]);
+            WithMixin p = (WithMixin)
+                generator.CreateClassProxy(
+                    typeof(WithMixin),
+                    new Type[] { typeof(Marker<int>) },
+                    new IInterceptor[0]
+                );
             p.Method();
         }
 
@@ -107,7 +120,9 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void DYNPROXY_99_InterfaceProxyWithTargetHasNamespace()
         {
-            Type type = generator.CreateInterfaceProxyWithTarget(typeof(IService),new ServiceImpl()).GetType();
+            Type type = generator
+                .CreateInterfaceProxyWithTarget(typeof(IService), new ServiceImpl())
+                .GetType();
             Assert.IsNotNull(type.Namespace);
             Assert.AreEqual("Castle.Proxies", type.Namespace);
         }
@@ -115,10 +130,13 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void DYNPROXY_99_InterfaceProxyWithTargetInterfaceHasNamespace()
         {
-            Type type = generator.CreateInterfaceProxyWithTargetInterface(typeof(IService), new ServiceImpl()).GetType();
+            Type type = generator
+                .CreateInterfaceProxyWithTargetInterface(typeof(IService), new ServiceImpl())
+                .GetType();
             Assert.IsNotNull(type.Namespace);
             Assert.AreEqual("Castle.Proxies", type.Namespace);
         }
+
         [Test]
         public void DYNPROXY_99_InterfaceProxyWithoutTargetHasNamespace()
         {
@@ -133,13 +151,9 @@ namespace Castle.DynamicProxy.Tests
         TEntity GetById(TKey key);
     }
 
-    public class User
-    {
-    }
+    public class User { }
 
-    public interface IUserRepository : IRepository<User, string>
-    {
-    }
+    public interface IUserRepository : IRepository<User, string> { }
 
     public abstract class AbstractClass
     {
@@ -159,14 +173,10 @@ namespace Castle.DynamicProxy.Tests
         }
     }
 
-    public interface Marker<T>
-    {
-    }
+    public interface Marker<T> { }
 
     public class WithMixin
     {
-        public virtual void Method()
-        {
-        }
+        public virtual void Method() { }
     }
 }

@@ -8,6 +8,4 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-public abstract class TestAnalyzer : DiagnosticAnalyzer
-{
-}
+public abstract class TestAnalyzer : DiagnosticAnalyzer { }

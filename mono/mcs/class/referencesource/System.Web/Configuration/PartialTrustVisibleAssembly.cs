@@ -26,63 +26,58 @@ namespace System.Web.Configuration
     public sealed class PartialTrustVisibleAssembly : ConfigurationElement
     {
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propAssemblyName =
-            new ConfigurationProperty("assemblyName",
-                                        typeof(string),
-                                        null,
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+        private static readonly ConfigurationProperty _propAssemblyName = new ConfigurationProperty(
+            "assemblyName",
+            typeof(string),
+            null,
+            null,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        );
 
-        private static readonly ConfigurationProperty _propPublicKey =
-            new ConfigurationProperty("publicKey",
-                                        typeof(string),
-                                        null,
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.IsRequired);
+        private static readonly ConfigurationProperty _propPublicKey = new ConfigurationProperty(
+            "publicKey",
+            typeof(string),
+            null,
+            null,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.IsRequired
+        );
 
-        static PartialTrustVisibleAssembly() {
+        static PartialTrustVisibleAssembly()
+        {
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propAssemblyName);
             _properties.Add(_propPublicKey);
         }
 
+        internal PartialTrustVisibleAssembly() { }
 
-        internal PartialTrustVisibleAssembly() {
-        }
-
-        public PartialTrustVisibleAssembly(string assemblyName, string publicKey) {
+        public PartialTrustVisibleAssembly(string assemblyName, string publicKey)
+        {
             AssemblyName = assemblyName;
             PublicKey = publicKey;
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("assemblyName", IsRequired = true, IsKey = true, DefaultValue = "")]
         [StringValidator(MinLength = 1)]
-        public string AssemblyName {
-            get {
-                return (string)base[_propAssemblyName];
-            }
-            set {
-                base[_propAssemblyName] = value;
-            }
+        public string AssemblyName
+        {
+            get { return (string)base[_propAssemblyName]; }
+            set { base[_propAssemblyName] = value; }
         }
 
         [ConfigurationProperty("publicKey", IsRequired = true, IsKey = false, DefaultValue = "")]
         [StringValidator(MinLength = 1)]
-        public string PublicKey {
-            get {
-                return (string)base[_propPublicKey];
-            }
-            set {
-                base[_propPublicKey] = value;
-            }
+        public string PublicKey
+        {
+            get { return (string)base[_propPublicKey]; }
+            set { base[_propPublicKey] = value; }
         }
     }
 }

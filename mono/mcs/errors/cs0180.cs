@@ -1,12 +1,9 @@
 // CS0180: `X.extern_method()' cannot be both extern and abstract
 // Line:
 
-class X {
+class X
+{
+    public extern abstract int extern_method();
 
-	public extern abstract int extern_method ();
-	
-	public static void Main ()
-		{
-		}
+    public static void Main() { }
 }
-      

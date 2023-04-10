@@ -3,14 +3,15 @@
 // Compiler options: -warn:3 -warnaserror
 
 using System;
+
 public class ConsoleStub
 {
-	public static void Main()
-	{
-		try {
-		} catch (Exception e) {
-			e = null;
-		}
-	}
+    public static void Main()
+    {
+        try { }
+        catch (Exception e)
+        {
+            e = null;
+        }
+    }
 }
-

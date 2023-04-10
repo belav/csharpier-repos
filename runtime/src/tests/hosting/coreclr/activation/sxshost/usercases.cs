@@ -21,7 +21,7 @@ class Calls
         throw new NotSupportedException("blagh");
         return 100;
     }
-    
+
     static int InterfaceThrow()
     {
         Console.WriteLine("Interface call to null object");

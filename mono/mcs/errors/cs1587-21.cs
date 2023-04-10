@@ -6,12 +6,10 @@ using System;
 
 namespace TopNS
 {
-	class Foo
-	{
-		void  /// incorrect
-		FooBar (string foo)
-		{
-		}
-	}
-
+    class Foo
+    {
+        void
+        /// incorrect
+        FooBar(string foo) { }
+    }
 }

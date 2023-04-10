@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,8 +31,9 @@ namespace Castle.DynamicProxy.Tests
         {
             NonPublicConstructorClass proxy =
                 generator.CreateClassProxy(
-                    typeof(NonPublicConstructorClass), new StandardInterceptor())
-                as NonPublicConstructorClass;
+                    typeof(NonPublicConstructorClass),
+                    new StandardInterceptor()
+                ) as NonPublicConstructorClass;
 
             Assert.IsNotNull(proxy);
 
@@ -44,8 +45,9 @@ namespace Castle.DynamicProxy.Tests
         {
             ProtectedInternalConstructorClass proxy =
                 generator.CreateClassProxy(
-                    typeof(ProtectedInternalConstructorClass), new StandardInterceptor())
-                as ProtectedInternalConstructorClass;
+                    typeof(ProtectedInternalConstructorClass),
+                    new StandardInterceptor()
+                ) as ProtectedInternalConstructorClass;
 
             Assert.IsNotNull(proxy);
 
@@ -58,7 +60,7 @@ namespace Castle.DynamicProxy.Tests
             LogInvocationInterceptor logger = new LogInvocationInterceptor();
 
             NonPublicMethodsClass proxy = (NonPublicMethodsClass)
-                                          generator.CreateClassProxy(typeof(NonPublicMethodsClass), logger);
+                generator.CreateClassProxy(typeof(NonPublicMethodsClass), logger);
 
             proxy.DoSomething();
             Assert.AreEqual(2, logger.Invocations.Count);
@@ -69,21 +71,27 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void InternalConstructorIsNotReplicated()
         {
-            object proxy = generator.CreateClassProxy(typeof(Dictionary<int, object>), new StandardInterceptor());
-            Assert.IsNull(proxy.GetType().GetConstructor(new[] { typeof(IInterceptor[]), typeof(bool) }));
+            object proxy = generator.CreateClassProxy(
+                typeof(Dictionary<int, object>),
+                new StandardInterceptor()
+            );
+            Assert.IsNull(
+                proxy.GetType().GetConstructor(new[] { typeof(IInterceptor[]), typeof(bool) })
+            );
         }
 
         internal class InternalClass
         {
-            internal InternalClass()
-            {
-            }
+            internal InternalClass() { }
         }
 
         [Test]
         public void InternalConstructorIsReplicatedWhenInternalsVisibleTo()
         {
-            object proxy = generator.CreateClassProxy(typeof(InternalClass), new StandardInterceptor());
+            object proxy = generator.CreateClassProxy(
+                typeof(InternalClass),
+                new StandardInterceptor()
+            );
             Assert.IsNotNull(proxy.GetType().GetConstructor(new[] { typeof(IInterceptor[]) }));
         }
 
@@ -93,13 +101,17 @@ namespace Castle.DynamicProxy.Tests
         [TestCase(typeof(ProtectedInternalMethodClass))]
         public void Methods_made_visible_by_InternalsVisibleTo_can_be_intercepted(Type methodClass)
         {
-            var method = methodClass.GetMethod("Method", BindingFlags.NonPublic | BindingFlags.Instance);
-            Assume.That(ProxyUtil.IsAccessible(method));  // because this assembly makes its internals visible to DynamicProxy
+            var method = methodClass.GetMethod(
+                "Method",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+            Assume.That(ProxyUtil.IsAccessible(method)); // because this assembly makes its internals visible to DynamicProxy
 
             var realObj = (IMethodClass)Activator.CreateInstance(methodClass);
             Assert.Throws<Exception>(realObj.InvokeMethod);
 
-            var proxy = (IMethodClass)generator.CreateClassProxy(methodClass, new DoNothingInterceptor());
+            var proxy = (IMethodClass)
+                generator.CreateClassProxy(methodClass, new DoNothingInterceptor());
             Assert.DoesNotThrow(proxy.InvokeMethod);
         }
 
@@ -111,24 +123,28 @@ namespace Castle.DynamicProxy.Tests
         public class InternalMethodClass : IMethodClass
         {
             public void InvokeMethod() => Method();
+
             internal virtual void Method() => throw new Exception();
         }
 
         public class PrivateProtectedMethodClass : IMethodClass
         {
             public void InvokeMethod() => Method();
+
             private protected virtual void Method() => throw new Exception();
         }
 
         public class ProtectedMethodClass : IMethodClass
         {
             public void InvokeMethod() => Method();
+
             protected virtual void Method() => throw new Exception();
         }
 
         public class ProtectedInternalMethodClass : IMethodClass
         {
             public void InvokeMethod() => Method();
+
             protected internal virtual void Method() => throw new Exception();
         }
     }

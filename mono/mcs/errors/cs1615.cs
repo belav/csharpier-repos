@@ -3,11 +3,11 @@
 
 class C
 {
-	public static void test (int i) {}
+    public static void test(int i) { }
 
-	public static void Main()
-	{
-		int i = 1;
-		test (ref i);
-	}
+    public static void Main()
+    {
+        int i = 1;
+        test(ref i);
+    }
 }

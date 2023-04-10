@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="VerticalAlign.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
     /// <devdoc>
@@ -13,15 +13,15 @@ namespace System.Web.UI.WebControls.WebParts {
     ///       Specifies what properties can be exported from a WebPart.
     ///    </para>
     /// </devdoc>
-    public enum WebPartExportMode {
-
+    public enum WebPartExportMode
+    {
         /// <devdoc>
         ///    <para>
         ///       The Part is not exportable.
         ///    </para>
         /// </devdoc>
         None = 0,
-        
+
         /// <devdoc>
         ///    <para>
         ///       All properties can be exported.

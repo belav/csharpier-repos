@@ -4,10 +4,10 @@
 
 class C
 {
-	int? s;
-	
-	void Test ()
-	{
-		System.Console.WriteLine (s == null);
-	}
+    int? s;
+
+    void Test()
+    {
+        System.Console.WriteLine(s == null);
+    }
 }

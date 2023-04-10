@@ -6,7 +6,11 @@ using System.Runtime.Serialization;
 
 namespace System.Reflection
 {
-    [Obsolete(Obsoletions.StrongNameKeyPairMessage, DiagnosticId = Obsoletions.StrongNameKeyPairDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.StrongNameKeyPairMessage,
+        DiagnosticId = Obsoletions.StrongNameKeyPairDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public class StrongNameKeyPair : IDeserializationCallback, ISerializable
     {
         public StrongNameKeyPair(FileStream keyPairFile) =>

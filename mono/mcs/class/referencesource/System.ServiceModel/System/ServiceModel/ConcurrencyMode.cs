@@ -17,11 +17,10 @@ namespace System.ServiceModel
     {
         static public bool IsDefined(ConcurrencyMode x)
         {
-            return
-                x == ConcurrencyMode.Single ||
-                x == ConcurrencyMode.Reentrant ||
-                x == ConcurrencyMode.Multiple ||
-                false;
+            return x == ConcurrencyMode.Single
+                || x == ConcurrencyMode.Reentrant
+                || x == ConcurrencyMode.Multiple
+                || false;
         }
     }
 }

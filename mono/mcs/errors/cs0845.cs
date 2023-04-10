@@ -6,8 +6,8 @@ using System.Linq.Expressions;
 
 class C
 {
-	public static void Main ()
-	{
-		Expression<Func<bool?, bool?>> e = (a) => null ?? a;
-	}
+    public static void Main()
+    {
+        Expression<Func<bool?, bool?>> e = (a) => null ?? a;
+    }
 }

@@ -7,7 +7,10 @@ using System.Diagnostics.Tracing;
 
 namespace System.Net
 {
-    [EventSource(Name = "Private.InternalDiagnostics.System.Net.Http", LocalizationResources = "FxResources.System.Net.Http.SR")]
+    [EventSource(
+        Name = "Private.InternalDiagnostics.System.Net.Http",
+        LocalizationResources = "FxResources.System.Net.Http.SR"
+    )]
     internal sealed partial class NetEventSource
     {
         private const int UriBaseAddressId = NextAvailableEventId;
@@ -45,12 +48,22 @@ namespace System.Net
             WriteEvent(HeadersInvalidValueId, name, rawValue);
 
         [Event(HandlerMessageId, Keywords = Keywords.Debug, Level = EventLevel.Verbose)]
-        public void HandlerMessage(int poolId, int workerId, int requestId, string? memberName, string? message) =>
-            WriteEvent(HandlerMessageId, poolId, workerId, requestId, memberName, message);
+        public void HandlerMessage(
+            int poolId,
+            int workerId,
+            int requestId,
+            string? memberName,
+            string? message
+        ) => WriteEvent(HandlerMessageId, poolId, workerId, requestId, memberName, message);
 
         [Event(HandlerErrorId, Keywords = Keywords.Debug, Level = EventLevel.Error)]
-        public void HandlerMessageError(int poolId, int workerId, int requestId, string? memberName, string message) =>
-            WriteEvent(HandlerErrorId, poolId, workerId, requestId, memberName, message);
+        public void HandlerMessageError(
+            int poolId,
+            int workerId,
+            int requestId,
+            string? memberName,
+            string message
+        ) => WriteEvent(HandlerErrorId, poolId, workerId, requestId, memberName, message);
 
         [NonEvent]
         public static void AuthenticationInfo(Uri uri, string message)
@@ -74,10 +87,20 @@ namespace System.Net
         public void AuthenticationError(string? uri, string message) =>
             WriteEvent(AuthenticationErrorId, uri, message);
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
         [NonEvent]
-        private unsafe void WriteEvent(int eventId, int arg1, int arg2, int arg3, string? arg4, string? arg5)
+        private unsafe void WriteEvent(
+            int eventId,
+            int arg1,
+            int arg2,
+            int arg3,
+            string? arg4,
+            string? arg5
+        )
         {
             arg4 ??= "";
             arg5 ??= "";
@@ -88,21 +111,9 @@ namespace System.Net
                 const int NumEventDatas = 5;
                 EventData* descrs = stackalloc EventData[NumEventDatas];
 
-                descrs[0] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg1),
-                    Size = sizeof(int)
-                };
-                descrs[1] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg2),
-                    Size = sizeof(int)
-                };
-                descrs[2] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg3),
-                    Size = sizeof(int)
-                };
+                descrs[0] = new EventData { DataPointer = (IntPtr)(&arg1), Size = sizeof(int) };
+                descrs[1] = new EventData { DataPointer = (IntPtr)(&arg2), Size = sizeof(int) };
+                descrs[2] = new EventData { DataPointer = (IntPtr)(&arg3), Size = sizeof(int) };
                 descrs[3] = new EventData
                 {
                     DataPointer = (IntPtr)string4Bytes,

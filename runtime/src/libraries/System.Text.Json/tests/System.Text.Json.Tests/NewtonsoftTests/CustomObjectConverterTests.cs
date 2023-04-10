@@ -45,9 +45,13 @@ namespace System.Text.Json.Tests
                 NullDecimalRange = null
             };
 
-            string json = JsonSerializer.Serialize(initial, new JsonSerializerOptions { WriteIndented = true });
+            string json = JsonSerializer.Serialize(
+                initial,
+                new JsonSerializerOptions { WriteIndented = true }
+            );
 
-            Assert.Equal(@"{
+            Assert.Equal(
+                @"{
   ""Id"": ""00000001-0002-0003-0405-060708090a0b"",
   ""Year"": 2010,
   ""Company"": ""Company!"",
@@ -60,13 +64,16 @@ namespace System.Text.Json.Tests
     ""Last"": 2147483647
   },
   ""NullDecimalRange"": null
-}".NormalizeLineEndings(), json);
+}".NormalizeLineEndings(),
+                json
+            );
         }
 
         [Fact]
         public void DeserializeAndConvertNullValue()
         {
-            string json = @"{
+            string json =
+                @"{
   ""Id"": ""00000001-0002-0003-0405-060708090a0b"",
   ""Year"": 2010,
   ""Company"": ""Company!"",
@@ -83,7 +90,8 @@ namespace System.Text.Json.Tests
 
             JsonSerializer.Serialize(json, new JsonSerializerOptions { WriteIndented = true });
 
-            NullInterfaceTestClass deserialized = JsonSerializer.Deserialize<NullInterfaceTestClass>(json);
+            NullInterfaceTestClass deserialized =
+                JsonSerializer.Deserialize<NullInterfaceTestClass>(json);
 
             Assert.Equal("Company!", deserialized.Company);
             Assert.Equal(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), deserialized.Id);
@@ -98,7 +106,8 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeByteArrayFromJsonArray()
         {
-            string json = @"{
+            string json =
+                @"{
   ""ByteArray"": ""AAECAw=="",
   ""NullByteArray"": null
 }";
@@ -116,18 +125,25 @@ namespace System.Text.Json.Tests
             byteArrayClass.ByteArray = s_testData;
             byteArrayClass.NullByteArray = null;
 
-            string json = JsonSerializer.Serialize(byteArrayClass, new JsonSerializerOptions { WriteIndented = true });
+            string json = JsonSerializer.Serialize(
+                byteArrayClass,
+                new JsonSerializerOptions { WriteIndented = true }
+            );
 
-            Assert.Equal(@"{
+            Assert.Equal(
+                @"{
   ""ByteArray"": ""VGhpcyBpcyBzb21lIHRlc3QgZGF0YSEhIQ=="",
   ""NullByteArray"": null
-}".NormalizeLineEndings(), json);
+}".NormalizeLineEndings(),
+                json
+            );
         }
 
         [Fact]
         public void DeserializeByteArrayClass()
         {
-            string json = @"{
+            string json =
+                @"{
   ""ByteArray"": ""VGhpcyBpcyBzb21lIHRlc3QgZGF0YSEhIQ=="",
   ""NullByteArray"": null
 }";
@@ -165,7 +181,9 @@ namespace System.Text.Json.Tests
                     }
                 }]";
 
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<List<MyClass>>(validJson));
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize<List<MyClass>>(validJson)
+            );
 
             const string invalidJson =
                 @"{
@@ -175,7 +193,9 @@ namespace System.Text.Json.Tests
                     }
                 }";
 
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<List<MyClass>>(invalidJson));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<List<MyClass>>(invalidJson)
+            );
         }
     }
 

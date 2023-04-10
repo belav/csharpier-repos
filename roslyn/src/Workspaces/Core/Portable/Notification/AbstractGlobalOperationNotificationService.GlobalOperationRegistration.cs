@@ -14,8 +14,8 @@ internal partial class AbstractGlobalOperationNotificationService
     {
         private readonly AbstractGlobalOperationNotificationService _service;
 
-        public GlobalOperationRegistration(AbstractGlobalOperationNotificationService service)
-            => _service = service;
+        public GlobalOperationRegistration(AbstractGlobalOperationNotificationService service) =>
+            _service = service;
 
         public void Dispose()
         {

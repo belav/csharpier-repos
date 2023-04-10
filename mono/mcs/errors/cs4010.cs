@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 class C
 {
-	static Task<int> GetInt ()
-	{
-		return null;
-	}
-	
-	public static void Main ()
-	{
-		Func<bool> a = async () => { await GetInt (); };
-	}
+    static Task<int> GetInt()
+    {
+        return null;
+    }
+
+    public static void Main()
+    {
+        Func<bool> a = async () =>
+        {
+            await GetInt();
+        };
+    }
 }

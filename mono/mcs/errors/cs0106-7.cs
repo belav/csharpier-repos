@@ -3,7 +3,8 @@
 
 struct S
 {
-	public abstract int Prop {
-		set {}
-	}
+    public abstract int Prop
+    {
+        set { }
+    }
 }

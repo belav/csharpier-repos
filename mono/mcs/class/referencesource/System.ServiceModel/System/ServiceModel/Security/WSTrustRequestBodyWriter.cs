@@ -28,12 +28,18 @@ namespace System.ServiceModel.Security
         /// <exception cref="ArgumentNullException">The 'requestSecurityToken' is null.</exception>
         /// <exception cref="ArgumentNullException">The 'serializer' is null.</exception>
         /// <exception cref="ArgumentNullException">The 'serializationContext' is null.</exception>
-        public WSTrustRequestBodyWriter(System.IdentityModel.Protocols.WSTrust.RequestSecurityToken requestSecurityToken, WSTrustRequestSerializer serializer, WSTrustSerializationContext serializationContext)
+        public WSTrustRequestBodyWriter(
+            System.IdentityModel.Protocols.WSTrust.RequestSecurityToken requestSecurityToken,
+            WSTrustRequestSerializer serializer,
+            WSTrustSerializationContext serializationContext
+        )
             : base(true)
         {
             if (requestSecurityToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("requestSecurityToken");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "requestSecurityToken"
+                );
             }
 
             if (serializer == null)
@@ -43,7 +49,9 @@ namespace System.ServiceModel.Security
 
             if (serializationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serializationContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serializationContext"
+                );
             }
 
             _requestSecurityToken = requestSecurityToken;
@@ -60,5 +68,4 @@ namespace System.ServiceModel.Security
             _serializer.WriteXml(_requestSecurityToken, writer, _serializationContext);
         }
     }
-
 }

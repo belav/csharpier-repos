@@ -21,9 +21,19 @@ namespace System
     // UrlFormat.The URL that should be used by an IDE for navigating to corresponding documentation. Instead of taking the URL directly,
     //   the API takes a format string. This allows having a generic URL that includes the diagnostic ID.
     //
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum |
-        AttributeTargets.Interface | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Delegate,
-        Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Event
+            | AttributeTargets.Delegate,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else
@@ -31,9 +41,7 @@ namespace System
 #endif
     sealed class ObsoleteAttribute : Attribute
     {
-        public ObsoleteAttribute()
-        {
-        }
+        public ObsoleteAttribute() { }
 
         public ObsoleteAttribute(string? message)
         {

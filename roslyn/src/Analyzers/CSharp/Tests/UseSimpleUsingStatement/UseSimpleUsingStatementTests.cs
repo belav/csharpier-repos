@@ -19,24 +19,30 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseSimpleUsingStatement)]
-    public partial class UseSimpleUsingStatementTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseSimpleUsingStatementTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseSimpleUsingStatementTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new UseSimpleUsingStatementDiagnosticAnalyzer(), new UseSimpleUsingStatementCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new UseSimpleUsingStatementDiagnosticAnalyzer(),
+                new UseSimpleUsingStatementCodeFixProvider()
+            );
 
-        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
-        private static readonly ParseOptions CSharp8ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp72ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp8ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
 
         [Fact]
         public async Task TestAboveCSharp8()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -47,7 +53,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -56,14 +62,15 @@ class C
         using var a = b;
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestWithOptionOff()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -74,16 +81,21 @@ class C
         }
     }
 }",
-new TestParameters(
-    parseOptions: CSharp8ParseOptions,
-    options: Option(CSharpCodeStyleOptions.PreferSimpleUsingStatement, CodeStyleOptions2.FalseWithSilentEnforcement)));
+                new TestParameters(
+                    parseOptions: CSharp8ParseOptions,
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferSimpleUsingStatement,
+                        CodeStyleOptions2.FalseWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact]
         public async Task TestMultiDeclaration()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -94,7 +106,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -103,14 +115,15 @@ class C
         using var a = b, c = d;
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         public async Task TestMissingIfOnSimpleUsingStatement()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -118,14 +131,16 @@ class C
     {
         [||]using var a = b;
     }
-}", parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+}",
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         public async Task TestMissingPriorToCSharp8()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -135,14 +150,16 @@ class C
         {
         }
     }
-}", parameters: new TestParameters(parseOptions: CSharp72ParseOptions));
+}",
+                parameters: new TestParameters(parseOptions: CSharp72ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         public async Task TestMissingIfExpressionUsing()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -152,14 +169,16 @@ class C
         {
         }
     }
-}", parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+}",
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         public async Task TestMissingIfCodeFollows()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -170,7 +189,9 @@ class C
         }
         Console.WriteLine();
     }
-}", parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+}",
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -178,7 +199,7 @@ class C
         {
             // not actually legal code.
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -190,7 +211,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -200,7 +221,8 @@ class C
         async using var a = b;
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -208,7 +230,7 @@ parseOptions: CSharp8ParseOptions);
         {
             // not actually legal code.
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -220,7 +242,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -230,14 +252,15 @@ class C
         await using var a = b;
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestWithBlockBodyWithContents()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -249,7 +272,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -259,14 +282,15 @@ class C
         Console.WriteLine(a);
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestWithNonBlockBody()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -276,7 +300,7 @@ class C
             Console.WriteLine(a);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -286,14 +310,15 @@ class C
         Console.WriteLine(a);
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestMultiUsing1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -306,7 +331,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -317,14 +342,15 @@ class C
         Console.WriteLine(a);
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestMultiUsingOnlyOnTopmostUsing()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -337,14 +363,15 @@ class C
         }
     }
 }",
-new TestParameters(parseOptions: CSharp8ParseOptions));
+                new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -359,7 +386,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -370,14 +397,15 @@ class C
         Console.WriteLine(a);
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -392,7 +420,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -403,14 +431,15 @@ class C
         Console.WriteLine(a);
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestFixAll3()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -427,7 +456,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -440,14 +469,15 @@ class C
         Console.WriteLine(a);
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestFixAll4()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -464,7 +494,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -479,14 +509,15 @@ class C
         }
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestFixAll5()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -496,14 +527,15 @@ class C
         using (var c = d) { }
     }
 }",
-new TestParameters(parseOptions: CSharp8ParseOptions));
+                new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact]
         public async Task TestFixAll6()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -513,7 +545,7 @@ class C
         {|FixAllInDocument:|}using (var c = d) { }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -523,14 +555,15 @@ class C
         using var c = d;
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestWithFollowingReturn()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -542,7 +575,7 @@ class C
         return;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -552,14 +585,15 @@ class C
         return;
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestWithFollowingBreak()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -577,7 +611,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -593,14 +627,15 @@ class C
         }
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         public async Task TestMissingInSwitchSection()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -615,14 +650,16 @@ class C
                 break;
         }
     }
-}", parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+}",
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         public async Task TestMissingWithJumpInsideToOutside()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -634,14 +671,16 @@ class C
             goto label;
         }
     }
-}", parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+}",
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         public async Task TestMissingWithJumpBeforeToAfter()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -655,14 +694,16 @@ class C
         }
         label:
     }
-}", parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+}",
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(35879, "https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestCollision1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -676,14 +717,15 @@ class Program
         }
     }
 }",
-parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(35879, "https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestNoCollision1()
         {
             await TestInRegularAndScript1Async(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -697,7 +739,7 @@ class Program
         }
     }
 }",
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -709,14 +751,15 @@ class Program
         using Stream stream1 = File.OpenRead(""test"");
     }
 }",
-parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(35879, "https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestCollision2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -731,14 +774,15 @@ class Program
         }
     }
 }",
-parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(35879, "https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestNoCollision2()
         {
             await TestInRegularAndScript1Async(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -753,7 +797,7 @@ class Program
         }
     }
 }",
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -766,14 +810,15 @@ class Program
         Stream stream2;
     }
 }",
-parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(35879, "https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestCollision3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -788,14 +833,15 @@ class Program
         }
     }
 }",
-parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(35879, "https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestNoCollision3()
         {
             await TestInRegularAndScript1Async(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -810,7 +856,7 @@ class Program
         }
     }
 }",
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -823,14 +869,15 @@ class Program
         Goo(out var stream2);
     }
 }",
-parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(35879, "https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestCollision4()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -843,14 +890,15 @@ class Program
             Goo(out var stream);
     }
 }",
-parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(35879, "https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestNoCollision4()
         {
             await TestInRegularAndScript1Async(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -863,7 +911,7 @@ class Program
             Goo(out var stream2);
     }
 }",
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -876,14 +924,15 @@ class Program
         Goo(out var stream2);
     }
 }",
-parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(35879, "https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestCollision5()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -898,14 +947,15 @@ class Program
         }
     }
 }",
-parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(35879, "https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestNoCollision5()
         {
             await TestInRegularAndScript1Async(
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -920,7 +970,7 @@ class Program
         }
     }
 }",
-@"using System.IO;
+                @"using System.IO;
 
 class Program
 {
@@ -933,14 +983,15 @@ class Program
         using Stream stream2 = File.OpenRead(""test"");
     }
 }",
-parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem(37678, "https://github.com/dotnet/roslyn/issues/37678")]
         public async Task TestCopyTrivia()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -950,21 +1001,22 @@ parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         using var x = y;
         // comment
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(37678, "https://github.com/dotnet/roslyn/issues/37678")]
         public async Task TestMultiCopyTrivia()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -975,7 +1027,7 @@ parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -983,14 +1035,15 @@ parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
         using var a = b;
         // comment
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll_WithTrivia()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1007,7 +1060,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1020,14 +1073,15 @@ class C
         // comment2
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(38737, "https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveTrivia()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1046,7 +1100,7 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1063,14 +1117,15 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(38737, "https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveAndCommentTrivia_AfterRestore()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1090,7 +1145,7 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1108,14 +1163,15 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(38737, "https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveAndCommentTrivia_BeforeRestore()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1135,7 +1191,7 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1153,14 +1209,15 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(38737, "https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveAndCommentTrivia_AfterDisable()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1180,7 +1237,7 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1198,14 +1255,15 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(38737, "https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveAndCommentTrivia_BeforeDisable()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1225,7 +1283,7 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1243,14 +1301,15 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(38737, "https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveTrivia_PreserveCodeBeforeAndAfterDirective()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1271,7 +1330,7 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1290,14 +1349,15 @@ parseOptions: CSharp8ParseOptions);
     [Obsolete]
     static void LegacyMethod() => throw new NotImplementedException();
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(38842, "https://github.com/dotnet/roslyn/issues/38842")]
         public async Task TestNextLineIndentation1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1314,7 +1374,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1329,14 +1389,15 @@ class C
             3);
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(38842, "https://github.com/dotnet/roslyn/issues/38842")]
         public async Task TestNextLineIndentation2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.IO;
 
 class C
@@ -1351,7 +1412,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.IO;
 
 class C
@@ -1364,14 +1425,15 @@ class C
             );
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(48586, "https://github.com/dotnet/roslyn/issues/48586")]
         public async Task TestKeepSurroundingComments()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1383,7 +1445,7 @@ class C
         } // ...all comments remain
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1395,14 +1457,15 @@ class C
         // ...all comments remain
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(48586, "https://github.com/dotnet/roslyn/issues/48586")]
         public async Task TestKeepSurroundingComments2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1416,7 +1479,7 @@ class C
         // ...remain
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1430,14 +1493,15 @@ class C
                                       // ...remain
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(48586, "https://github.com/dotnet/roslyn/issues/48586")]
         public async Task TestKeepSurroundingComments3()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1455,7 +1519,7 @@ class C
         // ...transformation
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1473,14 +1537,15 @@ class C
                                       // ...transformation
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(52970, "https://github.com/dotnet/roslyn/issues/52970")]
         public async Task TestWithBlockBodyWithOpeningBracketOnSameLine()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1491,7 +1556,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1501,14 +1566,15 @@ class C
         Console.WriteLine(a);
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(52970, "https://github.com/dotnet/roslyn/issues/52970")]
         public async Task TestWithBlockBodyWithOpeningBracketOnSameLine2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1519,7 +1585,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1529,14 +1595,15 @@ class C
         Console.WriteLine(a);
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(52970, "https://github.com/dotnet/roslyn/issues/52970")]
         public async Task TestWithBlockBodyWithOpeningBracketAndCommentOnSameLine()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1547,7 +1614,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1557,14 +1624,15 @@ class C
         Console.WriteLine(a);
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(52970, "https://github.com/dotnet/roslyn/issues/52970")]
         public async Task TestWithBlockBodyWithOpeningBracketOnSameLineWithNoStatements()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1574,7 +1642,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1583,14 +1651,15 @@ class C
         using var a = b;
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(52970, "https://github.com/dotnet/roslyn/issues/52970")]
         public async Task TestWithBlockBodyWithOpeningBracketOnSameLineAndCommentInBlock()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1601,7 +1670,7 @@ class C
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1611,14 +1680,15 @@ class C
         // intentionally empty
     }
 }",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(58911, "https://github.com/dotnet/roslyn/issues/58911")]
         public async Task TestUsingWithoutSpace()
         {
             await TestInRegularAndScriptAsync(
-@"public class Test
+                @"public class Test
 {
     public IEnumerable<Test> Collection { get; } = new[]
     {
@@ -1638,7 +1708,7 @@ parseOptions: CSharp8ParseOptions);
     public static IDisposable Get() => throw new NotImplementedException();
 }
 ",
-@"public class Test
+                @"public class Test
 {
     public IEnumerable<Test> Collection { get; } = new[]
     {
@@ -1656,14 +1726,15 @@ parseOptions: CSharp8ParseOptions);
     public static IDisposable Get() => throw new NotImplementedException();
 }
 ",
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem(42194, "https://github.com/dotnet/roslyn/issues/42194")]
         public async Task TestWithConstantReturn1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System.IO;
 
 class C
@@ -1678,7 +1749,7 @@ class C
     }
 }
 ",
-@"
+                @"
 using System.IO;
 
 class C
@@ -1690,14 +1761,15 @@ class C
         return true;
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(42194, "https://github.com/dotnet/roslyn/issues/42194")]
         public async Task TestWithNonConstantReturn1()
         {
             await TestMissingAsync(
-@"
+                @"
 using System.IO;
 
 class C
@@ -1711,14 +1783,15 @@ class C
         return a > b;
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(42194, "https://github.com/dotnet/roslyn/issues/42194")]
         public async Task TestWithLocalFunctions1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 using System.IO;
 
 class C
@@ -1734,7 +1807,7 @@ class C
     }
 }
 ",
-@"
+                @"
 using System.IO;
 
 class C
@@ -1747,14 +1820,15 @@ class C
         void Inner2() { }
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(42194, "https://github.com/dotnet/roslyn/issues/42194")]
         public async Task TestWithLocalFunctions2()
         {
             await TestMissingAsync(
-@"
+                @"
 using System.IO;
 
 class C
@@ -1771,14 +1845,15 @@ class C
         return a > b;
     }
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(42194, "https://github.com/dotnet/roslyn/issues/42194")]
         public async Task TestWithLocalFunctionsAndConstantReturn()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System.IO;
 
 class C
@@ -1796,7 +1871,7 @@ class C
     }
 }
 ",
-@"
+                @"
 using System.IO;
 
 class C
@@ -1811,7 +1886,8 @@ class C
         return true;
     }
 }
-");
+"
+            );
         }
     }
 }

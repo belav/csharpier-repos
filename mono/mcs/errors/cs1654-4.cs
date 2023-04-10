@@ -5,21 +5,21 @@ using System;
 
 struct Foo : IDisposable
 {
-	public int this[int arg] {
-		set { }
-	}
+    public int this[int arg]
+    {
+        set { }
+    }
 
-	public void Dispose ()
-	{
-	}
+    public void Dispose() { }
 }
 
 class Bar
 {
-	static void Main ()
-	{
-		using (var f = new Foo ()) {
-			f[0] = 1;
-		}
-	}
+    static void Main()
+    {
+        using (var f = new Foo())
+        {
+            f[0] = 1;
+        }
+    }
 }

@@ -4,5 +4,5 @@
 
 class X
 {
-	int i = default;
+    int i = default;
 }

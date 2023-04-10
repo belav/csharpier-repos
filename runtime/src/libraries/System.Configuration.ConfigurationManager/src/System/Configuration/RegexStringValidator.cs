@@ -12,7 +12,8 @@ namespace System.Configuration
 
         public RegexStringValidator(string regex)
         {
-            if (string.IsNullOrEmpty(regex)) throw ExceptionUtil.ParameterNullOrEmpty(nameof(regex));
+            if (string.IsNullOrEmpty(regex))
+                throw ExceptionUtil.ParameterNullOrEmpty(nameof(regex));
 
             _expression = regex;
             _regex = new Regex(regex, RegexOptions.Compiled);

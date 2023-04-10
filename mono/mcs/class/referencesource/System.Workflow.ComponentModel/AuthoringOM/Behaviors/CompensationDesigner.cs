@@ -11,7 +11,6 @@ namespace System.Workflow.ComponentModel.Design
     using System.ComponentModel.Design;
     using System.Workflow.ComponentModel.Design;
 
-
     #region CompensationDesigner
     [ActivityDesignerTheme(typeof(CompensationDesignerTheme))]
     internal sealed class CompensationHandlerActivityDesigner : SequentialActivityDesigner
@@ -25,10 +24,7 @@ namespace System.Workflow.ComponentModel.Design
                 foreach (DesignerView view in base.Views)
                 {
                     // disable the fault handlers, cancellation handler and compensation handler
-                    if ((view.ViewId != 2) &&
-                            (view.ViewId != 3) &&
-                            (view.ViewId != 4)
-                        )
+                    if ((view.ViewId != 2) && (view.ViewId != 3) && (view.ViewId != 4))
                         views.Add(view);
                 }
                 return new ReadOnlyCollection<DesignerView>(views);
@@ -40,12 +36,13 @@ namespace System.Workflow.ComponentModel.Design
         #region Properties and Methods
         public override bool CanExpandCollapse
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             foreach (Activity activity in activitiesToInsert)
             {

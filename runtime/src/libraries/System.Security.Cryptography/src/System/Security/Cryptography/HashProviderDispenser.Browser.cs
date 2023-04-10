@@ -15,7 +15,9 @@ namespace System.Security.Cryptography
                 case HashAlgorithmNames.SHA512:
                     return new SHAManagedHashProvider(hashAlgorithmId);
             }
-            throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+            );
         }
 
 #pragma warning disable IDE0060
@@ -26,14 +28,19 @@ namespace System.Security.Cryptography
                 string hashAlgorithmId,
                 ReadOnlySpan<byte> key,
                 ReadOnlySpan<byte> source,
-                Span<byte> destination)
+                Span<byte> destination
+            )
             {
                 using HashProvider provider = CreateMacProvider(hashAlgorithmId, key);
                 provider.AppendHashData(source);
                 return provider.FinalizeHashAndReset(destination);
             }
 
-            public static int HashData(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination)
+            public static int HashData(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination
+            )
             {
                 HashProvider provider = CreateHashProvider(hashAlgorithmId);
                 provider.AppendHashData(source);
@@ -41,7 +48,10 @@ namespace System.Security.Cryptography
             }
         }
 
-        public static unsafe HashProvider CreateMacProvider(string hashAlgorithmId, ReadOnlySpan<byte> key)
+        public static unsafe HashProvider CreateMacProvider(
+            string hashAlgorithmId,
+            ReadOnlySpan<byte> key
+        )
         {
             switch (hashAlgorithmId)
             {
@@ -51,10 +61,11 @@ namespace System.Security.Cryptography
                 case HashAlgorithmNames.SHA512:
                     return new HMACManagedHashProvider(hashAlgorithmId, key);
             }
-            throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+            );
         }
 
 #pragma warning restore IDE0060
-
     }
 }

@@ -3,13 +3,13 @@
 
 class C
 {
-	static void Test ()
-	{
-		char c = 'c';
-		switch (c)
-		{
-			case 'a': 
-				goto case null;
-		}
-	}
+    static void Test()
+    {
+        char c = 'c';
+        switch (c)
+        {
+            case 'a':
+                goto case null;
+        }
+    }
 }

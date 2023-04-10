@@ -15,7 +15,8 @@ namespace System.Text.RegularExpressions.Symbolic
     /// if the predicates are [0-9] and [0-4], then there are three minterms: [0-4], [5-9] and [^0-9]. Notably, there is no
     /// minterm corresponding to "[0-9] and not [0-4]", since that is unsatisfiable.
     /// </remarks>
-    internal sealed class MintermGenerator<TPredicate> where TPredicate : notnull
+    internal sealed class MintermGenerator<TPredicate>
+        where TPredicate : notnull
     {
         private readonly IBooleanAlgebra<TPredicate> _algebra;
 

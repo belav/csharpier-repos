@@ -18,9 +18,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
         /*
          * Markup for basic test case:
          *     // Comment
-         *     static class C { }  
+         *     static class C { }
          */
-        private static readonly string s_standardCase = @"{|caret:|}// Comment
+        private static readonly string s_standardCase =
+            @"{|caret:|}// Comment
 static class C { }";
 
         /*
@@ -32,7 +33,8 @@ static class C { }";
         [Fact]
         public async Task TestInsertingNewLineInMiddleOfFile()
         {
-            var updatedText = @"// Comment
+            var updatedText =
+                @"// Comment
 
 static class C { }";
 
@@ -41,9 +43,18 @@ static class C { }";
             await RunGetSemanticTokensAsync(testLspServer, caretLocation);
             await UpdateDocumentTextAsync(updatedText, testLspServer.TestWorkspace);
 
-            var results = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "1");
+            var results = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "1"
+            );
 
-            var expectedEdit = new LSP.SemanticTokensEdit { Start = 5, DeleteCount = 1, Data = new int[] { 2 } };
+            var expectedEdit = new LSP.SemanticTokensEdit
+            {
+                Start = 5,
+                DeleteCount = 1,
+                Data = new int[] { 2 }
+            };
 
             Assert.Equal(expectedEdit, ((LSP.SemanticTokensDelta)results).Edits.First());
             Assert.Equal("2", ((LSP.SemanticTokensDelta)results).ResultId);
@@ -55,17 +66,25 @@ static class C { }";
         [Fact]
         public async Task TestGetSemanticTokensEdits_EndDeletionAsync()
         {
-            var updatedText =
-@"// Comment";
+            var updatedText = @"// Comment";
 
             using var testLspServer = await CreateTestLspServerAsync(s_standardCase);
             var caretLocation = testLspServer.GetLocations("caret").First();
             await RunGetSemanticTokensAsync(testLspServer, caretLocation);
             await UpdateDocumentTextAsync(updatedText, testLspServer.TestWorkspace);
 
-            var results = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "1");
+            var results = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "1"
+            );
 
-            var expectedEdit = new LSP.SemanticTokensEdit { Start = 5, DeleteCount = 25, Data = System.Array.Empty<int>() };
+            var expectedEdit = new LSP.SemanticTokensEdit
+            {
+                Start = 5,
+                DeleteCount = 25,
+                Data = System.Array.Empty<int>()
+            };
 
             Assert.Equal(expectedEdit, ((LSP.SemanticTokensDelta)results).Edits.First());
             Assert.Equal("2", ((LSP.SemanticTokensDelta)results).ResultId);
@@ -78,7 +97,7 @@ static class C { }";
         public async Task TestGetSemanticTokensEdits_EndInsertionAsync()
         {
             var updatedText =
-@"// Comment
+                @"// Comment
 static class C { }
 // Comment";
 
@@ -87,13 +106,24 @@ static class C { }
             await RunGetSemanticTokensAsync(testLspServer, caretLocation);
             await UpdateDocumentTextAsync(updatedText, testLspServer.TestWorkspace);
 
-            var results = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "1");
+            var results = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "1"
+            );
 
             var expectedEdit = new LSP.SemanticTokensEdit
             {
                 Start = 30,
                 DeleteCount = 0,
-                Data = new int[] { 1, 0, 10, SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment], 0 }
+                Data = new int[]
+                {
+                    1,
+                    0,
+                    10,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment],
+                    0
+                }
             };
 
             Assert.Equal(expectedEdit, ((LSP.SemanticTokensDelta)results).Edits.First());
@@ -107,7 +137,7 @@ static class C { }
         public async Task TestGetSemanticTokensEdits_ReturnMinimalEdits()
         {
             var updatedText =
-@"class
+                @"class
 // Comment";
 
             using var testLspServer = await CreateTestLspServerAsync(s_singleLineCase);
@@ -117,7 +147,11 @@ static class C { }
             // Edit text
             await UpdateDocumentTextAsync(updatedText, testLspServer.TestWorkspace);
 
-            var results = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "1");
+            var results = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "1"
+            );
 
             // 1. Updates length of token (10 to 5) and updates token type (comment to keyword)
             // 2. Creates new token for '// Comment'
@@ -128,10 +162,12 @@ static class C { }
                 Data = new int[]
                 {
                     // 'class'
-                    /* 0, 0, */ 5, SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword], 0,
-
+                    /* 0, 0, */5,
+                    SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Keyword],
+                    0,
                     // '// Comment'
-                    1, 0, /* 10,  SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment], 0 */
+                    1,
+                    0, /* 10,  SemanticTokensCache.TokenTypeToIndex[LSP.SemanticTokenTypes.Comment], 0 */
                 }
             };
 
@@ -147,7 +183,7 @@ static class C { }
         public async Task TestGetSemanticTokensEditsNoCacheAsync()
         {
             var updatedText =
-@"// Comment
+                @"// Comment
 
 static class C { }";
 
@@ -156,14 +192,21 @@ static class C { }";
             await RunGetSemanticTokensAsync(testLspServer, caretLocation);
             await UpdateDocumentTextAsync(updatedText, testLspServer.TestWorkspace);
 
-            var results = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "10");
+            var results = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "10"
+            );
 
             // Make sure we're returned SemanticTokens instead of SemanticTokensEdits.
             Assert.True(results.Value is LSP.SemanticTokens);
 
             // The returned result should now be in the cache and should be of the LSP.SemanticTokensDelta type.
             var cachedResults = await RunGetSemanticTokensEditsAsync(
-                testLspServer, caretLocation, previousResultId: ((LSP.SemanticTokens)results).ResultId!);
+                testLspServer,
+                caretLocation,
+                previousResultId: ((LSP.SemanticTokens)results).ResultId!
+            );
             Assert.True(cachedResults.Value is LSP.SemanticTokensDelta);
         }
 
@@ -171,7 +214,7 @@ static class C { }";
         public async Task TestConvertSemanticTokenEditsIntoSemanticTokens_InsertNewlineInMiddleOfFile()
         {
             var updatedText =
-@"// Comment
+                @"// Comment
 
 static class C { }";
 
@@ -181,11 +224,21 @@ static class C { }";
             await UpdateDocumentTextAsync(updatedText, testLspServer.TestWorkspace);
 
             // Edits to tokens conversion
-            var edits = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "1");
-            var editsToTokens = ApplySemanticTokensEdits(originalTokens.Data, (LSP.SemanticTokensDelta)edits);
+            var edits = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "1"
+            );
+            var editsToTokens = ApplySemanticTokensEdits(
+                originalTokens.Data,
+                (LSP.SemanticTokensDelta)edits
+            );
 
             // Raw tokens
-            var rawTokens = await RunGetSemanticTokensAsync(testLspServer, testLspServer.GetLocations("caret").First());
+            var rawTokens = await RunGetSemanticTokensAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").First()
+            );
 
             Assert.True(Enumerable.SequenceEqual(rawTokens.Data, editsToTokens));
         }
@@ -194,7 +247,7 @@ static class C { }";
         public async Task TestConvertSemanticTokenEditsIntoSemanticTokens_ReplacementEdit()
         {
             var updatedText =
-@"// Comment
+                @"// Comment
 internal struct S { }";
 
             using var testLspServer = await CreateTestLspServerAsync(s_standardCase);
@@ -203,11 +256,21 @@ internal struct S { }";
             await UpdateDocumentTextAsync(updatedText, testLspServer.TestWorkspace);
 
             // Edits to tokens conversion
-            var edits = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "1");
-            var editsToTokens = ApplySemanticTokensEdits(originalTokens.Data, (LSP.SemanticTokensDelta)edits);
+            var edits = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "1"
+            );
+            var editsToTokens = ApplySemanticTokensEdits(
+                originalTokens.Data,
+                (LSP.SemanticTokensDelta)edits
+            );
 
             // Raw tokens
-            var rawTokens = await RunGetSemanticTokensAsync(testLspServer, testLspServer.GetLocations("caret").First());
+            var rawTokens = await RunGetSemanticTokensAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").First()
+            );
 
             Assert.True(Enumerable.SequenceEqual(rawTokens.Data, editsToTokens));
         }
@@ -216,7 +279,7 @@ internal struct S { }";
         public async Task TestConvertSemanticTokenEditsIntoSemanticTokens_ManyEdits()
         {
             var updatedText =
-@"
+                @"
 // Comment
 class C
 {
@@ -232,11 +295,21 @@ class C
             await UpdateDocumentTextAsync(updatedText, testLspServer.TestWorkspace);
 
             // Edits to tokens conversion
-            var edits = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "1");
-            var editsToTokens = ApplySemanticTokensEdits(originalTokens.Data, (LSP.SemanticTokensDelta)edits);
+            var edits = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "1"
+            );
+            var editsToTokens = ApplySemanticTokensEdits(
+                originalTokens.Data,
+                (LSP.SemanticTokensDelta)edits
+            );
 
             // Raw tokens
-            var rawTokens = await RunGetSemanticTokensAsync(testLspServer, testLspServer.GetLocations("caret").First());
+            var rawTokens = await RunGetSemanticTokensAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").First()
+            );
 
             Assert.True(Enumerable.SequenceEqual(rawTokens.Data, editsToTokens));
         }
@@ -245,13 +318,13 @@ class C
         public async Task TestConvertSemanticTokenEditsIntoSemanticTokens_FragmentedTokens()
         {
             var originalText =
-@"fo {|caret:|}r (int i = 0;/*c*/; i++)
+                @"fo {|caret:|}r (int i = 0;/*c*/; i++)
 {
 
 }";
 
             var updatedText =
-@"for (int i = 0;/*c*/; i++)
+                @"for (int i = 0;/*c*/; i++)
 {
 
 }";
@@ -262,11 +335,21 @@ class C
             await UpdateDocumentTextAsync(updatedText, testLspServer.TestWorkspace);
 
             // Edits to tokens conversion
-            var edits = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "1");
-            var editsToTokens = ApplySemanticTokensEdits(originalTokens.Data, (LSP.SemanticTokensDelta)edits);
+            var edits = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "1"
+            );
+            var editsToTokens = ApplySemanticTokensEdits(
+                originalTokens.Data,
+                (LSP.SemanticTokensDelta)edits
+            );
 
             // Raw tokens
-            var rawTokens = await RunGetSemanticTokensAsync(testLspServer, testLspServer.GetLocations("caret").First());
+            var rawTokens = await RunGetSemanticTokensAsync(
+                testLspServer,
+                testLspServer.GetLocations("caret").First()
+            );
 
             Assert.True(Enumerable.SequenceEqual(rawTokens.Data, editsToTokens));
         }
@@ -281,7 +364,11 @@ class C
             await RunGetSemanticTokensAsync(testLspServer, caretLocation);
             await UpdateDocumentTextAsync(updatedText, testLspServer.TestWorkspace);
 
-            var results = await RunGetSemanticTokensEditsAsync(testLspServer, caretLocation, previousResultId: "10");
+            var results = await RunGetSemanticTokensEditsAsync(
+                testLspServer,
+                caretLocation,
+                previousResultId: "10"
+            );
 
             // Ensure we're returned SemanticTokens instead of SemanticTokensEdits.
             Assert.True(results.Value is LSP.SemanticTokens);
@@ -289,7 +376,10 @@ class C
             Assert.Empty(results.First.Data);
         }
 
-        private static int[] ApplySemanticTokensEdits(int[]? originalTokens, LSP.SemanticTokensDelta edits)
+        private static int[] ApplySemanticTokensEdits(
+            int[]? originalTokens,
+            LSP.SemanticTokensDelta edits
+        )
         {
             var data = originalTokens.ToList();
             if (edits.Edits != null)

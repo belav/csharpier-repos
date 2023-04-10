@@ -3,18 +3,16 @@
 
 namespace TestCases
 {
-	public class GmcsCtorBug
-	{
-		public static void Test ()
-		{
-			new ClassWithNonPublicConstructor ();
-		}
-	}
+    public class GmcsCtorBug
+    {
+        public static void Test()
+        {
+            new ClassWithNonPublicConstructor();
+        }
+    }
 
-	public class ClassWithNonPublicConstructor
-	{
-		protected ClassWithNonPublicConstructor (int p)
-		{
-		}
-	}
+    public class ClassWithNonPublicConstructor
+    {
+        protected ClassWithNonPublicConstructor(int p) { }
+    }
 }

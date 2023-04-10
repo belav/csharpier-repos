@@ -3,11 +3,11 @@
 
 class C
 {
-	public static void Main ()
-	{
-		object o = null;
+    public static void Main()
+    {
+        object o = null;
 
-		var x1 = o is string s;
-		var x2 = o is string s;
-	}
+        var x1 = o is string s;
+        var x2 = o is string s;
+    }
 }

@@ -6,11 +6,11 @@ using System;
 
 namespace Testing
 {
-	/// <summary>
-	/// description for class Test
-	/// </summary>
-	public class Test
-	{
-		public event EventHandler MyEvent;
-	}
+    /// <summary>
+    /// description for class Test
+    /// </summary>
+    public class Test
+    {
+        public event EventHandler MyEvent;
+    }
 }

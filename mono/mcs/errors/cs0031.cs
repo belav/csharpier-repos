@@ -3,10 +3,11 @@
 
 public class Test
 {
-	public static void Main()
-	{
-		unchecked {
-			byte b = 1024 - 2;
-		}
-	}
+    public static void Main()
+    {
+        unchecked
+        {
+            byte b = 1024 - 2;
+        }
+    }
 }

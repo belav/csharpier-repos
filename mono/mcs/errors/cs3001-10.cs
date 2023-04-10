@@ -3,9 +3,10 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant (true)]
+
+[assembly: CLSCompliant(true)]
 
 public static class CLSClass
 {
-	public static void Foo (this sbyte value) { }
+    public static void Foo(this sbyte value) { }
 }

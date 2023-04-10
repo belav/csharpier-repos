@@ -4,15 +4,13 @@
 
 using System.Linq;
 
-class Item
-{
-}
+class Item { }
 
 public static class Test
 {
-	static void Main ()
-	{
-		var v = new Item ();
-		var foo = from a in v select a;
-	}
+    static void Main()
+    {
+        var v = new Item();
+        var foo = from a in v select a;
+    }
 }

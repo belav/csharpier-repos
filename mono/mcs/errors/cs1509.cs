@@ -2,6 +2,4 @@
 // Line: 0
 // Compiler options: -r:CS1509-module.dll
 
-class C
-{
-}
+class C { }

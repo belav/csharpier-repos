@@ -4,15 +4,13 @@
 using System;
 
 [System.Obsolete("", true)]
-class ObsoleteException: Exception {
-}
+class ObsoleteException : Exception { }
 
-class MainClass {
-        public void Method ()
-        {
-                try {
-                }
-                catch (ObsoleteException) {
-                }
-        }
+class MainClass
+{
+    public void Method()
+    {
+        try { }
+        catch (ObsoleteException) { }
+    }
 }

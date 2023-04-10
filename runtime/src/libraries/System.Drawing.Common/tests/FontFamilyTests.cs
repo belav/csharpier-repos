@@ -65,7 +65,10 @@ namespace System.Drawing.Tests
         {
             using (var fontCollection = new PrivateFontCollection())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => new FontFamily("Times New Roman", fontCollection));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => new FontFamily("Times New Roman", fontCollection)
+                );
             }
         }
 
@@ -73,8 +76,18 @@ namespace System.Drawing.Tests
         {
             FontFamily fontFamily = FontFamily.GenericMonospace;
             yield return new object[] { fontFamily, fontFamily, true };
-            yield return new object[] { FontFamily.GenericMonospace, FontFamily.GenericMonospace, true };
-            yield return new object[] { FontFamily.GenericMonospace, FontFamily.GenericSansSerif, false };
+            yield return new object[]
+            {
+                FontFamily.GenericMonospace,
+                FontFamily.GenericMonospace,
+                true
+            };
+            yield return new object[]
+            {
+                FontFamily.GenericMonospace,
+                FontFamily.GenericSansSerif,
+                false
+            };
 
             yield return new object[] { FontFamily.GenericSansSerif, new object(), false };
             yield return new object[] { FontFamily.GenericSansSerif, null, false };
@@ -82,7 +95,11 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(FontFamily fontFamily, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            FontFamily fontFamily,
+            object other,
+            bool expected
+        )
         {
             try
             {
@@ -171,7 +188,10 @@ namespace System.Drawing.Tests
         public void GetFamilies_NullGraphics_ThrowsArgumentNullException()
         {
 #pragma warning disable 0618 // FontFamily.GetFamilies is deprecated.
-            AssertExtensions.Throws<ArgumentNullException>("graphics", () => FontFamily.GetFamilies(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "graphics",
+                () => FontFamily.GetFamilies(null)
+            );
 #pragma warning restore 0618
         }
 
@@ -220,7 +240,10 @@ namespace System.Drawing.Tests
             FontFamily fontFamily = FontFamily.GenericMonospace;
             fontFamily.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => fontFamily.IsStyleAvailable(FontStyle.Italic));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => fontFamily.IsStyleAvailable(FontStyle.Italic)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -229,7 +252,10 @@ namespace System.Drawing.Tests
             FontFamily fontFamily = FontFamily.GenericMonospace;
             fontFamily.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => fontFamily.GetEmHeight(FontStyle.Italic));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => fontFamily.GetEmHeight(FontStyle.Italic)
+            );
         }
 
         private const int FrenchLCID = 1036;
@@ -268,7 +294,10 @@ namespace System.Drawing.Tests
             FontFamily fontFamily = FontFamily.GenericMonospace;
             fontFamily.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => fontFamily.GetCellAscent(FontStyle.Italic));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => fontFamily.GetCellAscent(FontStyle.Italic)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -277,7 +306,10 @@ namespace System.Drawing.Tests
             FontFamily fontFamily = FontFamily.GenericMonospace;
             fontFamily.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => fontFamily.GetCellDescent(FontStyle.Italic));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => fontFamily.GetCellDescent(FontStyle.Italic)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -286,7 +318,10 @@ namespace System.Drawing.Tests
             FontFamily fontFamily = FontFamily.GenericMonospace;
             fontFamily.Dispose();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => fontFamily.GetLineSpacing(FontStyle.Italic));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => fontFamily.GetLineSpacing(FontStyle.Italic)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]

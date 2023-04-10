@@ -21,13 +21,16 @@ namespace System.ServiceModel.ComIntegration
 
         public static bool IsValidInterface(Guid iid)
         {
-            if (iid == IID_Object ||
-                iid == IID_IDisposable ||
-                iid == IID_IManagedObject ||
-                iid == IID_IProcessInitializer ||
-                iid == IID_IRemoteDispatch ||
-                iid == IID_IServicedComponentInfo ||
-                iid.ToString("D").EndsWith("C000-000000000046", StringComparison.OrdinalIgnoreCase)) //other ole/com standard interfaces
+            if (
+                iid == IID_Object
+                || iid == IID_IDisposable
+                || iid == IID_IManagedObject
+                || iid == IID_IProcessInitializer
+                || iid == IID_IRemoteDispatch
+                || iid == IID_IServicedComponentInfo
+                || iid.ToString("D")
+                    .EndsWith("C000-000000000046", StringComparison.OrdinalIgnoreCase)
+            ) //other ole/com standard interfaces
             {
                 return false;
             }
@@ -35,18 +38,28 @@ namespace System.ServiceModel.ComIntegration
             return true;
         }
 
-        public static bool IsValidParameter(Type type, ICustomAttributeProvider attributeProvider, bool allowReferences)        
+        public static bool IsValidParameter(
+            Type type,
+            ICustomAttributeProvider attributeProvider,
+            bool allowReferences
+        )
         {
-
-            object[] attributes = System.ServiceModel.Description.ServiceReflector.GetCustomAttributes(attributeProvider, typeof(MarshalAsAttribute), true);
+            object[] attributes =
+                System.ServiceModel.Description.ServiceReflector.GetCustomAttributes(
+                    attributeProvider,
+                    typeof(MarshalAsAttribute),
+                    true
+                );
 
             foreach (MarshalAsAttribute attr in attributes)
             {
                 UnmanagedType marshalAs = attr.Value;
 
-                if (marshalAs == UnmanagedType.IDispatch ||
-                    marshalAs == UnmanagedType.Interface ||
-                    marshalAs == UnmanagedType.IUnknown)
+                if (
+                    marshalAs == UnmanagedType.IDispatch
+                    || marshalAs == UnmanagedType.Interface
+                    || marshalAs == UnmanagedType.IUnknown
+                )
                 {
                     return allowReferences;
                 }

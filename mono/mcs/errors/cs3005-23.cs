@@ -2,9 +2,17 @@
 // Line: 8
 // Compiler options: -warnaserror
 
-[assembly:System.CLSCompliant(true)]
+[assembly: System.CLSCompliant(true)]
 
-public class CLSClass {
-        public int get_A () { return 3; }
-        public int a { get { return 2; } }
+public class CLSClass
+{
+    public int get_A()
+    {
+        return 3;
+    }
+
+    public int a
+    {
+        get { return 2; }
+    }
 }

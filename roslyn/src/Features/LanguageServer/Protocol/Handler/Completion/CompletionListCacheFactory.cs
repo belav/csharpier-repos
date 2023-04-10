@@ -13,9 +13,10 @@ internal class CompletionListCacheFactory : ILspServiceFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CompletionListCacheFactory()
-    {
-    }
+    public CompletionListCacheFactory() { }
 
-    public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind) => new CompletionListCache();
+    public ILspService CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    ) => new CompletionListCache();
 }

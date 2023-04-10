@@ -2,15 +2,14 @@
 // Line: 13
 // Compiler options: -warnaserror -warn:1
 
-class S {}
-	
+class S { }
+
 class X
 {
-	static void Main ()
-	{
-		const S x = null;
-		
-		if (x is byte) {
-		}
-	}
+    static void Main()
+    {
+        const S x = null;
+
+        if (x is byte) { }
+    }
 }

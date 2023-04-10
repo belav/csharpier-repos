@@ -15,7 +15,12 @@ namespace R2RDump
         protected readonly Disassembler _disassembler;
         protected readonly DumpModel _model;
 
-        public Dumper(ReadyToRunReader r2r, TextWriter writer, Disassembler disassembler, DumpModel model)
+        public Dumper(
+            ReadyToRunReader r2r,
+            TextWriter writer,
+            Disassembler disassembler,
+            DumpModel model
+        )
         {
             _r2r = r2r;
             _writer = writer;
@@ -62,7 +67,12 @@ namespace R2RDump
         public abstract void DumpMethod(ReadyToRunMethod method);
         public abstract void DumpRuntimeFunction(RuntimeFunction rtf);
         public abstract void DumpDisasm(RuntimeFunction rtf, int imageOffset);
-        public abstract void DumpBytes(int rva, uint size, string name = "Raw", bool convertToOffset = true);
+        public abstract void DumpBytes(
+            int rva,
+            uint size,
+            string name = "Raw",
+            bool convertToOffset = true
+        );
         public abstract void DumpSectionContents(ReadyToRunSection section);
         public abstract void DumpQueryCount(string q, string title, int count);
         public abstract void DumpFixupStats();

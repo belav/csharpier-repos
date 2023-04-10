@@ -14,13 +14,17 @@ internal sealed class DefaultParameterPolicyFactory : ParameterPolicyFactory
 
     public DefaultParameterPolicyFactory(
         IOptions<RouteOptions> options,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider
+    )
     {
         _options = options.Value;
         _serviceProvider = serviceProvider;
     }
 
-    public override IParameterPolicy Create(RoutePatternParameterPart? parameter, IParameterPolicy parameterPolicy)
+    public override IParameterPolicy Create(
+        RoutePatternParameterPart? parameter,
+        IParameterPolicy parameterPolicy
+    )
     {
         if (parameterPolicy == null)
         {
@@ -46,14 +50,18 @@ internal sealed class DefaultParameterPolicyFactory : ParameterPolicyFactory
             _options.TrimmerSafeConstraintMap,
             _serviceProvider,
             inlineText,
-            out var parameterPolicyKey);
+            out var parameterPolicyKey
+        );
 
         if (parameterPolicy == null)
         {
-            throw new InvalidOperationException(Resources.FormatRoutePattern_ConstraintReferenceNotFound(
-                parameterPolicyKey,
-                typeof(RouteOptions),
-                nameof(RouteOptions.ConstraintMap)));
+            throw new InvalidOperationException(
+                Resources.FormatRoutePattern_ConstraintReferenceNotFound(
+                    parameterPolicyKey,
+                    typeof(RouteOptions),
+                    nameof(RouteOptions.ConstraintMap)
+                )
+            );
         }
 
         if (parameterPolicy is IRouteConstraint constraint)
@@ -66,7 +74,8 @@ internal sealed class DefaultParameterPolicyFactory : ParameterPolicyFactory
 
     private static IParameterPolicy InitializeRouteConstraint(
         bool optional,
-        IRouteConstraint routeConstraint)
+        IRouteConstraint routeConstraint
+    )
     {
         if (optional)
         {

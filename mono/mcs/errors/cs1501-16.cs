@@ -3,12 +3,10 @@
 
 class X
 {
-	public static void Block (object type, object variables, params object[] expressions)
-	{
-	}
+    public static void Block(object type, object variables, params object[] expressions) { }
 
-	public static void Main ()
-	{
-		Block (variables: null, expressions: null);
-	}
+    public static void Main()
+    {
+        Block(variables: null, expressions: null);
+    }
 }

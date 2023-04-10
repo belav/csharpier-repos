@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -17,18 +17,24 @@ namespace Castle.Components.DictionaryAdapter.Xml
     using System;
     using System.Xml.XPath;
 
-    public class XPathBehaviorAccessor : XmlAccessor, IXmlIncludedType, IXmlIncludedTypeMap,
-        IConfigurable<XPathAttribute>,
-        IConfigurable<XPathVariableAttribute>,
-        IConfigurable<XPathFunctionAttribute>
+    public class XPathBehaviorAccessor
+        : XmlAccessor,
+            IXmlIncludedType,
+            IXmlIncludedTypeMap,
+            IConfigurable<XPathAttribute>,
+            IConfigurable<XPathVariableAttribute>,
+            IConfigurable<XPathFunctionAttribute>
     {
         private CompiledXPath path;
         private XmlIncludedTypeSet includedTypes;
         private XmlAccessor defaultAccessor;
         private XmlAccessor itemAccessor;
 
-        internal static readonly XmlAccessorFactory<XPathBehaviorAccessor>
-            Factory = (name, type, context) => new XPathBehaviorAccessor(type, context);
+        internal static readonly XmlAccessorFactory<XPathBehaviorAccessor> Factory = (
+            name,
+            type,
+            context
+        ) => new XPathBehaviorAccessor(type, context);
 
         protected XPathBehaviorAccessor(Type type, IXmlContext context)
             : base(type, context)
@@ -56,7 +62,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private bool CreatesAttributes
         {
-            get { var step = path.LastStep; return step != null && step.IsAttribute; }
+            get
+            {
+                var step = path.LastStep;
+                return step != null && step.IsAttribute;
+            }
         }
 
         public void Configure(XPathAttribute attribute)
@@ -97,24 +107,38 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public override bool IsPropertyDefined(IXmlNode parentNode)
         {
-            return SelectsNodes
-                && base.IsPropertyDefined(parentNode);
+            return SelectsNodes && base.IsPropertyDefined(parentNode);
         }
 
-        public override object GetPropertyValue(IXmlNode parentNode, IDictionaryAdapter parentObject, XmlReferenceManager references, bool orStub)
+        public override object GetPropertyValue(
+            IXmlNode parentNode,
+            IDictionaryAdapter parentObject,
+            XmlReferenceManager references,
+            bool orStub
+        )
         {
-            return GetPropertyValueCore   (parentNode, parentObject, references, orStub)
+            return GetPropertyValueCore(parentNode, parentObject, references, orStub)
                 ?? GetDefaultPropertyValue(parentNode, parentObject, references, orStub);
         }
 
-        private object GetPropertyValueCore(IXmlNode parentNode, IDictionaryAdapter parentObject, XmlReferenceManager references, bool orStub)
+        private object GetPropertyValueCore(
+            IXmlNode parentNode,
+            IDictionaryAdapter parentObject,
+            XmlReferenceManager references,
+            bool orStub
+        )
         {
             return SelectsNodes
                 ? base.GetPropertyValue(parentNode, parentObject, references, orStub)
                 : Evaluate(parentNode);
         }
 
-        private object GetDefaultPropertyValue(IXmlNode parentNode, IDictionaryAdapter parentObject, XmlReferenceManager references, bool orStub)
+        private object GetDefaultPropertyValue(
+            IXmlNode parentNode,
+            IDictionaryAdapter parentObject,
+            XmlReferenceManager references,
+            bool orStub
+        )
         {
             return defaultAccessor != null
                 ? defaultAccessor.GetPropertyValue(parentNode, parentObject, references, orStub)
@@ -124,12 +148,16 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private object Evaluate(IXmlNode node)
         {
             var value = node.Evaluate(path);
-            return value != null
-                ? Convert.ChangeType(value, ClrType)
-                : null;
+            return value != null ? Convert.ChangeType(value, ClrType) : null;
         }
 
-        public override void SetPropertyValue(IXmlNode parentNode, IDictionaryAdapter parentObject, XmlReferenceManager references, object oldValue, ref object value)
+        public override void SetPropertyValue(
+            IXmlNode parentNode,
+            IDictionaryAdapter parentObject,
+            XmlReferenceManager references,
+            object oldValue,
+            ref object value
+        )
         {
             if (SelectsNodes)
                 base.SetPropertyValue(parentNode, parentObject, references, oldValue, ref value);
@@ -188,13 +216,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 : base(parent.ClrType, parent.Context)
             {
                 this.parent = parent;
-                this.path   = path;
+                this.path = path;
             }
 
             public override void Prepare()
             {
                 this.includedTypes = parent.includedTypes;
-                this.Context       = parent.Context;
+                this.Context = parent.Context;
 
                 base.Prepare();
             }
@@ -205,8 +233,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             public ItemAccessor(XPathBehaviorAccessor parent)
                 : base(parent.ClrType.GetCollectionItemType(), parent.Context)
             {
-                includedTypes   = parent.includedTypes;
-                path            = parent.path;
+                includedTypes = parent.includedTypes;
+                path = parent.path;
 
                 ConfigureNillable(true);
             }

@@ -3,8 +3,8 @@
 
 class C
 {
-	void Foo ()
-	{
-		string s = nameof (this);
-	}
+    void Foo()
+    {
+        string s = nameof(this);
+    }
 }

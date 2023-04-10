@@ -13,10 +13,12 @@ internal class Surface
     public Func<VectorPacket256, Vector256<float>> Reflect;
     public float Roughness;
 
-    public Surface(Func<VectorPacket256, ColorPacket256> Diffuse,
-                    VectorPacket256 Specular,
-                    Func<VectorPacket256, Vector256<float>> Reflect,
-                    float Roughness)
+    public Surface(
+        Func<VectorPacket256, ColorPacket256> Diffuse,
+        VectorPacket256 Specular,
+        Func<VectorPacket256, Vector256<float>> Reflect,
+        float Roughness
+    )
     {
         this.Diffuse = Diffuse;
         this.Specular = Specular;

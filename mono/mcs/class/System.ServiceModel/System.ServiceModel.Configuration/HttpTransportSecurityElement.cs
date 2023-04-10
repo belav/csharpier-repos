@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,95 +56,123 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class HttpTransportSecurityElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty client_credential_type;
-		static ConfigurationProperty proxy_credential_type;
-		static ConfigurationProperty realm;
-		static ConfigurationProperty extended_protection_policy;
+    [MonoTODO]
+    public sealed partial class HttpTransportSecurityElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty client_credential_type;
+        static ConfigurationProperty proxy_credential_type;
+        static ConfigurationProperty realm;
+        static ConfigurationProperty extended_protection_policy;
 
-		static HttpTransportSecurityElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			client_credential_type = new ConfigurationProperty ("clientCredentialType",
-				typeof (HttpClientCredentialType), "None", null/* FIXME: get converter for HttpClientCredentialType*/, null,
-				ConfigurationPropertyOptions.None);
+        static HttpTransportSecurityElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            client_credential_type = new ConfigurationProperty(
+                "clientCredentialType",
+                typeof(HttpClientCredentialType),
+                "None",
+                null /* FIXME: get converter for HttpClientCredentialType*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			proxy_credential_type = new ConfigurationProperty ("proxyCredentialType",
-				typeof (HttpProxyCredentialType), "None", null/* FIXME: get converter for HttpProxyCredentialType*/, null,
-				ConfigurationPropertyOptions.None);
+            proxy_credential_type = new ConfigurationProperty(
+                "proxyCredentialType",
+                typeof(HttpProxyCredentialType),
+                "None",
+                null /* FIXME: get converter for HttpProxyCredentialType*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			realm = new ConfigurationProperty ("realm",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+            realm = new ConfigurationProperty(
+                "realm",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			extended_protection_policy = new ConfigurationProperty ("extendedProtectionPolicy",
-				typeof (ExtendedProtectionPolicyElement), null, new ExtendedProtectionPolicyTypeConverter (), null,
-				ConfigurationPropertyOptions.None);
+            extended_protection_policy = new ConfigurationProperty(
+                "extendedProtectionPolicy",
+                typeof(ExtendedProtectionPolicyElement),
+                null,
+                new ExtendedProtectionPolicyTypeConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (client_credential_type);
-			properties.Add (proxy_credential_type);
-			properties.Add (realm);
-			properties.Add (extended_protection_policy);
-		}
+            properties.Add(client_credential_type);
+            properties.Add(proxy_credential_type);
+            properties.Add(realm);
+            properties.Add(extended_protection_policy);
+        }
 
-		public HttpTransportSecurityElement ()
-		{
-		}
+        public HttpTransportSecurityElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "clientCredentialType",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = HttpClientCredentialType.None
+        )]
+        public HttpClientCredentialType ClientCredentialType
+        {
+            get { return (HttpClientCredentialType)base[client_credential_type]; }
+            set { base[client_credential_type] = value; }
+        }
 
-		[ConfigurationProperty ("clientCredentialType",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = HttpClientCredentialType.None)]
-		public HttpClientCredentialType ClientCredentialType {
-			get { return (HttpClientCredentialType) base [client_credential_type]; }
-			set { base [client_credential_type] = value; }
-		}
+        [ConfigurationProperty(
+            "extendedProtectionPolicy",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public ExtendedProtectionPolicyElement extendedProtectionPolicy
+        {
+            get { return (ExtendedProtectionPolicyElement)base[extended_protection_policy]; }
+            set { base[extended_protection_policy] = value; }
+        }
 
-		[ConfigurationProperty ("extendedProtectionPolicy",
-			 Options = ConfigurationPropertyOptions.None)]
-		public ExtendedProtectionPolicyElement extendedProtectionPolicy {
-			get { return (ExtendedProtectionPolicyElement) base [extended_protection_policy]; }
-			set { base [extended_protection_policy] = value; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        [ConfigurationProperty(
+            "proxyCredentialType",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = HttpProxyCredentialType.None
+        )]
+        public HttpProxyCredentialType ProxyCredentialType
+        {
+            get { return (HttpProxyCredentialType)base[proxy_credential_type]; }
+            set { base[proxy_credential_type] = value; }
+        }
 
-		[ConfigurationProperty ("proxyCredentialType",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = HttpProxyCredentialType.None)]
-		public HttpProxyCredentialType ProxyCredentialType {
-			get { return (HttpProxyCredentialType) base [proxy_credential_type]; }
-			set { base [proxy_credential_type] = value; }
-		}
+        [ConfigurationProperty(
+            "realm",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = ""
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string Realm
+        {
+            get { return (string)base[realm]; }
+            set { base[realm] = value; }
+        }
 
-		[ConfigurationProperty ("realm",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "")]
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string Realm {
-			get { return (string) base [realm]; }
-			set { base [realm] = value; }
-		}
-
-		internal void ApplyConfiguration (HttpTransportSecurity security)
-		{
-			security.ClientCredentialType = ClientCredentialType;
-			security.ProxyCredentialType = ProxyCredentialType;
-			security.Realm = Realm;
-			// FIXME: enable this
-			// security.ExtendedProtectionPolicy = ExtendedProtectionPolicy.BuildPolicy ();
-		}
-	}
-
+        internal void ApplyConfiguration(HttpTransportSecurity security)
+        {
+            security.ClientCredentialType = ClientCredentialType;
+            security.ProxyCredentialType = ProxyCredentialType;
+            security.Realm = Realm;
+            // FIXME: enable this
+            // security.ExtendedProtectionPolicy = ExtendedProtectionPolicy.BuildPolicy ();
+        }
+    }
 }

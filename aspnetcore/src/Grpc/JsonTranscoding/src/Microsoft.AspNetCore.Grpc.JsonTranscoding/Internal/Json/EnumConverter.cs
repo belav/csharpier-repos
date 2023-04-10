@@ -9,21 +9,28 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-internal sealed class EnumConverter<TEnum> : SettingsConverterBase<TEnum> where TEnum : Enum
+internal sealed class EnumConverter<TEnum> : SettingsConverterBase<TEnum>
+    where TEnum : Enum
 {
-    public EnumConverter(JsonContext context) : base(context)
-    {
-    }
+    public EnumConverter(JsonContext context)
+        : base(context) { }
 
-    public override TEnum? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TEnum? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         switch (reader.TokenType)
         {
             case JsonTokenType.String:
-                var enumDescriptor = (EnumDescriptor?)Context.DescriptorRegistry.FindDescriptorByType(typeToConvert);
+                var enumDescriptor = (EnumDescriptor?)
+                    Context.DescriptorRegistry.FindDescriptorByType(typeToConvert);
                 if (enumDescriptor == null)
                 {
-                    throw new InvalidOperationException($"Unable to resolve descriptor for {typeToConvert}.");
+                    throw new InvalidOperationException(
+                        $"Unable to resolve descriptor for {typeToConvert}."
+                    );
                 }
                 var valueDescriptor = enumDescriptor.FindValueByName(reader.GetString()!);
 
@@ -61,7 +68,9 @@ internal sealed class EnumConverter<TEnum> : SettingsConverterBase<TEnum> where 
     {
         if (!TryConvertToEnum(integer, out var value))
         {
-            throw new InvalidOperationException($"Integer can't be converted to enum {typeof(TEnum).FullName}.");
+            throw new InvalidOperationException(
+                $"Integer can't be converted to enum {typeof(TEnum).FullName}."
+            );
         }
 
         return value;
@@ -71,7 +80,9 @@ internal sealed class EnumConverter<TEnum> : SettingsConverterBase<TEnum> where 
     {
         if (!TryConvertToInteger(value, out var integer))
         {
-            throw new InvalidOperationException($"Enum {typeof(TEnum).FullName} can't be converted to integer.");
+            throw new InvalidOperationException(
+                $"Enum {typeof(TEnum).FullName} can't be converted to integer."
+            );
         }
 
         return integer;

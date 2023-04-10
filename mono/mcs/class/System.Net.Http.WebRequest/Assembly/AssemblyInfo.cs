@@ -33,25 +33,23 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// Information about this assembly is defined by the following attributes. 
+// Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle ("System.Net.Http.WebRequest.dll")]
-[assembly: AssemblyDescription ("System.Net.Http.WebRequest.dll")]
-[assembly: AssemblyDefaultAlias ("System.Net.Http.WebRequest.dll")]
+[assembly: AssemblyTitle("System.Net.Http.WebRequest.dll")]
+[assembly: AssemblyDescription("System.Net.Http.WebRequest.dll")]
+[assembly: AssemblyDefaultAlias("System.Net.Http.WebRequest.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
-[assembly: CLSCompliant (true)]
-[assembly: AssemblyDelaySign (true)]
+[assembly: NeutralResourcesLanguage("en-US")]
+[assembly: CLSCompliant(true)]
+[assembly: AssemblyDelaySign(true)]
 
-
-[assembly: ComVisible (false)]
-
+[assembly: ComVisible(false)]

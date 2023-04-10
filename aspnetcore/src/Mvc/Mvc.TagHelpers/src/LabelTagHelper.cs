@@ -64,7 +64,8 @@ public class LabelTagHelper : TagHelper
             For.ModelExplorer,
             For.Name,
             labelText: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
 
         if (tagBuilder != null)
         {

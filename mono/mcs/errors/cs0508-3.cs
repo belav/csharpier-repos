@@ -3,13 +3,13 @@
 
 abstract class A<T>
 {
-	public abstract T Test ();
+    public abstract T Test();
 
-	public class B<H> : A<B<H>>
-	{
-		public override B<H> Test ()
-		{
-			return this;
-		}
-	}
+    public class B<H> : A<B<H>>
+    {
+        public override B<H> Test()
+        {
+            return this;
+        }
+    }
 }

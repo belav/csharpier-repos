@@ -3,8 +3,8 @@
 
 public class C
 {
-	public object Test (object a)
-	{
-		return (System)(a);
-	}
+    public object Test(object a)
+    {
+        return (System)(a);
+    }
 }

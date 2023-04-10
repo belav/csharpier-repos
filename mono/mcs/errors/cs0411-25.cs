@@ -5,12 +5,10 @@ using System;
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        Foo (() => throw null);
+        Foo(() => throw null);
     }
 
-    static void Foo<T> (Func<T> arg)
-    {
-    }
+    static void Foo<T>(Func<T> arg) { }
 }

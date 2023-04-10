@@ -18,23 +18,49 @@ namespace Microsoft.VisualBasic.Activities
     [TypeConverter(typeof(VisualBasicSettingsConverter))]
     public class VisualBasicSettings
     {
-        
-        static readonly HashSet<VisualBasicImportReference> defaultImportReferences = new HashSet<VisualBasicImportReference>()
-        {
-            //"mscorlib"
-            new VisualBasicImportReference { Import = "System", Assembly = "mscorlib" },
-            new VisualBasicImportReference { Import = "System.Collections", Assembly = "mscorlib" },
-            new VisualBasicImportReference { Import = "System.Collections.Generic", Assembly = "mscorlib" },
-            //"system"
-            new VisualBasicImportReference { Import = "System", Assembly = "system" },
-            new VisualBasicImportReference { Import = "System.Collections.Generic", Assembly = "system" },
-            //"System.Activities"
-            new VisualBasicImportReference { Import = "System.Activities", Assembly = "System.Activities" },
-            new VisualBasicImportReference { Import = "System.Activities.Statements", Assembly = "System.Activities" },
-            new VisualBasicImportReference { Import = "System.Activities.Expressions", Assembly = "System.Activities" },
-        };
+        static readonly HashSet<VisualBasicImportReference> defaultImportReferences =
+            new HashSet<VisualBasicImportReference>()
+            {
+                //"mscorlib"
+                new VisualBasicImportReference { Import = "System", Assembly = "mscorlib" },
+                new VisualBasicImportReference
+                {
+                    Import = "System.Collections",
+                    Assembly = "mscorlib"
+                },
+                new VisualBasicImportReference
+                {
+                    Import = "System.Collections.Generic",
+                    Assembly = "mscorlib"
+                },
+                //"system"
+                new VisualBasicImportReference { Import = "System", Assembly = "system" },
+                new VisualBasicImportReference
+                {
+                    Import = "System.Collections.Generic",
+                    Assembly = "system"
+                },
+                //"System.Activities"
+                new VisualBasicImportReference
+                {
+                    Import = "System.Activities",
+                    Assembly = "System.Activities"
+                },
+                new VisualBasicImportReference
+                {
+                    Import = "System.Activities.Statements",
+                    Assembly = "System.Activities"
+                },
+                new VisualBasicImportReference
+                {
+                    Import = "System.Activities.Expressions",
+                    Assembly = "System.Activities"
+                },
+            };
 
-        static VisualBasicSettings defaultSettings = new VisualBasicSettings(defaultImportReferences);
+        static VisualBasicSettings defaultSettings = new VisualBasicSettings(
+            defaultImportReferences
+        );
 
         public VisualBasicSettings()
         {
@@ -49,26 +75,15 @@ namespace Microsoft.VisualBasic.Activities
 
         public static VisualBasicSettings Default
         {
-            get
-            {
-                return defaultSettings;
-            }
+            get { return defaultSettings; }
         }
 
         // hide from XAML since the value serializer can't suppress yet
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public ISet<VisualBasicImportReference> ImportReferences
-        {
-            get;
-            private set;
-        }
+        public ISet<VisualBasicImportReference> ImportReferences { get; private set; }
 
-        internal bool SuppressXamlSerialization 
-        { 
-            get; 
-            set; 
-        }
-        
+        internal bool SuppressXamlSerialization { get; set; }
+
         internal void GenerateXamlReferences(IValueSerializerContext context)
         {
             // promote settings to xmlns declarations
@@ -79,12 +94,15 @@ namespace Microsoft.VisualBasic.Activities
             }
         }
 
-        internal static T GetService<T>(ITypeDescriptorContext context) where T : class
+        internal static T GetService<T>(ITypeDescriptorContext context)
+            where T : class
         {
             T service = (T)context.GetService(typeof(T));
             if (service == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidTypeConverterUsage));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.InvalidTypeConverterUsage)
+                );
             }
 
             return service;

@@ -3,12 +3,10 @@
 
 class X
 {
-	public void Foo ()
-	{
-	}
-	
-	void Test ()
-	{
-		Foo<int> ();
-	}
+    public void Foo() { }
+
+    void Test()
+    {
+        Foo<int>();
+    }
 }

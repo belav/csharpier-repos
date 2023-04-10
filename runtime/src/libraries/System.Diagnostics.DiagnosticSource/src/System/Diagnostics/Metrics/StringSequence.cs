@@ -81,17 +81,14 @@ namespace System.Diagnostics.Metrics
     {
         private readonly string[] _values;
 
-        public StringSequenceMany(string[] values) =>
-            _values = values;
+        public StringSequenceMany(string[] values) => _values = values;
 
-        public Span<string> AsSpan() =>
-            _values.AsSpan();
+        public Span<string> AsSpan() => _values.AsSpan();
 
         public bool Equals(StringSequenceMany other) =>
             _values.AsSpan().SequenceEqual(other._values.AsSpan());
 
         //GetHashCode() is in the platform specific files
-        public override bool Equals(object? obj) =>
-            obj is StringSequenceMany ssm && Equals(ssm);
+        public override bool Equals(object? obj) => obj is StringSequenceMany ssm && Equals(ssm);
     }
 }

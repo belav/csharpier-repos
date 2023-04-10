@@ -17,8 +17,8 @@ public static class TypeConfigurationTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool? IsEntityType(this TypeConfigurationType? configurationType)
-        => configurationType?.IsEntityType();
+    public static bool? IsEntityType(this TypeConfigurationType? configurationType) =>
+        configurationType?.IsEntityType();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -26,8 +26,8 @@ public static class TypeConfigurationTypeExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsEntityType(this TypeConfigurationType configurationType)
-        => configurationType == TypeConfigurationType.EntityType
-            || configurationType == TypeConfigurationType.SharedTypeEntityType
-            || configurationType == TypeConfigurationType.OwnedEntityType;
+    public static bool IsEntityType(this TypeConfigurationType configurationType) =>
+        configurationType == TypeConfigurationType.EntityType
+        || configurationType == TypeConfigurationType.SharedTypeEntityType
+        || configurationType == TypeConfigurationType.OwnedEntityType;
 }

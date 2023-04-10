@@ -3,15 +3,16 @@
 
 class C
 {
-	static void Foo (int arg)
-	{
-		switch (arg) {
-			case 1:
-				int res = 1;
-				break;
-			case 2:
-				int res = 2;
-				break;
-		}
-	}
+    static void Foo(int arg)
+    {
+        switch (arg)
+        {
+            case 1:
+                int res = 1;
+                break;
+            case 2:
+                int res = 2;
+                break;
+        }
+    }
 }

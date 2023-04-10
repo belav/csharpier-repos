@@ -3,14 +3,12 @@
 
 struct B
 {
-	public int a;
+    public int a;
 
-	public B (int foo)
-	{
-		Test ();
-	}
+    public B(int foo)
+    {
+        Test();
+    }
 
-	public void Test ()
-	{
-	}
+    public void Test() { }
 }

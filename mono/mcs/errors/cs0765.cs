@@ -7,11 +7,11 @@ using System.Linq.Expressions;
 
 public class C
 {
-	[Conditional ("DEBUG")]
-	public static void TestMethod () { }
+    [Conditional("DEBUG")]
+    public static void TestMethod() { }
 
-	static void Main ()
-	{
-		Expression<Action> e = () => TestMethod ();
-	}
+    static void Main()
+    {
+        Expression<Action> e = () => TestMethod();
+    }
 }

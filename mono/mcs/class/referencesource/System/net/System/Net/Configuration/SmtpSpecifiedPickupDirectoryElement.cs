@@ -19,12 +19,9 @@ namespace System.Net.Configuration
             this.properties.Add(this.pickupDirectoryLocation);
         }
 
-        protected override ConfigurationPropertyCollection Properties 
+        protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.PickupDirectoryLocation)]
@@ -34,21 +31,25 @@ namespace System.Net.Configuration
             set { this[this.pickupDirectoryLocation] = value; }
         }
 
-	        
-        // 
+        //
 
 
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty pickupDirectoryLocation =
-            new ConfigurationProperty(ConfigurationStrings.PickupDirectoryLocation, typeof(string), null,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty pickupDirectoryLocation = new ConfigurationProperty(
+            ConfigurationStrings.PickupDirectoryLocation,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
     }
 
     internal sealed class SmtpSpecifiedPickupDirectoryElementInternal
     {
-        internal SmtpSpecifiedPickupDirectoryElementInternal(SmtpSpecifiedPickupDirectoryElement element)
+        internal SmtpSpecifiedPickupDirectoryElementInternal(
+            SmtpSpecifiedPickupDirectoryElement element
+        )
         {
             this.pickupDirectoryLocation = element.PickupDirectoryLocation;
         }
@@ -61,4 +62,3 @@ namespace System.Net.Configuration
         string pickupDirectoryLocation;
     }
 }
-

@@ -3,9 +3,9 @@
 
 class A
 {
-	public A ()
-	{
-		var x = new { s = "-" };
-		x.MemberwiseClone();
-	}
+    public A()
+    {
+        var x = new { s = "-" };
+        x.MemberwiseClone();
+    }
 }

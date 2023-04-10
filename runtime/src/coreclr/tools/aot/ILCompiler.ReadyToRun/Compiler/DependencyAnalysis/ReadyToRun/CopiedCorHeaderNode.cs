@@ -16,13 +16,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private static readonly int s_corHeaderSize = 0x48;
 
         private EcmaModule _module;
-        
+
         public CopiedCorHeaderNode(EcmaModule sourceModule)
         {
             _module = sourceModule;
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.TextSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.TextSection;
 
         public override bool IsShareable => false;
 
@@ -56,7 +57,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 sb.Append("__CompositeCorHeader_");
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
@@ -84,7 +86,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 builder.EmitInt(metadataBlob.Size);
 
                 // Flags
-                builder.EmitUInt((uint)(((CorFlags)reader.ReadUInt32() & ~CorFlags.ILOnly) | CorFlags.ILLibrary));
+                builder.EmitUInt(
+                    (uint)(((CorFlags)reader.ReadUInt32() & ~CorFlags.ILOnly) | CorFlags.ILLibrary)
+                );
 
                 // Entrypoint
                 builder.EmitInt(reader.ReadInt32());
@@ -131,7 +135,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 builder.EmitReloc(factory.Header, RelocType.IMAGE_REL_SYMBOL_SIZE);
 
                 // Did we fully read the header?
-                Debug.Assert(reader.Offset - headerSize == _module.PEReader.PEHeaders.CorHeaderStartOffset);
+                Debug.Assert(
+                    reader.Offset - headerSize == _module.PEReader.PEHeaders.CorHeaderStartOffset
+                );
                 Debug.Assert(builder.CountBytes == headerSize);
                 Debug.Assert(headerSize == Size);
             }
@@ -146,7 +152,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 builder.EmitUShort(0);
 
                 // Metadata Directory
-                builder.EmitReloc(factory.ManifestMetadataTable, RelocType.IMAGE_REL_BASED_ADDR32NB);
+                builder.EmitReloc(
+                    factory.ManifestMetadataTable,
+                    RelocType.IMAGE_REL_BASED_ADDR32NB
+                );
                 builder.EmitReloc(factory.ManifestMetadataTable, RelocType.IMAGE_REL_SYMBOL_SIZE);
 
                 // Flags

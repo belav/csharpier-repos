@@ -19,12 +19,12 @@ namespace System.Data.Objects.ELinq
         /// <summary>
         /// A context-sensitive DbExpression builder class that simulates order preservation
         /// for operators (project, filter, oftype, skip and limit) that are not natively order
-        /// preserving. The builder simulates order preservation by 'lifting' order keys in 
+        /// preserving. The builder simulates order preservation by 'lifting' order keys in
         /// the expression tree. For instance, source.Sort(o).Where(f) is rewritten as
         /// source.Where(f).Sort(o) since otherwise the sort keys would be ignored.
-        /// 
+        ///
         /// In general, the lifter works as follows:
-        /// 
+        ///
         /// - The input to the operator is matched against a series of patterns for intrinsically
         ///   ordered expressions.
         /// - For each pattern, the lifter encodes the compensation required for each of the
@@ -97,7 +97,10 @@ namespace System.Data.Objects.ELinq
                 /// the exception of the PassthroughOrderByLifter. The latter class represents expressions
                 /// without intrinsic order that therefore require no lifting.
                 /// </remarks>
-                internal static OrderByLifterBase GetLifter(DbExpression source, AliasGenerator aliasGenerator)
+                internal static OrderByLifterBase GetLifter(
+                    DbExpression source,
+                    AliasGenerator aliasGenerator
+                )
                 {
                     if (source.ExpressionKind == DbExpressionKind.Sort)
                     {
@@ -109,11 +112,19 @@ namespace System.Data.Objects.ELinq
                         DbExpression projectInput = project.Input.Expression;
                         if (projectInput.ExpressionKind == DbExpressionKind.Sort)
                         {
-                            return new ProjectSortLifter(project, (DbSortExpression)projectInput, aliasGenerator);
+                            return new ProjectSortLifter(
+                                project,
+                                (DbSortExpression)projectInput,
+                                aliasGenerator
+                            );
                         }
                         if (projectInput.ExpressionKind == DbExpressionKind.Skip)
                         {
-                            return new ProjectSkipLifter(project, (DbSkipExpression)projectInput, aliasGenerator);
+                            return new ProjectSkipLifter(
+                                project,
+                                (DbSkipExpression)projectInput,
+                                aliasGenerator
+                            );
                         }
                         if (projectInput.ExpressionKind == DbExpressionKind.Limit)
                         {
@@ -121,11 +132,21 @@ namespace System.Data.Objects.ELinq
                             DbExpression limitInput = limit.Argument;
                             if (limitInput.ExpressionKind == DbExpressionKind.Sort)
                             {
-                                return new ProjectLimitSortLifter(project, limit, (DbSortExpression)limitInput, aliasGenerator);
+                                return new ProjectLimitSortLifter(
+                                    project,
+                                    limit,
+                                    (DbSortExpression)limitInput,
+                                    aliasGenerator
+                                );
                             }
                             if (limitInput.ExpressionKind == DbExpressionKind.Skip)
                             {
-                                return new ProjectLimitSkipLifter(project, limit, (DbSkipExpression)limitInput, aliasGenerator);
+                                return new ProjectLimitSkipLifter(
+                                    project,
+                                    limit,
+                                    (DbSkipExpression)limitInput,
+                                    aliasGenerator
+                                );
                             }
                         }
                     }
@@ -139,11 +160,19 @@ namespace System.Data.Objects.ELinq
                         DbExpression limitInput = limit.Argument;
                         if (limitInput.ExpressionKind == DbExpressionKind.Sort)
                         {
-                            return new LimitSortLifter(limit, (DbSortExpression)limitInput, aliasGenerator);
+                            return new LimitSortLifter(
+                                limit,
+                                (DbSortExpression)limitInput,
+                                aliasGenerator
+                            );
                         }
                         if (limitInput.ExpressionKind == DbExpressionKind.Skip)
                         {
-                            return new LimitSkipLifter(limit, (DbSkipExpression)limitInput, aliasGenerator);
+                            return new LimitSkipLifter(
+                                limit,
+                                (DbSkipExpression)limitInput,
+                                aliasGenerator
+                            );
                         }
                         if (limitInput.ExpressionKind == DbExpressionKind.Project)
                         {
@@ -151,15 +180,25 @@ namespace System.Data.Objects.ELinq
                             DbExpression projectInput = project.Input.Expression;
                             if (projectInput.ExpressionKind == DbExpressionKind.Sort)
                             {
-                                // source.Sort(o).Project(p).Limit(k).* is equivalent to transformation for 
-                                // source.Sort(o).Limit(k).Project(p).* 
-                                return new ProjectLimitSortLifter(project, limit, (DbSortExpression)projectInput, aliasGenerator);
+                                // source.Sort(o).Project(p).Limit(k).* is equivalent to transformation for
+                                // source.Sort(o).Limit(k).Project(p).*
+                                return new ProjectLimitSortLifter(
+                                    project,
+                                    limit,
+                                    (DbSortExpression)projectInput,
+                                    aliasGenerator
+                                );
                             }
                             if (projectInput.ExpressionKind == DbExpressionKind.Skip)
                             {
-                                // source.Skip(k, o).Project(p).Limit(k2).* is equivalent to transformation for 
+                                // source.Skip(k, o).Project(p).Limit(k2).* is equivalent to transformation for
                                 // source.Skip(k, o).Limit(k2).Project(p).*
-                                return new ProjectLimitSkipLifter(project, limit, (DbSkipExpression)projectInput, aliasGenerator);
+                                return new ProjectLimitSkipLifter(
+                                    project,
+                                    limit,
+                                    (DbSkipExpression)projectInput,
+                                    aliasGenerator
+                                );
                             }
                         }
                     }
@@ -169,97 +208,150 @@ namespace System.Data.Objects.ELinq
                 #region Builder methods
                 internal abstract DbExpression Project(DbProjectExpression project);
                 internal abstract DbExpression Filter(DbFilterExpression filter);
+
                 internal virtual DbExpression OfType(TypeUsage type)
                 {
                     // s.OfType<T> is normally translated to s.Filter(e => e is T).Project(e => e as T)
                     DbExpressionBinding rootBinding = _root.BindAs(_aliasGenerator.Next());
-                    DbExpression filter = this.Filter(rootBinding.Filter(rootBinding.Variable.IsOf(type)));
+                    DbExpression filter = this.Filter(
+                        rootBinding.Filter(rootBinding.Variable.IsOf(type))
+                    );
                     OrderByLifterBase filterLifter = GetLifter(filter, _aliasGenerator);
                     DbExpressionBinding filterBinding = filter.BindAs(_aliasGenerator.Next());
-                    DbExpression project = filterLifter.Project(filterBinding.Project(filterBinding.Variable.TreatAs(type)));
+                    DbExpression project = filterLifter.Project(
+                        filterBinding.Project(filterBinding.Variable.TreatAs(type))
+                    );
                     return project;
                 }
+
                 internal abstract DbExpression Limit(DbExpression k);
                 internal abstract DbExpression Skip(DbExpression k);
                 #endregion
 
                 #region Lambda composition: merge arguments to operators to create a single operator
-                protected DbProjectExpression ComposeProject(DbExpression input, DbProjectExpression first, DbProjectExpression second)
+                protected DbProjectExpression ComposeProject(
+                    DbExpression input,
+                    DbProjectExpression first,
+                    DbProjectExpression second
+                )
                 {
                     // source.Project(first).Project(second) -> source.Project(e => second(first(e)))
 
                     // create lambda expression representing the second projection (e => second(e))
-                    DbLambda secondLambda = DbExpressionBuilder.Lambda(second.Projection, second.Input.Variable);
+                    DbLambda secondLambda = DbExpressionBuilder.Lambda(
+                        second.Projection,
+                        second.Input.Variable
+                    );
 
                     // invoke lambda with variable from the first projection
-                    DbProjectExpression composed = first.Input.Project(secondLambda.Invoke(first.Projection));
+                    DbProjectExpression composed = first.Input.Project(
+                        secondLambda.Invoke(first.Projection)
+                    );
 
                     return RebindProject(input, composed);
                 }
 
-                protected DbFilterExpression ComposeFilter(DbExpression input, DbProjectExpression first, DbFilterExpression second)
+                protected DbFilterExpression ComposeFilter(
+                    DbExpression input,
+                    DbProjectExpression first,
+                    DbFilterExpression second
+                )
                 {
                     // source.Project(first).Filter(second) -> source.Filter(e => second(first(e)))
 
                     // create lambda expression representing the filter (e => second(e))
-                    DbLambda secondLambda = DbExpressionBuilder.Lambda(second.Predicate, second.Input.Variable);
+                    DbLambda secondLambda = DbExpressionBuilder.Lambda(
+                        second.Predicate,
+                        second.Input.Variable
+                    );
 
                     // invoke lambda with variable from the project
-                    DbFilterExpression composed = first.Input.Filter(secondLambda.Invoke(first.Projection));
+                    DbFilterExpression composed = first.Input.Filter(
+                        secondLambda.Invoke(first.Projection)
+                    );
 
                     return RebindFilter(input, composed);
                 }
                 #endregion
 
                 #region Paging op reducers
-                protected DbSkipExpression AddToSkip(DbExpression input, DbSkipExpression skip, DbExpression plusK)
+                protected DbSkipExpression AddToSkip(
+                    DbExpression input,
+                    DbSkipExpression skip,
+                    DbExpression plusK
+                )
                 {
                     // source.Skip(k, o).Skip(k2) -> source.Skip(k + k2, o)
-                    DbExpression newCount = CombineIntegers(skip.Count, plusK,
-                        (l, r) => l + r);
+                    DbExpression newCount = CombineIntegers(skip.Count, plusK, (l, r) => l + r);
                     return RebindSkip(input, skip, newCount);
                 }
 
-                protected DbLimitExpression SubtractFromLimit(DbExpression input, DbLimitExpression limit, DbExpression minusK)
+                protected DbLimitExpression SubtractFromLimit(
+                    DbExpression input,
+                    DbLimitExpression limit,
+                    DbExpression minusK
+                )
                 {
-                    DbExpression newCount = CombineIntegers(limit.Limit, minusK,
-                        (l, r) => r > l ? 0 : l - r); // can't limit to less than zero rows)
+                    DbExpression newCount = CombineIntegers(
+                        limit.Limit,
+                        minusK,
+                        (l, r) => r > l ? 0 : l - r
+                    ); // can't limit to less than zero rows)
                     return DbExpressionBuilder.Limit(input, newCount);
                 }
 
-                protected DbLimitExpression MinimumLimit(DbExpression input, DbLimitExpression limit, DbExpression k)
+                protected DbLimitExpression MinimumLimit(
+                    DbExpression input,
+                    DbLimitExpression limit,
+                    DbExpression k
+                )
                 {
                     // source.Limit(k).Limit(k2) -> source.Limit(Min(k, k2))
                     DbExpression newCount = CombineIntegers(limit.Limit, k, Math.Min);
                     return DbExpressionBuilder.Limit(input, newCount);
                 }
 
-                protected DbExpression CombineIntegers(DbExpression left, DbExpression right,
-                    Func<int, int, int> combineConstants)
+                protected DbExpression CombineIntegers(
+                    DbExpression left,
+                    DbExpression right,
+                    Func<int, int, int> combineConstants
+                )
                 {
-                    if (left.ExpressionKind == DbExpressionKind.Constant &&
-                        right.ExpressionKind == DbExpressionKind.Constant)
+                    if (
+                        left.ExpressionKind == DbExpressionKind.Constant
+                        && right.ExpressionKind == DbExpressionKind.Constant
+                    )
                     {
                         object leftValue = ((DbConstantExpression)left).Value;
                         object rightValue = ((DbConstantExpression)right).Value;
                         if (leftValue is int && rightValue is int)
                         {
-                            return left.ResultType.Constant(combineConstants((int)leftValue, (int)rightValue));
+                            return left.ResultType.Constant(
+                                combineConstants((int)leftValue, (int)rightValue)
+                            );
                         }
                     }
                     Debug.Fail("only valid for integer constants");
-                    throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.UnexpectedLinqLambdaExpressionFormat);
+                    throw EntityUtil.InternalError(
+                        EntityUtil.InternalErrorCode.UnexpectedLinqLambdaExpressionFormat
+                    );
                 }
                 #endregion
 
                 #region Rebinders: take an operator and apply it to a different input
-                protected DbProjectExpression RebindProject(DbExpression input, DbProjectExpression project)
+                protected DbProjectExpression RebindProject(
+                    DbExpression input,
+                    DbProjectExpression project
+                )
                 {
                     DbExpressionBinding inputBinding = input.BindAs(project.Input.VariableName);
                     return inputBinding.Project(project.Projection);
                 }
 
-                protected DbFilterExpression RebindFilter(DbExpression input, DbFilterExpression filter)
+                protected DbFilterExpression RebindFilter(
+                    DbExpression input,
+                    DbFilterExpression filter
+                )
                 {
                     DbExpressionBinding inputBinding = input.BindAs(filter.Input.VariableName);
                     return inputBinding.Filter(filter.Predicate);
@@ -271,19 +363,30 @@ namespace System.Data.Objects.ELinq
                     return inputBinding.Sort(sort.SortOrder);
                 }
 
-                protected DbSortExpression ApplySkipOrderToSort(DbExpression input, DbSkipExpression sortSpec)
+                protected DbSortExpression ApplySkipOrderToSort(
+                    DbExpression input,
+                    DbSkipExpression sortSpec
+                )
                 {
                     DbExpressionBinding inputBinding = input.BindAs(sortSpec.Input.VariableName);
                     return inputBinding.Sort(sortSpec.SortOrder);
                 }
 
-                protected DbSkipExpression ApplySortOrderToSkip(DbExpression input, DbSortExpression sort, DbExpression k)
+                protected DbSkipExpression ApplySortOrderToSkip(
+                    DbExpression input,
+                    DbSortExpression sort,
+                    DbExpression k
+                )
                 {
                     DbExpressionBinding inputBinding = input.BindAs(sort.Input.VariableName);
                     return inputBinding.Skip(sort.SortOrder, k);
                 }
 
-                protected DbSkipExpression RebindSkip(DbExpression input, DbSkipExpression skip, DbExpression k)
+                protected DbSkipExpression RebindSkip(
+                    DbExpression input,
+                    DbSkipExpression skip,
+                    DbExpression k
+                )
                 {
                     DbExpressionBinding inputBinding = input.BindAs(skip.Input.VariableName);
                     return inputBinding.Skip(skip.SortOrder, k);
@@ -300,7 +403,11 @@ namespace System.Data.Objects.ELinq
                 private readonly DbSkipExpression _skip;
                 private readonly DbExpression _source;
 
-                internal LimitSkipLifter(DbLimitExpression limit, DbSkipExpression skip, AliasGenerator aliasGenerator)
+                internal LimitSkipLifter(
+                    DbLimitExpression limit,
+                    DbSkipExpression skip,
+                    AliasGenerator aliasGenerator
+                )
                     : base(limit, aliasGenerator)
                 {
                     _limit = limit;
@@ -326,8 +433,10 @@ namespace System.Data.Objects.ELinq
                     // source.Skip(k, o).Limit(k2).Limit(k3) ->
                     // source.Skip(k, o).Limit(Min(k2, k3)) where k2 and k3 are constants
                     // otherwise source.Skip(k, o).Limit(k2).Sort(o).Limit(k3)
-                    if (_limit.Limit.ExpressionKind == DbExpressionKind.Constant &&
-                        k.ExpressionKind == DbExpressionKind.Constant)
+                    if (
+                        _limit.Limit.ExpressionKind == DbExpressionKind.Constant
+                        && k.ExpressionKind == DbExpressionKind.Constant
+                    )
                     {
                         return MinimumLimit(_skip, _limit, k);
                     }
@@ -354,7 +463,11 @@ namespace System.Data.Objects.ELinq
                 private readonly DbSortExpression _sort;
                 private readonly DbExpression _source;
 
-                internal LimitSortLifter(DbLimitExpression limit, DbSortExpression sort, AliasGenerator aliasGenerator)
+                internal LimitSortLifter(
+                    DbLimitExpression limit,
+                    DbSortExpression sort,
+                    AliasGenerator aliasGenerator
+                )
                     : base(limit, aliasGenerator)
                 {
                     _limit = limit;
@@ -378,8 +491,10 @@ namespace System.Data.Objects.ELinq
                 {
                     // source.Sort(o).Limit(k).Limit(k2) -> source.Sort(o).Limit(Min(k, k2)) when k and k2 are constants
                     // otherwise -> source.Sort(o).Limit(k).Sort(o).Limit(k2)
-                    if (_limit.Limit.ExpressionKind == DbExpressionKind.Constant &&
-                        k.ExpressionKind == DbExpressionKind.Constant)
+                    if (
+                        _limit.Limit.ExpressionKind == DbExpressionKind.Constant
+                        && k.ExpressionKind == DbExpressionKind.Constant
+                    )
                     {
                         return MinimumLimit(_sort, _limit, k);
                     }
@@ -401,7 +516,7 @@ namespace System.Data.Objects.ELinq
             /// </summary>
             /// <remarks>
             /// This class is also used to represent expressions of the form: source.Skip(k, o).Project(p).Limit(k).
-            /// As a result, the rewrites must be spelled out entirely (the implementation cannot assume that 
+            /// As a result, the rewrites must be spelled out entirely (the implementation cannot assume that
             /// _limit exists in a particular position in the tree)
             /// </remarks>
             private class ProjectLimitSkipLifter : OrderByLifterBase
@@ -411,7 +526,12 @@ namespace System.Data.Objects.ELinq
                 private readonly DbSkipExpression _skip;
                 private readonly DbExpression _source;
 
-                internal ProjectLimitSkipLifter(DbProjectExpression project, DbLimitExpression limit, DbSkipExpression skip, AliasGenerator aliasGenerator)
+                internal ProjectLimitSkipLifter(
+                    DbProjectExpression project,
+                    DbLimitExpression limit,
+                    DbSkipExpression skip,
+                    AliasGenerator aliasGenerator
+                )
                     : base(project, aliasGenerator)
                 {
                     _project = project;
@@ -429,19 +549,23 @@ namespace System.Data.Objects.ELinq
                             ComposeFilter(
                                 DbExpressionBuilder.Limit(_skip, _limit.Limit),
                                 _project,
-                                filter),
-                            _skip),
-                        _project);
+                                filter
+                            ),
+                            _skip
+                        ),
+                        _project
+                    );
                 }
 
                 internal override DbExpression Project(DbProjectExpression project)
                 {
-                    // source.Skip(k, o).Limit(k2).Project(p).Project(p2) -> 
+                    // source.Skip(k, o).Limit(k2).Project(p).Project(p2) ->
                     // source.Skip(k, o).Limit(k2).Project(e => p2(p(e)))
                     return ComposeProject(
                         DbExpressionBuilder.Limit(_skip, _limit.Limit),
                         _project,
-                        project);
+                        project
+                    );
                 }
 
                 internal override DbExpression Limit(DbExpression k)
@@ -449,12 +573,12 @@ namespace System.Data.Objects.ELinq
                     // source.Skip(k, o).Limit(k2).Project(p).Limit(k3) ->
                     // source.Skip(k, o).Limit(Min(k2, k3)).Project(p) where k2 and k2 are constants
                     // otherwise -> source.Skip(k, o).Limit(k2).Sort(o).Limit(k3).Project(p)
-                    if (_limit.Limit.ExpressionKind == DbExpressionKind.Constant &&
-                        k.ExpressionKind == DbExpressionKind.Constant)
+                    if (
+                        _limit.Limit.ExpressionKind == DbExpressionKind.Constant
+                        && k.ExpressionKind == DbExpressionKind.Constant
+                    )
                     {
-                        return RebindProject(
-                            MinimumLimit(_skip, _limit, k),
-                            _project);
+                        return RebindProject(MinimumLimit(_skip, _limit, k), _project);
                     }
                     else
                     {
@@ -462,9 +586,12 @@ namespace System.Data.Objects.ELinq
                             DbExpressionBuilder.Limit(
                                 ApplySkipOrderToSort(
                                     DbExpressionBuilder.Limit(_skip, _limit.Limit),
-                                    _skip),
-                                k),
-                            _project);
+                                    _skip
+                                ),
+                                k
+                            ),
+                            _project
+                        );
                     }
                 }
 
@@ -473,25 +600,23 @@ namespace System.Data.Objects.ELinq
                     // source.Skip(k, o).Limit(k2).Project(p).Skip(k3) ->
                     // source.Skip(k + k3, o).Limit(k2 – k3).Project(p) when k, k2 and k3 are constants
                     // otherwise -> source.Skip(k, o).Limit(k2).Skip(k3, o).Project(p)
-                    if (_skip.Count.ExpressionKind == DbExpressionKind.Constant &&
-                        _limit.Limit.ExpressionKind == DbExpressionKind.Constant &&
-                        k.ExpressionKind == DbExpressionKind.Constant)
+                    if (
+                        _skip.Count.ExpressionKind == DbExpressionKind.Constant
+                        && _limit.Limit.ExpressionKind == DbExpressionKind.Constant
+                        && k.ExpressionKind == DbExpressionKind.Constant
+                    )
                     {
                         return RebindProject(
-                            SubtractFromLimit(
-                                AddToSkip(_source, _skip, k),
-                                _limit,
-                                k),
-                            _project);
+                            SubtractFromLimit(AddToSkip(_source, _skip, k), _limit, k),
+                            _project
+                        );
                     }
                     else
                     {
                         return RebindProject(
-                            RebindSkip(
-                                DbExpressionBuilder.Limit(_skip, _limit.Limit),
-                                _skip,
-                                k),
-                            _project);
+                            RebindSkip(DbExpressionBuilder.Limit(_skip, _limit.Limit), _skip, k),
+                            _project
+                        );
                     }
                 }
             }
@@ -501,7 +626,7 @@ namespace System.Data.Objects.ELinq
             /// </summary>
             /// <remarks>
             /// This class is also used to represent expressions of the form: source.Sort(o).Project(p).Limit(k).
-            /// As a result, the rewrites must be spelled out entirely (the implementation cannot assume that 
+            /// As a result, the rewrites must be spelled out entirely (the implementation cannot assume that
             /// _limit exists in a particular position in the tree)
             /// </remarks>
             private class ProjectLimitSortLifter : OrderByLifterBase
@@ -511,7 +636,12 @@ namespace System.Data.Objects.ELinq
                 private readonly DbSortExpression _sort;
                 private readonly DbExpression _source;
 
-                internal ProjectLimitSortLifter(DbProjectExpression project, DbLimitExpression limit, DbSortExpression sort, AliasGenerator aliasGenerator)
+                internal ProjectLimitSortLifter(
+                    DbProjectExpression project,
+                    DbLimitExpression limit,
+                    DbSortExpression sort,
+                    AliasGenerator aliasGenerator
+                )
                     : base(project, aliasGenerator)
                 {
                     _project = project;
@@ -528,9 +658,12 @@ namespace System.Data.Objects.ELinq
                             ComposeFilter(
                                 DbExpressionBuilder.Limit(_sort, _limit.Limit),
                                 _project,
-                                filter),
-                            _sort),
-                        _project);
+                                filter
+                            ),
+                            _sort
+                        ),
+                        _project
+                    );
                 }
 
                 internal override DbExpression Project(DbProjectExpression project)
@@ -539,29 +672,30 @@ namespace System.Data.Objects.ELinq
                     return ComposeProject(
                         DbExpressionBuilder.Limit(_sort, _limit.Limit),
                         _project,
-                        project);
+                        project
+                    );
                 }
 
                 internal override DbExpression Limit(DbExpression k)
                 {
                     // source.Sort(o).Limit(k).Project(p).Limit(k2) -> source.Sort(o).Limit(Min(k, k2)).Project(p) where k and k2 are constants
-                    // otherwise -> source.Sort(o).Limit(k).Sort(o).Limit(k2).Project(p) 
-                    if (_limit.Limit.ExpressionKind == DbExpressionKind.Constant &&
-                        k.ExpressionKind == DbExpressionKind.Constant)
+                    // otherwise -> source.Sort(o).Limit(k).Sort(o).Limit(k2).Project(p)
+                    if (
+                        _limit.Limit.ExpressionKind == DbExpressionKind.Constant
+                        && k.ExpressionKind == DbExpressionKind.Constant
+                    )
                     {
-                        return RebindProject(
-                            MinimumLimit(_sort, _limit, k),
-                            _project);
+                        return RebindProject(MinimumLimit(_sort, _limit, k), _project);
                     }
                     else
                     {
                         return RebindProject(
                             DbExpressionBuilder.Limit(
-                                RebindSort(
-                                    DbExpressionBuilder.Limit(_sort, _limit.Limit),
-                                    _sort),
-                                k),
-                            _project);
+                                RebindSort(DbExpressionBuilder.Limit(_sort, _limit.Limit), _sort),
+                                k
+                            ),
+                            _project
+                        );
                     }
                 }
 
@@ -572,8 +706,10 @@ namespace System.Data.Objects.ELinq
                         ApplySortOrderToSkip(
                             DbExpressionBuilder.Limit(_sort, _limit.Limit),
                             _sort,
-                            k),
-                        _project);
+                            k
+                        ),
+                        _project
+                    );
                 }
             }
 
@@ -586,7 +722,11 @@ namespace System.Data.Objects.ELinq
                 private readonly DbSkipExpression _skip;
                 private readonly DbExpression _source;
 
-                internal ProjectSkipLifter(DbProjectExpression project, DbSkipExpression skip, AliasGenerator aliasGenerator)
+                internal ProjectSkipLifter(
+                    DbProjectExpression project,
+                    DbSkipExpression skip,
+                    AliasGenerator aliasGenerator
+                )
                     : base(project, aliasGenerator)
                 {
                     _project = project;
@@ -598,10 +738,9 @@ namespace System.Data.Objects.ELinq
                 {
                     // source.Skip(k, o).Project(p).Filter(f) -> source.Skip(k, o).Filter(e => f(p(e))).Sort(o).Project(p)
                     return RebindProject(
-                        ApplySkipOrderToSort(
-                            ComposeFilter(_skip, _project, filter),
-                            _skip),
-                        _project);
+                        ApplySkipOrderToSort(ComposeFilter(_skip, _project, filter), _skip),
+                        _project
+                    );
                 }
 
                 internal override DbExpression Limit(DbExpression k)
@@ -619,9 +758,11 @@ namespace System.Data.Objects.ELinq
                 internal override DbExpression Skip(DbExpression k)
                 {
                     // source.Skip(k, o).Project(p).Skip(k2) -> source.Skip(k + k2, o).Project(p) where k and k2 are constants,
-                    // otherwise -> source.Skip(k, o).Skip(k2, o).Project(p) 
-                    if (_skip.Count.ExpressionKind == DbExpressionKind.Constant &&
-                        k.ExpressionKind == DbExpressionKind.Constant)
+                    // otherwise -> source.Skip(k, o).Skip(k2, o).Project(p)
+                    if (
+                        _skip.Count.ExpressionKind == DbExpressionKind.Constant
+                        && k.ExpressionKind == DbExpressionKind.Constant
+                    )
                     {
                         return RebindProject(AddToSkip(_source, _skip, k), _project);
                     }
@@ -669,8 +810,10 @@ namespace System.Data.Objects.ELinq
                 {
                     // source.Skip(k, o).Skip(k2) -> source.Skip(k + k2, o) where k and k2 are both constants
                     // otherwise, -> source.Skip(k, o).Skip(k2, o)
-                    if (_skip.Count.ExpressionKind == DbExpressionKind.Constant &&
-                        k.ExpressionKind == DbExpressionKind.Constant)
+                    if (
+                        _skip.Count.ExpressionKind == DbExpressionKind.Constant
+                        && k.ExpressionKind == DbExpressionKind.Constant
+                    )
                     {
                         return AddToSkip(_source, _skip, k);
                     }
@@ -690,7 +833,11 @@ namespace System.Data.Objects.ELinq
                 private readonly DbSortExpression _sort;
                 private readonly DbExpression _source;
 
-                internal ProjectSortLifter(DbProjectExpression project, DbSortExpression sort, AliasGenerator aliasGenerator)
+                internal ProjectSortLifter(
+                    DbProjectExpression project,
+                    DbSortExpression sort,
+                    AliasGenerator aliasGenerator
+                )
                     : base(project, aliasGenerator)
                 {
                     _project = project;
@@ -708,10 +855,9 @@ namespace System.Data.Objects.ELinq
                 {
                     // source.Sort(o).Project(p).Filter(f) -> source.Filter(e => f(p(e))).Sort(o).Project(p)
                     return RebindProject(
-                        RebindSort(
-                            ComposeFilter(_source, _project, filter),
-                            _sort),
-                        _project);
+                        RebindSort(ComposeFilter(_source, _project, filter), _sort),
+                        _project
+                    );
                 }
 
                 internal override DbExpression Limit(DbExpression k)
@@ -772,10 +918,11 @@ namespace System.Data.Objects.ELinq
             /// </summary>
             private class PassthroughOrderByLifter : OrderByLifterBase
             {
-                internal PassthroughOrderByLifter(DbExpression source, AliasGenerator aliasGenerator)
-                    : base(source, aliasGenerator)
-                {
-                }
+                internal PassthroughOrderByLifter(
+                    DbExpression source,
+                    AliasGenerator aliasGenerator
+                )
+                    : base(source, aliasGenerator) { }
 
                 internal override DbExpression Project(DbProjectExpression project)
                 {
@@ -801,7 +948,9 @@ namespace System.Data.Objects.ELinq
                 {
                     // since the source has no intrinsic order, we need to throw (skip
                     // requires order)
-                    throw EntityUtil.NotSupported(System.Data.Entity.Strings.ELinq_SkipWithoutOrder);
+                    throw EntityUtil.NotSupported(
+                        System.Data.Entity.Strings.ELinq_SkipWithoutOrder
+                    );
                 }
             }
         }

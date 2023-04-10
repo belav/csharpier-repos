@@ -14,16 +14,20 @@ public class ComponentMarkupEncodingPassTest
     public ComponentMarkupEncodingPassTest()
     {
         Pass = new ComponentMarkupEncodingPass();
-        ProjectEngine = (DefaultRazorProjectEngine)RazorProjectEngine.Create(
-            RazorConfiguration.Default,
-            RazorProjectFileSystem.Create(Environment.CurrentDirectory),
-            b =>
-            {
-                if (b.Features.OfType<ComponentMarkupEncodingPass>().Any())
+        ProjectEngine = (DefaultRazorProjectEngine)
+            RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                RazorProjectFileSystem.Create(Environment.CurrentDirectory),
+                b =>
                 {
-                    b.Features.Remove(b.Features.OfType<ComponentMarkupEncodingPass>().Single());
+                    if (b.Features.OfType<ComponentMarkupEncodingPass>().Any())
+                    {
+                        b.Features.Remove(
+                            b.Features.OfType<ComponentMarkupEncodingPass>().Single()
+                        );
+                    }
                 }
-            });
+            );
         Engine = ProjectEngine.Engine;
 
         Pass.Engine = Engine;
@@ -39,10 +43,12 @@ public class ComponentMarkupEncodingPassTest
     public void Execute_StaticHtmlContent_RewrittenToBlock()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <div>
 &nbsp;
-</div>");
+</div>"
+        );
 
         var documentNode = Lower(document);
 
@@ -58,8 +64,10 @@ public class ComponentMarkupEncodingPassTest
     public void Execute_MixedHtmlContent_NoNewLineorSpecialCharacters_DoesNotSetEncoded()
     {
         // Arrange
-        var document = CreateDocument(@"
-<div>The time is @DateTime.Now</div>");
+        var document = CreateDocument(
+            @"
+<div>The time is @DateTime.Now</div>"
+        );
         var expected = NormalizeContent("The time is ");
 
         var documentNode = Lower(document);
@@ -77,11 +85,15 @@ public class ComponentMarkupEncodingPassTest
     public void Execute_MixedHtmlContent_NewLine_SetsEncoded()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <div>
-The time is @DateTime.Now</div>");
-        var expected = NormalizeContent(@"
-The time is ");
+The time is @DateTime.Now</div>"
+        );
+        var expected = NormalizeContent(
+            @"
+The time is "
+        );
 
         var documentNode = Lower(document);
 
@@ -98,8 +110,10 @@ The time is ");
     public void Execute_MixedHtmlContent_Ampersand_SetsEncoded()
     {
         // Arrange
-        var document = CreateDocument(@"
-<div>The time is &&nbsp;& @DateTime.Now</div>");
+        var document = CreateDocument(
+            @"
+<div>The time is &&nbsp;& @DateTime.Now</div>"
+        );
         var expected = NormalizeContent("The time is &&nbsp;& ");
 
         var documentNode = Lower(document);
@@ -117,8 +131,10 @@ The time is ");
     public void Execute_MixedHtmlContent_NonAsciiCharacter_SetsEncoded()
     {
         // Arrange
-        var document = CreateDocument(@"
-<div>ThE tIme is @DateTime.Now</div>");
+        var document = CreateDocument(
+            @"
+<div>ThE tIme is @DateTime.Now</div>"
+        );
         var expected = NormalizeContent("ThE tIme is ");
 
         var documentNode = Lower(document);
@@ -136,8 +152,10 @@ The time is ");
     public void Execute_MixedHtmlContent_HTMLEntity_DoesNotSetEncoded()
     {
         // Arrange
-        var document = CreateDocument(@"
-<div>The time &equals; @DateTime.Now</div>");
+        var document = CreateDocument(
+            @"
+<div>The time &equals; @DateTime.Now</div>"
+        );
         var expected = NormalizeContent("The time = ");
 
         var documentNode = Lower(document);
@@ -155,8 +173,10 @@ The time is ");
     public void Execute_MixedHtmlContent_MultipleHTMLEntities_DoesNotSetEncoded()
     {
         // Arrange
-        var document = CreateDocument(@"
-<div>The time &equals;&nbsp;&#61;&#0x003D; @DateTime.Now</div>");
+        var document = CreateDocument(
+            @"
+<div>The time &equals;&nbsp;&#61;&#0x003D; @DateTime.Now</div>"
+        );
         var expected = NormalizeContent("The time =\u00A0== ");
 
         var documentNode = Lower(document);
@@ -203,7 +223,10 @@ The time is ");
         }
 
         var document = codeDocument.GetDocumentIntermediateNode();
-        Engine.Features.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
+        Engine.Features
+            .OfType<ComponentDocumentClassifierPass>()
+            .Single()
+            .Execute(codeDocument, document);
         return document;
     }
 

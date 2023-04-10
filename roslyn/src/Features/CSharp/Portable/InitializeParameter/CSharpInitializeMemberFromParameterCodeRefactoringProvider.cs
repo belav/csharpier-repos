@@ -17,46 +17,74 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.InitializeMemberFromParameter), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.InitializeMemberFromParameter
+        ),
+        Shared
+    ]
     [ExtensionOrder(Before = nameof(CSharpAddParameterCheckCodeRefactoringProvider))]
     [ExtensionOrder(Before = PredefinedCodeRefactoringProviderNames.Wrapping)]
-    internal class CSharpInitializeMemberFromParameterCodeRefactoringProvider :
-        AbstractInitializeMemberFromParameterCodeRefactoringProvider<
+    internal class CSharpInitializeMemberFromParameterCodeRefactoringProvider
+        : AbstractInitializeMemberFromParameterCodeRefactoringProvider<
             BaseTypeDeclarationSyntax,
             ParameterSyntax,
             StatementSyntax,
-            ExpressionSyntax>
+            ExpressionSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpInitializeMemberFromParameterCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpInitializeMemberFromParameterCodeRefactoringProvider() { }
 
-        protected override bool IsFunctionDeclaration(SyntaxNode node)
-            => InitializeParameterHelpers.IsFunctionDeclaration(node);
+        protected override bool IsFunctionDeclaration(SyntaxNode node) =>
+            InitializeParameterHelpers.IsFunctionDeclaration(node);
 
-        protected override SyntaxNode? TryGetLastStatement(IBlockOperation? blockStatement)
-            => InitializeParameterHelpers.TryGetLastStatement(blockStatement);
+        protected override SyntaxNode? TryGetLastStatement(IBlockOperation? blockStatement) =>
+            InitializeParameterHelpers.TryGetLastStatement(blockStatement);
 
-        protected override void InsertStatement(SyntaxEditor editor, SyntaxNode functionDeclaration, bool returnsVoid, SyntaxNode? statementToAddAfter, StatementSyntax statement)
-            => InitializeParameterHelpers.InsertStatement(editor, functionDeclaration, returnsVoid, statementToAddAfter, statement);
+        protected override void InsertStatement(
+            SyntaxEditor editor,
+            SyntaxNode functionDeclaration,
+            bool returnsVoid,
+            SyntaxNode? statementToAddAfter,
+            StatementSyntax statement
+        ) =>
+            InitializeParameterHelpers.InsertStatement(
+                editor,
+                functionDeclaration,
+                returnsVoid,
+                statementToAddAfter,
+                statement
+            );
 
-        protected override bool IsImplicitConversion(Compilation compilation, ITypeSymbol source, ITypeSymbol destination)
-            => InitializeParameterHelpers.IsImplicitConversion(compilation, source, destination);
+        protected override bool IsImplicitConversion(
+            Compilation compilation,
+            ITypeSymbol source,
+            ITypeSymbol destination
+        ) => InitializeParameterHelpers.IsImplicitConversion(compilation, source, destination);
 
         // Fields are always private by default in C#.
-        protected override Accessibility DetermineDefaultFieldAccessibility(INamedTypeSymbol containingType)
-            => Accessibility.Private;
+        protected override Accessibility DetermineDefaultFieldAccessibility(
+            INamedTypeSymbol containingType
+        ) => Accessibility.Private;
 
         // Properties are always private by default in C#.
-        protected override Accessibility DetermineDefaultPropertyAccessibility()
-            => Accessibility.Private;
+        protected override Accessibility DetermineDefaultPropertyAccessibility() =>
+            Accessibility.Private;
 
-        protected override SyntaxNode GetBody(SyntaxNode functionDeclaration)
-            => InitializeParameterHelpers.GetBody(functionDeclaration);
+        protected override SyntaxNode GetBody(SyntaxNode functionDeclaration) =>
+            InitializeParameterHelpers.GetBody(functionDeclaration);
 
-        protected override SyntaxNode? GetAccessorBody(IMethodSymbol accessor, CancellationToken cancellationToken)
+        protected override SyntaxNode? GetAccessorBody(
+            IMethodSymbol accessor,
+            CancellationToken cancellationToken
+        )
         {
             var node = accessor.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken);
             if (node is AccessorDeclarationSyntax accessorDeclaration)
@@ -78,9 +106,11 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
                     var result = propertyDeclaration
                         .WithExpressionBody(null)
                         .WithSemicolonToken(default)
-                        .AddAccessorListAccessors(SyntaxFactory
-                            .AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
-                            .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)))
+                        .AddAccessorListAccessors(
+                            SyntaxFactory
+                                .AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                        )
                         .WithTrailingTrivia(propertyDeclaration.SemicolonToken.TrailingTrivia)
                         .WithAdditionalAnnotations(Formatter.Annotation);
                     return result;
@@ -88,23 +118,33 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
 
                 if (propertyDeclaration.AccessorList != null)
                 {
-                    var accessors = propertyDeclaration.AccessorList.Accessors.Select(RemoveThrowNotImplemented);
+                    var accessors = propertyDeclaration.AccessorList.Accessors.Select(
+                        RemoveThrowNotImplemented
+                    );
                     return propertyDeclaration.WithAccessorList(
-                        propertyDeclaration.AccessorList.WithAccessors(SyntaxFactory.List(accessors)));
+                        propertyDeclaration.AccessorList.WithAccessors(
+                            SyntaxFactory.List(accessors)
+                        )
+                    );
                 }
             }
 
             return node;
         }
 
-        private static AccessorDeclarationSyntax RemoveThrowNotImplemented(AccessorDeclarationSyntax accessorDeclaration)
+        private static AccessorDeclarationSyntax RemoveThrowNotImplemented(
+            AccessorDeclarationSyntax accessorDeclaration
+        )
         {
             var result = accessorDeclaration
                 .WithExpressionBody(null)
                 .WithBody(null)
                 .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
 
-            return result.WithTrailingTrivia(accessorDeclaration.Body?.GetTrailingTrivia() ?? accessorDeclaration.SemicolonToken.TrailingTrivia);
+            return result.WithTrailingTrivia(
+                accessorDeclaration.Body?.GetTrailingTrivia()
+                    ?? accessorDeclaration.SemicolonToken.TrailingTrivia
+            );
         }
     }
 }

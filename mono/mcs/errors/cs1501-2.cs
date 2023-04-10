@@ -3,20 +3,16 @@
 
 class A
 {
-	protected virtual void Foo (object[] arr)
-	{
-	}
+    protected virtual void Foo(object[] arr) { }
 }
 
 class B : A
 {
-	protected override void Foo (params object[] arr)
-	{
-	}
+    protected override void Foo(params object[] arr) { }
 
-	static void Bar()
-	{
-		B b = new B ();
-		b.Foo ();
-	}
+    static void Bar()
+    {
+        B b = new B();
+        b.Foo();
+    }
 }

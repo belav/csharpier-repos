@@ -4,12 +4,13 @@
 
 using System;
 
-public sealed class FooAttribute : Attribute {
-	int Foo;
+public sealed class FooAttribute : Attribute
+{
+    int Foo;
 }
 
-[Foo (Foo = 1)]
-public class Tests {
-	public static void Main () {
-	}
+[Foo(Foo = 1)]
+public class Tests
+{
+    public static void Main() { }
 }

@@ -39,7 +39,11 @@ internal sealed class OletxCommittableTransaction : OletxTransaction
         if (etwLog.IsEnabled())
         {
             etwLog.MethodEnter(TraceSourceType.TraceSourceOleTx, this);
-            etwLog.TransactionCommit(TraceSourceType.TraceSourceOleTx, TransactionTraceId, "CommittableTransaction");
+            etwLog.TransactionCommit(
+                TraceSourceType.TraceSourceOleTx,
+                TransactionTraceId,
+                "CommittableTransaction"
+            );
         }
 
         Debug.Assert(0 == Disposed, "OletxTransction object is disposed");
@@ -51,7 +55,11 @@ internal sealed class OletxCommittableTransaction : OletxTransaction
 
         if (etwLog.IsEnabled())
         {
-            etwLog.MethodExit(TraceSourceType.TraceSourceOleTx, this, $"{nameof(OletxCommittableTransaction)}.{nameof(BeginCommit)}");
+            etwLog.MethodExit(
+                TraceSourceType.TraceSourceOleTx,
+                this,
+                $"{nameof(OletxCommittableTransaction)}.{nameof(BeginCommit)}"
+            );
         }
     }
 }

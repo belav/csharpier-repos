@@ -8,7 +8,11 @@ namespace System.Runtime.Serialization.Formatters.Binary
 {
     public sealed partial class BinaryFormatter : IFormatter
     {
-        [Obsolete(Obsoletions.BinaryFormatterMessage, DiagnosticId = Obsoletions.BinaryFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.BinaryFormatterMessage,
+            DiagnosticId = Obsoletions.BinaryFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresDynamicCode(IFormatter.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(IFormatter.RequiresUnreferencedCodeMessage)]
         public object Deserialize(Stream serializationStream)
@@ -34,7 +38,13 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 _securityLevel = _securityLevel,
             };
 
-            var reader = new ObjectReader(serializationStream, _surrogates, _context, formatterEnums, _binder)
+            var reader = new ObjectReader(
+                serializationStream,
+                _surrogates,
+                _context,
+                formatterEnums,
+                _binder
+            )
             {
                 _crossAppDomainArray = _crossAppDomainArray
             };
@@ -58,7 +68,11 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
         }
 
-        [Obsolete(Obsoletions.BinaryFormatterMessage, DiagnosticId = Obsoletions.BinaryFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.BinaryFormatterMessage,
+            DiagnosticId = Obsoletions.BinaryFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(IFormatter.RequiresUnreferencedCodeMessage)]
         public void Serialize(Stream serializationStream, object graph)
         {
@@ -81,7 +95,11 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 BinaryFormatterEventSource.Log.SerializationStart();
                 var sow = new ObjectWriter(_surrogates, _context, formatterEnums, _binder);
-                BinaryFormatterWriter binaryWriter = new BinaryFormatterWriter(serializationStream, sow, _typeFormat);
+                BinaryFormatterWriter binaryWriter = new BinaryFormatterWriter(
+                    serializationStream,
+                    sow,
+                    _typeFormat
+                );
                 sow.Serialize(graph, binaryWriter);
                 _crossAppDomainArray = sow._crossAppDomainArray;
             }

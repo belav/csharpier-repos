@@ -4,8 +4,8 @@
 
 class Foo
 {
-	class Bar
-	{
-		int a;
-	}
+    class Bar
+    {
+        int a;
+    }
 }

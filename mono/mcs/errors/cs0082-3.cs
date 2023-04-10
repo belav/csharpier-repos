@@ -3,8 +3,10 @@
 
 public class Test
 {
-	public string this [int i] {
-		get { return ""; }
-	}
-	public void set_Item (int i, string s) { }
+    public string this[int i]
+    {
+        get { return ""; }
+    }
+
+    public void set_Item(int i, string s) { }
 }

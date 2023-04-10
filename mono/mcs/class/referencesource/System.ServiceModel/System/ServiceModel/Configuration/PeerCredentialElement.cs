@@ -13,9 +13,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class PeerCredentialElement : ConfigurationElement
     {
-        public PeerCredentialElement()
-        {
-        }
+        public PeerCredentialElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.Certificate)]
         public X509PeerCertificateElement Certificate
@@ -26,20 +24,30 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.PeerAuthentication)]
         public X509PeerCertificateAuthenticationElement PeerAuthentication
         {
-            get { return (X509PeerCertificateAuthenticationElement)base[ConfigurationStrings.PeerAuthentication]; }
+            get
+            {
+                return (X509PeerCertificateAuthenticationElement)
+                    base[ConfigurationStrings.PeerAuthentication];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.MessageSenderAuthentication)]
         public X509PeerCertificateAuthenticationElement MessageSenderAuthentication
         {
-            get { return (X509PeerCertificateAuthenticationElement)base[ConfigurationStrings.MessageSenderAuthentication]; }
+            get
+            {
+                return (X509PeerCertificateAuthenticationElement)
+                    base[ConfigurationStrings.MessageSenderAuthentication];
+            }
         }
 
         public void Copy(PeerCredentialElement from)
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == from)
             {
@@ -59,21 +67,29 @@ namespace System.ServiceModel.Configuration
             }
 
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
-            if (propertyInfo[ConfigurationStrings.Certificate].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.Certificate].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.Certificate.ApplyConfiguration(creds);
             }
-            if (propertyInfo[ConfigurationStrings.PeerAuthentication].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.PeerAuthentication].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.PeerAuthentication.ApplyConfiguration(creds.PeerAuthentication);
             }
-            if (propertyInfo[ConfigurationStrings.MessageSenderAuthentication].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.MessageSenderAuthentication].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
-                this.MessageSenderAuthentication.ApplyConfiguration(creds.MessageSenderAuthentication);
+                this.MessageSenderAuthentication.ApplyConfiguration(
+                    creds.MessageSenderAuthentication
+                );
             }
         }
     }
 }
-
-
-

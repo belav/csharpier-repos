@@ -21,38 +21,46 @@ class ForeignThreadExceptionsTest
 
     public static void RunTest()
     {
-        InvokeCallback(() => {
+        InvokeCallback(() =>
+        {
             try
             {
                 MethodThatThrows();
             }
             catch (Exception e)
             {
-                Console.WriteLine("Caught exception thrown in a function called by a delegate called through Reverse PInvoke.");
+                Console.WriteLine(
+                    "Caught exception thrown in a function called by a delegate called through Reverse PInvoke."
+                );
             }
         });
 
-        InvokeCallbackOnNewThread(() => {
+        InvokeCallbackOnNewThread(() =>
+        {
             try
             {
                 throw new Exception("Exception from delegate on foreign thread!");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Caught exception thrown in a delegate called through Reverse PInvoke on a foreign thread.");
+                Console.WriteLine(
+                    "Caught exception thrown in a delegate called through Reverse PInvoke on a foreign thread."
+                );
             }
-
         });
 
-        InvokeCallbackOnNewThread(() => {
+        InvokeCallbackOnNewThread(() =>
+        {
             string s = null;
             try
             {
                 int len = s.Length;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine("Caught hardware exception in a delegate called through Reverse PInvoke on a foreign thread.");
+                Console.WriteLine(
+                    "Caught hardware exception in a delegate called through Reverse PInvoke on a foreign thread."
+                );
             }
         });
     }
@@ -64,10 +72,9 @@ class ForeignThreadExceptionsTest
             RunTest();
             return 100;
         }
-
         catch (Exception ex)
         {
-            Console.WriteLine("Failed to catch an exception! "+ ex.ToString());
+            Console.WriteLine("Failed to catch an exception! " + ex.ToString());
         }
 
         return 1;

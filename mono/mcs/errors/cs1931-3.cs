@@ -8,10 +8,10 @@ using System.Linq;
 
 class Test
 {
-	public static void Main ()
-	{
-		int[] int_array = null;
-		int ii = 0;
-		IEnumerable<int> e = from int ii in int_array select "1";
-	}
+    public static void Main()
+    {
+        int[] int_array = null;
+        int ii = 0;
+        IEnumerable<int> e = from int ii in int_array select "1";
+    }
 }

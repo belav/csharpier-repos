@@ -15,10 +15,10 @@ namespace System.ServiceModel.PeerResolvers
         internal static bool IsDefined(PeerResolverMode value)
         {
             return (
-                value == PeerResolverMode.Auto ||
-                value == PeerResolverMode.Pnrp ||
-                value == PeerResolverMode.Custom );
+                value == PeerResolverMode.Auto
+                || value == PeerResolverMode.Pnrp
+                || value == PeerResolverMode.Custom
+            );
         }
     }
 }
-

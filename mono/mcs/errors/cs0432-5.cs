@@ -3,13 +3,13 @@
 
 namespace A
 {
-	using BB = System.Collections.Generic;
+    using BB = System.Collections.Generic;
 }
 
 namespace A.B
 {
-	class X
-	{
-		BB::List<int> p;
-	}
+    class X
+    {
+        BB::List<int> p;
+    }
 }

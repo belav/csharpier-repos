@@ -35,13 +35,22 @@ public class TableValuedFunctionToQueryRootConvertingExpressionVisitor : Express
         var function = _model.FindDbFunction(methodCallExpression.Method);
 
         return function?.IsScalar == false
-            ? CreateTableValuedFunctionQueryRootExpression(function.StoreFunction, methodCallExpression.Arguments)
+            ? CreateTableValuedFunctionQueryRootExpression(
+                function.StoreFunction,
+                methodCallExpression.Arguments
+            )
             : base.VisitMethodCall(methodCallExpression);
     }
 
     private static Expression CreateTableValuedFunctionQueryRootExpression(
-            IStoreFunction function,
-            IReadOnlyCollection<Expression> arguments)
+        IStoreFunction function,
+        IReadOnlyCollection<Expression> arguments
+    )
         // See issue #19970
-        => new TableValuedFunctionQueryRootExpression(function.EntityTypeMappings.Single().EntityType, function, arguments);
+        =>
+        new TableValuedFunctionQueryRootExpression(
+            function.EntityTypeMappings.Single().EntityType,
+            function,
+            arguments
+        );
 }

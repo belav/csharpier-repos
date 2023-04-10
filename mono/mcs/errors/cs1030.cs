@@ -3,4 +3,3 @@
 // Compiler options: -warnaserror
 
 #warning Expected warning
-

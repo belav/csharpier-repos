@@ -4,8 +4,8 @@
 
 class E
 {
-   public static void Method (int i)
-   {
-       switch (i) {}
-   }
+    public static void Method(int i)
+    {
+        switch (i) { }
+    }
 }

@@ -10,7 +10,10 @@ namespace System.ServiceModel.Activation.Configuration
     {
         public DiagnosticSection Diagnostics
         {
-            get { return (DiagnosticSection)this.Sections[ConfigurationStrings.DiagnosticSectionName]; }
+            get
+            {
+                return (DiagnosticSection)this.Sections[ConfigurationStrings.DiagnosticSectionName];
+            }
         }
 
         static public ServiceModelActivationSectionGroup GetSectionGroup(Configuration config)
@@ -20,7 +23,8 @@ namespace System.ServiceModel.Activation.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("config");
             }
 #pragma warning suppress 56506 // Microsoft, Configuration.SectionGroups cannot be null
-            return (ServiceModelActivationSectionGroup)config.SectionGroups[ConfigurationStrings.SectionGroupName];
+            return (ServiceModelActivationSectionGroup)
+                config.SectionGroups[ConfigurationStrings.SectionGroupName];
         }
 
         public NetPipeSection NetPipe
@@ -34,6 +38,3 @@ namespace System.ServiceModel.Activation.Configuration
         }
     }
 }
-
-
-

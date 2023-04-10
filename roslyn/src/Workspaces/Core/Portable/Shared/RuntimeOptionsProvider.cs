@@ -18,11 +18,9 @@ namespace Microsoft.CodeAnalysis.Shared.Options
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RuntimeOptionsProvider()
-        {
-        }
+        public RuntimeOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown);
     }
 }

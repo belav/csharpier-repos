@@ -8,10 +8,10 @@ namespace System.ServiceModel.Channels
     using System.Runtime.CompilerServices;
     using System.Runtime;
 
-    [TypeForwardedFrom("System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     // Marker interface to indicate binding elements which support the context exchange protocol
     [SuppressMessage(FxCop.Category.Design, "CA1040")]
-    public interface IContextBindingElement
-    {
-    }
+    public interface IContextBindingElement { }
 }

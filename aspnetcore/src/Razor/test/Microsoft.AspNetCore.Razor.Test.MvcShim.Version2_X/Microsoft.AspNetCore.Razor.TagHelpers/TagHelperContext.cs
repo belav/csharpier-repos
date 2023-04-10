@@ -25,7 +25,9 @@ public class TagHelperContext
         string tagName,
         TagHelperAttributeList allAttributes,
         IDictionary<object, object> items,
-        string uniqueId) : this(allAttributes, items, uniqueId)
+        string uniqueId
+    )
+        : this(allAttributes, items, uniqueId)
     {
         if (tagName == null)
         {
@@ -45,7 +47,8 @@ public class TagHelperContext
     public TagHelperContext(
         TagHelperAttributeList allAttributes,
         IDictionary<object, object> items,
-        string uniqueId)
+        string uniqueId
+    )
     {
         if (items == null)
         {

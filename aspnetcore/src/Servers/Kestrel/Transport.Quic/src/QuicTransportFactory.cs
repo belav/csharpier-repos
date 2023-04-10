@@ -13,18 +13,25 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic;
 /// <summary>
 /// A factory for QUIC based connections.
 /// </summary>
-internal sealed class QuicTransportFactory : IMultiplexedConnectionListenerFactory, IConnectionListenerFactorySelector
+internal sealed class QuicTransportFactory
+    : IMultiplexedConnectionListenerFactory,
+        IConnectionListenerFactorySelector
 {
     private readonly ILogger _log;
     private readonly QuicTransportOptions _options;
 
-    public QuicTransportFactory(ILoggerFactory loggerFactory, IOptions<QuicTransportOptions> options)
+    public QuicTransportFactory(
+        ILoggerFactory loggerFactory,
+        IOptions<QuicTransportOptions> options
+    )
     {
         ArgumentNullException.ThrowIfNull(options);
 
         ArgumentNullException.ThrowIfNull(loggerFactory);
 
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Server.Kestrel.Transport.Quic");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Server.Kestrel.Transport.Quic"
+        );
         _log = logger;
         _options = options.Value;
     }
@@ -36,7 +43,11 @@ internal sealed class QuicTransportFactory : IMultiplexedConnectionListenerFacto
     /// <param name="features">Additional features to be used to create the listener.</param>
     /// <param name="cancellationToken">To cancel the </param>
     /// <returns>A </returns>
-    public async ValueTask<IMultiplexedConnectionListener> BindAsync(EndPoint endpoint, IFeatureCollection? features = null, CancellationToken cancellationToken = default)
+    public async ValueTask<IMultiplexedConnectionListener> BindAsync(
+        EndPoint endpoint,
+        IFeatureCollection? features = null,
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoint);
 
@@ -44,11 +55,18 @@ internal sealed class QuicTransportFactory : IMultiplexedConnectionListenerFacto
 
         if (tlsConnectionOptions == null)
         {
-            throw new InvalidOperationException("Couldn't find HTTPS configuration for QUIC transport.");
+            throw new InvalidOperationException(
+                "Couldn't find HTTPS configuration for QUIC transport."
+            );
         }
-        if (tlsConnectionOptions.ApplicationProtocols == null || tlsConnectionOptions.ApplicationProtocols.Count == 0)
+        if (
+            tlsConnectionOptions.ApplicationProtocols == null
+            || tlsConnectionOptions.ApplicationProtocols.Count == 0
+        )
         {
-            throw new InvalidOperationException("No application protocols specified for QUIC transport.");
+            throw new InvalidOperationException(
+                "No application protocols specified for QUIC transport."
+            );
         }
 
         var transport = new QuicConnectionListener(_options, _log, endpoint, tlsConnectionOptions);

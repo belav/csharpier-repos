@@ -22,7 +22,10 @@ public interface IConventionDbFunctionParameterBuilder : IConventionAnnotatableB
     /// <param name="storeType">The store type of the function parameter in the database.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The same builder instance if the configuration was applied; <see langword="null" /> otherwise.</returns>
-    IConventionDbFunctionParameterBuilder? HasStoreType(string? storeType, bool fromDataAnnotation = false);
+    IConventionDbFunctionParameterBuilder? HasStoreType(
+        string? storeType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the store type can be set for this property
@@ -41,7 +44,8 @@ public interface IConventionDbFunctionParameterBuilder : IConventionAnnotatableB
     /// <returns>The same builder instance if the configuration was applied; <see langword="null" /> otherwise.</returns>
     IConventionDbFunctionParameterBuilder? HasTypeMapping(
         RelationalTypeMapping? typeMapping,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether <see cref="RelationalTypeMapping" /> can be set for this property

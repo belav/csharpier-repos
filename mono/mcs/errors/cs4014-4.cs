@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 class C
 {
-	static async Task<int> TestAsync ()
-	{
-		new Task (() => {});
-		return await Task.FromResult (2);
-	}
+    static async Task<int> TestAsync()
+    {
+        new Task(() => { });
+        return await Task.FromResult(2);
+    }
 }

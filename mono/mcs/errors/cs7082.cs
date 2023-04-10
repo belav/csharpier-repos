@@ -6,7 +6,5 @@ using System.Runtime.CompilerServices;
 
 class D
 {
-	void Foo ([CallerFilePath, CallerLineNumber] object o = null)
-	{
-	}
+    void Foo([CallerFilePath, CallerLineNumber] object o = null) { }
 }

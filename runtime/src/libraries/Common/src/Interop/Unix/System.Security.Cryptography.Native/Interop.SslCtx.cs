@@ -30,12 +30,27 @@ internal static partial class Interop
         internal static partial int SslCtxSetData(IntPtr ctx, IntPtr data);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetAlpnSelectCb")]
-        internal static unsafe partial void SslCtxSetAlpnSelectCb(SafeSslContextHandle ctx, delegate* unmanaged<IntPtr, byte**, byte*, byte*, uint, IntPtr, int> callback, IntPtr arg);
+        internal static unsafe partial void SslCtxSetAlpnSelectCb(
+            SafeSslContextHandle ctx,
+            delegate* unmanaged<IntPtr, byte**, byte*, byte*, uint, IntPtr, int> callback,
+            IntPtr arg
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslCtxSetCaching")]
-        internal static unsafe partial int SslCtxSetCaching(SafeSslContextHandle ctx, int mode, int cacheSize, int contextIdLength, Span<byte> contextId, delegate* unmanaged<IntPtr, IntPtr, int> neewSessionCallback, delegate* unmanaged<IntPtr, IntPtr, void> removeSessionCallback);
+        internal static unsafe partial int SslCtxSetCaching(
+            SafeSslContextHandle ctx,
+            int mode,
+            int cacheSize,
+            int contextIdLength,
+            Span<byte> contextId,
+            delegate* unmanaged<IntPtr, IntPtr, int> neewSessionCallback,
+            delegate* unmanaged<IntPtr, IntPtr, void> removeSessionCallback
+        );
 
-        internal static bool AddExtraChainCertificates(SafeSslContextHandle ctx, X509Certificate2[] chain)
+        internal static bool AddExtraChainCertificates(
+            SafeSslContextHandle ctx,
+            X509Certificate2[] chain
+        )
         {
             // send pre-computed list of intermediates.
             for (int i = 0; i < chain.Length; i++)
@@ -65,14 +80,10 @@ namespace Microsoft.Win32.SafeHandles
         private GCHandle _gch;
 
         public SafeSslContextHandle()
-            : base(IntPtr.Zero, true)
-        {
-        }
+            : base(IntPtr.Zero, true) { }
 
         internal SafeSslContextHandle(IntPtr handle, bool ownsHandle)
-            : base(handle, ownsHandle)
-        {
-        }
+            : base(handle, ownsHandle) { }
 
         public override bool IsInvalid
         {
@@ -180,7 +191,6 @@ namespace Microsoft.Win32.SafeHandles
                     // when added to Dictionary, we will also drop exactly one when removed.
                     Interop.Ssl.SessionFree(oldSession);
                 }
-
             }
         }
 

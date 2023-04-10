@@ -5,10 +5,8 @@ using System;
 
 public sealed class FooAttribute : Attribute
 {
-	internal int Foo;
+    internal int Foo;
 }
 
-[Foo (Foo = 1)]
-public class Tests
-{
-}
+[Foo(Foo = 1)]
+public class Tests { }

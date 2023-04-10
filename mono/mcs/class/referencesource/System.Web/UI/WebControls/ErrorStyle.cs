@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -13,65 +13,87 @@ namespace System.Web.UI.WebControls {
     using System.Drawing;
 
     // A derived Style class with the default ForeColor set to Color.Red instead of Color.Empty
-    internal sealed class ErrorStyle : Style, ICustomTypeDescriptor {
-
-        public ErrorStyle() : base() {
+    internal sealed class ErrorStyle : Style, ICustomTypeDescriptor
+    {
+        public ErrorStyle()
+            : base()
+        {
             ForeColor = Color.Red;
         }
 
         #region ICustomTypeDesciptor implementation
-        AttributeCollection ICustomTypeDescriptor.GetAttributes() {
+        AttributeCollection ICustomTypeDescriptor.GetAttributes()
+        {
             return TypeDescriptor.GetAttributes(this, true);
         }
 
-        string ICustomTypeDescriptor.GetClassName() {
+        string ICustomTypeDescriptor.GetClassName()
+        {
             return TypeDescriptor.GetClassName(this, true);
         }
 
-        string ICustomTypeDescriptor.GetComponentName() {
+        string ICustomTypeDescriptor.GetComponentName()
+        {
             return TypeDescriptor.GetComponentName(this, true);
         }
 
-        TypeConverter ICustomTypeDescriptor.GetConverter() {
+        TypeConverter ICustomTypeDescriptor.GetConverter()
+        {
             return TypeDescriptor.GetConverter(this, true);
         }
 
-        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent() {
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
+        {
             return TypeDescriptor.GetDefaultEvent(this, true);
         }
 
-        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty() {
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
+        {
             return TypeDescriptor.GetDefaultProperty(this, true);
         }
 
-        object ICustomTypeDescriptor.GetEditor(Type editorBaseType) {
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
+        {
             return TypeDescriptor.GetEditor(this, editorBaseType, true);
         }
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents() {
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
+        {
             return TypeDescriptor.GetEvents(this, true);
         }
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes) {
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
+        {
             return TypeDescriptor.GetEvents(this, attributes, true);
         }
 
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties() {
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
+        {
             return ((ICustomTypeDescriptor)this).GetProperties(null);
         }
 
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes) {
-            PropertyDescriptorCollection oldProperties = TypeDescriptor.GetProperties(GetType(), attributes);
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
+        {
+            PropertyDescriptorCollection oldProperties = TypeDescriptor.GetProperties(
+                GetType(),
+                attributes
+            );
             PropertyDescriptor[] newProperties = new PropertyDescriptor[oldProperties.Count];
             PropertyDescriptor foreColor = oldProperties["ForeColor"];
 
-            for (int i=0; i < oldProperties.Count; i++) {
+            for (int i = 0; i < oldProperties.Count; i++)
+            {
                 PropertyDescriptor property = oldProperties[i];
-                if (property == foreColor) {
+                if (property == foreColor)
+                {
                     newProperties[i] = TypeDescriptor.CreateProperty(
-                        GetType(), property, new DefaultValueAttribute(typeof(Color), "Red"));
+                        GetType(),
+                        property,
+                        new DefaultValueAttribute(typeof(Color), "Red")
+                    );
                 }
-                else {
+                else
+                {
                     newProperties[i] = property;
                 }
             }
@@ -79,10 +101,10 @@ namespace System.Web.UI.WebControls {
             return new PropertyDescriptorCollection(newProperties, true);
         }
 
-        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd) {
+        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
+        {
             return this;
         }
         #endregion //ICustomTypeDescriptor implementation
     }
 }
-

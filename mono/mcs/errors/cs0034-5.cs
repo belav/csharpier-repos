@@ -3,8 +3,8 @@
 
 class C
 {
-	public static void Main ()
-	{
-		const string s3 = null + null;
-	}
+    public static void Main()
+    {
+        const string s3 = null + null;
+    }
 }

@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace System.Configuration
 {
-
     /// <summary>
     /// Event handler for the SettingsSaving event.
     /// </summary>

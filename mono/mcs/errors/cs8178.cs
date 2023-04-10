@@ -5,20 +5,20 @@ using System.Threading.Tasks;
 
 class X
 {
-	int x;
+    int x;
 
-	async Task Test ()
-	{
-		Foo (ref Wrap (await Task.FromResult (1))) = 4;
-	}
+    async Task Test()
+    {
+        Foo(ref Wrap(await Task.FromResult(1))) = 4;
+    }
 
-	ref int Wrap (int arg)
-	{
-		return ref x;
-	}
+    ref int Wrap(int arg)
+    {
+        return ref x;
+    }
 
-	static ref int Foo (ref int arg)
-	{
-		return ref arg;
-	}
+    static ref int Foo(ref int arg)
+    {
+        return ref arg;
+    }
 }

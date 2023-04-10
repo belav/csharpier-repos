@@ -46,7 +46,8 @@ internal class MyTypeConverter : TypeConverter
     {
         private readonly bool _isReadOnly;
 
-        public MyPropertyDescriptor(bool isReadOnly) : base(typeof(Program), "property", typeof(int))
+        public MyPropertyDescriptor(bool isReadOnly)
+            : base(typeof(Program), "property", typeof(int))
         {
             _isReadOnly = isReadOnly;
         }
@@ -62,6 +63,7 @@ internal class MyTypeConverter : TypeConverter
         }
 
         public override object GetValue(object component) => null;
+
         public override void SetValue(object component, object value) { }
     }
 

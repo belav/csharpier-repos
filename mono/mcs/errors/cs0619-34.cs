@@ -3,17 +3,16 @@
 
 using System;
 
-[Obsolete ("Obsolete struct", true)]
+[Obsolete("Obsolete struct", true)]
 struct Error
 {
-    public static void Report (bool arg)
-    {
-    }
+    public static void Report(bool arg) { }
 }
 
-class MainClass {
-    public static void Main ()
+class MainClass
+{
+    public static void Main()
     {
-        Error.Report (false);
+        Error.Report(false);
     }
 }

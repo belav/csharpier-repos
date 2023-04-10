@@ -4,9 +4,9 @@
 
 namespace Testing
 {
-	public class Test
-	{
-		/// <param name='i'>correct</param>
-		public void Baz (int i, int j) {}
-	}
+    public class Test
+    {
+        /// <param name='i'>correct</param>
+        public void Baz(int i, int j) { }
+    }
 }

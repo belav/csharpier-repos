@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,7 +32,12 @@ namespace Castle.DynamicProxy.Generators
         /// <param name = "adder">The add method.</param>
         /// <param name = "remover">The remove method.</param>
         /// <param name = "attributes">The attributes.</param>
-        public MetaEvent(EventInfo @event, MetaMethod adder, MetaMethod remover, EventAttributes attributes)
+        public MetaEvent(
+            EventInfo @event,
+            MetaMethod adder,
+            MetaMethod remover,
+            EventAttributes attributes
+        )
             : base(@event)
         {
             if (adder == null)
@@ -65,7 +70,8 @@ namespace Castle.DynamicProxy.Generators
                 }
 
                 throw new InvalidOperationException(
-                    "Emitter is not initialized. You have to initialize it first using 'BuildEventEmitter' method");
+                    "Emitter is not initialized. You have to initialize it first using 'BuildEventEmitter' method"
+                );
             }
         }
 
@@ -110,8 +116,9 @@ namespace Castle.DynamicProxy.Generators
             unchecked
             {
                 var result = (adder.Method != null ? adder.Method.GetHashCode() : 0);
-                result = (result*397) ^ (remover.Method != null ? remover.Method.GetHashCode() : 0);
-                result = (result*397) ^ Attributes.GetHashCode();
+                result =
+                    (result * 397) ^ (remover.Method != null ? remover.Method.GetHashCode() : 0);
+                result = (result * 397) ^ Attributes.GetHashCode();
                 return result;
             }
         }

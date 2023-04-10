@@ -5,8 +5,8 @@ using System;
 
 class C
 {
-    public TypedReference Method ()
+    public TypedReference Method()
     {
-		return null;
+        return null;
     }
 }

@@ -23,17 +23,38 @@ namespace System.Web.Mvc.Html
             return ValueForHelper(html, name, value: null, format: format, useViewData: true);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ValueFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ValueFor<TModel, TProperty>(
+            this HtmlHelper<TModel> html,
+            Expression<Func<TModel, TProperty>> expression
+        )
         {
             return ValueFor(html, expression, format: null);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static MvcHtmlString ValueFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, string format)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static MvcHtmlString ValueFor<TModel, TProperty>(
+            this HtmlHelper<TModel> html,
+            Expression<Func<TModel, TProperty>> expression,
+            string format
+        )
         {
             ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, html.ViewData);
-            return ValueForHelper(html, ExpressionHelper.GetExpressionText(expression), metadata.Model, format, useViewData: false);
+            return ValueForHelper(
+                html,
+                ExpressionHelper.GetExpressionText(expression),
+                metadata.Model,
+                format,
+                useViewData: false
+            );
         }
 
         public static MvcHtmlString ValueForModel(this HtmlHelper html)
@@ -46,7 +67,13 @@ namespace System.Web.Mvc.Html
             return Value(html, String.Empty, format);
         }
 
-        internal static MvcHtmlString ValueForHelper(HtmlHelper html, string name, object value, string format, bool useViewData)
+        internal static MvcHtmlString ValueForHelper(
+            HtmlHelper html,
+            string name,
+            object value,
+            string format,
+            bool useViewData
+        )
         {
             string fullName = html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
             string attemptedValue = (string)html.GetModelStateValue(fullName, typeof(string));
@@ -62,7 +89,10 @@ namespace System.Web.Mvc.Html
                 if (name.Length == 0)
                 {
                     // case 2(a): format the value from ModelMetadata for the current model
-                    ModelMetadata metadata = ModelMetadata.FromStringExpression(String.Empty, html.ViewContext.ViewData);
+                    ModelMetadata metadata = ModelMetadata.FromStringExpression(
+                        String.Empty,
+                        html.ViewContext.ViewData
+                    );
                     resolvedValue = html.FormatValue(metadata.Model, format);
                 }
                 else

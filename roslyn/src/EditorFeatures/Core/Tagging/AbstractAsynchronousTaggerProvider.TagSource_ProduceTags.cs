@@ -33,14 +33,24 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             {
                 _dataSource.ThreadingContext.ThrowIfNotOnUIThread();
 
-                Debug.Assert(_dataSource.CaretChangeBehavior.HasFlag(TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag));
+                Debug.Assert(
+                    _dataSource.CaretChangeBehavior.HasFlag(
+                        TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag
+                    )
+                );
 
                 var caret = _dataSource.GetCaretPoint(_textView, _subjectBuffer);
                 if (caret.HasValue)
                 {
                     // If it changed position and we're still in a tag, there's nothing more to do
-                    var currentTags = TryGetTagIntervalTreeForBuffer(caret.Value.Snapshot.TextBuffer);
-                    if (currentTags != null && currentTags.GetIntersectingSpans(new SnapshotSpan(caret.Value, 0)).Count > 0)
+                    var currentTags = TryGetTagIntervalTreeForBuffer(
+                        caret.Value.Snapshot.TextBuffer
+                    );
+                    if (
+                        currentTags != null
+                        && currentTags.GetIntersectingSpans(new SnapshotSpan(caret.Value, 0)).Count
+                            > 0
+                    )
                     {
                         // Caret is inside a tag.  No need to do anything.
                         return;
@@ -55,13 +65,22 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 _dataSource.ThreadingContext.ThrowIfNotOnUIThread();
 
                 var oldTagTrees = this.CachedTagTrees;
-                this.CachedTagTrees = ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>>.Empty;
+                this.CachedTagTrees = ImmutableDictionary<
+                    ITextBuffer,
+                    TagSpanIntervalTree<TTag>
+                >.Empty;
 
                 var snapshot = _subjectBuffer.CurrentSnapshot;
                 var oldTagTree = GetTagTree(snapshot, oldTagTrees);
 
                 // everything from old tree is removed.
-                RaiseTagsChanged(snapshot.TextBuffer, new DiffResult(added: null, removed: new(oldTagTree.GetSpans(snapshot).Select(s => s.Span))));
+                RaiseTagsChanged(
+                    snapshot.TextBuffer,
+                    new DiffResult(
+                        added: null,
+                        removed: new(oldTagTree.GetSpans(snapshot).Select(s => s.Span))
+                    )
+                );
             }
 
             private void OnSubjectBufferChanged(object? _, TextContentChangedEventArgs e)
@@ -83,26 +102,43 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                         return;
 
                     case 1:
+
                         // PERF: Optimize for the simple case of typing on a line.
                         {
                             var c = contentChanges[0];
-                            var textChangeRange = new TextChangeRange(new TextSpan(c.OldSpan.Start, c.OldSpan.Length), c.NewLength);
-                            this.AccumulatedTextChanges = this.AccumulatedTextChanges == null
-                                ? textChangeRange
-                                : this.AccumulatedTextChanges.Accumulate(SpecializedCollections.SingletonEnumerable(textChangeRange));
+                            var textChangeRange = new TextChangeRange(
+                                new TextSpan(c.OldSpan.Start, c.OldSpan.Length),
+                                c.NewLength
+                            );
+                            this.AccumulatedTextChanges =
+                                this.AccumulatedTextChanges == null
+                                    ? textChangeRange
+                                    : this.AccumulatedTextChanges.Accumulate(
+                                        SpecializedCollections.SingletonEnumerable(textChangeRange)
+                                    );
                         }
 
                         break;
 
                     default:
-                        {
-                            using var _ = ArrayBuilder<TextChangeRange>.GetInstance(count, out var textChangeRanges);
-                            foreach (var c in contentChanges)
-                                textChangeRanges.Add(new TextChangeRange(new TextSpan(c.OldSpan.Start, c.OldSpan.Length), c.NewLength));
+                    {
+                        using var _ = ArrayBuilder<TextChangeRange>.GetInstance(
+                            count,
+                            out var textChangeRanges
+                        );
+                        foreach (var c in contentChanges)
+                            textChangeRanges.Add(
+                                new TextChangeRange(
+                                    new TextSpan(c.OldSpan.Start, c.OldSpan.Length),
+                                    c.NewLength
+                                )
+                            );
 
-                            this.AccumulatedTextChanges = this.AccumulatedTextChanges.Accumulate(textChangeRanges);
-                            break;
-                        }
+                        this.AccumulatedTextChanges = this.AccumulatedTextChanges.Accumulate(
+                            textChangeRanges
+                        );
+                        break;
+                    }
                 }
             }
 
@@ -117,7 +153,11 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 }
 
                 // Don't bother going forward if we're not going adjust any tags based on edits.
-                if (_dataSource.TextChangeBehavior.HasFlag(TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits))
+                if (
+                    _dataSource.TextChangeBehavior.HasFlag(
+                        TaggerTextChangeBehavior.RemoveTagsThatIntersectEdits
+                    )
+                )
                 {
                     RemoveTagsThatIntersectEdit(e);
                     return;
@@ -135,7 +175,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 var snapshot = e.After;
 
-                var tagsToRemove = e.Changes.SelectMany(c => treeForBuffer.GetIntersectingSpans(new SnapshotSpan(snapshot, c.NewSpan)));
+                var tagsToRemove = e.Changes.SelectMany(
+                    c => treeForBuffer.GetIntersectingSpans(new SnapshotSpan(snapshot, c.NewSpan))
+                );
                 if (!tagsToRemove.Any())
                     return;
 
@@ -143,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 var newTagTree = new TagSpanIntervalTree<TTag>(
                     buffer,
                     treeForBuffer.SpanTrackingMode,
-                    allTags.Except(tagsToRemove, comparer: this));
+                    allTags.Except(tagsToRemove, comparer: this)
+                );
 
                 this.CachedTagTrees = this.CachedTagTrees.SetItem(snapshot.TextBuffer, newTagTree);
 
@@ -157,22 +200,33 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 RaiseTagsChanged(snapshot.TextBuffer, difference);
             }
 
-            private TagSpanIntervalTree<TTag> GetTagTree(ITextSnapshot snapshot, ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> tagTrees)
+            private TagSpanIntervalTree<TTag> GetTagTree(
+                ITextSnapshot snapshot,
+                ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> tagTrees
+            )
             {
                 return tagTrees.TryGetValue(snapshot.TextBuffer, out var tagTree)
                     ? tagTree
-                    : new TagSpanIntervalTree<TTag>(snapshot.TextBuffer, _dataSource.SpanTrackingMode);
+                    : new TagSpanIntervalTree<TTag>(
+                        snapshot.TextBuffer,
+                        _dataSource.SpanTrackingMode
+                    );
             }
 
-            private void OnEventSourceChanged(object? _1, TaggerEventArgs _2)
-                => EnqueueWork(highPriority: false);
+            private void OnEventSourceChanged(object? _1, TaggerEventArgs _2) =>
+                EnqueueWork(highPriority: false);
 
-            private void EnqueueWork(bool highPriority)
-                => _eventChangeQueue.AddWork(highPriority, _dataSource.CancelOnNewWork);
+            private void EnqueueWork(bool highPriority) =>
+                _eventChangeQueue.AddWork(highPriority, _dataSource.CancelOnNewWork);
 
-            private async ValueTask ProcessEventChangeAsync(ImmutableSegmentedList<bool> changes, CancellationToken cancellationToken)
+            private async ValueTask ProcessEventChangeAsync(
+                ImmutableSegmentedList<bool> changes,
+                CancellationToken cancellationToken
+            )
             {
-                await _dataSource.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _dataSource.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 // no point preceding if we're already disposed.  We check this on the UI thread so that we will know
                 // about any prior disposal on the UI thread.
@@ -194,7 +248,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             /// <param name="highPriority">
             /// If this tagging request should be processed as quickly as possible with no extra delays added for it.
             /// </param>
-            private async Task RecomputeTagsAsync(bool highPriority, CancellationToken cancellationToken)
+            private async Task RecomputeTagsAsync(
+                bool highPriority,
+                CancellationToken cancellationToken
+            )
             {
                 // if we're tagging documents that are not visible, then introduce a long delay so that we avoid
                 // consuming machine resources on work the user isn't likely to see.  ConfigureAwait(true) so that if
@@ -204,17 +261,27 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 // possible.
                 if (!highPriority)
                 {
-                    await _visibilityTracker.DelayWhileNonVisibleAsync(
-                        _dataSource.ThreadingContext, _subjectBuffer, DelayTimeSpan.NonFocus, cancellationToken).ConfigureAwait(true);
+                    await _visibilityTracker
+                        .DelayWhileNonVisibleAsync(
+                            _dataSource.ThreadingContext,
+                            _subjectBuffer,
+                            DelayTimeSpan.NonFocus,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(true);
                 }
 
-                await _dataSource.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await _dataSource.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
                 _dataSource.ThreadingContext.ThrowIfNotOnUIThread();
                 if (cancellationToken.IsCancellationRequested)
                     return;
 
-                using (Logger.LogBlock(FunctionId.Tagger_TagSource_RecomputeTags, cancellationToken))
+                using (
+                    Logger.LogBlock(FunctionId.Tagger_TagSource_RecomputeTags, cancellationToken)
+                )
                 {
                     // Make a copy of all the data we need while we're on the foreground.  Then switch to a threadpool
                     // thread to do the computation. Finally, once new tags have been computed, then we update our state
@@ -235,17 +302,29 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                     // Create a context to store pass the information along and collect the results.
                     var context = new TaggerContext<TTag>(
-                        oldState, spansToTag, caretPosition, textChangeRange, oldTagTrees);
+                        oldState,
+                        spansToTag,
+                        caretPosition,
+                        textChangeRange,
+                        oldTagTrees
+                    );
                     await ProduceTagsAsync(context, cancellationToken).ConfigureAwait(false);
 
                     cancellationToken.ThrowIfCancellationRequested();
 
                     // Process the result to determine what changed.
                     var newTagTrees = ComputeNewTagTrees(oldTagTrees, context);
-                    var bufferToChanges = ProcessNewTagTrees(spansToTag, oldTagTrees, newTagTrees, cancellationToken);
+                    var bufferToChanges = ProcessNewTagTrees(
+                        spansToTag,
+                        oldTagTrees,
+                        newTagTrees,
+                        cancellationToken
+                    );
 
                     // Then switch back to the UI thread to update our state and kick off the work to notify the editor.
-                    await _dataSource.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                    await _dataSource.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationToken
+                    );
 
                     // Once we assign our state, we're uncancellable.  We must report the changed information
                     // to the editor.  The only case where it's ok not to is if the tagger itself is disposed.
@@ -268,7 +347,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 // TODO: Update to tag spans from all related documents.
 
-                using var _ = PooledDictionary<ITextSnapshot, Document?>.GetInstance(out var snapshotToDocumentMap);
+                using var _ = PooledDictionary<ITextSnapshot, Document?>.GetInstance(
+                    out var snapshotToDocumentMap
+                );
                 var spansToTag = _dataSource.GetSpansToTag(_textView, _subjectBuffer);
 
                 var spansAndDocumentsToTag = spansToTag.SelectAsArray(span =>
@@ -301,20 +382,24 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
             private ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> ComputeNewTagTrees(
                 ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> oldTagTrees,
-                TaggerContext<TTag> context)
+                TaggerContext<TTag> context
+            )
             {
                 // Ignore any tag spans reported for any buffers we weren't interested in.
 
                 var spansToTag = context.SpansToTag;
-                var buffersToTag = spansToTag.Select(dss => dss.SnapshotSpan.Snapshot.TextBuffer).ToSet();
-                var newTagsByBuffer =
-                    context.tagSpans.Where(ts => buffersToTag.Contains(ts.Span.Snapshot.TextBuffer))
-                                    .ToLookup(t => t.Span.Snapshot.TextBuffer);
+                var buffersToTag = spansToTag
+                    .Select(dss => dss.SnapshotSpan.Snapshot.TextBuffer)
+                    .ToSet();
+                var newTagsByBuffer = context.tagSpans
+                    .Where(ts => buffersToTag.Contains(ts.Span.Snapshot.TextBuffer))
+                    .ToLookup(t => t.Span.Snapshot.TextBuffer);
                 var spansTagged = context._spansTagged;
 
                 var spansToInvalidateByBuffer = spansTagged.ToLookup(
                     keySelector: span => span.Snapshot.TextBuffer,
-                    elementSelector: span => span);
+                    elementSelector: span => span
+                );
 
                 // Walk through each relevant buffer and decide what the interval tree should be
                 // for that buffer.  In general this will work by keeping around old tags that
@@ -323,7 +408,12 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 var newTagTrees = ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>>.Empty;
                 foreach (var buffer in buffersToTag)
                 {
-                    var newTagTree = ComputeNewTagTree(oldTagTrees, buffer, newTagsByBuffer[buffer], spansToInvalidateByBuffer[buffer]);
+                    var newTagTree = ComputeNewTagTree(
+                        oldTagTrees,
+                        buffer,
+                        newTagsByBuffer[buffer],
+                        spansToInvalidateByBuffer[buffer]
+                    );
                     if (newTagTree != null)
                         newTagTrees = newTagTrees.Add(buffer, newTagTree);
                 }
@@ -335,7 +425,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> oldTagTrees,
                 ITextBuffer textBuffer,
                 IEnumerable<ITagSpan<TTag>> newTags,
-                IEnumerable<SnapshotSpan> spansToInvalidate)
+                IEnumerable<SnapshotSpan> spansToInvalidate
+            )
             {
                 var noNewTags = newTags.IsEmpty();
                 var noSpansToInvalidate = spansToInvalidate.IsEmpty();
@@ -351,10 +442,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     }
 
                     // If we don't have any old tags then we just need to return the new tags.
-                    return new TagSpanIntervalTree<TTag>(textBuffer, _dataSource.SpanTrackingMode, newTags);
+                    return new TagSpanIntervalTree<TTag>(
+                        textBuffer,
+                        _dataSource.SpanTrackingMode,
+                        newTags
+                    );
                 }
 
-                // If we don't have any new tags, and there was nothing to invalidate, then we can 
+                // If we don't have any new tags, and there was nothing to invalidate, then we can
                 // keep whatever old tags we have without doing any additional work.
                 if (noNewTags && noSpansToInvalidate)
                 {
@@ -363,35 +458,60 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 // We either have some new tags, or we have some tags to invalidate.
                 // First, determine which of the old tags we want to keep around.
-                var snapshot = noNewTags ? spansToInvalidate.First().Snapshot : newTags.First().Span.Snapshot;
+                var snapshot = noNewTags
+                    ? spansToInvalidate.First().Snapshot
+                    : newTags.First().Span.Snapshot;
                 var oldTagsToKeep = noSpansToInvalidate
                     ? oldTagTree.GetSpans(snapshot)
                     : GetNonIntersectingTagSpans(spansToInvalidate, oldTagTree);
 
                 // Then union those with the new tags to produce the final tag tree.
                 var finalTags = oldTagsToKeep.Concat(newTags);
-                return new TagSpanIntervalTree<TTag>(textBuffer, _dataSource.SpanTrackingMode, finalTags);
+                return new TagSpanIntervalTree<TTag>(
+                    textBuffer,
+                    _dataSource.SpanTrackingMode,
+                    finalTags
+                );
             }
 
-            private IEnumerable<ITagSpan<TTag>> GetNonIntersectingTagSpans(IEnumerable<SnapshotSpan> spansToInvalidate, TagSpanIntervalTree<TTag> oldTagTree)
+            private IEnumerable<ITagSpan<TTag>> GetNonIntersectingTagSpans(
+                IEnumerable<SnapshotSpan> spansToInvalidate,
+                TagSpanIntervalTree<TTag> oldTagTree
+            )
             {
                 var snapshot = spansToInvalidate.First().Snapshot;
 
-                return oldTagTree.GetSpans(snapshot).Except(
-                    spansToInvalidate.SelectMany(oldTagTree.GetIntersectingSpans),
-                    comparer: this);
+                return oldTagTree
+                    .GetSpans(snapshot)
+                    .Except(
+                        spansToInvalidate.SelectMany(oldTagTree.GetIntersectingSpans),
+                        comparer: this
+                    );
             }
 
             private bool ShouldSkipTagProduction()
             {
-                if (_dataSource.Options.OfType<Option2<bool>>().Any(option => !_dataSource.GlobalOptions.GetOption(option)))
+                if (
+                    _dataSource.Options
+                        .OfType<Option2<bool>>()
+                        .Any(option => !_dataSource.GlobalOptions.GetOption(option))
+                )
                     return true;
 
                 var languageName = _subjectBuffer.GetLanguageName();
-                return _dataSource.Options.OfType<PerLanguageOption2<bool>>().Any(option => languageName == null || !_dataSource.GlobalOptions.GetOption(option, languageName));
+                return _dataSource.Options
+                    .OfType<PerLanguageOption2<bool>>()
+                    .Any(
+                        option =>
+                            languageName == null
+                            || !_dataSource.GlobalOptions.GetOption(option, languageName)
+                    );
             }
 
-            private Task ProduceTagsAsync(TaggerContext<TTag> context, CancellationToken cancellationToken)
+            private Task ProduceTagsAsync(
+                TaggerContext<TTag> context,
+                CancellationToken cancellationToken
+            )
             {
                 // If the feature is disabled, then just produce no tags.
                 return ShouldSkipTagProduction()
@@ -403,25 +523,37 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 ImmutableArray<DocumentSnapshotSpan> spansToTag,
                 ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> oldTagTrees,
                 ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> newTagTrees,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                using (Logger.LogBlock(FunctionId.Tagger_TagSource_ProcessNewTags, cancellationToken))
+                using (
+                    Logger.LogBlock(FunctionId.Tagger_TagSource_ProcessNewTags, cancellationToken)
+                )
                 {
                     var bufferToChanges = new Dictionary<ITextBuffer, DiffResult>();
 
                     foreach (var (latestBuffer, latestSpans) in newTagTrees)
                     {
-                        var snapshot = spansToTag.First(s => s.SnapshotSpan.Snapshot.TextBuffer == latestBuffer).SnapshotSpan.Snapshot;
+                        var snapshot = spansToTag
+                            .First(s => s.SnapshotSpan.Snapshot.TextBuffer == latestBuffer)
+                            .SnapshotSpan.Snapshot;
 
                         if (oldTagTrees.TryGetValue(latestBuffer, out var previousSpans))
                         {
-                            var difference = ComputeDifference(snapshot, latestSpans, previousSpans);
+                            var difference = ComputeDifference(
+                                snapshot,
+                                latestSpans,
+                                previousSpans
+                            );
                             bufferToChanges[latestBuffer] = difference;
                         }
                         else
                         {
                             // It's a new buffer, so report all spans are changed
-                            bufferToChanges[latestBuffer] = new DiffResult(added: new(latestSpans.GetSpans(snapshot).Select(t => t.Span)), removed: null);
+                            bufferToChanges[latestBuffer] = new DiffResult(
+                                added: new(latestSpans.GetSpans(snapshot).Select(t => t.Span)),
+                                removed: null
+                            );
                         }
                     }
 
@@ -430,7 +562,14 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                         if (!newTagTrees.ContainsKey(oldBuffer))
                         {
                             // This buffer disappeared, so let's notify that the old tags are gone
-                            bufferToChanges[oldBuffer] = new DiffResult(added: null, removed: new(previousSpans.GetSpans(oldBuffer.CurrentSnapshot).Select(t => t.Span)));
+                            bufferToChanges[oldBuffer] = new DiffResult(
+                                added: null,
+                                removed: new(
+                                    previousSpans
+                                        .GetSpans(oldBuffer.CurrentSnapshot)
+                                        .Select(t => t.Span)
+                                )
+                            );
                         }
                     }
 
@@ -444,7 +583,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             private DiffResult ComputeDifference(
                 ITextSnapshot snapshot,
                 TagSpanIntervalTree<TTag> latestTree,
-                TagSpanIntervalTree<TTag> previousTree)
+                TagSpanIntervalTree<TTag> previousTree
+            )
             {
                 var latestSpans = latestTree.GetSpans(snapshot);
                 var previousSpans = previousTree.GetSpans(snapshot);
@@ -511,8 +651,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 return new DiffResult(new(added), new(removed));
 
-                static ITagSpan<TTag>? NextOrNull(IEnumerator<ITagSpan<TTag>> enumerator)
-                    => enumerator.MoveNext() ? enumerator.Current : null;
+                static ITagSpan<TTag>? NextOrNull(IEnumerator<ITagSpan<TTag>> enumerator) =>
+                    enumerator.MoveNext() ? enumerator.Current : null;
             }
 
             /// <summary>
@@ -531,13 +671,17 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 // tags be available synchronously on this call, and the computation of tags hasn't completed yet, then
                 // force the tags to be computed now on this thread.  The singular use case for this is Outlining which
                 // needs those tags synchronously computed for things like Metadata-as-Source collapsing.
-                if (_firstTagsRequest &&
-                    _dataSource.ComputeInitialTagsSynchronously(buffer) &&
-                    !this.CachedTagTrees.TryGetValue(buffer, out _))
+                if (
+                    _firstTagsRequest
+                    && _dataSource.ComputeInitialTagsSynchronously(buffer)
+                    && !this.CachedTagTrees.TryGetValue(buffer, out _)
+                )
                 {
                     // Compute this as a high priority work item to have the lease amount of blocking as possible.
-                    _dataSource.ThreadingContext.JoinableTaskFactory.Run(() =>
-                        this.RecomputeTagsAsync(highPriority: true, _disposalTokenSource.Token));
+                    _dataSource.ThreadingContext.JoinableTaskFactory.Run(
+                        () =>
+                            this.RecomputeTagsAsync(highPriority: true, _disposalTokenSource.Token)
+                    );
                 }
 
                 _firstTagsRequest = false;
@@ -547,7 +691,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 return tags;
             }
 
-            public IEnumerable<ITagSpan<TTag>> GetTags(NormalizedSnapshotSpanCollection requestedSpans)
+            public IEnumerable<ITagSpan<TTag>> GetTags(
+                NormalizedSnapshotSpanCollection requestedSpans
+            )
             {
                 _dataSource.ThreadingContext.ThrowIfNotOnUIThread();
 

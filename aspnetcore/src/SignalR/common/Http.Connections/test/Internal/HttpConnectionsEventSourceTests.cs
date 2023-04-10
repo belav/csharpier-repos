@@ -20,7 +20,10 @@ public class HttpConnectionsEventSourceTests
 
         // Assert
         Assert.Equal("Microsoft.AspNetCore.Http.Connections", eventSource.Name);
-        Assert.Equal(Guid.Parse("c26fe4b6-8790-5d41-5900-0f2b6b74efaa", CultureInfo.InvariantCulture), eventSource.Guid);
+        Assert.Equal(
+            Guid.Parse("c26fe4b6-8790-5d41-5900-0f2b6b74efaa", CultureInfo.InvariantCulture),
+            eventSource.Guid
+        );
     }
 
     [Fact]
@@ -43,11 +46,13 @@ public class HttpConnectionsEventSourceTests
         Assert.Equal(EventLevel.Informational, eventData.Level);
         Assert.Same(httpConnectionsEventSource, eventData.EventSource);
         Assert.Equal("Started connection '{0}'.", eventData.Message);
-        Assert.Collection(eventData.Payload,
+        Assert.Collection(
+            eventData.Payload,
             arg =>
             {
                 Assert.Equal("1", arg);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -71,11 +76,13 @@ public class HttpConnectionsEventSourceTests
         Assert.Equal(EventLevel.Informational, eventData.Level);
         Assert.Same(httpConnectionsEventSource, eventData.EventSource);
         Assert.Equal("Stopped connection '{0}'.", eventData.Message);
-        Assert.Collection(eventData.Payload,
+        Assert.Collection(
+            eventData.Payload,
             arg =>
             {
                 Assert.Equal("1", arg);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -98,11 +105,13 @@ public class HttpConnectionsEventSourceTests
         Assert.Equal(EventLevel.Informational, eventData.Level);
         Assert.Same(httpConnectionsEventSource, eventData.EventSource);
         Assert.Equal("Connection '{0}' timed out.", eventData.Message);
-        Assert.Collection(eventData.Payload,
+        Assert.Collection(
+            eventData.Payload,
             arg =>
             {
                 Assert.Equal("1", arg);
-            });
+            }
+        );
     }
 
     private static HttpConnectionsEventSource GetHttpConnectionEventSource()

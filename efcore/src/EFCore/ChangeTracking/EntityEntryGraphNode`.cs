@@ -26,7 +26,8 @@ public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
         InternalEntityEntry entry,
         TState state,
         InternalEntityEntry? sourceEntry,
-        INavigationBase? inboundNavigation)
+        INavigationBase? inboundNavigation
+    )
         : base(entry, sourceEntry, inboundNavigation)
     {
         NodeState = state;
@@ -43,10 +44,14 @@ public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
         EntityEntry entry,
         TState state,
         EntityEntry? sourceEntry,
-        INavigationBase? inboundNavigation)
-        : this(entry.GetInfrastructure(), state, sourceEntry?.GetInfrastructure(), inboundNavigation)
-    {
-    }
+        INavigationBase? inboundNavigation
+    )
+        : this(
+            entry.GetInfrastructure(),
+            state,
+            sourceEntry?.GetInfrastructure(),
+            inboundNavigation
+        ) { }
 
     /// <summary>
     ///     Gets or sets state that will be available to all nodes that are visited after this node.
@@ -63,10 +68,12 @@ public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
     public override EntityEntryGraphNode CreateNode(
         EntityEntryGraphNode currentNode,
         InternalEntityEntry internalEntityEntry,
-        INavigationBase reachedVia)
-        => new EntityEntryGraphNode<TState>(
+        INavigationBase reachedVia
+    ) =>
+        new EntityEntryGraphNode<TState>(
             internalEntityEntry,
             ((EntityEntryGraphNode<TState>)currentNode).NodeState,
             currentNode.Entry.GetInfrastructure(),
-            reachedVia);
+            reachedVia
+        );
 }

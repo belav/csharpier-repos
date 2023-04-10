@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Int16>>() / sizeof(Int16);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Int16>>() / sizeof(Int16);
 
         public bool Succeeded { get; set; } = true;
 
@@ -53,7 +54,16 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetInt16();
             }
 
-            Vector128<Int16> value = Vector128.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector128<Int16> value = Vector128.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
             Vector64<Int16> lowerResult = value.GetLower();
             Vector64<Int16> upperResult = value.GetUpper();
@@ -75,30 +85,48 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetInt16();
             }
 
-            Vector128<Int16> value = Vector128.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector128<Int16> value = Vector128.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
             object lowerResult = typeof(Vector128)
-                                    .GetMethod(nameof(Vector128.GetLower))
-                                    .MakeGenericMethod(typeof(Int16))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.GetLower))
+                .MakeGenericMethod(typeof(Int16))
+                .Invoke(null, new object[] { value });
             object upperResult = typeof(Vector128)
-                                    .GetMethod(nameof(Vector128.GetUpper))
-                                    .MakeGenericMethod(typeof(Int16))
-                                    .Invoke(null, new object[] { value });
-            ValidateGetResult((Vector64<Int16>)(lowerResult), (Vector64<Int16>)(upperResult), values);
+                .GetMethod(nameof(Vector128.GetUpper))
+                .MakeGenericMethod(typeof(Int16))
+                .Invoke(null, new object[] { value });
+            ValidateGetResult(
+                (Vector64<Int16>)(lowerResult),
+                (Vector64<Int16>)(upperResult),
+                values
+            );
 
             object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.WithLower))
-                                .MakeGenericMethod(typeof(Int16))
-                                .Invoke(null, new object[] { value, upperResult });
+                .GetMethod(nameof(Vector128.WithLower))
+                .MakeGenericMethod(typeof(Int16))
+                .Invoke(null, new object[] { value, upperResult });
             result = typeof(Vector128)
-                        .GetMethod(nameof(Vector128.WithUpper))
-                        .MakeGenericMethod(typeof(Int16))
-                        .Invoke(null, new object[] { result, lowerResult });
+                .GetMethod(nameof(Vector128.WithUpper))
+                .MakeGenericMethod(typeof(Int16))
+                .Invoke(null, new object[] { result, lowerResult });
             ValidateWithResult((Vector128<Int16>)(result), values);
         }
 
-        private void ValidateGetResult(Vector64<Int16> lowerResult, Vector64<Int16> upperResult, Int16[] values, [CallerMemberName] string method = "")
+        private void ValidateGetResult(
+            Vector64<Int16> lowerResult,
+            Vector64<Int16> upperResult,
+            Int16[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             Int16[] lowerElements = new Int16[ElementCount / 2];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int16, byte>(ref lowerElements[0]), lowerResult);
@@ -109,7 +137,12 @@ namespace JIT.HardwareIntrinsics.General
             ValidateGetResult(lowerElements, upperElements, values, method);
         }
 
-        private void ValidateGetResult(Int16[] lowerResult, Int16[] upperResult, Int16[] values, [CallerMemberName] string method = "")
+        private void ValidateGetResult(
+            Int16[] lowerResult,
+            Int16[] upperResult,
+            Int16[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -124,9 +157,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Int16>.GetLower(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", lowerResult)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Int16>.GetLower(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", lowerResult)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -145,23 +184,37 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Int16>.GetUpper(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", upperResult)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Int16>.GetUpper(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", upperResult)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
             }
         }
 
-        private void ValidateWithResult(Vector128<Int16> result, Int16[] values, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            Vector128<Int16> result,
+            Int16[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             Int16[] resultElements = new Int16[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int16, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, method);
         }
 
-        private void ValidateWithResult(Int16[] result, Int16[] values, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            Int16[] result,
+            Int16[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -176,9 +229,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Int16.WithLower(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Int16.WithLower(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -197,9 +256,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Int16.WithUpper(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Int16.WithUpper(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

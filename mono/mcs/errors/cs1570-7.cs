@@ -6,9 +6,6 @@ using System;
 
 namespace Testing
 {
-	/// <6roken> broken markup
-	public class Test2
-	{
-	}
+    /// <6roken> broken markup
+    public class Test2 { }
 }
-

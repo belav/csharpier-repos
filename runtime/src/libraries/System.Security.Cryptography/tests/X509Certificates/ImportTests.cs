@@ -31,10 +31,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             Assert.Throws<PlatformNotSupportedException>(() => c.Import(Array.Empty<byte>()));
             Assert.Throws<PlatformNotSupportedException>(() => c.Import(string.Empty));
-            Assert.Throws<PlatformNotSupportedException>(() => c.Import(Array.Empty<byte>(), string.Empty, X509KeyStorageFlags.DefaultKeySet));
-            Assert.Throws<PlatformNotSupportedException>(() => c.Import(Array.Empty<byte>(), new SecureString(), X509KeyStorageFlags.DefaultKeySet));
-            Assert.Throws<PlatformNotSupportedException>(() => c.Import(string.Empty, string.Empty, X509KeyStorageFlags.DefaultKeySet));
-            Assert.Throws<PlatformNotSupportedException>(() => c.Import(string.Empty, new SecureString(), X509KeyStorageFlags.DefaultKeySet));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => c.Import(Array.Empty<byte>(), string.Empty, X509KeyStorageFlags.DefaultKeySet)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    c.Import(
+                        Array.Empty<byte>(),
+                        new SecureString(),
+                        X509KeyStorageFlags.DefaultKeySet
+                    )
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => c.Import(string.Empty, string.Empty, X509KeyStorageFlags.DefaultKeySet)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => c.Import(string.Empty, new SecureString(), X509KeyStorageFlags.DefaultKeySet)
+            );
         }
     }
 }

@@ -11,7 +11,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     internal sealed class AnalyzerDependencyConflict
     {
-        public AnalyzerDependencyConflict(AssemblyIdentity identity, string analyzerFilePath1, string analyzerFilePath2)
+        public AnalyzerDependencyConflict(
+            AssemblyIdentity identity,
+            string analyzerFilePath1,
+            string analyzerFilePath2
+        )
         {
             Debug.Assert(identity != null);
             Debug.Assert(analyzerFilePath1 != null);

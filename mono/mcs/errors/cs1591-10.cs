@@ -6,13 +6,11 @@ using System;
 
 namespace Testing
 {
-	/// <summary>
-	/// description for class Test
-	/// </summary>
-	public class Test
-	{
-		public static void Foo ()
-		{
-		}
-	}
+    /// <summary>
+    /// description for class Test
+    /// </summary>
+    public class Test
+    {
+        public static void Foo() { }
+    }
 }

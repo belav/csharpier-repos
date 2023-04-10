@@ -5,6 +5,7 @@
 
 #pragma warning disable 0414
 using System;
+
 internal class lclflddiv
 {
     //user-defined class that overloads operator /
@@ -17,6 +18,7 @@ internal class lclflddiv
         private float _f_num;
         private double _d_num;
         private decimal _m_num;
+
         public numHolder(int i_num)
         {
             _i_num = Convert.ToInt32(i_num);
@@ -159,6 +161,7 @@ internal class lclflddiv
         else
             return 4;
     }
+
     public static uint ui_f(String s)
     {
         if (s == "op1")
@@ -166,6 +169,7 @@ internal class lclflddiv
         else
             return 4;
     }
+
     public static long l_f(String s)
     {
         if (s == "op1")
@@ -173,6 +177,7 @@ internal class lclflddiv
         else
             return 4;
     }
+
     public static ulong ul_f(String s)
     {
         if (s == "op1")
@@ -180,6 +185,7 @@ internal class lclflddiv
         else
             return 4;
     }
+
     public static float f_f(String s)
     {
         if (s == "op1")
@@ -187,6 +193,7 @@ internal class lclflddiv
         else
             return 4;
     }
+
     public static double d_f(String s)
     {
         if (s == "op1")
@@ -194,6 +201,7 @@ internal class lclflddiv
         else
             return 4;
     }
+
     public static decimal m_f(String s)
     {
         if (s == "op1")
@@ -201,6 +209,7 @@ internal class lclflddiv
         else
             return 4;
     }
+
     public static numHolder nHldr_f(String s)
     {
         if (s == "op1")
@@ -208,6 +217,7 @@ internal class lclflddiv
         else
             return new numHolder(4);
     }
+
     private class CL
     {
         public int i_cl_op1 = 128;
@@ -272,53 +282,207 @@ internal class lclflddiv
         vt1.nHldr_vt_op2 = new numHolder(4);
 
         int[] i_arr1d_op1 = { 0, 128 };
-        int[,] i_arr2d_op1 = { { 0, 128 }, { 1, 1 } };
-        int[,,] i_arr3d_op1 = { { { 0, 128 }, { 1, 1 } } };
+        int[,] i_arr2d_op1 =
+        {
+            { 0, 128 },
+            { 1, 1 }
+        };
+        int[,,] i_arr3d_op1 =
+        {
+            {
+                { 0, 128 },
+                { 1, 1 }
+            }
+        };
         uint[] ui_arr1d_op1 = { 0, 128 };
-        uint[,] ui_arr2d_op1 = { { 0, 128 }, { 1, 1 } };
-        uint[,,] ui_arr3d_op1 = { { { 0, 128 }, { 1, 1 } } };
+        uint[,] ui_arr2d_op1 =
+        {
+            { 0, 128 },
+            { 1, 1 }
+        };
+        uint[,,] ui_arr3d_op1 =
+        {
+            {
+                { 0, 128 },
+                { 1, 1 }
+            }
+        };
         long[] l_arr1d_op1 = { 0, 128 };
-        long[,] l_arr2d_op1 = { { 0, 128 }, { 1, 1 } };
-        long[,,] l_arr3d_op1 = { { { 0, 128 }, { 1, 1 } } };
+        long[,] l_arr2d_op1 =
+        {
+            { 0, 128 },
+            { 1, 1 }
+        };
+        long[,,] l_arr3d_op1 =
+        {
+            {
+                { 0, 128 },
+                { 1, 1 }
+            }
+        };
         ulong[] ul_arr1d_op1 = { 0, 128 };
-        ulong[,] ul_arr2d_op1 = { { 0, 128 }, { 1, 1 } };
-        ulong[,,] ul_arr3d_op1 = { { { 0, 128 }, { 1, 1 } } };
+        ulong[,] ul_arr2d_op1 =
+        {
+            { 0, 128 },
+            { 1, 1 }
+        };
+        ulong[,,] ul_arr3d_op1 =
+        {
+            {
+                { 0, 128 },
+                { 1, 1 }
+            }
+        };
         float[] f_arr1d_op1 = { 0, 128 };
-        float[,] f_arr2d_op1 = { { 0, 128 }, { 1, 1 } };
-        float[,,] f_arr3d_op1 = { { { 0, 128 }, { 1, 1 } } };
+        float[,] f_arr2d_op1 =
+        {
+            { 0, 128 },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_op1 =
+        {
+            {
+                { 0, 128 },
+                { 1, 1 }
+            }
+        };
         double[] d_arr1d_op1 = { 0, 128 };
-        double[,] d_arr2d_op1 = { { 0, 128 }, { 1, 1 } };
-        double[,,] d_arr3d_op1 = { { { 0, 128 }, { 1, 1 } } };
+        double[,] d_arr2d_op1 =
+        {
+            { 0, 128 },
+            { 1, 1 }
+        };
+        double[,,] d_arr3d_op1 =
+        {
+            {
+                { 0, 128 },
+                { 1, 1 }
+            }
+        };
         decimal[] m_arr1d_op1 = { 0, 128 };
-        decimal[,] m_arr2d_op1 = { { 0, 128 }, { 1, 1 } };
-        decimal[,,] m_arr3d_op1 = { { { 0, 128 }, { 1, 1 } } };
+        decimal[,] m_arr2d_op1 =
+        {
+            { 0, 128 },
+            { 1, 1 }
+        };
+        decimal[,,] m_arr3d_op1 =
+        {
+            {
+                { 0, 128 },
+                { 1, 1 }
+            }
+        };
 
         int[] i_arr1d_op2 = { 4, 0, 1 };
-        int[,] i_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        int[,,] i_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        int[,] i_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        int[,,] i_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         uint[] ui_arr1d_op2 = { 4, 0, 1 };
-        uint[,] ui_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        uint[,,] ui_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        uint[,] ui_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        uint[,,] ui_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         long[] l_arr1d_op2 = { 4, 0, 1 };
-        long[,] l_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        long[,,] l_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        long[,] l_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        long[,,] l_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         ulong[] ul_arr1d_op2 = { 4, 0, 1 };
-        ulong[,] ul_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        ulong[,,] ul_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        ulong[,] ul_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        ulong[,,] ul_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         float[] f_arr1d_op2 = { 4, 0, 1 };
-        float[,] f_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        float[,,] f_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        float[,] f_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        float[,,] f_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         double[] d_arr1d_op2 = { 4, 0, 1 };
-        double[,] d_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        double[,,] d_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        double[,] d_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        double[,,] d_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         decimal[] m_arr1d_op2 = { 4, 0, 1 };
-        decimal[,] m_arr2d_op2 = { { 0, 4 }, { 1, 1 } };
-        decimal[,,] m_arr3d_op2 = { { { 0, 4 }, { 1, 1 } } };
+        decimal[,] m_arr2d_op2 =
+        {
+            { 0, 4 },
+            { 1, 1 }
+        };
+        decimal[,,] m_arr3d_op2 =
+        {
+            {
+                { 0, 4 },
+                { 1, 1 }
+            }
+        };
         numHolder[] nHldr_arr1d_op2 = { new numHolder(4), new numHolder(0), new numHolder(1) };
-        numHolder[,] nHldr_arr2d_op2 = { { new numHolder(0), new numHolder(4) }, { new numHolder(1), new numHolder(1) } };
-        numHolder[,,] nHldr_arr3d_op2 = { { { new numHolder(0), new numHolder(4) }, { new numHolder(1), new numHolder(1) } } };
+        numHolder[,] nHldr_arr2d_op2 =
+        {
+            { new numHolder(0), new numHolder(4) },
+            { new numHolder(1), new numHolder(1) }
+        };
+        numHolder[,,] nHldr_arr3d_op2 =
+        {
+            {
+                { new numHolder(0), new numHolder(4) },
+                { new numHolder(1), new numHolder(1) }
+            }
+        };
 
-        int[,] index = { { 0, 0 }, { 1, 1 } };
+        int[,] index =
+        {
+            { 0, 0 },
+            { 1, 1 }
+        };
 
         {
             int i_l_op1 = 128;
@@ -330,22 +494,58 @@ internal class lclflddiv
             double d_l_op2 = 4;
             decimal m_l_op2 = 4;
             numHolder nHldr_l_op2 = new numHolder(4);
-            if ((i_l_op1 / i_l_op2 != i_l_op1 / ui_l_op2) || (i_l_op1 / ui_l_op2 != i_l_op1 / l_l_op2) || (i_l_op1 / l_l_op2 != i_l_op1 / (int)ul_l_op2) || (i_l_op1 / (int)ul_l_op2 != i_l_op1 / f_l_op2) || (i_l_op1 / f_l_op2 != i_l_op1 / d_l_op2) || ((decimal)(i_l_op1 / d_l_op2) != i_l_op1 / m_l_op2) || (i_l_op1 / m_l_op2 != i_l_op1 / i_l_op2) || (i_l_op1 / i_l_op2 != 32))
+            if (
+                (i_l_op1 / i_l_op2 != i_l_op1 / ui_l_op2)
+                || (i_l_op1 / ui_l_op2 != i_l_op1 / l_l_op2)
+                || (i_l_op1 / l_l_op2 != i_l_op1 / (int)ul_l_op2)
+                || (i_l_op1 / (int)ul_l_op2 != i_l_op1 / f_l_op2)
+                || (i_l_op1 / f_l_op2 != i_l_op1 / d_l_op2)
+                || ((decimal)(i_l_op1 / d_l_op2) != i_l_op1 / m_l_op2)
+                || (i_l_op1 / m_l_op2 != i_l_op1 / i_l_op2)
+                || (i_l_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 1 failed");
                 passed = false;
             }
-            if ((i_l_op1 / s_i_s_op2 != i_l_op1 / s_ui_s_op2) || (i_l_op1 / s_ui_s_op2 != i_l_op1 / s_l_s_op2) || (i_l_op1 / s_l_s_op2 != i_l_op1 / (int)s_ul_s_op2) || (i_l_op1 / (int)s_ul_s_op2 != i_l_op1 / s_f_s_op2) || (i_l_op1 / s_f_s_op2 != i_l_op1 / s_d_s_op2) || ((decimal)(i_l_op1 / s_d_s_op2) != i_l_op1 / s_m_s_op2) || (i_l_op1 / s_m_s_op2 != i_l_op1 / s_i_s_op2) || (i_l_op1 / s_i_s_op2 != 32))
+            if (
+                (i_l_op1 / s_i_s_op2 != i_l_op1 / s_ui_s_op2)
+                || (i_l_op1 / s_ui_s_op2 != i_l_op1 / s_l_s_op2)
+                || (i_l_op1 / s_l_s_op2 != i_l_op1 / (int)s_ul_s_op2)
+                || (i_l_op1 / (int)s_ul_s_op2 != i_l_op1 / s_f_s_op2)
+                || (i_l_op1 / s_f_s_op2 != i_l_op1 / s_d_s_op2)
+                || ((decimal)(i_l_op1 / s_d_s_op2) != i_l_op1 / s_m_s_op2)
+                || (i_l_op1 / s_m_s_op2 != i_l_op1 / s_i_s_op2)
+                || (i_l_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 2 failed");
                 passed = false;
             }
-            if ((s_i_s_op1 / i_l_op2 != s_i_s_op1 / ui_l_op2) || (s_i_s_op1 / ui_l_op2 != s_i_s_op1 / l_l_op2) || (s_i_s_op1 / l_l_op2 != s_i_s_op1 / (int)ul_l_op2) || (s_i_s_op1 / (int)ul_l_op2 != s_i_s_op1 / f_l_op2) || (s_i_s_op1 / f_l_op2 != s_i_s_op1 / d_l_op2) || ((decimal)(s_i_s_op1 / d_l_op2) != s_i_s_op1 / m_l_op2) || (s_i_s_op1 / m_l_op2 != s_i_s_op1 / i_l_op2) || (s_i_s_op1 / i_l_op2 != 32))
+            if (
+                (s_i_s_op1 / i_l_op2 != s_i_s_op1 / ui_l_op2)
+                || (s_i_s_op1 / ui_l_op2 != s_i_s_op1 / l_l_op2)
+                || (s_i_s_op1 / l_l_op2 != s_i_s_op1 / (int)ul_l_op2)
+                || (s_i_s_op1 / (int)ul_l_op2 != s_i_s_op1 / f_l_op2)
+                || (s_i_s_op1 / f_l_op2 != s_i_s_op1 / d_l_op2)
+                || ((decimal)(s_i_s_op1 / d_l_op2) != s_i_s_op1 / m_l_op2)
+                || (s_i_s_op1 / m_l_op2 != s_i_s_op1 / i_l_op2)
+                || (s_i_s_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 3 failed");
                 passed = false;
             }
-            if ((s_i_s_op1 / s_i_s_op2 != s_i_s_op1 / s_ui_s_op2) || (s_i_s_op1 / s_ui_s_op2 != s_i_s_op1 / s_l_s_op2) || (s_i_s_op1 / s_l_s_op2 != s_i_s_op1 / (int)s_ul_s_op2) || (s_i_s_op1 / (int)s_ul_s_op2 != s_i_s_op1 / s_f_s_op2) || (s_i_s_op1 / s_f_s_op2 != s_i_s_op1 / s_d_s_op2) || ((decimal)(s_i_s_op1 / s_d_s_op2) != s_i_s_op1 / s_m_s_op2) || (s_i_s_op1 / s_m_s_op2 != s_i_s_op1 / s_i_s_op2) || (s_i_s_op1 / s_i_s_op2 != 32))
+            if (
+                (s_i_s_op1 / s_i_s_op2 != s_i_s_op1 / s_ui_s_op2)
+                || (s_i_s_op1 / s_ui_s_op2 != s_i_s_op1 / s_l_s_op2)
+                || (s_i_s_op1 / s_l_s_op2 != s_i_s_op1 / (int)s_ul_s_op2)
+                || (s_i_s_op1 / (int)s_ul_s_op2 != s_i_s_op1 / s_f_s_op2)
+                || (s_i_s_op1 / s_f_s_op2 != s_i_s_op1 / s_d_s_op2)
+                || ((decimal)(s_i_s_op1 / s_d_s_op2) != s_i_s_op1 / s_m_s_op2)
+                || (s_i_s_op1 / s_m_s_op2 != s_i_s_op1 / s_i_s_op2)
+                || (s_i_s_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 4 failed");
                 passed = false;
@@ -362,22 +562,58 @@ internal class lclflddiv
             double d_l_op2 = 4;
             decimal m_l_op2 = 4;
             numHolder nHldr_l_op2 = new numHolder(4);
-            if ((ui_l_op1 / i_l_op2 != ui_l_op1 / ui_l_op2) || (ui_l_op1 / ui_l_op2 != ui_l_op1 / l_l_op2) || ((ulong)(ui_l_op1 / l_l_op2) != ui_l_op1 / ul_l_op2) || (ui_l_op1 / ul_l_op2 != ui_l_op1 / f_l_op2) || (ui_l_op1 / f_l_op2 != ui_l_op1 / d_l_op2) || ((decimal)(ui_l_op1 / d_l_op2) != ui_l_op1 / m_l_op2) || (ui_l_op1 / m_l_op2 != ui_l_op1 / i_l_op2) || (ui_l_op1 / i_l_op2 != 32))
+            if (
+                (ui_l_op1 / i_l_op2 != ui_l_op1 / ui_l_op2)
+                || (ui_l_op1 / ui_l_op2 != ui_l_op1 / l_l_op2)
+                || ((ulong)(ui_l_op1 / l_l_op2) != ui_l_op1 / ul_l_op2)
+                || (ui_l_op1 / ul_l_op2 != ui_l_op1 / f_l_op2)
+                || (ui_l_op1 / f_l_op2 != ui_l_op1 / d_l_op2)
+                || ((decimal)(ui_l_op1 / d_l_op2) != ui_l_op1 / m_l_op2)
+                || (ui_l_op1 / m_l_op2 != ui_l_op1 / i_l_op2)
+                || (ui_l_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 5 failed");
                 passed = false;
             }
-            if ((ui_l_op1 / s_i_s_op2 != ui_l_op1 / s_ui_s_op2) || (ui_l_op1 / s_ui_s_op2 != ui_l_op1 / s_l_s_op2) || ((ulong)(ui_l_op1 / s_l_s_op2) != ui_l_op1 / s_ul_s_op2) || (ui_l_op1 / s_ul_s_op2 != ui_l_op1 / s_f_s_op2) || (ui_l_op1 / s_f_s_op2 != ui_l_op1 / s_d_s_op2) || ((decimal)(ui_l_op1 / s_d_s_op2) != ui_l_op1 / s_m_s_op2) || (ui_l_op1 / s_m_s_op2 != ui_l_op1 / s_i_s_op2) || (ui_l_op1 / s_i_s_op2 != 32))
+            if (
+                (ui_l_op1 / s_i_s_op2 != ui_l_op1 / s_ui_s_op2)
+                || (ui_l_op1 / s_ui_s_op2 != ui_l_op1 / s_l_s_op2)
+                || ((ulong)(ui_l_op1 / s_l_s_op2) != ui_l_op1 / s_ul_s_op2)
+                || (ui_l_op1 / s_ul_s_op2 != ui_l_op1 / s_f_s_op2)
+                || (ui_l_op1 / s_f_s_op2 != ui_l_op1 / s_d_s_op2)
+                || ((decimal)(ui_l_op1 / s_d_s_op2) != ui_l_op1 / s_m_s_op2)
+                || (ui_l_op1 / s_m_s_op2 != ui_l_op1 / s_i_s_op2)
+                || (ui_l_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 6 failed");
                 passed = false;
             }
-            if ((s_ui_s_op1 / i_l_op2 != s_ui_s_op1 / ui_l_op2) || (s_ui_s_op1 / ui_l_op2 != s_ui_s_op1 / l_l_op2) || ((ulong)(s_ui_s_op1 / l_l_op2) != s_ui_s_op1 / ul_l_op2) || (s_ui_s_op1 / ul_l_op2 != s_ui_s_op1 / f_l_op2) || (s_ui_s_op1 / f_l_op2 != s_ui_s_op1 / d_l_op2) || ((decimal)(s_ui_s_op1 / d_l_op2) != s_ui_s_op1 / m_l_op2) || (s_ui_s_op1 / m_l_op2 != s_ui_s_op1 / i_l_op2) || (s_ui_s_op1 / i_l_op2 != 32))
+            if (
+                (s_ui_s_op1 / i_l_op2 != s_ui_s_op1 / ui_l_op2)
+                || (s_ui_s_op1 / ui_l_op2 != s_ui_s_op1 / l_l_op2)
+                || ((ulong)(s_ui_s_op1 / l_l_op2) != s_ui_s_op1 / ul_l_op2)
+                || (s_ui_s_op1 / ul_l_op2 != s_ui_s_op1 / f_l_op2)
+                || (s_ui_s_op1 / f_l_op2 != s_ui_s_op1 / d_l_op2)
+                || ((decimal)(s_ui_s_op1 / d_l_op2) != s_ui_s_op1 / m_l_op2)
+                || (s_ui_s_op1 / m_l_op2 != s_ui_s_op1 / i_l_op2)
+                || (s_ui_s_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 7 failed");
                 passed = false;
             }
-            if ((s_ui_s_op1 / s_i_s_op2 != s_ui_s_op1 / s_ui_s_op2) || (s_ui_s_op1 / s_ui_s_op2 != s_ui_s_op1 / s_l_s_op2) || ((ulong)(s_ui_s_op1 / s_l_s_op2) != s_ui_s_op1 / s_ul_s_op2) || (s_ui_s_op1 / s_ul_s_op2 != s_ui_s_op1 / s_f_s_op2) || (s_ui_s_op1 / s_f_s_op2 != s_ui_s_op1 / s_d_s_op2) || ((decimal)(s_ui_s_op1 / s_d_s_op2) != s_ui_s_op1 / s_m_s_op2) || (s_ui_s_op1 / s_m_s_op2 != s_ui_s_op1 / s_i_s_op2) || (s_ui_s_op1 / s_i_s_op2 != 32))
+            if (
+                (s_ui_s_op1 / s_i_s_op2 != s_ui_s_op1 / s_ui_s_op2)
+                || (s_ui_s_op1 / s_ui_s_op2 != s_ui_s_op1 / s_l_s_op2)
+                || ((ulong)(s_ui_s_op1 / s_l_s_op2) != s_ui_s_op1 / s_ul_s_op2)
+                || (s_ui_s_op1 / s_ul_s_op2 != s_ui_s_op1 / s_f_s_op2)
+                || (s_ui_s_op1 / s_f_s_op2 != s_ui_s_op1 / s_d_s_op2)
+                || ((decimal)(s_ui_s_op1 / s_d_s_op2) != s_ui_s_op1 / s_m_s_op2)
+                || (s_ui_s_op1 / s_m_s_op2 != s_ui_s_op1 / s_i_s_op2)
+                || (s_ui_s_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 8 failed");
                 passed = false;
@@ -394,22 +630,58 @@ internal class lclflddiv
             double d_l_op2 = 4;
             decimal m_l_op2 = 4;
             numHolder nHldr_l_op2 = new numHolder(4);
-            if ((l_l_op1 / i_l_op2 != l_l_op1 / ui_l_op2) || (l_l_op1 / ui_l_op2 != l_l_op1 / l_l_op2) || (l_l_op1 / l_l_op2 != l_l_op1 / (long)ul_l_op2) || (l_l_op1 / (long)ul_l_op2 != l_l_op1 / f_l_op2) || (l_l_op1 / f_l_op2 != l_l_op1 / d_l_op2) || ((decimal)(l_l_op1 / d_l_op2) != l_l_op1 / m_l_op2) || (l_l_op1 / m_l_op2 != l_l_op1 / i_l_op2) || (l_l_op1 / i_l_op2 != 32))
+            if (
+                (l_l_op1 / i_l_op2 != l_l_op1 / ui_l_op2)
+                || (l_l_op1 / ui_l_op2 != l_l_op1 / l_l_op2)
+                || (l_l_op1 / l_l_op2 != l_l_op1 / (long)ul_l_op2)
+                || (l_l_op1 / (long)ul_l_op2 != l_l_op1 / f_l_op2)
+                || (l_l_op1 / f_l_op2 != l_l_op1 / d_l_op2)
+                || ((decimal)(l_l_op1 / d_l_op2) != l_l_op1 / m_l_op2)
+                || (l_l_op1 / m_l_op2 != l_l_op1 / i_l_op2)
+                || (l_l_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 9 failed");
                 passed = false;
             }
-            if ((l_l_op1 / s_i_s_op2 != l_l_op1 / s_ui_s_op2) || (l_l_op1 / s_ui_s_op2 != l_l_op1 / s_l_s_op2) || (l_l_op1 / s_l_s_op2 != l_l_op1 / (long)s_ul_s_op2) || (l_l_op1 / (long)s_ul_s_op2 != l_l_op1 / s_f_s_op2) || (l_l_op1 / s_f_s_op2 != l_l_op1 / s_d_s_op2) || ((decimal)(l_l_op1 / s_d_s_op2) != l_l_op1 / s_m_s_op2) || (l_l_op1 / s_m_s_op2 != l_l_op1 / s_i_s_op2) || (l_l_op1 / s_i_s_op2 != 32))
+            if (
+                (l_l_op1 / s_i_s_op2 != l_l_op1 / s_ui_s_op2)
+                || (l_l_op1 / s_ui_s_op2 != l_l_op1 / s_l_s_op2)
+                || (l_l_op1 / s_l_s_op2 != l_l_op1 / (long)s_ul_s_op2)
+                || (l_l_op1 / (long)s_ul_s_op2 != l_l_op1 / s_f_s_op2)
+                || (l_l_op1 / s_f_s_op2 != l_l_op1 / s_d_s_op2)
+                || ((decimal)(l_l_op1 / s_d_s_op2) != l_l_op1 / s_m_s_op2)
+                || (l_l_op1 / s_m_s_op2 != l_l_op1 / s_i_s_op2)
+                || (l_l_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 10 failed");
                 passed = false;
             }
-            if ((s_l_s_op1 / i_l_op2 != s_l_s_op1 / ui_l_op2) || (s_l_s_op1 / ui_l_op2 != s_l_s_op1 / l_l_op2) || (s_l_s_op1 / l_l_op2 != s_l_s_op1 / (long)ul_l_op2) || (s_l_s_op1 / (long)ul_l_op2 != s_l_s_op1 / f_l_op2) || (s_l_s_op1 / f_l_op2 != s_l_s_op1 / d_l_op2) || ((decimal)(s_l_s_op1 / d_l_op2) != s_l_s_op1 / m_l_op2) || (s_l_s_op1 / m_l_op2 != s_l_s_op1 / i_l_op2) || (s_l_s_op1 / i_l_op2 != 32))
+            if (
+                (s_l_s_op1 / i_l_op2 != s_l_s_op1 / ui_l_op2)
+                || (s_l_s_op1 / ui_l_op2 != s_l_s_op1 / l_l_op2)
+                || (s_l_s_op1 / l_l_op2 != s_l_s_op1 / (long)ul_l_op2)
+                || (s_l_s_op1 / (long)ul_l_op2 != s_l_s_op1 / f_l_op2)
+                || (s_l_s_op1 / f_l_op2 != s_l_s_op1 / d_l_op2)
+                || ((decimal)(s_l_s_op1 / d_l_op2) != s_l_s_op1 / m_l_op2)
+                || (s_l_s_op1 / m_l_op2 != s_l_s_op1 / i_l_op2)
+                || (s_l_s_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 11 failed");
                 passed = false;
             }
-            if ((s_l_s_op1 / s_i_s_op2 != s_l_s_op1 / s_ui_s_op2) || (s_l_s_op1 / s_ui_s_op2 != s_l_s_op1 / s_l_s_op2) || (s_l_s_op1 / s_l_s_op2 != s_l_s_op1 / (long)s_ul_s_op2) || (s_l_s_op1 / (long)s_ul_s_op2 != s_l_s_op1 / s_f_s_op2) || (s_l_s_op1 / s_f_s_op2 != s_l_s_op1 / s_d_s_op2) || ((decimal)(s_l_s_op1 / s_d_s_op2) != s_l_s_op1 / s_m_s_op2) || (s_l_s_op1 / s_m_s_op2 != s_l_s_op1 / s_i_s_op2) || (s_l_s_op1 / s_i_s_op2 != 32))
+            if (
+                (s_l_s_op1 / s_i_s_op2 != s_l_s_op1 / s_ui_s_op2)
+                || (s_l_s_op1 / s_ui_s_op2 != s_l_s_op1 / s_l_s_op2)
+                || (s_l_s_op1 / s_l_s_op2 != s_l_s_op1 / (long)s_ul_s_op2)
+                || (s_l_s_op1 / (long)s_ul_s_op2 != s_l_s_op1 / s_f_s_op2)
+                || (s_l_s_op1 / s_f_s_op2 != s_l_s_op1 / s_d_s_op2)
+                || ((decimal)(s_l_s_op1 / s_d_s_op2) != s_l_s_op1 / s_m_s_op2)
+                || (s_l_s_op1 / s_m_s_op2 != s_l_s_op1 / s_i_s_op2)
+                || (s_l_s_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 12 failed");
                 passed = false;
@@ -426,22 +698,58 @@ internal class lclflddiv
             double d_l_op2 = 4;
             decimal m_l_op2 = 4;
             numHolder nHldr_l_op2 = new numHolder(4);
-            if ((ul_l_op1 / (ulong)i_l_op2 != ul_l_op1 / ui_l_op2) || (ul_l_op1 / ui_l_op2 != ul_l_op1 / (ulong)l_l_op2) || (ul_l_op1 / (ulong)l_l_op2 != ul_l_op1 / ul_l_op2) || (ul_l_op1 / ul_l_op2 != ul_l_op1 / f_l_op2) || (ul_l_op1 / f_l_op2 != ul_l_op1 / d_l_op2) || ((decimal)(ul_l_op1 / d_l_op2) != ul_l_op1 / m_l_op2) || (ul_l_op1 / m_l_op2 != ul_l_op1 / (ulong)i_l_op2) || (ul_l_op1 / (ulong)i_l_op2 != 32))
+            if (
+                (ul_l_op1 / (ulong)i_l_op2 != ul_l_op1 / ui_l_op2)
+                || (ul_l_op1 / ui_l_op2 != ul_l_op1 / (ulong)l_l_op2)
+                || (ul_l_op1 / (ulong)l_l_op2 != ul_l_op1 / ul_l_op2)
+                || (ul_l_op1 / ul_l_op2 != ul_l_op1 / f_l_op2)
+                || (ul_l_op1 / f_l_op2 != ul_l_op1 / d_l_op2)
+                || ((decimal)(ul_l_op1 / d_l_op2) != ul_l_op1 / m_l_op2)
+                || (ul_l_op1 / m_l_op2 != ul_l_op1 / (ulong)i_l_op2)
+                || (ul_l_op1 / (ulong)i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 13 failed");
                 passed = false;
             }
-            if ((ul_l_op1 / (ulong)s_i_s_op2 != ul_l_op1 / s_ui_s_op2) || (ul_l_op1 / s_ui_s_op2 != ul_l_op1 / (ulong)s_l_s_op2) || (ul_l_op1 / (ulong)s_l_s_op2 != ul_l_op1 / s_ul_s_op2) || (ul_l_op1 / s_ul_s_op2 != ul_l_op1 / s_f_s_op2) || (ul_l_op1 / s_f_s_op2 != ul_l_op1 / s_d_s_op2) || ((decimal)(ul_l_op1 / s_d_s_op2) != ul_l_op1 / s_m_s_op2) || (ul_l_op1 / s_m_s_op2 != ul_l_op1 / (ulong)s_i_s_op2) || (ul_l_op1 / (ulong)s_i_s_op2 != 32))
+            if (
+                (ul_l_op1 / (ulong)s_i_s_op2 != ul_l_op1 / s_ui_s_op2)
+                || (ul_l_op1 / s_ui_s_op2 != ul_l_op1 / (ulong)s_l_s_op2)
+                || (ul_l_op1 / (ulong)s_l_s_op2 != ul_l_op1 / s_ul_s_op2)
+                || (ul_l_op1 / s_ul_s_op2 != ul_l_op1 / s_f_s_op2)
+                || (ul_l_op1 / s_f_s_op2 != ul_l_op1 / s_d_s_op2)
+                || ((decimal)(ul_l_op1 / s_d_s_op2) != ul_l_op1 / s_m_s_op2)
+                || (ul_l_op1 / s_m_s_op2 != ul_l_op1 / (ulong)s_i_s_op2)
+                || (ul_l_op1 / (ulong)s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 14 failed");
                 passed = false;
             }
-            if ((s_ul_s_op1 / (ulong)i_l_op2 != s_ul_s_op1 / ui_l_op2) || (s_ul_s_op1 / ui_l_op2 != s_ul_s_op1 / (ulong)l_l_op2) || (s_ul_s_op1 / (ulong)l_l_op2 != s_ul_s_op1 / ul_l_op2) || (s_ul_s_op1 / ul_l_op2 != s_ul_s_op1 / f_l_op2) || (s_ul_s_op1 / f_l_op2 != s_ul_s_op1 / d_l_op2) || ((decimal)(s_ul_s_op1 / d_l_op2) != s_ul_s_op1 / m_l_op2) || (s_ul_s_op1 / m_l_op2 != s_ul_s_op1 / (ulong)i_l_op2) || (s_ul_s_op1 / (ulong)i_l_op2 != 32))
+            if (
+                (s_ul_s_op1 / (ulong)i_l_op2 != s_ul_s_op1 / ui_l_op2)
+                || (s_ul_s_op1 / ui_l_op2 != s_ul_s_op1 / (ulong)l_l_op2)
+                || (s_ul_s_op1 / (ulong)l_l_op2 != s_ul_s_op1 / ul_l_op2)
+                || (s_ul_s_op1 / ul_l_op2 != s_ul_s_op1 / f_l_op2)
+                || (s_ul_s_op1 / f_l_op2 != s_ul_s_op1 / d_l_op2)
+                || ((decimal)(s_ul_s_op1 / d_l_op2) != s_ul_s_op1 / m_l_op2)
+                || (s_ul_s_op1 / m_l_op2 != s_ul_s_op1 / (ulong)i_l_op2)
+                || (s_ul_s_op1 / (ulong)i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 15 failed");
                 passed = false;
             }
-            if ((s_ul_s_op1 / (ulong)s_i_s_op2 != s_ul_s_op1 / s_ui_s_op2) || (s_ul_s_op1 / s_ui_s_op2 != s_ul_s_op1 / (ulong)s_l_s_op2) || (s_ul_s_op1 / (ulong)s_l_s_op2 != s_ul_s_op1 / s_ul_s_op2) || (s_ul_s_op1 / s_ul_s_op2 != s_ul_s_op1 / s_f_s_op2) || (s_ul_s_op1 / s_f_s_op2 != s_ul_s_op1 / s_d_s_op2) || ((decimal)(s_ul_s_op1 / s_d_s_op2) != s_ul_s_op1 / s_m_s_op2) || (s_ul_s_op1 / s_m_s_op2 != s_ul_s_op1 / (ulong)s_i_s_op2) || (s_ul_s_op1 / (ulong)s_i_s_op2 != 32))
+            if (
+                (s_ul_s_op1 / (ulong)s_i_s_op2 != s_ul_s_op1 / s_ui_s_op2)
+                || (s_ul_s_op1 / s_ui_s_op2 != s_ul_s_op1 / (ulong)s_l_s_op2)
+                || (s_ul_s_op1 / (ulong)s_l_s_op2 != s_ul_s_op1 / s_ul_s_op2)
+                || (s_ul_s_op1 / s_ul_s_op2 != s_ul_s_op1 / s_f_s_op2)
+                || (s_ul_s_op1 / s_f_s_op2 != s_ul_s_op1 / s_d_s_op2)
+                || ((decimal)(s_ul_s_op1 / s_d_s_op2) != s_ul_s_op1 / s_m_s_op2)
+                || (s_ul_s_op1 / s_m_s_op2 != s_ul_s_op1 / (ulong)s_i_s_op2)
+                || (s_ul_s_op1 / (ulong)s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 16 failed");
                 passed = false;
@@ -458,22 +766,58 @@ internal class lclflddiv
             double d_l_op2 = 4;
             decimal m_l_op2 = 4;
             numHolder nHldr_l_op2 = new numHolder(4);
-            if ((f_l_op1 / i_l_op2 != f_l_op1 / ui_l_op2) || (f_l_op1 / ui_l_op2 != f_l_op1 / l_l_op2) || (f_l_op1 / l_l_op2 != f_l_op1 / ul_l_op2) || (f_l_op1 / ul_l_op2 != f_l_op1 / f_l_op2) || (f_l_op1 / f_l_op2 != f_l_op1 / d_l_op2) || (f_l_op1 / d_l_op2 != f_l_op1 / (float)m_l_op2) || (f_l_op1 / (float)m_l_op2 != f_l_op1 / i_l_op2) || (f_l_op1 / i_l_op2 != 32))
+            if (
+                (f_l_op1 / i_l_op2 != f_l_op1 / ui_l_op2)
+                || (f_l_op1 / ui_l_op2 != f_l_op1 / l_l_op2)
+                || (f_l_op1 / l_l_op2 != f_l_op1 / ul_l_op2)
+                || (f_l_op1 / ul_l_op2 != f_l_op1 / f_l_op2)
+                || (f_l_op1 / f_l_op2 != f_l_op1 / d_l_op2)
+                || (f_l_op1 / d_l_op2 != f_l_op1 / (float)m_l_op2)
+                || (f_l_op1 / (float)m_l_op2 != f_l_op1 / i_l_op2)
+                || (f_l_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 17 failed");
                 passed = false;
             }
-            if ((f_l_op1 / s_i_s_op2 != f_l_op1 / s_ui_s_op2) || (f_l_op1 / s_ui_s_op2 != f_l_op1 / s_l_s_op2) || (f_l_op1 / s_l_s_op2 != f_l_op1 / s_ul_s_op2) || (f_l_op1 / s_ul_s_op2 != f_l_op1 / s_f_s_op2) || (f_l_op1 / s_f_s_op2 != f_l_op1 / s_d_s_op2) || (f_l_op1 / s_d_s_op2 != f_l_op1 / (float)s_m_s_op2) || (f_l_op1 / (float)s_m_s_op2 != f_l_op1 / s_i_s_op2) || (f_l_op1 / s_i_s_op2 != 32))
+            if (
+                (f_l_op1 / s_i_s_op2 != f_l_op1 / s_ui_s_op2)
+                || (f_l_op1 / s_ui_s_op2 != f_l_op1 / s_l_s_op2)
+                || (f_l_op1 / s_l_s_op2 != f_l_op1 / s_ul_s_op2)
+                || (f_l_op1 / s_ul_s_op2 != f_l_op1 / s_f_s_op2)
+                || (f_l_op1 / s_f_s_op2 != f_l_op1 / s_d_s_op2)
+                || (f_l_op1 / s_d_s_op2 != f_l_op1 / (float)s_m_s_op2)
+                || (f_l_op1 / (float)s_m_s_op2 != f_l_op1 / s_i_s_op2)
+                || (f_l_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 18 failed");
                 passed = false;
             }
-            if ((s_f_s_op1 / i_l_op2 != s_f_s_op1 / ui_l_op2) || (s_f_s_op1 / ui_l_op2 != s_f_s_op1 / l_l_op2) || (s_f_s_op1 / l_l_op2 != s_f_s_op1 / ul_l_op2) || (s_f_s_op1 / ul_l_op2 != s_f_s_op1 / f_l_op2) || (s_f_s_op1 / f_l_op2 != s_f_s_op1 / d_l_op2) || (s_f_s_op1 / d_l_op2 != s_f_s_op1 / (float)m_l_op2) || (s_f_s_op1 / (float)m_l_op2 != s_f_s_op1 / i_l_op2) || (s_f_s_op1 / i_l_op2 != 32))
+            if (
+                (s_f_s_op1 / i_l_op2 != s_f_s_op1 / ui_l_op2)
+                || (s_f_s_op1 / ui_l_op2 != s_f_s_op1 / l_l_op2)
+                || (s_f_s_op1 / l_l_op2 != s_f_s_op1 / ul_l_op2)
+                || (s_f_s_op1 / ul_l_op2 != s_f_s_op1 / f_l_op2)
+                || (s_f_s_op1 / f_l_op2 != s_f_s_op1 / d_l_op2)
+                || (s_f_s_op1 / d_l_op2 != s_f_s_op1 / (float)m_l_op2)
+                || (s_f_s_op1 / (float)m_l_op2 != s_f_s_op1 / i_l_op2)
+                || (s_f_s_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 19 failed");
                 passed = false;
             }
-            if ((s_f_s_op1 / s_i_s_op2 != s_f_s_op1 / s_ui_s_op2) || (s_f_s_op1 / s_ui_s_op2 != s_f_s_op1 / s_l_s_op2) || (s_f_s_op1 / s_l_s_op2 != s_f_s_op1 / s_ul_s_op2) || (s_f_s_op1 / s_ul_s_op2 != s_f_s_op1 / s_f_s_op2) || (s_f_s_op1 / s_f_s_op2 != s_f_s_op1 / s_d_s_op2) || (s_f_s_op1 / s_d_s_op2 != s_f_s_op1 / (float)s_m_s_op2) || (s_f_s_op1 / (float)s_m_s_op2 != s_f_s_op1 / s_i_s_op2) || (s_f_s_op1 / s_i_s_op2 != 32))
+            if (
+                (s_f_s_op1 / s_i_s_op2 != s_f_s_op1 / s_ui_s_op2)
+                || (s_f_s_op1 / s_ui_s_op2 != s_f_s_op1 / s_l_s_op2)
+                || (s_f_s_op1 / s_l_s_op2 != s_f_s_op1 / s_ul_s_op2)
+                || (s_f_s_op1 / s_ul_s_op2 != s_f_s_op1 / s_f_s_op2)
+                || (s_f_s_op1 / s_f_s_op2 != s_f_s_op1 / s_d_s_op2)
+                || (s_f_s_op1 / s_d_s_op2 != s_f_s_op1 / (float)s_m_s_op2)
+                || (s_f_s_op1 / (float)s_m_s_op2 != s_f_s_op1 / s_i_s_op2)
+                || (s_f_s_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 20 failed");
                 passed = false;
@@ -490,22 +834,58 @@ internal class lclflddiv
             double d_l_op2 = 4;
             decimal m_l_op2 = 4;
             numHolder nHldr_l_op2 = new numHolder(4);
-            if ((d_l_op1 / i_l_op2 != d_l_op1 / ui_l_op2) || (d_l_op1 / ui_l_op2 != d_l_op1 / l_l_op2) || (d_l_op1 / l_l_op2 != d_l_op1 / ul_l_op2) || (d_l_op1 / ul_l_op2 != d_l_op1 / f_l_op2) || (d_l_op1 / f_l_op2 != d_l_op1 / d_l_op2) || (d_l_op1 / d_l_op2 != d_l_op1 / (double)m_l_op2) || (d_l_op1 / (double)m_l_op2 != d_l_op1 / i_l_op2) || (d_l_op1 / i_l_op2 != 32))
+            if (
+                (d_l_op1 / i_l_op2 != d_l_op1 / ui_l_op2)
+                || (d_l_op1 / ui_l_op2 != d_l_op1 / l_l_op2)
+                || (d_l_op1 / l_l_op2 != d_l_op1 / ul_l_op2)
+                || (d_l_op1 / ul_l_op2 != d_l_op1 / f_l_op2)
+                || (d_l_op1 / f_l_op2 != d_l_op1 / d_l_op2)
+                || (d_l_op1 / d_l_op2 != d_l_op1 / (double)m_l_op2)
+                || (d_l_op1 / (double)m_l_op2 != d_l_op1 / i_l_op2)
+                || (d_l_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 21 failed");
                 passed = false;
             }
-            if ((d_l_op1 / s_i_s_op2 != d_l_op1 / s_ui_s_op2) || (d_l_op1 / s_ui_s_op2 != d_l_op1 / s_l_s_op2) || (d_l_op1 / s_l_s_op2 != d_l_op1 / s_ul_s_op2) || (d_l_op1 / s_ul_s_op2 != d_l_op1 / s_f_s_op2) || (d_l_op1 / s_f_s_op2 != d_l_op1 / s_d_s_op2) || (d_l_op1 / s_d_s_op2 != d_l_op1 / (double)s_m_s_op2) || (d_l_op1 / (double)s_m_s_op2 != d_l_op1 / s_i_s_op2) || (d_l_op1 / s_i_s_op2 != 32))
+            if (
+                (d_l_op1 / s_i_s_op2 != d_l_op1 / s_ui_s_op2)
+                || (d_l_op1 / s_ui_s_op2 != d_l_op1 / s_l_s_op2)
+                || (d_l_op1 / s_l_s_op2 != d_l_op1 / s_ul_s_op2)
+                || (d_l_op1 / s_ul_s_op2 != d_l_op1 / s_f_s_op2)
+                || (d_l_op1 / s_f_s_op2 != d_l_op1 / s_d_s_op2)
+                || (d_l_op1 / s_d_s_op2 != d_l_op1 / (double)s_m_s_op2)
+                || (d_l_op1 / (double)s_m_s_op2 != d_l_op1 / s_i_s_op2)
+                || (d_l_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 22 failed");
                 passed = false;
             }
-            if ((s_d_s_op1 / i_l_op2 != s_d_s_op1 / ui_l_op2) || (s_d_s_op1 / ui_l_op2 != s_d_s_op1 / l_l_op2) || (s_d_s_op1 / l_l_op2 != s_d_s_op1 / ul_l_op2) || (s_d_s_op1 / ul_l_op2 != s_d_s_op1 / f_l_op2) || (s_d_s_op1 / f_l_op2 != s_d_s_op1 / d_l_op2) || (s_d_s_op1 / d_l_op2 != s_d_s_op1 / (double)m_l_op2) || (s_d_s_op1 / (double)m_l_op2 != s_d_s_op1 / i_l_op2) || (s_d_s_op1 / i_l_op2 != 32))
+            if (
+                (s_d_s_op1 / i_l_op2 != s_d_s_op1 / ui_l_op2)
+                || (s_d_s_op1 / ui_l_op2 != s_d_s_op1 / l_l_op2)
+                || (s_d_s_op1 / l_l_op2 != s_d_s_op1 / ul_l_op2)
+                || (s_d_s_op1 / ul_l_op2 != s_d_s_op1 / f_l_op2)
+                || (s_d_s_op1 / f_l_op2 != s_d_s_op1 / d_l_op2)
+                || (s_d_s_op1 / d_l_op2 != s_d_s_op1 / (double)m_l_op2)
+                || (s_d_s_op1 / (double)m_l_op2 != s_d_s_op1 / i_l_op2)
+                || (s_d_s_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 23 failed");
                 passed = false;
             }
-            if ((s_d_s_op1 / s_i_s_op2 != s_d_s_op1 / s_ui_s_op2) || (s_d_s_op1 / s_ui_s_op2 != s_d_s_op1 / s_l_s_op2) || (s_d_s_op1 / s_l_s_op2 != s_d_s_op1 / s_ul_s_op2) || (s_d_s_op1 / s_ul_s_op2 != s_d_s_op1 / s_f_s_op2) || (s_d_s_op1 / s_f_s_op2 != s_d_s_op1 / s_d_s_op2) || (s_d_s_op1 / s_d_s_op2 != s_d_s_op1 / (double)s_m_s_op2) || (s_d_s_op1 / (double)s_m_s_op2 != s_d_s_op1 / s_i_s_op2) || (s_d_s_op1 / s_i_s_op2 != 32))
+            if (
+                (s_d_s_op1 / s_i_s_op2 != s_d_s_op1 / s_ui_s_op2)
+                || (s_d_s_op1 / s_ui_s_op2 != s_d_s_op1 / s_l_s_op2)
+                || (s_d_s_op1 / s_l_s_op2 != s_d_s_op1 / s_ul_s_op2)
+                || (s_d_s_op1 / s_ul_s_op2 != s_d_s_op1 / s_f_s_op2)
+                || (s_d_s_op1 / s_f_s_op2 != s_d_s_op1 / s_d_s_op2)
+                || (s_d_s_op1 / s_d_s_op2 != s_d_s_op1 / (double)s_m_s_op2)
+                || (s_d_s_op1 / (double)s_m_s_op2 != s_d_s_op1 / s_i_s_op2)
+                || (s_d_s_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 24 failed");
                 passed = false;
@@ -522,22 +902,58 @@ internal class lclflddiv
             double d_l_op2 = 4;
             decimal m_l_op2 = 4;
             numHolder nHldr_l_op2 = new numHolder(4);
-            if ((m_l_op1 / i_l_op2 != m_l_op1 / ui_l_op2) || (m_l_op1 / ui_l_op2 != m_l_op1 / l_l_op2) || (m_l_op1 / l_l_op2 != m_l_op1 / ul_l_op2) || (m_l_op1 / ul_l_op2 != m_l_op1 / (decimal)f_l_op2) || (m_l_op1 / (decimal)f_l_op2 != m_l_op1 / (decimal)d_l_op2) || (m_l_op1 / (decimal)d_l_op2 != m_l_op1 / m_l_op2) || (m_l_op1 / m_l_op2 != m_l_op1 / i_l_op2) || (m_l_op1 / i_l_op2 != 32))
+            if (
+                (m_l_op1 / i_l_op2 != m_l_op1 / ui_l_op2)
+                || (m_l_op1 / ui_l_op2 != m_l_op1 / l_l_op2)
+                || (m_l_op1 / l_l_op2 != m_l_op1 / ul_l_op2)
+                || (m_l_op1 / ul_l_op2 != m_l_op1 / (decimal)f_l_op2)
+                || (m_l_op1 / (decimal)f_l_op2 != m_l_op1 / (decimal)d_l_op2)
+                || (m_l_op1 / (decimal)d_l_op2 != m_l_op1 / m_l_op2)
+                || (m_l_op1 / m_l_op2 != m_l_op1 / i_l_op2)
+                || (m_l_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 25 failed");
                 passed = false;
             }
-            if ((m_l_op1 / s_i_s_op2 != m_l_op1 / s_ui_s_op2) || (m_l_op1 / s_ui_s_op2 != m_l_op1 / s_l_s_op2) || (m_l_op1 / s_l_s_op2 != m_l_op1 / s_ul_s_op2) || (m_l_op1 / s_ul_s_op2 != m_l_op1 / (decimal)s_f_s_op2) || (m_l_op1 / (decimal)s_f_s_op2 != m_l_op1 / (decimal)s_d_s_op2) || (m_l_op1 / (decimal)s_d_s_op2 != m_l_op1 / s_m_s_op2) || (m_l_op1 / s_m_s_op2 != m_l_op1 / s_i_s_op2) || (m_l_op1 / s_i_s_op2 != 32))
+            if (
+                (m_l_op1 / s_i_s_op2 != m_l_op1 / s_ui_s_op2)
+                || (m_l_op1 / s_ui_s_op2 != m_l_op1 / s_l_s_op2)
+                || (m_l_op1 / s_l_s_op2 != m_l_op1 / s_ul_s_op2)
+                || (m_l_op1 / s_ul_s_op2 != m_l_op1 / (decimal)s_f_s_op2)
+                || (m_l_op1 / (decimal)s_f_s_op2 != m_l_op1 / (decimal)s_d_s_op2)
+                || (m_l_op1 / (decimal)s_d_s_op2 != m_l_op1 / s_m_s_op2)
+                || (m_l_op1 / s_m_s_op2 != m_l_op1 / s_i_s_op2)
+                || (m_l_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 26 failed");
                 passed = false;
             }
-            if ((s_m_s_op1 / i_l_op2 != s_m_s_op1 / ui_l_op2) || (s_m_s_op1 / ui_l_op2 != s_m_s_op1 / l_l_op2) || (s_m_s_op1 / l_l_op2 != s_m_s_op1 / ul_l_op2) || (s_m_s_op1 / ul_l_op2 != s_m_s_op1 / (decimal)f_l_op2) || (s_m_s_op1 / (decimal)f_l_op2 != s_m_s_op1 / (decimal)d_l_op2) || (s_m_s_op1 / (decimal)d_l_op2 != s_m_s_op1 / m_l_op2) || (s_m_s_op1 / m_l_op2 != s_m_s_op1 / i_l_op2) || (s_m_s_op1 / i_l_op2 != 32))
+            if (
+                (s_m_s_op1 / i_l_op2 != s_m_s_op1 / ui_l_op2)
+                || (s_m_s_op1 / ui_l_op2 != s_m_s_op1 / l_l_op2)
+                || (s_m_s_op1 / l_l_op2 != s_m_s_op1 / ul_l_op2)
+                || (s_m_s_op1 / ul_l_op2 != s_m_s_op1 / (decimal)f_l_op2)
+                || (s_m_s_op1 / (decimal)f_l_op2 != s_m_s_op1 / (decimal)d_l_op2)
+                || (s_m_s_op1 / (decimal)d_l_op2 != s_m_s_op1 / m_l_op2)
+                || (s_m_s_op1 / m_l_op2 != s_m_s_op1 / i_l_op2)
+                || (s_m_s_op1 / i_l_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 27 failed");
                 passed = false;
             }
-            if ((s_m_s_op1 / s_i_s_op2 != s_m_s_op1 / s_ui_s_op2) || (s_m_s_op1 / s_ui_s_op2 != s_m_s_op1 / s_l_s_op2) || (s_m_s_op1 / s_l_s_op2 != s_m_s_op1 / s_ul_s_op2) || (s_m_s_op1 / s_ul_s_op2 != s_m_s_op1 / (decimal)s_f_s_op2) || (s_m_s_op1 / (decimal)s_f_s_op2 != s_m_s_op1 / (decimal)s_d_s_op2) || (s_m_s_op1 / (decimal)s_d_s_op2 != s_m_s_op1 / s_m_s_op2) || (s_m_s_op1 / s_m_s_op2 != s_m_s_op1 / s_i_s_op2) || (s_m_s_op1 / s_i_s_op2 != 32))
+            if (
+                (s_m_s_op1 / s_i_s_op2 != s_m_s_op1 / s_ui_s_op2)
+                || (s_m_s_op1 / s_ui_s_op2 != s_m_s_op1 / s_l_s_op2)
+                || (s_m_s_op1 / s_l_s_op2 != s_m_s_op1 / s_ul_s_op2)
+                || (s_m_s_op1 / s_ul_s_op2 != s_m_s_op1 / (decimal)s_f_s_op2)
+                || (s_m_s_op1 / (decimal)s_f_s_op2 != s_m_s_op1 / (decimal)s_d_s_op2)
+                || (s_m_s_op1 / (decimal)s_d_s_op2 != s_m_s_op1 / s_m_s_op2)
+                || (s_m_s_op1 / s_m_s_op2 != s_m_s_op1 / s_i_s_op2)
+                || (s_m_s_op1 / s_i_s_op2 != 32)
+            )
             {
                 Console.WriteLine("testcase 28 failed");
                 passed = false;

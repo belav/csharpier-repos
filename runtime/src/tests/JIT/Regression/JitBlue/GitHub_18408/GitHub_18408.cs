@@ -13,7 +13,6 @@ class MetadataReader
     {
         return new Method(this, handle, MethodAttributes.Abstract);
     }
-
 }
 
 struct Handle
@@ -84,16 +83,31 @@ struct QMethodDefinition
         return new QMethodDefinition(reader, token);
     }
 
-    public MetadataReader Reader { get { return _reader; } }
-    public int Token { get { return _handle; } }
+    public MetadataReader Reader
+    {
+        get { return _reader; }
+    }
+    public int Token
+    {
+        get { return _handle; }
+    }
 
-    public bool IsValid { get { return _reader == null; } }
+    public bool IsValid
+    {
+        get { return _reader == null; }
+    }
 
     private readonly MetadataReader _reader;
     private readonly int _handle;
 
-    public MetadataReader NativeFormatReader { get { return _reader; } }
-    public MethodHandle NativeFormatHandle { get { return _handle.AsHandle().ToMethodHandle(NativeFormatReader); } }
+    public MetadataReader NativeFormatReader
+    {
+        get { return _reader; }
+    }
+    public MethodHandle NativeFormatHandle
+    {
+        get { return _handle.AsHandle().ToMethodHandle(NativeFormatReader); }
+    }
 }
 
 public class GitHub_18408

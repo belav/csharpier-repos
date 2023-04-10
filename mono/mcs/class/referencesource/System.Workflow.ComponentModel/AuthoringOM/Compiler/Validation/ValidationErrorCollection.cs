@@ -9,9 +9,7 @@ namespace System.Workflow.ComponentModel.Compiler
     [Serializable()]
     public sealed class ValidationErrorCollection : Collection<ValidationError>
     {
-        public ValidationErrorCollection()
-        {
-        }
+        public ValidationErrorCollection() { }
 
         public ValidationErrorCollection(ValidationErrorCollection value)
         {

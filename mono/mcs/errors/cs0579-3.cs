@@ -3,10 +3,9 @@
 
 using System;
 
-class MainClass {
-        [Obsolete]
-        [Obsolete]
-        static void Main()
-        {
-        }
+class MainClass
+{
+    [Obsolete]
+    [Obsolete]
+    static void Main() { }
 }

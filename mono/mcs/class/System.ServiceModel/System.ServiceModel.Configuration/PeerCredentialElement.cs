@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,66 +54,85 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class PeerCredentialElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty certificate;
-		static ConfigurationProperty message_sender_authentication;
-		static ConfigurationProperty peer_authentication;
+    [MonoTODO]
+    public sealed partial class PeerCredentialElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty certificate;
+        static ConfigurationProperty message_sender_authentication;
+        static ConfigurationProperty peer_authentication;
 
-		static PeerCredentialElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			certificate = new ConfigurationProperty ("certificate",
-				typeof (X509PeerCertificateElement), null, null/* FIXME: get converter for X509PeerCertificateElement*/, null,
-				ConfigurationPropertyOptions.None);
+        static PeerCredentialElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            certificate = new ConfigurationProperty(
+                "certificate",
+                typeof(X509PeerCertificateElement),
+                null,
+                null /* FIXME: get converter for X509PeerCertificateElement*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			message_sender_authentication = new ConfigurationProperty ("messageSenderAuthentication",
-				typeof (X509PeerCertificateAuthenticationElement), null, null/* FIXME: get converter for X509PeerCertificateAuthenticationElement*/, null,
-				ConfigurationPropertyOptions.None);
+            message_sender_authentication = new ConfigurationProperty(
+                "messageSenderAuthentication",
+                typeof(X509PeerCertificateAuthenticationElement),
+                null,
+                null /* FIXME: get converter for X509PeerCertificateAuthenticationElement*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			peer_authentication = new ConfigurationProperty ("peerAuthentication",
-				typeof (X509PeerCertificateAuthenticationElement), null, null/* FIXME: get converter for X509PeerCertificateAuthenticationElement*/, null,
-				ConfigurationPropertyOptions.None);
+            peer_authentication = new ConfigurationProperty(
+                "peerAuthentication",
+                typeof(X509PeerCertificateAuthenticationElement),
+                null,
+                null /* FIXME: get converter for X509PeerCertificateAuthenticationElement*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (certificate);
-			properties.Add (message_sender_authentication);
-			properties.Add (peer_authentication);
-		}
+            properties.Add(certificate);
+            properties.Add(message_sender_authentication);
+            properties.Add(peer_authentication);
+        }
 
-		public PeerCredentialElement ()
-		{
-		}
+        public PeerCredentialElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty("certificate", Options = ConfigurationPropertyOptions.None)]
+        public X509PeerCertificateElement Certificate
+        {
+            get { return (X509PeerCertificateElement)base[certificate]; }
+        }
 
-		[ConfigurationProperty ("certificate",
-			 Options = ConfigurationPropertyOptions.None)]
-		public X509PeerCertificateElement Certificate {
-			get { return (X509PeerCertificateElement) base [certificate]; }
-		}
+        [ConfigurationProperty(
+            "messageSenderAuthentication",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public X509PeerCertificateAuthenticationElement MessageSenderAuthentication
+        {
+            get
+            {
+                return (X509PeerCertificateAuthenticationElement)
+                    base[message_sender_authentication];
+            }
+        }
 
-		[ConfigurationProperty ("messageSenderAuthentication",
-			 Options = ConfigurationPropertyOptions.None)]
-		public X509PeerCertificateAuthenticationElement MessageSenderAuthentication {
-			get { return (X509PeerCertificateAuthenticationElement) base [message_sender_authentication]; }
-		}
+        [ConfigurationProperty("peerAuthentication", Options = ConfigurationPropertyOptions.None)]
+        public X509PeerCertificateAuthenticationElement PeerAuthentication
+        {
+            get { return (X509PeerCertificateAuthenticationElement)base[peer_authentication]; }
+        }
 
-		[ConfigurationProperty ("peerAuthentication",
-			 Options = ConfigurationPropertyOptions.None)]
-		public X509PeerCertificateAuthenticationElement PeerAuthentication {
-			get { return (X509PeerCertificateAuthenticationElement) base [peer_authentication]; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

@@ -12,15 +12,18 @@ namespace System.Activities.DurableInstancing
 
     abstract class SqlWorkflowInstanceStoreAsyncResult : AsyncResult
     {
-        static Action<AsyncResult, Exception> finallyCallback = new Action<AsyncResult, Exception>(Finally);
+        static Action<AsyncResult, Exception> finallyCallback = new Action<AsyncResult, Exception>(
+            Finally
+        );
         static AsyncCompletion onBindReclaimed = new AsyncCompletion(OnBindReclaimed);
-        static AsyncCompletion onSqlCommandAsyncResultCallback = new AsyncCompletion(SqlCommandAsyncResultCallback);
+        static AsyncCompletion onSqlCommandAsyncResultCallback = new AsyncCompletion(
+            SqlCommandAsyncResultCallback
+        );
 
         SqlCommand sqlCommand;
         int maximumRetries;
 
-        protected SqlWorkflowInstanceStoreAsyncResult
-            (
+        protected SqlWorkflowInstanceStoreAsyncResult(
             InstancePersistenceContext context,
             InstancePersistenceCommand command,
             SqlWorkflowInstanceStore store,
@@ -29,14 +32,21 @@ namespace System.Activities.DurableInstancing
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-            ) 
-            : this(context, command, store, storeLock, currentTransaction, timeout, store.MaxConnectionRetries, callback, state)
-        {
-        }
+        )
+            : this(
+                context,
+                command,
+                store,
+                storeLock,
+                currentTransaction,
+                timeout,
+                store.MaxConnectionRetries,
+                callback,
+                state
+            ) { }
 
         // ExtendLockAsyncResult and RecoverInstanceLocksAsyncResult directly call this ctor
-        protected SqlWorkflowInstanceStoreAsyncResult
-            (
+        protected SqlWorkflowInstanceStoreAsyncResult(
             InstancePersistenceContext context,
             InstancePersistenceCommand command,
             SqlWorkflowInstanceStore store,
@@ -46,10 +56,15 @@ namespace System.Activities.DurableInstancing
             int maximumRetries,
             AsyncCallback callback,
             object state
-            ) :
-            base(callback, state)
+        )
+            : base(callback, state)
         {
-            this.DependentTransaction = (currentTransaction != null) ? currentTransaction.DependentClone(DependentCloneOption.BlockCommitUntilComplete) : null;
+            this.DependentTransaction =
+                (currentTransaction != null)
+                    ? currentTransaction.DependentClone(
+                        DependentCloneOption.BlockCommitUntilComplete
+                    )
+                    : null;
             this.InstancePersistenceContext = context;
             this.InstancePersistenceCommand = command;
             this.Store = store;
@@ -61,47 +76,20 @@ namespace System.Activities.DurableInstancing
 
         protected virtual string ConnectionString
         {
-            get
-            {
-                return this.Store.CachedConnectionString;
-            }
+            get { return this.Store.CachedConnectionString; }
         }
 
-        protected DependentTransaction DependentTransaction
-        {
-            get;
-            set;
-        }
+        protected DependentTransaction DependentTransaction { get; set; }
 
-        protected InstancePersistenceCommand InstancePersistenceCommand
-        {
-            get;
-            private set;
-        }
+        protected InstancePersistenceCommand InstancePersistenceCommand { get; private set; }
 
-        protected InstancePersistenceContext InstancePersistenceContext
-        {
-            get;
-            private set;
-        }
+        protected InstancePersistenceContext InstancePersistenceContext { get; private set; }
 
-        protected SqlWorkflowInstanceStore Store
-        {
-            get;
-            private set;
-        }
+        protected SqlWorkflowInstanceStore Store { get; private set; }
 
-        protected SqlWorkflowInstanceStoreLock StoreLock
-        {
-            get;
-            private set;
-        }
+        protected SqlWorkflowInstanceStoreLock StoreLock { get; private set; }
 
-        protected TimeoutHelper TimeoutHelper
-        {
-            get;
-            set;
-        }
+        protected TimeoutHelper TimeoutHelper { get; set; }
 
         public static bool End(IAsyncResult result)
         {
@@ -124,9 +112,8 @@ namespace System.Activities.DurableInstancing
         protected abstract string GetSqlCommandText();
         protected abstract CommandType GetSqlCommandType();
 
-        protected virtual void OnCommandCompletion()
-        {
-        }
+        protected virtual void OnCommandCompletion() { }
+
         protected abstract Exception ProcessSqlResult(SqlDataReader reader);
 
         protected virtual bool OnSqlProcessingComplete()
@@ -141,7 +128,8 @@ namespace System.Activities.DurableInstancing
 
         static void Finally(AsyncResult result, Exception currentException)
         {
-            SqlWorkflowInstanceStoreAsyncResult thisPtr = result as SqlWorkflowInstanceStoreAsyncResult;
+            SqlWorkflowInstanceStoreAsyncResult thisPtr =
+                result as SqlWorkflowInstanceStoreAsyncResult;
 
             try
             {
@@ -170,21 +158,27 @@ namespace System.Activities.DurableInstancing
 
         static bool OnBindReclaimed(IAsyncResult result)
         {
-            SqlWorkflowInstanceStoreAsyncResult thisPtr = (SqlWorkflowInstanceStoreAsyncResult)result.AsyncState;
+            SqlWorkflowInstanceStoreAsyncResult thisPtr = (SqlWorkflowInstanceStoreAsyncResult)
+                result.AsyncState;
             thisPtr.InstancePersistenceContext.EndBindReclaimedLock(result);
             Guid instanceId = thisPtr.InstancePersistenceContext.InstanceView.InstanceId;
             long lockVersion = thisPtr.InstancePersistenceContext.InstanceVersion;
 
-            InstanceLockTracking instanceLockTracking = (InstanceLockTracking)(thisPtr.InstancePersistenceContext.UserContext);
+            InstanceLockTracking instanceLockTracking = (InstanceLockTracking)(
+                thisPtr.InstancePersistenceContext.UserContext
+            );
             instanceLockTracking.TrackStoreLock(instanceId, lockVersion, null);
             thisPtr.InstancePersistenceContext.InstanceHandle.Free();
 
-            throw FxTrace.Exception.AsError(new InstanceLockLostException(thisPtr.InstancePersistenceCommand.Name, instanceId));
+            throw FxTrace.Exception.AsError(
+                new InstanceLockLostException(thisPtr.InstancePersistenceCommand.Name, instanceId)
+            );
         }
 
         static bool SqlCommandAsyncResultCallback(IAsyncResult result)
         {
-            SqlWorkflowInstanceStoreAsyncResult thisPtr = (SqlWorkflowInstanceStoreAsyncResult)result.AsyncState;
+            SqlWorkflowInstanceStoreAsyncResult thisPtr = (SqlWorkflowInstanceStoreAsyncResult)
+                result.AsyncState;
             Exception delayedException = null;
             bool completeFlag = true;
 
@@ -205,21 +199,39 @@ namespace System.Activities.DurableInstancing
                     throw;
                 }
 
-                Guid instanceId = (thisPtr.InstancePersistenceContext != null) ? thisPtr.InstancePersistenceContext.InstanceView.InstanceId : Guid.Empty;
-                delayedException = new InstancePersistenceCommandException(thisPtr.InstancePersistenceCommand.Name, instanceId, exception);
+                Guid instanceId =
+                    (thisPtr.InstancePersistenceContext != null)
+                        ? thisPtr.InstancePersistenceContext.InstanceView.InstanceId
+                        : Guid.Empty;
+                delayedException = new InstancePersistenceCommandException(
+                    thisPtr.InstancePersistenceCommand.Name,
+                    instanceId,
+                    exception
+                );
             }
 
             if (delayedException is InstanceAlreadyLockedToOwnerException)
             {
-                InstanceAlreadyLockedToOwnerException alreadyLockedException = (InstanceAlreadyLockedToOwnerException) delayedException;
+                InstanceAlreadyLockedToOwnerException alreadyLockedException =
+                    (InstanceAlreadyLockedToOwnerException)delayedException;
                 long reclaimLockAtVersion = alreadyLockedException.InstanceVersion;
 
                 if (!thisPtr.InstancePersistenceContext.InstanceView.IsBoundToInstance)
                 {
-                    thisPtr.InstancePersistenceContext.BindInstance(alreadyLockedException.InstanceId);
+                    thisPtr.InstancePersistenceContext.BindInstance(
+                        alreadyLockedException.InstanceId
+                    );
                 }
 
-                IAsyncResult bindReclaimedAsyncResult = thisPtr.InstancePersistenceContext.BeginBindReclaimedLock(reclaimLockAtVersion, thisPtr.TimeoutHelper.RemainingTime(), thisPtr.PrepareAsyncCompletion(SqlWorkflowInstanceStoreAsyncResult.onBindReclaimed), thisPtr);
+                IAsyncResult bindReclaimedAsyncResult =
+                    thisPtr.InstancePersistenceContext.BeginBindReclaimedLock(
+                        reclaimLockAtVersion,
+                        thisPtr.TimeoutHelper.RemainingTime(),
+                        thisPtr.PrepareAsyncCompletion(
+                            SqlWorkflowInstanceStoreAsyncResult.onBindReclaimed
+                        ),
+                        thisPtr
+                    );
 
                 if (!thisPtr.SyncContinue(bindReclaimedAsyncResult))
                 {
@@ -254,7 +266,8 @@ namespace System.Activities.DurableInstancing
 
         static void StartOperationCallback(object state)
         {
-            SqlWorkflowInstanceStoreAsyncResult sqlWorkflowInstanceStoreAsyncResult = (SqlWorkflowInstanceStoreAsyncResult) state;
+            SqlWorkflowInstanceStoreAsyncResult sqlWorkflowInstanceStoreAsyncResult =
+                (SqlWorkflowInstanceStoreAsyncResult)state;
             sqlWorkflowInstanceStoreAsyncResult.StartOperation();
         }
 
@@ -271,7 +284,10 @@ namespace System.Activities.DurableInstancing
 
         void StartOperation()
         {
-            Guid instanceId = (this.InstancePersistenceContext != null) ? this.InstancePersistenceContext.InstanceView.InstanceId : Guid.Empty;
+            Guid instanceId =
+                (this.InstancePersistenceContext != null)
+                    ? this.InstancePersistenceContext.InstanceView.InstanceId
+                    : Guid.Empty;
             Exception delayedException = null;
 
             try
@@ -282,9 +298,19 @@ namespace System.Activities.DurableInstancing
                 this.sqlCommand.CommandType = this.GetSqlCommandType();
 
                 StoreUtilities.TraceSqlCommand(this.sqlCommand, true);
-                SqlCommandAsyncResult sqlCommandResult = new SqlCommandAsyncResult(this.sqlCommand, this.ConnectionString,
-                    (this.InstancePersistenceContext != null) ? this.InstancePersistenceContext.EventTraceActivity : null,
-                    this.DependentTransaction, this.TimeoutHelper.RemainingTime(), 0, this.maximumRetries, PrepareAsyncCompletion(onSqlCommandAsyncResultCallback), this);
+                SqlCommandAsyncResult sqlCommandResult = new SqlCommandAsyncResult(
+                    this.sqlCommand,
+                    this.ConnectionString,
+                    (this.InstancePersistenceContext != null)
+                        ? this.InstancePersistenceContext.EventTraceActivity
+                        : null,
+                    this.DependentTransaction,
+                    this.TimeoutHelper.RemainingTime(),
+                    0,
+                    this.maximumRetries,
+                    PrepareAsyncCompletion(onSqlCommandAsyncResultCallback),
+                    this
+                );
                 sqlCommandResult.StartCommand();
 
                 if (!SyncContinue(sqlCommandResult))
@@ -303,7 +329,11 @@ namespace System.Activities.DurableInstancing
                     throw;
                 }
 
-                delayedException = new InstancePersistenceCommandException(this.InstancePersistenceCommand.Name, instanceId, exception);
+                delayedException = new InstancePersistenceCommandException(
+                    this.InstancePersistenceCommand.Name,
+                    instanceId,
+                    exception
+                );
             }
 
             if (delayedException != null)
@@ -331,8 +361,13 @@ namespace System.Activities.DurableInstancing
 
             if (traceException && TD.FoundProcessingErrorIsEnabled())
             {
-                TD.FoundProcessingError((this.InstancePersistenceContext != null) ? this.InstancePersistenceContext.EventTraceActivity : null,
-                    exception.Message, exception);
+                TD.FoundProcessingError(
+                    (this.InstancePersistenceContext != null)
+                        ? this.InstancePersistenceContext.EventTraceActivity
+                        : null,
+                    exception.Message,
+                    exception
+                );
             }
         }
     }

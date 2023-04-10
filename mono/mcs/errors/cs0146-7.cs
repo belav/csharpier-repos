@@ -3,10 +3,9 @@
 
 public class Generic<P>
 {
-	public class Status : Status
-	{
-		Status (Foo foo) : base (foo)
-		{
-		}
-	}
+    public class Status : Status
+    {
+        Status(Foo foo)
+            : base(foo) { }
+    }
 }

@@ -2,6 +2,4 @@
 // Line: 5
 // Compiler options: -r:CS1070-lib.dll
 
-public class D : C
-{
-}
+public class D : C { }

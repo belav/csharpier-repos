@@ -12,9 +12,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data.Common
 {
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2113:ReflectionToRequiresUnreferencedCode",
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2113:ReflectionToRequiresUnreferencedCode",
         Justification = "The use of GetType preserves ICustomTypeDescriptor members with RequiresUnreferencedCode, but the GetType callsites either "
-            + "occur in RequiresUnreferencedCode scopes, or have individually justified suppressions.")]
+            + "occur in RequiresUnreferencedCode scopes, or have individually justified suppressions."
+    )]
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
     public class DbConnectionStringBuilder : IDictionary, ICustomTypeDescriptor
     {
@@ -30,11 +33,11 @@ namespace System.Data.Common
         private readonly bool _useOdbcRules;
 
         private static int s_objectTypeCount; // Bid counter
-        internal readonly int _objectID = System.Threading.Interlocked.Increment(ref s_objectTypeCount);
+        internal readonly int _objectID = System.Threading.Interlocked.Increment(
+            ref s_objectTypeCount
+        );
 
-        public DbConnectionStringBuilder()
-        {
-        }
+        public DbConnectionStringBuilder() { }
 
         public DbConnectionStringBuilder(bool useOdbcRules)
         {
@@ -76,7 +79,11 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource.Log.Trace("<comm.DbConnectionStringBuilder.get_Item|API> {0}, keyword='{1}'", ObjectID, keyword);
+                DataCommonEventSource.Log.Trace(
+                    "<comm.DbConnectionStringBuilder.get_Item|API> {0}, keyword='{1}'",
+                    ObjectID,
+                    keyword
+                );
                 ADP.CheckArgumentNull(keyword, nameof(keyword));
                 object? value;
                 if (CurrentValues.TryGetValue(keyword, out value))
@@ -117,10 +124,7 @@ namespace System.Data.Common
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool BrowsableConnectionString
         {
-            get
-            {
-                return _browsableConnectionString;
-            }
+            get { return _browsableConnectionString; }
             set
             {
                 _browsableConnectionString = value;
@@ -134,7 +138,10 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource.Log.Trace("<comm.DbConnectionStringBuilder.get_ConnectionString|API> {0}", ObjectID);
+                DataCommonEventSource.Log.Trace(
+                    "<comm.DbConnectionStringBuilder.get_ConnectionString|API> {0}",
+                    ObjectID
+                );
                 string? connectionString = _connectionString;
                 if (null == connectionString)
                 {
@@ -156,7 +163,10 @@ namespace System.Data.Common
             }
             set
             {
-                DataCommonEventSource.Log.Trace("<comm.DbConnectionStringBuilder.set_ConnectionString|API> {0}", ObjectID);
+                DataCommonEventSource.Log.Trace(
+                    "<comm.DbConnectionStringBuilder.set_ConnectionString|API> {0}",
+                    ObjectID
+                );
                 DbConnectionOptions constr = new DbConnectionOptions(value, null, _useOdbcRules);
                 string originalValue = ConnectionString;
                 Clear();
@@ -214,17 +224,17 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource.Log.Trace("<comm.DbConnectionStringBuilder.Keys|API> {0}", ObjectID);
+                DataCommonEventSource.Log.Trace(
+                    "<comm.DbConnectionStringBuilder.Keys|API> {0}",
+                    ObjectID
+                );
                 return Dictionary.Keys;
             }
         }
 
         internal int ObjectID
         {
-            get
-            {
-                return _objectID;
-            }
+            get { return _objectID; }
         }
 
         object ICollection.SyncRoot
@@ -237,7 +247,10 @@ namespace System.Data.Common
         {
             get
             {
-                DataCommonEventSource.Log.Trace("<comm.DbConnectionStringBuilder.Values|API> {0}", ObjectID);
+                DataCommonEventSource.Log.Trace(
+                    "<comm.DbConnectionStringBuilder.Values|API> {0}",
+                    ObjectID
+                );
                 ICollection<string> keys = (ICollection<string>)Keys;
                 IEnumerator<string> keylist = keys.GetEnumerator();
                 object[] values = new object[keys.Count];
@@ -260,6 +273,7 @@ namespace System.Data.Common
         {
             Add(ObjectToString(keyword), value!);
         }
+
         public void Add(string keyword, object value)
         {
             this[keyword] = value;
@@ -270,7 +284,12 @@ namespace System.Data.Common
             DbConnectionOptions.AppendKeyValuePairBuilder(builder, keyword, value, false);
         }
 
-        public static void AppendKeyValuePair(StringBuilder builder, string keyword, string? value, bool useOdbcRules)
+        public static void AppendKeyValuePair(
+            StringBuilder builder,
+            string keyword,
+            string? value,
+            bool useOdbcRules
+        )
         {
             DbConnectionOptions.AppendKeyValuePairBuilder(builder, keyword, value, useOdbcRules);
         }
@@ -293,6 +312,7 @@ namespace System.Data.Common
         {
             return ContainsKey(ObjectToString(keyword));
         }
+
         public virtual bool ContainsKey(string keyword)
         {
             ADP.CheckArgumentNull(keyword, nameof(keyword));
@@ -301,7 +321,10 @@ namespace System.Data.Common
 
         void ICollection.CopyTo(Array array, int index)
         {
-            DataCommonEventSource.Log.Trace("<comm.DbConnectionStringBuilder.ICollection.CopyTo|API> {0}", ObjectID);
+            DataCommonEventSource.Log.Trace(
+                "<comm.DbConnectionStringBuilder.ICollection.CopyTo|API> {0}",
+                ObjectID
+            );
             Collection.CopyTo(array, index);
         }
 
@@ -309,15 +332,25 @@ namespace System.Data.Common
         {
             ADP.CheckArgumentNull(connectionStringBuilder, nameof(connectionStringBuilder));
 
-            DataCommonEventSource.Log.Trace("<comm.DbConnectionStringBuilder.EquivalentTo|API> {0}, connectionStringBuilder={1}", ObjectID, connectionStringBuilder.ObjectID);
-            if ((GetType() != connectionStringBuilder.GetType()) || (CurrentValues.Count != connectionStringBuilder.CurrentValues.Count))
+            DataCommonEventSource.Log.Trace(
+                "<comm.DbConnectionStringBuilder.EquivalentTo|API> {0}, connectionStringBuilder={1}",
+                ObjectID,
+                connectionStringBuilder.ObjectID
+            );
+            if (
+                (GetType() != connectionStringBuilder.GetType())
+                || (CurrentValues.Count != connectionStringBuilder.CurrentValues.Count)
+            )
             {
                 return false;
             }
             object? value;
             foreach (KeyValuePair<string, object> entry in CurrentValues)
             {
-                if (!connectionStringBuilder.CurrentValues.TryGetValue(entry.Key, out value) || !entry.Value.Equals(value))
+                if (
+                    !connectionStringBuilder.CurrentValues.TryGetValue(entry.Key, out value)
+                    || !entry.Value.Equals(value)
+                )
                 {
                     return false;
                 }
@@ -327,12 +360,19 @@ namespace System.Data.Common
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            DataCommonEventSource.Log.Trace("<comm.DbConnectionStringBuilder.IEnumerable.GetEnumerator|API> {0}", ObjectID);
+            DataCommonEventSource.Log.Trace(
+                "<comm.DbConnectionStringBuilder.IEnumerable.GetEnumerator|API> {0}",
+                ObjectID
+            );
             return Collection.GetEnumerator();
         }
+
         IDictionaryEnumerator IDictionary.GetEnumerator()
         {
-            DataCommonEventSource.Log.Trace("<comm.DbConnectionStringBuilder.IDictionary.GetEnumerator|API> {0}", ObjectID);
+            DataCommonEventSource.Log.Trace(
+                "<comm.DbConnectionStringBuilder.IDictionary.GetEnumerator|API> {0}",
+                ObjectID
+            );
             return Dictionary.GetEnumerator();
         }
 
@@ -353,9 +393,14 @@ namespace System.Data.Common
         {
             Remove(ObjectToString(keyword));
         }
+
         public virtual bool Remove(string keyword)
         {
-            DataCommonEventSource.Log.Trace("<comm.DbConnectionStringBuilder.Remove|API> {0}, keyword='{1}'", ObjectID, keyword);
+            DataCommonEventSource.Log.Trace(
+                "<comm.DbConnectionStringBuilder.Remove|API> {0}, keyword='{1}'",
+                ObjectID,
+                keyword
+            );
             ADP.CheckArgumentNull(keyword, nameof(keyword));
             if (CurrentValues.Remove(keyword))
             {
@@ -391,16 +436,24 @@ namespace System.Data.Common
             return attributes;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2112:ReflectionToRequiresUnreferencedCode",
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2112:ReflectionToRequiresUnreferencedCode",
             Justification = "The use of GetType preserves this member with RequiresUnreferencedCode, but the GetType callsites either "
-                + "occur in RequiresUnreferencedCode scopes, or have individually justified suppressions.")]
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered.")]
+                + "occur in RequiresUnreferencedCode scopes, or have individually justified suppressions."
+        )]
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered."
+        )]
         private PropertyDescriptorCollection GetProperties()
         {
             PropertyDescriptorCollection? propertyDescriptors = _propertyDescriptors;
             if (null == propertyDescriptors)
             {
-                long logScopeId = DataCommonEventSource.Log.EnterScope("<comm.DbConnectionStringBuilder.GetProperties|INFO> {0}", ObjectID);
+                long logScopeId = DataCommonEventSource.Log.EnterScope(
+                    "<comm.DbConnectionStringBuilder.GetProperties|INFO> {0}",
+                    ObjectID
+                );
                 try
                 {
                     Hashtable descriptors = new Hashtable(StringComparer.OrdinalIgnoreCase);
@@ -420,13 +473,21 @@ namespace System.Data.Common
             return propertyDescriptors;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2112:ReflectionToRequiresUnreferencedCode",
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2112:ReflectionToRequiresUnreferencedCode",
             Justification = "The use of GetType preserves this member with RequiresUnreferencedCode, but the GetType callsites either "
-                + "occur in RequiresUnreferencedCode scopes, or have individually justified suppressions.")]
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered.")]
+                + "occur in RequiresUnreferencedCode scopes, or have individually justified suppressions."
+        )]
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered."
+        )]
         protected virtual void GetProperties(Hashtable propertyDescriptors)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope("<comm.DbConnectionStringBuilder.GetProperties|API> {0}", ObjectID);
+            long logScopeId = DataCommonEventSource.Log.EnterScope(
+                "<comm.DbConnectionStringBuilder.GetProperties|API> {0}",
+                ObjectID
+            );
             try
             {
                 // Below call is necessary to tell the trimmer that it should mark derived types appropriately.
@@ -445,8 +506,13 @@ namespace System.Data.Common
                         if (!propertyDescriptors.ContainsKey(displayName))
                         {
                             attributes = GetAttributesFromCollection(reflected.Attributes);
-                            PropertyDescriptor descriptor = new DbConnectionStringBuilderDescriptor(reflected.Name,
-                                    reflected.ComponentType, reflected.PropertyType, reflected.IsReadOnly, attributes);
+                            PropertyDescriptor descriptor = new DbConnectionStringBuilderDescriptor(
+                                reflected.Name,
+                                reflected.ComponentType,
+                                reflected.PropertyType,
+                                reflected.IsReadOnly,
+                                attributes
+                            );
                             propertyDescriptors[displayName] = descriptor;
                         }
                         // else added by derived class first
@@ -499,10 +565,19 @@ namespace System.Data.Common
                             }
 
                             Attribute[]? useAttributes = null;
-                            if (StringComparer.OrdinalIgnoreCase.Equals(DbConnectionStringKeywords.Password, keyword) ||
-                                StringComparer.OrdinalIgnoreCase.Equals(DbConnectionStringSynonyms.Pwd, keyword))
+                            if (
+                                StringComparer.OrdinalIgnoreCase.Equals(
+                                    DbConnectionStringKeywords.Password,
+                                    keyword
+                                )
+                                || StringComparer.OrdinalIgnoreCase.Equals(
+                                    DbConnectionStringSynonyms.Pwd,
+                                    keyword
+                                )
+                            )
                             {
-                                useAttributes = new Attribute[] {
+                                useAttributes = new Attribute[]
+                                {
                                     BrowsableAttribute.Yes,
                                     PasswordPropertyTextAttribute.Yes,
                                     RefreshPropertiesAttribute.All,
@@ -510,15 +585,21 @@ namespace System.Data.Common
                             }
                             else if (null == attributes)
                             {
-                                attributes = new Attribute[] {
+                                attributes = new Attribute[]
+                                {
                                     BrowsableAttribute.Yes,
                                     RefreshPropertiesAttribute.All,
                                 };
                                 useAttributes = attributes;
                             }
 
-                            PropertyDescriptor descriptor = new DbConnectionStringBuilderDescriptor(keyword,
-                                                                    GetType(), vtype, false, useAttributes!);
+                            PropertyDescriptor descriptor = new DbConnectionStringBuilderDescriptor(
+                                keyword,
+                                GetType(),
+                                vtype,
+                                false,
+                                useAttributes!
+                            );
                             propertyDescriptors[keyword] = descriptor;
                         }
                     }
@@ -530,10 +611,15 @@ namespace System.Data.Common
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2112:ReflectionToRequiresUnreferencedCode",
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2112:ReflectionToRequiresUnreferencedCode",
             Justification = "The use of GetType preserves this member with RequiresUnreferencedCode, but the GetType callsites either "
-                + "occur in RequiresUnreferencedCode scopes, or have individually justified suppressions.")]
-        [RequiresUnreferencedCode("The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type.")]
+                + "occur in RequiresUnreferencedCode scopes, or have individually justified suppressions."
+        )]
+        [RequiresUnreferencedCode(
+            "The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
+        )]
         private PropertyDescriptorCollection GetProperties(Attribute[]? attributes)
         {
             PropertyDescriptorCollection propertyDescriptors = GetProperties();
@@ -544,7 +630,9 @@ namespace System.Data.Common
             }
 
             // Create an array that is guaranteed to hold all attributes
-            PropertyDescriptor[] propertiesArray = new PropertyDescriptor[propertyDescriptors.Count];
+            PropertyDescriptor[] propertiesArray = new PropertyDescriptor[
+                propertyDescriptors.Count
+            ];
 
             // Create an index to reference into this array
             int index = 0;
@@ -559,7 +647,10 @@ namespace System.Data.Common
                 foreach (Attribute attribute in attributes)
                 {
                     Attribute? attr = property.Attributes[attribute.GetType()];
-                    if ((attr == null && !attribute.IsDefaultAttribute()) || attr?.Match(attribute) == false)
+                    if (
+                        (attr == null && !attribute.IsDefaultAttribute())
+                        || attr?.Match(attribute) == false
+                    )
                     {
                         match = false;
                         break;
@@ -581,8 +672,11 @@ namespace System.Data.Common
             return new PropertyDescriptorCollection(filteredPropertiesArray);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The component type's class name is preserved because this class is marked with [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The component type's class name is preserved because this class is marked with [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]"
+        )]
         string? ICustomTypeDescriptor.GetClassName()
         {
             // Below call is necessary to tell the trimmer that it should mark derived types appropriately.
@@ -590,8 +684,12 @@ namespace System.Data.Common
             GetType();
             return TypeDescriptor.GetClassName(this, true);
         }
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The component type's component name is preserved because this class is marked with [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]")]
+
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The component type's component name is preserved because this class is marked with [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]"
+        )]
         string? ICustomTypeDescriptor.GetComponentName()
         {
             // Below call is necessary to tell the trimmer that it should mark derived types appropriately.
@@ -599,44 +697,70 @@ namespace System.Data.Common
             GetType();
             return TypeDescriptor.GetComponentName(this, true);
         }
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The component type's attributes are preserved because this class is marked with [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]")]
+
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The component type's attributes are preserved because this class is marked with [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]"
+        )]
         AttributeCollection ICustomTypeDescriptor.GetAttributes()
         {
             return TypeDescriptor.GetAttributes(this, true);
         }
-        [RequiresUnreferencedCode("Editors registered in TypeDescriptor.AddEditorTable may be trimmed.")]
+
+        [RequiresUnreferencedCode(
+            "Editors registered in TypeDescriptor.AddEditorTable may be trimmed."
+        )]
         object? ICustomTypeDescriptor.GetEditor(Type editorBaseType)
         {
             return TypeDescriptor.GetEditor(this, editorBaseType, true);
         }
-        [RequiresUnreferencedCode("Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All.")]
+
+        [RequiresUnreferencedCode(
+            "Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All."
+        )]
         TypeConverter ICustomTypeDescriptor.GetConverter()
         {
             return TypeDescriptor.GetConverter(this, true);
         }
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered.")]
+
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered."
+        )]
         PropertyDescriptor? ICustomTypeDescriptor.GetDefaultProperty()
         {
             return TypeDescriptor.GetDefaultProperty(this, true);
         }
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered.")]
+
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered."
+        )]
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
         {
             return GetProperties();
         }
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered. The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type.")]
+
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered. The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
+        )]
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[]? attributes)
         {
             return GetProperties(attributes);
         }
-        [RequiresUnreferencedCode("The built-in EventDescriptor implementation uses Reflection which requires unreferenced code.")]
+
+        [RequiresUnreferencedCode(
+            "The built-in EventDescriptor implementation uses Reflection which requires unreferenced code."
+        )]
         EventDescriptor? ICustomTypeDescriptor.GetDefaultEvent()
         {
             return TypeDescriptor.GetDefaultEvent(this, true);
         }
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The component type's events are preserved because this class is marked with [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]")]
+
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The component type's events are preserved because this class is marked with [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]"
+        )]
         EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
         {
             // Below call is necessary to tell the trimmer that it should mark derived types appropriately.
@@ -644,11 +768,15 @@ namespace System.Data.Common
             GetType();
             return TypeDescriptor.GetEvents(this, true);
         }
-        [RequiresUnreferencedCode("The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type.")]
+
+        [RequiresUnreferencedCode(
+            "The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
+        )]
         EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[]? attributes)
         {
             return TypeDescriptor.GetEvents(this, attributes, true);
         }
+
         object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor? pd)
         {
             return this;

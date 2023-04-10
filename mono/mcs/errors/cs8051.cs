@@ -3,5 +3,5 @@
 
 class V
 {
-	public object P { set; } = 1;
+    public object P { set; } = 1;
 }

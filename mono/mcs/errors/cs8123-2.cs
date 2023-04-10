@@ -4,8 +4,8 @@
 
 class C
 {
-	public static void Main ()
-	{
-		(int tt1, int tt2) t = (a: 1, 2);
-	}
+    public static void Main()
+    {
+        (int tt1, int tt2) t = (a: 1, 2);
+    }
 }

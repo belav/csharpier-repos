@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Builder;
 /// <summary>
 /// <see cref="IApplicationBuilder"/> extension methods for the <see cref="DatabaseErrorPageMiddleware"/>.
 /// </summary>
-[Obsolete("This is obsolete and will be removed in a future version. Use DatabaseDeveloperPageExceptionFilter instead, see documentation at https://aka.ms/DatabaseDeveloperPageExceptionFilter.")]
+[Obsolete(
+    "This is obsolete and will be removed in a future version. Use DatabaseDeveloperPageExceptionFilter instead, see documentation at https://aka.ms/DatabaseDeveloperPageExceptionFilter."
+)]
 public static class DatabaseErrorPageExtensions
 {
     /// <summary>
@@ -19,7 +21,9 @@ public static class DatabaseErrorPageExtensions
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/> to register the middleware with.</param>
     /// <returns>The same <see cref="IApplicationBuilder"/> instance so that multiple calls can be chained.</returns>
-    [Obsolete("This is obsolete and will be removed in a future version. Use DatabaseDeveloperPageExceptionFilter instead, see documentation at https://aka.ms/DatabaseDeveloperPageExceptionFilter.")]
+    [Obsolete(
+        "This is obsolete and will be removed in a future version. Use DatabaseDeveloperPageExceptionFilter instead, see documentation at https://aka.ms/DatabaseDeveloperPageExceptionFilter."
+    )]
     public static IApplicationBuilder UseDatabaseErrorPage(this IApplicationBuilder app)
     {
         if (app == null)
@@ -37,9 +41,13 @@ public static class DatabaseErrorPageExtensions
     /// <param name="app">The <see cref="IApplicationBuilder"/> to register the middleware with.</param>
     /// <param name="options">A <see cref="DatabaseErrorPageOptions"/> that specifies options for the middleware.</param>
     /// <returns>The same <see cref="IApplicationBuilder"/> instance so that multiple calls can be chained.</returns>
-    [Obsolete("This is obsolete and will be removed in a future version. Use DatabaseDeveloperPageExceptionFilter instead, see documentation at https://aka.ms/DatabaseDeveloperPageExceptionFilter.")]
+    [Obsolete(
+        "This is obsolete and will be removed in a future version. Use DatabaseDeveloperPageExceptionFilter instead, see documentation at https://aka.ms/DatabaseDeveloperPageExceptionFilter."
+    )]
     public static IApplicationBuilder UseDatabaseErrorPage(
-        this IApplicationBuilder app, DatabaseErrorPageOptions options)
+        this IApplicationBuilder app,
+        DatabaseErrorPageOptions options
+    )
     {
         if (app == null)
         {
@@ -53,10 +61,9 @@ public static class DatabaseErrorPageExtensions
 
         app = app.UseMiddleware<DatabaseErrorPageMiddleware>(Options.Create(options));
 
-        app.UseMigrationsEndPoint(new MigrationsEndPointOptions
-        {
-            Path = options.MigrationsEndPointPath
-        });
+        app.UseMigrationsEndPoint(
+            new MigrationsEndPointOptions { Path = options.MigrationsEndPointPath }
+        );
 
         return app;
     }

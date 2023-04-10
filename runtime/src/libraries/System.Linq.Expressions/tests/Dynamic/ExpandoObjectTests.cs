@@ -47,7 +47,10 @@ namespace System.Dynamic.Tests
         {
             IDictionary<string, object> eo = new ExpandoObject();
             eo.Add("The test key to add.", "value");
-            var ae = AssertExtensions.Throws<ArgumentException>("key", () => eo.Add("The test key to add.", "value"));
+            var ae = AssertExtensions.Throws<ArgumentException>(
+                "key",
+                () => eo.Add("The test key to add.", "value")
+            );
             Assert.Contains("The test key to add.", ae.Message);
         }
 
@@ -123,7 +126,7 @@ namespace System.Dynamic.Tests
             var keys = dict.Keys;
             Assert.Equal(2, keys.Count);
             Assert.True(keys.IsReadOnly);
-            Assert.Equal(new[] {"X", "Y"}, keys.OrderBy(k => k)); // OrderBy because order is not guaranteed.
+            Assert.Equal(new[] { "X", "Y" }, keys.OrderBy(k => k)); // OrderBy because order is not guaranteed.
             Assert.Throws<NotSupportedException>(() => keys.Add("Z"));
             Assert.Throws<NotSupportedException>(() => keys.Clear());
             Assert.Throws<NotSupportedException>(() => keys.Remove("X"));
@@ -133,13 +136,13 @@ namespace System.Dynamic.Tests
             keys.CopyTo(array, 1);
             Assert.Null(array[0]);
             Array.Sort(array); // Because order is not guaranteed.
-            Assert.Equal(new[] {null, "X", "Y"}, array);
+            Assert.Equal(new[] { null, "X", "Y" }, array);
             var keysEnumerated = new List<object>();
             foreach (var key in (IEnumerable)keys) // going through non-generic to test delegation to generic
             {
                 keysEnumerated.Add(key);
             }
-            Assert.Equal(new[] {"X", "Y"}, keysEnumerated.OrderBy(k => k));
+            Assert.Equal(new[] { "X", "Y" }, keysEnumerated.OrderBy(k => k));
             using (var en = keys.GetEnumerator())
             {
                 en.MoveNext();
@@ -159,7 +162,7 @@ namespace System.Dynamic.Tests
             var values = dict.Values;
             Assert.Equal(2, values.Count);
             Assert.True(values.IsReadOnly);
-            Assert.Equal(new object[] {1, 2}, values.OrderBy(k => k)); // OrderBy because order is not guaranteed.
+            Assert.Equal(new object[] { 1, 2 }, values.OrderBy(k => k)); // OrderBy because order is not guaranteed.
             Assert.Throws<NotSupportedException>(() => values.Add(3));
             Assert.Throws<NotSupportedException>(() => values.Clear());
             Assert.Throws<NotSupportedException>(() => values.Remove(1));
@@ -169,13 +172,13 @@ namespace System.Dynamic.Tests
             values.CopyTo(array, 1);
             Assert.Null(array[0]);
             Array.Sort(array); // Because order is not guaranteed.
-            Assert.Equal(new object[] {null, 1, 2}, array);
+            Assert.Equal(new object[] { null, 1, 2 }, array);
             var valuesEnumerated = new List<object>();
             foreach (var value in (IEnumerable)values) // going through non-generic to test delegation to generic
             {
                 valuesEnumerated.Add(value);
             }
-            Assert.Equal(new object[] {1, 2}, valuesEnumerated.OrderBy(k => k));
+            Assert.Equal(new object[] { 1, 2 }, valuesEnumerated.OrderBy(k => k));
             using (var en = values.GetEnumerator())
             {
                 en.MoveNext();

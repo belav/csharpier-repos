@@ -30,24 +30,38 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Fact]
     public void Ctor_ThrowsExceptionsWhenNullArgs()
     {
-        Assert.Throws<ArgumentNullException>(() => new HttpLoggingMiddleware(
-            null,
-            CreateOptionsAccessor(),
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new HttpLoggingMiddleware(
+                    null,
+                    CreateOptionsAccessor(),
+                    LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+                )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new HttpLoggingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
-        null,
-        LoggerFactory.CreateLogger<HttpLoggingMiddleware>()));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new HttpLoggingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+                )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new HttpLoggingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
-        CreateOptionsAccessor(),
-        null));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new HttpLoggingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    CreateOptionsAccessor(),
+                    null
+                )
+        );
     }
 
     [Fact]
@@ -63,7 +77,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 return Task.CompletedTask;
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
@@ -98,7 +113,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 }
             },
             CreateOptionsAccessor(),
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
@@ -139,7 +155,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 }
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
@@ -180,7 +197,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 }
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
@@ -221,7 +239,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 }
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
@@ -262,7 +281,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 }
             },
             CreateOptionsAccessor(),
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -280,12 +300,13 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         options.CurrentValue.RequestHeaders.Clear();
         options.CurrentValue.RequestHeaders.Add("foo");
         var middleware = new HttpLoggingMiddleware(
-             c =>
-             {
-                 return Task.CompletedTask;
-             },
-             options,
-             LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            c =>
+            {
+                return Task.CompletedTask;
+            },
+            options,
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -322,7 +343,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 }
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -359,7 +381,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 Assert.Equal(15, count);
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -396,7 +419,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 Assert.Equal(63000, count);
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -422,7 +446,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 var res = await c.Request.Body.ReadAsync(arr);
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -462,7 +487,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 }
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = contentType;
@@ -502,7 +528,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 Assert.Equal(1000, count);
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = contentType;
@@ -511,7 +538,10 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         await middleware.Invoke(httpContext);
 
         Assert.DoesNotContain(TestSink.Writes, w => w.Message.Contains(expected));
-        Assert.Contains(TestSink.Writes, w => w.Message.Contains("Unrecognized Content-Type for request body."));
+        Assert.Contains(
+            TestSink.Writes,
+            w => w.Message.Contains("Unrecognized Content-Type for request body.")
+        );
     }
 
     [Fact]
@@ -542,7 +572,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 Assert.Equal(2000, count);
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -565,7 +596,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await c.Response.WriteAsync("test");
             },
             CreateOptionsAccessor(),
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -590,7 +622,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await c.Response.WriteAsync("test");
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -615,7 +648,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await c.Response.WriteAsync("test");
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -640,7 +674,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await c.Response.WriteAsync("test");
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -663,7 +698,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 return Task.CompletedTask;
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -687,7 +723,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 return Task.CompletedTask;
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -709,7 +746,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 return c.Response.WriteAsync(expected);
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -731,7 +769,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 return c.Response.WriteAsync(input);
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -761,7 +800,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await letBodyFinish.Task;
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -800,7 +840,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await letBodyFinish.Task;
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -830,13 +871,17 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 return c.Response.WriteAsync(expected);
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
         await middleware.Invoke(httpContext);
 
-        Assert.Contains(TestSink.Writes, w => w.Message.Contains("Unrecognized Content-Type for response body."));
+        Assert.Contains(
+            TestSink.Writes,
+            w => w.Message.Contains("Unrecognized Content-Type for response body.")
+        );
     }
 
     [Fact]
@@ -859,7 +904,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 }
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -867,7 +913,10 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         await middleware.Invoke(httpContext);
 
-        Assert.Contains(TestSink.Writes, w => w.Message.Contains("No Content-Type header for request body."));
+        Assert.Contains(
+            TestSink.Writes,
+            w => w.Message.Contains("No Content-Type header for request body.")
+        );
     }
 
     [Fact]
@@ -901,7 +950,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await letBodyFinish.Task;
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var middlewareTask = middleware.Invoke(httpContext);
 
@@ -945,7 +995,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await letBodyFinish.Task;
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var middlewareTask = middleware.Invoke(httpContext);
 
@@ -962,7 +1013,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     public async Task UpgradeToWebSocketDoesNotLogWhenResponseIsFlushedIfLoggingOptionsAreOtherThanResponseStatusCodeOrResponseHeaders()
     {
         var options = CreateOptionsAccessor();
-        options.CurrentValue.LoggingFields = HttpLoggingFields.All ^ HttpLoggingFields.ResponsePropertiesAndHeaders;
+        options.CurrentValue.LoggingFields =
+            HttpLoggingFields.All ^ HttpLoggingFields.ResponsePropertiesAndHeaders;
 
         var writtenHeaders = new TaskCompletionSource();
         var letBodyFinish = new TaskCompletionSource();
@@ -989,7 +1041,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await letBodyFinish.Task;
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var middlewareTask = middleware.Invoke(httpContext);
 
@@ -1006,7 +1059,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public async Task LogsWrittenOutsideUpgradeWrapperIfUpgradeDoesNotOccur(bool isUpgradableRequest)
+    public async Task LogsWrittenOutsideUpgradeWrapperIfUpgradeDoesNotOccur(
+        bool isUpgradableRequest
+    )
     {
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = HttpLoggingFields.ResponsePropertiesAndHeaders;
@@ -1026,7 +1081,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await c.Response.StartAsync();
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var middlewareTask = middleware.Invoke(httpContext);
 
@@ -1034,7 +1090,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         Assert.Contains(TestSink.Writes, w => w.Message.Contains("Transfer-Encoding: test"));
         Assert.Contains(TestSink.Writes, w => w.Message.Contains("Content-Type: text/plain"));
         Assert.Null(
-            Record.Exception(() => upgradeFeatureMock.Verify(m => m.UpgradeAsync(), Times.Never)));
+            Record.Exception(() => upgradeFeatureMock.Verify(m => m.UpgradeAsync(), Times.Never))
+        );
 
         await middlewareTask;
     }
@@ -1062,7 +1119,10 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         httpContext.Features.Set<IHttpUpgradeFeature>(upgradeFeatureMock.Object);
 
         var writeCount = 0;
-        TestSink.MessageLogged += (context) => { writeCount++; };
+        TestSink.MessageLogged += (context) =>
+        {
+            writeCount++;
+        };
 
         var middleware = new HttpLoggingMiddleware(
             async c =>
@@ -1070,7 +1130,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await c.Features.Get<IHttpUpgradeFeature>().UpgradeAsync();
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         await middleware.Invoke(httpContext);
 
@@ -1080,7 +1141,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Theory]
     [InlineData(HttpLoggingFields.ResponseStatusCode)]
     [InlineData(HttpLoggingFields.ResponseHeaders)]
-    public async Task OriginalUpgradeFeatureIsRestoredBeforeMiddlewareCompletes(HttpLoggingFields loggingFields)
+    public async Task OriginalUpgradeFeatureIsRestoredBeforeMiddlewareCompletes(
+        HttpLoggingFields loggingFields
+    )
     {
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = loggingFields;
@@ -1103,7 +1166,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 await letBodyFinish.Task;
             },
             options,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>());
+            LoggerFactory.CreateLogger<HttpLoggingMiddleware>()
+        );
 
         var middlewareTask = middleware.Invoke(httpContext);
 
@@ -1112,13 +1176,17 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         letBodyFinish.SetResult();
         await middlewareTask;
 
-        Assert.False(httpContext.Features.Get<IHttpUpgradeFeature>() is UpgradeFeatureLoggingDecorator);
+        Assert.False(
+            httpContext.Features.Get<IHttpUpgradeFeature>() is UpgradeFeatureLoggingDecorator
+        );
     }
 
     private IOptionsMonitor<HttpLoggingOptions> CreateOptionsAccessor()
     {
         var options = new HttpLoggingOptions();
-        var optionsAccessor = Mock.Of<IOptionsMonitor<HttpLoggingOptions>>(o => o.CurrentValue == options);
+        var optionsAccessor = Mock.Of<IOptionsMonitor<HttpLoggingOptions>>(
+            o => o.CurrentValue == options
+        );
         return optionsAccessor;
     }
 }

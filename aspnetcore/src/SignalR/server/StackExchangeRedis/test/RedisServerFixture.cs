@@ -30,7 +30,13 @@ public class RedisServerFixture<TStartup> : IAsyncLifetime
         }
 
         var testLog = AssemblyTestLog.ForAssembly(typeof(RedisServerFixture<TStartup>).Assembly);
-        _logToken = testLog.StartTestLog(null, $"{nameof(RedisServerFixture<TStartup>)}_{typeof(TStartup).Name}", out _loggerFactory, LogLevel.Trace, "RedisServerFixture");
+        _logToken = testLog.StartTestLog(
+            null,
+            $"{nameof(RedisServerFixture<TStartup>)}_{typeof(TStartup).Name}",
+            out _loggerFactory,
+            LogLevel.Trace,
+            "RedisServerFixture"
+        );
         _logger = _loggerFactory.CreateLogger<RedisServerFixture<TStartup>>();
 
         Docker.Default.Start(_logger);

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +25,8 @@ namespace Castle.DynamicProxy.Contributors
 
     internal abstract class MembersCollector
     {
-        private const BindingFlags Flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+        private const BindingFlags Flags =
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
         private ILogger logger = NullLogger.Instance;
 
         protected readonly Type type;
@@ -41,7 +42,10 @@ namespace Castle.DynamicProxy.Contributors
             set { logger = value; }
         }
 
-        public virtual void CollectMembersToProxy(IProxyGenerationHook hook, IMembersCollectorSink sink)
+        public virtual void CollectMembersToProxy(
+            IProxyGenerationHook hook,
+            IMembersCollectorSink sink
+        )
         {
             var checkedMethods = new HashSet<MethodInfo>();
 
@@ -104,11 +108,15 @@ namespace Castle.DynamicProxy.Contributors
                 var nonInheritableAttributes = property.GetNonInheritableAttributes();
                 var arguments = property.GetIndexParameters();
 
-                sink.Add(new MetaProperty(property,
-                                          getter,
-                                          setter,
-                                          nonInheritableAttributes.Select(a => a.Builder),
-                                          arguments.Select(a => a.ParameterType).ToArray()));
+                sink.Add(
+                    new MetaProperty(
+                        property,
+                        getter,
+                        setter,
+                        nonInheritableAttributes.Select(a => a.Builder),
+                        arguments.Select(a => a.ParameterType).ToArray()
+                    )
+                );
             }
 
             void AddEvent(EventInfo @event)
@@ -153,7 +161,11 @@ namespace Castle.DynamicProxy.Contributors
             }
         }
 
-        protected abstract MetaMethod GetMethodToGenerate(MethodInfo method, IProxyGenerationHook hook, bool isStandalone);
+        protected abstract MetaMethod GetMethodToGenerate(
+            MethodInfo method,
+            IProxyGenerationHook hook,
+            bool isStandalone
+        );
 
         /// <summary>
         ///   Performs some basic screening and invokes the <see cref = "IProxyGenerationHook" />
@@ -161,7 +173,8 @@ namespace Castle.DynamicProxy.Contributors
         /// </summary>
         protected bool AcceptMethod(MethodInfo method, bool onlyVirtuals, IProxyGenerationHook hook)
         {
-            return AcceptMethodPreScreen(method, onlyVirtuals, hook) && hook.ShouldInterceptMethod(type, method);
+            return AcceptMethodPreScreen(method, onlyVirtuals, hook)
+                && hook.ShouldInterceptMethod(type, method);
         }
 
         /// <summary>
@@ -171,7 +184,11 @@ namespace Castle.DynamicProxy.Contributors
         ///   The <paramref name="hook"/> will get invoked for non-interceptable method notification only;
         ///   it does not get asked whether or not to intercept the <paramref name="method"/>.
         /// </remarks>
-        protected bool AcceptMethodPreScreen(MethodInfo method, bool onlyVirtuals, IProxyGenerationHook hook)
+        protected bool AcceptMethodPreScreen(
+            MethodInfo method,
+            bool onlyVirtuals,
+            IProxyGenerationHook hook
+        )
         {
             if (IsInternalAndNotVisibleToDynamicProxy(method))
             {
@@ -181,12 +198,17 @@ namespace Castle.DynamicProxy.Contributors
             var isOverridable = method.IsVirtual && !method.IsFinal;
             if (onlyVirtuals && !isOverridable)
             {
-                if (method.DeclaringType != typeof(MarshalByRefObject) &&
-                    method.IsGetType() == false &&
-                    method.IsMemberwiseClone() == false)
+                if (
+                    method.DeclaringType != typeof(MarshalByRefObject)
+                    && method.IsGetType() == false
+                    && method.IsMemberwiseClone() == false
+                )
                 {
-                    Logger.DebugFormat("Excluded non-overridable method {0} on {1} because it cannot be intercepted.", method.Name,
-                                       method.DeclaringType.FullName);
+                    Logger.DebugFormat(
+                        "Excluded non-overridable method {0} on {1} because it cannot be intercepted.",
+                        method.Name,
+                        method.DeclaringType.FullName
+                    );
                     hook.NonProxyableMemberNotification(type, method);
                 }
                 return false;
@@ -195,13 +217,24 @@ namespace Castle.DynamicProxy.Contributors
             // we can never intercept a sealed (final) method
             if (method.IsFinal)
             {
-                Logger.DebugFormat("Excluded sealed method {0} on {1} because it cannot be intercepted.", method.Name,
-                                   method.DeclaringType.FullName);
+                Logger.DebugFormat(
+                    "Excluded sealed method {0} on {1} because it cannot be intercepted.",
+                    method.Name,
+                    method.DeclaringType.FullName
+                );
                 return false;
             }
 
             //can only proxy methods that are public or protected (or internals that have already been checked above)
-            if ((method.IsPublic || method.IsFamily || method.IsAssembly || method.IsFamilyOrAssembly || method.IsFamilyAndAssembly) == false)
+            if (
+                (
+                    method.IsPublic
+                    || method.IsFamily
+                    || method.IsAssembly
+                    || method.IsFamilyOrAssembly
+                    || method.IsFamilyAndAssembly
+                ) == false
+            )
             {
                 return false;
             }
@@ -221,8 +254,9 @@ namespace Castle.DynamicProxy.Contributors
 
         private static bool IsInternalAndNotVisibleToDynamicProxy(MethodInfo method)
         {
-            return ProxyUtil.IsInternal(method) &&
-                   ProxyUtil.AreInternalsVisibleToDynamicProxy(method.DeclaringType.Assembly) == false;
+            return ProxyUtil.IsInternal(method)
+                && ProxyUtil.AreInternalsVisibleToDynamicProxy(method.DeclaringType.Assembly)
+                    == false;
         }
     }
 }

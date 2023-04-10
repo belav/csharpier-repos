@@ -20,7 +20,6 @@ namespace POS_Server.Models
         public Nullable<long> createUserId { get; set; }
         public Nullable<long> updateUserId { get; set; }
 
-
         public Boolean canDelete { get; set; }
         public string sectionName { get; set; }
         public string branchName { get; set; }

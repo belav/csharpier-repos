@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,41 +32,42 @@ using System;
 using System.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
-	class A { }
-	class B : A { }
+namespace MonoTests.System.Configuration
+{
+    class A { }
 
-	[TestFixture]
-	public class SubclassTypeValidatorTest
-	{
-		[Test]
-		public void CanValidate ()
-		{
-			SubclassTypeValidator v = new SubclassTypeValidator (typeof (A));
+    class B : A { }
 
-			Assert.IsFalse (v.CanValidate (typeof (string)));
-			Assert.IsFalse (v.CanValidate (typeof (int)));
-			Assert.IsFalse (v.CanValidate (typeof (object)));
-			Assert.IsTrue (v.CanValidate (typeof (Type)));
-		}
+    [TestFixture]
+    public class SubclassTypeValidatorTest
+    {
+        [Test]
+        public void CanValidate()
+        {
+            SubclassTypeValidator v = new SubclassTypeValidator(typeof(A));
 
-		[Test]
-		public void Success ()
-		{
-			SubclassTypeValidator v = new SubclassTypeValidator (typeof (A));
+            Assert.IsFalse(v.CanValidate(typeof(string)));
+            Assert.IsFalse(v.CanValidate(typeof(int)));
+            Assert.IsFalse(v.CanValidate(typeof(object)));
+            Assert.IsTrue(v.CanValidate(typeof(Type)));
+        }
 
-			v.Validate (typeof (B));
-			v.Validate (typeof (A));
-		}
+        [Test]
+        public void Success()
+        {
+            SubclassTypeValidator v = new SubclassTypeValidator(typeof(A));
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Failure ()
-		{
-			SubclassTypeValidator v = new SubclassTypeValidator (typeof (B));
+            v.Validate(typeof(B));
+            v.Validate(typeof(A));
+        }
 
-			v.Validate (typeof (A));
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Failure()
+        {
+            SubclassTypeValidator v = new SubclassTypeValidator(typeof(B));
+
+            v.Validate(typeof(A));
+        }
+    }
 }
-

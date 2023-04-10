@@ -1,25 +1,29 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // HMACSHA256.cs
 //
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     [System.Runtime.InteropServices.ComVisible(true)]
-    public class HMACSHA256 : HMAC {
+    public class HMACSHA256 : HMAC
+    {
         //
         // public constructors
         //
 
-        public HMACSHA256 () : this (Utils.GenerateRandom(64)) {}
+        public HMACSHA256()
+            : this(Utils.GenerateRandom(64)) { }
 
-        public HMACSHA256 (byte[] key) {
+        public HMACSHA256(byte[] key)
+        {
             m_hashName = "SHA256";
 
 #if FEATURE_CRYPTO && !FULL_AOT_RUNTIME

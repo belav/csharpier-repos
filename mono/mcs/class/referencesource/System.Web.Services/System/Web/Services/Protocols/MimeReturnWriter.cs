@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="MimeReturnWriter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System.IO;
     using System;
     using System.Xml.Serialization;
@@ -12,8 +13,12 @@ namespace System.Web.Services.Protocols {
     using System.Collections;
     using System.Web.Services;
 
-    internal abstract class MimeReturnWriter : MimeFormatter {
-        internal abstract void Write(HttpResponse response, Stream outputStream, object returnValue);
+    internal abstract class MimeReturnWriter : MimeFormatter
+    {
+        internal abstract void Write(
+            HttpResponse response,
+            Stream outputStream,
+            object returnValue
+        );
     }
-
 }

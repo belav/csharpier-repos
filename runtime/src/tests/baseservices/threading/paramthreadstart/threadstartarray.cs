@@ -13,9 +13,9 @@ class ThreadStartArray
     {
         // Abandon this mutex
         Mutex[] mArr = new Mutex[64];
-        for(int i=0;i<mArr.Length;i++)
+        for (int i = 0; i < mArr.Length; i++)
             mArr[i] = new Mutex(false);
-        
+
         ThreadStartArray tsa = new ThreadStartArray();
         return tsa.Run(mArr);
     }
@@ -26,17 +26,17 @@ class ThreadStartArray
         Thread t = new Thread(new ParameterizedThreadStart(ThreadWorker));
         t.Start(mPass);
         are.WaitOne();
-        
+
         // Check to make sure the array is abandoned
         try
         {
             WaitHandle.WaitAny(m, 10000);
         }
-        catch(AbandonedMutexException)
+        catch (AbandonedMutexException)
         {
             bRet = true;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Unexpected exception thrown: " + ex.ToString());
         }
@@ -47,7 +47,7 @@ class ThreadStartArray
 
     private void ThreadWorker(Object o)
     {
-        for(int i = 0;i<((Mutex[])o).Length;i++)
+        for (int i = 0; i < ((Mutex[])o).Length; i++)
             ((Mutex[])o)[i].WaitOne();
 
         m = (Mutex[])o;

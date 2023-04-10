@@ -4,8 +4,8 @@
 
 public sealed class Class2 : Class1
 {
-	protected internal override string GetString ()
-	{
-		return "Hello2";
-	}
+    protected internal override string GetString()
+    {
+        return "Hello2";
+    }
 }

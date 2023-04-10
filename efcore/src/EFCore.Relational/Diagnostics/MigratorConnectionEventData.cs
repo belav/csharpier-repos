@@ -31,7 +31,8 @@ public class MigratorConnectionEventData : MigratorEventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IMigrator migrator,
         DbConnection connection,
-        Guid connectionId)
+        Guid connectionId
+    )
         : base(eventDefinition, messageGenerator, migrator)
     {
         Connection = connection;

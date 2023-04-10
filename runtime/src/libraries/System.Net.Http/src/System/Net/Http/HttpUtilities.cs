@@ -13,7 +13,8 @@ namespace System.Net.Http
 
         internal static Version DefaultResponseVersion => HttpVersion.Version11;
 
-        internal static HttpVersionPolicy DefaultVersionPolicy => HttpVersionPolicy.RequestVersionOrLower;
+        internal static HttpVersionPolicy DefaultVersionPolicy =>
+            HttpVersionPolicy.RequestVersionOrLower;
 
         internal static bool IsHttpUri(Uri uri)
         {
@@ -22,11 +23,11 @@ namespace System.Net.Http
         }
 
         internal static bool IsSupportedScheme(string scheme) =>
-            IsSupportedNonSecureScheme(scheme) ||
-            IsSupportedSecureScheme(scheme);
+            IsSupportedNonSecureScheme(scheme) || IsSupportedSecureScheme(scheme);
 
         internal static bool IsSupportedSecureScheme(string scheme) =>
-            string.Equals(scheme, "https", StringComparison.OrdinalIgnoreCase) || IsSecureWebSocketScheme(scheme);
+            string.Equals(scheme, "https", StringComparison.OrdinalIgnoreCase)
+            || IsSecureWebSocketScheme(scheme);
 
         internal static bool IsNonSecureWebSocketScheme(string scheme) =>
             string.Equals(scheme, "ws", StringComparison.OrdinalIgnoreCase);
@@ -39,10 +40,19 @@ namespace System.Net.Http
         // Since we're not doing any CPU and/or I/O intensive operations, continue on the same thread.
         // This results in better performance since the continuation task doesn't get scheduled by the
         // scheduler and there are no context switches required.
-        internal static Task ContinueWithStandard<T>(this Task<T> task, object state, Action<Task<T>, object?> continuation)
+        internal static Task ContinueWithStandard<T>(
+            this Task<T> task,
+            object state,
+            Action<Task<T>, object?> continuation
+        )
         {
-            return task.ContinueWith(continuation, state, CancellationToken.None,
-                TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            return task.ContinueWith(
+                continuation,
+                state,
+                CancellationToken.None,
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
         }
     }
 }

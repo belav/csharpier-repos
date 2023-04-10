@@ -31,7 +31,10 @@ namespace System.IO.Pipes
 #endif
 
         // Using RunContinuationsAsynchronously for compat reasons (old API used ThreadPool.QueueUserWorkItem for continuations)
-        protected PipeCompletionSource(ThreadPoolBoundHandle handle, ReadOnlyMemory<byte> bufferToPin)
+        protected PipeCompletionSource(
+            ThreadPoolBoundHandle handle,
+            ReadOnlyMemory<byte> bufferToPin
+        )
             : base(TaskCreationOptions.RunContinuationsAsynchronously)
         {
             Debug.Assert(handle != null, "handle is null");
@@ -40,13 +43,19 @@ namespace System.IO.Pipes
             _state = NoResult;
 
             _pinnedMemory = bufferToPin.Pin();
-            _overlapped = _threadPoolBinding.AllocateNativeOverlapped((errorCode, numBytes, pOverlapped) =>
-            {
-                var completionSource = (PipeCompletionSource<TResult>)ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped)!;
-                Debug.Assert(completionSource.Overlapped == pOverlapped);
+            _overlapped = _threadPoolBinding.AllocateNativeOverlapped(
+                (errorCode, numBytes, pOverlapped) =>
+                {
+                    var completionSource =
+                        (PipeCompletionSource<TResult>)
+                            ThreadPoolBoundHandle.GetNativeOverlappedState(pOverlapped)!;
+                    Debug.Assert(completionSource.Overlapped == pOverlapped);
 
-                completionSource.AsyncCallback(errorCode, numBytes);
-            }, this, null);
+                    completionSource.AsyncCallback(errorCode, numBytes);
+                },
+                this,
+                null
+            );
         }
 
         internal NativeOverlapped* Overlapped
@@ -65,11 +74,18 @@ namespace System.IO.Pipes
             if (cancellationToken.CanBeCanceled && Overlapped != null)
             {
                 // Register the cancellation only if the IO hasn't completed
-                int state = Interlocked.CompareExchange(ref _state, RegisteringCancellation, NoResult);
+                int state = Interlocked.CompareExchange(
+                    ref _state,
+                    RegisteringCancellation,
+                    NoResult
+                );
                 if (state == NoResult)
                 {
                     // Register the cancellation
-                    _cancellationRegistration = cancellationToken.UnsafeRegister(thisRef => ((PipeCompletionSource<TResult>)thisRef!).Cancel(), this);
+                    _cancellationRegistration = cancellationToken.UnsafeRegister(
+                        thisRef => ((PipeCompletionSource<TResult>)thisRef!).Cancel(),
+                        this
+                    );
 
                     // Grab the state for case if IO completed while we were setting the registration.
                     state = Interlocked.Exchange(ref _state, NoResult);
@@ -156,7 +172,10 @@ namespace System.IO.Pipes
 
         private void CompleteCallback(int resultState)
         {
-            Debug.Assert(resultState == ResultSuccess || resultState == ResultError, "Unexpected result state " + resultState);
+            Debug.Assert(
+                resultState == ResultSuccess || resultState == ResultError,
+                "Unexpected result state " + resultState
+            );
             CancellationToken cancellationToken = _cancellationRegistration.Token;
 
             ReleaseResources();
@@ -165,7 +184,10 @@ namespace System.IO.Pipes
             {
                 if (_errorCode == Interop.Errors.ERROR_OPERATION_ABORTED)
                 {
-                    if (cancellationToken.CanBeCanceled && !cancellationToken.IsCancellationRequested)
+                    if (
+                        cancellationToken.CanBeCanceled
+                        && !cancellationToken.IsCancellationRequested
+                    )
                     {
                         HandleUnexpectedCancellation();
                     }

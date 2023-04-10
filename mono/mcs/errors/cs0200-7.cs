@@ -3,12 +3,12 @@
 
 using System;
 
- public class MyClass
- {
-	Type Type { get; }
+public class MyClass
+{
+    Type Type { get; }
 
-	public void Test ()
-	{
-		Type = typeof (string);
-	}
+    public void Test()
+    {
+        Type = typeof(string);
+    }
 }

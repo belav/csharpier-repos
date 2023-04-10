@@ -37,7 +37,11 @@ public interface IConventionStoredProcedureBuilder : IConventionAnnotatableBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureBuilder? HasName(string? name, string? schema, bool fromDataAnnotation = false);
+    IConventionStoredProcedureBuilder? HasName(
+        string? name,
+        string? schema,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given name can be set for the stored procedure.
@@ -75,7 +79,10 @@ public interface IConventionStoredProcedureBuilder : IConventionAnnotatableBuild
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureParameterBuilder? HasParameter(string propertyName, bool fromDataAnnotation = false);
+    IConventionStoredProcedureParameterBuilder? HasParameter(
+        string propertyName,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether a parameter mapped to the given property can be used for stored procedure.
@@ -94,7 +101,10 @@ public interface IConventionStoredProcedureBuilder : IConventionAnnotatableBuild
     /// <returns>
     ///     The builder instance if the configuration was applied, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureParameterBuilder? HasOriginalValueParameter(string propertyName, bool fromDataAnnotation = false);
+    IConventionStoredProcedureParameterBuilder? HasOriginalValueParameter(
+        string propertyName,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether a parameter holds the original value of the mapped property
@@ -112,7 +122,9 @@ public interface IConventionStoredProcedureBuilder : IConventionAnnotatableBuild
     /// <returns>
     ///     The builder instance if the configuration was applied, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureParameterBuilder? HasRowsAffectedParameter(bool fromDataAnnotation = false);
+    IConventionStoredProcedureParameterBuilder? HasRowsAffectedParameter(
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether a parameter that returns the rows affected can be used for stored procedure.
@@ -129,7 +141,10 @@ public interface IConventionStoredProcedureBuilder : IConventionAnnotatableBuild
     /// <returns>
     ///     The builder instance if the configuration was applied, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureResultColumnBuilder? HasResultColumn(string propertyName, bool fromDataAnnotation = false);
+    IConventionStoredProcedureResultColumnBuilder? HasResultColumn(
+        string propertyName,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether a column of the result mapped to the given property can be used for stored procedure.
@@ -146,7 +161,9 @@ public interface IConventionStoredProcedureBuilder : IConventionAnnotatableBuild
     /// <returns>
     ///     The builder instance if the configuration was applied, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureResultColumnBuilder? HasRowsAffectedResultColumn(bool fromDataAnnotation = false);
+    IConventionStoredProcedureResultColumnBuilder? HasRowsAffectedResultColumn(
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether a column that contains the rows affected can be used for stored procedure.

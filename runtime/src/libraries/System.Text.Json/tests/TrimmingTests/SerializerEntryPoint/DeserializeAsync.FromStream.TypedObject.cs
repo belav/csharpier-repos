@@ -31,7 +31,9 @@ namespace SerializerTrimmingTest
             json = @"{""X"":1,""Y"":2}";
             using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
             {
-                var obj = (MyClassWithParameterizedCtor)(await JsonSerializer.DeserializeAsync<MyClassWithParameterizedCtor>(stream));
+                var obj = (MyClassWithParameterizedCtor)(
+                    await JsonSerializer.DeserializeAsync<MyClassWithParameterizedCtor>(stream)
+                );
                 if (obj == null)
                 {
                     return -1;

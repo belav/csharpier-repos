@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this Document document,
             bool explicitFormat,
             IIndentationManagerService indentationManagerService,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
@@ -25,11 +26,18 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             if (snapshot != null)
             {
-                indentationManagerService.GetIndentation(snapshot.TextBuffer, explicitFormat, out var convertTabsToSpaces, out var tabSize, out var indentSize);
+                indentationManagerService.GetIndentation(
+                    snapshot.TextBuffer,
+                    explicitFormat,
+                    out var convertTabsToSpaces,
+                    out var tabSize,
+                    out var indentSize
+                );
 
-                options = options.WithChangedOption(FormattingOptions.UseTabs, !convertTabsToSpaces)
-                                 .WithChangedOption(FormattingOptions.IndentationSize, indentSize)
-                                 .WithChangedOption(FormattingOptions.TabSize, tabSize);
+                options = options
+                    .WithChangedOption(FormattingOptions.UseTabs, !convertTabsToSpaces)
+                    .WithChangedOption(FormattingOptions.IndentationSize, indentSize)
+                    .WithChangedOption(FormattingOptions.TabSize, tabSize);
             }
 
             return options;

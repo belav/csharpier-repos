@@ -11,8 +11,9 @@ namespace DbLinq.Data.Linq.Sugar.Expressions
 #endif
     class StartIndexOffsetExpression : MutableExpression
     {
-        public const ExpressionType ExpressionType = (ExpressionType)CustomExpressionType.StartIndexOffset;
-        public bool StartsAtOne{get; private set;}
+        public const ExpressionType ExpressionType = (ExpressionType)
+            CustomExpressionType.StartIndexOffset;
+        public bool StartsAtOne { get; private set; }
         public Expression InnerExpression { get; private set; }
 
         public StartIndexOffsetExpression(bool startsAtOne, Expression startExpression)
@@ -21,12 +22,10 @@ namespace DbLinq.Data.Linq.Sugar.Expressions
             this.InnerExpression = startExpression;
             this.StartsAtOne = startsAtOne;
         }
+
         public override IEnumerable<Expression> Operands
         {
-            get
-            {
-                return new Expression[] { this.InnerExpression };
-            }
+            get { return new Expression[] { this.InnerExpression }; }
         }
 
         public override Expression Mutate(IList<Expression> newOperands)

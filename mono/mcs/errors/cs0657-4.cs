@@ -4,7 +4,7 @@
 
 using System;
 
-[param: CLSCompliant (false)]
+[param: CLSCompliant(false)]
 public enum E
 {
     item

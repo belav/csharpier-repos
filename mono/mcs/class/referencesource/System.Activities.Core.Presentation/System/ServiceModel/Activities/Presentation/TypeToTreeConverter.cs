@@ -17,7 +17,12 @@ namespace System.ServiceModel.Activities.Presentation
 
     sealed class TypeToTreeConverter : IValueConverter
     {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        object IValueConverter.Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             Type type = null;
             if (value is ModelItem)
@@ -38,9 +43,9 @@ namespace System.ServiceModel.Activities.Presentation
             }
 
             //1) Dead-ends (not expand any more)
-            //  a. CLR built-in types 
-            //  b. Byte array, DateTime, TimeSpan, GUID, Uri, XmlQualifiedName, XmlElement and XmlNode array [This includes XElement and XNode array from .NET 3.5] 
-            //  c. Enums 
+            //  a. CLR built-in types
+            //  b. Byte array, DateTime, TimeSpan, GUID, Uri, XmlQualifiedName, XmlElement and XmlNode array [This includes XElement and XNode array from .NET 3.5]
+            //  c. Enums
             //  d. Arrays and Collection classes including List<T>, Dictionary<K,V> and Hashtable(Anything that implements IEnumerable or IDictionary or is an array is treated as a collection)
             //  e. Types marked with [CollectionDataContract] attribute
             //2) Show nothing (Xpath generator cannot generate XPath according to member info), but user should be able to manually input query string
@@ -70,32 +75,61 @@ namespace System.ServiceModel.Activities.Presentation
                 }
                 else if (type.GetCustomAttributes(typeof(DataContractAttribute), false).Length > 0)
                 {
-                    result = type
-                        .GetMembers(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                        .Where(member => member.GetCustomAttributes(typeof(DataMemberAttribute), false).Length > 0)
+                    result = type.GetMembers(
+                            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                        )
+                        .Where(
+                            member =>
+                                member
+                                    .GetCustomAttributes(typeof(DataMemberAttribute), false)
+                                    .Length > 0
+                        )
                         .OrderBy(member => member.Name);
                 }
                 else if (type.GetCustomAttributes(typeof(SerializableAttribute), false).Length > 0)
                 {
-                    result = type
-                        .GetMembers(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                        .Where(member => member.MemberType == MemberTypes.Field && member.GetCustomAttributes(typeof(NonSerializedAttribute), false).Length == 0)
+                    result = type.GetMembers(
+                            BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+                        )
+                        .Where(
+                            member =>
+                                member.MemberType == MemberTypes.Field
+                                && member
+                                    .GetCustomAttributes(typeof(NonSerializedAttribute), false)
+                                    .Length == 0
+                        )
                         .OrderBy(member => member.Name);
                 }
                 else if (type.GetConstructor(new Type[0] { }) != null)
                 {
-                    result = type
-                        .GetMembers(BindingFlags.Instance | BindingFlags.Public)
-                        .Where(member => (member.MemberType == MemberTypes.Field || member.MemberType == MemberTypes.Property) &&
-                        (member.GetCustomAttributes(typeof(IgnoreDataMemberAttribute), false).Length == 0))
+                    result = type.GetMembers(BindingFlags.Instance | BindingFlags.Public)
+                        .Where(
+                            member =>
+                                (
+                                    member.MemberType == MemberTypes.Field
+                                    || member.MemberType == MemberTypes.Property
+                                )
+                                && (
+                                    member
+                                        .GetCustomAttributes(
+                                            typeof(IgnoreDataMemberAttribute),
+                                            false
+                                        )
+                                        .Length == 0
+                                )
+                        )
                         .OrderBy(member => member.Name);
                 }
             }
             return result;
         }
 
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        object IValueConverter.ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotSupportedException());
         }

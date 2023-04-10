@@ -5,11 +5,11 @@ using System;
 
 public class Test
 {
-	public static void Main ()
-	{
-		Action<int> a = (i) => {};
+    public static void Main()
+    {
+        Action<int> a = (i) => { };
 
-		dynamic d = 1;
-		a (d, true);
-	}
+        dynamic d = 1;
+        a(d, true);
+    }
 }

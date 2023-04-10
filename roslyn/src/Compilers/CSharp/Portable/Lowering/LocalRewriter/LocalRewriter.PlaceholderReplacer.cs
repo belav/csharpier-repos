@@ -9,16 +9,22 @@ namespace Microsoft.CodeAnalysis.CSharp;
 
 internal sealed partial class LocalRewriter
 {
-    private sealed class PlaceholderReplacer : BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+    private sealed class PlaceholderReplacer
+        : BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
     {
         private readonly Dictionary<BoundEarlyValuePlaceholderBase, BoundExpression> _placeholders;
 
-        private PlaceholderReplacer(Dictionary<BoundEarlyValuePlaceholderBase, BoundExpression> placeholders)
+        private PlaceholderReplacer(
+            Dictionary<BoundEarlyValuePlaceholderBase, BoundExpression> placeholders
+        )
         {
             _placeholders = placeholders;
         }
 
-        public static BoundExpression Replace(Dictionary<BoundEarlyValuePlaceholderBase, BoundExpression> placeholders, BoundExpression expr)
+        public static BoundExpression Replace(
+            Dictionary<BoundEarlyValuePlaceholderBase, BoundExpression> placeholders,
+            BoundExpression expr
+        )
         {
             var result = new PlaceholderReplacer(placeholders).Visit(expr);
             Debug.Assert(result is not null);
@@ -32,22 +38,30 @@ internal sealed partial class LocalRewriter
             return value;
         }
 
-        public override BoundNode VisitListPatternReceiverPlaceholder(BoundListPatternReceiverPlaceholder node)
+        public override BoundNode VisitListPatternReceiverPlaceholder(
+            BoundListPatternReceiverPlaceholder node
+        )
         {
             return ReplacePlaceholder(node);
         }
 
-        public override BoundNode VisitListPatternIndexPlaceholder(BoundListPatternIndexPlaceholder node)
+        public override BoundNode VisitListPatternIndexPlaceholder(
+            BoundListPatternIndexPlaceholder node
+        )
         {
             return ReplacePlaceholder(node);
         }
 
-        public override BoundNode VisitSlicePatternReceiverPlaceholder(BoundSlicePatternReceiverPlaceholder node)
+        public override BoundNode VisitSlicePatternReceiverPlaceholder(
+            BoundSlicePatternReceiverPlaceholder node
+        )
         {
             return ReplacePlaceholder(node);
         }
 
-        public override BoundNode VisitSlicePatternRangePlaceholder(BoundSlicePatternRangePlaceholder node)
+        public override BoundNode VisitSlicePatternRangePlaceholder(
+            BoundSlicePatternRangePlaceholder node
+        )
         {
             return ReplacePlaceholder(node);
         }

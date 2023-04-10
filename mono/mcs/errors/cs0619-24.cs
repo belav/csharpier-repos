@@ -2,22 +2,21 @@
 // Line: 19
 // Compiler options: -unsafe
 
-class Box {
-        public Helper o;
+class Box
+{
+    public Helper o;
 }
 
 [System.Obsolete("", true)]
-unsafe struct Obsolete {
-}
+unsafe struct Obsolete { }
 
-unsafe struct Helper {}
+unsafe struct Helper { }
 
-class MainClass {
-        unsafe public static void Main ()
-        {
-                Box b = new Box ();
-                fixed (Obsolete* p = &b.o)
-                {
-                }
-        }
+class MainClass
+{
+    unsafe public static void Main()
+    {
+        Box b = new Box();
+        fixed (Obsolete* p = &b.o) { }
+    }
 }

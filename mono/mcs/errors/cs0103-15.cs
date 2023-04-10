@@ -3,8 +3,8 @@
 
 class X
 {
-	public static void Main ()
-	{
-		var r = nameof (List<int2>);
-	}
+    public static void Main()
+    {
+        var r = nameof(List<int2>);
+    }
 }

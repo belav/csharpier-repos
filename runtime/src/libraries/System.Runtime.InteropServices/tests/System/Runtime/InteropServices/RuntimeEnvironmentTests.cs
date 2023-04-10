@@ -24,7 +24,9 @@ namespace System.Runtime.InteropServices
         public void SystemConfigurationFile_Get_ThrowsPlatformNotSupportedException()
         {
 #pragma warning disable 618 // SystemConfigurationFile is marked as Obsolete
-            Assert.Throws<PlatformNotSupportedException>(() => RuntimeEnvironment.SystemConfigurationFile);
+            Assert.Throws<PlatformNotSupportedException>(
+                () => RuntimeEnvironment.SystemConfigurationFile
+            );
 #pragma warning restore 618
         }
 
@@ -32,7 +34,9 @@ namespace System.Runtime.InteropServices
         public void GetRuntimeInterfaceAsObject_Invoke_ThrowsPlatformNotSupportedException()
         {
 #pragma warning disable 618 // GetRuntimeInterfaceAsObject is marked as Obsolete
-            Assert.Throws<PlatformNotSupportedException>(() => RuntimeEnvironment.GetRuntimeInterfaceAsObject(Guid.Empty, Guid.Empty));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => RuntimeEnvironment.GetRuntimeInterfaceAsObject(Guid.Empty, Guid.Empty)
+            );
 #pragma warning restore 618
         }
 
@@ -40,14 +44,18 @@ namespace System.Runtime.InteropServices
         public void GetRuntimeInterfaceAsIntPtr_Invoke_ThrowsPlatformNotSupportedException()
         {
 #pragma warning disable 618 // GetRuntimeInterfaceAsIntPtr is marked as Obsolete
-            Assert.Throws<PlatformNotSupportedException>(() => RuntimeEnvironment.GetRuntimeInterfaceAsIntPtr(Guid.Empty, Guid.Empty));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => RuntimeEnvironment.GetRuntimeInterfaceAsIntPtr(Guid.Empty, Guid.Empty)
+            );
 #pragma warning restore 618
         }
 
         [Fact]
         public void FromGlobalAccessCache_nNvoke_ReturnsFalse()
         {
-            Assert.False(RuntimeEnvironment.FromGlobalAccessCache(typeof(RuntimeEnvironmentTests).Assembly));
+            Assert.False(
+                RuntimeEnvironment.FromGlobalAccessCache(typeof(RuntimeEnvironmentTests).Assembly)
+            );
             Assert.False(RuntimeEnvironment.FromGlobalAccessCache(null));
         }
     }

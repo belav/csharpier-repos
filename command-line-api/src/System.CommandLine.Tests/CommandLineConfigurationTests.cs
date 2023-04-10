@@ -15,22 +15,17 @@ public class CommandLineConfigurationTests
         var option2 = new Option<string>("-y");
         option2.AddAlias("--dupe");
 
-        var command = new RootCommand
-        {
-            option1,
-            option2
-        };
+        var command = new RootCommand { option1, option2 };
 
         var config = new CommandLineConfiguration(command);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CommandLineConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Duplicate alias '--dupe' found on command '{command.Name}'.");
+        validate
+            .Should()
+            .Throw<CommandLineConfigurationException>()
+            .Which.Message.Should()
+            .Be($"Duplicate alias '--dupe' found on command '{command.Name}'.");
     }
 
     [Fact]
@@ -42,23 +37,18 @@ public class CommandLineConfigurationTests
 
         var command = new RootCommand
         {
-            new Command("subcommand")
-            {
-                option1,
-                option2
-            }
+            new Command("subcommand") { option1, option2 }
         };
 
         var config = new CommandLineConfiguration(command);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CommandLineConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be("Duplicate alias '--dupe' found on command 'subcommand'.");
+        validate
+            .Should()
+            .Throw<CommandLineConfigurationException>()
+            .Which.Message.Should()
+            .Be("Duplicate alias '--dupe' found on command 'subcommand'.");
     }
 
     [Fact]
@@ -68,22 +58,17 @@ public class CommandLineConfigurationTests
         var command2 = new Command("not-a-dupe");
         command2.AddAlias("dupe");
 
-        var rootCommand = new RootCommand
-        {
-            command1,
-            command2
-        };
+        var rootCommand = new RootCommand { command1, command2 };
 
         var config = new CommandLineConfiguration(rootCommand);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CommandLineConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Duplicate alias 'dupe' found on command '{rootCommand.Name}'.");
+        validate
+            .Should()
+            .Throw<CommandLineConfigurationException>()
+            .Which.Message.Should()
+            .Be($"Duplicate alias 'dupe' found on command '{rootCommand.Name}'.");
     }
 
     [Fact]
@@ -95,23 +80,18 @@ public class CommandLineConfigurationTests
 
         var command = new RootCommand
         {
-            new Command("subcommand")
-            {
-                command1,
-                command2
-            }
+            new Command("subcommand") { command1, command2 }
         };
 
         var config = new CommandLineConfiguration(command);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CommandLineConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be("Duplicate alias 'dupe' found on command 'subcommand'.");
+        validate
+            .Should()
+            .Throw<CommandLineConfigurationException>()
+            .Which.Message.Should()
+            .Be("Duplicate alias 'dupe' found on command 'subcommand'.");
     }
 
     [Fact]
@@ -121,22 +101,17 @@ public class CommandLineConfigurationTests
         var command = new Command("not-a-dupe");
         command.AddAlias("dupe");
 
-        var rootCommand = new RootCommand
-        {
-            option,
-            command
-        };
+        var rootCommand = new RootCommand { option, command };
 
         var config = new CommandLineConfiguration(rootCommand);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CommandLineConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Duplicate alias 'dupe' found on command '{rootCommand.Name}'.");
+        validate
+            .Should()
+            .Throw<CommandLineConfigurationException>()
+            .Which.Message.Should()
+            .Be($"Duplicate alias 'dupe' found on command '{rootCommand.Name}'.");
     }
 
     [Fact]
@@ -148,23 +123,18 @@ public class CommandLineConfigurationTests
 
         var rootCommand = new RootCommand
         {
-            new Command("subcommand")
-            {
-                option,
-                command
-            }
+            new Command("subcommand") { option, command }
         };
 
         var config = new CommandLineConfiguration(rootCommand);
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CommandLineConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be("Duplicate alias 'dupe' found on command 'subcommand'.");
+        validate
+            .Should()
+            .Throw<CommandLineConfigurationException>()
+            .Which.Message.Should()
+            .Be("Duplicate alias 'dupe' found on command 'subcommand'.");
     }
 
     [Fact]
@@ -182,12 +152,11 @@ public class CommandLineConfigurationTests
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CommandLineConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Duplicate alias '--dupe' found on command '{command.Name}'.");
+        validate
+            .Should()
+            .Throw<CommandLineConfigurationException>()
+            .Which.Message.Should()
+            .Be($"Duplicate alias '--dupe' found on command '{command.Name}'.");
     }
 
     [Fact]
@@ -195,10 +164,7 @@ public class CommandLineConfigurationTests
     {
         var rootCommand = new RootCommand
         {
-            new Command("subcommand")
-            {
-                new Option<string>("--dupe")
-            }
+            new Command("subcommand") { new Option<string>("--dupe") }
         };
         rootCommand.AddGlobalOption(new Option<string>("--dupe"));
 
@@ -212,13 +178,7 @@ public class CommandLineConfigurationTests
     [Fact]
     public void ThrowIfInvalid_does_not_throw_if_global_option_alias_is_the_same_as_subcommand_alias()
     {
-        var rootCommand = new RootCommand
-        {
-            new Command("subcommand")
-            {
-                new Command("--dupe")
-            }
-        };
+        var rootCommand = new RootCommand { new Command("subcommand") { new Command("--dupe") } };
         rootCommand.AddGlobalOption(new Option<string>("--dupe"));
 
         var config = new CommandLineConfiguration(rootCommand);
@@ -238,12 +198,11 @@ public class CommandLineConfigurationTests
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CommandLineConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Cycle detected in command tree. Command '{command.Name}' is its own ancestor.");
+        validate
+            .Should()
+            .Throw<CommandLineConfigurationException>()
+            .Which.Message.Should()
+            .Be($"Cycle detected in command tree. Command '{command.Name}' is its own ancestor.");
     }
 
     [Fact]
@@ -257,11 +216,12 @@ public class CommandLineConfigurationTests
 
         var validate = () => config.ThrowIfInvalid();
 
-        validate.Should()
-                .Throw<CommandLineConfigurationException>()
-                .Which
-                .Message
-                .Should()
-                .Be($"Cycle detected in command tree. Command '{rootCommand.Name}' is its own ancestor.");
+        validate
+            .Should()
+            .Throw<CommandLineConfigurationException>()
+            .Which.Message.Should()
+            .Be(
+                $"Cycle detected in command tree. Command '{rootCommand.Name}' is its own ancestor."
+            );
     }
 }

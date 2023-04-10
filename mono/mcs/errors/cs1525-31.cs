@@ -3,5 +3,5 @@
 
 namespace Bar
 {
-	float a;
+    float a;
 }

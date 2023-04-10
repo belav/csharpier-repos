@@ -2,13 +2,16 @@
 // Line: 11
 // Compiler options: -unsafe
 
-struct foo {
-	public delegate void bar (int x);
-	public bar barf;
+struct foo
+{
+    public delegate void bar(int x);
+    public bar barf;
 }
 
-unsafe class t {
-	static void Main () {
-		foo *f = null;
-	}
+unsafe class t
+{
+    static void Main()
+    {
+        foo* f = null;
+    }
 }

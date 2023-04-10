@@ -5,14 +5,17 @@ using System;
 
 public class Base
 {
-    public virtual int Foo() { return 33; }
-    
+    public virtual int Foo()
+    {
+        return 33;
+    }
+
     static BaseSealed s_Default = new BaseSealed();
 
     public static Base Default => s_Default;
 }
 
-sealed class BaseSealed : Base {}
+sealed class BaseSealed : Base { }
 
 // The jit can devirtualize the call to Foo when initializing y,
 // but not when initializing x.

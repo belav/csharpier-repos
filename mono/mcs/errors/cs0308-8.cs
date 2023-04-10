@@ -3,13 +3,11 @@
 
 class C
 {
-	static void TestCall (int i)
-	{
-	}
-	
-	public static void Main ()
-	{
-		dynamic d = 0;
-		TestCall<int> (d);
-	}
+    static void TestCall(int i) { }
+
+    public static void Main()
+    {
+        dynamic d = 0;
+        TestCall<int>(d);
+    }
 }

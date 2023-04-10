@@ -12,10 +12,14 @@ internal static class ComponentPreserveWhitespaceDirective
         DirectiveKind.SingleLine,
         builder =>
         {
-            builder.AddBooleanToken(ComponentResources.PreserveWhitespaceDirective_BooleanToken_Name, ComponentResources.PreserveWhitespaceDirective_BooleanToken_Description);
+            builder.AddBooleanToken(
+                ComponentResources.PreserveWhitespaceDirective_BooleanToken_Name,
+                ComponentResources.PreserveWhitespaceDirective_BooleanToken_Description
+            );
             builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
             builder.Description = ComponentResources.PreserveWhitespaceDirective_Description;
-        });
+        }
+    );
 
     public static void Register(RazorProjectEngineBuilder builder)
     {

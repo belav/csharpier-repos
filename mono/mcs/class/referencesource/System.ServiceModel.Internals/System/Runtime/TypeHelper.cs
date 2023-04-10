@@ -51,17 +51,20 @@ namespace System.Runtime
                 return true;
             }
 
-            return IsImplicitNumericConversion(sourceType, destinationType) ||
-                IsImplicitReferenceConversion(sourceType, destinationType) ||
-                IsImplicitBoxingConversion(sourceType, destinationType) ||
-                IsImplicitNullableConversion(sourceType, destinationType);
+            return IsImplicitNumericConversion(sourceType, destinationType)
+                || IsImplicitReferenceConversion(sourceType, destinationType)
+                || IsImplicitBoxingConversion(sourceType, destinationType)
+                || IsImplicitNullableConversion(sourceType, destinationType);
         }
 
         // simpler, more performant version of AreTypesCompatible when
         // we know both sides are reference types
         public static bool AreReferenceTypesCompatible(Type sourceType, Type destinationType)
         {
-            Fx.Assert(!sourceType.IsValueType && !destinationType.IsValueType, "AreReferenceTypesCompatible can only be used for reference types");
+            Fx.Assert(
+                !sourceType.IsValueType && !destinationType.IsValueType,
+                "AreReferenceTypesCompatible can only be used for reference types"
+            );
             if (object.ReferenceEquals(sourceType, destinationType))
             {
                 return true;
@@ -71,7 +74,10 @@ namespace System.Runtime
         }
 
         // variation to OfType<T> that uses AreTypesCompatible instead of Type equality
-        public static IEnumerable<Type> GetCompatibleTypes(IEnumerable<Type> enumerable, Type targetType)
+        public static IEnumerable<Type> GetCompatibleTypes(
+            IEnumerable<Type> enumerable,
+            Type targetType
+        )
         {
             foreach (Type sourceType in enumerable)
             {
@@ -108,7 +114,9 @@ namespace System.Runtime
             {
                 if (typeof(T).IsValueType && !IsNullableType(typeof(T)))
                 {
-                    throw Fx.Exception.AsError(new InvalidCastException(InternalSR.CannotConvertObject(source, typeof(T))));
+                    throw Fx.Exception.AsError(
+                        new InvalidCastException(InternalSR.CannotConvertObject(source, typeof(T)))
+                    );
                 }
 
                 return default(T);
@@ -120,7 +128,9 @@ namespace System.Runtime
                 return result;
             }
 
-            throw Fx.Exception.AsError(new InvalidCastException(InternalSR.CannotConvertObject(source, typeof(T))));
+            throw Fx.Exception.AsError(
+                new InvalidCastException(InternalSR.CannotConvertObject(source, typeof(T)))
+            );
         }
 
         // get all of the types that this Type implements (based classes, interfaces, etc)
@@ -132,7 +142,12 @@ namespace System.Runtime
             return typesEncountered.Keys;
         }
 
-        [SuppressMessage(FxCop.Category.Usage, "CA2301:EmbeddableTypesInContainersRule", MessageId = "typesEncountered", Justification = "No need to support type equivalence here.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            "CA2301:EmbeddableTypesInContainersRule",
+            MessageId = "typesEncountered",
+            Justification = "No need to support type equivalence here."
+        )]
         static void GetImplementedTypesHelper(Type type, Dictionary<Type, object> typesEncountered)
         {
             if (typesEncountered.ContainsKey(type))
@@ -156,8 +171,11 @@ namespace System.Runtime
             }
         }
 
-        [SuppressMessage(FxCop.Category.Maintainability, FxCop.Rule.AvoidExcessiveComplexity,
-            Justification = "Need to check all possible numeric conversions")]
+        [SuppressMessage(
+            FxCop.Category.Maintainability,
+            FxCop.Rule.AvoidExcessiveComplexity,
+            Justification = "Need to check all possible numeric conversions"
+        )]
         static bool IsImplicitNumericConversion(Type source, Type destination)
         {
             TypeCode sourceTypeCode = Type.GetTypeCode(source);
@@ -276,7 +294,10 @@ namespace System.Runtime
 
         static bool IsImplicitBoxingConversion(Type sourceType, Type destinationType)
         {
-            if (sourceType.IsValueType && (destinationType == ObjectType || destinationType == typeof(ValueType)))
+            if (
+                sourceType.IsValueType
+                && (destinationType == ObjectType || destinationType == typeof(ValueType))
+            )
             {
                 return true;
             }
@@ -316,239 +337,239 @@ namespace System.Runtime
             switch (sourceTypeCode)
             {
                 case TypeCode.SByte:
+                {
+                    SByte sbyteSource = (SByte)source;
+                    switch (destinationTypeCode)
                     {
-                        SByte sbyteSource = (SByte)source;
-                        switch (destinationTypeCode)
-                        {
-                            case TypeCode.Int16:
-                                result = (T)(object)(Int16)sbyteSource;
-                                return true;
-                            case TypeCode.Int32:
-                                result = (T)(object)(Int32)sbyteSource;
-                                return true;
-                            case TypeCode.Int64:
-                                result = (T)(object)(Int64)sbyteSource;
-                                return true;
-                            case TypeCode.Single:
-                                result = (T)(object)(Single)sbyteSource;
-                                return true;
-                            case TypeCode.Double:
-                                result = (T)(object)(Double)sbyteSource;
-                                return true;
-                            case TypeCode.Decimal:
-                                result = (T)(object)(Decimal)sbyteSource;
-                                return true;
-                        }
-                        break;
-                    }
-                case TypeCode.Byte:
-                    {
-                        Byte byteSource = (Byte)source;
-                        switch (destinationTypeCode)
-                        {
-                            case TypeCode.Int16:
-                                result = (T)(object)(Int16)byteSource;
-                                return true;
-                            case TypeCode.UInt16:
-                                result = (T)(object)(UInt16)byteSource;
-                                return true;
-                            case TypeCode.Int32:
-                                result = (T)(object)(Int32)byteSource;
-                                return true;
-                            case TypeCode.UInt32:
-                                result = (T)(object)(UInt32)byteSource;
-                                return true;
-                            case TypeCode.Int64:
-                                result = (T)(object)(Int64)byteSource;
-                                return true;
-                            case TypeCode.UInt64:
-                                result = (T)(object)(UInt64)byteSource;
-                                return true;
-                            case TypeCode.Single:
-                                result = (T)(object)(Single)byteSource;
-                                return true;
-                            case TypeCode.Double:
-                                result = (T)(object)(Double)byteSource;
-                                return true;
-                            case TypeCode.Decimal:
-                                result = (T)(object)(Decimal)byteSource;
-                                return true;
-                        }
-                        break;
-                    }
-                case TypeCode.Int16:
-                    {
-                        Int16 int16Source = (Int16)source;
-                        switch (destinationTypeCode)
-                        {
-                            case TypeCode.Int32:
-                                result = (T)(object)(Int32)int16Source;
-                                return true;
-                            case TypeCode.Int64:
-                                result = (T)(object)(Int64)int16Source;
-                                return true;
-                            case TypeCode.Single:
-                                result = (T)(object)(Single)int16Source;
-                                return true;
-                            case TypeCode.Double:
-                                result = (T)(object)(Double)int16Source;
-                                return true;
-                            case TypeCode.Decimal:
-                                result = (T)(object)(Decimal)int16Source;
-                                return true;
-                        }
-                        break;
-                    }
-                case TypeCode.UInt16:
-                    {
-                        UInt16 uint16Source = (UInt16)source;
-                        switch (destinationTypeCode)
-                        {
-                            case TypeCode.Int32:
-                                result = (T)(object)(Int32)uint16Source;
-                                return true;
-                            case TypeCode.UInt32:
-                                result = (T)(object)(UInt32)uint16Source;
-                                return true;
-                            case TypeCode.Int64:
-                                result = (T)(object)(Int64)uint16Source;
-                                return true;
-                            case TypeCode.UInt64:
-                                result = (T)(object)(UInt64)uint16Source;
-                                return true;
-                            case TypeCode.Single:
-                                result = (T)(object)(Single)uint16Source;
-                                return true;
-                            case TypeCode.Double:
-                                result = (T)(object)(Double)uint16Source;
-                                return true;
-                            case TypeCode.Decimal:
-                                result = (T)(object)(Decimal)uint16Source;
-                                return true;
-                        }
-                        break;
-                    }
-                case TypeCode.Int32:
-                    {
-                        Int32 int32Source = (Int32)source;
-                        switch (destinationTypeCode)
-                        {
-                            case TypeCode.Int64:
-                                result = (T)(object)(Int64)int32Source;
-                                return true;
-                            case TypeCode.Single:
-                                result = (T)(object)(Single)int32Source;
-                                return true;
-                            case TypeCode.Double:
-                                result = (T)(object)(Double)int32Source;
-                                return true;
-                            case TypeCode.Decimal:
-                                result = (T)(object)(Decimal)int32Source;
-                                return true;
-                        }
-                        break;
-                    }
-                case TypeCode.UInt32:
-                    {
-                        UInt32 uint32Source = (UInt32)source;
-                        switch (destinationTypeCode)
-                        {
-                            case TypeCode.UInt32:
-                                result = (T)(object)(UInt32)uint32Source;
-                                return true;
-                            case TypeCode.Int64:
-                                result = (T)(object)(Int64)uint32Source;
-                                return true;
-                            case TypeCode.UInt64:
-                                result = (T)(object)(UInt64)uint32Source;
-                                return true;
-                            case TypeCode.Single:
-                                result = (T)(object)(Single)uint32Source;
-                                return true;
-                            case TypeCode.Double:
-                                result = (T)(object)(Double)uint32Source;
-                                return true;
-                            case TypeCode.Decimal:
-                                result = (T)(object)(Decimal)uint32Source;
-                                return true;
-                        }
-                        break;
-                    }
-                case TypeCode.Int64:
-                    {
-                        Int64 int64Source = (Int64)source;
-                        switch (destinationTypeCode)
-                        {
-                            case TypeCode.Single:
-                                result = (T)(object)(Single)int64Source;
-                                return true;
-                            case TypeCode.Double:
-                                result = (T)(object)(Double)int64Source;
-                                return true;
-                            case TypeCode.Decimal:
-                                result = (T)(object)(Decimal)int64Source;
-                                return true;
-                        }
-                        break;
-                    }
-                case TypeCode.UInt64:
-                    {
-                        UInt64 uint64Source = (UInt64)source;
-                        switch (destinationTypeCode)
-                        {
-                            case TypeCode.Single:
-                                result = (T)(object)(Single)uint64Source;
-                                return true;
-                            case TypeCode.Double:
-                                result = (T)(object)(Double)uint64Source;
-                                return true;
-                            case TypeCode.Decimal:
-                                result = (T)(object)(Decimal)uint64Source;
-                                return true;
-                        }
-                        break;
-                    }
-                case TypeCode.Char:
-                    {
-                        Char charSource = (Char)source;
-                        switch (destinationTypeCode)
-                        {
-                            case TypeCode.UInt16:
-                                result = (T)(object)(UInt16)charSource;
-                                return true;
-                            case TypeCode.Int32:
-                                result = (T)(object)(Int32)charSource;
-                                return true;
-                            case TypeCode.UInt32:
-                                result = (T)(object)(UInt32)charSource;
-                                return true;
-                            case TypeCode.Int64:
-                                result = (T)(object)(Int64)charSource;
-                                return true;
-                            case TypeCode.UInt64:
-                                result = (T)(object)(UInt64)charSource;
-                                return true;
-                            case TypeCode.Single:
-                                result = (T)(object)(Single)charSource;
-                                return true;
-                            case TypeCode.Double:
-                                result = (T)(object)(Double)charSource;
-                                return true;
-                            case TypeCode.Decimal:
-                                result = (T)(object)(Decimal)charSource;
-                                return true;
-                        }
-                        break;
-                    }
-                case TypeCode.Single:
-                    {
-                        if (destinationTypeCode == TypeCode.Double)
-                        {
-                            result = (T)(object)(Double)(Single)source;
+                        case TypeCode.Int16:
+                            result = (T)(object)(Int16)sbyteSource;
                             return true;
-                        }
-                        break;
+                        case TypeCode.Int32:
+                            result = (T)(object)(Int32)sbyteSource;
+                            return true;
+                        case TypeCode.Int64:
+                            result = (T)(object)(Int64)sbyteSource;
+                            return true;
+                        case TypeCode.Single:
+                            result = (T)(object)(Single)sbyteSource;
+                            return true;
+                        case TypeCode.Double:
+                            result = (T)(object)(Double)sbyteSource;
+                            return true;
+                        case TypeCode.Decimal:
+                            result = (T)(object)(Decimal)sbyteSource;
+                            return true;
                     }
+                    break;
+                }
+                case TypeCode.Byte:
+                {
+                    Byte byteSource = (Byte)source;
+                    switch (destinationTypeCode)
+                    {
+                        case TypeCode.Int16:
+                            result = (T)(object)(Int16)byteSource;
+                            return true;
+                        case TypeCode.UInt16:
+                            result = (T)(object)(UInt16)byteSource;
+                            return true;
+                        case TypeCode.Int32:
+                            result = (T)(object)(Int32)byteSource;
+                            return true;
+                        case TypeCode.UInt32:
+                            result = (T)(object)(UInt32)byteSource;
+                            return true;
+                        case TypeCode.Int64:
+                            result = (T)(object)(Int64)byteSource;
+                            return true;
+                        case TypeCode.UInt64:
+                            result = (T)(object)(UInt64)byteSource;
+                            return true;
+                        case TypeCode.Single:
+                            result = (T)(object)(Single)byteSource;
+                            return true;
+                        case TypeCode.Double:
+                            result = (T)(object)(Double)byteSource;
+                            return true;
+                        case TypeCode.Decimal:
+                            result = (T)(object)(Decimal)byteSource;
+                            return true;
+                    }
+                    break;
+                }
+                case TypeCode.Int16:
+                {
+                    Int16 int16Source = (Int16)source;
+                    switch (destinationTypeCode)
+                    {
+                        case TypeCode.Int32:
+                            result = (T)(object)(Int32)int16Source;
+                            return true;
+                        case TypeCode.Int64:
+                            result = (T)(object)(Int64)int16Source;
+                            return true;
+                        case TypeCode.Single:
+                            result = (T)(object)(Single)int16Source;
+                            return true;
+                        case TypeCode.Double:
+                            result = (T)(object)(Double)int16Source;
+                            return true;
+                        case TypeCode.Decimal:
+                            result = (T)(object)(Decimal)int16Source;
+                            return true;
+                    }
+                    break;
+                }
+                case TypeCode.UInt16:
+                {
+                    UInt16 uint16Source = (UInt16)source;
+                    switch (destinationTypeCode)
+                    {
+                        case TypeCode.Int32:
+                            result = (T)(object)(Int32)uint16Source;
+                            return true;
+                        case TypeCode.UInt32:
+                            result = (T)(object)(UInt32)uint16Source;
+                            return true;
+                        case TypeCode.Int64:
+                            result = (T)(object)(Int64)uint16Source;
+                            return true;
+                        case TypeCode.UInt64:
+                            result = (T)(object)(UInt64)uint16Source;
+                            return true;
+                        case TypeCode.Single:
+                            result = (T)(object)(Single)uint16Source;
+                            return true;
+                        case TypeCode.Double:
+                            result = (T)(object)(Double)uint16Source;
+                            return true;
+                        case TypeCode.Decimal:
+                            result = (T)(object)(Decimal)uint16Source;
+                            return true;
+                    }
+                    break;
+                }
+                case TypeCode.Int32:
+                {
+                    Int32 int32Source = (Int32)source;
+                    switch (destinationTypeCode)
+                    {
+                        case TypeCode.Int64:
+                            result = (T)(object)(Int64)int32Source;
+                            return true;
+                        case TypeCode.Single:
+                            result = (T)(object)(Single)int32Source;
+                            return true;
+                        case TypeCode.Double:
+                            result = (T)(object)(Double)int32Source;
+                            return true;
+                        case TypeCode.Decimal:
+                            result = (T)(object)(Decimal)int32Source;
+                            return true;
+                    }
+                    break;
+                }
+                case TypeCode.UInt32:
+                {
+                    UInt32 uint32Source = (UInt32)source;
+                    switch (destinationTypeCode)
+                    {
+                        case TypeCode.UInt32:
+                            result = (T)(object)(UInt32)uint32Source;
+                            return true;
+                        case TypeCode.Int64:
+                            result = (T)(object)(Int64)uint32Source;
+                            return true;
+                        case TypeCode.UInt64:
+                            result = (T)(object)(UInt64)uint32Source;
+                            return true;
+                        case TypeCode.Single:
+                            result = (T)(object)(Single)uint32Source;
+                            return true;
+                        case TypeCode.Double:
+                            result = (T)(object)(Double)uint32Source;
+                            return true;
+                        case TypeCode.Decimal:
+                            result = (T)(object)(Decimal)uint32Source;
+                            return true;
+                    }
+                    break;
+                }
+                case TypeCode.Int64:
+                {
+                    Int64 int64Source = (Int64)source;
+                    switch (destinationTypeCode)
+                    {
+                        case TypeCode.Single:
+                            result = (T)(object)(Single)int64Source;
+                            return true;
+                        case TypeCode.Double:
+                            result = (T)(object)(Double)int64Source;
+                            return true;
+                        case TypeCode.Decimal:
+                            result = (T)(object)(Decimal)int64Source;
+                            return true;
+                    }
+                    break;
+                }
+                case TypeCode.UInt64:
+                {
+                    UInt64 uint64Source = (UInt64)source;
+                    switch (destinationTypeCode)
+                    {
+                        case TypeCode.Single:
+                            result = (T)(object)(Single)uint64Source;
+                            return true;
+                        case TypeCode.Double:
+                            result = (T)(object)(Double)uint64Source;
+                            return true;
+                        case TypeCode.Decimal:
+                            result = (T)(object)(Decimal)uint64Source;
+                            return true;
+                    }
+                    break;
+                }
+                case TypeCode.Char:
+                {
+                    Char charSource = (Char)source;
+                    switch (destinationTypeCode)
+                    {
+                        case TypeCode.UInt16:
+                            result = (T)(object)(UInt16)charSource;
+                            return true;
+                        case TypeCode.Int32:
+                            result = (T)(object)(Int32)charSource;
+                            return true;
+                        case TypeCode.UInt32:
+                            result = (T)(object)(UInt32)charSource;
+                            return true;
+                        case TypeCode.Int64:
+                            result = (T)(object)(Int64)charSource;
+                            return true;
+                        case TypeCode.UInt64:
+                            result = (T)(object)(UInt64)charSource;
+                            return true;
+                        case TypeCode.Single:
+                            result = (T)(object)(Single)charSource;
+                            return true;
+                        case TypeCode.Double:
+                            result = (T)(object)(Double)charSource;
+                            return true;
+                        case TypeCode.Decimal:
+                            result = (T)(object)(Decimal)charSource;
+                            return true;
+                    }
+                    break;
+                }
+                case TypeCode.Single:
+                {
+                    if (destinationTypeCode == TypeCode.Double)
+                    {
+                        result = (T)(object)(Double)(Single)source;
+                        return true;
+                    }
+                    break;
+                }
             }
 
             result = default(T);

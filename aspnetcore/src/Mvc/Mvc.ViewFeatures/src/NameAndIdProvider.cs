@@ -29,7 +29,11 @@ internal static class NameAndIdProvider
     /// <remarks>
     /// Similar to <see cref="TagBuilder.CreateSanitizedId"/> but caches value for repeated invocations.
     /// </remarks>
-    public static string CreateSanitizedId(ViewContext viewContext, string fullName, string invalidCharReplacement)
+    public static string CreateSanitizedId(
+        ViewContext viewContext,
+        string fullName,
+        string invalidCharReplacement
+    )
     {
         if (viewContext == null)
         {
@@ -50,9 +54,11 @@ internal static class NameAndIdProvider
         var items = viewContext.HttpContext.Items;
         object previousNameAndIdObject;
         PreviousNameAndId previousNameAndId = null;
-        if (items.TryGetValue(PreviousNameAndIdKey, out previousNameAndIdObject) &&
-            (previousNameAndId = (PreviousNameAndId)previousNameAndIdObject) != null &&
-            string.Equals(previousNameAndId.FullName, fullName, StringComparison.Ordinal))
+        if (
+            items.TryGetValue(PreviousNameAndIdKey, out previousNameAndIdObject)
+            && (previousNameAndId = (PreviousNameAndId)previousNameAndIdObject) != null
+            && string.Equals(previousNameAndId.FullName, fullName, StringComparison.Ordinal)
+        )
         {
             return previousNameAndId.SanitizedId;
         }
@@ -99,7 +105,8 @@ internal static class NameAndIdProvider
         ViewContext viewContext,
         TagBuilder tagBuilder,
         string fullName,
-        string invalidCharReplacement)
+        string invalidCharReplacement
+    )
     {
         if (viewContext == null)
         {
@@ -160,10 +167,16 @@ internal static class NameAndIdProvider
         var items = viewContext.HttpContext.Items;
         object previousNameAndIdObject;
         PreviousNameAndId previousNameAndId = null;
-        if (items.TryGetValue(PreviousNameAndIdKey, out previousNameAndIdObject) &&
-            (previousNameAndId = (PreviousNameAndId)previousNameAndIdObject) != null &&
-            string.Equals(previousNameAndId.HtmlFieldPrefix, htmlFieldPrefix, StringComparison.Ordinal) &&
-            string.Equals(previousNameAndId.Expression, expression, StringComparison.Ordinal))
+        if (
+            items.TryGetValue(PreviousNameAndIdKey, out previousNameAndIdObject)
+            && (previousNameAndId = (PreviousNameAndId)previousNameAndIdObject) != null
+            && string.Equals(
+                previousNameAndId.HtmlFieldPrefix,
+                htmlFieldPrefix,
+                StringComparison.Ordinal
+            )
+            && string.Equals(previousNameAndId.Expression, expression, StringComparison.Ordinal)
+        )
         {
             return previousNameAndId.OutputFullName;
         }

@@ -26,7 +26,14 @@ namespace System.Buffers
         private const int IndexMask = 0x7;
         private const int IndexShift = 0x3;
 
-        private readonly uint _e0, _e1, _e2, _e3, _e4, _e5, _e6, _e7;
+        private readonly uint _e0,
+            _e1,
+            _e2,
+            _e3,
+            _e4,
+            _e5,
+            _e6,
+            _e7;
 
         public ProbabilisticMap(ReadOnlySpan<char> values)
         {
@@ -70,9 +77,9 @@ namespace System.Buffers
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool Contains(ref uint charMap, ReadOnlySpan<char> values, int ch) =>
-            IsCharBitSet(ref charMap, (byte)ch) &&
-            IsCharBitSet(ref charMap, (byte)(ch >> 8)) &&
-            values.Contains((char)ch);
+            IsCharBitSet(ref charMap, (byte)ch)
+            && IsCharBitSet(ref charMap, (byte)(ch >> 8))
+            && values.Contains((char)ch);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool ShouldUseSimpleLoop(int searchSpaceLength, int valuesLength)
@@ -89,19 +96,64 @@ namespace System.Buffers
                 || (searchSpaceLength < 20 && searchSpaceLength < (valuesLength >> 1));
         }
 
-        public static int IndexOfAny(ref char searchSpace, int searchSpaceLength, ref char values, int valuesLength) =>
-            IndexOfAny<SpanHelpers.DontNegate<char>>(ref searchSpace, searchSpaceLength, ref values, valuesLength);
+        public static int IndexOfAny(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ref char values,
+            int valuesLength
+        ) =>
+            IndexOfAny<SpanHelpers.DontNegate<char>>(
+                ref searchSpace,
+                searchSpaceLength,
+                ref values,
+                valuesLength
+            );
 
-        public static int IndexOfAnyExcept(ref char searchSpace, int searchSpaceLength, ref char values, int valuesLength) =>
-            IndexOfAny<SpanHelpers.Negate<char>>(ref searchSpace, searchSpaceLength, ref values, valuesLength);
+        public static int IndexOfAnyExcept(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ref char values,
+            int valuesLength
+        ) =>
+            IndexOfAny<SpanHelpers.Negate<char>>(
+                ref searchSpace,
+                searchSpaceLength,
+                ref values,
+                valuesLength
+            );
 
-        public static int LastIndexOfAny(ref char searchSpace, int searchSpaceLength, ref char values, int valuesLength) =>
-            LastIndexOfAny<SpanHelpers.DontNegate<char>>(ref searchSpace, searchSpaceLength, ref values, valuesLength);
+        public static int LastIndexOfAny(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ref char values,
+            int valuesLength
+        ) =>
+            LastIndexOfAny<SpanHelpers.DontNegate<char>>(
+                ref searchSpace,
+                searchSpaceLength,
+                ref values,
+                valuesLength
+            );
 
-        public static int LastIndexOfAnyExcept(ref char searchSpace, int searchSpaceLength, ref char values, int valuesLength) =>
-            LastIndexOfAny<SpanHelpers.Negate<char>>(ref searchSpace, searchSpaceLength, ref values, valuesLength);
+        public static int LastIndexOfAnyExcept(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ref char values,
+            int valuesLength
+        ) =>
+            LastIndexOfAny<SpanHelpers.Negate<char>>(
+                ref searchSpace,
+                searchSpaceLength,
+                ref values,
+                valuesLength
+            );
 
-        private static int IndexOfAny<TNegator>(ref char searchSpace, int searchSpaceLength, ref char values, int valuesLength)
+        private static int IndexOfAny<TNegator>(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ref char values,
+            int valuesLength
+        )
             where TNegator : struct, SpanHelpers.INegator<char>
         {
             var valuesSpan = new ReadOnlySpan<char>(ref values, valuesLength);
@@ -126,17 +178,39 @@ namespace System.Buffers
                 return -1;
             }
 
-            if (typeof(TNegator) == typeof(SpanHelpers.DontNegate<char>)
-                ? IndexOfAnyAsciiSearcher.TryIndexOfAny(ref searchSpace, searchSpaceLength, valuesSpan, out int index)
-                : IndexOfAnyAsciiSearcher.TryIndexOfAnyExcept(ref searchSpace, searchSpaceLength, valuesSpan, out index))
+            if (
+                typeof(TNegator) == typeof(SpanHelpers.DontNegate<char>)
+                    ? IndexOfAnyAsciiSearcher.TryIndexOfAny(
+                        ref searchSpace,
+                        searchSpaceLength,
+                        valuesSpan,
+                        out int index
+                    )
+                    : IndexOfAnyAsciiSearcher.TryIndexOfAnyExcept(
+                        ref searchSpace,
+                        searchSpaceLength,
+                        valuesSpan,
+                        out index
+                    )
+            )
             {
                 return index;
             }
 
-            return ProbabilisticIndexOfAny<TNegator>(ref searchSpace, searchSpaceLength, ref values, valuesLength);
+            return ProbabilisticIndexOfAny<TNegator>(
+                ref searchSpace,
+                searchSpaceLength,
+                ref values,
+                valuesLength
+            );
         }
 
-        private static int LastIndexOfAny<TNegator>(ref char searchSpace, int searchSpaceLength, ref char values, int valuesLength)
+        private static int LastIndexOfAny<TNegator>(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ref char values,
+            int valuesLength
+        )
             where TNegator : struct, SpanHelpers.INegator<char>
         {
             var valuesSpan = new ReadOnlySpan<char>(ref values, valuesLength);
@@ -156,18 +230,40 @@ namespace System.Buffers
                 return -1;
             }
 
-            if (typeof(TNegator) == typeof(SpanHelpers.DontNegate<char>)
-                ? IndexOfAnyAsciiSearcher.TryLastIndexOfAny(ref searchSpace, searchSpaceLength, valuesSpan, out int index)
-                : IndexOfAnyAsciiSearcher.TryLastIndexOfAnyExcept(ref searchSpace, searchSpaceLength, valuesSpan, out index))
+            if (
+                typeof(TNegator) == typeof(SpanHelpers.DontNegate<char>)
+                    ? IndexOfAnyAsciiSearcher.TryLastIndexOfAny(
+                        ref searchSpace,
+                        searchSpaceLength,
+                        valuesSpan,
+                        out int index
+                    )
+                    : IndexOfAnyAsciiSearcher.TryLastIndexOfAnyExcept(
+                        ref searchSpace,
+                        searchSpaceLength,
+                        valuesSpan,
+                        out index
+                    )
+            )
             {
                 return index;
             }
 
-            return ProbabilisticLastIndexOfAny<TNegator>(ref searchSpace, searchSpaceLength, ref values, valuesLength);
+            return ProbabilisticLastIndexOfAny<TNegator>(
+                ref searchSpace,
+                searchSpaceLength,
+                ref values,
+                valuesLength
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int ProbabilisticIndexOfAny<TNegator>(ref char searchSpace, int searchSpaceLength, ref char values, int valuesLength)
+        private static int ProbabilisticIndexOfAny<TNegator>(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ref char values,
+            int valuesLength
+        )
             where TNegator : struct, SpanHelpers.INegator<char>
         {
             var valuesSpan = new ReadOnlySpan<char>(ref values, valuesLength);
@@ -176,12 +272,27 @@ namespace System.Buffers
             ref uint charMap = ref Unsafe.As<ProbabilisticMap, uint>(ref map);
 
             return typeof(TNegator) == typeof(SpanHelpers.DontNegate<char>)
-                ? IndexOfAny<IndexOfAnyAsciiSearcher.DontNegate>(ref charMap, ref searchSpace, searchSpaceLength, valuesSpan)
-                : IndexOfAny<IndexOfAnyAsciiSearcher.Negate>(ref charMap, ref searchSpace, searchSpaceLength, valuesSpan);
+                ? IndexOfAny<IndexOfAnyAsciiSearcher.DontNegate>(
+                    ref charMap,
+                    ref searchSpace,
+                    searchSpaceLength,
+                    valuesSpan
+                )
+                : IndexOfAny<IndexOfAnyAsciiSearcher.Negate>(
+                    ref charMap,
+                    ref searchSpace,
+                    searchSpaceLength,
+                    valuesSpan
+                );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int ProbabilisticLastIndexOfAny<TNegator>(ref char searchSpace, int searchSpaceLength, ref char values, int valuesLength)
+        private static int ProbabilisticLastIndexOfAny<TNegator>(
+            ref char searchSpace,
+            int searchSpaceLength,
+            ref char values,
+            int valuesLength
+        )
             where TNegator : struct, SpanHelpers.INegator<char>
         {
             var valuesSpan = new ReadOnlySpan<char>(ref values, valuesLength);
@@ -190,12 +301,27 @@ namespace System.Buffers
             ref uint charMap = ref Unsafe.As<ProbabilisticMap, uint>(ref map);
 
             return typeof(TNegator) == typeof(SpanHelpers.DontNegate<char>)
-                ? LastIndexOfAny<IndexOfAnyAsciiSearcher.DontNegate>(ref charMap, ref searchSpace, searchSpaceLength, valuesSpan)
-                : LastIndexOfAny<IndexOfAnyAsciiSearcher.Negate>(ref charMap, ref searchSpace, searchSpaceLength, valuesSpan);
+                ? LastIndexOfAny<IndexOfAnyAsciiSearcher.DontNegate>(
+                    ref charMap,
+                    ref searchSpace,
+                    searchSpaceLength,
+                    valuesSpan
+                )
+                : LastIndexOfAny<IndexOfAnyAsciiSearcher.Negate>(
+                    ref charMap,
+                    ref searchSpace,
+                    searchSpaceLength,
+                    valuesSpan
+                );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static int IndexOfAny<TNegator>(ref uint charMap, ref char searchSpace, int searchSpaceLength, ReadOnlySpan<char> values)
+        internal static int IndexOfAny<TNegator>(
+            ref uint charMap,
+            ref char searchSpace,
+            int searchSpaceLength,
+            ReadOnlySpan<char> values
+        )
             where TNegator : struct, IndexOfAnyAsciiSearcher.INegator
         {
             ref char searchSpaceEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength);
@@ -216,7 +342,12 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static int LastIndexOfAny<TNegator>(ref uint charMap, ref char searchSpace, int searchSpaceLength, ReadOnlySpan<char> values)
+        internal static int LastIndexOfAny<TNegator>(
+            ref uint charMap,
+            ref char searchSpace,
+            int searchSpaceLength,
+            ReadOnlySpan<char> values
+        )
             where TNegator : struct, IndexOfAnyAsciiSearcher.INegator
         {
             for (int i = searchSpaceLength - 1; i >= 0; i--)

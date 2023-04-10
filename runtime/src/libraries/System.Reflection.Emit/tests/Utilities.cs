@@ -7,17 +7,23 @@ using Xunit;
 namespace System.Reflection.Emit.Tests
 {
     public class EmptyNonGenericClass { }
+
     public class EmptyGenericClass<T> { }
+
     public sealed class SealedClass { }
+
     public static class StaticClass { }
 
     public struct EmptyNonGenericStruct { }
+
     public struct EmptyGenericStruct<T> { }
 
     public enum EmptyEnum { }
+
     public delegate EventHandler BasicDelegate();
 
     public interface EmptyNonGenericInterface1 { }
+
     public interface EmptyNonGenericInterface2 { }
 
     public interface EmptyGenericInterface<T> { }
@@ -28,7 +34,11 @@ namespace System.Reflection.Emit.Tests
     public class IntAllAttribute : Attribute
     {
         public int _i;
-        public IntAllAttribute(int i) { _i = i; }
+
+        public IntAllAttribute(int i)
+        {
+            _i = i;
+        }
     }
 
     public static class TypeExtensions
@@ -41,20 +51,36 @@ namespace System.Reflection.Emit.Tests
 
     public static class Helpers
     {
-        public const BindingFlags AllFlags = BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        public const BindingFlags AllFlags =
+            BindingFlags.Static
+            | BindingFlags.Instance
+            | BindingFlags.Public
+            | BindingFlags.NonPublic;
 
-        public static AssemblyBuilder DynamicAssembly(string name = "TestAssembly", AssemblyBuilderAccess access = AssemblyBuilderAccess.Run)
+        public static AssemblyBuilder DynamicAssembly(
+            string name = "TestAssembly",
+            AssemblyBuilderAccess access = AssemblyBuilderAccess.Run
+        )
         {
             AssemblyName assemblyName = new AssemblyName(name);
             return AssemblyBuilder.DefineDynamicAssembly(assemblyName, access);
         }
 
-        public static ModuleBuilder DynamicModule(string assemblyName = "TestAssembly", string moduleName = "TestModule")
+        public static ModuleBuilder DynamicModule(
+            string assemblyName = "TestAssembly",
+            string moduleName = "TestModule"
+        )
         {
             return DynamicAssembly(assemblyName).DefineDynamicModule(moduleName);
         }
 
-        public static TypeBuilder DynamicType(TypeAttributes attributes, string assemblyName = "TestAssembly", string moduleName = "TestModule", string typeName = "TestType", Type? baseType = null)
+        public static TypeBuilder DynamicType(
+            TypeAttributes attributes,
+            string assemblyName = "TestAssembly",
+            string moduleName = "TestModule",
+            string typeName = "TestType",
+            Type? baseType = null
+        )
         {
             if (baseType is null)
             {
@@ -62,16 +88,34 @@ namespace System.Reflection.Emit.Tests
             }
             else
             {
-                return DynamicModule(assemblyName, moduleName).DefineType(typeName, attributes, baseType);
+                return DynamicModule(assemblyName, moduleName)
+                    .DefineType(typeName, attributes, baseType);
             }
         }
 
-        public static EnumBuilder DynamicEnum(TypeAttributes visibility, Type underlyingType, string enumName = "TestEnum", string assemblyName = "TestAssembly", string moduleName = "TestModule")
+        public static EnumBuilder DynamicEnum(
+            TypeAttributes visibility,
+            Type underlyingType,
+            string enumName = "TestEnum",
+            string assemblyName = "TestAssembly",
+            string moduleName = "TestModule"
+        )
         {
-            return DynamicModule(assemblyName, moduleName).DefineEnum(enumName, visibility, underlyingType);
+            return DynamicModule(assemblyName, moduleName)
+                .DefineEnum(enumName, visibility, underlyingType);
         }
 
-        public static void VerifyType(TypeBuilder type, Module module, TypeBuilder declaringType, string name, TypeAttributes attributes, Type baseType, int size, PackingSize packingSize, Type[] implementedInterfaces)
+        public static void VerifyType(
+            TypeBuilder type,
+            Module module,
+            TypeBuilder declaringType,
+            string name,
+            TypeAttributes attributes,
+            Type baseType,
+            int size,
+            PackingSize packingSize,
+            Type[] implementedInterfaces
+        )
         {
             Assert.Equal(module, type.Module);
             Assert.Equal(module.Assembly, type.Assembly);
@@ -83,7 +127,10 @@ namespace System.Reflection.Emit.Tests
             }
             else
             {
-                Assert.Equal(GetFullName(declaringType.Name) + "+" + GetFullName(type.Name), type.FullName);
+                Assert.Equal(
+                    GetFullName(declaringType.Name) + "+" + GetFullName(type.Name),
+                    type.FullName
+                );
             }
 
             Assert.Equal(attributes, type.Attributes);
@@ -96,14 +143,24 @@ namespace System.Reflection.Emit.Tests
 
             Assert.Equal(implementedInterfaces ?? new Type[0], type.GetInterfaces());
 
-            if (declaringType == null && !type.IsInterface && (implementedInterfaces == null || implementedInterfaces.Length == 0))
+            if (
+                declaringType == null
+                && !type.IsInterface
+                && (implementedInterfaces == null || implementedInterfaces.Length == 0)
+            )
             {
                 Type createdType = type.CreateType();
                 Assert.Equal(createdType, module.GetType(name, false, false));
                 Assert.Equal(createdType, module.GetType(name, true, false));
 
-                Assert.Equal(type.AsType().GetNestedTypes(AllFlags), createdType.GetNestedTypes(AllFlags));
-                Assert.Equal(type.AsType().GetNestedType(name, AllFlags), createdType.GetNestedType(name, AllFlags));
+                Assert.Equal(
+                    type.AsType().GetNestedTypes(AllFlags),
+                    createdType.GetNestedTypes(AllFlags)
+                );
+                Assert.Equal(
+                    type.AsType().GetNestedType(name, AllFlags),
+                    createdType.GetNestedType(name, AllFlags)
+                );
 
                 Assert.Equal(createdType, module.GetType(name, true, true));
                 Assert.Equal(createdType, module.GetType(name.ToLowerInvariant(), true, true));
@@ -111,9 +168,18 @@ namespace System.Reflection.Emit.Tests
             }
         }
 
-        public static void VerifyConstructor(ConstructorBuilder constructor, TypeBuilder type, MethodAttributes attributes, CallingConventions callingConvention, Type[] parameterTypes)
+        public static void VerifyConstructor(
+            ConstructorBuilder constructor,
+            TypeBuilder type,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type[] parameterTypes
+        )
         {
-            string expectedName = (attributes & MethodAttributes.Static) != 0 ? ConstructorInfo.TypeConstructorName : ConstructorInfo.ConstructorName;
+            string expectedName =
+                (attributes & MethodAttributes.Static) != 0
+                    ? ConstructorInfo.TypeConstructorName
+                    : ConstructorInfo.ConstructorName;
 
             Assert.Equal(expectedName, constructor.Name);
             Assert.Equal(attributes | MethodAttributes.SpecialName, constructor.Attributes);
@@ -126,10 +192,22 @@ namespace System.Reflection.Emit.Tests
             Assert.Throws<NotSupportedException>(() => constructor.Invoke(null, null));
 
             Type createdType = type.CreateType();
-            Assert.Equal(type.AsType().GetConstructors(AllFlags), createdType.GetConstructors(AllFlags));
-            Assert.Equal(type.AsType().GetConstructor(parameterTypes), createdType.GetConstructor(parameterTypes));
+            Assert.Equal(
+                type.AsType().GetConstructors(AllFlags),
+                createdType.GetConstructors(AllFlags)
+            );
+            Assert.Equal(
+                type.AsType().GetConstructor(parameterTypes),
+                createdType.GetConstructor(parameterTypes)
+            );
 
-            ConstructorInfo createdConstructor = createdType.GetConstructors(BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+            ConstructorInfo createdConstructor = createdType
+                .GetConstructors(
+                    BindingFlags.Static
+                        | BindingFlags.Instance
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                )
                 .Single(ctor => ctor.IsStatic == constructor.IsStatic);
 
             CallingConventions expectedCallingConvention = CallingConventions.Standard;
@@ -142,7 +220,8 @@ namespace System.Reflection.Emit.Tests
                 expectedCallingConvention |= CallingConventions.HasThis;
             }
 
-            MethodAttributes expectedAttributes = attributes | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName;
+            MethodAttributes expectedAttributes =
+                attributes | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName;
             expectedAttributes &= ~MethodAttributes.RequireSecObject;
 
             Assert.Equal(expectedName, constructor.Name);

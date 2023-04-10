@@ -3,13 +3,11 @@
 
 class X
 {
-	void Test ()
-	{
-	}
+    void Test() { }
 
-	public static void Main ()
-	{
-		X x = null;
-		System.Action n = x?.Test;
-	}
+    public static void Main()
+    {
+        X x = null;
+        System.Action n = x?.Test;
+    }
 }

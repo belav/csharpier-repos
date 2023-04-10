@@ -4,12 +4,12 @@
 
 class X
 {
-	void b ()
-	{
-                byte b = 0;
-                if (b == 500)
-                    return;
-	}
+    void b()
+    {
+        byte b = 0;
+        if (b == 500)
+            return;
+    }
 
-	static void Main () {}
+    static void Main() { }
 }

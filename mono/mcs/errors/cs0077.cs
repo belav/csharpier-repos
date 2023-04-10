@@ -3,11 +3,14 @@
 
 using System;
 
-class ErrorCS0077 {
-	struct Foo { }
-	public static void Main () {
-		Foo s1, s2; 
-		s1 = s2 as ErrorCS0077.Foo;
-	}
-}
+class ErrorCS0077
+{
+    struct Foo { }
 
+    public static void Main()
+    {
+        Foo s1,
+            s2;
+        s1 = s2 as ErrorCS0077.Foo;
+    }
+}

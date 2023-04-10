@@ -14,8 +14,18 @@ namespace SerializerTrimmingTest
         static int Main(string[] args)
         {
             string json = @"{""Key"":1}";
-            object obj = JsonSerializer.Deserialize(json, typeof(ConcurrentDictionary<string, int>));
-            if (!(TestHelper.AssertCollectionAndSerialize<ConcurrentDictionary<string, int>>(obj, json)))
+            object obj = JsonSerializer.Deserialize(
+                json,
+                typeof(ConcurrentDictionary<string, int>)
+            );
+            if (
+                !(
+                    TestHelper.AssertCollectionAndSerialize<ConcurrentDictionary<string, int>>(
+                        obj,
+                        json
+                    )
+                )
+            )
             {
                 return -1;
             }

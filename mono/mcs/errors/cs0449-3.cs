@@ -3,7 +3,6 @@
 
 public class C<T>
 {
-      public void Foo<T>() where T : class, struct 
-      {
-      }
+    public void Foo<T>()
+        where T : class, struct { }
 }

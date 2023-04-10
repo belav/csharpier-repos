@@ -4,9 +4,9 @@
 
 class C
 {
-	public static void Main ()
-	{
-		int? k = 1;
-		var x = k > null;
-	}
+    public static void Main()
+    {
+        int? k = 1;
+        var x = k > null;
+    }
 }

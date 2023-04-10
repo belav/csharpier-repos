@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.OpenApi;
 
 namespace Microsoft.AspNetCore.OpenApi.Tests;
 
-public class  OpenApiSchemaGeneratorTests
+public class OpenApiSchemaGeneratorTests
 {
     [Theory]
     [InlineData(typeof(Dictionary<string, string>))]
@@ -50,9 +50,14 @@ public class  OpenApiSchemaGeneratorTests
     }
 
     class Todo : Dictionary<string, object> { }
+
     class Products : IList<int>
     {
-        public int this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int this[int index]
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
 
         public int Count => throw new NotImplementedException();
 

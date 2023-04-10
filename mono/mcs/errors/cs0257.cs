@@ -2,5 +2,5 @@
 // Line: 5
 class Test
 {
-    void Foo (__arglist, bool b) {}
+    void Foo(__arglist, bool b) { }
 }

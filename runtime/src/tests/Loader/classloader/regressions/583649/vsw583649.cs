@@ -9,21 +9,20 @@ using System;
 
 public class Type_Class42_Driver
 {
-
     public static int Main()
     {
         try
         {
             Console.WriteLine("Instantiating: Class42_0...");
             Class42 Class42_0 = new Class42();
-            
+
             Console.WriteLine("PASS");
             return 100;
-        } 
+        }
         catch (Exception e)
         {
             Console.WriteLine("FAIL: Caught unexpected exception: " + e.Message);
             return 101;
         }
-    } 
-} 
+    }
+}

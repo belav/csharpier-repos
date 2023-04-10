@@ -15,11 +15,6 @@ namespace System.ServiceModel.Dispatcher
 
     internal interface IDispatchFaultFormatterWrapper
     {
-        IDispatchFaultFormatter InnerFaultFormatter
-        {
-            get;
-            set;
-        }
+        IDispatchFaultFormatter InnerFaultFormatter { get; set; }
     }
 }
-

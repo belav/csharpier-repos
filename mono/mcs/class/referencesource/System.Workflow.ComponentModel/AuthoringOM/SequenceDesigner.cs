@@ -14,10 +14,10 @@ namespace System.Workflow.ComponentModel.Design
 
     #region Class SequenceDesigner
     [ActivityDesignerTheme(typeof(SequenceDesignerTheme))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public class SequenceDesigner : SequentialActivityDesigner
-    {
-    }
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public class SequenceDesigner : SequentialActivityDesigner { }
     #endregion
 
     #region SequenceDesignerTheme

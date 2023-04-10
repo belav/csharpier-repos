@@ -35,7 +35,10 @@ namespace Microsoft.AspNetCore.Components.WebView
         {
             if (!string.IsNullOrEmpty(value) && value[0] != '?')
             {
-                throw new ArgumentException("The leading '?' must be included for a non-empty query.", nameof(value));
+                throw new ArgumentException(
+                    "The leading '?' must be included for a non-empty query.",
+                    nameof(value)
+                );
             }
             Value = value;
         }
@@ -290,7 +293,12 @@ namespace Microsoft.AspNetCore.Components.WebView
             return left.Add(right);
         }
 
-        private static void AppendKeyValuePair(StringBuilder builder, string key, string? value, bool first)
+        private static void AppendKeyValuePair(
+            StringBuilder builder,
+            string key,
+            string? value,
+            bool first
+        )
         {
             builder.Append(first ? "?" : "&");
             builder.Append(UrlEncoder.Default.Encode(key));

@@ -3,6 +3,7 @@
 
 using System;
 
-public interface IX: IComparable, IComparable {
-    int CompareTo (object obj);
+public interface IX : IComparable, IComparable
+{
+    int CompareTo(object obj);
 }

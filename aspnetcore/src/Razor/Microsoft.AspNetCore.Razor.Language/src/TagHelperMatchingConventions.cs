@@ -18,7 +18,8 @@ internal static class TagHelperMatchingConventions
         StringSegment tagNameWithoutPrefix,
         StringSegment parentTagNameWithoutPrefix,
         IReadOnlyList<KeyValuePair<string, string>> tagAttributes,
-        TagMatchingRuleDescriptor rule)
+        TagMatchingRuleDescriptor rule
+    )
     {
         var satisfiesTagName = SatisfiesTagName(tagNameWithoutPrefix, rule);
         if (!satisfiesTagName)
@@ -41,7 +42,10 @@ internal static class TagHelperMatchingConventions
         return true;
     }
 
-    public static bool SatisfiesTagName(StringSegment tagNameWithoutPrefix, TagMatchingRuleDescriptor rule)
+    public static bool SatisfiesTagName(
+        StringSegment tagNameWithoutPrefix,
+        TagMatchingRuleDescriptor rule
+    )
     {
         if (StringSegment.IsNullOrEmpty(tagNameWithoutPrefix))
         {
@@ -54,9 +58,14 @@ internal static class TagHelperMatchingConventions
             return false;
         }
 
-        if (rule.TagName != ElementCatchAllName &&
-            rule.TagName != null &&
-            !tagNameWithoutPrefix.Equals(rule.TagName, rule.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase))
+        if (
+            rule.TagName != ElementCatchAllName
+            && rule.TagName != null
+            && !tagNameWithoutPrefix.Equals(
+                rule.TagName,
+                rule.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             return false;
         }
@@ -64,10 +73,18 @@ internal static class TagHelperMatchingConventions
         return true;
     }
 
-    public static bool SatisfiesParentTag(StringSegment parentTagNameWithoutPrefix, TagMatchingRuleDescriptor rule)
+    public static bool SatisfiesParentTag(
+        StringSegment parentTagNameWithoutPrefix,
+        TagMatchingRuleDescriptor rule
+    )
     {
-        if (rule.ParentTag != null &&
-            !parentTagNameWithoutPrefix.Equals(rule.ParentTag, rule.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase))
+        if (
+            rule.ParentTag != null
+            && !parentTagNameWithoutPrefix.Equals(
+                rule.ParentTag,
+                rule.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             return false;
         }
@@ -75,13 +92,26 @@ internal static class TagHelperMatchingConventions
         return true;
     }
 
-    public static bool SatisfiesAttributes(IReadOnlyList<KeyValuePair<string, string>> tagAttributes, TagMatchingRuleDescriptor rule)
+    public static bool SatisfiesAttributes(
+        IReadOnlyList<KeyValuePair<string, string>> tagAttributes,
+        TagMatchingRuleDescriptor rule
+    )
     {
-        if (!rule.Attributes.All(
-            static (requiredAttribute, tagAttributes) => tagAttributes.Any(
-                static (attribute, requiredAttribute) => SatisfiesRequiredAttribute(attribute.Key, attribute.Value, requiredAttribute),
-                requiredAttribute),
-            tagAttributes))
+        if (
+            !rule.Attributes.All(
+                static (requiredAttribute, tagAttributes) =>
+                    tagAttributes.Any(
+                        static (attribute, requiredAttribute) =>
+                            SatisfiesRequiredAttribute(
+                                attribute.Key,
+                                attribute.Value,
+                                requiredAttribute
+                            ),
+                        requiredAttribute
+                    ),
+                tagAttributes
+            )
+        )
         {
             return false;
         }
@@ -91,12 +121,21 @@ internal static class TagHelperMatchingConventions
 
     public static bool CanSatisfyBoundAttribute(string name, BoundAttributeDescriptor descriptor)
     {
-        return SatisfiesBoundAttributeName(name, descriptor) ||
-            SatisfiesBoundAttributeIndexer(name, descriptor) ||
-            GetSatifyingBoundAttributeWithParameter(name, descriptor, descriptor.BoundAttributeParameters) is not null;
+        return SatisfiesBoundAttributeName(name, descriptor)
+            || SatisfiesBoundAttributeIndexer(name, descriptor)
+            || GetSatifyingBoundAttributeWithParameter(
+                name,
+                descriptor,
+                descriptor.BoundAttributeParameters
+            )
+                is not null;
     }
 
-    private static BoundAttributeParameterDescriptor GetSatifyingBoundAttributeWithParameter(string name, BoundAttributeDescriptor descriptor, IReadOnlyList<BoundAttributeParameterDescriptor> boundAttributeParameters)
+    private static BoundAttributeParameterDescriptor GetSatifyingBoundAttributeWithParameter(
+        string name,
+        BoundAttributeDescriptor descriptor,
+        IReadOnlyList<BoundAttributeParameterDescriptor> boundAttributeParameters
+    )
     {
         var count = boundAttributeParameters.Count;
         for (var i = 0; i < count; i++)
@@ -110,27 +149,51 @@ internal static class TagHelperMatchingConventions
         return null;
     }
 
-    public static bool SatisfiesBoundAttributeIndexer(StringSegment name, BoundAttributeDescriptor descriptor)
+    public static bool SatisfiesBoundAttributeIndexer(
+        StringSegment name,
+        BoundAttributeDescriptor descriptor
+    )
     {
-        return descriptor.IndexerNamePrefix != null &&
-            !SatisfiesBoundAttributeName(name, descriptor) &&
-            name.StartsWith(descriptor.IndexerNamePrefix, descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+        return descriptor.IndexerNamePrefix != null
+            && !SatisfiesBoundAttributeName(name, descriptor)
+            && name.StartsWith(
+                descriptor.IndexerNamePrefix,
+                descriptor.CaseSensitive
+                    ? StringComparison.Ordinal
+                    : StringComparison.OrdinalIgnoreCase
+            );
     }
 
-    public static bool SatisfiesBoundAttributeWithParameter(string name, BoundAttributeDescriptor parent, BoundAttributeParameterDescriptor descriptor)
+    public static bool SatisfiesBoundAttributeWithParameter(
+        string name,
+        BoundAttributeDescriptor parent,
+        BoundAttributeParameterDescriptor descriptor
+    )
     {
         if (TryGetBoundAttributeParameter(name, out var attributeName, out var parameterName))
         {
             var satisfiesBoundAttributeName = SatisfiesBoundAttributeName(attributeName, parent);
-            var satisfiesBoundAttributeIndexer = SatisfiesBoundAttributeIndexer(attributeName, parent);
-            var matchesParameter = parameterName.Equals(descriptor.Name, descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
-            return (satisfiesBoundAttributeName || satisfiesBoundAttributeIndexer) && matchesParameter;
+            var satisfiesBoundAttributeIndexer = SatisfiesBoundAttributeIndexer(
+                attributeName,
+                parent
+            );
+            var matchesParameter = parameterName.Equals(
+                descriptor.Name,
+                descriptor.CaseSensitive
+                    ? StringComparison.Ordinal
+                    : StringComparison.OrdinalIgnoreCase
+            );
+            return (satisfiesBoundAttributeName || satisfiesBoundAttributeIndexer)
+                && matchesParameter;
         }
 
         return false;
     }
 
-    public static bool TryGetBoundAttributeParameter(string fullAttributeName, out StringSegment boundAttributeName)
+    public static bool TryGetBoundAttributeParameter(
+        string fullAttributeName,
+        out StringSegment boundAttributeName
+    )
     {
         boundAttributeName = default;
 
@@ -149,7 +212,11 @@ internal static class TagHelperMatchingConventions
         return true;
     }
 
-    public static bool TryGetBoundAttributeParameter(string fullAttributeName, out StringSegment boundAttributeName, out StringSegment parameterName)
+    public static bool TryGetBoundAttributeParameter(
+        string fullAttributeName,
+        out StringSegment boundAttributeName,
+        out StringSegment parameterName
+    )
     {
         boundAttributeName = default;
         parameterName = default;
@@ -176,7 +243,8 @@ internal static class TagHelperMatchingConventions
         out BoundAttributeDescriptor boundAttribute,
         out bool indexerMatch,
         out bool parameterMatch,
-        out BoundAttributeParameterDescriptor boundAttributeParameter)
+        out BoundAttributeParameterDescriptor boundAttributeParameter
+    )
     {
         indexerMatch = false;
         parameterMatch = false;
@@ -191,7 +259,11 @@ internal static class TagHelperMatchingConventions
         // First, check if we have a bound attribute descriptor that matches the parameter if it exists.
         foreach (var attribute in descriptor.BoundAttributes)
         {
-            boundAttributeParameter = GetSatifyingBoundAttributeWithParameter(name, attribute, attribute.BoundAttributeParameters);
+            boundAttributeParameter = GetSatifyingBoundAttributeWithParameter(
+                name,
+                attribute,
+                attribute.BoundAttributeParameters
+            );
 
             if (boundAttributeParameter != null)
             {
@@ -218,24 +290,48 @@ internal static class TagHelperMatchingConventions
         return false;
     }
 
-    private static bool SatisfiesBoundAttributeName(StringSegment name, BoundAttributeDescriptor descriptor)
+    private static bool SatisfiesBoundAttributeName(
+        StringSegment name,
+        BoundAttributeDescriptor descriptor
+    )
     {
-        return name.Equals(descriptor.Name, descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+        return name.Equals(
+            descriptor.Name,
+            descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase
+        );
     }
 
     // Internal for testing
-    internal static bool SatisfiesRequiredAttribute(string attributeName, string attributeValue, RequiredAttributeDescriptor descriptor)
+    internal static bool SatisfiesRequiredAttribute(
+        string attributeName,
+        string attributeValue,
+        RequiredAttributeDescriptor descriptor
+    )
     {
         var nameMatches = false;
         if (descriptor.NameComparison == RequiredAttributeDescriptor.NameComparisonMode.FullMatch)
         {
-            nameMatches = string.Equals(descriptor.Name, attributeName, descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+            nameMatches = string.Equals(
+                descriptor.Name,
+                attributeName,
+                descriptor.CaseSensitive
+                    ? StringComparison.Ordinal
+                    : StringComparison.OrdinalIgnoreCase
+            );
         }
-        else if (descriptor.NameComparison == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch)
+        else if (
+            descriptor.NameComparison == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+        )
         {
             // attributeName cannot equal the Name if comparing as a PrefixMatch.
-            nameMatches = attributeName.Length != descriptor.Name.Length &&
-                attributeName.StartsWith(descriptor.Name, descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+            nameMatches =
+                attributeName.Length != descriptor.Name.Length
+                && attributeName.StartsWith(
+                    descriptor.Name,
+                    descriptor.CaseSensitive
+                        ? StringComparison.Ordinal
+                        : StringComparison.OrdinalIgnoreCase
+                );
         }
         else
         {

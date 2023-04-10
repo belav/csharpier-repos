@@ -3,20 +3,11 @@
 
 using System;
 
-[AttributeUsage (AttributeTargets.All)]
-public class MineAttribute : Attribute {
-	public MineAttribute (Type [] t)
-	{
-	}
-}
-
-[Mine(new Type [(ulong) 3])]
-public class Foo
+[AttributeUsage(AttributeTargets.All)]
+public class MineAttribute : Attribute
 {
+    public MineAttribute(Type[] t) { }
 }
 
-
-
-
-
-
+[Mine(new Type[(ulong)3])]
+public class Foo { }

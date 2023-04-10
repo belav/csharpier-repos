@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,96 +32,103 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Principal {
+namespace System.Security.Principal
+{
+    [ComVisible(false)]
+    public class IdentityReferenceCollection
+        : IEnumerable,
+            ICollection<IdentityReference>,
+            IEnumerable<IdentityReference>
+    {
+        private ArrayList _list;
 
-	[ComVisible (false)]
-	public class IdentityReferenceCollection : IEnumerable, ICollection<IdentityReference>, IEnumerable<IdentityReference> {
+        public IdentityReferenceCollection()
+        {
+            _list = new ArrayList();
+        }
 
-		private ArrayList _list;
+        public IdentityReferenceCollection(int capacity)
+        {
+            _list = new ArrayList(capacity);
+        }
 
-		public IdentityReferenceCollection ()
-		{
-			_list = new ArrayList ();
-		}
+        public int Count
+        {
+            get { return _list.Count; }
+        }
 
-		public IdentityReferenceCollection (int capacity)
-		{
-			_list = new ArrayList (capacity);
-		}
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
 
+        public IdentityReference this[int index]
+        {
+            get
+            {
+                if (index >= _list.Count)
+                    return null;
+                return (IdentityReference)_list[index];
+            }
+            set { _list[index] = value; }
+        }
 
-		public int Count {
-			get { return _list.Count; }
-		}
+        public void Add(IdentityReference identity)
+        {
+            _list.Add(identity);
+        }
 
-		public bool IsReadOnly {
-			get { return false; }
-		}
+        public void Clear()
+        {
+            _list.Clear();
+        }
 
-		public IdentityReference this [int index] {
-			get {
-				if (index >= _list.Count)
-					return null;
-				return (IdentityReference) _list [index];
-			}
-			set { _list [index] = value; }
-		}
+        public bool Contains(IdentityReference identity)
+        {
+            foreach (IdentityReference id in _list)
+            {
+                if (id.Equals(identity))
+                    return true;
+            }
+            return false;
+        }
 
+        public void CopyTo(IdentityReference[] array, int offset)
+        {
+            throw new NotImplementedException();
+        }
 
-		public void Add (IdentityReference identity)
-		{
-			_list.Add (identity);
-		}
+        public IEnumerator<IdentityReference> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
 
-		public void Clear ()
-		{
-			_list.Clear ();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
 
-		public bool Contains (IdentityReference identity)
-		{
-			foreach (IdentityReference id in _list) {
-				if (id.Equals (identity))
-					return true;
-			}
-			return false;
-		}
+        public bool Remove(IdentityReference identity)
+        {
+            foreach (IdentityReference id in _list)
+            {
+                if (id.Equals(identity))
+                {
+                    _list.Remove(id);
+                    return true;
+                }
+            }
+            return false;
+        }
 
-		public void CopyTo (IdentityReference[] array, int offset)
-		{
-			throw new NotImplementedException ();
-		}
+        public IdentityReferenceCollection Translate(Type targetType)
+        {
+            throw new NotImplementedException();
+        }
 
-		public IEnumerator<IdentityReference> GetEnumerator ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public bool Remove (IdentityReference identity)
-		{
-			foreach (IdentityReference id in _list) {
-				if (id.Equals (identity)) {
-					_list.Remove (id);
-					return true;
-				}
-			}
-			return false;
-		}
-
-		public IdentityReferenceCollection Translate (Type targetType)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public IdentityReferenceCollection Translate (Type targetType, bool forceSuccess)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public IdentityReferenceCollection Translate(Type targetType, bool forceSuccess)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

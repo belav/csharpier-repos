@@ -68,7 +68,10 @@ internal sealed partial class ResponseCookies : IResponseCookies
     }
 
     /// <inheritdoc />
-    public void Append(ReadOnlySpan<KeyValuePair<string, string>> keyValuePairs, CookieOptions options)
+    public void Append(
+        ReadOnlySpan<KeyValuePair<string, string>> keyValuePairs,
+        CookieOptions options
+    )
     {
         if (options == null)
         {
@@ -99,7 +102,12 @@ internal sealed partial class ResponseCookies : IResponseCookies
 
         foreach (var keyValuePair in keyValuePairs)
         {
-            cookies[position] = string.Concat(keyValuePair.Key, "=", Uri.EscapeDataString(keyValuePair.Value), cookieSuffix);
+            cookies[position] = string.Concat(
+                keyValuePair.Key,
+                "=",
+                Uri.EscapeDataString(keyValuePair.Value),
+                cookieSuffix
+            );
             position++;
         }
 
@@ -130,25 +138,26 @@ internal sealed partial class ResponseCookies : IResponseCookies
         if (domainHasValue && pathHasValue)
         {
             rejectPredicate = (value, encKeyPlusEquals, opts) =>
-                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase) &&
-                    value.IndexOf($"domain={opts.Domain}", StringComparison.OrdinalIgnoreCase) != -1 &&
-                    value.IndexOf($"path={opts.Path}", StringComparison.OrdinalIgnoreCase) != -1;
+                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase)
+                && value.IndexOf($"domain={opts.Domain}", StringComparison.OrdinalIgnoreCase) != -1
+                && value.IndexOf($"path={opts.Path}", StringComparison.OrdinalIgnoreCase) != -1;
         }
         else if (domainHasValue)
         {
             rejectPredicate = (value, encKeyPlusEquals, opts) =>
-                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase) &&
-                    value.IndexOf($"domain={opts.Domain}", StringComparison.OrdinalIgnoreCase) != -1;
+                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase)
+                && value.IndexOf($"domain={opts.Domain}", StringComparison.OrdinalIgnoreCase) != -1;
         }
         else if (pathHasValue)
         {
             rejectPredicate = (value, encKeyPlusEquals, opts) =>
-                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase) &&
-                    value.IndexOf($"path={opts.Path}", StringComparison.OrdinalIgnoreCase) != -1;
+                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase)
+                && value.IndexOf($"path={opts.Path}", StringComparison.OrdinalIgnoreCase) != -1;
         }
         else
         {
-            rejectPredicate = (value, encKeyPlusEquals, opts) => value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase);
+            rejectPredicate = (value, encKeyPlusEquals, opts) =>
+                value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase);
         }
 
         var existingValues = Headers.SetCookie;
@@ -169,15 +178,21 @@ internal sealed partial class ResponseCookies : IResponseCookies
             Headers.SetCookie = new StringValues(newValues.ToArray());
         }
 
-        Append(key, string.Empty, new CookieOptions(options)
-        {
-            Expires = DateTimeOffset.UnixEpoch,
-        });
+        Append(
+            key,
+            string.Empty,
+            new CookieOptions(options) { Expires = DateTimeOffset.UnixEpoch, }
+        );
     }
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Warning, "The cookie '{name}' has set 'SameSite=None' and must also set 'Secure'.", EventName = "SameSiteNotSecure")]
+        [LoggerMessage(
+            1,
+            LogLevel.Warning,
+            "The cookie '{name}' has set 'SameSite=None' and must also set 'Secure'.",
+            EventName = "SameSiteNotSecure"
+        )]
         public static partial void SameSiteCookieNotSecure(ILogger logger, string name);
     }
 }

@@ -47,10 +47,7 @@ namespace Microsoft.CodeAnalysis
 
         public override LocationKind Kind
         {
-            get
-            {
-                return LocationKind.XmlFile;
-            }
+            get { return LocationKind.XmlFile; }
         }
 
         public override FileLinePositionSpan GetLineSpan()

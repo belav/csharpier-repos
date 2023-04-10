@@ -4,11 +4,8 @@
 using System;
 using System.Diagnostics;
 
-class TestClass {
-	[Conditional ("UNDEFINED CONDITION")]
-	static void ConditionalMethod ()
-	{
-	}
+class TestClass
+{
+    [Conditional("UNDEFINED CONDITION")]
+    static void ConditionalMethod() { }
 }
-
-

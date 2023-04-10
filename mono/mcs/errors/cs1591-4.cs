@@ -6,11 +6,12 @@ using System;
 
 namespace Testing
 {
-	/// comment is here.
-	public enum Foo
-	{
-		Foo,
-		/// required for all enum members
-		Bar
-	}
+    /// comment is here.
+    public enum Foo
+    {
+        Foo,
+
+        /// required for all enum members
+        Bar
+    }
 }

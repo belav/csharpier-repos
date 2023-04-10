@@ -8,6 +8,7 @@ namespace POS_Server.Controllers
     public class Validation
     {
         public string APIKey = "1234";
+
         public bool CheckApiKey(string apiKey)
         {
             if (apiKey.Equals(APIKey))

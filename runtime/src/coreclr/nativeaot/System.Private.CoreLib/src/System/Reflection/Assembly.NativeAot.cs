@@ -12,20 +12,30 @@ namespace System.Reflection
 {
     public abstract partial class Assembly : ICustomAttributeProvider, ISerializable
     {
-        private static Assembly? GetEntryAssemblyInternal() => Internal.Runtime.CompilerHelpers.StartupCodeHelpers.GetEntryAssembly();
+        private static Assembly? GetEntryAssemblyInternal() =>
+            Internal.Runtime.CompilerHelpers.StartupCodeHelpers.GetEntryAssembly();
 
         [System.Runtime.CompilerServices.Intrinsic]
-        public static Assembly GetExecutingAssembly() { throw NotImplemented.ByDesign; } //Implemented by toolchain.
+        public static Assembly GetExecutingAssembly()
+        {
+            throw NotImplemented.ByDesign;
+        } //Implemented by toolchain.
 
         public static Assembly GetCallingAssembly()
         {
-            if (AppContext.TryGetSwitch("Switch.System.Reflection.Assembly.SimulatedCallingAssembly", out bool isSimulated) && isSimulated)
+            if (
+                AppContext.TryGetSwitch(
+                    "Switch.System.Reflection.Assembly.SimulatedCallingAssembly",
+                    out bool isSimulated
+                ) && isSimulated
+            )
                 return GetEntryAssembly();
 
             throw new PlatformNotSupportedException();
         }
 
-        public static Assembly Load(AssemblyName assemblyRef) => ReflectionAugments.ReflectionCoreCallbacks.Load(assemblyRef, throwOnFileNotFound: true);
+        public static Assembly Load(AssemblyName assemblyRef) =>
+            ReflectionAugments.ReflectionCoreCallbacks.Load(assemblyRef, throwOnFileNotFound: true);
 
         public static Assembly Load(string assemblyString)
         {
@@ -54,5 +64,5 @@ namespace System.Reflection
                 return null;
             }
         }
-   }
+    }
 }

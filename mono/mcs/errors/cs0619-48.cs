@@ -1,15 +1,15 @@
 // CS0619-48: `A.Prop' is obsolete: `!!!'
 // Line: 13
 
-class A: System.Attribute
+class A : System.Attribute
 {
-	[System.Obsolete("!!!", true)]
-	public string Prop {
-		set { }
-		get { return ""; }
-	}
+    [System.Obsolete("!!!", true)]
+    public string Prop
+    {
+        set { }
+        get { return ""; }
+    }
 }
 
-[A(Prop="System.String.Empty")]
-class Obsolete {
-}
+[A(Prop = "System.String.Empty")]
+class Obsolete { }

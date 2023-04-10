@@ -3,8 +3,10 @@
 
 using System;
 
-public class Test {
-	void Main () {
-		Console.WriteLine (++0);
-	}
+public class Test
+{
+    void Main()
+    {
+        Console.WriteLine(++0);
+    }
 }

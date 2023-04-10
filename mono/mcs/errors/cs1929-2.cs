@@ -6,17 +6,16 @@ using System.Collections;
 
 static class Extensions
 {
-	public static void Frobnicate<T> (this T foo) where T : IList
-	{
-	}
+    public static void Frobnicate<T>(this T foo)
+        where T : IList { }
 }
 
 public class Test
 {
-	IList mFoo;
+    IList mFoo;
 
-	void Frobnicate ()
-	{
-		mFoo.Frobnicate<Test> ();
-	}
+    void Frobnicate()
+    {
+        mFoo.Frobnicate<Test>();
+    }
 }

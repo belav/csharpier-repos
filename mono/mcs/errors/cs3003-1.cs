@@ -2,11 +2,12 @@
 // Line: 8
 // Compiler options: -warnaserror -warn:1
 
-[assembly:System.CLSCompliant (true)]
+[assembly: System.CLSCompliant(true)]
 
-[System.CLSCompliant (false)]
-public delegate void MyDelegate ();
+[System.CLSCompliant(false)]
+public delegate void MyDelegate();
 
-public class CLSClass {
-        public event MyDelegate MyEvent;
+public class CLSClass
+{
+    public event MyDelegate MyEvent;
 }

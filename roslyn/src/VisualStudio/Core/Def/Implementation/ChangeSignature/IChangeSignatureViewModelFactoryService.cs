@@ -10,7 +10,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 {
     internal interface IChangeSignatureViewModelFactoryService : ILanguageService
     {
-        SymbolDisplayPart[] GeneratePreviewDisplayParts(AddedParameterViewModel addedParameterViewModel);
+        SymbolDisplayPart[] GeneratePreviewDisplayParts(
+            AddedParameterViewModel addedParameterViewModel
+        );
 
         bool IsTypeNameValid(string typeName);
 

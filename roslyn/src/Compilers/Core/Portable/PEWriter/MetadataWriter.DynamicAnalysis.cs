@@ -45,9 +45,12 @@ namespace Microsoft.Cci
 
         public DynamicAnalysisDataWriter(int documentCountEstimate, int methodCountEstimate)
         {
-            // Most methods will have a span blob, each document has a hash blob and at least two blobs encoding the name 
+            // Most methods will have a span blob, each document has a hash blob and at least two blobs encoding the name
             // (adding one more blob per document to account for all directory names):
-            _blobs = new Dictionary<ImmutableArray<byte>, BlobHandle>(1 + methodCountEstimate + 4 * documentCountEstimate, ByteSequenceComparer.Instance);
+            _blobs = new Dictionary<ImmutableArray<byte>, BlobHandle>(
+                1 + methodCountEstimate + 4 * documentCountEstimate,
+                ByteSequenceComparer.Instance
+            );
 
             // Each document has a unique guid:
             const int guidSize = 16;
@@ -128,7 +131,8 @@ namespace Microsoft.Cci
 
         private BlobHandle SerializeSpans(
             ImmutableArray<SourceSpan> spans,
-            Dictionary<DebugSourceDocument, int> documentIndex)
+            Dictionary<DebugSourceDocument, int> documentIndex
+        )
         {
             if (spans.Length == 0)
             {
@@ -207,7 +211,10 @@ namespace Microsoft.Cci
             return GetOrAddDocument(document, _documentIndex);
         }
 
-        private int GetOrAddDocument(DebugSourceDocument document, Dictionary<DebugSourceDocument, int> index)
+        private int GetOrAddDocument(
+            DebugSourceDocument document,
+            Dictionary<DebugSourceDocument, int> index
+        )
         {
             int documentRowId;
             if (!index.TryGetValue(document, out documentRowId))
@@ -216,12 +223,21 @@ namespace Microsoft.Cci
                 index.Add(document, documentRowId);
 
                 var sourceInfo = document.GetSourceInfo();
-                _documentTable.Add(new DocumentRow
-                {
-                    Name = SerializeDocumentName(document.Location),
-                    HashAlgorithm = (sourceInfo.Checksum.IsDefault ? default(GuidHandle) : GetOrAddGuid(sourceInfo.ChecksumAlgorithmId)),
-                    Hash = (sourceInfo.Checksum.IsDefault) ? default(BlobHandle) : GetOrAddBlob(sourceInfo.Checksum)
-                });
+                _documentTable.Add(
+                    new DocumentRow
+                    {
+                        Name = SerializeDocumentName(document.Location),
+                        HashAlgorithm = (
+                            sourceInfo.Checksum.IsDefault
+                                ? default(GuidHandle)
+                                : GetOrAddGuid(sourceInfo.ChecksumAlgorithmId)
+                        ),
+                        Hash =
+                            (sourceInfo.Checksum.IsDefault)
+                                ? default(BlobHandle)
+                                : GetOrAddBlob(sourceInfo.Checksum)
+                    }
+                );
             }
 
             return documentRowId;
@@ -246,7 +262,9 @@ namespace Microsoft.Cci
             // TODO: avoid allocations
             foreach (var part in name.Split(separator))
             {
-                BlobHandle partIndex = GetOrAddBlob(ImmutableArray.Create(MetadataWriter.s_utf8Encoding.GetBytes(part)));
+                BlobHandle partIndex = GetOrAddBlob(
+                    ImmutableArray.Create(MetadataWriter.s_utf8Encoding.GetBytes(part))
+                );
                 writer.WriteCompressedInteger(MetadataTokens.GetHeapOffset(partIndex));
             }
 
@@ -307,9 +325,9 @@ namespace Microsoft.Cci
         {
             var writer = new BlobWriter(builder.ReserveBytes(_blobHeapSize));
 
-            // Perf consideration: With large heap the following loop may cause a lot of cache misses 
-            // since the order of entries in _blobs dictionary depends on the hash of the array values, 
-            // which is not correlated to the heap index. If we observe such issue we should order 
+            // Perf consideration: With large heap the following loop may cause a lot of cache misses
+            // since the order of entries in _blobs dictionary depends on the hash of the array values,
+            // which is not correlated to the heap index. If we observe such issue we should order
             // the entries by heap position before running this loop.
             foreach (var entry in _blobs)
             {
@@ -347,9 +365,18 @@ namespace Microsoft.Cci
         {
             foreach (var row in _documentTable)
             {
-                writer.WriteReference(MetadataTokens.GetHeapOffset(row.Name), isSmall: (sizes.BlobIndexSize == 2));
-                writer.WriteReference(MetadataTokens.GetHeapOffset(row.HashAlgorithm), isSmall: (sizes.GuidIndexSize == 2));
-                writer.WriteReference(MetadataTokens.GetHeapOffset(row.Hash), isSmall: (sizes.BlobIndexSize == 2));
+                writer.WriteReference(
+                    MetadataTokens.GetHeapOffset(row.Name),
+                    isSmall: (sizes.BlobIndexSize == 2)
+                );
+                writer.WriteReference(
+                    MetadataTokens.GetHeapOffset(row.HashAlgorithm),
+                    isSmall: (sizes.GuidIndexSize == 2)
+                );
+                writer.WriteReference(
+                    MetadataTokens.GetHeapOffset(row.Hash),
+                    isSmall: (sizes.BlobIndexSize == 2)
+                );
             }
         }
 
@@ -357,7 +384,10 @@ namespace Microsoft.Cci
         {
             foreach (var row in _methodTable)
             {
-                writer.WriteReference(MetadataTokens.GetHeapOffset(row.Spans), isSmall: (sizes.BlobIndexSize == 2));
+                writer.WriteReference(
+                    MetadataTokens.GetHeapOffset(row.Spans),
+                    isSmall: (sizes.BlobIndexSize == 2)
+                );
             }
         }
 

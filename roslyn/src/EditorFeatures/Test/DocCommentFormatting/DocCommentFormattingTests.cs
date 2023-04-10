@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocCommentFormatting
     [Trait(Traits.Feature, Traits.Features.DocCommentFormatting)]
     public class DocCommentFormattingTests
     {
-        private readonly CSharpDocumentationCommentFormattingService _csharpService = new CSharpDocumentationCommentFormattingService();
-        private readonly VisualBasicDocumentationCommentFormattingService _vbService = new VisualBasicDocumentationCommentFormattingService();
+        private readonly CSharpDocumentationCommentFormattingService _csharpService =
+            new CSharpDocumentationCommentFormattingService();
+        private readonly VisualBasicDocumentationCommentFormattingService _vbService =
+            new VisualBasicDocumentationCommentFormattingService();
 
         private void TestFormat(string xmlFragment, string expectedCSharp, string expectedVB)
         {
@@ -27,8 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocCommentFormatting
             Assert.Equal(expectedVB, vbFormattedText);
         }
 
-        private void TestFormat(string xmlFragment, string expected)
-            => TestFormat(xmlFragment, expected, expected);
+        private void TestFormat(string xmlFragment, string expected) =>
+            TestFormat(xmlFragment, expected, expected);
 
         [Fact]
         public void CTag()
@@ -42,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocCommentFormatting
         [Fact]
         public void ExampleAndCodeTags()
         {
-            var comment = @"This method changes the point's location by the given x- and y-offsets.
+            var comment =
+                @"This method changes the point's location by the given x- and y-offsets.
             <example>For example:
             <code>
             Point p = new Point(3,5);
@@ -51,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocCommentFormatting
             results in <c>p</c>'s having the value (2,8).
             </example>";
 
-            var expected = "This method changes the point's location by the given x- and y-offsets. For example:\r\n\r\n            Point p = new Point(3,5);\r\n            p.Translate(-1,3);\r\n            \r\n\r\nresults in p's having the value (2,8).";
+            var expected =
+                "This method changes the point's location by the given x- and y-offsets. For example:\r\n\r\n            Point p = new Point(3,5);\r\n            p.Translate(-1,3);\r\n            \r\n\r\nresults in p's having the value (2,8).";
 
             TestFormat(comment, expected);
         }
@@ -59,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocCommentFormatting
         [Fact]
         public void ListTag()
         {
-            var comment = @"Here is an example of a bulleted list:
+            var comment =
+                @"Here is an example of a bulleted list:
         <list type=""bullet"">
         <item>
         <description>Item 1.</description>
@@ -77,13 +82,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.DocCommentFormatting
         [Fact]
         public void ParaTag()
         {
-            var comment = @"This is the entry point of the Point class testing program.
+            var comment =
+                @"This is the entry point of the Point class testing program.
         <para>This program tests each method and operator, and
         is intended to be run after any non-trivial maintenance has
         been performed on the Point class.</para>";
 
             var expected =
-@"This is the entry point of the Point class testing program.
+                @"This is the entry point of the Point class testing program.
 
 This program tests each method and operator, and is intended to be run after any non-trivial maintenance has been performed on the Point class.";
 
@@ -93,7 +99,8 @@ This program tests each method and operator, and is intended to be run after any
         [Fact]
         public void TestPermissionTag()
         {
-            var comment = @"<permission cref=""System.Security.PermissionSet"">Everyone can access this method.</permission>";
+            var comment =
+                @"<permission cref=""System.Security.PermissionSet"">Everyone can access this method.</permission>";
 
             var expected = @"Everyone can access this method.";
 
@@ -134,7 +141,7 @@ This program tests each method and operator, and is intended to be run after any
         public void TestParamRefTag()
         {
             var comment =
-@"This constructor initializes the new Point to 
+                @"This constructor initializes the new Point to 
 (<paramref name=""xor""/>,<paramref name=""yor""/>).";
 
             var expected = "This constructor initializes the new Point to (xor,yor).";
@@ -145,7 +152,8 @@ This program tests each method and operator, and is intended to be run after any
         [Fact]
         public void TestTypeParamRefTag()
         {
-            var comment = @"This method fetches data and returns a list of  <typeparamref name=""Z""/>.";
+            var comment =
+                @"This method fetches data and returns a list of  <typeparamref name=""Z""/>.";
 
             var expected = @"This method fetches data and returns a list of Z.";
 
@@ -166,7 +174,7 @@ This program tests each method and operator, and is intended to be run after any
         public void Whitespace2()
         {
             var comment =
-@"
+                @"
 This has extra
 whitespace.
 ";
@@ -189,7 +197,7 @@ whitespace.
         public void Paragraphs1()
         {
             var comment =
-@"
+                @"
 <para>This is part of a paragraph.</para>
 ";
             var expected = "This is part of a paragraph.";
@@ -201,13 +209,13 @@ whitespace.
         public void Paragraphs2()
         {
             var comment =
-@"
+                @"
 <para>This is part of a paragraph.</para>
 <para>This is also part of a paragraph.</para>
 ";
 
             var expected =
-@"This is part of a paragraph.
+                @"This is part of a paragraph.
 
 This is also part of a paragraph.";
 
@@ -218,13 +226,13 @@ This is also part of a paragraph.";
         public void Paragraphs3()
         {
             var comment =
-@"
+                @"
 This is a summary.
 <para>This is part of a paragraph.</para>
 ";
 
             var expected =
-@"This is a summary.
+                @"This is a summary.
 
 This is part of a paragraph.";
 
@@ -235,12 +243,12 @@ This is part of a paragraph.";
         public void Paragraphs4()
         {
             var comment =
-@"
+                @"
 <para>This is part of a paragraph.</para> This is part of the summary, too.
 ";
 
             var expected =
-@"This is part of a paragraph.
+                @"This is part of a paragraph.
 
 This is part of the summary, too.";
 
@@ -251,13 +259,13 @@ This is part of the summary, too.";
         public void Paragraphs5()
         {
             var comment =
-@"
+                @"
 <para>This is part of a<br/>paragraph.</para>
 <para>This is also part of a paragraph.</para>
 ";
 
             var expected =
-@"This is part of a
+                @"This is part of a
 paragraph.
 
 This is also part of a paragraph.";
@@ -272,13 +280,13 @@ This is also part of a paragraph.";
         public void Paragraphs6(string lineBreak)
         {
             var comment =
-$@"
+                $@"
 <para>This is part of a{lineBreak}paragraph.</para>
 <para>This is also part of a paragraph.</para>
 ";
 
             var expected =
-@"This is part of a
+                @"This is part of a
 
 paragraph.
 

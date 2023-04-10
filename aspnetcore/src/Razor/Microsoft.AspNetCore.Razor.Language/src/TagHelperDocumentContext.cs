@@ -13,7 +13,10 @@ namespace Microsoft.AspNetCore.Razor.Language;
 /// </summary>
 public abstract class TagHelperDocumentContext
 {
-    public static TagHelperDocumentContext Create(string prefix, IEnumerable<TagHelperDescriptor> tagHelpers)
+    public static TagHelperDocumentContext Create(
+        string prefix,
+        IEnumerable<TagHelperDescriptor> tagHelpers
+    )
     {
         if (tagHelpers == null)
         {
@@ -23,7 +26,10 @@ public abstract class TagHelperDocumentContext
         return new DefaultTagHelperDocumentContext(prefix, tagHelpers.ToArray());
     }
 
-    internal static TagHelperDocumentContext Create(string prefix, IReadOnlyList<TagHelperDescriptor> tagHelpers)
+    internal static TagHelperDocumentContext Create(
+        string prefix,
+        IReadOnlyList<TagHelperDescriptor> tagHelpers
+    )
     {
         if (tagHelpers == null)
         {
@@ -42,7 +48,10 @@ public abstract class TagHelperDocumentContext
         private readonly string _prefix;
         private readonly IReadOnlyList<TagHelperDescriptor> _tagHelpers;
 
-        public DefaultTagHelperDocumentContext(string prefix, IReadOnlyList<TagHelperDescriptor> tagHelpers)
+        public DefaultTagHelperDocumentContext(
+            string prefix,
+            IReadOnlyList<TagHelperDescriptor> tagHelpers
+        )
         {
             _prefix = prefix;
             _tagHelpers = tagHelpers;

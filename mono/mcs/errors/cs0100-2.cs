@@ -5,8 +5,8 @@ using System;
 
 class C
 {
-	static void Main ()
-	{
-		Func<int, int, int> l = (a, a) => 1;
-	}
+    static void Main()
+    {
+        Func<int, int, int> l = (a, a) => 1;
+    }
 }

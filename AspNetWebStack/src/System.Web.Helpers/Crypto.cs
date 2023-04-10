@@ -16,7 +16,12 @@ namespace System.Web.Helpers
         private const int PBKDF2SubkeyLength = 256 / 8; // 256 bits
         private const int SaltSize = 128 / 8; // 128 bits
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "byte", Justification = "It really is a byte length")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "byte",
+            Justification = "It really is a byte length"
+        )]
         internal static byte[] GenerateSaltInternal(int byteLength = SaltSize)
         {
             byte[] buf = new byte[byteLength];
@@ -27,7 +32,12 @@ namespace System.Web.Helpers
             return buf;
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "byte", Justification = "It really is a byte length")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1720:IdentifiersShouldNotContainTypeNames",
+            MessageId = "byte",
+            Justification = "It really is a byte length"
+        )]
         public static string GenerateSalt(int byteLength = SaltSize)
         {
             return Convert.ToBase64String(GenerateSaltInternal(byteLength));
@@ -59,18 +69,34 @@ namespace System.Web.Helpers
                 }
                 else
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.InvariantCulture, HelpersResources.Crypto_NotSupportedHashAlg, algorithm));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            HelpersResources.Crypto_NotSupportedHashAlg,
+                            algorithm
+                        )
+                    );
                 }
             }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "SHA", Justification = "Consistent with the Framework, which uses SHA")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1709:IdentifiersShouldBeCasedCorrectly",
+            MessageId = "SHA",
+            Justification = "Consistent with the Framework, which uses SHA"
+        )]
         public static string SHA1(string input)
         {
             return Hash(input, "sha1");
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "SHA", Justification = "Consistent with the Framework, which uses SHA")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1709:IdentifiersShouldBeCasedCorrectly",
+            MessageId = "SHA",
+            Justification = "Consistent with the Framework, which uses SHA"
+        )]
         public static string SHA256(string input)
         {
             return Hash(input, "sha256");
@@ -79,7 +105,7 @@ namespace System.Web.Helpers
         /* =======================
          * HASHED PASSWORD FORMATS
          * =======================
-         * 
+         *
          * Version 0:
          * PBKDF2 with HMAC-SHA1, 128-bit salt, 256-bit subkey, 1000 iterations.
          * (See also: SDL crypto guidelines v5.1, Part III)
@@ -124,7 +150,10 @@ namespace System.Web.Helpers
 
             // Verify a version 0 (see comment above) password hash.
 
-            if (hashedPasswordBytes.Length != (1 + SaltSize + PBKDF2SubkeyLength) || hashedPasswordBytes[0] != 0x00)
+            if (
+                hashedPasswordBytes.Length != (1 + SaltSize + PBKDF2SubkeyLength)
+                || hashedPasswordBytes[0] != 0x00
+            )
             {
                 // Wrong length or version header.
                 return false;
@@ -133,7 +162,13 @@ namespace System.Web.Helpers
             byte[] salt = new byte[SaltSize];
             Buffer.BlockCopy(hashedPasswordBytes, 1, salt, 0, SaltSize);
             byte[] storedSubkey = new byte[PBKDF2SubkeyLength];
-            Buffer.BlockCopy(hashedPasswordBytes, 1 + SaltSize, storedSubkey, 0, PBKDF2SubkeyLength);
+            Buffer.BlockCopy(
+                hashedPasswordBytes,
+                1 + SaltSize,
+                storedSubkey,
+                0,
+                PBKDF2SubkeyLength
+            );
 
             byte[] generatedSubkey;
             using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, PBKDF2IterCount))

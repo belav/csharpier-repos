@@ -24,7 +24,10 @@ namespace Internal.TypeSystem
                 method = rawPinvoke.Target;
 
             // Check SuppressGCTransition attribute
-            return method.HasCustomAttribute("System.Runtime.InteropServices", "SuppressGCTransitionAttribute");
+            return method.HasCustomAttribute(
+                "System.Runtime.InteropServices",
+                "SuppressGCTransitionAttribute"
+            );
         }
 
         /// <summary>
@@ -38,7 +41,9 @@ namespace Internal.TypeSystem
             if (method.HasSuppressGCTransitionAttribute())
                 return true;
 
-            MethodSignatureFlags unmanagedCallConv = method.GetPInvokeMethodMetadata().Flags.UnmanagedCallingConvention;
+            MethodSignatureFlags unmanagedCallConv = method
+                .GetPInvokeMethodMetadata()
+                .Flags.UnmanagedCallingConvention;
             if (unmanagedCallConv != MethodSignatureFlags.None)
                 return false;
 
@@ -46,11 +51,17 @@ namespace Internal.TypeSystem
                 return false;
 
             // Check UnmanagedCallConv attribute
-            System.Reflection.Metadata.CustomAttributeValue<TypeDesc>? unmanagedCallConvAttribute = ecmaMethod.GetDecodedCustomAttribute("System.Runtime.InteropServices", "UnmanagedCallConvAttribute");
+            System.Reflection.Metadata.CustomAttributeValue<TypeDesc>? unmanagedCallConvAttribute =
+                ecmaMethod.GetDecodedCustomAttribute(
+                    "System.Runtime.InteropServices",
+                    "UnmanagedCallConvAttribute"
+                );
             if (unmanagedCallConvAttribute == null)
                 return false;
 
-            foreach (DefType defType in unmanagedCallConvAttribute.Value.EnumerateCallConvsFromAttribute())
+            foreach (
+                DefType defType in unmanagedCallConvAttribute.Value.EnumerateCallConvsFromAttribute()
+            )
             {
                 if (defType.Name == "CallConvSuppressGCTransition")
                 {
@@ -61,14 +72,17 @@ namespace Internal.TypeSystem
             return false;
         }
 
-        public static IEnumerable<DefType> EnumerateCallConvsFromAttribute(this CustomAttributeValue<TypeDesc> attributeWithCallConvsArray)
+        public static IEnumerable<DefType> EnumerateCallConvsFromAttribute(
+            this CustomAttributeValue<TypeDesc> attributeWithCallConvsArray
+        )
         {
             ImmutableArray<CustomAttributeTypedArgument<TypeDesc>> callConvArray = default;
             foreach (var arg in attributeWithCallConvsArray.NamedArguments)
             {
                 if (arg.Name == "CallConvs")
                 {
-                    callConvArray = (ImmutableArray<CustomAttributeTypedArgument<TypeDesc>>)arg.Value;
+                    callConvArray =
+                        (ImmutableArray<CustomAttributeTypedArgument<TypeDesc>>)arg.Value;
                 }
             }
 

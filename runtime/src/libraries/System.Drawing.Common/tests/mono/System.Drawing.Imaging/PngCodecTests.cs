@@ -175,7 +175,11 @@ namespace MonoTests.System.Drawing.Imaging
             string sInFile = Helpers.GetTestBitmapPath("1bit.png");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     Assert.Equal(bmp.Height, data.Height);
@@ -183,7 +187,6 @@ namespace MonoTests.System.Drawing.Imaging
                     Assert.Equal(PixelFormat.Format24bppRgb, data.PixelFormat);
                     Assert.Equal(864, data.Stride);
                     Assert.Equal(384, data.Height);
-
                     unsafe
                     {
                         byte* scan = (byte*)data.Scan0;
@@ -342,7 +345,11 @@ namespace MonoTests.System.Drawing.Imaging
             string sInFile = Helpers.GetTestBitmapPath("81674-2bpp.png");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     Assert.Equal(bmp.Height, data.Height);
@@ -350,7 +357,6 @@ namespace MonoTests.System.Drawing.Imaging
                     Assert.Equal(PixelFormat.Format24bppRgb, data.PixelFormat);
                     Assert.Equal(300, data.Stride);
                     Assert.Equal(100, data.Height);
-
                     unsafe
                     {
                         byte* scan = (byte*)data.Scan0;
@@ -521,14 +527,17 @@ namespace MonoTests.System.Drawing.Imaging
             string sInFile = Helpers.GetTestBitmapPath("4bit.png");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
-                BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     Assert.Equal(bmp.Height, data.Height);
                     Assert.Equal(bmp.Width, data.Width);
                     Assert.Equal(PixelFormat.Format24bppRgb, data.PixelFormat);
                     Assert.Equal(864, data.Stride);
-
                     unsafe
                     {
                         byte* scan = (byte*)data.Scan0;
@@ -653,9 +662,7 @@ namespace MonoTests.System.Drawing.Imaging
                 {
                     File.Delete(sOutFile);
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 

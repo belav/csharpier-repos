@@ -3,5 +3,4 @@
 // Compiler options: -warnaserror
 
 #pragma warning disable 1AAA
-class MainClass {
-}
+class MainClass { }

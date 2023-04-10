@@ -17,9 +17,7 @@ internal sealed partial class ForbidResult : IResult
     /// Initializes a new instance of <see cref="ForbidResult"/>.
     /// </summary>
     public ForbidResult()
-        : this(Array.Empty<string>())
-    {
-    }
+        : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
@@ -27,9 +25,7 @@ internal sealed partial class ForbidResult : IResult
     /// </summary>
     /// <param name="authenticationScheme">The authentication scheme to challenge.</param>
     public ForbidResult(string authenticationScheme)
-        : this(new[] { authenticationScheme })
-    {
-    }
+        : this(new[] { authenticationScheme }) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
@@ -37,9 +33,7 @@ internal sealed partial class ForbidResult : IResult
     /// </summary>
     /// <param name="authenticationSchemes">The authentication schemes to challenge.</param>
     public ForbidResult(IList<string> authenticationSchemes)
-        : this(authenticationSchemes, properties: null)
-    {
-    }
+        : this(authenticationSchemes, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
@@ -48,9 +42,7 @@ internal sealed partial class ForbidResult : IResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
     public ForbidResult(AuthenticationProperties? properties)
-        : this(Array.Empty<string>(), properties)
-    {
-    }
+        : this(Array.Empty<string>(), properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
@@ -60,9 +52,7 @@ internal sealed partial class ForbidResult : IResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
     public ForbidResult(string authenticationScheme, AuthenticationProperties? properties)
-        : this(new[] { authenticationScheme }, properties)
-    {
-    }
+        : this(new[] { authenticationScheme }, properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
@@ -109,7 +99,10 @@ internal sealed partial class ForbidResult : IResult
 
     private static partial class Log
     {
-        public static void ForbidResultExecuting(ILogger logger, IList<string> authenticationSchemes)
+        public static void ForbidResultExecuting(
+            ILogger logger,
+            IList<string> authenticationSchemes
+        )
         {
             if (logger.IsEnabled(LogLevel.Information))
             {
@@ -117,8 +110,13 @@ internal sealed partial class ForbidResult : IResult
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information, "Executing ChallengeResult with authentication schemes ({Schemes}).", EventName = "ChallengeResultExecuting", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing ChallengeResult with authentication schemes ({Schemes}).",
+            EventName = "ChallengeResultExecuting",
+            SkipEnabledCheck = true
+        )]
         private static partial void ForbidResultExecuting(ILogger logger, string[] schemes);
     }
-
 }

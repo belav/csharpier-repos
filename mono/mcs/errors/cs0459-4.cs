@@ -4,10 +4,10 @@
 
 using System;
 
-class X {
-
-	unsafe void Test ()
-	{
-		X x = *&this;
-	}
+class X
+{
+    unsafe void Test()
+    {
+        X x = *&this;
+    }
 }

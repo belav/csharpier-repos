@@ -23,7 +23,8 @@ namespace System.ServiceModel.PeerResolvers
             }
         }
 
-        public ResolveResponseInfo() : this(null) { }
+        public ResolveResponseInfo()
+            : this(null) { }
 
         public ResolveResponseInfo(PeerNodeAddress[] addresses)
         {
@@ -45,4 +46,3 @@ namespace System.ServiceModel.PeerResolvers
         }
     }
 }
-

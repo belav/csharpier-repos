@@ -20,21 +20,39 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.Snippets
     {
         internal override bool IsSnippetProvider => true;
 
-        public override async Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey = null, CancellationToken cancellationToken = default)
+        public override async Task<CompletionChange> GetChangeAsync(
+            Document document,
+            CompletionItem item,
+            char? commitKey = null,
+            CancellationToken cancellationToken = default
+        )
         {
             // This retrieves the document without the text used to invoke completion
             // as well as the new cursor position after that has been removed.
-            var (strippedDocument, position) = await GetDocumentWithoutInvokingTextAsync(document, SnippetCompletionItem.GetInvocationPosition(item), cancellationToken).ConfigureAwait(false);
+            var (strippedDocument, position) = await GetDocumentWithoutInvokingTextAsync(
+                    document,
+                    SnippetCompletionItem.GetInvocationPosition(item),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var service = strippedDocument.GetRequiredLanguageService<ISnippetService>();
             var snippetIdentifier = SnippetCompletionItem.GetSnippetIdentifier(item);
             var snippetProvider = service.GetSnippetProvider(snippetIdentifier);
 
             // Logging for telemetry.
-            Logger.Log(FunctionId.Completion_SemanticSnippets, $"Name: {snippetIdentifier}", LogLevel.Information);
+            Logger.Log(
+                FunctionId.Completion_SemanticSnippets,
+                $"Name: {snippetIdentifier}",
+                LogLevel.Information
+            );
 
             // This retrieves the generated Snippet
-            var snippet = await snippetProvider.GetSnippetAsync(strippedDocument, position, cancellationToken).ConfigureAwait(false);
-            var strippedText = await strippedDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
+            var snippet = await snippetProvider
+                .GetSnippetAsync(strippedDocument, position, cancellationToken)
+                .ConfigureAwait(false);
+            var strippedText = await strippedDocument
+                .GetTextAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // This introduces the text changes of the snippet into the document with the completion invoking text
             var allChangesText = strippedText.WithChanges(snippet.TextChanges);
@@ -42,12 +60,23 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.Snippets
             // This retrieves ALL text changes from the original document which includes the TextChanges from the snippet
             // as well as the clean up.
             var allChangesDocument = document.WithText(allChangesText);
-            var allTextChanges = await allChangesDocument.GetTextChangesAsync(document, cancellationToken).ConfigureAwait(false);
+            var allTextChanges = await allChangesDocument
+                .GetTextChangesAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
             var change = Utilities.Collapse(allChangesText, allTextChanges.AsImmutable());
 
             // Converts the snippet to an LSP formatted snippet string.
-            var lspSnippet = await RoslynLSPSnippetConverter.GenerateLSPSnippetAsync(allChangesDocument, snippet.CursorPosition, snippet.Placeholders, change, item.Span.Start, cancellationToken).ConfigureAwait(false);
+            var lspSnippet = await RoslynLSPSnippetConverter
+                .GenerateLSPSnippetAsync(
+                    allChangesDocument,
+                    snippet.CursorPosition,
+                    snippet.Placeholders,
+                    change,
+                    item.Span.Start,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // If the TextChanges retrieved starts after the trigger point of the CompletionItem,
             // then we need to move the bounds backwards and encapsulate the trigger point.
@@ -59,10 +88,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.Snippets
                 change = new TextChange(textSpan, snippetText);
             }
 
-            var props = ImmutableDictionary<string, string>.Empty
-                .Add(SnippetCompletionItem.LSPSnippetKey, lspSnippet);
+            var props = ImmutableDictionary<string, string>.Empty.Add(
+                SnippetCompletionItem.LSPSnippetKey,
+                lspSnippet
+            );
 
-            return CompletionChange.Create(change, allTextChanges.AsImmutable(), properties: props, snippet.CursorPosition, includesCommitCharacter: true);
+            return CompletionChange.Create(
+                change,
+                allTextChanges.AsImmutable(),
+                properties: props,
+                snippet.CursorPosition,
+                includesCommitCharacter: true
+            );
         }
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
@@ -82,9 +119,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.Snippets
                 return;
             }
 
-            var (strippedDocument, newPosition) = await GetDocumentWithoutInvokingTextAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var (strippedDocument, newPosition) = await GetDocumentWithoutInvokingTextAsync(
+                    document,
+                    position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var snippets = await service.GetSnippetsAsync(strippedDocument, newPosition, cancellationToken).ConfigureAwait(false);
+            var snippets = await service
+                .GetSnippetsAsync(strippedDocument, newPosition, cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var snippetData in snippets)
             {
@@ -94,22 +138,37 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.Snippets
                     position: position,
                     snippetIdentifier: snippetData.Identifier,
                     glyph: Glyph.Snippet,
-                    description: (snippetData.Description + Environment.NewLine + string.Format(FeaturesResources.Code_snippet_for_0, snippetData.Description)).ToSymbolDisplayParts(),
+                    description: (
+                        snippetData.Description
+                        + Environment.NewLine
+                        + string.Format(
+                            FeaturesResources.Code_snippet_for_0,
+                            snippetData.Description
+                        )
+                    ).ToSymbolDisplayParts(),
                     inlineDescription: snippetData.Description,
-                    additionalFilterTexts: snippetData.AdditionalFilterTexts);
+                    additionalFilterTexts: snippetData.AdditionalFilterTexts
+                );
                 context.AddItem(completionItem);
             }
         }
 
-        internal override async Task<CompletionDescription?> GetDescriptionAsync(Document document, CompletionItem item, CompletionOptions options, SymbolDescriptionOptions displayOptions, CancellationToken cancellationToken)
+        internal override async Task<CompletionDescription?> GetDescriptionAsync(
+            Document document,
+            CompletionItem item,
+            CompletionOptions options,
+            SymbolDescriptionOptions displayOptions,
+            CancellationToken cancellationToken
+        )
         {
-            return await Task.FromResult(CommonCompletionItem.GetDescription(item)).ConfigureAwait(false);
+            return await Task.FromResult(CommonCompletionItem.GetDescription(item))
+                .ConfigureAwait(false);
         }
 
         /// Gets the document without whatever text was used to invoke the completion.
         /// Also gets the new position the cursor will be on.
         /// Returns the original document and position if completion was invoked using Ctrl-Space.
-        /// 
+        ///
         /// public void Method()
         /// {
         ///     $$               //invoked by typing Ctrl-Space
@@ -117,9 +176,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.Snippets
         /// Example invoking when span is not empty:
         /// public void Method()
         /// {
-        ///     Wr$$             //invoked by typing out the completion 
+        ///     Wr$$             //invoked by typing out the completion
         /// }
-        private static async Task<(Document, int)> GetDocumentWithoutInvokingTextAsync(Document document, int position, CancellationToken cancellationToken)
+        private static async Task<(Document, int)> GetDocumentWithoutInvokingTextAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var originalText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 

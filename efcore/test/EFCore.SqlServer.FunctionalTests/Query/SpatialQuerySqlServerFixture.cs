@@ -8,12 +8,10 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class SpatialQuerySqlServerFixture : SpatialQueryRelationalFixture
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-    protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-        => base.AddServices(serviceCollection)
-            .AddEntityFrameworkSqlServerNetTopologySuite();
+    protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+        base.AddServices(serviceCollection).AddEntityFrameworkSqlServerNetTopologySuite();
 
     public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
     {
@@ -29,15 +27,20 @@ public class SpatialQuerySqlServerFixture : SpatialQueryRelationalFixture
 
         modelBuilder.HasDbFunction(
             typeof(GeoExtensions).GetMethod(nameof(GeoExtensions.Distance)),
-            b => b.HasTranslation(
-                e => new SqlFunctionExpression(
-                    instance: e[0],
-                    "STDistance",
-                    arguments: e.Skip(1),
-                    nullable: true,
-                    instancePropagatesNullability: true,
-                    argumentsPropagateNullability: e.Skip(1).Select(a => true),
-                    typeof(double),
-                    null)));
+            b =>
+                b.HasTranslation(
+                    e =>
+                        new SqlFunctionExpression(
+                            instance: e[0],
+                            "STDistance",
+                            arguments: e.Skip(1),
+                            nullable: true,
+                            instancePropagatesNullability: true,
+                            argumentsPropagateNullability: e.Skip(1).Select(a => true),
+                            typeof(double),
+                            null
+                        )
+                )
+        );
     }
 }

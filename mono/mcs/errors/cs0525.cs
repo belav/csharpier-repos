@@ -2,6 +2,6 @@
 // Line: 6
 
 interface Interface
-{ 
-	bool value = false;
+{
+    bool value = false;
 }

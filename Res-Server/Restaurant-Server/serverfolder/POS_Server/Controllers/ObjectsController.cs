@@ -18,47 +18,41 @@ namespace POS_Server.Controllers
     public class ObjectsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller> get all Objects
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
         {
-
-          
-
-
-
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-                 
-
                 bool canDelete = false;
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var List = entity.objects
-
-                                   .Select(c => new ObjectsModel
-                                   {
-                                       objectId = c.objectId,
-                                       name = c.name,
-                                       parentObjectName=c.parentObjectName,
-                                       //parentObjectId = c.parentObjectId,
-                                       objectType = c.objectType,
-                                       translate = c.translate,
-                                       icon= c.icon,
-                                       translateHint=  c.translateHint,
-                                   })
-                                   .ToList();
+                            .Select(
+                                c =>
+                                    new ObjectsModel
+                                    {
+                                        objectId = c.objectId,
+                                        name = c.name,
+                                        parentObjectName = c.parentObjectName,
+                                        //parentObjectId = c.parentObjectId,
+                                        objectType = c.objectType,
+                                        translate = c.translate,
+                                        icon = c.icon,
+                                        translateHint = c.translateHint,
+                                    }
+                            )
+                            .ToList();
                         if (List.Count > 0)
                         {
                             for (int i = 0; i < List.Count; i++)
@@ -67,7 +61,10 @@ namespace POS_Server.Controllers
                                 if (List[i].isActive == 1)
                                 {
                                     long objectId = (long)List[i].objectId;
-                                    var operationsL = entity.groupObject.Where(x => x.objectId == objectId).Select(b => new { b.id }).FirstOrDefault();
+                                    var operationsL = entity.groupObject
+                                        .Where(x => x.objectId == objectId)
+                                        .Select(b => new { b.id })
+                                        .FirstOrDefault();
 
                                     if (operationsL is null)
                                         canDelete = true;
@@ -77,7 +74,6 @@ namespace POS_Server.Controllers
                         }
 
                         return TokenManager.GenerateToken(List);
-                
                     }
                 }
                 catch
@@ -85,19 +81,16 @@ namespace POS_Server.Controllers
                     return TokenManager.GenerateToken("0");
                 }
             }
-
-         
         }
 
-
-
-        // GET api/<controller>  Get medal By ID 
+        // GET api/<controller>  Get medal By ID
         [HttpPost]
         [Route("GetByID")]
         public string GetByID(string token)
         {
             // public string GetUsersByGroupId(string token)
-          token = TokenManager.readToken(HttpContext.Current.Request);var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -105,7 +98,7 @@ namespace POS_Server.Controllers
             else
             {
                 long Id = 0;
-                
+
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -113,47 +106,41 @@ namespace POS_Server.Controllers
                     {
                         Id = long.Parse(c.Value);
                     }
-
-
                 }
 
-              
                 try
                 {
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var list = entity.objects
-                       .Where(c => c.objectId == Id)
-                       .Select(c => new
-                       {
-                           c.objectId,
-                           c.name,
-
-                           // c.parentObjectId,
-                           c.parentObjectName,
-                           c.objectType,
-                           c.translate,
-                            c.icon,
-                           c.translateHint,
-                       })
-                       .FirstOrDefault();
-
+                            .Where(c => c.objectId == Id)
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        c.objectId,
+                                        c.name,
+                                        // c.parentObjectId,
+                                        c.parentObjectName,
+                                        c.objectType,
+                                        c.translate,
+                                        c.icon,
+                                        c.translateHint,
+                                    }
+                            )
+                            .FirstOrDefault();
 
                         return TokenManager.GenerateToken(list);
                     }
-                    }
+                }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
             }
-
-           
         }
 
-
-        // add or update 
+        // add or update
         [HttpPost]
         [Route("Save")]
         public String Save(string token)
@@ -161,10 +148,8 @@ namespace POS_Server.Controllers
             //string Object
             string message = "";
 
-
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -180,71 +165,61 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<objects>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<objects>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
                     //   bondes tmpObject = null;
 
 
                     try
                     {
-
-                     
-
-                        
-                            using (incposdbEntities entity = new incposdbEntities())
+                        using (incposdbEntities entity = new incposdbEntities())
+                        {
+                            var sEntity = entity.Set<objects>();
+                            if (newObject.objectId == 0)
                             {
-                                var sEntity = entity.Set<objects>();
-                                if (newObject.objectId == 0)
-                                {
-                                  
-                                    sEntity.Add(newObject);
-                                    entity.SaveChanges();
-                                    message = newObject.objectId.ToString();
-                                }
-                                else
-                                {
+                                sEntity.Add(newObject);
+                                entity.SaveChanges();
+                                message = newObject.objectId.ToString();
+                            }
+                            else
+                            {
+                                var tmps = entity.objects
+                                    .Where(p => p.objectId == newObject.objectId)
+                                    .FirstOrDefault();
 
-                                    var tmps = entity.objects.Where(p => p.objectId == newObject.objectId).FirstOrDefault();
+                                tmps.objectId = newObject.objectId;
+                                tmps.name = newObject.name;
 
-                                    tmps.objectId = newObject.objectId;
-                                    tmps.name = newObject.name;
-                               
-                                  //  tmps.parentObjectId = newObject.parentObjectId;
-                                    tmps.objectType = newObject.objectType;
-                                    tmps.translate = newObject.translate;
+                                //  tmps.parentObjectId = newObject.parentObjectId;
+                                tmps.objectType = newObject.objectType;
+                                tmps.translate = newObject.translate;
                                 tmps.translateHint = newObject.translateHint;
                                 tmps.parentObjectName = newObject.parentObjectName;
                                 tmps.icon = newObject.icon;
-                                
-                                    entity.SaveChanges();
-                                    message = tmps.objectId.ToString();
-                                }
 
-
+                                entity.SaveChanges();
+                                message = tmps.objectId.ToString();
                             }
-                           // return message; ;
-                            return TokenManager.GenerateToken(message);
-
+                        }
+                        // return message; ;
+                        return TokenManager.GenerateToken(message);
                     }
                     catch
                     {
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
-             return TokenManager.GenerateToken(message);
-
+                return TokenManager.GenerateToken(message);
             }
-
 
             //var re = Request;
             //var headers = re.Headers;
@@ -329,10 +304,8 @@ namespace POS_Server.Controllers
 
             string message = "";
 
-
-
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -358,7 +331,6 @@ namespace POS_Server.Controllers
                     {
                         final = bool.Parse(c.Value);
                     }
-
                 }
 
                 if (final)
@@ -367,14 +339,13 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             objects Deleterow = entity.objects.Find(objectId);
                             entity.objects.Remove(Deleterow);
                             message = entity.SaveChanges().ToString();
                             //  return Ok("OK");
                             return TokenManager.GenerateToken(message);
 
-                           // return Ok("OK");
+                            // return Ok("OK");
                         }
                     }
                     catch
@@ -388,9 +359,8 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
                             objects Obj = entity.objects.Find(objectId);
-                         
+
                             message = entity.SaveChanges().ToString();
                             //  return Ok("OK");
                             return TokenManager.GenerateToken(message);
@@ -401,14 +371,7 @@ namespace POS_Server.Controllers
                         return TokenManager.GenerateToken("0");
                     }
                 }
-
-
-
-
             }
-
-
-
 
             //var re = Request;
             //var headers = re.Headers;

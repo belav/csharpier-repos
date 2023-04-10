@@ -19,6 +19,7 @@ namespace System.Runtime.InteropServices.Marshalling
         /// This custom type marshaller represents a single value.
         /// </summary>
         Value,
+
         /// <summary>
         /// This custom type marshaller represents a container of values that are placed sequentially in memory.
         /// </summary>

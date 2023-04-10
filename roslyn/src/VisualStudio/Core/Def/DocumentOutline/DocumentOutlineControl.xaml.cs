@@ -62,15 +62,21 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         private SortOption _sortOption;
 
         /// <summary>
-        /// Queue to batch up work to do to compute the data model. Used so we can batch up a lot of events 
+        /// Queue to batch up work to do to compute the data model. Used so we can batch up a lot of events
         /// and only fetch the model once for every batch. The bool parameter is unused.
         /// </summary>
-        private readonly AsyncBatchingWorkQueue<bool, DocumentSymbolDataModel?> _computeDataModelQueue;
+        private readonly AsyncBatchingWorkQueue<
+            bool,
+            DocumentSymbolDataModel?
+        > _computeDataModelQueue;
 
         /// <summary>
         /// Queue to batch up work to do to filter and sort the data model. The bool parameter is unused.
         /// </summary>
-        private readonly AsyncBatchingWorkQueue<bool, DocumentSymbolDataModel?> _filterAndSortDataModelQueue;
+        private readonly AsyncBatchingWorkQueue<
+            bool,
+            DocumentSymbolDataModel?
+        > _filterAndSortDataModelQueue;
 
         /// <summary>
         /// Queue to batch up work to do to highlight the currently selected symbol node, expand/collapse nodes,
@@ -88,7 +94,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             IThreadingContext threadingContext,
             IAsynchronousOperationListener asyncListener,
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
-            IVsCodeWindow codeWindow)
+            IVsCodeWindow codeWindow
+        )
         {
             InitializeComponent();
 
@@ -105,20 +112,26 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 ComputeDataModelAsync,
                 EqualityComparer<bool>.Default,
                 asyncListener,
-                CancellationToken);
+                CancellationToken
+            );
 
-            _filterAndSortDataModelQueue = new AsyncBatchingWorkQueue<bool, DocumentSymbolDataModel?>(
+            _filterAndSortDataModelQueue = new AsyncBatchingWorkQueue<
+                bool,
+                DocumentSymbolDataModel?
+            >(
                 DelayTimeSpan.NearImmediate,
                 FilterAndSortDataModelAsync,
                 EqualityComparer<bool>.Default,
                 asyncListener,
-                CancellationToken);
+                CancellationToken
+            );
 
             _highlightExpandAndPresentItemsQueue = new AsyncBatchingWorkQueue<ExpansionOption>(
                 DelayTimeSpan.NearImmediate,
                 HighlightExpandAndPresentItemsAsync,
                 asyncListener,
-                CancellationToken);
+                CancellationToken
+            );
 
             // We don't think the shell is initialized lazily, so we'll Debug.Fail(), but if it was we'd still
             // see the view created later so this will still function.
@@ -126,12 +139,16 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 Debug.Fail("GetPrimaryView failed during DocumentOutlineControl initialization.");
 
             if (ErrorHandler.Failed(StartTrackingView(primaryTextView)))
-                Debug.Fail("StartTrackingView failed during DocumentOutlineControl initialization.");
+                Debug.Fail(
+                    "StartTrackingView failed during DocumentOutlineControl initialization."
+                );
 
             if (ErrorHandler.Succeeded(codeWindow.GetSecondaryView(out var secondaryTextView)))
             {
                 if (ErrorHandler.Failed(StartTrackingView(secondaryTextView)))
-                    Debug.Fail("StartTrackingView failed during DocumentOutlineControl initialization.");
+                    Debug.Fail(
+                        "StartTrackingView failed during DocumentOutlineControl initialization."
+                    );
             }
 
             var subjectBuffer = _trackedTextViews[primaryTextView].TextBuffer;
@@ -145,7 +162,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 // Many workspace changes may need us to change the document symbols (like options changing, or project renaming).
                 TaggerEventSources.OnWorkspaceChanged(subjectBuffer, _asyncListener),
                 // Once we hook this buffer up to the workspace, then we can start computing the document symbols.
-                TaggerEventSources.OnWorkspaceRegistrationChanged(subjectBuffer));
+                TaggerEventSources.OnWorkspaceRegistrationChanged(subjectBuffer)
+            );
 
             _textViewEventSource.Changed += OnEventSourceChanged;
             _textViewEventSource.Connect();
@@ -202,8 +220,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             return VSConstants.S_OK;
         }
 
-        private void OnEventSourceChanged(object sender, TaggerEventArgs e)
-            => EnqueueComputeDataModelTask();
+        private void OnEventSourceChanged(object sender, TaggerEventArgs e) =>
+            EnqueueComputeDataModelTask();
 
         /// <summary>
         /// On caret position change, highlight the corresponding symbol node in the window and update the view.
@@ -214,23 +232,23 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 EnqueueHighlightExpandAndPresentItemsTask(ExpansionOption.CurrentExpansion);
         }
 
-        private void ExpandAll(object sender, RoutedEventArgs e)
-            => EnqueueHighlightExpandAndPresentItemsTask(ExpansionOption.Expand);
+        private void ExpandAll(object sender, RoutedEventArgs e) =>
+            EnqueueHighlightExpandAndPresentItemsTask(ExpansionOption.Expand);
 
-        private void CollapseAll(object sender, RoutedEventArgs e)
-            => EnqueueHighlightExpandAndPresentItemsTask(ExpansionOption.Collapse);
+        private void CollapseAll(object sender, RoutedEventArgs e) =>
+            EnqueueHighlightExpandAndPresentItemsTask(ExpansionOption.Collapse);
 
-        private void SearchBox_TextChanged(object sender, EventArgs e)
-            => EnqueueFilterAndSortDataModelTask();
+        private void SearchBox_TextChanged(object sender, EventArgs e) =>
+            EnqueueFilterAndSortDataModelTask();
 
-        private void SortByName(object sender, EventArgs e)
-            => SetSortOptionAndUpdateDataModel(SortOption.Name);
+        private void SortByName(object sender, EventArgs e) =>
+            SetSortOptionAndUpdateDataModel(SortOption.Name);
 
-        private void SortByOrder(object sender, EventArgs e)
-            => SetSortOptionAndUpdateDataModel(SortOption.Location);
+        private void SortByOrder(object sender, EventArgs e) =>
+            SetSortOptionAndUpdateDataModel(SortOption.Location);
 
-        private void SortByType(object sender, EventArgs e)
-            => SetSortOptionAndUpdateDataModel(SortOption.Type);
+        private void SortByType(object sender, EventArgs e) =>
+            SetSortOptionAndUpdateDataModel(SortOption.Type);
 
         private void SetSortOptionAndUpdateDataModel(SortOption sortOption)
         {
@@ -262,7 +280,11 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                     // Map the symbol's selection range start SnapshotPoint to a SnapshotPoint in the current textview then set the
                     // active text view caret position to this SnapshotPoint.
                     activeTextView.TryMoveCaretToAndEnsureVisible(
-                        symbol.SelectionRangeSpan.Start.TranslateTo(activeTextView.TextSnapshot, PointTrackingMode.Negative));
+                        symbol.SelectionRangeSpan.Start.TranslateTo(
+                            activeTextView.TextSnapshot,
+                            PointTrackingMode.Negative
+                        )
+                    );
                 }
                 finally
                 {

@@ -8,7 +8,8 @@ namespace System.Runtime.InteropServices.Tests
 {
     public class SetWin32ContextInIDispatchAttributeTests
     {
-        private const string TypeName = "System.Runtime.InteropServices.SetWin32ContextInIDispatchAttribute";
+        private const string TypeName =
+            "System.Runtime.InteropServices.SetWin32ContextInIDispatchAttribute";
 
         [Fact]
         public void Ctor_Default_ExistsInSrc()

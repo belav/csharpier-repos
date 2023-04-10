@@ -2,15 +2,25 @@
 // Line: 20
 // Compiler options: -nostdlib CS0656-corlib.cs
 
-namespace System {
-    public partial class Delegate {
-	public static Delegate Combine(Delegate a, Delegate b) { return null; }
-	public static void Remove(Delegate a, Delegate b) { return; }
+namespace System
+{
+    public partial class Delegate
+    {
+        public static Delegate Combine(Delegate a, Delegate b)
+        {
+            return null;
+        }
+
+        public static void Remove(Delegate a, Delegate b)
+        {
+            return;
+        }
     }
 }
 
-namespace System.Threading {
-    class Interlocked {}
+namespace System.Threading
+{
+    class Interlocked { }
 }
 
 delegate void D();

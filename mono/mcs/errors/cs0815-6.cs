@@ -6,15 +6,14 @@ using System.Collections.Generic;
 
 class A
 {
-	static void Test (Action a)
-	{
-	}
+    static void Test(Action a) { }
 
-	public static void Main ()
-	{
-		Test (() => {
-			List<string> l = null;
-			var res = l.ForEach (g => { });
-		});
-	}
+    public static void Main()
+    {
+        Test(() =>
+        {
+            List<string> l = null;
+            var res = l.ForEach(g => { });
+        });
+    }
 }

@@ -5,13 +5,15 @@ using System;
 
 class C
 {
-	[Obsolete("ooo", true)]
-	const int ob = 4;
+    [Obsolete("ooo", true)]
+    const int ob = 4;
 
-	public void Test (int arg)
-	{
-		switch (arg) {
-			case ob: return;
-		}
-	}
+    public void Test(int arg)
+    {
+        switch (arg)
+        {
+            case ob:
+                return;
+        }
+    }
 }

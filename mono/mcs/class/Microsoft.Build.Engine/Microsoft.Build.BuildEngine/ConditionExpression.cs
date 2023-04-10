@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2006 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -28,15 +28,16 @@
 using System;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
-	internal abstract class ConditionExpression {
-	
-		public abstract bool BoolEvaluate (Project context);
-		public abstract float NumberEvaluate (Project context);
-		public abstract string StringEvaluate (Project context);
-		
-		public abstract bool CanEvaluateToBool (Project context);
-		public abstract bool CanEvaluateToNumber (Project context);
-		public abstract bool CanEvaluateToString (Project context);
-	}
+namespace Microsoft.Build.BuildEngine
+{
+    internal abstract class ConditionExpression
+    {
+        public abstract bool BoolEvaluate(Project context);
+        public abstract float NumberEvaluate(Project context);
+        public abstract string StringEvaluate(Project context);
+
+        public abstract bool CanEvaluateToBool(Project context);
+        public abstract bool CanEvaluateToNumber(Project context);
+        public abstract bool CanEvaluateToString(Project context);
+    }
 }

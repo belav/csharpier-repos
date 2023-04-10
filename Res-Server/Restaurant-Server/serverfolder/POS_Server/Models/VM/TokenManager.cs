@@ -19,16 +19,19 @@ namespace POS_Server.Models.VM
 {
     public class TokenManager
     {
-        public static string Secret = "EREMN05OPLoDvbTTa/QkqLNMI7cPLguaRyHzyg7n5qNBVjQmtBhz4SzYh4NBVCXi3KJHlSXKP+oi2+bXr6CUYTR==";
-        private static int blackListSize = 10000;//
+        public static string Secret =
+            "EREMN05OPLoDvbTTa/QkqLNMI7cPLguaRyHzyg7n5qNBVjQmtBhz4SzYh4NBVCXi3KJHlSXKP+oi2+bXr6CUYTR==";
+        private static int blackListSize = 10000; //
 
         public static string GenerateToken(object res)
         {
             byte[] key = Convert.FromBase64String(Secret);
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(key);
 
-            var credentials = new Microsoft.IdentityModel.Tokens.SigningCredentials
-                            (securityKey, SecurityAlgorithms.HmacSha256Signature);
+            var credentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(
+                securityKey,
+                SecurityAlgorithms.HmacSha256Signature
+            );
 
             //  Finally create a Token
             var header = new JwtHeader(credentials);
@@ -40,10 +43,11 @@ namespace POS_Server.Models.VM
             var token = new JwtSecurityToken(header, payload);
             var handler = new JwtSecurityTokenHandler();
 
-            var jwtToken =  handler.WriteToken(token);
+            var jwtToken = handler.WriteToken(token);
             // Token to String so you can use it in your client
             return EncryptThenCompress(jwtToken);
         }
+
         public static IEnumerable<Claim> getTokenClaims(string token)
         {
             var decryptedtToken = DeCompressThenDecrypt(token);
@@ -53,6 +57,7 @@ namespace POS_Server.Models.VM
             IEnumerable<Claim> claims = jwtToken.Claims;
             return claims;
         }
+
         public static string GetPrincipal(string token)
         {
             try
@@ -74,9 +79,16 @@ namespace POS_Server.Models.VM
                 var jwtToken = new JwtSecurityToken(token);
                 IEnumerable<Claim> claims = jwtToken.Claims;
 
-                string requestToken = claims.Where(x => x.Type == "requestToken").Select(x => x.Value).FirstOrDefault();
+                string requestToken = claims
+                    .Where(x => x.Type == "requestToken")
+                    .Select(x => x.Value)
+                    .FirstOrDefault();
 
-                var principal = handler.ValidateToken(token, validationParameters, out securityToken);
+                var principal = handler.ValidateToken(
+                    token,
+                    validationParameters,
+                    out securityToken
+                );
                 if (principal == null)
                 {
                     //remove request token from black list
@@ -85,16 +97,18 @@ namespace POS_Server.Models.VM
                     return "-7"; // no authorization
                 }
 
-                
-                // check if any user logged in with same user account 
-                string userLogInID = claims.Where(x => x.Type == "userLogInID").Select(x => x.Value).FirstOrDefault();
+                // check if any user logged in with same user account
+                string userLogInID = claims
+                    .Where(x => x.Type == "userLogInID")
+                    .Select(x => x.Value)
+                    .FirstOrDefault();
                 long logInID = 0;
                 if (userLogInID != null && userLogInID != "")
                     logInID = long.Parse(userLogInID);
                 if (logInID != 0)
                 {
                     UsersLogsController uc = new UsersLogsController();
-                   bool isLoggedOut =  uc.checkLogByID(logInID);
+                    bool isLoggedOut = uc.checkLogByID(logInID);
                     if (isLoggedOut == true)
                         return "-8"; // log out
                 }
@@ -102,19 +116,19 @@ namespace POS_Server.Models.VM
                 #region confirm request token
                 bool requestDone = requestExecuted(requestToken);
 
-                if (requestDone)// request already executed 
+                if (requestDone) // request already executed
                     return "-9";
 
                 #endregion
 
                 return "0"; // every thing is OK
             }
-
             catch (Exception ex)
             {
                 return null;
             }
         }
+
         #region encryption & decryption
         public static string Encrypt(string Text)
         {
@@ -122,11 +136,12 @@ namespace POS_Server.Models.VM
             b = Encrypt(b);
             return ConvertToText(b);
         }
+
         private static byte[] ConvertToBytes(string text)
         {
             return System.Text.Encoding.Unicode.GetBytes(text);
-
         }
+
         public static byte[] Encrypt(byte[] ordinary)
         {
             BitArray bits = ToBits(ordinary);
@@ -140,12 +155,14 @@ namespace POS_Server.Models.VM
             encr.CopyTo(b, 0);
             return b;
         }
+
         public static string Decrypt(string EncryptedText)
         {
             byte[] b = ConvertToBytes(EncryptedText);
             b = Decrypt(b);
             return ConvertToText(b);
         }
+
         public static byte[] Decrypt(byte[] Encrypted)
         {
             BitArray enc = ToBits(Encrypted);
@@ -159,15 +176,18 @@ namespace POS_Server.Models.VM
             bits.CopyTo(decr, 0);
             return decr;
         }
+
         private static string ConvertToText(byte[] ByteAarry)
         {
             return System.Text.Encoding.Unicode.GetString(ByteAarry);
         }
+
         private static BitArray ToBits(byte[] Bytes)
         {
             BitArray bits = new BitArray(Bytes);
             return bits;
         }
+
         private static BitArray SubBits(BitArray Bits, int Start, int Length)
         {
             BitArray half = new BitArray(Length);
@@ -175,6 +195,7 @@ namespace POS_Server.Models.VM
                 half[i] = Bits[i + Start];
             return half;
         }
+
         private static BitArray ConcateBits(BitArray LHH, BitArray RHH)
         {
             BitArray bits = new BitArray(LHH.Length + RHH.Length);
@@ -192,18 +213,18 @@ namespace POS_Server.Models.VM
             try
             {
                 MemoryStream ms = new MemoryStream();
-                Stream s = new GZipStream(ms, CompressionMode.Compress,true);
+                Stream s = new GZipStream(ms, CompressionMode.Compress, true);
                 s.Write(bytData, 0, bytData.Length);
                 s.Close();
                 byte[] compressedData = (byte[])ms.ToArray();
                 return compressedData;
-
             }
             catch
             {
                 return null;
             }
         }
+
         public static byte[] DeCompress(byte[] bytInput)
         {
             string strResult = "";
@@ -266,7 +287,7 @@ namespace POS_Server.Models.VM
             text = HttpUtility.UrlDecode(text);
             var bytes = Encoding.UTF8.GetBytes(text);
             text = Encoding.UTF8.GetString(bytes);
-            // string reversedStr = ReverseString(text);           
+            // string reversedStr = ReverseString(text);
             // var bytes = Encoding.Unicode.GetBytes(text);
             //var bytes1 = DeCompress(bytes);
 
@@ -274,6 +295,7 @@ namespace POS_Server.Models.VM
             // return str;
             return (Decrypt(text));
         }
+
         public static string readToken(HttpRequest Request)
         {
             var filePath = "";
@@ -290,14 +312,20 @@ namespace POS_Server.Models.VM
                 while (true)
                 {
                     fileName = "tmp" + fileNum.ToString() + ".txt";
-                    var files = Directory.GetFiles(System.Web.Hosting.HostingEnvironment.MapPath("~\\tmpFiles"), fileName);
+                    var files = Directory.GetFiles(
+                        System.Web.Hosting.HostingEnvironment.MapPath("~\\tmpFiles"),
+                        fileName
+                    );
                     if (files.Length > 0)
                     {
                         fileNum = rnd.Next();
                     }
                     else
                     {
-                        filePath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\tmpFiles"), fileName);
+                        filePath = Path.Combine(
+                            System.Web.Hosting.HostingEnvironment.MapPath("~\\tmpFiles"),
+                            fileName
+                        );
                         try
                         {
                             postedFile.SaveAs(filePath);
@@ -313,20 +341,18 @@ namespace POS_Server.Models.VM
                             text = readToken(Request);
                             if (text != "")
                                 break;
-
                         }
                         if (text != "")
                             break;
                     }
                 }
-
             }
-
 
             return text;
         }
+
         // public static string readToken(HttpRequest Request)
-        //{  
+        //{
         //    var filePath = "";
         //    int fileNum = 0;
         //    string fileName = "";
@@ -363,7 +389,7 @@ namespace POS_Server.Models.VM
         //}
         public static void deleteDirectoryFiles()
         {
-            // Delete all files in a directory   
+            // Delete all files in a directory
             string rootFolder = System.Web.Hosting.HostingEnvironment.MapPath("~\\tmpFiles");
             string[] files = System.IO.Directory.GetFiles(rootFolder, "*.txt");
             foreach (string file in files)
@@ -375,9 +401,10 @@ namespace POS_Server.Models.VM
                 catch { }
             }
         }
+
         public static void deleteDirectoryFiles(string rootFolder)
         {
-            // Delete all files in a directory   
+            // Delete all files in a directory
 
             string[] files = System.IO.Directory.GetFiles(rootFolder, "*.txt");
             foreach (string file in files)
@@ -403,7 +430,6 @@ namespace POS_Server.Models.VM
             }
         }
 
-
         private static bool requestExecuted(string requestToken)
         {
             using (incposdbEntities entity = new incposdbEntities())
@@ -420,18 +446,17 @@ namespace POS_Server.Models.VM
                     if (count > blackListSize)
                     {
                         var lastN = entity.TokensTable
-                       .OrderBy(x => x.createDate).Take(count - blackListSize + blackListSize / 2);
+                            .OrderBy(x => x.createDate)
+                            .Take(count - blackListSize + blackListSize / 2);
                         try
                         {
                             entity.TokensTable.RemoveRange(lastN);
                         }
                         catch { }
-
                     }
 
                     var newToken = new TokensTable()
                     {
-
                         token = requestToken,
                         createDate = DateTime.Now,
                     };
@@ -440,8 +465,6 @@ namespace POS_Server.Models.VM
                     return false;
                 }
             }
-
         }
-
     }
 }

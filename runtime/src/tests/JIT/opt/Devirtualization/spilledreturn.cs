@@ -8,22 +8,43 @@ using System.Runtime.CompilerServices;
 // but the jit can prune the set down to one type during
 // importation, which then triggers late devirtualization.
 
-public class Base 
+public class Base
 {
-    public virtual void Foo() { Console.WriteLine("Base:Foo"); }
-    public virtual void Bar() { Console.WriteLine("Base:Bar"); }
+    public virtual void Foo()
+    {
+        Console.WriteLine("Base:Foo");
+    }
+
+    public virtual void Bar()
+    {
+        Console.WriteLine("Base:Bar");
+    }
 }
 
 public class Derived : Base
 {
-    public override sealed void Foo() { Console.WriteLine("Derived:Foo"); }
-    public override void Bar() { Console.WriteLine("Derived:Bar"); }
+    public override sealed void Foo()
+    {
+        Console.WriteLine("Derived:Foo");
+    }
+
+    public override void Bar()
+    {
+        Console.WriteLine("Derived:Bar");
+    }
 }
 
 public class Derived2 : Base
 {
-    public override sealed void Foo() { Console.WriteLine("Derived2:Foo"); }
-    public override void Bar() { Console.WriteLine("Derived2:Bar"); }
+    public override sealed void Foo()
+    {
+        Console.WriteLine("Derived2:Foo");
+    }
+
+    public override void Bar()
+    {
+        Console.WriteLine("Derived2:Bar");
+    }
 }
 
 public class Test
@@ -38,7 +59,7 @@ public class Test
         {
             return new Derived();
         }
-        else 
+        else
         {
             return new Derived2();
         }
@@ -53,7 +74,7 @@ public class Test
             Console.WriteLine("b true");
             return new Derived();
         }
-        else 
+        else
         {
             Console.WriteLine("b false");
             return new Derived();
@@ -93,7 +114,3 @@ public class Test
         return 100;
     }
 }
-
-
-        
-    

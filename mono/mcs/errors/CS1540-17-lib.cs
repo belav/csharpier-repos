@@ -1,6 +1,4 @@
 public abstract class A
 {
-	protected internal void Foo ()
-	{
-	}
+    protected internal void Foo() { }
 }

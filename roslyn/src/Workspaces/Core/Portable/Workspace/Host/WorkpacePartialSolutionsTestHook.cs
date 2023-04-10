@@ -16,7 +16,5 @@ internal class WorkpacePartialSolutionsTestHook : IWorkpacePartialSolutionsTestH
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public WorkpacePartialSolutionsTestHook()
-    {
-    }
+    public WorkpacePartialSolutionsTestHook() { }
 }

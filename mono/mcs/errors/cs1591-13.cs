@@ -6,13 +6,14 @@ using System;
 
 namespace Testing
 {
-	/// <summary>
-	/// description for class Test
-	/// </summary>
-	public class Test
-	{
-		public string this [int i] {
-			get { return null; }
-		}
-	}
+    /// <summary>
+    /// description for class Test
+    /// </summary>
+    public class Test
+    {
+        public string this[int i]
+        {
+            get { return null; }
+        }
+    }
 }

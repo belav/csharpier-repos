@@ -5,11 +5,12 @@ using System;
 using System.Reflection;
 
 [AttributeUsage(AttributeTargets.Method)]
-public class EnumAttribute : Attribute {}
+public class EnumAttribute : Attribute { }
 
 public enum E
 {
-        e_1,
-        [EnumAttribute]
-        e_2
+    e_1,
+
+    [EnumAttribute]
+    e_2
 }

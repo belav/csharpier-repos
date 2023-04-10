@@ -13,19 +13,29 @@ namespace System.Text.Json.Serialization.Converters
     {
         protected sealed override void Add(in object? value, ref ReadStack state)
         {
-            var addMethodDelegate = ((Action<TCollection, object?>?)state.Current.JsonTypeInfo.AddMethodDelegate);
+            var addMethodDelegate = (
+                (Action<TCollection, object?>?)state.Current.JsonTypeInfo.AddMethodDelegate
+            );
             Debug.Assert(addMethodDelegate != null);
             addMethodDelegate((TCollection)state.Current.ReturnValue!, value);
         }
 
-        protected sealed override void CreateCollection(ref Utf8JsonReader reader, scoped ref ReadStack state, JsonSerializerOptions options)
+        protected sealed override void CreateCollection(
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
             Func<object>? constructorDelegate = typeInfo.CreateObject;
 
             if (constructorDelegate == null)
             {
-                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                    TypeToConvert,
+                    ref reader,
+                    ref state
+                );
             }
 
             state.Current.ReturnValue = constructorDelegate();
@@ -33,7 +43,12 @@ namespace System.Text.Json.Serialization.Converters
             Debug.Assert(typeInfo.AddMethodDelegate != null);
         }
 
-        protected sealed override bool OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, ref WriteStack state)
+        protected sealed override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TCollection value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             IEnumerator enumerator;
             if (state.Current.CollectionEnumerator == null)

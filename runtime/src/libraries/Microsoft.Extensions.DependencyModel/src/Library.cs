@@ -9,28 +9,41 @@ namespace Microsoft.Extensions.DependencyModel
 {
     public class Library
     {
-        public Library(string type,
+        public Library(
+            string type,
             string name,
             string version,
             string? hash,
             IEnumerable<Dependency> dependencies,
-            bool serviceable)
+            bool serviceable
+        )
             : this(type, name, version, hash, dependencies, serviceable, path: null, hashPath: null)
-        {
-        }
+        { }
 
-        public Library(string type,
+        public Library(
+            string type,
             string name,
             string version,
             string? hash,
             IEnumerable<Dependency> dependencies,
             bool serviceable,
             string? path,
-            string? hashPath)
-            : this(type, name, version, hash, dependencies, serviceable, path, hashPath, runtimeStoreManifestName: null)
-        {
-        }
-        public Library(string type,
+            string? hashPath
+        )
+            : this(
+                type,
+                name,
+                version,
+                hash,
+                dependencies,
+                serviceable,
+                path,
+                hashPath,
+                runtimeStoreManifestName: null
+            ) { }
+
+        public Library(
+            string type,
             string name,
             string version,
             string? hash,
@@ -38,7 +51,8 @@ namespace Microsoft.Extensions.DependencyModel
             bool serviceable,
             string? path,
             string? hashPath,
-            string? runtimeStoreManifestName = null)
+            string? runtimeStoreManifestName = null
+        )
         {
             if (string.IsNullOrEmpty(type))
             {
@@ -81,6 +95,6 @@ namespace Microsoft.Extensions.DependencyModel
 
         public string? HashPath { get; }
 
-        public string? RuntimeStoreManifestName {get;}
+        public string? RuntimeStoreManifestName { get; }
     }
 }

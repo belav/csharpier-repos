@@ -3,10 +3,10 @@
 
 class C
 {
-	public int P { get; }
+    public int P { get; }
 
-	public void Foo ()
-	{
-		P = 10;
-	}
+    public void Foo()
+    {
+        P = 10;
+    }
 }

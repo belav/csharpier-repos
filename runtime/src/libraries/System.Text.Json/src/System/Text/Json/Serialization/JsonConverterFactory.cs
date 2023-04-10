@@ -19,7 +19,8 @@ namespace System.Text.Json.Serialization
         /// </summary>
         protected JsonConverterFactory() { }
 
-        private protected override ConverterStrategy GetDefaultConverterStrategy() => ConverterStrategy.None;
+        private protected override ConverterStrategy GetDefaultConverterStrategy() =>
+            ConverterStrategy.None;
 
         /// <summary>
         /// Create a converter for the provided <see cref="Type"/>.
@@ -30,7 +31,10 @@ namespace System.Text.Json.Serialization
         /// An instance of a <see cref="JsonConverter{T}"/> where T is compatible with <paramref name="typeToConvert"/>.
         /// If <see langword="null"/> is returned, a <see cref="NotSupportedException"/> will be thrown.
         /// </returns>
-        public abstract JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options);
+        public abstract JsonConverter? CreateConverter(
+            Type typeToConvert,
+            JsonSerializerOptions options
+        );
 
         internal override JsonParameterInfo CreateJsonParameterInfo()
         {
@@ -43,7 +47,10 @@ namespace System.Text.Json.Serialization
 
         internal sealed override Type? ElementType => null;
 
-        internal JsonConverter GetConverterInternal(Type typeToConvert, JsonSerializerOptions options)
+        internal JsonConverter GetConverterInternal(
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(CanConvert(typeToConvert));
 
@@ -51,10 +58,14 @@ namespace System.Text.Json.Serialization
             switch (converter)
             {
                 case null:
-                    ThrowHelper.ThrowInvalidOperationException_SerializerConverterFactoryReturnsNull(GetType());
+                    ThrowHelper.ThrowInvalidOperationException_SerializerConverterFactoryReturnsNull(
+                        GetType()
+                    );
                     break;
                 case JsonConverterFactory:
-                    ThrowHelper.ThrowInvalidOperationException_SerializerConverterFactoryReturnsJsonConverterFactorty(GetType());
+                    ThrowHelper.ThrowInvalidOperationException_SerializerConverterFactoryReturnsJsonConverterFactorty(
+                        GetType()
+                    );
                     break;
             }
 
@@ -65,7 +76,8 @@ namespace System.Text.Json.Serialization
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
             scoped ref ReadStack state,
-            out object? value)
+            out object? value
+        )
         {
             Debug.Fail("We should never get here.");
 
@@ -76,7 +88,8 @@ namespace System.Text.Json.Serialization
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
             scoped ref ReadStack state,
-            out object? value)
+            out object? value
+        )
         {
             Debug.Fail("We should never get here.");
 
@@ -87,7 +100,8 @@ namespace System.Text.Json.Serialization
             Utf8JsonWriter writer,
             object? value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             Debug.Fail("We should never get here.");
 
@@ -97,9 +111,11 @@ namespace System.Text.Json.Serialization
         internal sealed override Type TypeToConvert => null!;
 
         internal sealed override void WriteAsPropertyNameCoreAsObject(
-            Utf8JsonWriter writer, object value,
+            Utf8JsonWriter writer,
+            object value,
             JsonSerializerOptions options,
-            bool isWritingExtensionDataProperty)
+            bool isWritingExtensionDataProperty
+        )
         {
             Debug.Fail("We should never get here.");
 
@@ -108,7 +124,10 @@ namespace System.Text.Json.Serialization
 
         internal sealed override JsonConverter<TTarget> CreateCastingConverter<TTarget>()
         {
-            ThrowHelper.ThrowInvalidOperationException_ConverterCanConvertMultipleTypes(typeof(TTarget), this);
+            ThrowHelper.ThrowInvalidOperationException_ConverterCanConvertMultipleTypes(
+                typeof(TTarget),
+                this
+            );
             return null!;
         }
     }

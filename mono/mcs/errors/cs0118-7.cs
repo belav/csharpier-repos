@@ -5,15 +5,11 @@ using Foo;
 
 namespace Foo
 {
-	public class Test : Attribute
-	{
-	}
+    public class Test : Attribute { }
 }
 
 namespace Martin.Test
 {
-	[Test]
-	public class X
-	{
-	}
+    [Test]
+    public class X { }
 }

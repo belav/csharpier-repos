@@ -2,14 +2,13 @@
 // Line: 7
 class Test<T>
 {
-	public T Null ()
-	{
-		return null;
-	}
+    public T Null()
+    {
+        return null;
+    }
 }
 
 class X
 {
-	static void Main ()
-	{ }
+    static void Main() { }
 }

@@ -11,22 +11,25 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class SqlServerDatabaseCleaner : RelationalDatabaseCleaner
 {
-    protected override IDatabaseModelFactory CreateDatabaseModelFactory(ILoggerFactory loggerFactory)
-        => new SqlServerDatabaseModelFactory(
+    protected override IDatabaseModelFactory CreateDatabaseModelFactory(
+        ILoggerFactory loggerFactory
+    ) =>
+        new SqlServerDatabaseModelFactory(
             new DiagnosticsLogger<DbLoggerCategory.Scaffolding>(
                 loggerFactory,
                 new LoggingOptions(),
                 new DiagnosticListener("Fake"),
                 new SqlServerLoggingDefinitions(),
-                new NullDbContextLogger()));
+                new NullDbContextLogger()
+            )
+        );
 
-    protected override bool AcceptTable(DatabaseTable table)
-        => !(table is DatabaseView);
+    protected override bool AcceptTable(DatabaseTable table) => !(table is DatabaseView);
 
-    protected override bool AcceptIndex(DatabaseIndex index)
-        => false;
+    protected override bool AcceptIndex(DatabaseIndex index) => false;
 
-    private readonly string _dropViewsSql = @"
+    private readonly string _dropViewsSql =
+        @"
 DECLARE @name varchar(max) = '__dummy__', @SQL varchar(max) = '';
 
 WHILE @name IS NOT NULL
@@ -48,12 +51,11 @@ BEGIN
     EXEC (@SQL)
 END";
 
-    protected override string BuildCustomSql(DatabaseModel databaseModel)
-        => _dropViewsSql;
+    protected override string BuildCustomSql(DatabaseModel databaseModel) => _dropViewsSql;
 
-    protected override string BuildCustomEndingSql(DatabaseModel databaseModel)
-        => _dropViewsSql
-            + @"
+    protected override string BuildCustomEndingSql(DatabaseModel databaseModel) =>
+        _dropViewsSql
+        + @"
 GO
 
 DECLARE @SQL varchar(max) = '';
@@ -78,37 +80,45 @@ SET @SQL ='';
 SELECT @SQL = @SQL + 'DROP SCHEMA ' + QUOTENAME(name) + ';' FROM sys.schemas WHERE principal_id <> schema_id;
 EXEC (@SQL);";
 
-    protected override MigrationOperation Drop(DatabaseTable table)
-        => AddSqlServerSpecificAnnotations(base.Drop(table), table);
+    protected override MigrationOperation Drop(DatabaseTable table) =>
+        AddSqlServerSpecificAnnotations(base.Drop(table), table);
 
-    protected override MigrationOperation Drop(DatabaseForeignKey foreignKey)
-        => AddSqlServerSpecificAnnotations(base.Drop(foreignKey), foreignKey.Table);
+    protected override MigrationOperation Drop(DatabaseForeignKey foreignKey) =>
+        AddSqlServerSpecificAnnotations(base.Drop(foreignKey), foreignKey.Table);
 
-    protected override MigrationOperation Drop(DatabaseIndex index)
-        => AddSqlServerSpecificAnnotations(base.Drop(index), index.Table);
+    protected override MigrationOperation Drop(DatabaseIndex index) =>
+        AddSqlServerSpecificAnnotations(base.Drop(index), index.Table);
 
-    private static TOperation AddSqlServerSpecificAnnotations<TOperation>(TOperation operation, DatabaseTable table)
+    private static TOperation AddSqlServerSpecificAnnotations<TOperation>(
+        TOperation operation,
+        DatabaseTable table
+    )
         where TOperation : MigrationOperation
     {
-        operation[SqlServerAnnotationNames.MemoryOptimized]
-            = table[SqlServerAnnotationNames.MemoryOptimized] as bool?;
+        operation[SqlServerAnnotationNames.MemoryOptimized] =
+            table[SqlServerAnnotationNames.MemoryOptimized] as bool?;
 
         if (table[SqlServerAnnotationNames.IsTemporal] != null)
         {
-            operation[SqlServerAnnotationNames.IsTemporal]
-                = table[SqlServerAnnotationNames.IsTemporal];
+            operation[SqlServerAnnotationNames.IsTemporal] = table[
+                SqlServerAnnotationNames.IsTemporal
+            ];
 
-            operation[SqlServerAnnotationNames.TemporalHistoryTableName]
-                = table[SqlServerAnnotationNames.TemporalHistoryTableName];
+            operation[SqlServerAnnotationNames.TemporalHistoryTableName] = table[
+                SqlServerAnnotationNames.TemporalHistoryTableName
+            ];
 
-            operation[SqlServerAnnotationNames.TemporalHistoryTableSchema]
-                = table[SqlServerAnnotationNames.TemporalHistoryTableSchema];
+            operation[SqlServerAnnotationNames.TemporalHistoryTableSchema] = table[
+                SqlServerAnnotationNames.TemporalHistoryTableSchema
+            ];
 
-            operation[SqlServerAnnotationNames.TemporalPeriodStartColumnName]
-                = table[SqlServerAnnotationNames.TemporalPeriodStartColumnName];
+            operation[SqlServerAnnotationNames.TemporalPeriodStartColumnName] = table[
+                SqlServerAnnotationNames.TemporalPeriodStartColumnName
+            ];
 
-            operation[SqlServerAnnotationNames.TemporalPeriodEndColumnName]
-                = table[SqlServerAnnotationNames.TemporalPeriodEndColumnName];
+            operation[SqlServerAnnotationNames.TemporalPeriodEndColumnName] = table[
+                SqlServerAnnotationNames.TemporalPeriodEndColumnName
+            ];
         }
 
         return operation;

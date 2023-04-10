@@ -4,6 +4,5 @@
 
 using System;
 
-[CLSCompliant (true)]
-public class C {
-}
+[CLSCompliant(true)]
+public class C { }

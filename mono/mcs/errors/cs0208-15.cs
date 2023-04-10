@@ -4,15 +4,13 @@
 
 struct S<T>
 {
-	public struct N
-	{
-	}
+    public struct N { }
 }
 
 unsafe class Test
 {
-	public static void Main()
-	{
-		S<int>.N* a;
-	}
+    public static void Main()
+    {
+        S<int>.N* a;
+    }
 }

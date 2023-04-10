@@ -3,8 +3,8 @@
 
 class C
 {
-	static (int a, int a) Test ()
-	{
-		return null;
-	}
+    static (int a, int a) Test()
+    {
+        return null;
+    }
 }

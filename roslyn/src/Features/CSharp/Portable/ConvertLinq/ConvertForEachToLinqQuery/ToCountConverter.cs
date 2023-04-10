@@ -20,18 +20,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ForEachInfo<ForEachStatementSyntax, StatementSyntax> forEachInfo,
             ExpressionSyntax selectExpression,
             ExpressionSyntax modifyingExpression,
-            SyntaxTrivia[] trivia)
-            : base(forEachInfo, selectExpression, modifyingExpression, trivia)
-        {
-        }
+            SyntaxTrivia[] trivia
+        )
+            : base(forEachInfo, selectExpression, modifyingExpression, trivia) { }
 
         protected override string MethodName => nameof(Enumerable.Count);
 
         // Checks that the expression is "0".
         protected override bool CanReplaceInitialization(
             ExpressionSyntax expression,
-            CancellationToken cancellationToken)
-            => expression is LiteralExpressionSyntax literalExpression && literalExpression.Token.ValueText == "0";
+            CancellationToken cancellationToken
+        ) =>
+            expression is LiteralExpressionSyntax literalExpression
+            && literalExpression.Token.ValueText == "0";
 
         /// Input:
         /// foreach(...)
@@ -40,14 +41,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         ///     ...
         ///     counter++;
         ///  }
-        ///  
+        ///
         ///  Output:
         ///  counter += queryGenerated.Count();
-        protected override StatementSyntax CreateDefaultStatement(ExpressionSyntax queryOrLinqInvocationExpression, ExpressionSyntax expression)
-            => SyntaxFactory.ExpressionStatement(
+        protected override StatementSyntax CreateDefaultStatement(
+            ExpressionSyntax queryOrLinqInvocationExpression,
+            ExpressionSyntax expression
+        ) =>
+            SyntaxFactory.ExpressionStatement(
                 SyntaxFactory.AssignmentExpression(
                     SyntaxKind.AddAssignmentExpression,
                     expression,
-                    CreateInvocationExpression(queryOrLinqInvocationExpression)));
+                    CreateInvocationExpression(queryOrLinqInvocationExpression)
+                )
+            );
     }
 }

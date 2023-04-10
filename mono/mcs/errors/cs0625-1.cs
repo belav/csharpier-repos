@@ -4,14 +4,16 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace CS0625 {
-	[StructLayout(LayoutKind.Explicit)]
-	class GValue {
-		public int foo;
-	}
-	
-	class Tests {
-		public static void Main () {
-		}
-	}
+namespace CS0625
+{
+    [StructLayout(LayoutKind.Explicit)]
+    class GValue
+    {
+        public int foo;
+    }
+
+    class Tests
+    {
+        public static void Main() { }
+    }
 }

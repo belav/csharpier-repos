@@ -3,8 +3,8 @@
 
 class C
 {
-	public static void Main ()
-	{
-		string s = null.ToString ();
-	}
+    public static void Main()
+    {
+        string s = null.ToString();
+    }
 }

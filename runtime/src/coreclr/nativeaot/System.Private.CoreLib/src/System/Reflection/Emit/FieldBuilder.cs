@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace System.Reflection.Emit
 {
-
     public sealed class FieldBuilder : FieldInfo
     {
         internal FieldBuilder()
@@ -15,50 +14,32 @@ namespace System.Reflection.Emit
 
         public override FieldAttributes Attributes
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override RuntimeFieldHandle FieldHandle
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type FieldType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override string Name
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override object[] GetCustomAttributes(bool inherit)
@@ -81,24 +62,20 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public void SetConstant(object defaultValue)
-        {
-        }
+        public void SetConstant(object defaultValue) { }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
-        {
-        }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
-        {
-        }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
 
-        public void SetOffset(int iOffset)
-        {
-        }
+        public void SetOffset(int iOffset) { }
 
-        public override void SetValue(object obj, object val, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
-        {
-        }
+        public override void SetValue(
+            object obj,
+            object val,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        ) { }
     }
 }

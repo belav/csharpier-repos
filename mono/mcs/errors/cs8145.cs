@@ -3,5 +3,5 @@
 
 public class X
 {
-	ref string TestProp { get; }
+    ref string TestProp { get; }
 }

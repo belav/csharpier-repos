@@ -28,7 +28,9 @@ namespace System.ServiceModel
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.protectionLevel = value;
             }
@@ -41,7 +43,10 @@ namespace System.ServiceModel
             return result;
         }
 
-        internal static bool IsTransportProtectionAndAuthentication(WindowsStreamSecurityBindingElement wssbe, NamedPipeTransportSecurity transportSecurity)
+        internal static bool IsTransportProtectionAndAuthentication(
+            WindowsStreamSecurityBindingElement wssbe,
+            NamedPipeTransportSecurity transportSecurity
+        )
         {
             transportSecurity.protectionLevel = wssbe.ProtectionLevel;
             return true;

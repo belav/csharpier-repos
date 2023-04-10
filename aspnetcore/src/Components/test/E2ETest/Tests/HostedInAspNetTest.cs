@@ -14,7 +14,8 @@ public class HostedInAspNetTest : ServerTestBase<AspNetSiteServerFixture>
     public HostedInAspNetTest(
         BrowserFixture browserFixture,
         AspNetSiteServerFixture serverFixture,
-        ITestOutputHelper output)
+        ITestOutputHelper output
+    )
         : base(browserFixture, serverFixture, output)
     {
         serverFixture.BuildWebHostMethod = HostedInAspNet.Server.Program.BuildWebHost;
@@ -37,8 +38,9 @@ public class HostedInAspNetTest : ServerTestBase<AspNetSiteServerFixture>
     public void ServesStaticAssetsFromClientAppWebRoot()
     {
         var javascriptExecutor = (IJavaScriptExecutor)Browser;
-        var bootstrapTooltipType = javascriptExecutor
-            .ExecuteScript("return window.customJsWasLoaded;");
+        var bootstrapTooltipType = javascriptExecutor.ExecuteScript(
+            "return window.customJsWasLoaded;"
+        );
         Assert.True((bool)bootstrapTooltipType);
     }
 

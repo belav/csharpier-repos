@@ -6,16 +6,16 @@ using System;
 
 class A
 {
-       protected event EventHandler member;
+    protected event EventHandler member;
 }
 
 class B : A
 {
-       static void Main ()
-       {
-               A a = new A ();
-               a.member += Handler;
-       }
-       
-       static void Handler (object sender, EventArgs args) {}
+    static void Main()
+    {
+        A a = new A();
+        a.member += Handler;
+    }
+
+    static void Handler(object sender, EventArgs args) { }
 }

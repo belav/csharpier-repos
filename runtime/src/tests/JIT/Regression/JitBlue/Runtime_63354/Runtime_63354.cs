@@ -26,7 +26,7 @@ public class Runtime_63354
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void Box(object o) {}
+    public static void Box(object o) { }
 
     public static int Main()
     {

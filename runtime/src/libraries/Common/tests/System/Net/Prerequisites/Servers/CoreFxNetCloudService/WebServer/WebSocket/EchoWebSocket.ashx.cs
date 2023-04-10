@@ -18,7 +18,9 @@ namespace WebServer
 
         public void ProcessRequest(HttpContext context)
         {
-            _replyWithPartialMessages = context.Request.Url.Query.Contains("replyWithPartialMessages");
+            _replyWithPartialMessages = context.Request.Url.Query.Contains(
+                "replyWithPartialMessages"
+            );
 
             string subProtocol = context.Request.QueryString["subprotocol"];
 
@@ -59,10 +61,7 @@ namespace WebServer
 
         public bool IsReusable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         private async Task ProcessWebSocketRequest(WebSocketContext wsContext)
@@ -74,19 +73,27 @@ namespace WebServer
             // Stay in loop while websocket is open
             while (socket.State == WebSocketState.Open || socket.State == WebSocketState.CloseSent)
             {
-                var receiveResult = await socket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), CancellationToken.None);
+                var receiveResult = await socket.ReceiveAsync(
+                    new ArraySegment<byte>(receiveBuffer),
+                    CancellationToken.None
+                );
                 if (receiveResult.MessageType == WebSocketMessageType.Close)
                 {
                     if (receiveResult.CloseStatus == WebSocketCloseStatus.Empty)
                     {
-                        await socket.CloseAsync(WebSocketCloseStatus.Empty, null, CancellationToken.None);
+                        await socket.CloseAsync(
+                            WebSocketCloseStatus.Empty,
+                            null,
+                            CancellationToken.None
+                        );
                     }
                     else
                     {
                         await socket.CloseAsync(
                             receiveResult.CloseStatus.GetValueOrDefault(),
                             receiveResult.CloseStatusDescription,
-                            CancellationToken.None);
+                            CancellationToken.None
+                        );
                     }
 
                     continue;
@@ -100,13 +107,15 @@ namespace WebServer
                     {
                         receiveResult = await socket.ReceiveAsync(
                             new ArraySegment<byte>(receiveBuffer, offset, MaxBufferSize - offset),
-                            CancellationToken.None);
+                            CancellationToken.None
+                        );
                     }
                     else
                     {
                         receiveResult = await socket.ReceiveAsync(
                             new ArraySegment<byte>(throwAwayBuffer),
-                            CancellationToken.None);
+                            CancellationToken.None
+                        );
                     }
 
                     offset += receiveResult.Count;
@@ -117,8 +126,14 @@ namespace WebServer
                 {
                     await socket.CloseAsync(
                         WebSocketCloseStatus.MessageTooBig,
-                        string.Format("{0}: {1} > {2}", WebSocketCloseStatus.MessageTooBig.ToString(), offset, MaxBufferSize),
-                        CancellationToken.None);
+                        string.Format(
+                            "{0}: {1} > {2}",
+                            WebSocketCloseStatus.MessageTooBig.ToString(),
+                            offset,
+                            MaxBufferSize
+                        ),
+                        CancellationToken.None
+                    );
 
                     continue;
                 }
@@ -129,11 +144,19 @@ namespace WebServer
                     string receivedMessage = Encoding.UTF8.GetString(receiveBuffer, 0, offset);
                     if (receivedMessage == ".close")
                     {
-                        await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, receivedMessage, CancellationToken.None);
+                        await socket.CloseAsync(
+                            WebSocketCloseStatus.NormalClosure,
+                            receivedMessage,
+                            CancellationToken.None
+                        );
                     }
                     if (receivedMessage == ".shutdown")
                     {
-                        await socket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, receivedMessage, CancellationToken.None);
+                        await socket.CloseOutputAsync(
+                            WebSocketCloseStatus.NormalClosure,
+                            receivedMessage,
+                            CancellationToken.None
+                        );
                     }
                     else if (receivedMessage == ".abort")
                     {
@@ -156,10 +179,11 @@ namespace WebServer
                 if (sendMessage)
                 {
                     await socket.SendAsync(
-                            new ArraySegment<byte>(receiveBuffer, 0, offset),
-                            receiveResult.MessageType,
-                            !_replyWithPartialMessages,
-                            CancellationToken.None);
+                        new ArraySegment<byte>(receiveBuffer, 0, offset),
+                        receiveResult.MessageType,
+                        !_replyWithPartialMessages,
+                        CancellationToken.None
+                    );
                 }
             }
         }

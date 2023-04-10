@@ -2,7 +2,8 @@
 // Line: 6
 // Compiler options: -warnaserror -warn:1
 
-class ExternClass {
-        [System.Obsolete]
-        public static extern void ExternMethod();
+class ExternClass
+{
+    [System.Obsolete]
+    public static extern void ExternMethod();
 }

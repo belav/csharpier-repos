@@ -7,9 +7,8 @@ using System.Linq;
 
 class C
 {
-	public static void Foo <T> ()
-	{
-		var e = from T in "a"
-			select T;
-	}
+    public static void Foo<T>()
+    {
+        var e = from T in "a" select T;
+    }
 }

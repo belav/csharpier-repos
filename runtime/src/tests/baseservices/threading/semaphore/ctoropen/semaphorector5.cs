@@ -11,13 +11,17 @@ class CtorTest
         // Check args
         if (args.Length < 2)
         {
-            Console.WriteLine("USAGE: SemaphoreCtor4 /iCount:<int> /mCount:<int> " + 
-                "[/semName:<string>] [/iRandom:<int>]");
+            Console.WriteLine(
+                "USAGE: SemaphoreCtor4 /iCount:<int> /mCount:<int> "
+                    + "[/semName:<string>] [/iRandom:<int>]"
+            );
             return -1;
         }
 
         // Get the args
-        int iCount = -1, mCount = -1, iRandom = -1;
+        int iCount = -1,
+            mCount = -1,
+            iRandom = -1;
         string semName = "DefaultString";
 
         for (int i = 0; i < args.Length; i++)
@@ -61,14 +65,17 @@ class CtorTest
         CtorTest ct = new CtorTest();
         return ct.Run(iCount, mCount, semName, iRandom);
     }
-           
+
     private int Run(int iCount, int mCount, string semName, int iRandom)
     {
         // Testing createdNew
-        bool createdNew, createdNew2;
+        bool createdNew,
+            createdNew2;
         bool bResult = true;
-        int iRet = -1, count = iCount;
-        Semaphore sem1 = null, sem2 = null;
+        int iRet = -1,
+            count = iCount;
+        Semaphore sem1 = null,
+            sem2 = null;
         if (iRandom > 0)
             semName = Common.GenerateUnicodeString(iRandom);
         try

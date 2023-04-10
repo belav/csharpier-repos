@@ -14,8 +14,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private const int ShowEmptyEnvironment = (int)vsStartUp.vsStartUpEmptyEnvironment;
         private const int ShowStartPage = 5;
 
-        public static StartPage_InProc Create()
-            => new StartPage_InProc();
+        public static StartPage_InProc Create() => new StartPage_InProc();
 
         public void SetEnabled(bool enabled)
         {
@@ -31,7 +30,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return InvokeOnUIThread(cancellationToken =>
             {
                 var uiShell = GetGlobalService<SVsUIShell, IVsUIShell>();
-                if (ErrorHandler.Failed(uiShell.FindToolWindow((uint)__VSFINDTOOLWIN.FTW_fFrameOnly, new Guid(ToolWindowGuids80.StartPage), out var frame)))
+                if (
+                    ErrorHandler.Failed(
+                        uiShell.FindToolWindow(
+                            (uint)__VSFINDTOOLWIN.FTW_fFrameOnly,
+                            new Guid(ToolWindowGuids80.StartPage),
+                            out var frame
+                        )
+                    )
+                )
                 {
                     return false;
                 }

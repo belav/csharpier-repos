@@ -11,29 +11,39 @@ namespace System.CommandLine.Binding
             IArgument argument,
             Type expectedType,
             string value,
-            LocalizationResources localizationResources) :
-            base(argument, FormatErrorMessage(argument, expectedType, value, localizationResources))
-        {
-        }
+            LocalizationResources localizationResources
+        )
+            : base(
+                argument,
+                FormatErrorMessage(argument, expectedType, value, localizationResources)
+            ) { }
 
         private static string FormatErrorMessage(
             IArgument argument,
             Type expectedType,
             string value,
-            LocalizationResources localizationResources)
+            LocalizationResources localizationResources
+        )
         {
-            if (argument is Argument a &&
-                a.Parents.Count == 1)
+            if (argument is Argument a && a.Parents.Count == 1)
             {
-                var firstParent = (IIdentifierSymbol) a.Parents[0];
+                var firstParent = (IIdentifierSymbol)a.Parents[0];
                 var alias = firstParent.Aliases.First();
-                
-                switch(firstParent)
+
+                switch (firstParent)
                 {
                     case ICommand _:
-                        return localizationResources.ArgumentConversionCannotParseForCommand(value, alias, expectedType);
+                        return localizationResources.ArgumentConversionCannotParseForCommand(
+                            value,
+                            alias,
+                            expectedType
+                        );
                     case IOption _:
-                        return localizationResources.ArgumentConversionCannotParseForOption(value, alias, expectedType);
+                        return localizationResources.ArgumentConversionCannotParseForOption(
+                            value,
+                            alias,
+                            expectedType
+                        );
                 }
             }
 

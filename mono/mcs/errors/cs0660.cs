@@ -4,18 +4,18 @@
 
 class T
 {
-        public static bool operator == (object o, T t)
-        {
-            return false;
-        }
+    public static bool operator ==(object o, T t)
+    {
+        return false;
+    }
 
-        public static bool operator != (object o, T t)
-        {
-            return true;
-        }
-        
-        public override int GetHashCode ()
-        {
-            return base.GetHashCode ();
-        }
+    public static bool operator !=(object o, T t)
+    {
+        return true;
+    }
+
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
 }

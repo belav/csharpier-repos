@@ -3,21 +3,17 @@
 
 class A
 {
-        protected virtual void X ()
-        {
-        }
+    protected virtual void X() { }
 }
- 
-class B : A
-{
-}
- 
+
+class B : A { }
+
 class C : A
 {
-        static B b = new B ();
- 
-        static void M ()
-        {
-                b.X ();
-        }
+    static B b = new B();
+
+    static void M()
+    {
+        b.X();
+    }
 }

@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.JsonQuery;
 public class JsonQueryContext : DbContext
 {
     public JsonQueryContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<EntityBasic> EntitiesBasic { get; set; }
     public DbSet<JsonEntityBasic> JsonEntitiesBasic { get; set; }
@@ -24,7 +22,11 @@ public class JsonQueryContext : DbContext
         var jsonEntitiesBasic = JsonQueryData.CreateJsonEntitiesBasic();
         var jsonEntitiesBasicForReference = JsonQueryData.CreateJsonEntitiesBasicForReference();
         var jsonEntitiesBasicForCollection = JsonQueryData.CreateJsonEntitiesBasicForCollection();
-        JsonQueryData.WireUp(jsonEntitiesBasic, jsonEntitiesBasicForReference, jsonEntitiesBasicForCollection);
+        JsonQueryData.WireUp(
+            jsonEntitiesBasic,
+            jsonEntitiesBasicForReference,
+            jsonEntitiesBasicForCollection
+        );
 
         var jsonEntitiesCustomNaming = JsonQueryData.CreateJsonEntitiesCustomNaming();
         var jsonEntitiesSingleOwned = JsonQueryData.CreateJsonEntitiesSingleOwned();

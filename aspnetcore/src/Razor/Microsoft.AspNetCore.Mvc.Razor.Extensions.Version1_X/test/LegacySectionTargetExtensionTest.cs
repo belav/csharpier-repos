@@ -15,17 +15,11 @@ public class LegacySectionTargetExtensionTest
         // Arrange
         var node = new SectionIntermediateNode()
         {
-            Children =
-                {
-                    new CSharpExpressionIntermediateNode(),
-                },
+            Children = { new CSharpExpressionIntermediateNode(), },
             SectionName = "MySection"
         };
 
-        var extension = new LegacySectionTargetExtension()
-        {
-            SectionMethodName = "CreateSection"
-        };
+        var extension = new LegacySectionTargetExtension() { SectionMethodName = "CreateSection" };
 
         var context = TestCodeRenderingContext.CreateDesignTime();
 
@@ -33,7 +27,8 @@ public class LegacySectionTargetExtensionTest
         extension.WriteSection(context, node);
 
         // Assert
-        var expected = @"CreateSection(""MySection"", async(__razor_section_writer) => {
+        var expected =
+            @"CreateSection(""MySection"", async(__razor_section_writer) => {
     Render Children
 }
 );

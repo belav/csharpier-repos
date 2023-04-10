@@ -18,10 +18,7 @@ namespace Internal.IL
     {
         IEcmaModule IEcmaMethodIL.Module
         {
-            get
-            {
-                return _module;
-            }
+            get { return _module; }
         }
     }
 
@@ -29,10 +26,7 @@ namespace Internal.IL
     {
         IEcmaModule IEcmaMethodIL.Module
         {
-            get
-            {
-                return _module;
-            }
+            get { return _module; }
         }
     }
 }
@@ -43,7 +37,10 @@ namespace Internal.TypeSystem.Ecma
     {
         MetadataReader MetadataReader { get; }
         TypeDesc GetType(EntityHandle handle);
-        object GetObject(EntityHandle handle, NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw);
+        object GetObject(
+            EntityHandle handle,
+            NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw
+        );
         int CompareTo(IEcmaModule other);
         int ModuleTypeSort { get; }
 

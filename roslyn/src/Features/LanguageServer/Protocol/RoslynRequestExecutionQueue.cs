@@ -11,12 +11,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 {
     internal class RoslynRequestExecutionQueue : RequestExecutionQueue<RequestContext>
     {
-        public RoslynRequestExecutionQueue(AbstractLanguageServer<RequestContext> languageServer, ILspLogger logger, IHandlerProvider handlerProvider)
-            : base(languageServer, logger, handlerProvider)
-        {
-        }
+        public RoslynRequestExecutionQueue(
+            AbstractLanguageServer<RequestContext> languageServer,
+            ILspLogger logger,
+            IHandlerProvider handlerProvider
+        )
+            : base(languageServer, logger, handlerProvider) { }
 
-        public override Task WrapStartRequestTaskAsync(Task nonMutatingRequestTask, bool rethrowExceptions)
+        public override Task WrapStartRequestTaskAsync(
+            Task nonMutatingRequestTask,
+            bool rethrowExceptions
+        )
         {
             if (rethrowExceptions)
             {

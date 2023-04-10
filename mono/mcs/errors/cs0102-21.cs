@@ -3,14 +3,13 @@
 
 class X
 {
-	bool False<T> ()
-	{
-		return false;
-	}
+    bool False<T>()
+    {
+        return false;
+    }
 
-	bool False {
-		get {
-			return false;
-		}
-	}
+    bool False
+    {
+        get { return false; }
+    }
 }

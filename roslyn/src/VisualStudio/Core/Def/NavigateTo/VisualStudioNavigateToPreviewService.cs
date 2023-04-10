@@ -26,8 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigateTo
             return (int)VsShellUtilities.GetProvisionalViewingStatus(document.FilePath);
         }
 
-        public bool CanPreview(Document document)
-            => ContainedDocument.TryGetContainedDocument(document.Id) == null;
+        public bool CanPreview(Document document) =>
+            ContainedDocument.TryGetContainedDocument(document.Id) == null;
 
         public void PreviewItem(INavigateToItemDisplay itemDisplay)
         {

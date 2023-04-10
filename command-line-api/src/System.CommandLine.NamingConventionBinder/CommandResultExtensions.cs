@@ -10,7 +10,8 @@ internal static class CommandResultExtensions
     internal static bool TryGetValueForArgument(
         this CommandResult commandResult,
         IValueDescriptor valueDescriptor,
-        out object? value)
+        out object? value
+    )
     {
         var arguments = commandResult.Command.Arguments;
 
@@ -40,7 +41,8 @@ internal static class CommandResultExtensions
     internal static bool TryGetValueForOption(
         this CommandResult commandResult,
         IValueDescriptor valueDescriptor,
-        out object? value)
+        out object? value
+    )
     {
         var options = commandResult.Command.Options;
 
@@ -48,8 +50,7 @@ internal static class CommandResultExtensions
         {
             if (options[i] is Option option)
             {
-                var hasMatchingAlias =
-                    HasMatchingAlias(valueDescriptor, option);
+                var hasMatchingAlias = HasMatchingAlias(valueDescriptor, option);
 
                 if (hasMatchingAlias)
                 {
@@ -68,9 +69,7 @@ internal static class CommandResultExtensions
         value = null;
         return false;
 
-        static bool HasMatchingAlias(
-            IValueDescriptor valueDescriptor,
-            Option option)
+        static bool HasMatchingAlias(IValueDescriptor valueDescriptor, Option option)
         {
             if (option.HasAlias(valueDescriptor.ValueName))
             {
@@ -96,9 +95,11 @@ internal static class CommandResultExtensions
         var indexAfterPrefix = IndexAfterPrefix(alias);
         var parameterCandidateLength = alias.Length - indexAfterPrefix;
 
-        for (var aliasIndex = indexAfterPrefix;
-             aliasIndex < alias.Length && parameterNameIndex < parameterName.Length;
-             aliasIndex++)
+        for (
+            var aliasIndex = indexAfterPrefix;
+            aliasIndex < alias.Length && parameterNameIndex < parameterName.Length;
+            aliasIndex++
+        )
         {
             var aliasChar = alias[aliasIndex];
 

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,59 +26,64 @@
 using System;
 using System.Security;
 
-namespace System.Windows.Interop {
+namespace System.Windows.Interop
+{
+    [Serializable]
+    public struct MSG
+    {
+        public IntPtr hwnd
+        {
+            [SecurityCritical]
+            get { throw new NotImplementedException(); }
+            [SecurityCritical]
+            set { throw new NotImplementedException(); }
+        }
 
-	[Serializable]
-	public struct MSG
-	{
-		public IntPtr hwnd {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
+        public IntPtr lParam
+        {
+            [SecurityCritical]
+            get { throw new NotImplementedException(); }
+            [SecurityCritical]
+            set { throw new NotImplementedException(); }
+        }
 
-		public IntPtr lParam {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
+        public IntPtr wParam
+        {
+            [SecurityCritical]
+            get { throw new NotImplementedException(); }
+            [SecurityCritical]
+            set { throw new NotImplementedException(); }
+        }
+        public int message
+        {
+            [SecurityCritical]
+            get { throw new NotImplementedException(); }
+            [SecurityCritical]
+            set { throw new NotImplementedException(); }
+        }
 
+        public int pt_x
+        {
+            [SecurityCritical]
+            get { throw new NotImplementedException(); }
+            [SecurityCritical]
+            set { throw new NotImplementedException(); }
+        }
 
-		public IntPtr wParam {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
-		public int message {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
+        public int pt_y
+        {
+            [SecurityCritical]
+            get { throw new NotImplementedException(); }
+            [SecurityCritical]
+            set { throw new NotImplementedException(); }
+        }
 
-		public int pt_x {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
-
-		public int pt_y {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
-
-		public int time {
-			[SecurityCritical]
-			get { throw new NotImplementedException (); }
-			[SecurityCritical]
-			set { throw new NotImplementedException (); }
-		}
-	}
+        public int time
+        {
+            [SecurityCritical]
+            get { throw new NotImplementedException(); }
+            [SecurityCritical]
+            set { throw new NotImplementedException(); }
+        }
+    }
 }
-

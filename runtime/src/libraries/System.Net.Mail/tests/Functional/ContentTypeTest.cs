@@ -23,11 +23,34 @@ namespace System.Net.Mime.Tests
         [Theory]
         [InlineData("text/plain", "text/plain", null, null, null)]
         [InlineData("text/plain; charset=us-ascii", "text/plain", "us-ascii", null, null)]
-        [InlineData("text/plain; charset=us-ascii; boundary=hello", "text/plain", "us-ascii", "hello", null)]
-        [InlineData("text/plain; boundary=hello; charset=us-ascii; name=world", "text/plain", "us-ascii", "hello", "world")]
-        [InlineData("text/plain; charset=us-ascii; name=world", "text/plain", "us-ascii", null, "world")]
+        [InlineData(
+            "text/plain; charset=us-ascii; boundary=hello",
+            "text/plain",
+            "us-ascii",
+            "hello",
+            null
+        )]
+        [InlineData(
+            "text/plain; boundary=hello; charset=us-ascii; name=world",
+            "text/plain",
+            "us-ascii",
+            "hello",
+            "world"
+        )]
+        [InlineData(
+            "text/plain; charset=us-ascii; name=world",
+            "text/plain",
+            "us-ascii",
+            null,
+            "world"
+        )]
         public static void Ctor_ContentString_ParsedValueMatchesExpected(
-            string contentType, string expectedMediaType, string expectedCharSet, string expectedBoundary, string expectedName)
+            string contentType,
+            string expectedMediaType,
+            string expectedCharSet,
+            string expectedBoundary,
+            string expectedName
+        )
         {
             var ct = new ContentType(contentType);
             Assert.Equal(expectedMediaType, ct.MediaType);
@@ -36,8 +59,11 @@ namespace System.Net.Mime.Tests
             Assert.Equal(expectedName, ct.Name);
 
             Assert.Equal(
-                (expectedCharSet != null ? 1 : 0) + (expectedBoundary != null ? 1 : 0) + (expectedName != null ? 1 : 0),
-                ct.Parameters.Count);
+                (expectedCharSet != null ? 1 : 0)
+                    + (expectedBoundary != null ? 1 : 0)
+                    + (expectedName != null ? 1 : 0),
+                ct.Parameters.Count
+            );
             Assert.Equal(expectedCharSet, ct.Parameters["charset"]);
             Assert.Equal(expectedBoundary, ct.Parameters["boundary"]);
             Assert.Equal(expectedName, ct.Parameters["name"]);
@@ -54,8 +80,14 @@ namespace System.Net.Mime.Tests
         [InlineData(typeof(FormatException), "text/plain; charset=utf-8,")]
         [InlineData(typeof(FormatException), "textplain")]
         [InlineData(typeof(FormatException), "text/")]
-        [InlineData(typeof(FormatException), ",, , ,,text/plain; charset=iso-8859-1; q=1.0,\r\n */xml; charset=utf-8; q=0.5,,,")]
-        [InlineData(typeof(FormatException), "text/plain; charset=iso-8859-1; q=1.0, */xml; charset=utf-8; q=0.5")]
+        [InlineData(
+            typeof(FormatException),
+            ",, , ,,text/plain; charset=iso-8859-1; q=1.0,\r\n */xml; charset=utf-8; q=0.5,,,"
+        )]
+        [InlineData(
+            typeof(FormatException),
+            "text/plain; charset=iso-8859-1; q=1.0, */xml; charset=utf-8; q=0.5"
+        )]
         [InlineData(typeof(FormatException), " , */xml; charset=utf-8; q=0.5 ")]
         [InlineData(typeof(FormatException), "text/plain; charset=iso-8859-1; q=1.0 , ")]
         public static void Ctor_InvalidContentType_Throws(Type exceptionType, string contentType)

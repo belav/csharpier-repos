@@ -13,9 +13,7 @@ namespace System.Security.Cryptography.Tests
         public static void ExportPem_ExportECPrivateKey()
         {
             string expectedPem =
-                "-----BEGIN EC PRIVATE KEY-----\n" +
-                "cGVubnk=\n" +
-                "-----END EC PRIVATE KEY-----";
+                "-----BEGIN EC PRIVATE KEY-----\n" + "cGVubnk=\n" + "-----END EC PRIVATE KEY-----";
 
             static byte[] ExportECPrivateKey()
             {
@@ -33,9 +31,7 @@ namespace System.Security.Cryptography.Tests
         public static void ExportPem_TryExportECPrivateKey()
         {
             string expectedPem =
-                "-----BEGIN EC PRIVATE KEY-----\n" +
-                "cGVubnk=\n" +
-                "-----END EC PRIVATE KEY-----";
+                "-----BEGIN EC PRIVATE KEY-----\n" + "cGVubnk=\n" + "-----END EC PRIVATE KEY-----";
 
             static bool TryExportECPrivateKey(Span<byte> destination, out int bytesWritten)
             {
@@ -88,15 +84,14 @@ namespace System.Security.Cryptography.Tests
             public Func<byte[]> ExportECPrivateKeyDelegate = null;
             public TryExportFunc TryExportECPrivateKeyDelegate = null;
 
-
-            public DelegateECAlgorithm()
-            {
-            }
+            public DelegateECAlgorithm() { }
 
             public override byte[] ExportECPrivateKey() => ExportECPrivateKeyDelegate();
 
-            public override bool TryExportECPrivateKey(Span<byte> destination, out int bytesWritten) =>
-                TryExportECPrivateKeyDelegate(destination, out bytesWritten);
+            public override bool TryExportECPrivateKey(
+                Span<byte> destination,
+                out int bytesWritten
+            ) => TryExportECPrivateKeyDelegate(destination, out bytesWritten);
         }
     }
 }

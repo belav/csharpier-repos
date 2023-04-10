@@ -4,13 +4,13 @@
 
 readonly struct X
 {
-	void Test (out X x)
-	{
-		x = new X ();
-	}
-	
-	void Run ()
-	{
-		Test (out this);
-	}
+    void Test(out X x)
+    {
+        x = new X();
+    }
+
+    void Run()
+    {
+        Test(out this);
+    }
 }

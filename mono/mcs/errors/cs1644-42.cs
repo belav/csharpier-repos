@@ -4,9 +4,9 @@
 
 class C
 {
-	static void Main ()
-	{
-		string[] a = null;
-		var s = a?[0];
-	}
+    static void Main()
+    {
+        string[] a = null;
+        var s = a?[0];
+    }
 }

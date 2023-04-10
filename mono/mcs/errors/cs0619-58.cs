@@ -5,21 +5,19 @@ using System;
 
 namespace Program
 {
-	public class TestClass
-	{
-		public EventHandler<TestEventArgs> Foo;
-	}
+    public class TestClass
+    {
+        public EventHandler<TestEventArgs> Foo;
+    }
 
-	[Obsolete(Messages.Test, true)]
-	public sealed class TestEventArgs : EventArgs
-	{
-	}
+    [Obsolete(Messages.Test, true)]
+    public sealed class TestEventArgs : EventArgs { }
 }
 
 namespace Program
 {
-	public static class Messages
-	{
-		public const string Test = "FooBar";
-	}
+    public static class Messages
+    {
+        public const string Test = "FooBar";
+    }
 }

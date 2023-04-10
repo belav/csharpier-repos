@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         /// <summary>
         /// Event to get notified as new diagnostics are discovered by IDiagnosticUpdateSource
-        /// 
+        ///
         /// Notifications for this event are serialized to preserve order.
         /// However, individual event notifications may occur on any thread.
         /// </summary>
@@ -26,9 +26,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// This call is equivalent to <see cref="GetPushDiagnosticsAsync"/> passing in <see cref="InternalDiagnosticsOptions.NormalDiagnosticMode"/>.
         /// </summary>
-        [Obsolete("Legacy overload for TypeScript.  Use GetPullDiagnostics or GetPushDiagnostics instead.", error: false)]
+        [Obsolete(
+            "Legacy overload for TypeScript.  Use GetPullDiagnostics or GetPushDiagnostics instead.",
+            error: false
+        )]
         ImmutableArray<DiagnosticData> GetDiagnostics(
-            Workspace workspace, ProjectId? projectId, DocumentId? documentId, object? id, bool includeSuppressedDiagnostics, CancellationToken cancellationToken);
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            object? id,
+            bool includeSuppressedDiagnostics,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get current diagnostics stored in IDiagnosticUpdateSource.
@@ -38,8 +47,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// If the caller's desired purpose doesn't match the option value, then this will return nothing, otherwise it
         /// will return the requested diagnostics.</param>
         ValueTask<ImmutableArray<DiagnosticData>> GetPullDiagnosticsAsync(
-            Workspace workspace, ProjectId? projectId, DocumentId? documentId, object? id, bool includeSuppressedDiagnostics,
-            Option2<DiagnosticMode> diagnosticMode, CancellationToken cancellationToken);
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            object? id,
+            bool includeSuppressedDiagnostics,
+            Option2<DiagnosticMode> diagnosticMode,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get current diagnostics stored in IDiagnosticUpdateSource.
@@ -49,8 +64,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// If the caller's desired purpose doesn't match the option value, then this will return nothing, otherwise it
         /// will return the requested diagnostics.</param>
         ValueTask<ImmutableArray<DiagnosticData>> GetPushDiagnosticsAsync(
-            Workspace workspace, ProjectId? projectId, DocumentId? documentId, object? id, bool includeSuppressedDiagnostics,
-            Option2<DiagnosticMode> diagnosticMode, CancellationToken cancellationToken);
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            object? id,
+            bool includeSuppressedDiagnostics,
+            Option2<DiagnosticMode> diagnosticMode,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get current buckets storing our grouped diagnostics.  Specific buckets can be retrieved by calling <see
@@ -61,8 +82,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// If the caller's desired purpose doesn't match the option value, then this will return nothing, otherwise it
         /// will return the requested buckets.</param>
         ImmutableArray<DiagnosticBucket> GetPullDiagnosticBuckets(
-            Workspace workspace, ProjectId? projectId, DocumentId? documentId,
-            Option2<DiagnosticMode> diagnosticMode, CancellationToken cancellationToken);
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            Option2<DiagnosticMode> diagnosticMode,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Get current buckets storing our grouped diagnostics.  Specific buckets can be retrieved by calling <see
@@ -73,7 +98,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// the caller's desired purpose doesn't match the option value, then this will return nothing, otherwise it
         /// will return the requested buckets.</param>
         ImmutableArray<DiagnosticBucket> GetPushDiagnosticBuckets(
-            Workspace workspace, ProjectId? projectId, DocumentId? documentId,
-            Option2<DiagnosticMode> diagnosticMode, CancellationToken cancellationToken);
+            Workspace workspace,
+            ProjectId? projectId,
+            DocumentId? documentId,
+            Option2<DiagnosticMode> diagnosticMode,
+            CancellationToken cancellationToken
+        );
     }
 }

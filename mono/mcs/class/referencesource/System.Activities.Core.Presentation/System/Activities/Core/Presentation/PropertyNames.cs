@@ -4,8 +4,7 @@
 
 namespace System.Activities.Core.Presentation
 {
-
-    // This class is holding names of the used property names, so access to model item's 
+    // This class is holding names of the used property names, so access to model item's
     // properties collection is somehow "strongly typed"
     internal static class PropertyNames
     {
@@ -34,6 +33,5 @@ namespace System.Activities.Core.Presentation
         public readonly static string Body = "Body";
         public readonly static string ExceptionType = "ExceptionType";
         public readonly static string ResultProperty = "Result";
-
     }
 }

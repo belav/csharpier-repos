@@ -3,10 +3,10 @@
 
 using System.Resources;
 
-public class MainClass {
-        static void Main () {
-                using (ResourceReader reader) {
-                }
-        }
+public class MainClass
+{
+    static void Main()
+    {
+        using (ResourceReader reader) { }
+    }
 }
-

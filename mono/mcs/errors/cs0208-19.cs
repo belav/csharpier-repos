@@ -4,17 +4,17 @@
 
 namespace CS208
 {
-	public struct Foo
-	{
-		public string PP { get; set; }
-	}
+    public struct Foo
+    {
+        public string PP { get; set; }
+    }
 
-	public class Bar
-	{
-		unsafe static void Main ()
-		{			
-			Foo f = new Foo ();
-			void *s = &f;
-		}
-	}
+    public class Bar
+    {
+        unsafe static void Main()
+        {
+            Foo f = new Foo();
+            void* s = &f;
+        }
+    }
 }

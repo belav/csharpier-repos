@@ -21,7 +21,11 @@ public class RoutingEndpointConventionBuilderExtensionsTest
         // Assert
         var convention = Assert.Single(builder.Conventions);
 
-        var endpointModel = new RouteEndpointBuilder((context) => Task.CompletedTask, RoutePatternFactory.Parse("/"), 0);
+        var endpointModel = new RouteEndpointBuilder(
+            (context) => Task.CompletedTask,
+            RoutePatternFactory.Parse("/"),
+            0
+        );
         convention(endpointModel);
 
         var hostMetadata = Assert.IsType<HostAttribute>(Assert.Single(endpointModel.Metadata));
@@ -225,10 +229,13 @@ public class RoutingEndpointConventionBuilderExtensionsTest
 
     private TestEndpointConventionBuilder CreateBuilder()
     {
-        var conventionBuilder = new DefaultEndpointConventionBuilder(new RouteEndpointBuilder(
-            TestConstants.EmptyRequestDelegate,
-            RoutePatternFactory.Parse("/test"),
-            order: 0));
+        var conventionBuilder = new DefaultEndpointConventionBuilder(
+            new RouteEndpointBuilder(
+                TestConstants.EmptyRequestDelegate,
+                RoutePatternFactory.Parse("/test"),
+                order: 0
+            )
+        );
 
         return new TestEndpointConventionBuilder(conventionBuilder);
     }
@@ -237,9 +244,12 @@ public class RoutingEndpointConventionBuilderExtensionsTest
     {
         private readonly DefaultEndpointConventionBuilder _endpointConventionBuilder;
         public bool TestProperty { get; } = true;
-        public IList<Action<EndpointBuilder>> Conventions { get; } = new List<Action<EndpointBuilder>>();
+        public IList<Action<EndpointBuilder>> Conventions { get; } =
+            new List<Action<EndpointBuilder>>();
 
-        public TestEndpointConventionBuilder(DefaultEndpointConventionBuilder endpointConventionBuilder)
+        public TestEndpointConventionBuilder(
+            DefaultEndpointConventionBuilder endpointConventionBuilder
+        )
         {
             _endpointConventionBuilder = endpointConventionBuilder;
         }
@@ -281,7 +291,9 @@ public class RoutingEndpointConventionBuilderExtensionsTest
 
             if (conventions is null)
             {
-                throw new InvalidOperationException(Resources.RouteEndpointDataSource_ConventionsCannotBeModifiedAfterBuild);
+                throw new InvalidOperationException(
+                    Resources.RouteEndpointDataSource_ConventionsCannotBeModifiedAfterBuild
+                );
             }
 
             conventions.Add(convention);

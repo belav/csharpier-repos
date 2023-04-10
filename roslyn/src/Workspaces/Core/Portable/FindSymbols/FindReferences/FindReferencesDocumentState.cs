@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SemanticModel semanticModel,
             SyntaxNode root,
             FindReferenceCache cache,
-            HashSet<string>? globalAliases)
+            HashSet<string>? globalAliases
+        )
         {
             Document = document;
             SemanticModel = semanticModel;

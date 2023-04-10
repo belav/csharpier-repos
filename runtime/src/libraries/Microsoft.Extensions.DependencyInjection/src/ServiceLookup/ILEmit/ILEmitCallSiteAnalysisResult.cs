@@ -5,7 +5,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     internal readonly struct ILEmitCallSiteAnalysisResult
     {
-        public ILEmitCallSiteAnalysisResult(int size) : this()
+        public ILEmitCallSiteAnalysisResult(int size)
+            : this()
         {
             Size = size;
         }

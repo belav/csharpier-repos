@@ -13,6 +13,7 @@ namespace POS_Server.Controllers
     public class PointsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
@@ -34,31 +35,28 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var List = (from S in  entity.Points                                         
-                                         select new PointsModel()
-                                         {
-                                            pointId=S.pointId,
-                                       
-                                            notes=S.notes,
-                                            isActive=S.isActive,
-                                            createDate = S.createDate,
-                                            updateDate = S.updateDate,
-                                            createUserId = S.createUserId,
-                                            updateUserId=S.updateUserId,
-                                           
-                                            Cash=S.Cash,
-                                            CashPoints=S.CashPoints,
-                                            invoiceCount=S.invoiceCount,
-                                            invoiceCountPoints=S.invoiceCountPoints,
-                                            CashArchive=S.CashArchive,
-                                            CashPointsArchive=S.CashPointsArchive,
-                                            invoiceCountArchive=S.invoiceCountArchive,
-                                            invoiceCountPoinstArchive=S.invoiceCountPoinstArchive,
-                                            agentId=S.agentId,
-
-
-
-                                         }).ToList();
+                    var List = (
+                        from S in entity.Points
+                        select new PointsModel()
+                        {
+                            pointId = S.pointId,
+                            notes = S.notes,
+                            isActive = S.isActive,
+                            createDate = S.createDate,
+                            updateDate = S.updateDate,
+                            createUserId = S.createUserId,
+                            updateUserId = S.updateUserId,
+                            Cash = S.Cash,
+                            CashPoints = S.CashPoints,
+                            invoiceCount = S.invoiceCount,
+                            invoiceCountPoints = S.invoiceCountPoints,
+                            CashArchive = S.CashArchive,
+                            CashPointsArchive = S.CashPointsArchive,
+                            invoiceCountArchive = S.invoiceCountArchive,
+                            invoiceCountPoinstArchive = S.invoiceCountPoinstArchive,
+                            agentId = S.agentId,
+                        }
+                    ).ToList();
                     /*
        public int pointId { get; set; }
         public Nullable<decimal> Cash { get; set; }
@@ -104,9 +102,12 @@ isActive
                             if (List[i].isActive == 1)
                             {
                                 long pointId = (long)List[i].pointId;
-                                var itemsI= entity.agents.Where(x => x.pointId == pointId).Select(b => new { b.agentId }).FirstOrDefault();
-                               
-                                if ((itemsI is null)  )
+                                var itemsI = entity.agents
+                                    .Where(x => x.pointId == pointId)
+                                    .Select(b => new { b.agentId })
+                                    .FirstOrDefault();
+
+                                if ((itemsI is null))
                                     canDelete = true;
                             }
                             List[i].canDelete = canDelete;
@@ -143,29 +144,30 @@ isActive
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var row = entity.Points
-                   .Where(u => u.pointId == pointId)
-                   .Select(S => new
-                   {
-                           S.pointId,
-                           S.Cash,
-                           S.CashPoints,
-                           S.invoiceCount,
-                           S.invoiceCountPoints,
-                           S.CashArchive,
-                           S.CashPointsArchive,
-                           S.invoiceCountArchive,
-                           S.invoiceCountPoinstArchive,
-                           S.agentId,
-                           S.notes,
-                           S.createDate,
-                           S.updateDate,
-                           S.createUserId,
-                           S.updateUserId,
-                           S.isActive,
-                          
-
-                   })
-                   .FirstOrDefault();
+                        .Where(u => u.pointId == pointId)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.pointId,
+                                    S.Cash,
+                                    S.CashPoints,
+                                    S.invoiceCount,
+                                    S.invoiceCountPoints,
+                                    S.CashArchive,
+                                    S.CashPointsArchive,
+                                    S.invoiceCountArchive,
+                                    S.invoiceCountPoinstArchive,
+                                    S.agentId,
+                                    S.notes,
+                                    S.createDate,
+                                    S.updateDate,
+                                    S.createUserId,
+                                    S.updateUserId,
+                                    S.isActive,
+                                }
+                        )
+                        .FirstOrDefault();
 
                     if (row == null)
                         return NotFound();
@@ -197,7 +199,10 @@ isActive
             {
                 Object = Object.Replace("\\", string.Empty);
                 Object = Object.Trim('"');
-                Points newObject = JsonConvert.DeserializeObject<Points>(Object, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                Points newObject = JsonConvert.DeserializeObject<Points>(
+                    Object,
+                    new JsonSerializerSettings { DateParseHandling = DateParseHandling.None }
+                );
                 if (newObject.updateUserId == 0 || newObject.updateUserId == null)
                 {
                     Nullable<long> id = null;
@@ -220,43 +225,43 @@ isActive
                         var locationEntity = entity.Set<Points>();
                         if (newObject.pointId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject.updateUserId = newObject.createUserId;
-                         
-                      
+
                             locationEntity.Add(newObject);
                             entity.SaveChanges();
                             message = newObject.pointId.ToString();
                         }
                         else
                         {
-                            var tmpObject = entity.Points.Where(p => p.pointId == newObject.pointId).FirstOrDefault();
+                            var tmpObject = entity.Points
+                                .Where(p => p.pointId == newObject.pointId)
+                                .FirstOrDefault();
 
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpObject.updateUserId = newObject.updateUserId;
 
-                        
-                            tmpObject.notes  =newObject.notes;
-                            tmpObject.isActive=newObject.isActive;
+                            tmpObject.notes = newObject.notes;
+                            tmpObject.isActive = newObject.isActive;
 
-                            tmpObject.pointId=newObject.pointId;
-                           tmpObject.Cash=newObject.Cash;
-                           tmpObject.CashPoints=newObject.CashPoints;
-                           tmpObject.invoiceCount=newObject.invoiceCount;
-                           tmpObject.invoiceCountPoints=newObject.invoiceCountPoints;
-                           tmpObject.CashArchive=newObject.CashArchive;
-                           tmpObject.CashPointsArchive=newObject.CashPointsArchive;
-                           tmpObject.invoiceCountArchive=newObject.invoiceCountArchive;
-                           tmpObject.invoiceCountPoinstArchive=newObject.invoiceCountPoinstArchive;
-                           tmpObject.agentId=newObject.agentId;
-                          
+                            tmpObject.pointId = newObject.pointId;
+                            tmpObject.Cash = newObject.Cash;
+                            tmpObject.CashPoints = newObject.CashPoints;
+                            tmpObject.invoiceCount = newObject.invoiceCount;
+                            tmpObject.invoiceCountPoints = newObject.invoiceCountPoints;
+                            tmpObject.CashArchive = newObject.CashArchive;
+                            tmpObject.CashPointsArchive = newObject.CashPointsArchive;
+                            tmpObject.invoiceCountArchive = newObject.invoiceCountArchive;
+                            tmpObject.invoiceCountPoinstArchive =
+                                newObject.invoiceCountPoinstArchive;
+                            tmpObject.agentId = newObject.agentId;
 
                             entity.SaveChanges();
 
                             message = tmpObject.pointId.ToString();
                         }
-                      //  entity.SaveChanges();
+                        //  entity.SaveChanges();
                     }
                 }
                 catch
@@ -269,7 +274,7 @@ isActive
 
         [HttpPost]
         [Route("Delete")]
-        public string Delete(long pointId, long userId,bool final)
+        public string Delete(long pointId, long userId, bool final)
         {
             var re = Request;
             var headers = re.Headers;
@@ -293,8 +298,8 @@ isActive
                             Points objectDelete = entity.Points.Find(pointId);
 
                             entity.Points.Remove(objectDelete);
-                        message=    entity.SaveChanges();
-                          
+                            message = entity.SaveChanges();
+
                             return message.ToString();
                         }
                     }
@@ -313,11 +318,12 @@ isActive
 
                             objectDelete.isActive = 0;
                             objectDelete.updateUserId = userId;
-                            objectDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            objectDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
 
                             message = entity.SaveChanges();
 
-                            return message.ToString(); ;
+                            return message.ToString();
+                            ;
                         }
                     }
                     catch
@@ -329,8 +335,5 @@ isActive
             else
                 return "-3";
         }
-
-
-
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,26 +36,30 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Web.Caching
 {
-	[TestFixture]
-	public class SubstitutionResponseElementTest
-	{
-		string TestCallback (HttpContext ctx)
-		{
-			return String.Empty;
-		}
+    [TestFixture]
+    public class SubstitutionResponseElementTest
+    {
+        string TestCallback(HttpContext ctx)
+        {
+            return String.Empty;
+        }
 
-		[Test]
-		public void Constructor ()
-		{
-			SubstitutionResponseElement sre;
+        [Test]
+        public void Constructor()
+        {
+            SubstitutionResponseElement sre;
 
-			Assert.Throws<ArgumentNullException> (() => {
-				sre = new SubstitutionResponseElement (null);
-			}, "#A1");
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    sre = new SubstitutionResponseElement(null);
+                },
+                "#A1"
+            );
 
-			var cb = new HttpResponseSubstitutionCallback (TestCallback);
-			sre = new SubstitutionResponseElement (cb);
-			Assert.AreEqual (cb, sre.Callback, "#B1");
-		}
-	}
+            var cb = new HttpResponseSubstitutionCallback(TestCallback);
+            sre = new SubstitutionResponseElement(cb);
+            Assert.AreEqual(cb, sre.Callback, "#B1");
+        }
+    }
 }

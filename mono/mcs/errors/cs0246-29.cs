@@ -3,8 +3,8 @@
 
 class X
 {
-	public static void Main ()
-	{
-		B b;
-	}
+    public static void Main()
+    {
+        B b;
+    }
 }

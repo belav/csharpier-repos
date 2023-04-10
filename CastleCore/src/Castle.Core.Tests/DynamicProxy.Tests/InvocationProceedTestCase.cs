@@ -47,7 +47,8 @@ namespace Castle.DynamicProxy.Tests
                 target: new WithCallbackSimple(method: () =>
                 {
                     ex = Assert.Throws<InvalidOperationException>(() => cachedInvocation.Proceed());
-                }));
+                })
+            );
 
             proxy.Method();
             Assert.NotNull(ex); // ensure that interception actually made it to the target
@@ -57,11 +58,11 @@ namespace Castle.DynamicProxy.Tests
         public void Proxy_without_target_and_last_interceptor_ProceedInfo_succeeds()
         {
             var interceptor = new WithCallbackInterceptor(invocation =>
-                {
-                    invocation.ReturnValue = 0;  // not relevant to this test, but prevents DP
-                                                 // from complaining about missing return value.
-                    var proceed = invocation.CaptureProceedInfo();
-                });
+            {
+                invocation.ReturnValue = 0; // not relevant to this test, but prevents DP
+                // from complaining about missing return value.
+                var proceed = invocation.CaptureProceedInfo();
+            });
 
             var proxy = generator.CreateInterfaceProxyWithoutTarget<IOne>(interceptor);
             proxy.OneMethod();
@@ -71,12 +72,12 @@ namespace Castle.DynamicProxy.Tests
         public void Proxy_without_target_and_last_interceptor_ProceedInfo_Invoke_throws_NotImplementedException()
         {
             var interceptor = new WithCallbackInterceptor(invocation =>
-                {
-                    invocation.ReturnValue = 0;  // not relevant for this test, but prevents DP
-                                                 // from complaining about missing return value.
-                    var proceed = invocation.CaptureProceedInfo();
-                    Assert.Throws<NotImplementedException>(() => proceed.Invoke());
-                });
+            {
+                invocation.ReturnValue = 0; // not relevant for this test, but prevents DP
+                // from complaining about missing return value.
+                var proceed = invocation.CaptureProceedInfo();
+                Assert.Throws<NotImplementedException>(() => proceed.Invoke());
+            });
 
             var proxy = generator.CreateInterfaceProxyWithoutTarget<IOne>(interceptor);
             proxy.OneMethod();
@@ -106,10 +107,10 @@ namespace Castle.DynamicProxy.Tests
             var target = new One();
 
             var interceptor = new WithCallbackInterceptor(invocation =>
-                {
-                    var proceed = invocation.CaptureProceedInfo();
-                    proceed.Invoke();
-                });
+            {
+                var proceed = invocation.CaptureProceedInfo();
+                proceed.Invoke();
+            });
 
             var proxy = generator.CreateInterfaceProxyWithTarget<IOne>(new One(), interceptor);
             var returnValue = proxy.OneMethod();
@@ -121,8 +122,8 @@ namespace Castle.DynamicProxy.Tests
         {
             var interceptor = new WithCallbackInterceptor(invocation =>
             {
-                invocation.ReturnValue = 0;  // not relevant to this test, but prevents DP
-                                             // from complaining about missing return value.
+                invocation.ReturnValue = 0; // not relevant to this test, but prevents DP
+                // from complaining about missing return value.
                 var proceed1 = invocation.CaptureProceedInfo();
                 var proceed2 = invocation.CaptureProceedInfo();
                 Assert.AreNotSame(proceed2, proceed1);
@@ -142,8 +143,8 @@ namespace Castle.DynamicProxy.Tests
             {
                 new WithCallbackInterceptor(invocation =>
                 {
-                    invocation.ReturnValue = 0;  // not relevant to this test, but prevents DP
-                                                 // from complaining about missing return value.
+                    invocation.ReturnValue = 0; // not relevant to this test, but prevents DP
+                    // from complaining about missing return value.
 
                     var proceed = invocation.CaptureProceedInfo();
                     proceed.Invoke();
@@ -182,8 +183,8 @@ namespace Castle.DynamicProxy.Tests
             {
                 new WithCallbackInterceptor(invocation =>
                 {
-                    invocation.ReturnValue = 0;  // not relevant to this test, but prevents DP
-                                                 // from complaining about missing return value.
+                    invocation.ReturnValue = 0; // not relevant to this test, but prevents DP
+                    // from complaining about missing return value.
 
                     var proceed1 = invocation.CaptureProceedInfo();
                     var proceed2 = invocation.CaptureProceedInfo();
@@ -221,11 +222,11 @@ namespace Castle.DynamicProxy.Tests
                 new WithCallbackInterceptor(invocation =>
                 {
                     breadcrumbs.Add(1); // (This statement is expected to be the first one
-                                        //  recorded, because it has the smallest number.)
+                    //  recorded, because it has the smallest number.)
                     var proceed = invocation.CaptureProceedInfo();
                     proceed.Invoke();
                     breadcrumbs.Add(5); // (This statement is expected to be the last one
-                                        //  recorded, because it has the largest number.)
+                    //  recorded, because it has the largest number.)
                 }),
                 new WithCallbackInterceptor(invocation =>
                 {

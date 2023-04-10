@@ -6,16 +6,14 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-        internal class X11Xim
+    internal class X11Xim
+    {
+        [DllImport("libX11", EntryPoint = "XCreateIC")]
+        internal extern static IntPtr XCreateIC(IntPtr xim, __arglist);
+
+        public static void Main()
         {
-                [DllImport ("libX11", EntryPoint="XCreateIC")]
-                internal extern static IntPtr XCreateIC(IntPtr xim, __arglist);
-
-                public static void Main ()
-                {
-                        XCreateIC (IntPtr.Zero, IntPtr.Zero);
-                }
+            XCreateIC(IntPtr.Zero, IntPtr.Zero);
         }
+    }
 }
-
-

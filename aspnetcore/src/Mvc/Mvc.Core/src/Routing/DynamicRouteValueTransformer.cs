@@ -59,7 +59,10 @@ public abstract class DynamicRouteValueTransformer
     /// <param name="httpContext">The <see cref="HttpContext" /> associated with the current request.</param>
     /// <param name="values">The route values associated with the current match. Implementations should not modify <paramref name="values"/>.</param>
     /// <returns>Returns a set of new route values, else null to indicate there was no match.</returns>
-    public abstract ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values);
+    public abstract ValueTask<RouteValueDictionary> TransformAsync(
+        HttpContext httpContext,
+        RouteValueDictionary values
+    );
 
     /// <summary>
     /// Filters the set of endpoints that were chosen as a result of lookup based on the route values returned by
@@ -83,7 +86,11 @@ public abstract class DynamicRouteValueTransformer
     /// where zero endpoints were matched based on route values.
     /// </para>
     /// </remarks>
-    public virtual ValueTask<IReadOnlyList<Endpoint>> FilterAsync(HttpContext httpContext, RouteValueDictionary values, IReadOnlyList<Endpoint> endpoints)
+    public virtual ValueTask<IReadOnlyList<Endpoint>> FilterAsync(
+        HttpContext httpContext,
+        RouteValueDictionary values,
+        IReadOnlyList<Endpoint> endpoints
+    )
     {
         return new ValueTask<IReadOnlyList<Endpoint>>(endpoints);
     }

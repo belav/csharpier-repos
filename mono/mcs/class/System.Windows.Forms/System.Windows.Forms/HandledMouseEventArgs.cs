@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,25 +24,35 @@
 //
 
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    public class HandledMouseEventArgs : MouseEventArgs
+    {
+        private bool handled;
 
-	public class HandledMouseEventArgs : MouseEventArgs {
+        public HandledMouseEventArgs(MouseButtons button, int clicks, int x, int y, int delta)
+            : base(button, clicks, x, y, delta)
+        {
+            handled = false;
+        }
 
-		private bool handled;
+        public HandledMouseEventArgs(
+            MouseButtons button,
+            int clicks,
+            int x,
+            int y,
+            int delta,
+            bool defaultHandledValue
+        )
+            : base(button, clicks, x, y, delta)
+        {
+            this.handled = defaultHandledValue;
+        }
 
-		public HandledMouseEventArgs (MouseButtons button, int clicks, int x, int y, int delta) : base (button, clicks, x, y, delta) {
-			handled = false;
-		}
-
-		public HandledMouseEventArgs( MouseButtons button, int clicks, int x, int y, int delta, bool defaultHandledValue) : base (button, clicks, x, y, delta) {
-			this.handled = defaultHandledValue;
-		}
-
-		public bool Handled {
-			get { return handled; }
-			set { handled = value; }
-		}
-
-	}
-
+        public bool Handled
+        {
+            get { return handled; }
+            set { handled = value; }
+        }
+    }
 }

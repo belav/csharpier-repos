@@ -106,11 +106,11 @@ internal class AnsiTextWriter
         }
     }
 
-    private static void ApplyBold()
-        => Console.ForegroundColor = (ConsoleColor)((int)Console.ForegroundColor | 8);
+    private static void ApplyBold() =>
+        Console.ForegroundColor = (ConsoleColor)((int)Console.ForegroundColor | 8);
 
-    private static void ResetBold()
-        => Console.ForegroundColor = (ConsoleColor)((int)Console.ForegroundColor & 7);
+    private static void ResetBold() =>
+        Console.ForegroundColor = (ConsoleColor)((int)Console.ForegroundColor & 7);
 
     private static void ApplyColor(ConsoleColor color)
     {

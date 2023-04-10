@@ -3,9 +3,10 @@
 
 using System;
 
-public static class Nullable_Test {
-	public static int Compare<T> (Nullable<T> left)
-	{
-		return 0;
-	}
+public static class Nullable_Test
+{
+    public static int Compare<T>(Nullable<T> left)
+    {
+        return 0;
+    }
 }

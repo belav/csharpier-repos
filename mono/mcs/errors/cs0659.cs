@@ -4,15 +4,15 @@
 
 public class Base
 {
-    public override int GetHashCode ()
+    public override int GetHashCode()
     {
         return 2;
     }
 }
 
-public class E: Base
+public class E : Base
 {
-    public override bool Equals (object o)
+    public override bool Equals(object o)
     {
         return true;
     }

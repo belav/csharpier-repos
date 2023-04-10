@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,8 +24,12 @@ namespace Castle.DynamicProxy.Generators
 
     internal static class GeneratorUtil
     {
-        public static void CopyOutAndRefParameters(TypeReference[] dereferencedArguments, LocalReference invocation,
-                                                   MethodInfo method, MethodEmitter emitter)
+        public static void CopyOutAndRefParameters(
+            TypeReference[] dereferencedArguments,
+            LocalReference invocation,
+            MethodInfo method,
+            MethodEmitter emitter
+        )
         {
             var parameters = method.GetParameters();
 
@@ -41,7 +45,9 @@ namespace Castle.DynamicProxy.Generators
                         arguments = StoreInvocationArgumentsInLocal(emitter, invocation);
                     }
 
-                    emitter.CodeBuilder.AddStatement(AssignArgument(dereferencedArguments, i, arguments));
+                    emitter.CodeBuilder.AddStatement(
+                        AssignArgument(dereferencedArguments, i, arguments)
+                    );
                 }
             }
 
@@ -76,7 +82,10 @@ namespace Castle.DynamicProxy.Generators
                 //
                 // The above points inform the following detection logic: First, we rely on an IL
                 // `[in]` modifier being present. This is a "fast guard" against non-`in` parameters:
-                if ((parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out)) != ParameterAttributes.In)
+                if (
+                    (parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out))
+                    != ParameterAttributes.In
+                )
                 {
                     return false;
                 }
@@ -96,7 +105,15 @@ namespace Castle.DynamicProxy.Generators
 
                 // The comparison by name is intentional; any assembly could define that attribute.
                 // See explanation in comment above.
-                if (parameter.GetCustomAttributes(false).Any(x => x.GetType().FullName == "System.Runtime.CompilerServices.IsReadOnlyAttribute"))
+                if (
+                    parameter
+                        .GetCustomAttributes(false)
+                        .Any(
+                            x =>
+                                x.GetType().FullName
+                                == "System.Runtime.CompilerServices.IsReadOnlyAttribute"
+                        )
+                )
                 {
                     return true;
                 }
@@ -105,23 +122,45 @@ namespace Castle.DynamicProxy.Generators
             }
         }
 
-        private static ConvertExpression Argument(int i, LocalReference invocationArgs, TypeReference[] arguments)
+        private static ConvertExpression Argument(
+            int i,
+            LocalReference invocationArgs,
+            TypeReference[] arguments
+        )
         {
-            return new ConvertExpression(arguments[i].Type, new LoadRefArrayElementExpression(i, invocationArgs));
+            return new ConvertExpression(
+                arguments[i].Type,
+                new LoadRefArrayElementExpression(i, invocationArgs)
+            );
         }
 
-        private static AssignStatement AssignArgument(TypeReference[] dereferencedArguments, int i,
-                                                      LocalReference invocationArgs)
+        private static AssignStatement AssignArgument(
+            TypeReference[] dereferencedArguments,
+            int i,
+            LocalReference invocationArgs
+        )
         {
-            return new AssignStatement(dereferencedArguments[i], Argument(i, invocationArgs, dereferencedArguments));
+            return new AssignStatement(
+                dereferencedArguments[i],
+                Argument(i, invocationArgs, dereferencedArguments)
+            );
         }
 
-        private static AssignStatement GetArguments(LocalReference invocationArgs, LocalReference invocation)
+        private static AssignStatement GetArguments(
+            LocalReference invocationArgs,
+            LocalReference invocation
+        )
         {
-            return new AssignStatement(invocationArgs, new MethodInvocationExpression(invocation, InvocationMethods.GetArguments));
+            return new AssignStatement(
+                invocationArgs,
+                new MethodInvocationExpression(invocation, InvocationMethods.GetArguments)
+            );
         }
 
-        private static LocalReference StoreInvocationArgumentsInLocal(MethodEmitter emitter, LocalReference invocation)
+        private static LocalReference StoreInvocationArgumentsInLocal(
+            MethodEmitter emitter,
+            LocalReference invocation
+        )
         {
             var invocationArgs = emitter.CodeBuilder.DeclareLocal(typeof(object[]));
             emitter.CodeBuilder.AddStatement(GetArguments(invocationArgs, invocation));

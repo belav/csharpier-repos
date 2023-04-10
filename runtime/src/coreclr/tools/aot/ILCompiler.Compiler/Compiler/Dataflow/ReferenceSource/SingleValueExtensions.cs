@@ -20,66 +20,76 @@ namespace ILLink.Shared.TrimAnalysis
         /// and should not be used by the caller after returning</param>
         /// <param name="allNodesSeen">Optional. The set of all nodes encountered during a walk after DetectCycle returns</param>
         /// <returns></returns>
-        public static bool DetectCycle (this SingleValue node, HashSet<SingleValue> seenNodes, HashSet<SingleValue>? allNodesSeen)
+        public static bool DetectCycle(
+            this SingleValue node,
+            HashSet<SingleValue> seenNodes,
+            HashSet<SingleValue>? allNodesSeen
+        )
         {
             if (node == null)
                 return false;
 
-            if (seenNodes.Contains (node))
+            if (seenNodes.Contains(node))
                 return true;
 
-            seenNodes.Add (node);
+            seenNodes.Add(node);
 
-            if (allNodesSeen != null) {
-                allNodesSeen.Add (node);
+            if (allNodesSeen != null)
+            {
+                allNodesSeen.Add(node);
             }
 
             bool foundCycle = false;
-            switch (node) {
-            //
-            // Leaf nodes
-            //
-            case UnknownValue:
-            case NullValue:
-            case SystemTypeValue:
-            case RuntimeTypeHandleValue:
-            case KnownStringValue:
-            case ConstIntValue:
-            case MethodParameterValue:
-            case MethodThisParameterValue:
-            case MethodReturnValue:
-            case GenericParameterValue:
-            case RuntimeTypeHandleForGenericParameterValue:
-            case SystemReflectionMethodBaseValue:
-            case RuntimeMethodHandleValue:
-            case FieldValue:
-                break;
+            switch (node)
+            {
+                //
+                // Leaf nodes
+                //
+                case UnknownValue:
+                case NullValue:
+                case SystemTypeValue:
+                case RuntimeTypeHandleValue:
+                case KnownStringValue:
+                case ConstIntValue:
+                case MethodParameterValue:
+                case MethodThisParameterValue:
+                case MethodReturnValue:
+                case GenericParameterValue:
+                case RuntimeTypeHandleForGenericParameterValue:
+                case SystemReflectionMethodBaseValue:
+                case RuntimeMethodHandleValue:
+                case FieldValue:
+                    break;
 
-            //
-            // Nodes with children
-            //
-            case ArrayValue:
-                ArrayValue av = (ArrayValue) node;
-                foundCycle = av.Size.DetectCycle (seenNodes, allNodesSeen);
-                foreach (ValueBasicBlockPair pair in av.IndexValues.Values) {
-                    foreach (var v in pair.Value) {
-                        foundCycle |= v.DetectCycle (seenNodes, allNodesSeen);
+                //
+                // Nodes with children
+                //
+                case ArrayValue:
+                    ArrayValue av = (ArrayValue)node;
+                    foundCycle = av.Size.DetectCycle(seenNodes, allNodesSeen);
+                    foreach (ValueBasicBlockPair pair in av.IndexValues.Values)
+                    {
+                        foreach (var v in pair.Value)
+                        {
+                            foundCycle |= v.DetectCycle(seenNodes, allNodesSeen);
+                        }
                     }
-                }
-                break;
+                    break;
 
-            case RuntimeTypeHandleForNullableValueWithDynamicallyAccessedMembers value:
-                foundCycle = value.UnderlyingTypeValue.DetectCycle (seenNodes, allNodesSeen);
-                break;
+                case RuntimeTypeHandleForNullableValueWithDynamicallyAccessedMembers value:
+                    foundCycle = value.UnderlyingTypeValue.DetectCycle(seenNodes, allNodesSeen);
+                    break;
 
-            case NullableValueWithDynamicallyAccessedMembers value:
-                foundCycle = value.UnderlyingTypeValue.DetectCycle (seenNodes, allNodesSeen);
-                break;
+                case NullableValueWithDynamicallyAccessedMembers value:
+                    foundCycle = value.UnderlyingTypeValue.DetectCycle(seenNodes, allNodesSeen);
+                    break;
 
-            default:
-                throw new Exception (String.Format ("Unknown node type: {0}", node.GetType ().Name));
+                default:
+                    throw new Exception(
+                        String.Format("Unknown node type: {0}", node.GetType().Name)
+                    );
             }
-            seenNodes.Remove (node);
+            seenNodes.Remove(node);
 
             return foundCycle;
         }

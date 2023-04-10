@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
         TParameterSyntax,
         TVariableSyntax,
         TSingleVariableDesignationSyntax,
-        TIdentifierNameSyntax>
-        : IReassignedVariableService
+        TIdentifierNameSyntax
+    > : IReassignedVariableService
         where TParameterSyntax : SyntaxNode
         where TVariableSyntax : SyntaxNode
         where TSingleVariableDesignationSyntax : SyntaxNode
@@ -34,24 +34,35 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
 
         protected abstract bool HasInitializer(SyntaxNode variable);
         protected abstract SyntaxToken GetIdentifierOfVariable(TVariableSyntax variable);
-        protected abstract SyntaxToken GetIdentifierOfSingleVariableDesignation(TSingleVariableDesignationSyntax variable);
+        protected abstract SyntaxToken GetIdentifierOfSingleVariableDesignation(
+            TSingleVariableDesignationSyntax variable
+        );
 
         public async Task<ImmutableArray<TextSpan>> GetLocationsAsync(
-            Document document, TextSpan span, CancellationToken cancellationToken)
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
         {
             var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            using var _1 = PooledDictionary<ISymbol, bool>.GetInstance(out var symbolToIsReassigned);
+            using var _1 = PooledDictionary<ISymbol, bool>.GetInstance(
+                out var symbolToIsReassigned
+            );
             using var _2 = ArrayBuilder<TextSpan>.GetInstance(out var result);
             using var _3 = ArrayBuilder<SyntaxNode>.GetInstance(out var stack);
 
             // Walk through all the nodes in the provided span.  Directly analyze local or parameter declaration.  And
             // also analyze any identifiers which might be reference to locals or parameters.  Note that we might hit
-            // locals/parameters without any references in the span, or references that don't have the declarations in 
+            // locals/parameters without any references in the span, or references that don't have the declarations in
             // the span
             stack.Add(root.FindNode(span));
 
@@ -109,21 +120,25 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
 
             void ProcessParameter(TParameterSyntax parameterSyntax)
             {
-                var parameter = semanticModel.GetDeclaredSymbol(parameterSyntax, cancellationToken) as IParameterSymbol;
+                var parameter =
+                    semanticModel.GetDeclaredSymbol(parameterSyntax, cancellationToken)
+                    as IParameterSymbol;
                 if (IsSymbolReassigned(parameter))
                     result.Add(syntaxFacts.GetIdentifierOfParameter(parameterSyntax).Span);
             }
 
             void ProcessVariable(TVariableSyntax variable)
             {
-                var local = semanticModel.GetDeclaredSymbol(variable, cancellationToken) as ILocalSymbol;
+                var local =
+                    semanticModel.GetDeclaredSymbol(variable, cancellationToken) as ILocalSymbol;
                 if (IsSymbolReassigned(local))
                     result.Add(GetIdentifierOfVariable(variable).Span);
             }
 
             void ProcessSingleVariableDesignation(TSingleVariableDesignationSyntax designation)
             {
-                var local = semanticModel.GetDeclaredSymbol(designation, cancellationToken) as ILocalSymbol;
+                var local =
+                    semanticModel.GetDeclaredSymbol(designation, cancellationToken) as ILocalSymbol;
                 if (IsSymbolReassigned(local))
                     result.Add(GetIdentifierOfSingleVariableDesignation(designation).Span);
             }
@@ -153,7 +168,12 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                 var methodOrProperty = parameter.ContainingSymbol;
 
                 // If we're on an accessor parameter. Map up to the matching parameter for the property/indexer.
-                if (methodOrProperty is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet } method)
+                if (
+                    methodOrProperty is IMethodSymbol
+                    {
+                        MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet
+                    } method
+                )
                     methodOrProperty = method.AssociatedSymbol as IPropertySymbol;
 
                 if (methodOrProperty is not IMethodSymbol and not IPropertySymbol)
@@ -165,7 +185,9 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                 // Be resilient to cases where the parameter might have multiple locations.  This
                 // should not normally happen, but we want to be resilient in case it occurs in
                 // error scenarios.
-                var methodOrPropertyDeclaration = methodOrProperty.DeclaringSyntaxReferences.First().GetSyntax(cancellationToken);
+                var methodOrPropertyDeclaration = methodOrProperty.DeclaringSyntaxReferences
+                    .First()
+                    .GetSyntax(cancellationToken);
                 if (methodOrPropertyDeclaration.SyntaxTree != semanticModel.SyntaxTree)
                     return false;
 
@@ -174,7 +196,8 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                     parameter,
                     parameterLocation,
                     symbolIsDefinitelyAssigned: parameter.RefKind != RefKind.Out,
-                    GetMemberBlock(methodOrPropertyDeclaration));
+                    GetMemberBlock(methodOrPropertyDeclaration)
+                );
             }
 
             bool TryGetParameterLocation(IParameterSymbol parameter, out TextSpan location)
@@ -191,7 +214,10 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                         return true;
                     }
                 }
-                else if (parameter.ContainingSymbol.Name == WellKnownMemberNames.TopLevelStatementsEntryPointMethodName)
+                else if (
+                    parameter.ContainingSymbol.Name
+                    == WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
+                )
                 {
                     // If this is a parameter of the top-level-main function, then the entire span of the compilation
                     // unit is what we need to examine.
@@ -214,7 +240,11 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                     .FirstOrDefault();
                 if (localDeclaration == null)
                 {
-                    FatalError.ReportAndCatch(new InvalidOperationException("Local did not come from same file that we were analyzing?"));
+                    FatalError.ReportAndCatch(
+                        new InvalidOperationException(
+                            "Local did not come from same file that we were analyzing?"
+                        )
+                    );
                     return false;
                 }
 
@@ -223,14 +253,16 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
                     local,
                     localDeclaration.Span,
                     symbolIsDefinitelyAssigned: HasInitializer(localDeclaration),
-                    GetParentScope(localDeclaration));
+                    GetParentScope(localDeclaration)
+                );
             }
 
             bool AnalyzePotentialMatches(
                 ISymbol localOrParameter,
                 TextSpan localOrParameterDeclarationSpan,
                 bool symbolIsDefinitelyAssigned,
-                SyntaxNode parentScope)
+                SyntaxNode parentScope
+            )
             {
                 // Now, walk the scope, looking for all usages of the local.  See if any are a reassignment.
                 using var _ = ArrayBuilder<SyntaxNode>.GetInstance(out var stack);
@@ -257,7 +289,9 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
 
                     // Ignore identifiers that don't match the local name.
                     var idToken = syntaxFacts.GetIdentifierOfSimpleName(id);
-                    if (!syntaxFacts.StringComparer.Equals(idToken.ValueText, localOrParameter.Name))
+                    if (
+                        !syntaxFacts.StringComparer.Equals(idToken.ValueText, localOrParameter.Name)
+                    )
                         continue;
 
                     // Ignore identifiers that bind to another symbol.
@@ -298,7 +332,12 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
 
                 // Special case for property parameters.  When we bind to references, we'll bind to the parameters on
                 // the accessor methods.  We need to map these back to the property parameter to see if we have a hit.
-                if (localOrParameter is IParameterSymbol { ContainingSymbol: IPropertySymbol property } parameter)
+                if (
+                    localOrParameter is IParameterSymbol
+                    {
+                        ContainingSymbol: IPropertySymbol property
+                    } parameter
+                )
                 {
                     var getParameter = property.GetMethod?.Parameters[parameter.Ordinal];
                     var setParameter = property.SetMethod?.Parameters[parameter.Ordinal];
@@ -321,12 +360,17 @@ namespace Microsoft.CodeAnalysis.ReassignedVariable
 
                 // Special case for property parameters.  When we bind to references, we'll bind to the parameters on
                 // the accessor methods.  We need to map these back to the property parameter to see if we have a hit.
-                if (localOrParameter is IParameterSymbol { ContainingSymbol: IPropertySymbol property } parameter)
+                if (
+                    localOrParameter is IParameterSymbol
+                    {
+                        ContainingSymbol: IPropertySymbol property
+                    } parameter
+                )
                 {
                     var getParameter = property.GetMethod?.Parameters[parameter.Ordinal];
                     var setParameter = property.SetMethod?.Parameters[parameter.Ordinal];
-                    return DefinitelyAssignedOnEntry(analysis, getParameter) ||
-                           DefinitelyAssignedOnEntry(analysis, setParameter);
+                    return DefinitelyAssignedOnEntry(analysis, getParameter)
+                        || DefinitelyAssignedOnEntry(analysis, setParameter);
                 }
 
                 return false;

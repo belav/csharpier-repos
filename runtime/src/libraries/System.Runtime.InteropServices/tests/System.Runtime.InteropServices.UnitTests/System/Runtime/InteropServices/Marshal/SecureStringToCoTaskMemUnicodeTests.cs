@@ -51,7 +51,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SecureStringToCoTaskMemUnicode_NullString_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("s", () => Marshal.SecureStringToCoTaskMemUnicode(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => Marshal.SecureStringToCoTaskMemUnicode(null)
+            );
         }
 
         [Fact]
@@ -60,7 +63,9 @@ namespace System.Runtime.InteropServices.Tests
             var secureString = new SecureString();
             secureString.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => Marshal.SecureStringToCoTaskMemUnicode(secureString));
+            Assert.Throws<ObjectDisposedException>(
+                () => Marshal.SecureStringToCoTaskMemUnicode(secureString)
+            );
         }
 
         private static SecureString ToSecureString(string data)

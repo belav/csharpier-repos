@@ -2,12 +2,12 @@
 // Line: 9
 
 [System.Obsolete("!!!", true)]
-class Obsolete {
-}
+class Obsolete { }
 
-class Class {
-		void VV ()
-		{
-			object[] o = new object [] { new Obsolete () };
-		}
+class Class
+{
+    void VV()
+    {
+        object[] o = new object[] { new Obsolete() };
+    }
 }

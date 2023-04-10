@@ -17,13 +17,25 @@ namespace Tracing.Tests.ExceptionThrown_V1
             {
                 new EventPipeProvider("Microsoft-DotNETCore-SampleProfiler", EventLevel.Verbose),
                 //ExceptionKeyword (0x8000): 0b1000_0000_0000_0000
-                new EventPipeProvider("Microsoft-Windows-DotNETRuntime", EventLevel.Warning, 0b1000_0000_0000_0000)
+                new EventPipeProvider(
+                    "Microsoft-Windows-DotNETRuntime",
+                    EventLevel.Warning,
+                    0b1000_0000_0000_0000
+                )
             };
 
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024);
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
             { "Microsoft-Windows-DotNETRuntime", new ExpectedEventCount(1000, 0.2f) },
             { "Microsoft-Windows-DotNETRuntimeRundown", -1 },

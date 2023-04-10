@@ -3,10 +3,10 @@
 
 interface I
 {
-   int Foo { set; }
+    int Foo { set; }
 }
 
-class C: I
+class C : I
 {
-   void I.set_Foo (int v) { }
+    void I.set_Foo(int v) { }
 }

@@ -2,15 +2,14 @@
 // Line: 3
 public abstract sealed partial class Foo
 {
-	public string myId;
+    public string myId;
 }
 
 public class PartialAbstractCompilationError
 {
-	public static void Main ()
-	{
-		System.Console.WriteLine (typeof (Foo).IsSealed);
-		System.Console.WriteLine (typeof (Foo).IsAbstract);
-	}
+    public static void Main()
+    {
+        System.Console.WriteLine(typeof(Foo).IsSealed);
+        System.Console.WriteLine(typeof(Foo).IsAbstract);
+    }
 }
-

@@ -18,9 +18,9 @@ public class CSharpCodeWriterTest
         {
             return new object[][]
             {
-                    new object[] { "\r" },
-                    new object[] { "\n" },
-                    new object[] { "\r\n" },
+                new object[] { "\r" },
+                new object[] { "\n" },
+                new object[] { "\r\n" },
             };
         }
     }
@@ -53,7 +53,11 @@ public class CSharpCodeWriterTest
 
         // Assert
         var location = writer.Location;
-        var expected = new SourceLocation(absoluteIndex: 3 + WriterNewLineLength, lineIndex: 1, characterIndex: 3);
+        var expected = new SourceLocation(
+            absoluteIndex: 3 + WriterNewLineLength,
+            lineIndex: 1,
+            characterIndex: 3
+        );
 
         Assert.Equal(expected, location);
     }
@@ -70,7 +74,11 @@ public class CSharpCodeWriterTest
         // Assert
         var location = writer.Location;
 
-        var expected = new SourceLocation(absoluteIndex: 4 + WriterNewLineLength, lineIndex: 1, characterIndex: 0);
+        var expected = new SourceLocation(
+            absoluteIndex: 4 + WriterNewLineLength,
+            lineIndex: 1,
+            characterIndex: 0
+        );
 
         Assert.Equal(expected, location);
     }
@@ -91,7 +99,8 @@ public class CSharpCodeWriterTest
         var expected = new SourceLocation(
             absoluteIndex: 6 + newLine.Length + WriterNewLineLength,
             lineIndex: 2,
-            characterIndex: 0);
+            characterIndex: 0
+        );
 
         Assert.Equal(expected, location);
     }
@@ -112,7 +121,8 @@ public class CSharpCodeWriterTest
         var expected = new SourceLocation(
             absoluteIndex: 9 + newLine.Length + newLine.Length,
             lineIndex: 2,
-            characterIndex: 2);
+            characterIndex: 2
+        );
 
         Assert.Equal(expected, location);
     }
@@ -129,10 +139,7 @@ public class CSharpCodeWriterTest
         // Assert
         var location = writer.Location;
 
-        var expected = new SourceLocation(
-            absoluteIndex: 9,
-            lineIndex: 2,
-            characterIndex: 3);
+        var expected = new SourceLocation(absoluteIndex: 9, lineIndex: 2, characterIndex: 3);
 
         Assert.Equal(expected, location);
     }
@@ -149,10 +156,7 @@ public class CSharpCodeWriterTest
         // Assert
         var location = writer.Location;
 
-        var expected = new SourceLocation(
-            absoluteIndex: 14,
-            lineIndex: 3,
-            characterIndex: 1);
+        var expected = new SourceLocation(absoluteIndex: 14, lineIndex: 3, characterIndex: 1);
 
         Assert.Equal(expected, location);
     }
@@ -287,7 +291,12 @@ public class CSharpCodeWriterTest
         var writer = new CodeWriter();
 
         // Act
-        writer.WriteField(Array.Empty<string>(), new[] { "private" }, "global::System.String", "_myString");
+        writer.WriteField(
+            Array.Empty<string>(),
+            new[] { "private" },
+            "global::System.String",
+            "_myString"
+        );
 
         // Assert
         var output = writer.GenerateCode();
@@ -301,11 +310,19 @@ public class CSharpCodeWriterTest
         var writer = new CodeWriter();
 
         // Act
-        writer.WriteField(Array.Empty<string>(), new[] { "private", "readonly", "static" }, "global::System.String", "_myString");
+        writer.WriteField(
+            Array.Empty<string>(),
+            new[] { "private", "readonly", "static" },
+            "global::System.String",
+            "_myString"
+        );
 
         // Assert
         var output = writer.GenerateCode();
-        Assert.Equal("private readonly static global::System.String _myString;" + Environment.NewLine, output);
+        Assert.Equal(
+            "private readonly static global::System.String _myString;" + Environment.NewLine,
+            output
+        );
     }
 
     [Fact]
@@ -319,17 +336,24 @@ public class CSharpCodeWriterTest
             new[] { "0001", "0002", },
             new[] { "private", "readonly", "static" },
             "global::System.String",
-            "_myString");
+            "_myString"
+        );
 
         // Assert
         var output = writer.GenerateCode();
         Assert.Equal(
-            "#pragma warning disable 0001" + Environment.NewLine +
-            "#pragma warning disable 0002" + Environment.NewLine +
-            "private readonly static global::System.String _myString;" + Environment.NewLine +
-            "#pragma warning restore 0002" + Environment.NewLine +
-            "#pragma warning restore 0001" + Environment.NewLine,
-            output);
+            "#pragma warning disable 0001"
+                + Environment.NewLine
+                + "#pragma warning disable 0002"
+                + Environment.NewLine
+                + "private readonly static global::System.String _myString;"
+                + Environment.NewLine
+                + "#pragma warning restore 0002"
+                + Environment.NewLine
+                + "#pragma warning restore 0001"
+                + Environment.NewLine,
+            output
+        );
     }
 
     [Fact]
@@ -339,11 +363,18 @@ public class CSharpCodeWriterTest
         var writer = new CodeWriter();
 
         // Act
-        writer.WriteAutoPropertyDeclaration(new[] { "public" }, "global::System.String", "MyString");
+        writer.WriteAutoPropertyDeclaration(
+            new[] { "public" },
+            "global::System.String",
+            "MyString"
+        );
 
         // Assert
         var output = writer.GenerateCode();
-        Assert.Equal("public global::System.String MyString { get; set; }" + Environment.NewLine, output);
+        Assert.Equal(
+            "public global::System.String MyString { get; set; }" + Environment.NewLine,
+            output
+        );
     }
 
     [Fact]
@@ -353,11 +384,18 @@ public class CSharpCodeWriterTest
         var writer = new CodeWriter();
 
         // Act
-        writer.WriteAutoPropertyDeclaration(new[] { "public", "static" }, "global::System.String", "MyString");
+        writer.WriteAutoPropertyDeclaration(
+            new[] { "public", "static" },
+            "global::System.String",
+            "MyString"
+        );
 
         // Assert
         var output = writer.GenerateCode();
-        Assert.Equal("public static global::System.String MyString { get; set; }" + Environment.NewLine, output);
+        Assert.Equal(
+            "public static global::System.String MyString { get; set; }" + Environment.NewLine,
+            output
+        );
     }
 
     [Fact]
@@ -373,12 +411,26 @@ public class CSharpCodeWriterTest
         var writer = new CodeWriter(Environment.NewLine, options);
 
         // Act
-        writer.BuildClassDeclaration(Array.Empty<string>(), "C", "", Array.Empty<string>(), Array.Empty<(string, string)>());
+        writer.BuildClassDeclaration(
+            Array.Empty<string>(),
+            "C",
+            "",
+            Array.Empty<string>(),
+            Array.Empty<(string, string)>()
+        );
         writer.WriteField(Array.Empty<string>(), Array.Empty<string>(), "int", "f");
 
         // Assert
         var output = writer.GenerateCode();
-        Assert.Equal("class C" + Environment.NewLine + "{" + Environment.NewLine + "\tint f;" + Environment.NewLine, output);
+        Assert.Equal(
+            "class C"
+                + Environment.NewLine
+                + "{"
+                + Environment.NewLine
+                + "\tint f;"
+                + Environment.NewLine,
+            output
+        );
     }
 
     [Fact]
@@ -394,11 +446,25 @@ public class CSharpCodeWriterTest
         var writer = new CodeWriter(Environment.NewLine, options);
 
         // Act
-        writer.BuildClassDeclaration(Array.Empty<string>(), "C", "", Array.Empty<string>(), Array.Empty<(string, string)>());
+        writer.BuildClassDeclaration(
+            Array.Empty<string>(),
+            "C",
+            "",
+            Array.Empty<string>(),
+            Array.Empty<(string, string)>()
+        );
         writer.WriteField(Array.Empty<string>(), Array.Empty<string>(), "int", "f");
 
         // Assert
         var output = writer.GenerateCode();
-        Assert.Equal("class C" + Environment.NewLine + "{" + Environment.NewLine + "    int f;" + Environment.NewLine, output);
+        Assert.Equal(
+            "class C"
+                + Environment.NewLine
+                + "{"
+                + Environment.NewLine
+                + "    int f;"
+                + Environment.NewLine,
+            output
+        );
     }
 }

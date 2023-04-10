@@ -3,12 +3,10 @@
 
 public class A
 {
-	private class B
-	{
-		protected class C { }
+    private class B
+    {
+        protected class C { }
 
-		protected internal class D : C
-		{
-		}
+        protected internal class D : C { }
     }
 }

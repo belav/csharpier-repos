@@ -8,9 +8,11 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
     using System.Configuration;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(VariableElement),
+    [ConfigurationCollection(
+        typeof(VariableElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.VariableQuery)]
+        AddItemName = TrackingConfigurationStrings.VariableQuery
+    )]
     public class VariableElementCollection : TrackingConfigurationCollection<VariableElement>
     {
         protected override string ElementName

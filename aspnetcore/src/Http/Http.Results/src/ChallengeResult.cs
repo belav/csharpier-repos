@@ -20,9 +20,7 @@ internal sealed partial class ChallengeResult : IResult
     /// Initializes a new instance of <see cref="ChallengeResult"/>.
     /// </summary>
     public ChallengeResult()
-        : this(Array.Empty<string>())
-    {
-    }
+        : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
@@ -30,9 +28,7 @@ internal sealed partial class ChallengeResult : IResult
     /// </summary>
     /// <param name="authenticationScheme">The authentication scheme to challenge.</param>
     public ChallengeResult(string authenticationScheme)
-        : this(new[] { authenticationScheme })
-    {
-    }
+        : this(new[] { authenticationScheme }) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
@@ -40,9 +36,7 @@ internal sealed partial class ChallengeResult : IResult
     /// </summary>
     /// <param name="authenticationSchemes">The authentication schemes to challenge.</param>
     public ChallengeResult(IList<string> authenticationSchemes)
-        : this(authenticationSchemes, properties: null)
-    {
-    }
+        : this(authenticationSchemes, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
@@ -51,9 +45,7 @@ internal sealed partial class ChallengeResult : IResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
     public ChallengeResult(AuthenticationProperties? properties)
-        : this(Array.Empty<string>(), properties)
-    {
-    }
+        : this(Array.Empty<string>(), properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
@@ -63,9 +55,7 @@ internal sealed partial class ChallengeResult : IResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
     public ChallengeResult(string authenticationScheme, AuthenticationProperties? properties)
-        : this(new[] { authenticationScheme }, properties)
-    {
-    }
+        : this(new[] { authenticationScheme }, properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeResult"/> with the
@@ -74,7 +64,10 @@ internal sealed partial class ChallengeResult : IResult
     /// <param name="authenticationSchemes">The authentication scheme to challenge.</param>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
-    public ChallengeResult(IList<string> authenticationSchemes, AuthenticationProperties? properties)
+    public ChallengeResult(
+        IList<string> authenticationSchemes,
+        AuthenticationProperties? properties
+    )
     {
         AuthenticationSchemes = authenticationSchemes;
         Properties = properties;
@@ -105,7 +98,10 @@ internal sealed partial class ChallengeResult : IResult
 
     private static partial class Log
     {
-        public static void ChallengeResultExecuting(ILogger logger, IList<string> authenticationSchemes)
+        public static void ChallengeResultExecuting(
+            ILogger logger,
+            IList<string> authenticationSchemes
+        )
         {
             if (logger.IsEnabled(LogLevel.Information))
             {
@@ -113,7 +109,13 @@ internal sealed partial class ChallengeResult : IResult
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information, "Executing ChallengeResult with authentication schemes ({Schemes}).", EventName = "ChallengeResultExecuting", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing ChallengeResult with authentication schemes ({Schemes}).",
+            EventName = "ChallengeResultExecuting",
+            SkipEnabledCheck = true
+        )]
         private static partial void ChallengeResultExecuting(ILogger logger, string[] schemes);
     }
 }

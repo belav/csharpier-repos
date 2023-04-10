@@ -42,8 +42,9 @@ namespace Microsoft.EntityFrameworkCore;
 ///     </para>
 /// </remarks>
 /// <typeparam name="TEntity">The type of entity being operated on by this set.</typeparam>
-public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity>
-    : IQueryable<TEntity>, IInfrastructure<IServiceProvider>, IListSource
+public abstract class DbSet<
+    [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
+> : IQueryable<TEntity>, IInfrastructure<IServiceProvider>, IListSource
     where TEntity : class
 {
     /// <summary>
@@ -58,8 +59,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     See <see href="https://aka.ms/efcore-docs-query">Querying data with EF Core</see> for more information and examples.
     /// </remarks>
     /// <returns>This object.</returns>
-    public virtual IAsyncEnumerable<TEntity> AsAsyncEnumerable()
-        => (IAsyncEnumerable<TEntity>)this;
+    public virtual IAsyncEnumerable<TEntity> AsAsyncEnumerable() => (IAsyncEnumerable<TEntity>)this;
 
     /// <summary>
     ///     Returns this object typed as <see cref="IQueryable{T}" />.
@@ -74,8 +74,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     </para>
     /// </remarks>
     /// <returns>This object.</returns>
-    public virtual IQueryable<TEntity> AsQueryable()
-        => this;
+    public virtual IQueryable<TEntity> AsQueryable() => this;
 
     /// <summary>
     ///     Gets a <see cref="LocalView{TEntity}" /> that represents a local view of all Added, Unchanged,
@@ -103,8 +102,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///         examples.
     ///     </para>
     /// </remarks>
-    public virtual LocalView<TEntity> Local
-        => throw new NotSupportedException();
+    public virtual LocalView<TEntity> Local => throw new NotSupportedException();
 
     /// <summary>
     ///     Finds an entity with the given primary key values. If an entity with the given primary key values
@@ -118,8 +116,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// </remarks>
     /// <param name="keyValues">The values of the primary key for the entity to be found.</param>
     /// <returns>The entity found, or <see langword="null" />.</returns>
-    public virtual TEntity? Find(params object?[]? keyValues)
-        => throw new NotSupportedException();
+    public virtual TEntity? Find(params object?[]? keyValues) => throw new NotSupportedException();
 
     /// <summary>
     ///     Finds an entity with the given primary key values. If an entity with the given primary key values
@@ -133,8 +130,8 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// </remarks>
     /// <param name="keyValues">The values of the primary key for the entity to be found.</param>
     /// <returns>The entity found, or <see langword="null" />.</returns>
-    public virtual ValueTask<TEntity?> FindAsync(params object?[]? keyValues)
-        => throw new NotSupportedException();
+    public virtual ValueTask<TEntity?> FindAsync(params object?[]? keyValues) =>
+        throw new NotSupportedException();
 
     /// <summary>
     ///     Finds an entity with the given primary key values. If an entity with the given primary key values
@@ -150,8 +147,10 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>The entity found, or <see langword="null" />.</returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual ValueTask<TEntity?> FindAsync(object?[]? keyValues, CancellationToken cancellationToken)
-        => throw new NotSupportedException();
+    public virtual ValueTask<TEntity?> FindAsync(
+        object?[]? keyValues,
+        CancellationToken cancellationToken
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entity, and any other reachable entities that are
@@ -171,8 +170,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     The <see cref="EntityEntry{TEntity}" /> for the entity. The entry provides
     ///     access to change tracking information and operations for the entity.
     /// </returns>
-    public virtual EntityEntry<TEntity> Add(TEntity entity)
-        => throw new NotSupportedException();
+    public virtual EntityEntry<TEntity> Add(TEntity entity) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entity, and any other reachable entities that are
@@ -202,8 +200,8 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public virtual ValueTask<EntityEntry<TEntity>> AddAsync(
         TEntity entity,
-        CancellationToken cancellationToken = default)
-        => throw new NotSupportedException();
+        CancellationToken cancellationToken = default
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entity and entries reachable from the given entity using
@@ -242,8 +240,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     The <see cref="EntityEntry" /> for the entity. The entry provides
     ///     access to change tracking information and operations for the entity.
     /// </returns>
-    public virtual EntityEntry<TEntity> Attach(TEntity entity)
-        => throw new NotSupportedException();
+    public virtual EntityEntry<TEntity> Attach(TEntity entity) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entity in the <see cref="EntityState.Deleted" /> state such that it will
@@ -272,8 +269,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     The <see cref="EntityEntry{TEntity}" /> for the entity. The entry provides
     ///     access to change tracking information and operations for the entity.
     /// </returns>
-    public virtual EntityEntry<TEntity> Remove(TEntity entity)
-        => throw new NotSupportedException();
+    public virtual EntityEntry<TEntity> Remove(TEntity entity) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entity and entries reachable from the given entity using
@@ -312,8 +308,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     The <see cref="EntityEntry" /> for the entity. The entry provides
     ///     access to change tracking information and operations for the entity.
     /// </returns>
-    public virtual EntityEntry<TEntity> Update(TEntity entity)
-        => throw new NotSupportedException();
+    public virtual EntityEntry<TEntity> Update(TEntity entity) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entities, and any other reachable entities that are
@@ -326,8 +321,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     for more information and examples.
     /// </remarks>
     /// <param name="entities">The entities to add.</param>
-    public virtual void AddRange(params TEntity[] entities)
-        => throw new NotSupportedException();
+    public virtual void AddRange(params TEntity[] entities) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entities, and any other reachable entities that are
@@ -348,8 +342,8 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// </remarks>
     /// <param name="entities">The entities to add.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public virtual Task AddRangeAsync(params TEntity[] entities)
-        => throw new NotSupportedException();
+    public virtual Task AddRangeAsync(params TEntity[] entities) =>
+        throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entities and entries reachable from the given entities using
@@ -386,8 +380,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     </para>
     /// </remarks>
     /// <param name="entities">The entities to attach.</param>
-    public virtual void AttachRange(params TEntity[] entities)
-        => throw new NotSupportedException();
+    public virtual void AttachRange(params TEntity[] entities) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entities in the <see cref="EntityState.Deleted" /> state such that they will
@@ -411,8 +404,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     </para>
     /// </remarks>
     /// <param name="entities">The entities to remove.</param>
-    public virtual void RemoveRange(params TEntity[] entities)
-        => throw new NotSupportedException();
+    public virtual void RemoveRange(params TEntity[] entities) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entities and entries reachable from the given entities using
@@ -449,8 +441,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     </para>
     /// </remarks>
     /// <param name="entities">The entities to update.</param>
-    public virtual void UpdateRange(params TEntity[] entities)
-        => throw new NotSupportedException();
+    public virtual void UpdateRange(params TEntity[] entities) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entities, and any other reachable entities that are
@@ -463,8 +454,8 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     for more information and examples.
     /// </remarks>
     /// <param name="entities">The entities to add.</param>
-    public virtual void AddRange(IEnumerable<TEntity> entities)
-        => throw new NotSupportedException();
+    public virtual void AddRange(IEnumerable<TEntity> entities) =>
+        throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entities, and any other reachable entities that are
@@ -489,8 +480,8 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public virtual Task AddRangeAsync(
         IEnumerable<TEntity> entities,
-        CancellationToken cancellationToken = default)
-        => throw new NotSupportedException();
+        CancellationToken cancellationToken = default
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entities and entries reachable from the given entities using
@@ -527,8 +518,8 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     </para>
     /// </remarks>
     /// <param name="entities">The entities to attach.</param>
-    public virtual void AttachRange(IEnumerable<TEntity> entities)
-        => throw new NotSupportedException();
+    public virtual void AttachRange(IEnumerable<TEntity> entities) =>
+        throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entities in the <see cref="EntityState.Deleted" /> state such that they will
@@ -552,8 +543,8 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     </para>
     /// </remarks>
     /// <param name="entities">The entities to remove.</param>
-    public virtual void RemoveRange(IEnumerable<TEntity> entities)
-        => throw new NotSupportedException();
+    public virtual void RemoveRange(IEnumerable<TEntity> entities) =>
+        throw new NotSupportedException();
 
     /// <summary>
     ///     Begins tracking the given entities and entries reachable from the given entities using
@@ -590,8 +581,8 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     </para>
     /// </remarks>
     /// <param name="entities">The entities to update.</param>
-    public virtual void UpdateRange(IEnumerable<TEntity> entities)
-        => throw new NotSupportedException();
+    public virtual void UpdateRange(IEnumerable<TEntity> entities) =>
+        throw new NotSupportedException();
 
     /// <summary>
     ///     Gets an <see cref="EntityEntry{TEntity}" /> for the given entity. The entry provides
@@ -603,8 +594,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// </remarks>
     /// <param name="entity">The entity to get the entry for.</param>
     /// <returns>The entry for the given entity.</returns>
-    public virtual EntityEntry<TEntity> Entry(TEntity entity)
-        => throw new NotSupportedException();
+    public virtual EntityEntry<TEntity> Entry(TEntity entity) => throw new NotSupportedException();
 
     /// <summary>
     ///     Returns an <see cref="IEnumerator{T}" /> which when enumerated will execute a query against the database
@@ -614,8 +604,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     See <see href="https://aka.ms/efcore-docs-query">Querying data with EF Core</see> for more information and examples.
     /// </remarks>
     /// <returns>The query results.</returns>
-    IEnumerator<TEntity> IEnumerable<TEntity>.GetEnumerator()
-        => throw new NotSupportedException();
+    IEnumerator<TEntity> IEnumerable<TEntity>.GetEnumerator() => throw new NotSupportedException();
 
     /// <summary>
     ///     Returns an <see cref="IEnumerator" /> which when enumerated will execute a query against the database
@@ -625,8 +614,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     See <see href="https://aka.ms/efcore-docs-query">Querying data with EF Core</see> for more information and examples.
     /// </remarks>
     /// <returns>The query results.</returns>
-    IEnumerator IEnumerable.GetEnumerator()
-        => throw new NotSupportedException();
+    IEnumerator IEnumerable.GetEnumerator() => throw new NotSupportedException();
 
     /// <summary>
     ///     Returns an <see cref="IAsyncEnumerator{T}" /> which when enumerated will asynchronously execute a query against
@@ -639,8 +627,9 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     A <see cref="CancellationToken" /> that may be used to cancel the asynchronous iteration.
     /// </param>
     /// <returns>The query results.</returns>
-    public virtual IAsyncEnumerator<TEntity> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-        => ((IAsyncEnumerable<TEntity>)this).GetAsyncEnumerator(cancellationToken);
+    public virtual IAsyncEnumerator<TEntity> GetAsyncEnumerator(
+        CancellationToken cancellationToken = default
+    ) => ((IAsyncEnumerable<TEntity>)this).GetAsyncEnumerator(cancellationToken);
 
     /// <summary>
     ///     Gets the IQueryable element type.
@@ -648,8 +637,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-query">Querying data with EF Core</see> for more information and examples.
     /// </remarks>
-    Type IQueryable.ElementType
-        => throw new NotSupportedException();
+    Type IQueryable.ElementType => throw new NotSupportedException();
 
     /// <summary>
     ///     Gets the IQueryable LINQ Expression.
@@ -657,8 +645,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-query">Querying data with EF Core</see> for more information and examples.
     /// </remarks>
-    Expression IQueryable.Expression
-        => throw new NotSupportedException();
+    Expression IQueryable.Expression => throw new NotSupportedException();
 
     /// <summary>
     ///     Gets the IQueryable provider.
@@ -666,8 +653,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-query">Querying data with EF Core</see> for more information and examples.
     /// </remarks>
-    IQueryProvider IQueryable.Provider
-        => throw new NotSupportedException();
+    IQueryProvider IQueryable.Provider => throw new NotSupportedException();
 
     /// <summary>
     ///     Gets the scoped <see cref="IServiceProvider" /> being used to resolve services.
@@ -681,8 +667,8 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///         See <see href="https://aka.ms/efcore-docs-services">Accessing DbContext services</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    IServiceProvider IInfrastructure<IServiceProvider>.Instance
-        => throw new NotSupportedException();
+    IServiceProvider IInfrastructure<IServiceProvider>.Instance =>
+        throw new NotSupportedException();
 
     /// <summary>
     ///     This method is called by data binding frameworks when attempting to data bind
@@ -706,8 +692,8 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// </remarks>
     /// <exception cref="NotSupportedException">Always thrown.</exception>
     /// <returns>Never returns, always throws an exception.</returns>
-    IList IListSource.GetList()
-        => throw new NotSupportedException(CoreStrings.DataBindingWithIListSource);
+    IList IListSource.GetList() =>
+        throw new NotSupportedException(CoreStrings.DataBindingWithIListSource);
 
     /// <summary>
     ///     Gets a value indicating whether the collection is a collection of System.Collections.IList objects.
@@ -717,8 +703,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     ///     See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information and
     ///     examples.
     /// </remarks>
-    bool IListSource.ContainsListCollection
-        => false;
+    bool IListSource.ContainsListCollection => false;
 
     #region Hidden System.Object members
 
@@ -727,8 +712,7 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -736,16 +720,14 @@ public abstract class DbSet<[DynamicallyAccessedMembers(IEntityType.DynamicallyA
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

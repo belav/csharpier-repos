@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,18 +30,22 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {
-	[TestFixture]
-	public class TreeViewImageKeyConverterTest : TestHelper
-	{
-		[Test]
-		public void ConvertTo ()
-		{
-			ImageKeyConverter ikc = new ImageKeyConverter ();
-			Assert.AreEqual ("(none)", ikc.ConvertTo (null, null, string.Empty, typeof (string)), "N1");
-			Assert.AreEqual ("(none)", ikc.ConvertTo (null, null, null, typeof (string)), "N2");
-			Assert.AreEqual ("(none)", ikc.ConvertTo (null, null, "(none)", typeof (string)), "N2-1");
-			Assert.AreEqual ("bob", ikc.ConvertTo (null, null, "bob", typeof (string)), "N3");
-			Assert.AreEqual ("oSCar", ikc.ConvertTo (null, null, "oSCar", typeof (string)), "N4");
-		}
-	}
+    [TestFixture]
+    public class TreeViewImageKeyConverterTest : TestHelper
+    {
+        [Test]
+        public void ConvertTo()
+        {
+            ImageKeyConverter ikc = new ImageKeyConverter();
+            Assert.AreEqual(
+                "(none)",
+                ikc.ConvertTo(null, null, string.Empty, typeof(string)),
+                "N1"
+            );
+            Assert.AreEqual("(none)", ikc.ConvertTo(null, null, null, typeof(string)), "N2");
+            Assert.AreEqual("(none)", ikc.ConvertTo(null, null, "(none)", typeof(string)), "N2-1");
+            Assert.AreEqual("bob", ikc.ConvertTo(null, null, "bob", typeof(string)), "N3");
+            Assert.AreEqual("oSCar", ikc.ConvertTo(null, null, "oSCar", typeof(string)), "N4");
+        }
+    }
 }

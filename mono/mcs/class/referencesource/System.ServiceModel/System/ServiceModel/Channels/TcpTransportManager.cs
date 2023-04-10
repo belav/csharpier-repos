@@ -10,9 +10,7 @@ namespace System.ServiceModel.Channels
 
     abstract class TcpTransportManager : ConnectionOrientedTransportManager<TcpChannelListener>
     {
-        internal TcpTransportManager()
-        {
-        }
+        internal TcpTransportManager() { }
 
         internal override string Scheme
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
+
 namespace Microsoft.Diagnostics.Tracing
 #else
 namespace System.Diagnostics.Tracing
@@ -33,7 +34,8 @@ namespace System.Diagnostics.Tracing
         /// <param name="group">The field that starts the group</param>
         private TraceLoggingMetadataCollector(
             TraceLoggingMetadataCollector other,
-            FieldMetadata group)
+            FieldMetadata group
+        )
         {
             this.impl = other.impl;
             this.currentGroup = group;
@@ -43,11 +45,7 @@ namespace System.Diagnostics.Tracing
         /// The field tags to be used for the next field.
         /// This will be reset to None each time a field is written.
         /// </summary>
-        internal EventFieldTags Tags
-        {
-            get;
-            set;
-        }
+        internal EventFieldTags Tags { get; set; }
 
         internal int ScratchSize
         {
@@ -93,14 +91,18 @@ namespace System.Diagnostics.Tracing
         {
             TraceLoggingMetadataCollector result = this;
 
-            if (name != null || // Normal.
-                this.BeginningBufferedArray) // Error, FieldMetadata's constructor will throw the appropriate exception.
+            if (
+                name != null
+                || // Normal.
+                this.BeginningBufferedArray
+            ) // Error, FieldMetadata's constructor will throw the appropriate exception.
             {
                 var newGroup = new FieldMetadata(
                     name,
                     TraceLoggingDataType.Struct,
                     this.Tags,
-                    this.BeginningBufferedArray);
+                    this.BeginningBufferedArray
+                );
                 this.AddField(newGroup);
                 result = new TraceLoggingMetadataCollector(this, newGroup);
             }
@@ -228,7 +230,9 @@ namespace System.Diagnostics.Tracing
 
             if (this.BeginningBufferedArray)
             {
-                throw new NotSupportedException(Environment.GetResourceString("EventSource_NotSupportedNestedArraysEnums"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("EventSource_NotSupportedNestedArraysEnums")
+                );
             }
 
             this.impl.AddScalar(2);
@@ -240,7 +244,9 @@ namespace System.Diagnostics.Tracing
         {
             if (this.bufferedArrayFieldCount >= 0)
             {
-                throw new NotSupportedException(Environment.GetResourceString("EventSource_NotSupportedNestedArraysEnums"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("EventSource_NotSupportedNestedArraysEnums")
+                );
             }
 
             this.bufferedArrayFieldCount = 0;
@@ -251,7 +257,9 @@ namespace System.Diagnostics.Tracing
         {
             if (this.bufferedArrayFieldCount != 1)
             {
-                throw new InvalidOperationException(Environment.GetResourceString("EventSource_IncorrentlyAuthoredTypeInfo"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("EventSource_IncorrentlyAuthoredTypeInfo")
+                );
             }
 
             this.bufferedArrayFieldCount = int.MinValue;
@@ -270,16 +278,14 @@ namespace System.Diagnostics.Tracing
         {
             if (this.BeginningBufferedArray)
             {
-                throw new NotSupportedException(Environment.GetResourceString("EventSource_NotSupportedCustomSerializedData"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("EventSource_NotSupportedCustomSerializedData")
+                );
             }
 
             this.impl.AddScalar(2);
             this.impl.AddNonscalar();
-            this.AddField(new FieldMetadata(
-                name,
-                type,
-                this.Tags,
-                metadata));
+            this.AddField(new FieldMetadata(name, type, this.Tags, metadata));
         }
 
         internal byte[] GetMetadata()

@@ -6,15 +6,17 @@ using System;
 
 class A
 {
-	public virtual int Property {
-		set { }
-	}
+    public virtual int Property
+    {
+        set { }
+    }
 }
 
 class B : A
 {
-	[Obsolete ("TEST")]
-	public override int Property {
-		set { }
-	}
+    [Obsolete("TEST")]
+    public override int Property
+    {
+        set { }
+    }
 }

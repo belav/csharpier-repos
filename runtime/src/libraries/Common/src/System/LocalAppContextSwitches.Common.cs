@@ -19,13 +19,18 @@ namespace System
         internal static bool GetCachedSwitchValue(string switchName, ref int cachedSwitchValue)
         {
             // The cached switch value has 3 states: 0 - unknown, 1 - true, -1 - false
-            if (cachedSwitchValue < 0) return false;
-            if (cachedSwitchValue > 0) return true;
+            if (cachedSwitchValue < 0)
+                return false;
+            if (cachedSwitchValue > 0)
+                return true;
 
             return GetCachedSwitchValueInternal(switchName, ref cachedSwitchValue);
         }
 
-        private static bool GetCachedSwitchValueInternal(string switchName, ref int cachedSwitchValue)
+        private static bool GetCachedSwitchValueInternal(
+            string switchName,
+            ref int cachedSwitchValue
+        )
         {
             bool hasSwitch = AppContext.TryGetSwitch(switchName, out bool isSwitchEnabled);
             if (!hasSwitch)
@@ -33,10 +38,16 @@ namespace System
                 isSwitchEnabled = GetSwitchDefaultValue(switchName);
             }
 
-            AppContext.TryGetSwitch("TestSwitch.LocalAppContext.DisableCaching", out bool disableCaching);
+            AppContext.TryGetSwitch(
+                "TestSwitch.LocalAppContext.DisableCaching",
+                out bool disableCaching
+            );
             if (!disableCaching)
             {
-                cachedSwitchValue = isSwitchEnabled ? 1 /*true*/ : -1 /*false*/;
+                cachedSwitchValue = isSwitchEnabled
+                    ? 1 /*true*/
+                    : -1 /*false*/
+                ;
             }
 
             return isSwitchEnabled;
@@ -50,7 +61,10 @@ namespace System
                 return true;
             }
 
-            if (switchName == "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization")
+            if (
+                switchName
+                == "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization"
+            )
             {
                 return true;
             }

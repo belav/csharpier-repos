@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 public class Program
 {
     public static ushort s_41 = 1646;
+
     public static int Main()
     {
         int result = Foo(0, 0);

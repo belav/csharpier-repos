@@ -6,19 +6,18 @@ using System.Linq.Expressions;
 
 class X
 {
-	void Foo ()
-	{
-		Expression<Func<int>> e = () => Test (ref this[0]);
-	}
+    void Foo()
+    {
+        Expression<Func<int>> e = () => Test(ref this[0]);
+    }
 
-	static int Test (ref int y)
-	{
-		return y;
-	}
+    static int Test(ref int y)
+    {
+        return y;
+    }
 
-	ref int this [int y] {
-		get {
-			throw null;
-		}
-	}
+    ref int this[int y]
+    {
+        get { throw null; }
+    }
 }

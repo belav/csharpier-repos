@@ -26,7 +26,11 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
 
         public unsafe QUIC_HANDLE* QuicHandle => (QUIC_HANDLE*)DangerousGetHandle();
 
-        protected unsafe MsQuicSafeHandle(QUIC_HANDLE* handle, Action<IntPtr> releaseAction, SafeHandleType safeHandleType)
+        protected unsafe MsQuicSafeHandle(
+            QUIC_HANDLE* handle,
+            Action<IntPtr> releaseAction,
+            SafeHandleType safeHandleType
+        )
             : base((IntPtr)handle, ownsHandle: true)
         {
             _releaseAction = releaseAction;

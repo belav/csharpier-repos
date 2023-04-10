@@ -18,9 +18,12 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 public class ApiActionsDoNotRequireExplicitModelValidationCheckCodeFixProvider : CodeFixProvider
 {
     public sealed override ImmutableArray<string> FixableDiagnosticIds =>
-        ImmutableArray.Create(ApiDiagnosticDescriptors.API1003_ApiActionsDoNotRequireExplicitModelValidationCheck.Id);
+        ImmutableArray.Create(
+            ApiDiagnosticDescriptors.API1003_ApiActionsDoNotRequireExplicitModelValidationCheck.Id
+        );
 
-    public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
+    public sealed override FixAllProvider GetFixAllProvider() =>
+        WellKnownFixAllProviders.BatchFixer;
 
     public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
     {
@@ -49,10 +52,16 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckCodeFixProvider :
 
         public override string Title => "Remove ModelState.IsValid check";
 
-        protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
+        protected override async Task<Document> GetChangedDocumentAsync(
+            CancellationToken cancellationToken
+        )
         {
-            var rootNode = await _document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var editor = await DocumentEditor.CreateAsync(_document, cancellationToken).ConfigureAwait(false);
+            var rootNode = await _document
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var editor = await DocumentEditor
+                .CreateAsync(_document, cancellationToken)
+                .ConfigureAwait(false);
 
             var ifBlockSyntax = rootNode!.FindNode(_ifBlockSpan);
             editor.RemoveNode(ifBlockSyntax);

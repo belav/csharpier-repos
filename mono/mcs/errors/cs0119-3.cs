@@ -5,9 +5,9 @@ using System;
 
 class X
 {
-	static void Main ()
-	{
-		Delegate d = null;
-		Console.WriteLine (d (null, null));
-	}
+    static void Main()
+    {
+        Delegate d = null;
+        Console.WriteLine(d(null, null));
+    }
 }

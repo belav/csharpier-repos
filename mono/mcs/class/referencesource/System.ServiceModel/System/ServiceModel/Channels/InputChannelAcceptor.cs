@@ -12,9 +12,7 @@ namespace System.ServiceModel.Channels
     class InputChannelAcceptor : SingletonChannelAcceptor<IInputChannel, InputChannel, Message>
     {
         public InputChannelAcceptor(ChannelManagerBase channelManager)
-            : base(channelManager)
-        {
-        }
+            : base(channelManager) { }
 
         protected override InputChannel OnCreateChannel()
         {
@@ -25,9 +23,14 @@ namespace System.ServiceModel.Channels
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.MessageReceived,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.MessageReceived,
                     SR.GetString(SR.TraceCodeMessageReceived),
-                    MessageTransmitTraceRecord.CreateReceiveTraceRecord(message), this, null);
+                    MessageTransmitTraceRecord.CreateReceiveTraceRecord(message),
+                    this,
+                    null
+                );
             }
         }
     }

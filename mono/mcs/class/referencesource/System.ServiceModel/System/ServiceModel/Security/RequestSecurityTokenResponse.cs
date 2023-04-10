@@ -60,73 +60,86 @@ namespace System.ServiceModel.Security
         System.IdentityModel.XmlBuffer issuedTokenBuffer;
 
         public RequestSecurityTokenResponse()
-            : this(SecurityStandardsManager.DefaultInstance)
-        {
-        }
+            : this(SecurityStandardsManager.DefaultInstance) { }
 
-        public RequestSecurityTokenResponse(MessageSecurityVersion messageSecurityVersion, SecurityTokenSerializer securityTokenSerializer)
-            : this(SecurityUtils.CreateSecurityStandardsManager(messageSecurityVersion, securityTokenSerializer))
-        {
-        }
+        public RequestSecurityTokenResponse(
+            MessageSecurityVersion messageSecurityVersion,
+            SecurityTokenSerializer securityTokenSerializer
+        )
+            : this(
+                SecurityUtils.CreateSecurityStandardsManager(
+                    messageSecurityVersion,
+                    securityTokenSerializer
+                )
+            ) { }
 
-        public RequestSecurityTokenResponse(XmlElement requestSecurityTokenResponseXml,
-                                            string context,
-                                            string tokenType,
-                                            int keySize,
-                                            SecurityKeyIdentifierClause requestedAttachedReference,
-                                            SecurityKeyIdentifierClause requestedUnattachedReference,
-                                            bool computeKey,
-                                            DateTime validFrom,
-                                            DateTime validTo,
-                                            bool isRequestedTokenClosed)
-            : this(SecurityStandardsManager.DefaultInstance,
-                   requestSecurityTokenResponseXml,
-                   context,
-                   tokenType,
-                   keySize,
-                   requestedAttachedReference,
-                   requestedUnattachedReference,
-                   computeKey,
-                   validFrom,
-                   validTo,
-                   isRequestedTokenClosed,
-                   null)
-        {
-        }
+        public RequestSecurityTokenResponse(
+            XmlElement requestSecurityTokenResponseXml,
+            string context,
+            string tokenType,
+            int keySize,
+            SecurityKeyIdentifierClause requestedAttachedReference,
+            SecurityKeyIdentifierClause requestedUnattachedReference,
+            bool computeKey,
+            DateTime validFrom,
+            DateTime validTo,
+            bool isRequestedTokenClosed
+        )
+            : this(
+                SecurityStandardsManager.DefaultInstance,
+                requestSecurityTokenResponseXml,
+                context,
+                tokenType,
+                keySize,
+                requestedAttachedReference,
+                requestedUnattachedReference,
+                computeKey,
+                validFrom,
+                validTo,
+                isRequestedTokenClosed,
+                null
+            ) { }
 
-        public RequestSecurityTokenResponse(MessageSecurityVersion messageSecurityVersion, 
-                                            SecurityTokenSerializer securityTokenSerializer, 
-                                            XmlElement requestSecurityTokenResponseXml,
-                                            string context,
-                                            string tokenType,
-                                            int keySize,
-                                            SecurityKeyIdentifierClause requestedAttachedReference,
-                                            SecurityKeyIdentifierClause requestedUnattachedReference,
-                                            bool computeKey,
-                                            DateTime validFrom,
-                                            DateTime validTo,
-                                            bool isRequestedTokenClosed)
-            : this(SecurityUtils.CreateSecurityStandardsManager(messageSecurityVersion, securityTokenSerializer),
-                   requestSecurityTokenResponseXml,
-                   context,
-                   tokenType,
-                   keySize,
-                   requestedAttachedReference,
-                   requestedUnattachedReference,
-                   computeKey,
-                   validFrom,
-                   validTo,
-                   isRequestedTokenClosed, 
-                   null)
-        {
-        }
+        public RequestSecurityTokenResponse(
+            MessageSecurityVersion messageSecurityVersion,
+            SecurityTokenSerializer securityTokenSerializer,
+            XmlElement requestSecurityTokenResponseXml,
+            string context,
+            string tokenType,
+            int keySize,
+            SecurityKeyIdentifierClause requestedAttachedReference,
+            SecurityKeyIdentifierClause requestedUnattachedReference,
+            bool computeKey,
+            DateTime validFrom,
+            DateTime validTo,
+            bool isRequestedTokenClosed
+        )
+            : this(
+                SecurityUtils.CreateSecurityStandardsManager(
+                    messageSecurityVersion,
+                    securityTokenSerializer
+                ),
+                requestSecurityTokenResponseXml,
+                context,
+                tokenType,
+                keySize,
+                requestedAttachedReference,
+                requestedUnattachedReference,
+                computeKey,
+                validFrom,
+                validTo,
+                isRequestedTokenClosed,
+                null
+            ) { }
 
         internal RequestSecurityTokenResponse(SecurityStandardsManager standardsManager)
             : base(true)
         {
             if (standardsManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("standardsManager"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("standardsManager")
+                );
             }
             this.standardsManager = standardsManager;
             effectiveTime = SecurityUtils.MinUtcDateTime;
@@ -136,24 +149,28 @@ namespace System.ServiceModel.Security
             this.isReceiver = false;
             this.isReadOnly = false;
         }
-        
-        internal RequestSecurityTokenResponse(SecurityStandardsManager standardsManager,
-                                              XmlElement rstrXml,
-                                              string context,
-                                              string tokenType,
-                                              int keySize,
-                                              SecurityKeyIdentifierClause requestedAttachedReference,
-                                              SecurityKeyIdentifierClause requestedUnattachedReference,
-                                              bool computeKey,
-                                              DateTime validFrom,
-                                              DateTime validTo,
-                                              bool isRequestedTokenClosed,
-                                              System.IdentityModel.XmlBuffer issuedTokenBuffer)
+
+        internal RequestSecurityTokenResponse(
+            SecurityStandardsManager standardsManager,
+            XmlElement rstrXml,
+            string context,
+            string tokenType,
+            int keySize,
+            SecurityKeyIdentifierClause requestedAttachedReference,
+            SecurityKeyIdentifierClause requestedUnattachedReference,
+            bool computeKey,
+            DateTime validFrom,
+            DateTime validTo,
+            bool isRequestedTokenClosed,
+            System.IdentityModel.XmlBuffer issuedTokenBuffer
+        )
             : base(true)
         {
             if (standardsManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("standardsManager"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("standardsManager")
+                );
             }
             this.standardsManager = standardsManager;
             if (rstrXml == null)
@@ -176,155 +193,139 @@ namespace System.ServiceModel.Security
 
         public string Context
         {
-            get
-            {
-                return this.context;
-            }
+            get { return this.context; }
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 this.context = value;
             }
         }
 
         public string TokenType
         {
-            get
-            {
-                return this.tokenType;
-            }
+            get { return this.tokenType; }
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 this.tokenType = value;
             }
         }
 
-        public SecurityKeyIdentifierClause RequestedAttachedReference 
+        public SecurityKeyIdentifierClause RequestedAttachedReference
         {
-            get 
-            { 
-                return this.requestedAttachedReference;
-            } 
-            set 
+            get { return this.requestedAttachedReference; }
+            set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 this.requestedAttachedReference = value;
-            } 
+            }
         }
 
         public SecurityKeyIdentifierClause RequestedUnattachedReference
         {
-            get
-            {
-                return this.requestedUnattachedReference;
-            }
+            get { return this.requestedUnattachedReference; }
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 this.requestedUnattachedReference = value;
             }
         }
 
         public DateTime ValidFrom
         {
-            get
-            {
-                return this.effectiveTime;
-            }
+            get { return this.effectiveTime; }
         }
 
         public DateTime ValidTo
         {
-            get 
-            {
-                return this.expirationTime;
-            }
+            get { return this.expirationTime; }
         }
 
         public bool ComputeKey
         {
-            get 
-            {
-                return this.computeKey;
-            }
-            set 
+            get { return this.computeKey; }
+            set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 this.computeKey = value;
             }
         }
 
         public int KeySize
         {
-            get 
-            {
-                return this.keySize;
-            }
+            get { return this.keySize; }
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 if (value < 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 this.keySize = value;
-            } 
+            }
         }
 
         public bool IsRequestedTokenClosed
         {
-            get 
-            {
-                return this.isRequestedTokenClosed;
-            }
+            get { return this.isRequestedTokenClosed; }
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 this.isRequestedTokenClosed = value;
             }
         }
 
         public bool IsReadOnly
         {
-            get
-            {   
-                return this.isReadOnly;
-            }
+            get { return this.isReadOnly; }
         }
 
         protected Object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         internal bool IsReceiver
         {
-            get
-            {
-                return this.isReceiver;
-            }
+            get { return this.isReceiver; }
         }
 
         internal SecurityStandardsManager StandardsManager
         {
-            get
-            {
-                return this.standardsManager;
-            }
+            get { return this.standardsManager; }
             set
             {
                 if (this.IsReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
-                this.standardsManager = (value != null ? value : SecurityStandardsManager.DefaultInstance);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
+                this.standardsManager = (
+                    value != null ? value : SecurityStandardsManager.DefaultInstance
+                );
             }
         }
 
@@ -335,8 +336,12 @@ namespace System.ServiceModel.Security
                 if (this.isReceiver)
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
-                    #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "EntropyToken")));
+#pragma warning suppress 56503
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "EntropyToken")
+                        )
+                    );
                 }
                 return this.entropyToken;
             }
@@ -344,20 +349,26 @@ namespace System.ServiceModel.Security
 
         public SecurityToken RequestedSecurityToken
         {
-            get 
+            get
             {
                 if (this.isReceiver)
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
-                    #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "IssuedToken")));
+#pragma warning suppress 56503
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "IssuedToken")
+                        )
+                    );
                 }
                 return this.issuedToken;
             }
             set
             {
                 if (this.isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 this.issuedToken = value;
             }
         }
@@ -369,15 +380,21 @@ namespace System.ServiceModel.Security
                 if (this.isReceiver)
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
-                    #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "ProofToken")));
+#pragma warning suppress 56503
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "ProofToken")
+                        )
+                    );
                 }
                 return this.proofToken;
             }
             set
             {
                 if (this.isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 this.proofToken = value;
             }
         }
@@ -389,8 +406,15 @@ namespace System.ServiceModel.Security
                 if (!this.isReceiver)
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
-                    #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemAvailableInDeserializedRSTROnly, "RequestSecurityTokenXml")));
+#pragma warning suppress 56503
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ItemAvailableInDeserializedRSTROnly,
+                                "RequestSecurityTokenXml"
+                            )
+                        )
+                    );
                 }
                 return this.rstrXml;
             }
@@ -403,8 +427,12 @@ namespace System.ServiceModel.Security
                 if (this.isReceiver)
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
-                    #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesTo")));
+#pragma warning suppress 56503
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesTo")
+                        )
+                    );
                 }
                 return this.appliesTo;
             }
@@ -417,8 +445,15 @@ namespace System.ServiceModel.Security
                 if (this.isReceiver)
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
-                    #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesToSerializer")));
+#pragma warning suppress 56503
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.ItemNotAvailableInDeserializedRST,
+                                "AppliesToSerializer"
+                            )
+                        )
+                    );
                 }
                 return this.appliesToSerializer;
             }
@@ -431,8 +466,12 @@ namespace System.ServiceModel.Security
                 if (this.isReceiver)
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
-                    #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesToType")));
+#pragma warning suppress 56503
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ItemNotAvailableInDeserializedRST, "AppliesToType")
+                        )
+                    );
                 }
                 return this.appliesToType;
             }
@@ -445,8 +484,12 @@ namespace System.ServiceModel.Security
                 if (this.isReceiver)
                 {
                     // PreSharp Bug: Property get methods should not throw exceptions.
-                    #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "IsLifetimeSet")));
+#pragma warning suppress 56503
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ItemNotAvailableInDeserializedRSTR, "IsLifetimeSet")
+                        )
+                    );
                 }
                 return this.isLifetimeSet;
             }
@@ -454,23 +497,24 @@ namespace System.ServiceModel.Security
 
         internal System.IdentityModel.XmlBuffer IssuedTokenBuffer
         {
-            get
-            {
-                return this.issuedTokenBuffer;
-            }
+            get { return this.issuedTokenBuffer; }
         }
 
         public void SetIssuerEntropy(byte[] issuerEntropy)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             this.entropyToken = (issuerEntropy != null) ? new NonceToken(issuerEntropy) : null;
         }
 
         internal void SetIssuerEntropy(WrappedKeySecurityToken issuerEntropy)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             this.entropyToken = issuerEntropy;
         }
 
@@ -492,10 +536,14 @@ namespace System.ServiceModel.Security
         public void SetLifetime(DateTime validFrom, DateTime validTo)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             if (validFrom.ToUniversalTime() > validTo.ToUniversalTime())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.EffectiveGreaterThanExpiration));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.EffectiveGreaterThanExpiration)
+                );
             }
             this.effectiveTime = validFrom.ToUniversalTime();
             this.expirationTime = validTo.ToUniversalTime();
@@ -505,7 +553,9 @@ namespace System.ServiceModel.Security
         public void SetAppliesTo<T>(T appliesTo, XmlObjectSerializer serializer)
         {
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             if (appliesTo != null && serializer == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serializer");
@@ -518,13 +568,26 @@ namespace System.ServiceModel.Security
         public void GetAppliesToQName(out string localName, out string namespaceUri)
         {
             if (!this.isReceiver)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemAvailableInDeserializedRSTOnly, "MatchesAppliesTo")));
-            this.standardsManager.TrustDriver.GetAppliesToQName(this, out localName, out namespaceUri);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ItemAvailableInDeserializedRSTOnly, "MatchesAppliesTo")
+                    )
+                );
+            this.standardsManager.TrustDriver.GetAppliesToQName(
+                this,
+                out localName,
+                out namespaceUri
+            );
         }
 
         public T GetAppliesTo<T>()
         {
-            return this.GetAppliesTo<T>(DataContractSerializerDefaults.CreateSerializer(typeof(T), DataContractSerializerDefaults.MaxItemsInObjectGraph));
+            return this.GetAppliesTo<T>(
+                DataContractSerializerDefaults.CreateSerializer(
+                    typeof(T),
+                    DataContractSerializerDefaults.MaxItemsInObjectGraph
+                )
+            );
         }
 
         public T GetAppliesTo<T>(XmlObjectSerializer serializer)
@@ -548,7 +611,9 @@ namespace System.ServiceModel.Security
             if (negotiation == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("negotiation");
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             this.negotiationData = negotiation;
         }
 
@@ -565,7 +630,9 @@ namespace System.ServiceModel.Security
             if (authenticator == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authenticator");
             if (this.IsReadOnly)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             this.authenticator = DiagnosticUtility.Utility.AllocateByteArray(authenticator.Length);
             Buffer.BlockCopy(authenticator, 0, this.authenticator, 0, authenticator.Length);
         }
@@ -578,9 +645,11 @@ namespace System.ServiceModel.Security
             {
                 if (this.authenticator == null)
                     return null;
-                else 
+                else
                 {
-                    byte[] result = DiagnosticUtility.Utility.AllocateByteArray(this.authenticator.Length);
+                    byte[] result = DiagnosticUtility.Utility.AllocateByteArray(
+                        this.authenticator.Length
+                    );
                     Buffer.BlockCopy(this.authenticator, 0, result, 0, this.authenticator.Length);
                     return result;
                 }
@@ -609,7 +678,12 @@ namespace System.ServiceModel.Security
                 if (this.cachedWriteBuffer == null)
                 {
                     MemoryStream stream = new MemoryStream();
-                    using (XmlDictionaryWriter binaryWriter = XmlDictionaryWriter.CreateBinaryWriter(stream, XD.Dictionary))
+                    using (
+                        XmlDictionaryWriter binaryWriter = XmlDictionaryWriter.CreateBinaryWriter(
+                            stream,
+                            XD.Dictionary
+                        )
+                    )
                     {
                         this.OnWriteTo(binaryWriter);
                         binaryWriter.Flush();
@@ -619,7 +693,16 @@ namespace System.ServiceModel.Security
                         this.cachedWriteBufferLength = (int)stream.Length;
                     }
                 }
-                writer.WriteNode(XmlDictionaryReader.CreateBinaryReader(this.cachedWriteBuffer, 0, this.cachedWriteBufferLength, XD.Dictionary, XmlDictionaryReaderQuotas.Max), false);
+                writer.WriteNode(
+                    XmlDictionaryReader.CreateBinaryReader(
+                        this.cachedWriteBuffer,
+                        0,
+                        this.cachedWriteBufferLength,
+                        XD.Dictionary,
+                        XmlDictionaryReaderQuotas.Max
+                    ),
+                    false
+                );
             }
             else
                 this.OnWriteTo(writer);
@@ -630,12 +713,25 @@ namespace System.ServiceModel.Security
             return CreateFrom(SecurityStandardsManager.DefaultInstance, reader);
         }
 
-        public static RequestSecurityTokenResponse CreateFrom(XmlReader reader, MessageSecurityVersion messageSecurityVersion, SecurityTokenSerializer securityTokenSerializer)
+        public static RequestSecurityTokenResponse CreateFrom(
+            XmlReader reader,
+            MessageSecurityVersion messageSecurityVersion,
+            SecurityTokenSerializer securityTokenSerializer
+        )
         {
-            return CreateFrom(SecurityUtils.CreateSecurityStandardsManager(messageSecurityVersion, securityTokenSerializer), reader);
+            return CreateFrom(
+                SecurityUtils.CreateSecurityStandardsManager(
+                    messageSecurityVersion,
+                    securityTokenSerializer
+                ),
+                reader
+            );
         }
 
-        internal static RequestSecurityTokenResponse CreateFrom(SecurityStandardsManager standardsManager, XmlReader reader)
+        internal static RequestSecurityTokenResponse CreateFrom(
+            SecurityStandardsManager standardsManager,
+            XmlReader reader
+        )
         {
             return standardsManager.TrustDriver.CreateRequestSecurityTokenResponse(reader);
         }
@@ -654,47 +750,110 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public GenericXmlSecurityToken GetIssuedToken(SecurityTokenResolver resolver, IList<SecurityTokenAuthenticator> allowedAuthenticators, SecurityKeyEntropyMode keyEntropyMode, byte[] requestorEntropy, string expectedTokenType,
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+        public GenericXmlSecurityToken GetIssuedToken(
+            SecurityTokenResolver resolver,
+            IList<SecurityTokenAuthenticator> allowedAuthenticators,
+            SecurityKeyEntropyMode keyEntropyMode,
+            byte[] requestorEntropy,
+            string expectedTokenType,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
-            return this.GetIssuedToken(resolver, allowedAuthenticators, keyEntropyMode, requestorEntropy, expectedTokenType, authorizationPolicies, 0, false);
+            return this.GetIssuedToken(
+                resolver,
+                allowedAuthenticators,
+                keyEntropyMode,
+                requestorEntropy,
+                expectedTokenType,
+                authorizationPolicies,
+                0,
+                false
+            );
         }
 
-        public virtual GenericXmlSecurityToken GetIssuedToken(SecurityTokenResolver resolver, IList<SecurityTokenAuthenticator> allowedAuthenticators, SecurityKeyEntropyMode keyEntropyMode, byte[] requestorEntropy, string expectedTokenType,
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies, int defaultKeySize, bool isBearerKeyType)
+        public virtual GenericXmlSecurityToken GetIssuedToken(
+            SecurityTokenResolver resolver,
+            IList<SecurityTokenAuthenticator> allowedAuthenticators,
+            SecurityKeyEntropyMode keyEntropyMode,
+            byte[] requestorEntropy,
+            string expectedTokenType,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies,
+            int defaultKeySize,
+            bool isBearerKeyType
+        )
         {
             if (!this.isReceiver)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemAvailableInDeserializedRSTROnly, "GetIssuedToken")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ItemAvailableInDeserializedRSTROnly, "GetIssuedToken")
+                    )
+                );
 
-            return this.standardsManager.TrustDriver.GetIssuedToken(this, resolver, allowedAuthenticators, keyEntropyMode, requestorEntropy, expectedTokenType, authorizationPolicies, defaultKeySize, isBearerKeyType);
+            return this.standardsManager.TrustDriver.GetIssuedToken(
+                this,
+                resolver,
+                allowedAuthenticators,
+                keyEntropyMode,
+                requestorEntropy,
+                expectedTokenType,
+                authorizationPolicies,
+                defaultKeySize,
+                isBearerKeyType
+            );
         }
 
-        public virtual GenericXmlSecurityToken GetIssuedToken(string expectedTokenType, ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies, RSA clientKey)
+        public virtual GenericXmlSecurityToken GetIssuedToken(
+            string expectedTokenType,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies,
+            RSA clientKey
+        )
         {
             if (!this.isReceiver)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ItemAvailableInDeserializedRSTROnly, "GetIssuedToken")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ItemAvailableInDeserializedRSTROnly, "GetIssuedToken")
+                    )
+                );
 
-            return this.standardsManager.TrustDriver.GetIssuedToken(this, expectedTokenType, authorizationPolicies, clientKey);
+            return this.standardsManager.TrustDriver.GetIssuedToken(
+                this,
+                expectedTokenType,
+                authorizationPolicies,
+                clientKey
+            );
         }
 
-        protected internal virtual void OnWriteCustomAttributes(XmlWriter writer)
-        { }
+        protected internal virtual void OnWriteCustomAttributes(XmlWriter writer) { }
 
-        protected internal virtual void OnWriteCustomElements(XmlWriter writer) 
-        { }
+        protected internal virtual void OnWriteCustomElements(XmlWriter writer) { }
 
         protected virtual void OnMakeReadOnly() { }
 
-        public static byte[] ComputeCombinedKey(byte[] requestorEntropy, byte[] issuerEntropy, int keySizeInBits)
+        public static byte[] ComputeCombinedKey(
+            byte[] requestorEntropy,
+            byte[] issuerEntropy,
+            int keySizeInBits
+        )
         {
             if (requestorEntropy == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("requestorEntropy");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "requestorEntropy"
+                );
             if (issuerEntropy == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("issuerEntropy");
             // Do a sanity check here. We don't want to allow invalid keys or keys that are too
             // large.
             if ((keySizeInBits < minSaneKeySizeInBits) || (keySizeInBits > maxSaneKeySizeInBits))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.InvalidKeySizeSpecifiedInNegotiation, keySizeInBits, minSaneKeySizeInBits, maxSaneKeySizeInBits)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(
+                            SR.InvalidKeySizeSpecifiedInNegotiation,
+                            keySizeInBits,
+                            minSaneKeySizeInBits,
+                            maxSaneKeySizeInBits
+                        )
+                    )
+                );
             Psha1DerivedKeyGenerator generator = new Psha1DerivedKeyGenerator(requestorEntropy);
             return generator.GenerateDerivedKey(new byte[] { }, issuerEntropy, keySizeInBits, 0);
         }

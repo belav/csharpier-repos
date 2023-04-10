@@ -86,9 +86,17 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
             return CqlWriter.GetQualifiedName(m_block.CqlAlias, GetCqlFieldAlias(outputMember));
         }
 
-        internal override StringBuilder AsEsql(StringBuilder builder, MemberPath outputMember, string blockAlias, int indentLevel)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            MemberPath outputMember,
+            string blockAlias,
+            int indentLevel
+        )
         {
-            Debug.Assert(blockAlias == null || m_block.CqlAlias == blockAlias, "QualifiedSlot: blockAlias mismatch");
+            Debug.Assert(
+                blockAlias == null || m_block.CqlAlias == blockAlias,
+                "QualifiedSlot: blockAlias mismatch"
+            );
             builder.Append(GetQualifiedCqlName(outputMember));
             return builder;
         }

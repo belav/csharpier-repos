@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
+
 public class EnumCaseSensitivityBug : AutoMapperSpecBase
 {
     private SecondEnum _resultSecondEnum;
@@ -16,10 +17,11 @@ public class EnumCaseSensitivityBug : AutoMapperSpecBase
         dog
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        // not creating a map on purpose to trigger use of EnumToEnumMapper
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            // not creating a map on purpose to trigger use of EnumToEnumMapper
+        });
 
     protected override void Because_of()
     {

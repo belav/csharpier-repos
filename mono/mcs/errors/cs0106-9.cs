@@ -3,7 +3,8 @@
 
 class C
 {
-	public int Foo {
-		virtual set { }
-	}
+    public int Foo
+    {
+        virtual set { }
+    }
 }

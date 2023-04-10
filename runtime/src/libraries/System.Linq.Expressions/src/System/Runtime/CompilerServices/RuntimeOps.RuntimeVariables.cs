@@ -18,14 +18,8 @@ namespace System.Runtime.CompilerServices
 
             object? IRuntimeVariables.this[int index]
             {
-                get
-                {
-                    return _boxes[index].Value;
-                }
-                set
-                {
-                    _boxes[index].Value = value;
-                }
+                get { return _boxes[index].Value; }
+                set { _boxes[index].Value = value; }
             }
         }
     }

@@ -16,226 +16,225 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotAfterName_Type()
         {
-            await VerifyAbsenceAsync(
-@"class Test $$");
+            await VerifyAbsenceAsync(@"class Test $$");
         }
 
         [Fact]
         public async Task TestNotAfterWhereClause_Type()
         {
-            await VerifyAbsenceAsync(
-@"class Test<T> where $$");
+            await VerifyAbsenceAsync(@"class Test<T> where $$");
         }
 
         [Fact]
         public async Task TestNotAfterWhereClauseType_Type()
         {
-            await VerifyAbsenceAsync(
-@"class Test<T> where T $$");
+            await VerifyAbsenceAsync(@"class Test<T> where T $$");
         }
 
         [Fact]
         public async Task TestAfterWhereClauseColon_Type()
         {
-            await VerifyKeywordAsync(
-@"class Test<T> where T : $$");
+            await VerifyKeywordAsync(@"class Test<T> where T : $$");
         }
 
         [Fact]
         public async Task TestNotAfterTypeConstraint_Type()
         {
-            await VerifyAbsenceAsync(
-@"class Test<T> where T : I $$");
+            await VerifyAbsenceAsync(@"class Test<T> where T : I $$");
         }
 
         [Fact]
         public async Task TestAfterTypeConstraintComma_Type()
         {
-            await VerifyKeywordAsync(
-@"class Test<T> where T : I, $$");
+            await VerifyKeywordAsync(@"class Test<T> where T : I, $$");
         }
 
         [Fact]
         public async Task TestNotAfterName_Method()
         {
             await VerifyAbsenceAsync(
-@"class Test {
-    void M $$");
+                @"class Test {
+    void M $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterWhereClause_Method()
         {
             await VerifyAbsenceAsync(
-@"class Test {
-    void M<T> where $$");
+                @"class Test {
+    void M<T> where $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterWhereClauseType_Method()
         {
             await VerifyAbsenceAsync(
-@"class Test {
-    void M<T> where T $$");
+                @"class Test {
+    void M<T> where T $$"
+            );
         }
 
         [Fact]
         public async Task TestAfterWhereClauseColon_Method()
         {
             await VerifyKeywordAsync(
-@"class Test {
-    void M<T> where T : $$");
+                @"class Test {
+    void M<T> where T : $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterTypeConstraint_Method()
         {
             await VerifyAbsenceAsync(
-@"class Test {
-    void M<T> where T : I $$");
+                @"class Test {
+    void M<T> where T : I $$"
+            );
         }
 
         [Fact]
         public async Task TestAfterTypeConstraintComma_Method()
         {
             await VerifyKeywordAsync(
-@"class Test {
-    void M<T> where T : I, $$");
+                @"class Test {
+    void M<T> where T : I, $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterName_Delegate()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D $$");
+            await VerifyAbsenceAsync(@"delegate void D $$");
         }
 
         [Fact]
         public async Task TestNotAfterWhereClause_Delegate()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D<T>() where $$");
+            await VerifyAbsenceAsync(@"delegate void D<T>() where $$");
         }
 
         [Fact]
         public async Task TestNotAfterWhereClauseType_Delegate()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D<T>() where T $$");
+            await VerifyAbsenceAsync(@"delegate void D<T>() where T $$");
         }
 
         [Fact]
         public async Task TestAfterWhereClauseColon_Delegate()
         {
-            await VerifyKeywordAsync(
-@"delegate void D<T>() where T : $$");
+            await VerifyKeywordAsync(@"delegate void D<T>() where T : $$");
         }
 
         [Fact]
         public async Task TestNotAfterTypeConstraint_Delegate()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D<T>() where T : I $$");
+            await VerifyAbsenceAsync(@"delegate void D<T>() where T : I $$");
         }
 
         [Fact]
         public async Task TestAfterTypeConstraintComma_Delegate()
         {
-            await VerifyKeywordAsync(
-@"delegate void D<T>() where T : I, $$");
+            await VerifyKeywordAsync(@"delegate void D<T>() where T : I, $$");
         }
 
         [Fact]
         public async Task TestNotAfterName_LocalFunction()
         {
             await VerifyAbsenceAsync(
-@"class Test {
+                @"class Test {
     void N() {
-        void M $$");
+        void M $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterWhereClause_LocalFunction()
         {
             await VerifyAbsenceAsync(
-@"class Test {
+                @"class Test {
     void N() {
-        void M<T> where $$");
+        void M<T> where $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterWhereClauseType_LocalFunction()
         {
             await VerifyAbsenceAsync(
-@"class Test {
+                @"class Test {
     void N() {
-        void M<T> where T $$");
+        void M<T> where T $$"
+            );
         }
 
         [Fact]
         public async Task TestAfterWhereClauseColon_LocalFunction()
         {
             await VerifyKeywordAsync(
-@"class Test {
+                @"class Test {
     void N() {
-        void M<T> where T : $$");
+        void M<T> where T : $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterTypeConstraint_LocalFunction()
         {
             await VerifyAbsenceAsync(
-@"class Test {
+                @"class Test {
     void N() {
-        void M<T> where T : I $$");
+        void M<T> where T : I $$"
+            );
         }
 
         [Fact]
         public async Task TestAfterTypeConstraintComma_LocalFunction()
         {
             await VerifyKeywordAsync(
-@"class Test {
+                @"class Test {
     void N() {
-        void M<T> where T : I, $$");
+        void M<T> where T : I, $$"
+            );
         }
 
         [Fact]
         public async Task TestInFunctionPointerDeclaration()
         {
             await VerifyKeywordAsync(
-@"class Test {
+                @"class Test {
     unsafe void N() {
-        delegate* $$");
+        delegate* $$"
+            );
         }
 
         [Fact]
         public async Task TestInFunctionPointerDeclarationTouchingAsterisk()
         {
             await VerifyKeywordAsync(
-@"class Test {
+                @"class Test {
     unsafe void N() {
-        delegate*$$");
+        delegate*$$"
+            );
         }
     }
 }

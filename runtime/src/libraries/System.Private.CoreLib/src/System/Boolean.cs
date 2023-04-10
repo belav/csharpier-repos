@@ -19,7 +19,9 @@ using System.Runtime.Versioning;
 namespace System
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly struct Boolean : IComparable, IConvertible, IComparable<bool>, IEquatable<bool>
     {
         //
@@ -100,7 +102,9 @@ namespace System
             {
                 if (destination.Length > 3)
                 {
-                    ulong true_val = BitConverter.IsLittleEndian ? 0x65007500720054ul : 0x54007200750065ul; // "True"
+                    ulong true_val = BitConverter.IsLittleEndian
+                        ? 0x65007500720054ul
+                        : 0x54007200750065ul; // "True"
                     MemoryMarshal.Write<ulong>(MemoryMarshal.AsBytes(destination), ref true_val);
                     charsWritten = 4;
                     return true;
@@ -110,7 +114,9 @@ namespace System
             {
                 if (destination.Length > 4)
                 {
-                    ulong fals_val = BitConverter.IsLittleEndian ? 0x73006C00610046ul : 0x460061006C0073ul; // "Fals"
+                    ulong fals_val = BitConverter.IsLittleEndian
+                        ? 0x73006C00610046ul
+                        : 0x460061006C0073ul; // "Fals"
                     MemoryMarshal.Write<ulong>(MemoryMarshal.AsBytes(destination), ref fals_val);
                     destination[4] = 'e';
                     charsWritten = 5;
@@ -197,17 +203,24 @@ namespace System
         {
             // "true" as a ulong, each char |'d with 0x0020 for case-insensitivity
             ulong true_val = BitConverter.IsLittleEndian ? 0x65007500720074ul : 0x74007200750065ul;
-            return value.Length == 4 &&
-                   (MemoryMarshal.Read<ulong>(MemoryMarshal.AsBytes(value)) | 0x0020002000200020) == true_val;
+            return value.Length == 4
+                && (MemoryMarshal.Read<ulong>(MemoryMarshal.AsBytes(value)) | 0x0020002000200020)
+                    == true_val;
         }
 
         internal static bool IsFalseStringIgnoreCase(ReadOnlySpan<char> value)
         {
             // "fals" as a ulong, each char |'d with 0x0020 for case-insensitivity
             ulong fals_val = BitConverter.IsLittleEndian ? 0x73006C00610066ul : 0x660061006C0073ul;
-            return value.Length == 5 &&
-                   (((MemoryMarshal.Read<ulong>(MemoryMarshal.AsBytes(value)) | 0x0020002000200020) == fals_val) &
-                    ((value[4] | 0x20) == 'e'));
+            return value.Length == 5
+                && (
+                    (
+                        (
+                            MemoryMarshal.Read<ulong>(MemoryMarshal.AsBytes(value))
+                            | 0x0020002000200020
+                        ) == fals_val
+                    ) & ((value[4] | 0x20) == 'e')
+                );
         }
 #else
         internal static bool IsTrueStringIgnoreCase(ReadOnlySpan<char> value)
@@ -232,7 +245,9 @@ namespace System
         }
 
         public static bool Parse(ReadOnlySpan<char> value) =>
-            TryParse(value, out bool result) ? result : throw new FormatException(SR.Format(SR.Format_BadBoolean, new string(value)));
+            TryParse(value, out bool result)
+                ? result
+                : throw new FormatException(SR.Format(SR.Format_BadBoolean, new string(value)));
 
         // Determines whether a String represents true or false.
         //

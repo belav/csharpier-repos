@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
     /// is difficult to correctly apply to their tags cache. This allows for reliable recovery from errors and accounts
     /// for limitations in the edits application logic.
     /// </remarks>
-    internal class SemanticTokensHandler : IRequestHandler<LSP.SemanticTokensParams, LSP.SemanticTokens>
+    internal class SemanticTokensHandler
+        : IRequestHandler<LSP.SemanticTokensParams, LSP.SemanticTokens>
     {
         private readonly SemanticTokensCache _tokensCache;
 
@@ -34,7 +35,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.SemanticTokensParams request)
+        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.SemanticTokensParams request
+        )
         {
             Contract.ThrowIfNull(request.TextDocument);
             return request.TextDocument;
@@ -43,20 +46,33 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         public async Task<LSP.SemanticTokens> HandleRequestAsync(
             LSP.SemanticTokensParams request,
             RequestContext context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(request.TextDocument, "TextDocument is null.");
             Contract.ThrowIfNull(context.Document, "Document is null.");
 
             var resultId = _tokensCache.GetNextResultId();
-            var (tokensData, isFinalized) = await SemanticTokensHelpers.ComputeSemanticTokensDataAsync(
-                context.Document, SemanticTokensCache.TokenTypeToIndex,
-                range: null, cancellationToken).ConfigureAwait(false);
+            var (tokensData, isFinalized) = await SemanticTokensHelpers
+                .ComputeSemanticTokensDataAsync(
+                    context.Document,
+                    SemanticTokensCache.TokenTypeToIndex,
+                    range: null,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var tokens = new RoslynSemanticTokens { ResultId = resultId, Data = tokensData, IsFinalized = isFinalized };
+            var tokens = new RoslynSemanticTokens
+            {
+                ResultId = resultId,
+                Data = tokensData,
+                IsFinalized = isFinalized
+            };
             if (tokensData.Length > 0)
             {
-                await _tokensCache.UpdateCacheAsync(request.TextDocument.Uri, tokens, cancellationToken).ConfigureAwait(false);
+                await _tokensCache
+                    .UpdateCacheAsync(request.TextDocument.Uri, tokens, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             return tokens;

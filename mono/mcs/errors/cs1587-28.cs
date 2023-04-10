@@ -6,15 +6,17 @@ using System;
 
 namespace TopNS
 {
-	abstract class AFoo
-	{
-		internal abstract int Prop { get; }
-	}
+    abstract class AFoo
+    {
+        internal abstract int Prop { get; }
+    }
 
-	class Foo : AFoo
-	{
-		sealed /** is "sealed" checked? */ internal override int Prop {
-			get { return 0; }
-		}
-	}
+    class Foo : AFoo
+    {
+        sealed
+        /** is "sealed" checked? */internal override int Prop
+        {
+            get { return 0; }
+        }
+    }
 }

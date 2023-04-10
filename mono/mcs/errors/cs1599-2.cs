@@ -5,8 +5,8 @@ using System;
 
 class C
 {
-	public ArgIterator Method ()
-	{
-		return null;
-	}
+    public ArgIterator Method()
+    {
+        return null;
+    }
 }

@@ -29,7 +29,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeDefinitionW
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioCodeDefinitionWindowService(SVsServiceProvider asyncServiceProvider, IThreadingContext threadingContext)
+        public VisualStudioCodeDefinitionWindowService(
+            SVsServiceProvider asyncServiceProvider,
+            IThreadingContext threadingContext
+        )
         {
             _asyncServiceProvider = (IAsyncServiceProvider)asyncServiceProvider;
             _threadingContext = threadingContext;
@@ -42,7 +45,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeDefinitionW
                 return _lazyCodeDefView;
             }
 
-            _lazyCodeDefView = await _asyncServiceProvider.GetServiceAsync<SVsCodeDefView, IVsCodeDefView>().ConfigureAwait(true);
+            _lazyCodeDefView = await _asyncServiceProvider
+                .GetServiceAsync<SVsCodeDefView, IVsCodeDefView>()
+                .ConfigureAwait(true);
 
             return _lazyCodeDefView;
         }
@@ -58,7 +63,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeDefinitionW
             return vsCodeDefView.IsVisible() == VSConstants.S_OK;
         }
 
-        public async Task SetContextAsync(ImmutableArray<CodeDefinitionWindowLocation> locations, CancellationToken cancellationToken)
+        public async Task SetContextAsync(
+            ImmutableArray<CodeDefinitionWindowLocation> locations,
+            CancellationToken cancellationToken
+        )
         {
             // If the new context has no location, then just don't update, instead of showing the
             // "No definition selected" page.

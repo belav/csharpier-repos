@@ -22,39 +22,42 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Mono.Net.Dns {
-	class DnsQuestion {
-		string name;
-		DnsQType type;
-		DnsQClass _class;
+namespace Mono.Net.Dns
+{
+    class DnsQuestion
+    {
+        string name;
+        DnsQType type;
+        DnsQClass _class;
 
-		internal DnsQuestion ()
-		{
-		}
+        internal DnsQuestion() { }
 
-		internal int Init (DnsPacket packet, int offset)
-		{
-			name = packet.ReadName (ref offset);
-			type = (DnsQType) packet.ReadUInt16 (ref offset);
-			_class = (DnsQClass) packet.ReadUInt16 (ref offset);
-			return offset;
-		}
+        internal int Init(DnsPacket packet, int offset)
+        {
+            name = packet.ReadName(ref offset);
+            type = (DnsQType)packet.ReadUInt16(ref offset);
+            _class = (DnsQClass)packet.ReadUInt16(ref offset);
+            return offset;
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		public DnsQType Type {
-			get { return type; }
-		}
+        public DnsQType Type
+        {
+            get { return type; }
+        }
 
-		public DnsQClass Class {
-			get { return _class; }
-		}
+        public DnsQClass Class
+        {
+            get { return _class; }
+        }
 
-		public override string ToString() {
-			return String.Format("Name: {0} Type: {1} Class: {2}", Name, Type, Class);
-		}
-	}
+        public override string ToString()
+        {
+            return String.Format("Name: {0} Type: {1} Class: {2}", Name, Type, Class);
+        }
+    }
 }
-

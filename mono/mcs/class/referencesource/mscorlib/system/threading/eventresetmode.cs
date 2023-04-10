@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>ericeil</OWNER>
@@ -19,6 +19,7 @@
 namespace System.Threading
 {
     using System.Runtime.InteropServices;
+
     [ComVisibleAttribute(false)]
     public enum EventResetMode
     {

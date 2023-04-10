@@ -2,10 +2,12 @@
 // Line: 9
 // Compiler options: -warnaserror -warn:2 -t:library
 
-interface BaseInterface {
-	void Test (bool arg);
+interface BaseInterface
+{
+    void Test(bool arg);
 }
 
-interface Derived : BaseInterface {
-	void Test (bool arg);
+interface Derived : BaseInterface
+{
+    void Test(bool arg);
 }

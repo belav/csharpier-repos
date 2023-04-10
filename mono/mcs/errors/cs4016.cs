@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 class C
 {
-	public async Task<int> GetValue()
-	{
-		await Task.FromResult (0);
-		return Task.FromResult (1);
-	}
+    public async Task<int> GetValue()
+    {
+        await Task.FromResult(0);
+        return Task.FromResult(1);
+    }
 }

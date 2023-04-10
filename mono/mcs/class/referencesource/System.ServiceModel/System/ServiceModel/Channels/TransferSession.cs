@@ -12,4 +12,3 @@ namespace System.ServiceModel.Channels
         Unordered
     }
 }
-

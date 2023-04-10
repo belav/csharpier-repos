@@ -4,6 +4,7 @@
 
 class Test
 {
-	int? i;
-	static void Main () {}
+    int? i;
+
+    static void Main() { }
 }

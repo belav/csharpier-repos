@@ -55,7 +55,8 @@ namespace System.Runtime.InteropServices.JavaScript
         }
 
         /// <inheritdoc />
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is JSObject other && JSHandle == other.JSHandle;
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is JSObject other && JSHandle == other.JSHandle;
 
         /// <inheritdoc />
         public override int GetHashCode() => (int)JSHandle;

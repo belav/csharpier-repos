@@ -3,12 +3,15 @@
 
 delegate void TestDelegate();
 
-public class MainClass {
-        public static int Delegate() {
-                return 0;
-        }
+public class MainClass
+{
+    public static int Delegate()
+    {
+        return 0;
+    }
 
-        public static void Main() {
-                TestDelegate delegateInstance = new TestDelegate (Delegate);
-       }
+    public static void Main()
+    {
+        TestDelegate delegateInstance = new TestDelegate(Delegate);
+    }
 }

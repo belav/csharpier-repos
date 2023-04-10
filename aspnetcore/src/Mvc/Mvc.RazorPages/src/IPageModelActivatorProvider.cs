@@ -27,7 +27,9 @@ public interface IPageModelActivatorProvider
     /// </summary>
     /// <param name="descriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <returns>The delegate used to dispose the activated Razor Page model asynchronously.</returns>
-    Func<PageContext, object, ValueTask>? CreateAsyncReleaser(CompiledPageActionDescriptor descriptor)
+    Func<PageContext, object, ValueTask>? CreateAsyncReleaser(
+        CompiledPageActionDescriptor descriptor
+    )
     {
         var releaser = CreateReleaser(descriptor);
         if (releaser is null)

@@ -15,7 +15,7 @@ namespace System.Data.Common.EntitySql.AST
     using System.Collections.Generic;
 
     /// <summary>
-    /// Represents eSQL command as node. 
+    /// Represents eSQL command as node.
     /// </summary>
     internal sealed class Command : Node
     {

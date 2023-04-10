@@ -15,7 +15,11 @@ namespace System.Reflection.Context.Virtual
         private Type? _declaringType;
         private ParameterInfo[]? _indexedParameters;
 
-        protected VirtualPropertyBase(Type propertyType, string name, CustomReflectionContext context)
+        protected VirtualPropertyBase(
+            Type propertyType,
+            string name,
+            CustomReflectionContext context
+        )
         {
             if (name is null)
                 throw new ArgumentNullException(nameof(name));
@@ -100,7 +104,13 @@ namespace System.Reflection.Context.Virtual
             return (ParameterInfo[])GetIndexParametersNoCopy().Clone();
         }
 
-        public sealed override object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
+        public sealed override object? GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        )
         {
             MethodInfo? getMethod = GetGetMethod(true);
             if (getMethod == null)
@@ -109,7 +119,14 @@ namespace System.Reflection.Context.Virtual
             return getMethod.Invoke(obj, invokeAttr, binder, index, culture);
         }
 
-        public sealed override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture)
+        public sealed override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        )
         {
             MethodInfo? setMethod = GetSetMethod(true);
             if (setMethod == null)
@@ -178,19 +195,22 @@ namespace System.Reflection.Context.Virtual
         {
             // We don't need to compare the getters and setters.
             // But do we need to compare the contexts and return types?
-            return obj is VirtualPropertyBase other &&
-                _name == other._name &&
-                _declaringType!.Equals(other._declaringType) &&
-                _propertyType == other._propertyType &&
-                CollectionServices.CompareArrays(GetIndexParametersNoCopy(), other.GetIndexParametersNoCopy());
+            return obj is VirtualPropertyBase other
+                && _name == other._name
+                && _declaringType!.Equals(other._declaringType)
+                && _propertyType == other._propertyType
+                && CollectionServices.CompareArrays(
+                    GetIndexParametersNoCopy(),
+                    other.GetIndexParametersNoCopy()
+                );
         }
 
         public override int GetHashCode()
         {
-            return _name.GetHashCode() ^
-                _declaringType!.GetHashCode() ^
-                _propertyType.GetHashCode() ^
-                CollectionServices.GetArrayHashCode(GetIndexParametersNoCopy());
+            return _name.GetHashCode()
+                ^ _declaringType!.GetHashCode()
+                ^ _propertyType.GetHashCode()
+                ^ CollectionServices.GetArrayHashCode(GetIndexParametersNoCopy());
         }
 
         public override string ToString()
@@ -210,14 +230,22 @@ namespace System.Reflection.Context.Virtual
                 MethodInfo? method = GetGetMethod(true);
                 if (method != null)
                 {
-                    _indexedParameters = VirtualParameter.CloneParameters(this, method.GetParameters(), skipLastParameter: false);
+                    _indexedParameters = VirtualParameter.CloneParameters(
+                        this,
+                        method.GetParameters(),
+                        skipLastParameter: false
+                    );
                 }
                 else
                 {
                     method = GetSetMethod(true);
 
                     Debug.Assert(null != method);
-                    _indexedParameters = VirtualParameter.CloneParameters(this, method.GetParameters(), skipLastParameter: true);
+                    _indexedParameters = VirtualParameter.CloneParameters(
+                        this,
+                        method.GetParameters(),
+                        skipLastParameter: true
+                    );
                 }
             }
 

@@ -4,18 +4,14 @@
 using System;
 
 enum E
-{ 
-	Value
+{
+    Value
 }
 
 class AAttribute : Attribute
-{ 
-	public AAttribute (Enum e)
-	{
-	}
+{
+    public AAttribute(Enum e) { }
 }
 
-[A (E.Value)]
-class Test
-{
-}
+[A(E.Value)]
+class Test { }

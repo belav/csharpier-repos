@@ -2,11 +2,13 @@
 // Line: 9
 // Compiler options: -r:CS0122-19-lib.dll
 
-namespace A {
-	class C {
-		public static void Main ()
-		{
-			IFileWatcher i;
-		}
-	}
+namespace A
+{
+    class C
+    {
+        public static void Main()
+        {
+            IFileWatcher i;
+        }
+    }
 }

@@ -2,6 +2,4 @@
 // Line: 5
 // Compiler options: -r:CS0012-12-lib.dll
 
-class Program : Lib1.Class1<int>
-{
-}
+class Program : Lib1.Class1<int> { }

@@ -16,7 +16,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 {
     // TODO: Remove this type. This factory is needed just to instantiate a singleton of VisualStudioMetadataReferenceProvider.
     // We should be able to MEF-instantiate a singleton of VisualStudioMetadataReferenceProvider without creating this factory.
-    [ExportWorkspaceServiceFactory(typeof(VisualStudioMetadataReferenceManager), ServiceLayer.Host), Shared]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(VisualStudioMetadataReferenceManager),
+            ServiceLayer.Host
+        ),
+        Shared
+    ]
     internal class VisualStudioMetadataReferenceManagerFactory : IWorkspaceServiceFactory
     {
         private VisualStudioMetadataReferenceManager _singleton;
@@ -24,15 +30,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioMetadataReferenceManagerFactory(SVsServiceProvider serviceProvider)
-            => _serviceProvider = serviceProvider;
+        public VisualStudioMetadataReferenceManagerFactory(SVsServiceProvider serviceProvider) =>
+            _serviceProvider = serviceProvider;
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
             if (_singleton == null)
             {
                 var temporaryStorage = workspaceServices.GetService<ITemporaryStorageService>();
-                Interlocked.CompareExchange(ref _singleton, new VisualStudioMetadataReferenceManager(workspaceServices.Workspace, _serviceProvider, temporaryStorage), null);
+                Interlocked.CompareExchange(
+                    ref _singleton,
+                    new VisualStudioMetadataReferenceManager(
+                        workspaceServices.Workspace,
+                        _serviceProvider,
+                        temporaryStorage
+                    ),
+                    null
+                );
             }
 
             return _singleton;

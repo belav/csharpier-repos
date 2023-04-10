@@ -20,6 +20,5 @@ namespace POS_Server.Models
         public Nullable<long> branchCreatorId { get; set; }
         public string branchCreatorName { get; set; }
         public Nullable<long> mainMsgId { get; set; }
-
     }
 }

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         public IdleProcessor(
             IAsynchronousOperationListener listener,
             TimeSpan backOffTimeSpan,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Listener = listener;
             CancellationToken = cancellationToken;
@@ -57,11 +58,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         protected void Start()
         {
             Contract.ThrowIfFalse(_processorTask == null);
-            _processorTask = Task.Factory.SafeStartNewFromAsync(ProcessAsync, CancellationToken, TaskScheduler.Default);
+            _processorTask = Task.Factory.SafeStartNewFromAsync(
+                ProcessAsync,
+                CancellationToken,
+                TaskScheduler.Default
+            );
         }
 
-        protected void UpdateLastAccessTime()
-            => _timeSinceLastAccess = SharedStopwatch.StartNew();
+        protected void UpdateLastAccessTime() => _timeSinceLastAccess = SharedStopwatch.StartNew();
 
         /// <summary>
         /// Whether or not we are paused due to a global operation being in effect.
@@ -75,8 +79,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         /// <summary>
         /// Whether or not enough time has passed since the last time we were asked to back off.
         /// </summary>
-        protected bool ShouldContinueToBackOff()
-            => _timeSinceLastAccess.Elapsed < BackOffTimeSpan;
+        protected bool ShouldContinueToBackOff() => _timeSinceLastAccess.Elapsed < BackOffTimeSpan;
 
         protected void SetIsPaused(bool isPaused)
         {
@@ -111,8 +114,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     return true;
 
                 var timeLeft = BackOffTimeSpan - _timeSinceLastAccess.Elapsed;
-                var delayTimeSpan = TimeSpan.FromMilliseconds(Math.Max(s_minimumDelay.TotalMilliseconds, timeLeft.TotalMilliseconds));
-                if (!await expeditableDelaySource.Delay(delayTimeSpan, CancellationToken).ConfigureAwait(false))
+                var delayTimeSpan = TimeSpan.FromMilliseconds(
+                    Math.Max(s_minimumDelay.TotalMilliseconds, timeLeft.TotalMilliseconds)
+                );
+                if (
+                    !await expeditableDelaySource
+                        .Delay(delayTimeSpan, CancellationToken)
+                        .ConfigureAwait(false)
+                )
                 {
                     // The delay terminated early to accommodate a blocking operation. Make sure to yield so low
                     // priority (on idle) operations get a chance to be triggered.
@@ -155,7 +164,6 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             }
         }
 
-        public virtual Task AsyncProcessorTask
-            => _processorTask ?? Task.CompletedTask;
+        public virtual Task AsyncProcessorTask => _processorTask ?? Task.CompletedTask;
     }
 }

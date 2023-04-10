@@ -14,11 +14,21 @@ namespace Microsoft.CodeAnalysis.Formatting;
 
 internal static class LineFormattingOptionsStorage
 {
-    public static ValueTask<LineFormattingOptions> GetLineFormattingOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetLineFormattingOptionsAsync(globalOptions.GetLineFormattingOptions(document.Project.Language), cancellationToken);
+    public static ValueTask<LineFormattingOptions> GetLineFormattingOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetLineFormattingOptionsAsync(
+            globalOptions.GetLineFormattingOptions(document.Project.Language),
+            cancellationToken
+        );
 
-    public static LineFormattingOptions GetLineFormattingOptions(this IGlobalOptionService globalOptions, string language)
-        => new()
+    public static LineFormattingOptions GetLineFormattingOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) =>
+        new()
         {
             UseTabs = globalOptions.GetOption(FormattingOptions2.UseTabs, language),
             TabSize = globalOptions.GetOption(FormattingOptions2.TabSize, language),
@@ -26,4 +36,3 @@ internal static class LineFormattingOptionsStorage
             NewLine = globalOptions.GetOption(FormattingOptions2.NewLine, language)
         };
 }
-

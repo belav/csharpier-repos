@@ -4,7 +4,7 @@
 using System.Runtime.CompilerServices;
 
 [IndexerName("XXX")]
-class A {
-        public static void Main () { }
-        
+class A
+{
+    public static void Main() { }
 }

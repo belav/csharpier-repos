@@ -18,9 +18,10 @@ namespace System.Text.Json
         {
             // Rented buffer 20% longer that the input.
             int rentedBufferLength = (12 * name.Length) / 10;
-            char[]? rentedBuffer = rentedBufferLength > JsonConstants.StackallocCharThreshold
-                ? ArrayPool<char>.Shared.Rent(rentedBufferLength)
-                : null;
+            char[]? rentedBuffer =
+                rentedBufferLength > JsonConstants.StackallocCharThreshold
+                    ? ArrayPool<char>.Shared.Rent(rentedBufferLength)
+                    : null;
 
             int resultUsedLength = 0;
             Span<char> result = rentedBuffer is null
@@ -53,9 +54,8 @@ namespace System.Text.Json
                 int written;
                 while (true)
                 {
-                    var destinationOffset = resultUsedLength != 0
-                        ? resultUsedLength + 1
-                        : resultUsedLength;
+                    var destinationOffset =
+                        resultUsedLength != 0 ? resultUsedLength + 1 : resultUsedLength;
 
                     if (destinationOffset < result.Length)
                     {
@@ -92,9 +92,11 @@ namespace System.Text.Json
                 char current = chars[index];
                 UnicodeCategory currentCategoryUnicode = char.GetUnicodeCategory(current);
 
-                if (currentCategoryUnicode == UnicodeCategory.SpaceSeparator ||
-                    currentCategoryUnicode >= UnicodeCategory.ConnectorPunctuation &&
-                    currentCategoryUnicode <= UnicodeCategory.OtherPunctuation)
+                if (
+                    currentCategoryUnicode == UnicodeCategory.SpaceSeparator
+                    || currentCategoryUnicode >= UnicodeCategory.ConnectorPunctuation
+                        && currentCategoryUnicode <= UnicodeCategory.OtherPunctuation
+                )
                 {
                     WriteWord(chars.Slice(first, index - first), ref result);
 
@@ -114,8 +116,10 @@ namespace System.Text.Json
                         _ => previousCategory
                     };
 
-                    if (currentCategory == CharCategory.Lowercase && char.IsUpper(next) ||
-                        next == '_')
+                    if (
+                        currentCategory == CharCategory.Lowercase && char.IsUpper(next)
+                        || next == '_'
+                    )
                     {
                         WriteWord(chars.Slice(first, index - first + 1), ref result);
 
@@ -125,9 +129,11 @@ namespace System.Text.Json
                         continue;
                     }
 
-                    if (previousCategory == CharCategory.Uppercase &&
-                        currentCategoryUnicode == UnicodeCategory.UppercaseLetter &&
-                        char.IsLower(next))
+                    if (
+                        previousCategory == CharCategory.Uppercase
+                        && currentCategoryUnicode == UnicodeCategory.UppercaseLetter
+                        && char.IsLower(next)
+                    )
                     {
                         WriteWord(chars.Slice(first, index - first), ref result);
 

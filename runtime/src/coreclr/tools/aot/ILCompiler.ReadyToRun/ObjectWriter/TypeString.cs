@@ -102,7 +102,11 @@ namespace ILCompiler.PEWriter
             sb.Append(type.Name);
         }
 
-        protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
+        protected override void AppendNameForNestedType(
+            StringBuilder sb,
+            DefType nestedType,
+            DefType containingType
+        )
         {
             AppendName(sb, containingType);
             sb.Append('+');

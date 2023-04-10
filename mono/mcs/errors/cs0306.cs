@@ -2,8 +2,11 @@
 // Line: 9
 // Compiler options: -unsafe
 
-class F<U> {}
-unsafe class O {
-	F<char *> f;
-	static void Main () {}
+class F<U> { }
+
+unsafe class O
+{
+    F<char*> f;
+
+    static void Main() { }
 }

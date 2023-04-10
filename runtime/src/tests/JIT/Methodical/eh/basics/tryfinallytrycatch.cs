@@ -31,6 +31,7 @@ namespace hello_tryfinallytrycatch_basics_cs
         {
             Console.WriteLine("in Try catch");
         }
+
         static public void inTry2()
         {
             Console.WriteLine("in Try finally");
@@ -40,6 +41,7 @@ namespace hello_tryfinallytrycatch_basics_cs
         {
             Console.WriteLine("in Catch");
         }
+
         static public void inFinally()
         {
             Console.WriteLine("in Finally");

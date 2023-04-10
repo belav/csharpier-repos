@@ -16,13 +16,22 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         protected internal override bool SupportsNullValueOnDeserialize => false;
 
-        public StringSerializerWrapper(JsonSerializerContext defaultContext, Func<JsonSerializerOptions, JsonSerializerContext> customContextCreator)
+        public StringSerializerWrapper(
+            JsonSerializerContext defaultContext,
+            Func<JsonSerializerOptions, JsonSerializerContext> customContextCreator
+        )
         {
-            _defaultContext = defaultContext ?? throw new ArgumentNullException(nameof(defaultContext));
-            _customContextCreator = customContextCreator ?? throw new ArgumentNullException(nameof(defaultContext));
+            _defaultContext =
+                defaultContext ?? throw new ArgumentNullException(nameof(defaultContext));
+            _customContextCreator =
+                customContextCreator ?? throw new ArgumentNullException(nameof(defaultContext));
         }
 
-        protected internal override Task<string> SerializeWrapper(object value, Type type, JsonSerializerOptions? options = null)
+        protected internal override Task<string> SerializeWrapper(
+            object value,
+            Type type,
+            JsonSerializerOptions? options = null
+        )
         {
             if (options != null)
             {
@@ -34,11 +43,16 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         private string Serialize(object value, Type type, JsonSerializerOptions options)
         {
-            JsonSerializerContext context = _customContextCreator(new JsonSerializerOptions(options));
+            JsonSerializerContext context = _customContextCreator(
+                new JsonSerializerOptions(options)
+            );
             return JsonSerializer.Serialize(value, type, context);
         }
 
-        protected internal override Task<string> SerializeWrapper<T>(T value, JsonSerializerOptions? options = null)
+        protected internal override Task<string> SerializeWrapper<T>(
+            T value,
+            JsonSerializerOptions? options = null
+        )
         {
             Type runtimeType = GetRuntimeType(value);
 
@@ -58,7 +72,9 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         private string Serialize<T>(T value, JsonSerializerOptions options)
         {
-            JsonSerializerContext context = _customContextCreator(new JsonSerializerOptions(options));
+            JsonSerializerContext context = _customContextCreator(
+                new JsonSerializerOptions(options)
+            );
             JsonTypeInfo<T> typeInfo = (JsonTypeInfo<T>)context.GetTypeInfo(typeof(T));
             return JsonSerializer.Serialize(value, typeInfo);
         }
@@ -73,13 +89,21 @@ namespace System.Text.Json.SourceGeneration.Tests
             return typeof(TValue);
         }
 
-        protected internal override Task<string> SerializeWrapper(object value, Type inputType, JsonSerializerContext context)
-            => throw new NotImplementedException();
+        protected internal override Task<string> SerializeWrapper(
+            object value,
+            Type inputType,
+            JsonSerializerContext context
+        ) => throw new NotImplementedException();
 
-        protected internal override Task<string> SerializeWrapper<T>(T value, JsonTypeInfo<T> jsonTypeInfo)
-            => throw new NotImplementedException();
+        protected internal override Task<string> SerializeWrapper<T>(
+            T value,
+            JsonTypeInfo<T> jsonTypeInfo
+        ) => throw new NotImplementedException();
 
-        protected internal override Task<T> DeserializeWrapper<T>(string json, JsonSerializerOptions? options = null)
+        protected internal override Task<T> DeserializeWrapper<T>(
+            string json,
+            JsonSerializerOptions? options = null
+        )
         {
             if (options != null)
             {
@@ -92,12 +116,18 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         private T Deserialize<T>(string json, JsonSerializerOptions options)
         {
-            JsonSerializerContext context = _customContextCreator(new JsonSerializerOptions(options));
+            JsonSerializerContext context = _customContextCreator(
+                new JsonSerializerOptions(options)
+            );
             JsonTypeInfo<T> typeInfo = (JsonTypeInfo<T>)context.GetTypeInfo(typeof(T));
             return JsonSerializer.Deserialize<T>(json, typeInfo);
         }
 
-        protected internal override Task<object> DeserializeWrapper(string json, Type type, JsonSerializerOptions? options = null)
+        protected internal override Task<object> DeserializeWrapper(
+            string json,
+            Type type,
+            JsonSerializerOptions? options = null
+        )
         {
             if (options != null)
             {
@@ -109,15 +139,22 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         private object Deserialize(string json, Type type, JsonSerializerOptions options)
         {
-            JsonSerializerContext context = _customContextCreator(new JsonSerializerOptions(options));
+            JsonSerializerContext context = _customContextCreator(
+                new JsonSerializerOptions(options)
+            );
             return JsonSerializer.Deserialize(json, type, context);
         }
 
-        protected internal override Task<T> DeserializeWrapper<T>(string json, JsonTypeInfo<T> jsonTypeInfo)
-            => throw new NotImplementedException();
+        protected internal override Task<T> DeserializeWrapper<T>(
+            string json,
+            JsonTypeInfo<T> jsonTypeInfo
+        ) => throw new NotImplementedException();
 
-        protected internal override Task<object> DeserializeWrapper(string json, Type type, JsonSerializerContext context)
-            => throw new NotImplementedException();
+        protected internal override Task<object> DeserializeWrapper(
+            string json,
+            Type type,
+            JsonSerializerContext context
+        ) => throw new NotImplementedException();
     }
 
     internal sealed class StreamSerializerWrapper : JsonSerializerWrapperForStream
@@ -125,13 +162,21 @@ namespace System.Text.Json.SourceGeneration.Tests
         private readonly JsonSerializerContext _defaultContext;
         private readonly Func<JsonSerializerOptions, JsonSerializerContext> _customContextCreator;
 
-        public StreamSerializerWrapper(JsonSerializerContext defaultContext, Func<JsonSerializerOptions, JsonSerializerContext> customContextCreator)
+        public StreamSerializerWrapper(
+            JsonSerializerContext defaultContext,
+            Func<JsonSerializerOptions, JsonSerializerContext> customContextCreator
+        )
         {
-            _defaultContext = defaultContext ?? throw new ArgumentNullException(nameof(defaultContext));
-            _customContextCreator = customContextCreator ?? throw new ArgumentNullException(nameof(defaultContext));
+            _defaultContext =
+                defaultContext ?? throw new ArgumentNullException(nameof(defaultContext));
+            _customContextCreator =
+                customContextCreator ?? throw new ArgumentNullException(nameof(defaultContext));
         }
 
-        protected internal override async Task<T> DeserializeWrapper<T>(Stream utf8Json, JsonSerializerOptions? options = null)
+        protected internal override async Task<T> DeserializeWrapper<T>(
+            Stream utf8Json,
+            JsonSerializerOptions? options = null
+        )
         {
             if (options != null)
             {
@@ -144,15 +189,41 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         private async Task<T> Deserialize<T>(Stream utf8Json, JsonSerializerOptions options)
         {
-            JsonSerializerContext context = _customContextCreator(new JsonSerializerOptions(options));
+            JsonSerializerContext context = _customContextCreator(
+                new JsonSerializerOptions(options)
+            );
             JsonTypeInfo<T> typeInfo = (JsonTypeInfo<T>)context.GetTypeInfo(typeof(T));
             return await JsonSerializer.DeserializeAsync<T>(utf8Json, typeInfo);
         }
 
-        protected internal override Task<object> DeserializeWrapper(Stream utf8Json, Type returnType, JsonSerializerOptions options = null) => throw new NotImplementedException();
-        protected internal override Task<T> DeserializeWrapper<T>(Stream utf8Json, JsonTypeInfo<T> jsonTypeInfo) => throw new NotImplementedException();
-        protected internal override Task SerializeWrapper<T>(Stream stream, T value, JsonSerializerOptions options = null) => throw new NotImplementedException();
-        protected internal override Task SerializeWrapper(Stream stream, object value, Type inputType, JsonSerializerOptions options = null) => throw new NotImplementedException();
-        protected internal override Task SerializeWrapper<T>(Stream stream, T value, JsonTypeInfo<T> jsonTypeInfo) => throw new NotImplementedException();
+        protected internal override Task<object> DeserializeWrapper(
+            Stream utf8Json,
+            Type returnType,
+            JsonSerializerOptions options = null
+        ) => throw new NotImplementedException();
+
+        protected internal override Task<T> DeserializeWrapper<T>(
+            Stream utf8Json,
+            JsonTypeInfo<T> jsonTypeInfo
+        ) => throw new NotImplementedException();
+
+        protected internal override Task SerializeWrapper<T>(
+            Stream stream,
+            T value,
+            JsonSerializerOptions options = null
+        ) => throw new NotImplementedException();
+
+        protected internal override Task SerializeWrapper(
+            Stream stream,
+            object value,
+            Type inputType,
+            JsonSerializerOptions options = null
+        ) => throw new NotImplementedException();
+
+        protected internal override Task SerializeWrapper<T>(
+            Stream stream,
+            T value,
+            JsonTypeInfo<T> jsonTypeInfo
+        ) => throw new NotImplementedException();
     }
 }

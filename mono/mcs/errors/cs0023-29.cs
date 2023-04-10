@@ -3,8 +3,8 @@
 
 class X
 {
-	static void Bug<T>(System.Func<T> func)
-	{
-		var r = func?.Invoke ();
-	}
+    static void Bug<T>(System.Func<T> func)
+    {
+        var r = func?.Invoke();
+    }
 }

@@ -14,41 +14,17 @@ namespace System.Activities.Validation
     {
         IDictionary<Type, IList<Constraint>> additionalConstraints;
 
-        public CancellationToken CancellationToken
-        {
-            get;
-            set;
-        }
+        public CancellationToken CancellationToken { get; set; }
 
-        public bool SingleLevel
-        {
-            get;
-            set;
-        }
+        public bool SingleLevel { get; set; }
 
-        public bool SkipValidatingRootConfiguration
-        {
-            get;
-            set;
-        }
+        public bool SkipValidatingRootConfiguration { get; set; }
 
-        public bool OnlyUseAdditionalConstraints
-        {
-            get;
-            set;
-        }
+        public bool OnlyUseAdditionalConstraints { get; set; }
 
-        public bool PrepareForRuntime
-        {
-            get;
-            set;
-        }
+        public bool PrepareForRuntime { get; set; }
 
-        public LocationReferenceEnvironment Environment
-        {
-            get;
-            set;
-        }
+        public LocationReferenceEnvironment Environment { get; set; }
 
         internal bool HasAdditionalConstraints
         {
@@ -57,18 +33,18 @@ namespace System.Activities.Validation
                 return this.additionalConstraints != null && this.additionalConstraints.Count > 0;
             }
         }
-        
+
         public IDictionary<Type, IList<Constraint>> AdditionalConstraints
         {
             get
             {
                 if (this.additionalConstraints == null)
                 {
-                    this.additionalConstraints = new Dictionary<Type, IList<Constraint>>(); 
+                    this.additionalConstraints = new Dictionary<Type, IList<Constraint>>();
                 }
 
                 return this.additionalConstraints;
             }
-        }        
+        }
     }
 }

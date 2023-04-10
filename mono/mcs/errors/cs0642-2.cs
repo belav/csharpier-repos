@@ -4,11 +4,11 @@
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        int i= 5;
-        while (i++ < 100);
-            { }
+        int i = 5;
+        while (i++ < 100)
+            ;
+        { }
     }
 }
-

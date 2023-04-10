@@ -1,5 +1,5 @@
 //
-// DataKeyCollectionCas.cs 
+// DataKeyCollectionCas.cs
 //	- CAS unit tests for System.Web.UI.WebControls.DataKeyCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,31 +38,35 @@ using System.Web.UI.WebControls;
 
 using MonoTests.System.Web.UI.WebControls;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class DataKeyCollectionCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            DataKeyCollectionTest unit = new DataKeyCollectionTest();
+            unit.Constructor_Empty();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataKeyCollectionCas : AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			DataKeyCollectionTest unit = new DataKeyCollectionTest ();
-			unit.Constructor_Empty ();
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(ArrayList) });
+            Assert.IsNotNull(ci, ".ctor(ArrayList)");
+            return ci.Invoke(new object[1] { new ArrayList() });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (ArrayList) });
-			Assert.IsNotNull (ci, ".ctor(ArrayList)");
-			return ci.Invoke (new object[1] { new ArrayList () });
-		}
-
-		public override Type Type {
-			get { return typeof (DataKeyCollection); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(DataKeyCollection); }
+        }
+    }
 }

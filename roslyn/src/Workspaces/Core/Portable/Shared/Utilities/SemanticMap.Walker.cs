@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             private readonly SemanticMap _map;
             private readonly CancellationToken _cancellationToken;
 
-            public Walker(SemanticModel semanticModel, SemanticMap map, CancellationToken cancellationToken)
+            public Walker(
+                SemanticModel semanticModel,
+                SemanticMap map,
+                CancellationToken cancellationToken
+            )
                 : base(SyntaxWalkerDepth.Token)
             {
                 _semanticModel = semanticModel;
@@ -47,8 +51,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 base.VisitToken(token);
             }
 
-            private static bool IsNone(SymbolInfo info)
-                => info.Symbol == null && info.CandidateSymbols.Length == 0;
+            private static bool IsNone(SymbolInfo info) =>
+                info.Symbol == null && info.CandidateSymbols.Length == 0;
         }
     }
 }

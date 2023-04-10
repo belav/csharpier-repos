@@ -21,7 +21,9 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void ValidateOnStart_NullOptionsBuilder_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => OptionsBuilderExtensions.ValidateOnStart<object>(null));
+            Assert.Throws<ArgumentNullException>(
+                () => OptionsBuilderExtensions.ValidateOnStart<object>(null)
+            );
         }
 
         [Fact]
@@ -29,7 +31,8 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.AddOptions<ComplexOptions>()
+                services
+                    .AddOptions<ComplexOptions>()
                     .Configure(o => o.Boolean = false)
                     .Validate(o => o.Boolean)
                     .ValidateOnStart();
@@ -51,7 +54,8 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.AddOptions<ComplexOptions>()
+                services
+                    .AddOptions<ComplexOptions>()
                     .ValidateOnStart()
                     .Configure(o => o.Boolean = false)
                     .Validate(o => o.Boolean);
@@ -73,7 +77,8 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.AddOptions<ComplexOptions>()
+                services
+                    .AddOptions<ComplexOptions>()
                     .Configure(o => o.Boolean = false)
                     .Validate(o => o.Boolean, "Boolean must be true.")
                     .ValidateOnStart();
@@ -105,10 +110,12 @@ namespace Microsoft.Extensions.Hosting.Tests
                 services.AddOptions().AddSingleton(new FakeService());
                 services
                     .AddOptions<FakeSettings>("named")
-                    .Configure<FakeService>((o, _) =>
-                    {
-                        o.Name = "named";
-                    })
+                    .Configure<FakeService>(
+                        (o, _) =>
+                        {
+                            o.Name = "named";
+                        }
+                    )
                     .Validate(o => o.Name == null, "trigger validation failure for named option!")
                     .ValidateOnStart();
             });
@@ -120,7 +127,11 @@ namespace Microsoft.Extensions.Hosting.Tests
                     await host.StartAsync();
                 });
 
-                ValidateFailure<FakeSettings>(error, 1, "trigger validation failure for named option!");
+                ValidateFailure<FakeSettings>(
+                    error,
+                    1,
+                    "trigger validation failure for named option!"
+                );
             }
         }
 
@@ -131,26 +142,34 @@ namespace Microsoft.Extensions.Hosting.Tests
             bool secondOptionsBuilderTriggered = false;
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.AddOptions<ComplexOptions>("bad_configuration1")
+                services
+                    .AddOptions<ComplexOptions>("bad_configuration1")
                     .Configure(o => o.Boolean = true)
-                    .Validate(o =>
-                    {
-                        firstOptionsBuilderTriggered = true;
-                        return o.Boolean;
-                    }, "bad_configuration1")
+                    .Validate(
+                        o =>
+                        {
+                            firstOptionsBuilderTriggered = true;
+                            return o.Boolean;
+                        },
+                        "bad_configuration1"
+                    )
                     .ValidateOnStart();
 
-                services.AddOptions<ComplexOptions>("bad_configuration2")
+                services
+                    .AddOptions<ComplexOptions>("bad_configuration2")
                     .Configure(o =>
                     {
                         o.Boolean = false;
                         o.Integer = 11;
                     })
-                    .Validate(o =>
-                    {
-                        secondOptionsBuilderTriggered = true;
-                        return o.Boolean;
-                    }, "Boolean")
+                    .Validate(
+                        o =>
+                        {
+                            secondOptionsBuilderTriggered = true;
+                            return o.Boolean;
+                        },
+                        "Boolean"
+                    )
                     .Validate(o => o.Integer > 12, "Integer")
                     .ValidateOnStart();
             });
@@ -177,13 +196,17 @@ namespace Microsoft.Extensions.Hosting.Tests
             var hostBuilder = CreateHostBuilder(services =>
             {
                 // Adds eager validation using ValidateOnStart
-                services.AddOptions<ComplexOptions>("correct_configuration")
+                services
+                    .AddOptions<ComplexOptions>("correct_configuration")
                     .Configure(o => o.Boolean = true)
-                    .Validate(o =>
-                    {
-                        validateCalled = true;
-                        return o.Boolean;
-                    }, "correct_configuration")
+                    .Validate(
+                        o =>
+                        {
+                            validateCalled = true;
+                            return o.Boolean;
+                        },
+                        "correct_configuration"
+                    )
                     .ValidateOnStart();
             });
 
@@ -203,19 +226,24 @@ namespace Microsoft.Extensions.Hosting.Tests
             var hostBuilder = CreateHostBuilder(services =>
             {
                 // Adds eager validation using ValidateOnStart
-                services.AddOptions<ComplexOptions>("correct_configuration")
+                services
+                    .AddOptions<ComplexOptions>("correct_configuration")
                     .Configure(o => o.Boolean = true)
                     .Validate(o => o.Boolean, "correct_configuration")
                     .ValidateOnStart();
 
                 // Adds lazy validation, skipping validation on start (last options builder for same type gets triggered so above one is skipped)
-                services.AddOptions<ComplexOptions>("bad_configuration")
+                services
+                    .AddOptions<ComplexOptions>("bad_configuration")
                     .Configure(o => o.Boolean = false)
-                    .Validate(o =>
-                    {
-                        validateCalled = true;
-                        return o.Boolean;
-                    }, "bad_configuration");
+                    .Validate(
+                        o =>
+                        {
+                            validateCalled = true;
+                            return o.Boolean;
+                        },
+                        "bad_configuration"
+                    );
             });
 
             // For the lazily added "bad_configuration", validation failure does not occur when host starts
@@ -236,22 +264,30 @@ namespace Microsoft.Extensions.Hosting.Tests
             var hostBuilder = CreateHostBuilder(services =>
             {
                 // Lazy validation for NestedOptions
-                services.AddOptions<NestedOptions>()
+                services
+                    .AddOptions<NestedOptions>()
                     .Configure(o => o.Integer = 11)
-                    .Validate(o =>
-                    {
-                        validateCalledForNested = true;
-                        return o.Integer > 12;
-                    }, "Integer");
+                    .Validate(
+                        o =>
+                        {
+                            validateCalledForNested = true;
+                            return o.Integer > 12;
+                        },
+                        "Integer"
+                    );
 
                 // Eager validation for ComplexOptions
-                services.AddOptions<ComplexOptions>()
+                services
+                    .AddOptions<ComplexOptions>()
                     .Configure(o => o.Boolean = false)
-                    .Validate(o =>
-                    {
-                        validateCalledForComplexOptions = true;
-                        return o.Boolean;
-                    }, "first Boolean must be true.")
+                    .Validate(
+                        o =>
+                        {
+                            validateCalledForComplexOptions = true;
+                            return o.Boolean;
+                        },
+                        "first Boolean must be true."
+                    )
                     .ValidateOnStart();
             });
 
@@ -274,15 +310,16 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.AddOptions<ComplexOptions>()
-                .Configure(o =>
-                {
-                    o.Boolean = false;
-                    o.Integer = 11;
-                })
-                .Validate(o => o.Boolean)
-                .Validate(o => o.Integer > 12)
-                .ValidateOnStart();
+                services
+                    .AddOptions<ComplexOptions>()
+                    .Configure(o =>
+                    {
+                        o.Boolean = false;
+                        o.Integer = 11;
+                    })
+                    .Validate(o => o.Boolean)
+                    .Validate(o => o.Integer > 12)
+                    .ValidateOnStart();
             });
 
             using (var host = hostBuilder.Build())
@@ -301,17 +338,18 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var hostBuilder = CreateHostBuilder(services =>
             {
-                services.AddOptions<ComplexOptions>()
-                       .Configure(o =>
-                       {
-                           o.Boolean = false;
-                           o.Integer = 11;
-                           o.Virtual = "wut";
-                       })
-                       .Validate(o => o.Boolean)
-                       .Validate(o => o.Virtual == null, "Virtual")
-                       .Validate(o => o.Integer > 12, "Integer")
-                       .ValidateOnStart();
+                services
+                    .AddOptions<ComplexOptions>()
+                    .Configure(o =>
+                    {
+                        o.Boolean = false;
+                        o.Integer = 11;
+                        o.Virtual = "wut";
+                    })
+                    .Validate(o => o.Boolean)
+                    .Validate(o => o.Virtual == null, "Virtual")
+                    .Validate(o => o.Integer > 12, "Integer")
+                    .ValidateOnStart();
             });
             using (var host = hostBuilder.Build())
             {
@@ -324,7 +362,12 @@ namespace Microsoft.Extensions.Hosting.Tests
             }
         }
 
-        private static void ValidateFailure(Type type, OptionsValidationException e, int count = 1, params string[] errorsToMatch)
+        private static void ValidateFailure(
+            Type type,
+            OptionsValidationException e,
+            int count = 1,
+            params string[] errorsToMatch
+        )
         {
             Assert.Equal(type, e.OptionsType);
 
@@ -334,14 +377,28 @@ namespace Microsoft.Extensions.Hosting.Tests
             foreach (var error in errorsToMatch)
             {
 #if NETCOREAPP
-                Assert.True(e.Failures.FirstOrDefault(predicate: f => f.Contains(error, StringComparison.CurrentCulture)) != null, "Did not find: " + error + " " + e.Failures.First());
+                Assert.True(
+                    e.Failures.FirstOrDefault(
+                        predicate: f => f.Contains(error, StringComparison.CurrentCulture)
+                    ) != null,
+                    "Did not find: " + error + " " + e.Failures.First()
+                );
 #else
-                Assert.True(e.Failures.FirstOrDefault(predicate: f => f.IndexOf(error, StringComparison.CurrentCulture) >= 0) != null, "Did not find: " + error + " " + e.Failures.First());
+                Assert.True(
+                    e.Failures.FirstOrDefault(
+                        predicate: f => f.IndexOf(error, StringComparison.CurrentCulture) >= 0
+                    ) != null,
+                    "Did not find: " + error + " " + e.Failures.First()
+                );
 #endif
             }
         }
 
-        private static void ValidateFailure<TOptions>(OptionsValidationException e, int count = 1, params string[] errorsToMatch)
+        private static void ValidateFailure<TOptions>(
+            OptionsValidationException e,
+            int count = 1,
+            params string[] errorsToMatch
+        )
         {
             ValidateFailure(typeof(TOptions), e, count, errorsToMatch);
         }

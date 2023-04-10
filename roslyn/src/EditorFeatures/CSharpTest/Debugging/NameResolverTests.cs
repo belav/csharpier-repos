@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
     [Trait(Traits.Feature, Traits.Features.DebuggingNameResolver)]
     public class NameResolverTests
     {
-        private static async Task TestAsync(string text, string searchText, params string[] expectedNames)
+        private static async Task TestAsync(
+            string text,
+            string searchText,
+            params string[] expectedNames
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(text);
 
@@ -34,7 +38,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             using var workspace = TestWorkspace.CreateCSharp(" ");
 
             var debugInfo = new CSharpBreakpointResolutionService();
-            var results = await debugInfo.ResolveBreakpointsAsync(workspace.CurrentSolution, "goo", CancellationToken.None);
+            var results = await debugInfo.ResolveBreakpointsAsync(
+                workspace.CurrentSolution,
+                "goo",
+                CancellationToken.None
+            );
             Assert.Equal(0, results.Count());
         }
 
@@ -42,7 +50,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         public async Task TestSimpleNameInClass()
         {
             var text =
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -63,7 +71,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
         public async Task TestSimpleNameInNamespace()
         {
             var text =
-@"
+                @"
 namespace N
 {
   class C
@@ -91,7 +99,7 @@ namespace N
         public async Task TestSimpleNameInGenericClassNamespace()
         {
             var text =
-@"
+                @"
 namespace N
 {
   class C<T>
@@ -120,7 +128,7 @@ namespace N
         public async Task TestGenericNameInClassNamespace()
         {
             var text =
-@"
+                @"
 namespace N
 {
   class C
@@ -154,7 +162,7 @@ namespace N
         public async Task TestOverloadsInSingleClass()
         {
             var text =
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -180,7 +188,7 @@ namespace N
         public async Task TestMethodsInMultipleClasses()
         {
             var text =
-@"namespace N
+                @"namespace N
 {
   class C
   {
@@ -216,7 +224,7 @@ namespace N1
         public async Task TestMethodsWithDifferentArityInMultipleClasses()
         {
             var text =
-@"namespace N
+                @"namespace N
 {
   class C
   {
@@ -256,7 +264,7 @@ namespace N1
         public async Task TestOverloadsWithMultipleParametersInSingleClass()
         {
             var text =
-@"class C
+                @"class C
 {
   void Goo(int a)
   {
@@ -272,7 +280,13 @@ namespace N1
 }";
             await TestAsync(text, "Goo", "C.Goo(int)", "C.Goo(int, [string])", "C.Goo(__arglist)");
             await TestAsync(text, "goo");
-            await TestAsync(text, "C.Goo", "C.Goo(int)", "C.Goo(int, [string])", "C.Goo(__arglist)");
+            await TestAsync(
+                text,
+                "C.Goo",
+                "C.Goo(int)",
+                "C.Goo(int, [string])",
+                "C.Goo(__arglist)"
+            );
             await TestAsync(text, "N.C.Goo");
             await TestAsync(text, "Goo<T>");
             await TestAsync(text, "C<T>.Goo");
@@ -298,7 +312,7 @@ namespace N1
         public async Task AccessorTests()
         {
             var text =
-@"class C
+                @"class C
 {
   int Property1 { get { return 42; } }
   int Property2 { set { } }
@@ -313,7 +327,7 @@ namespace N1
         public async Task NegativeTests()
         {
             var text =
-@"using System.Runtime.CompilerServices;
+                @"using System.Runtime.CompilerServices;
 abstract class C
 {
     public abstract void AbstractMethod(int a);
@@ -363,7 +377,7 @@ abstract class C
         public async Task TestInstanceConstructors()
         {
             var text =
-@"class C
+                @"class C
 {
   public C() { }
 }
@@ -404,7 +418,7 @@ class G<T>
         public async Task TestStaticConstructors()
         {
             var text =
-@"class C
+                @"class C
 {
   static C()
   {
@@ -427,7 +441,7 @@ class G<T>
         public async Task TestAllConstructors()
         {
             var text =
-@"class C
+                @"class C
 {
   static C()
   {
@@ -452,7 +466,7 @@ class G<T>
         public async Task TestPartialMethods()
         {
             var text =
-@"partial class C
+                @"partial class C
 {
   partial int M1();
 
@@ -479,32 +493,31 @@ class G<T>
         public async Task TestLeadingAndTrailingText()
         {
             var text =
-@"class C
+                @"class C
 {
   void Goo() { };
 }";
             await TestAsync(text, "Goo;", "C.Goo()");
-            await TestAsync(text,
-@"Goo();", "C.Goo()");
+            await TestAsync(text, @"Goo();", "C.Goo()");
             await TestAsync(text, "  Goo;", "C.Goo()");
             await TestAsync(text, "  Goo;;");
             await TestAsync(text, "  Goo; ;");
-            await TestAsync(text,
-@"Goo();", "C.Goo()");
-            await TestAsync(text,
-@"Goo();", "C.Goo()");
-            await TestAsync(text,
-@"Goo(); // comment", "C.Goo()");
-            await TestAsync(text,
-@"/*comment*/
-           Goo(/* params */); /* comment", "C.Goo()");
+            await TestAsync(text, @"Goo();", "C.Goo()");
+            await TestAsync(text, @"Goo();", "C.Goo()");
+            await TestAsync(text, @"Goo(); // comment", "C.Goo()");
+            await TestAsync(
+                text,
+                @"/*comment*/
+           Goo(/* params */); /* comment",
+                "C.Goo()"
+            );
         }
 
         [Fact]
         public async Task TestEscapedKeywords()
         {
             var text =
-@"struct @true { }
+                @"struct @true { }
 class @foreach
 {
     void where(@true @this) { }
@@ -523,7 +536,7 @@ class @foreach
         public async Task TestAliasQualifiedNames()
         {
             var text =
-@"extern alias A
+                @"extern alias A
 class C
 {
     void Goo(D d) { }
@@ -539,7 +552,7 @@ class C
         public async Task TestNestedTypesAndNamespaces()
         {
             var text =
-@"namespace N1
+                @"namespace N1
 {
   class C
   {
@@ -573,7 +586,14 @@ class C
   namespace N5 { }
 }";
 
-            await TestAsync(text, "Goo", "N1.N4.C.Goo(double)", "N1.N4.C.D.Goo()", "N1.N4.C.D.E.Goo()", "N1.C.Goo()");
+            await TestAsync(
+                text,
+                "Goo",
+                "N1.N4.C.Goo(double)",
+                "N1.N4.C.D.Goo()",
+                "N1.N4.C.D.E.Goo()",
+                "N1.C.Goo()"
+            );
             await TestAsync(text, "C.Goo", "N1.N4.C.Goo(double)", "N1.C.Goo()");
             await TestAsync(text, "D.Goo", "N1.N4.C.D.Goo()");
             await TestAsync(text, "N1.N4.C.D.Goo", "N1.N4.C.D.Goo()");
@@ -586,7 +606,7 @@ class C
         public async Task TestInterfaces()
         {
             var text =
-@"interface I1
+                @"interface I1
 {
   void Goo();
 }

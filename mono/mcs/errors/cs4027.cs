@@ -5,31 +5,28 @@ using System.Threading.Tasks;
 
 static class S
 {
-	public static A GetAwaiter (this int i)
-	{
-		return new A ();
-	}
+    public static A GetAwaiter(this int i)
+    {
+        return new A();
+    }
 }
 
 class A
 {
-	bool IsCompleted {
-		get {
-			return true;
-		}
-	}
-	
-	public void OnCompleted (System.Action a)
-	{
-	}
+    bool IsCompleted
+    {
+        get { return true; }
+    }
 
-	int GetResult ()
-	{
-		return 3;
-	}
-	
-	static async Task<int> Test1 ()
-	{
-		await 1;
-	}
+    public void OnCompleted(System.Action a) { }
+
+    int GetResult()
+    {
+        return 3;
+    }
+
+    static async Task<int> Test1()
+    {
+        await 1;
+    }
 }

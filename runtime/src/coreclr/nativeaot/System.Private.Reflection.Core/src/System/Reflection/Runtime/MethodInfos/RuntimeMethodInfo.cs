@@ -24,19 +24,11 @@ namespace System.Reflection.Runtime.MethodInfos
     [DebuggerDisplay("{_debugName}")]
     internal abstract partial class RuntimeMethodInfo : MethodInfo, ITraceableTypeMember
     {
-        protected RuntimeMethodInfo()
-        {
-        }
+        protected RuntimeMethodInfo() { }
 
-        public abstract override MethodAttributes Attributes
-        {
-            get;
-        }
+        public abstract override MethodAttributes Attributes { get; }
 
-        public abstract override CallingConventions CallingConvention
-        {
-            get;
-        }
+        public abstract override CallingConventions CallingConvention { get; }
 
         public sealed override bool ContainsGenericParameters
         {
@@ -92,28 +84,27 @@ namespace System.Reflection.Runtime.MethodInfos
             if (!runtimeDelegateType.IsDelegate)
                 throw new ArgumentException(SR.Arg_MustBeDelegate);
 
-            Delegate result = CreateDelegateNoThrowOnBindFailure(runtimeDelegateType, target, allowClosed);
+            Delegate result = CreateDelegateNoThrowOnBindFailure(
+                runtimeDelegateType,
+                target,
+                allowClosed
+            );
             if (result == null)
                 throw new ArgumentException(SR.Arg_DlgtTargMeth);
             return result;
         }
 
-        public abstract override IEnumerable<CustomAttributeData> CustomAttributes
-        {
-            get;
-        }
+        public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
         public sealed override Type DeclaringType
         {
-            get
-            {
+            get {
 #if ENABLE_REFLECTION_TRACE
                 if (ReflectionTrace.Enabled)
                     ReflectionTrace.MethodBase_DeclaringType(this);
 #endif
 
-                return this.RuntimeDeclaringType;
-            }
+                return this.RuntimeDeclaringType; }
         }
 
         public abstract override bool Equals(object obj);
@@ -152,7 +143,9 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public abstract override MethodInfo GetGenericMethodDefinition();
 
-        [RequiresUnreferencedCode("Trimming may change method bodies. For example it can change some instructions, remove branches or local variables.")]
+        [RequiresUnreferencedCode(
+            "Trimming may change method bodies. For example it can change some instructions, remove branches or local variables."
+        )]
         public sealed override MethodBody GetMethodBody()
         {
             throw new PlatformNotSupportedException();
@@ -182,7 +175,13 @@ namespace System.Reflection.Runtime.MethodInfos
         public abstract override bool HasSameMetadataDefinitionAs(MemberInfo other);
 
         [DebuggerGuidedStepThroughAttribute]
-        public sealed override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public sealed override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
 #if ENABLE_REFLECTION_TRACE
             if (ReflectionTrace.Enabled)
@@ -196,80 +195,60 @@ namespace System.Reflection.Runtime.MethodInfos
             return result;
         }
 
-        public abstract override bool IsConstructedGenericMethod
-        {
-            get;
-        }
+        public abstract override bool IsConstructedGenericMethod { get; }
 
-        public abstract override bool IsGenericMethod
-        {
-            get;
-        }
+        public abstract override bool IsGenericMethod { get; }
 
-        public abstract override bool IsGenericMethodDefinition
-        {
-            get;
-        }
+        public abstract override bool IsGenericMethodDefinition { get; }
 
-        [RequiresDynamicCode("The native code for this instantiation might not be available at runtime.")]
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresDynamicCode(
+            "The native code for this instantiation might not be available at runtime."
+        )]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public abstract override MethodInfo MakeGenericMethod(params Type[] typeArguments);
 
         public abstract override MethodBase MetadataDefinitionMethod { get; }
 
-        public abstract override int MetadataToken
-        {
-            get;
-        }
+        public abstract override int MetadataToken { get; }
 
-        public abstract override MethodImplAttributes MethodImplementationFlags
-        {
-            get;
-        }
+        public abstract override MethodImplAttributes MethodImplementationFlags { get; }
 
-        public abstract override Module Module
-        {
-            get;
-        }
+        public abstract override Module Module { get; }
 
         public sealed override string Name
         {
-            get
-            {
+            get {
 #if ENABLE_REFLECTION_TRACE
                 if (ReflectionTrace.Enabled)
                     ReflectionTrace.MethodBase_Name(this);
 #endif
-                return this.RuntimeName;
-            }
+                return this.RuntimeName; }
         }
 
         public abstract override Type ReflectedType { get; }
 
         public sealed override ParameterInfo ReturnParameter
         {
-            get
-            {
+            get {
 #if ENABLE_REFLECTION_TRACE
                 if (ReflectionTrace.Enabled)
                     ReflectionTrace.MethodInfo_ReturnParameter(this);
 #endif
 
-                return this.RuntimeReturnParameter;
-            }
+                return this.RuntimeReturnParameter; }
         }
 
         public sealed override Type ReturnType
         {
-            get
-            {
+            get {
 #if ENABLE_REFLECTION_TRACE
                 if (ReflectionTrace.Enabled)
                     ReflectionTrace.MethodInfo_ReturnType(this);
 #endif
 
-                return ReturnParameter.ParameterType;
-            }
+                return ReturnParameter.ParameterType; }
         }
 
         public abstract override string ToString();
@@ -278,29 +257,17 @@ namespace System.Reflection.Runtime.MethodInfos
 
         Type ITraceableTypeMember.ContainingType
         {
-            get
-            {
-                return this.RuntimeDeclaringType;
-            }
+            get { return this.RuntimeDeclaringType; }
         }
 
         string ITraceableTypeMember.MemberName
         {
-            get
-            {
-                return this.RuntimeName;
-            }
+            get { return this.RuntimeName; }
         }
 
-        internal abstract RuntimeTypeInfo RuntimeDeclaringType
-        {
-            get;
-        }
+        internal abstract RuntimeTypeInfo RuntimeDeclaringType { get; }
 
-        internal abstract string RuntimeName
-        {
-            get;
-        }
+        internal abstract string RuntimeName { get; }
 
         internal abstract RuntimeMethodInfo WithReflectedTypeSetToDeclaringType { get; }
 
@@ -311,7 +278,10 @@ namespace System.Reflection.Runtime.MethodInfos
         //
         internal abstract RuntimeTypeInfo[] RuntimeGenericArgumentsOrParameters { get; }
 
-        internal abstract RuntimeParameterInfo[] GetRuntimeParameters(RuntimeMethodInfo contextMethod, out RuntimeParameterInfo returnParameter);
+        internal abstract RuntimeParameterInfo[] GetRuntimeParameters(
+            RuntimeMethodInfo contextMethod,
+            out RuntimeParameterInfo returnParameter
+        );
 
         //
         // The non-public version of MethodInfo.GetParameters() (does not array-copy.)
@@ -325,7 +295,7 @@ namespace System.Reflection.Runtime.MethodInfos
                 {
                     RuntimeParameterInfo returnParameter;
                     parameters = _lazyParameters = GetRuntimeParameters(this, out returnParameter);
-                    _lazyReturnParameter = returnParameter;  // Opportunistically initialize the _lazyReturnParameter latch as well.
+                    _lazyReturnParameter = returnParameter; // Opportunistically initialize the _lazyReturnParameter latch as well.
                 }
                 return parameters;
             }
@@ -360,7 +330,10 @@ namespace System.Reflection.Runtime.MethodInfos
                     {
                         // The invoker is going to dereference and box (for structs) the result of the invocation
                         // on behalf of the caller. Can't box byref-like types and can't box void.
-                        if (ReturnType.GetElementType().IsByRefLike || ReturnType.GetElementType() == typeof(void))
+                        if (
+                            ReturnType.GetElementType().IsByRefLike
+                            || ReturnType.GetElementType() == typeof(void)
+                        )
                             throw new NotSupportedException();
                     }
                     methodInvoker = _lazyMethodInvoker = this.UncachedMethodInvoker;
@@ -377,11 +350,16 @@ namespace System.Reflection.Runtime.MethodInfos
         /// Common CreateDelegate worker. NOTE: If the method signature is not compatible, this method returns null rather than throwing an ArgumentException.
         /// This is needed to support the api overloads that have a "throwOnBindFailure" parameter.
         /// </summary>
-        internal Delegate CreateDelegateNoThrowOnBindFailure(RuntimeTypeInfo runtimeDelegateType, object target, bool allowClosed)
+        internal Delegate CreateDelegateNoThrowOnBindFailure(
+            RuntimeTypeInfo runtimeDelegateType,
+            object target,
+            bool allowClosed
+        )
         {
             Debug.Assert(runtimeDelegateType.IsDelegate);
 
-            ExecutionEnvironment executionEnvironment = ReflectionCoreExecution.ExecutionEnvironment;
+            ExecutionEnvironment executionEnvironment =
+                ReflectionCoreExecution.ExecutionEnvironment;
             MethodInfo invokeMethod = runtimeDelegateType.GetInvokeMethod();
 
             // Make sure the return type is assignment-compatible.
@@ -398,7 +376,8 @@ namespace System.Reflection.Runtime.MethodInfos
 
             IList<ParameterInfo> delegateParameters = invokeMethod.GetParametersNoCopy();
             IList<ParameterInfo> targetParameters = this.GetParametersNoCopy();
-            IEnumerator<ParameterInfo> delegateParameterEnumerator = delegateParameters.GetEnumerator();
+            IEnumerator<ParameterInfo> delegateParameterEnumerator =
+                delegateParameters.GetEnumerator();
             IEnumerator<ParameterInfo> targetParameterEnumerator = targetParameters.GetEnumerator();
 
             bool isStatic = this.IsStatic;
@@ -421,7 +400,14 @@ namespace System.Reflection.Runtime.MethodInfos
                     isOpen = false;
                     if (!targetParameterEnumerator.MoveNext())
                         return null;
-                    if (target != null && !IsAssignableFrom(executionEnvironment, targetParameterEnumerator.Current.ParameterType, target.GetType()))
+                    if (
+                        target != null
+                        && !IsAssignableFrom(
+                            executionEnvironment,
+                            targetParameterEnumerator.Current.ParameterType,
+                            target.GetType()
+                        )
+                    )
                         return null;
                 }
             }
@@ -433,7 +419,14 @@ namespace System.Reflection.Runtime.MethodInfos
                     isOpen = false;
                     if (!allowClosed)
                         return null;
-                    if (target != null && !IsAssignableFrom(executionEnvironment, this.DeclaringType, target.GetType()))
+                    if (
+                        target != null
+                        && !IsAssignableFrom(
+                            executionEnvironment,
+                            this.DeclaringType,
+                            target.GetType()
+                        )
+                    )
                         return null;
                 }
                 else
@@ -447,7 +440,13 @@ namespace System.Reflection.Runtime.MethodInfos
                     if (firstParameterOfMethodType.IsValueType)
                         firstParameterOfMethodType = firstParameterOfMethodType.MakeByRefType();
 
-                    if (!IsAssignableFrom(executionEnvironment, firstParameterOfMethodType, delegateParameterEnumerator.Current.ParameterType))
+                    if (
+                        !IsAssignableFrom(
+                            executionEnvironment,
+                            firstParameterOfMethodType,
+                            delegateParameterEnumerator.Current.ParameterType
+                        )
+                    )
                         return null;
                     if (target != null)
                         return null;
@@ -459,21 +458,47 @@ namespace System.Reflection.Runtime.MethodInfos
             {
                 if (!targetParameterEnumerator.MoveNext())
                     return null;
-                if (!IsAssignableFrom(executionEnvironment, targetParameterEnumerator.Current.ParameterType, delegateParameterEnumerator.Current.ParameterType))
+                if (
+                    !IsAssignableFrom(
+                        executionEnvironment,
+                        targetParameterEnumerator.Current.ParameterType,
+                        delegateParameterEnumerator.Current.ParameterType
+                    )
+                )
                     return null;
             }
             if (targetParameterEnumerator.MoveNext())
                 return null;
 
-            return CreateDelegateWithoutSignatureValidation(runtimeDelegateType, target, isStatic: isStatic, isOpen: isOpen);
+            return CreateDelegateWithoutSignatureValidation(
+                runtimeDelegateType,
+                target,
+                isStatic: isStatic,
+                isOpen: isOpen
+            );
         }
 
-        internal Delegate CreateDelegateWithoutSignatureValidation(Type delegateType, object target, bool isStatic, bool isOpen)
+        internal Delegate CreateDelegateWithoutSignatureValidation(
+            Type delegateType,
+            object target,
+            bool isStatic,
+            bool isOpen
+        )
         {
-            return MethodInvoker.CreateDelegate(delegateType.TypeHandle, target, isStatic: isStatic, isVirtual: false, isOpen: isOpen);
+            return MethodInvoker.CreateDelegate(
+                delegateType.TypeHandle,
+                target,
+                isStatic: isStatic,
+                isVirtual: false,
+                isOpen: isOpen
+            );
         }
 
-        private static bool IsAssignableFrom(ExecutionEnvironment executionEnvironment, Type dstType, Type srcType)
+        private static bool IsAssignableFrom(
+            ExecutionEnvironment executionEnvironment,
+            Type dstType,
+            Type srcType
+        )
         {
             // byref types do not have a TypeHandle so we must treat these separately.
             if (dstType.IsByRef && srcType.IsByRef)

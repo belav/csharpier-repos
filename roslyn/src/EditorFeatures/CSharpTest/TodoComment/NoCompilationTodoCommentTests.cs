@@ -27,15 +27,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TodoComment
     {
         protected override TestWorkspace CreateWorkspace(string codeWithMarker)
         {
-            var workspace = TestWorkspace.CreateWorkspace(XElement.Parse(
-$@"<Workspace>
+            var workspace = TestWorkspace.CreateWorkspace(
+                XElement.Parse(
+                    $@"<Workspace>
     <Project Language=""NoCompilation"">
         <Document>{codeWithMarker}</Document>
     </Project>
-</Workspace>"), composition: EditorTestCompositions.EditorFeatures.AddParts(
-                typeof(NoCompilationContentTypeDefinitions),
-                typeof(NoCompilationContentTypeLanguageService),
-                typeof(NoCompilationTodoCommentService)));
+</Workspace>"
+                ),
+                composition: EditorTestCompositions.EditorFeatures.AddParts(
+                    typeof(NoCompilationContentTypeDefinitions),
+                    typeof(NoCompilationContentTypeLanguageService),
+                    typeof(NoCompilationTodoCommentService)
+                )
+            );
 
             return workspace;
         }
@@ -50,18 +55,34 @@ $@"<Workspace>
     }
 
     [PartNotDiscoverable]
-    [ExportLanguageService(typeof(ITodoCommentService), language: NoCompilationConstants.LanguageName), Shared]
+    [
+        ExportLanguageService(
+            typeof(ITodoCommentService),
+            language: NoCompilationConstants.LanguageName
+        ),
+        Shared
+    ]
     internal class NoCompilationTodoCommentService : ITodoCommentService
     {
         [ImportingConstructor]
         [System.Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NoCompilationTodoCommentService()
-        {
-        }
+        public NoCompilationTodoCommentService() { }
 
-        public Task<ImmutableArray<CodeAnalysis.TodoComments.TodoComment>> GetTodoCommentsAsync(Document document, ImmutableArray<TodoCommentDescriptor> commentDescriptors, CancellationToken cancellationToken)
+        public Task<ImmutableArray<CodeAnalysis.TodoComments.TodoComment>> GetTodoCommentsAsync(
+            Document document,
+            ImmutableArray<TodoCommentDescriptor> commentDescriptors,
+            CancellationToken cancellationToken
+        )
         {
-            return Task.FromResult(ImmutableArray.Create(new CodeAnalysis.TodoComments.TodoComment(commentDescriptors.First(), "Message", 3)));
+            return Task.FromResult(
+                ImmutableArray.Create(
+                    new CodeAnalysis.TodoComments.TodoComment(
+                        commentDescriptors.First(),
+                        "Message",
+                        3
+                    )
+                )
+            );
         }
     }
 }

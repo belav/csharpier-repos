@@ -63,7 +63,12 @@ namespace System.Data
             _ignoreSchema = ignoreSchema;
         }
 
-        internal XmlDataLoader(DataTable datatable, bool IsXdr, XmlElement topNode, bool ignoreSchema)
+        internal XmlDataLoader(
+            DataTable datatable,
+            bool IsXdr,
+            XmlElement topNode,
+            bool ignoreSchema
+        )
         {
             // Initialization
             _dataSet = null;
@@ -81,14 +86,8 @@ namespace System.Data
 
         internal bool FromInference
         {
-            get
-            {
-                return _fromInference;
-            }
-            set
-            {
-                _fromInference = value;
-            }
+            get { return _fromInference; }
+            set { _fromInference = value; }
         }
 
         // after loading, all detached DataRows are attached to their tables
@@ -107,7 +106,10 @@ namespace System.Data
                     if (r != null && r.RowState == DataRowState.Detached)
                     {
                         if (parentRow != null)
-                            r.SetNestedParentRow(parentRow, /*setNonNested*/ false);
+                            r.SetNestedParentRow(
+                                parentRow, /*setNonNested*/
+                                false
+                            );
 
                         r.Table.Rows.Add(r);
                     }
@@ -139,14 +141,19 @@ namespace System.Data
             string? value = null;
 
             // don't consider whitespace
-            while (n != null && (n.NodeType == XmlNodeType.Whitespace || !IsTextLikeNode(n.NodeType)))
+            while (
+                n != null && (n.NodeType == XmlNodeType.Whitespace || !IsTextLikeNode(n.NodeType))
+            )
             {
                 n = n.NextSibling;
             }
 
             if (n != null)
             {
-                if (IsTextLikeNode(n.NodeType) && (n.NextSibling == null || !IsTextLikeNode(n.NodeType)))
+                if (
+                    IsTextLikeNode(n.NodeType)
+                    && (n.NextSibling == null || !IsTextLikeNode(n.NodeType))
+                )
                 {
                     // don't use string builder if only one text node exists
                     value = n.Value;
@@ -176,7 +183,10 @@ namespace System.Data
                 while (n.NodeType == XmlNodeType.Whitespace)
                     n = n.NextSibling!;
 
-                if (IsTextLikeNode(n.NodeType) && (n.NextSibling == null || !IsTextLikeNode(n.NodeType)))
+                if (
+                    IsTextLikeNode(n.NodeType)
+                    && (n.NextSibling == null || !IsTextLikeNode(n.NodeType))
+                )
                 {
                     // don't use string builder if only one text node exists
                     value = n.Value;
@@ -335,7 +345,8 @@ namespace System.Data
             if (_isTableLevel || (_dataSet != null && _dataSet._fTopLevelTable))
             {
                 XmlElement e = xdoc.DocumentElement;
-                DataTable? topTable = (DataTable?)_nodeToSchemaMap.GetSchemaForNode(e, FIgnoreNamespace(e));
+                DataTable? topTable = (DataTable?)
+                    _nodeToSchemaMap.GetSchemaForNode(e, FIgnoreNamespace(e));
                 if (topTable != null)
                 {
                     topRow = topTable.CreateEmptyRow(); //enzol perf
@@ -349,7 +360,6 @@ namespace System.Data
 
             LoadRows(topRow, xdoc.DocumentElement);
             AttachRows(topRow, xdoc.DocumentElement);
-
 
             if (_isTableLevel)
             {
@@ -384,7 +394,14 @@ namespace System.Data
             {
                 foundColumns[column] = column;
                 string text = GetValueForTextOnlyColumns(n);
-                if (XMLSchema.GetBooleanAttribute(rowElement, Keywords.XSI_NIL, Keywords.XSINS, false) && string.IsNullOrEmpty(text))
+                if (
+                    XMLSchema.GetBooleanAttribute(
+                        rowElement,
+                        Keywords.XSI_NIL,
+                        Keywords.XSINS,
+                        false
+                    ) && string.IsNullOrEmpty(text)
+                )
                     row[column] = DBNull.Value;
                 else
                     SetRowValueFromXmlText(row, column, text);
@@ -414,11 +431,22 @@ namespace System.Data
                         {
                             DataColumn c = (DataColumn)schema;
 
-                            if (c.Table == row.Table && c.ColumnMapping != MappingType.Attribute && foundColumns[c] == null)
+                            if (
+                                c.Table == row.Table
+                                && c.ColumnMapping != MappingType.Attribute
+                                && foundColumns[c] == null
+                            )
                             {
                                 foundColumns[c] = c;
                                 string text = GetValueForTextOnlyColumns(n);
-                                if (XMLSchema.GetBooleanAttribute(e, Keywords.XSI_NIL, Keywords.XSINS, false) && string.IsNullOrEmpty(text))
+                                if (
+                                    XMLSchema.GetBooleanAttribute(
+                                        e,
+                                        Keywords.XSI_NIL,
+                                        Keywords.XSINS,
+                                        false
+                                    ) && string.IsNullOrEmpty(text)
+                                )
                                     row[c] = DBNull.Value;
                                 else
                                     SetRowValueFromXmlText(row, c, text);
@@ -428,7 +456,6 @@ namespace System.Data
                         {
                             continue;
                         }
-
 
                         // nothing left down here, continue from element
                         n ??= e;
@@ -490,7 +517,6 @@ namespace System.Data
             row.EndEdit();
         }
 
-
         // load all data from tree structure into datarows
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         private void LoadRows(DataRow? parentRow, XmlNode parentElement)
@@ -499,9 +525,14 @@ namespace System.Data
                 return;
 
             // Skip schema node as well
-            if (parentElement.LocalName == Keywords.XSD_SCHEMA && parentElement.NamespaceURI == Keywords.XSDNS ||
-                parentElement.LocalName == Keywords.SQL_SYNC && parentElement.NamespaceURI == Keywords.UPDGNS ||
-                parentElement.LocalName == Keywords.XDR_SCHEMA && parentElement.NamespaceURI == Keywords.XDRNS)
+            if (
+                parentElement.LocalName == Keywords.XSD_SCHEMA
+                    && parentElement.NamespaceURI == Keywords.XSDNS
+                || parentElement.LocalName == Keywords.SQL_SYNC
+                    && parentElement.NamespaceURI == Keywords.UPDGNS
+                || parentElement.LocalName == Keywords.XDR_SCHEMA
+                    && parentElement.NamespaceURI == Keywords.XDRNS
+            )
                 return;
 
             for (XmlNode? n = parentElement.FirstChild; n != null; n = n.NextSibling)
@@ -583,44 +614,51 @@ namespace System.Data
         {
             _dataReader = DataTextReader.CreateReader(reader);
 
-            int entryDepth = _dataReader.Depth;                  // Store current XML element depth so we'll read
-                                                                 // correct portion of the XML and no more
-            bool fEnforce = _isTableLevel ? _dataTable!.EnforceConstraints : _dataSet!.EnforceConstraints;
+            int entryDepth = _dataReader.Depth; // Store current XML element depth so we'll read
+            // correct portion of the XML and no more
+            bool fEnforce = _isTableLevel
+                ? _dataTable!.EnforceConstraints
+                : _dataSet!.EnforceConstraints;
             // Keep constraints status for datataset/table
-            InitNameTable();                                    // Adds DataSet namespaces to reader's nametable
+            InitNameTable(); // Adds DataSet namespaces to reader's nametable
 
             // Create XML to dataset map
-            _nodeToSchemaMap ??= _isTableLevel ? new XmlToDatasetMap(_dataReader.NameTable, _dataTable!) :
-                                                 new XmlToDatasetMap(_dataReader.NameTable, _dataSet!);
+            _nodeToSchemaMap ??= _isTableLevel
+                ? new XmlToDatasetMap(_dataReader.NameTable, _dataTable!)
+                : new XmlToDatasetMap(_dataReader.NameTable, _dataSet!);
 
             if (_isTableLevel)
             {
-                _dataTable!.EnforceConstraints = false;           // Disable constraints
+                _dataTable!.EnforceConstraints = false; // Disable constraints
             }
             else
             {
-                _dataSet!.EnforceConstraints = false;             // Disable constraints
-                _dataSet._fInReadXml = true;                      // We're in ReadXml now
+                _dataSet!.EnforceConstraints = false; // Disable constraints
+                _dataSet._fInReadXml = true; // We're in ReadXml now
             }
 
             if (_topMostNode != null)
-            {                          // Do we have top node?
+            { // Do we have top node?
                 if (!_isDiffgram && !_isTableLevel)
-                {             // Not a diffgram  and not DataSet?
-                    DataTable? table = _nodeToSchemaMap.GetSchemaForNode(_topMostNode, FIgnoreNamespace(_topMostNode)) as DataTable;
+                { // Not a diffgram  and not DataSet?
+                    DataTable? table =
+                        _nodeToSchemaMap.GetSchemaForNode(
+                            _topMostNode,
+                            FIgnoreNamespace(_topMostNode)
+                        ) as DataTable;
                     // Try to match table in the dataset to this node
                     if (table != null)
-                    {                        // Got the table ?
-                        LoadTopMostTable(table);                // Load top most node
+                    { // Got the table ?
+                        LoadTopMostTable(table); // Load top most node
                     }
                 }
 
-                _topMostNode = null;                             // topMostNode is no more. Good riddance.
+                _topMostNode = null; // topMostNode is no more. Good riddance.
             }
 
             while (!_dataReader.EOF)
-            {                          // Main XML parsing loop. Check for EOF just in case.
-                if (_dataReader.Depth < entryDepth)              // Stop if we have consumed all elements allowed
+            { // Main XML parsing loop. Check for EOF just in case.
+                if (_dataReader.Depth < entryDepth) // Stop if we have consumed all elements allowed
                     break;
 
                 if (reader.NodeType != XmlNodeType.Element)
@@ -628,28 +666,34 @@ namespace System.Data
                     _dataReader.Read();
                     continue;
                 }
-                DataTable? table = _nodeToSchemaMap.GetTableForNode(_dataReader, FIgnoreNamespace(_dataReader));
+                DataTable? table = _nodeToSchemaMap.GetTableForNode(
+                    _dataReader,
+                    FIgnoreNamespace(_dataReader)
+                );
                 // Try to get table for node
                 if (table == null)
-                {                            // Read till table is found
-                    if (!ProcessXsdSchema())                    // Check for schemas...
-                        _dataReader.Read();                      // Not found? Read next element.
+                { // Read till table is found
+                    if (!ProcessXsdSchema()) // Check for schemas...
+                        _dataReader.Read(); // Not found? Read next element.
 
                     continue;
                 }
 
-                LoadTable(table, false /* isNested */);        // Here goes -- load data for this table
-                                                               // This is a root table, so it's not nested
+                LoadTable(
+                    table,
+                    false /* isNested */
+                ); // Here goes -- load data for this table
+                // This is a root table, so it's not nested
             }
 
             if (_isTableLevel)
             {
-                _dataTable!.EnforceConstraints = fEnforce;        // Restore constraints and return
+                _dataTable!.EnforceConstraints = fEnforce; // Restore constraints and return
             }
             else
             {
-                _dataSet!._fInReadXml = false;                     // We're done.
-                _dataSet.EnforceConstraints = fEnforce;          // Restore constraints and return
+                _dataSet!._fInReadXml = false; // We're done.
+                _dataSet.EnforceConstraints = fEnforce; // Restore constraints and return
             }
         }
 
@@ -685,31 +729,34 @@ namespace System.Data
 
             Debug.Assert(table != null, "Table to be loaded is null on LoadTopMostTable() entry");
             Debug.Assert(_topMostNode != null, "topMostNode is null on LoadTopMostTable() entry");
-            Debug.Assert(!_isDiffgram, "Diffgram mode is on while we have topMostNode table. This is bad.");
+            Debug.Assert(
+                !_isDiffgram,
+                "Diffgram mode is on while we have topMostNode table. This is bad."
+            );
 
             bool topNodeIsTable = _isTableLevel || (_dataSet!.DataSetName != table.TableName);
             // If table name we have matches dataset
             // name top node could be a DataSet OR a table.
             // It's a table overwise.
-            DataRow? row;                                 // Data row we're going to add to this table
+            DataRow? row; // Data row we're going to add to this table
 
-            bool matchFound = false;                            // Assume we found no matching elements
+            bool matchFound = false; // Assume we found no matching elements
 
-            int entryDepth = _dataReader!.Depth - 1;              // Store current reader depth so we know when to stop reading
-                                                                 // Adjust depth by one as we've read top most element
-                                                                 // outside this method.
-            string textNodeValue;                               // Value of a text node we might have
+            int entryDepth = _dataReader!.Depth - 1; // Store current reader depth so we know when to stop reading
+            // Adjust depth by one as we've read top most element
+            // outside this method.
+            string textNodeValue; // Value of a text node we might have
 
             Debug.Assert(entryDepth >= 0, "Wrong entry Depth for top most element.");
 
-            int entryChild = _childRowsStack!.Count;              // Memorize child stack level on entry
+            int entryChild = _childRowsStack!.Count; // Memorize child stack level on entry
 
-            DataColumn? c;                                       // Hold column here
-            DataColumnCollection collection = table.Columns;    // Hold column collectio here
+            DataColumn? c; // Hold column here
+            DataColumnCollection collection = table.Columns; // Hold column collectio here
 
             object[] foundColumns = new object[collection.Count];
             // This is the columns data we might find
-            XmlNode? n;                                          // Need this to pass by reference
+            XmlNode? n; // Need this to pass by reference
 
             foreach (XmlAttribute attr in _topMostNode.Attributes)
             {
@@ -724,7 +771,7 @@ namespace System.Data
 
                     foundColumns[c.Ordinal] = c.ConvertXmlToObject(GetInitialTextFromNodes(ref n));
                     // Get value
-                    matchFound = true;                          // and note we found a matching element
+                    matchFound = true; // and note we found a matching element
                 }
             }
 
@@ -736,25 +783,29 @@ namespace System.Data
             while (entryDepth < _dataReader.Depth)
             {
                 switch (_dataReader.NodeType)
-                {                  // Process nodes based on type
-                    case XmlNodeType.Element:                       // It's an element
-                        object? o = _nodeToSchemaMap!.GetColumnSchema(table, _dataReader, FIgnoreNamespace(_dataReader));
+                { // Process nodes based on type
+                    case XmlNodeType.Element: // It's an element
+                        object? o = _nodeToSchemaMap!.GetColumnSchema(
+                            table,
+                            _dataReader,
+                            FIgnoreNamespace(_dataReader)
+                        );
                         // Get dataset element for this XML element
-                        c = o as DataColumn;                        // Perhaps, it's a column?
+                        c = o as DataColumn; // Perhaps, it's a column?
 
                         if (c != null)
-                        {                          // Do we have matched column in this table?
-                                                   // Let's load column data
+                        { // Do we have matched column in this table?
+                            // Let's load column data
 
                             if (foundColumns[c.Ordinal] == null)
                             {
                                 // If this column was not found before
-                                LoadColumn(c, foundColumns);       // Get column value.
-                                matchFound = true;                  // Got matched row.
+                                LoadColumn(c, foundColumns); // Get column value.
+                                matchFound = true; // Got matched row.
                             }
                             else
                             {
-                                _dataReader.Read();                  // Advance to next element.
+                                _dataReader.Read(); // Advance to next element.
                             }
                         }
                         else
@@ -762,40 +813,43 @@ namespace System.Data
                             DataTable? nestedTable = o as DataTable;
                             // Perhaps, it's a nested table ?
                             if (nestedTable != null)
-                            {            // Do we have matched table in DataSet ?
-                                LoadTable(nestedTable, true /* isNested */);
+                            { // Do we have matched table in DataSet ?
+                                LoadTable(
+                                    nestedTable,
+                                    true /* isNested */
+                                );
                                 // Yes. Load nested table (recursive)
-                                matchFound = true;                  // Got matched nested table
+                                matchFound = true; // Got matched nested table
                             }
                             else if (ProcessXsdSchema())
-                            {          // Check for schema. Skip or load if found.
-                                continue;                           // Schema has been found. Process the next element
-                                                                    // we're already at (done by schema processing).
+                            { // Check for schema. Skip or load if found.
+                                continue; // Schema has been found. Process the next element
+                                // we're already at (done by schema processing).
                             }
                             else
-                            {                                  // Not a table or column in this table ?
+                            { // Not a table or column in this table ?
                                 if (!(matchFound || topNodeIsTable))
                                 {
                                     // Could top node be a DataSet?
 
 
-                                    return;                         // Assume top node is DataSet
-                                                                    // and stop top node processing
+                                    return; // Assume top node is DataSet
+                                    // and stop top node processing
                                 }
-                                _dataReader.Read();                  // Continue to the next element.
+                                _dataReader.Read(); // Continue to the next element.
                             }
                         }
                         break;
                     // Oops. Not supported
-                    case XmlNodeType.EntityReference:               // Oops. No support for Entity Reference
+                    case XmlNodeType.EntityReference: // Oops. No support for Entity Reference
                         throw ExceptionBuilder.FoundEntity();
-                    case XmlNodeType.Text:                          // It looks like a text.
-                    case XmlNodeType.Whitespace:                    // This actually could be
-                    case XmlNodeType.CDATA:                         // if we have XmlText in our table
+                    case XmlNodeType.Text: // It looks like a text.
+                    case XmlNodeType.Whitespace: // This actually could be
+                    case XmlNodeType.CDATA: // if we have XmlText in our table
                     case XmlNodeType.SignificantWhitespace:
                         textNodeValue = _dataReader.ReadString();
                         // Get text node value.
-                        c = table._xmlText;                          // Get XML Text column from our table
+                        c = table._xmlText; // Get XML Text column from our table
 
                         if (c != null && foundColumns[c.Ordinal] == null)
                         {
@@ -807,12 +861,12 @@ namespace System.Data
 
                         break;
                     default:
-                        _dataReader.Read();                  // We don't process that, skip to the next element.
+                        _dataReader.Read(); // We don't process that, skip to the next element.
                         break;
                 }
             }
 
-            _dataReader.Read();                          // Proceed to the next element.
+            _dataReader.Read(); // Proceed to the next element.
 
             // It's the time to populate row with loaded data and add it to the table we'we just read to the table
 
@@ -820,29 +874,32 @@ namespace System.Data
             {
                 // Check all columns
                 if (null == foundColumns[i])
-                {              // Got data for this column ?
-                    c = collection[i];                      // No. Get column for this index
+                { // Got data for this column ?
+                    c = collection[i]; // No. Get column for this index
 
                     if (c.AllowDBNull && c.ColumnMapping != MappingType.Hidden && !c.AutoIncrement)
                     {
-                        foundColumns[i] = DBNull.Value;     // Assign DBNull if possible
-                                                            // table.Rows.Add() below will deal
-                                                            // with default values and autoincrement
+                        foundColumns[i] = DBNull.Value; // Assign DBNull if possible
+                        // table.Rows.Add() below will deal
+                        // with default values and autoincrement
                     }
                 }
             }
 
-            row = table.Rows.AddWithColumnEvents(foundColumns);             // Create, populate and add row
+            row = table.Rows.AddWithColumnEvents(foundColumns); // Create, populate and add row
 
             while (entryChild < _childRowsStack.Count)
-            {     // Process child rows we might have
+            { // Process child rows we might have
                 DataRow childRow = _childRowsStack.Pop();
                 // Get row from the stack
                 bool unchanged = (childRow.RowState == DataRowState.Unchanged);
                 // Is data the same as before?
-                childRow.SetNestedParentRow(row, /*setNonNested*/ false);
+                childRow.SetNestedParentRow(
+                    row, /*setNonNested*/
+                    false
+                );
                 // Set parent row
-                if (unchanged)                              // Restore record if child row's unchanged
+                if (unchanged) // Restore record if child row's unchanged
                     childRow._oldRecord = childRow._newRecord;
             }
         }
@@ -869,33 +926,38 @@ namespace System.Data
 
             Debug.Assert(table != null, "Table to be loaded is null on LoadTable() entry");
 
-            DataRow? row;                                 // Data row we're going to add to this table
+            DataRow? row; // Data row we're going to add to this table
 
-            int entryDepth = _dataReader!.Depth;                  // Store current reader depth so we know when to stop reading
-            int entryChild = _childRowsStack!.Count;              // Memorize child stack level on entry
+            int entryDepth = _dataReader!.Depth; // Store current reader depth so we know when to stop reading
+            int entryChild = _childRowsStack!.Count; // Memorize child stack level on entry
 
-            DataColumn? c;                                       // Hold column here
-            DataColumnCollection collection = table.Columns;    // Hold column collectio here
+            DataColumn? c; // Hold column here
+            DataColumnCollection collection = table.Columns; // Hold column collectio here
 
             object[] foundColumns = new object[collection.Count];
             // This is the columns data we found
             // This is used to process diffgramms
 
-            int rowOrder = -1;                                  // Row to insert data to
-            string diffId = string.Empty;                       // Diffgram ID string
-            string? hasChanges = null;                           // Changes string
-            bool hasErrors = false;                             // Set this in case of problem
+            int rowOrder = -1; // Row to insert data to
+            string diffId = string.Empty; // Diffgram ID string
+            string? hasChanges = null; // Changes string
+            bool hasErrors = false; // Set this in case of problem
 
-            string textNodeValue;                               // Value of a text node we might have
+            string textNodeValue; // Value of a text node we might have
 
             // Process attributes first
 
             for (int i = _dataReader.AttributeCount - 1; i >= 0; --i)
             {
                 // Check all attributes one by one
-                _dataReader.MoveToAttribute(i);                  // Get this attribute
+                _dataReader.MoveToAttribute(i); // Get this attribute
 
-                c = _nodeToSchemaMap!.GetColumnSchema(table, _dataReader, FIgnoreNamespace(_dataReader)) as DataColumn;
+                c =
+                    _nodeToSchemaMap!.GetColumnSchema(
+                        table,
+                        _dataReader,
+                        FIgnoreNamespace(_dataReader)
+                    ) as DataColumn;
                 // Try to get column for this attribute
 
                 if ((c != null) && (c.ColumnMapping == MappingType.Attribute))
@@ -903,22 +965,27 @@ namespace System.Data
                     // Yep, it is a column mapped as attribute
                     // Get value from XML and store it in the object array
                     foundColumns[c.Ordinal] = c.ConvertXmlToObject(_dataReader.Value);
-                }                                               // Oops. No column for this element
+                } // Oops. No column for this element
 
                 if (_isDiffgram)
-                {                             // Now handle some diffgram attributes
+                { // Now handle some diffgram attributes
                     if (_dataReader.NamespaceURI == Keywords.DFFNS)
                     {
                         switch (_dataReader.LocalName)
                         {
-                            case Keywords.DIFFID:                   // Is it a diffgeam ID ?
-                                diffId = _dataReader.Value;          // Store ID
+                            case Keywords.DIFFID: // Is it a diffgeam ID ?
+                                diffId = _dataReader.Value; // Store ID
                                 break;
-                            case Keywords.HASCHANGES:               // Has changes attribute ?
-                                hasChanges = _dataReader.Value;      // Store value
+                            case Keywords.HASCHANGES: // Has changes attribute ?
+                                hasChanges = _dataReader.Value; // Store value
                                 break;
-                            case Keywords.HASERRORS:                // Has errors attribute ?
-                                hasErrors = (bool)Convert.ChangeType(_dataReader.Value, typeof(bool), CultureInfo.InvariantCulture);
+                            case Keywords.HASERRORS: // Has errors attribute ?
+                                hasErrors = (bool)
+                                    Convert.ChangeType(
+                                        _dataReader.Value,
+                                        typeof(bool),
+                                        CultureInfo.InvariantCulture
+                                    );
                                 // Store value
                                 break;
                         }
@@ -928,13 +995,22 @@ namespace System.Data
                         if (_dataReader.LocalName == Keywords.ROWORDER)
                         {
                             // Is it a row order attribute ?
-                            rowOrder = (int)Convert.ChangeType(_dataReader.Value, typeof(int), CultureInfo.InvariantCulture);
+                            rowOrder = (int)
+                                Convert.ChangeType(
+                                    _dataReader.Value,
+                                    typeof(int),
+                                    CultureInfo.InvariantCulture
+                                );
                             // Store it
                         }
-                        else if (_dataReader.LocalName.StartsWith("hidden", StringComparison.Ordinal))
+                        else if (
+                            _dataReader.LocalName.StartsWith("hidden", StringComparison.Ordinal)
+                        )
                         {
                             // Hidden column ?
-                            c = collection[XmlConvert.DecodeName(_dataReader.LocalName.Substring(6))];
+                            c = collection[
+                                XmlConvert.DecodeName(_dataReader.LocalName.Substring(6))
+                            ];
                             // Let's see if we have one.
                             // We have to decode name before we look it up
                             // We could not use XmlToDataSet map as it contains
@@ -947,7 +1023,7 @@ namespace System.Data
                         }
                     }
                 }
-            }                                                   // Done with attributes
+            } // Done with attributes
 
             // Now handle elements. This could be columns or nested tables.
 
@@ -962,17 +1038,21 @@ namespace System.Data
             {
                 // Read to the next element and see if we're inside
                 while (entryDepth < _dataReader.Depth)
-                {       // Get out as soon as we've processed all nested nodes.
+                { // Get out as soon as we've processed all nested nodes.
                     switch (_dataReader.NodeType)
-                    {              // Process nodes based on type
-                        case XmlNodeType.Element:                   // It's an element
-                            object? o = _nodeToSchemaMap!.GetColumnSchema(table, _dataReader, FIgnoreNamespace(_dataReader));
+                    { // Process nodes based on type
+                        case XmlNodeType.Element: // It's an element
+                            object? o = _nodeToSchemaMap!.GetColumnSchema(
+                                table,
+                                _dataReader,
+                                FIgnoreNamespace(_dataReader)
+                            );
                             // Get dataset element for this XML element
-                            c = o as DataColumn;                    // Perhaps, it's a column?
+                            c = o as DataColumn; // Perhaps, it's a column?
 
                             if (c != null)
-                            {                      // Do we have matched column in this table?
-                                                   // Let's load column data
+                            { // Do we have matched column in this table?
+                                // Let's load column data
                                 if (foundColumns[c.Ordinal] == null)
                                 {
                                     // If this column was not found before
@@ -981,7 +1061,7 @@ namespace System.Data
                                 }
                                 else
                                 {
-                                    _dataReader.Read();              // Advance to next element.
+                                    _dataReader.Read(); // Advance to next element.
                                 }
                             }
                             else
@@ -989,14 +1069,17 @@ namespace System.Data
                                 DataTable? nestedTable = o as DataTable;
                                 // Perhaps, it's a nested table ?
                                 if (nestedTable != null)
-                                {        // Do we have matched nested table in DataSet ?
-                                    LoadTable(nestedTable, true /* isNested */);
+                                { // Do we have matched nested table in DataSet ?
+                                    LoadTable(
+                                        nestedTable,
+                                        true /* isNested */
+                                    );
                                     // Yes. Load nested table (recursive)
-                                }                                   // Not a table nor column? Check if it's schema.
+                                } // Not a table nor column? Check if it's schema.
                                 else if (ProcessXsdSchema())
-                                {      // Check for schema. Skip or load if found.
-                                    continue;                       // Schema has been found. Process the next element
-                                                                    // we're already at (done by schema processing).
+                                { // Check for schema. Skip or load if found.
+                                    continue; // Schema has been found. Process the next element
+                                    // we're already at (done by schema processing).
                                 }
                                 else
                                 {
@@ -1005,31 +1088,37 @@ namespace System.Data
                                     // but we'll try to load it so we could keep compatibility.
                                     // We won't try to match to columns as we have no idea
                                     // which table this potential column might belong to.
-                                    DataTable? misplacedTable = _nodeToSchemaMap.GetTableForNode(_dataReader, FIgnoreNamespace(_dataReader));
+                                    DataTable? misplacedTable = _nodeToSchemaMap.GetTableForNode(
+                                        _dataReader,
+                                        FIgnoreNamespace(_dataReader)
+                                    );
                                     // Try to get table for node
 
                                     if (misplacedTable != null)
-                                    {   // Got some matching table?
-                                        LoadTable(misplacedTable, false /* isNested */);
+                                    { // Got some matching table?
+                                        LoadTable(
+                                            misplacedTable,
+                                            false /* isNested */
+                                        );
                                         // While table's XML element is nested,
                                         // the table itself is not. Load it this way.
                                     }
                                     else
                                     {
-                                        _dataReader.Read();          // Not a table? Try next element.
+                                        _dataReader.Read(); // Not a table? Try next element.
                                     }
                                 }
                             }
                             break;
-                        case XmlNodeType.EntityReference:           // Oops. No support for Entity Reference
+                        case XmlNodeType.EntityReference: // Oops. No support for Entity Reference
                             throw ExceptionBuilder.FoundEntity();
-                        case XmlNodeType.Text:                      // It looks like a text.
-                        case XmlNodeType.Whitespace:                // This actually could be
-                        case XmlNodeType.CDATA:                     // if we have XmlText in our table
+                        case XmlNodeType.Text: // It looks like a text.
+                        case XmlNodeType.Whitespace: // This actually could be
+                        case XmlNodeType.CDATA: // if we have XmlText in our table
                         case XmlNodeType.SignificantWhitespace:
                             textNodeValue = _dataReader.ReadString();
                             // Get text node value.
-                            c = table._xmlText;                      // Get XML Text column from our table
+                            c = table._xmlText; // Get XML Text column from our table
 
                             if (c != null && foundColumns[c.Ordinal] == null)
                             {
@@ -1040,40 +1129,40 @@ namespace System.Data
                             }
                             break;
                         default:
-                            _dataReader.Read();                  // We don't process that, skip to the next element.
+                            _dataReader.Read(); // We don't process that, skip to the next element.
                             break;
                     }
                 }
 
-                _dataReader.Read();                              // We're done here, proceed to the next element.
+                _dataReader.Read(); // We're done here, proceed to the next element.
             }
 
             // It's the time to populate row with loaded data and add it to the table we'we just read to the table
 
             if (_isDiffgram)
-            {                               // In case of diffgram
+            { // In case of diffgram
                 row = table.NewRow(table.NewUninitializedRecord());
                 // just create an empty row
-                row.BeginEdit();                            // and allow it's population with data
+                row.BeginEdit(); // and allow it's population with data
 
                 for (int i = foundColumns.Length - 1; i >= 0; --i)
                 {
                     // Check all columns
-                    c = collection[i];                      // Get column for this index
+                    c = collection[i]; // Get column for this index
 
                     c[row._tempRecord] = foundColumns[i] ?? DBNull.Value;
                     // Set column to loaded value of to
                     // DBNull if value is missing.
                 }
 
-                row.EndEdit();                              // Done with this row
+                row.EndEdit(); // Done with this row
 
-                table.Rows.DiffInsertAt(row, rowOrder);     // insert data to specific location
+                table.Rows.DiffInsertAt(row, rowOrder); // insert data to specific location
 
                 // And do some diff processing
                 if (hasChanges == null)
-                {                   // No changes ?
-                    row._oldRecord = row._newRecord;          // Restore old record
+                { // No changes ?
+                    row._oldRecord = row._newRecord; // Restore old record
                 }
 
                 if ((hasChanges == Keywords.MODIFIED) || hasErrors)
@@ -1087,38 +1176,45 @@ namespace System.Data
                 {
                     // Check all columns
                     if (null == foundColumns[i])
-                    {          // Got data for this column ?
-                        c = collection[i];                  // No. Get column for this index
+                    { // Got data for this column ?
+                        c = collection[i]; // No. Get column for this index
 
-                        if (c.AllowDBNull && c.ColumnMapping != MappingType.Hidden && !c.AutoIncrement)
+                        if (
+                            c.AllowDBNull
+                            && c.ColumnMapping != MappingType.Hidden
+                            && !c.AutoIncrement
+                        )
                         {
                             foundColumns[i] = DBNull.Value; // Assign DBNull if possible
-                                                            // table.Rows.Add() below will deal
-                                                            // with default values and autoincrement
+                            // table.Rows.Add() below will deal
+                            // with default values and autoincrement
                         }
                     }
                 }
 
-                row = table.Rows.AddWithColumnEvents(foundColumns);         // Create, populate and add row
+                row = table.Rows.AddWithColumnEvents(foundColumns); // Create, populate and add row
             }
 
             // Data is loaded into the row and row is added to the table at this point
 
             while (entryChild < _childRowsStack.Count)
-            {     // Process child rows we might have
+            { // Process child rows we might have
                 DataRow childRow = _childRowsStack.Pop();
                 // Get row from the stack
                 bool unchanged = (childRow.RowState == DataRowState.Unchanged);
                 // Is data the same as before?
-                childRow.SetNestedParentRow(row, /*setNonNested*/ false);
+                childRow.SetNestedParentRow(
+                    row, /*setNonNested*/
+                    false
+                );
                 // Set parent row
 
-                if (unchanged)                              // Restore record if child row's unchanged
+                if (unchanged) // Restore record if child row's unchanged
                     childRow._oldRecord = childRow._newRecord;
             }
 
-            if (isNested)                                   // Got parent ?
-                _childRowsStack.Push(row);                   // Push row to the stack
+            if (isNested) // Got parent ?
+                _childRowsStack.Push(row); // Push row to the stack
         }
 
         // Returns column value
@@ -1138,26 +1234,26 @@ namespace System.Data
             //      <Bar>BarVal</Bar>                           And not "Value" as you might think
             //  </Column>                                       This is how .NET Framework works
 
-            string text = string.Empty;                         // Column text. Assume empty string
-            string? xsiNilString = null;                         // Possible NIL attribute string
+            string text = string.Empty; // Column text. Assume empty string
+            string? xsiNilString = null; // Possible NIL attribute string
 
-            int entryDepth = _dataReader!.Depth;                  // Store depth so we won't read too much
+            int entryDepth = _dataReader!.Depth; // Store depth so we won't read too much
 
-            if (_dataReader.AttributeCount > 0)                  // If have attributes
+            if (_dataReader.AttributeCount > 0) // If have attributes
                 xsiNilString = _dataReader.GetAttribute(Keywords.XSI_NIL, Keywords.XSINS);
             // Try to get NIL attribute
             // We have to do it before we move to the next element
             if (column.IsCustomType)
-            {                          // Custom type column
-                object? columnValue = null;                    // Column value we're after. Assume no value.
+            { // Custom type column
+                object? columnValue = null; // Column value we're after. Assume no value.
 
-                string? xsiTypeString = null;                    // XSI type name from TYPE attribute
-                string? typeName = null;                    // Type name from MSD_INSTANCETYPE attribute
+                string? xsiTypeString = null; // XSI type name from TYPE attribute
+                string? typeName = null; // Type name from MSD_INSTANCETYPE attribute
 
-                XmlRootAttribute? xmlAttrib = null;              // Might need this attribute for XmlSerializer
+                XmlRootAttribute? xmlAttrib = null; // Might need this attribute for XmlSerializer
 
                 if (_dataReader.AttributeCount > 0)
-                {            // If have attributes, get attributes we'll need
+                { // If have attributes, get attributes we'll need
                     xsiTypeString = _dataReader.GetAttribute(Keywords.TYPE, Keywords.XSINS);
                     typeName = _dataReader.GetAttribute(Keywords.MSD_INSTANCETYPE, Keywords.MSDNS);
                 }
@@ -1165,34 +1261,42 @@ namespace System.Data
                 // Check if need to use XmlSerializer. We need to do that if type does not implement IXmlSerializable.
                 // We also need to do that if no polymorphism for this type allowed.
 
-                bool useXmlSerializer = !column.ImplementsIXMLSerializable &&
-                    !((column.DataType == typeof(object)) || (typeName != null) || (xsiTypeString != null));
+                bool useXmlSerializer =
+                    !column.ImplementsIXMLSerializable
+                    && !(
+                        (column.DataType == typeof(object))
+                        || (typeName != null)
+                        || (xsiTypeString != null)
+                    );
 
                 // Check if we have an attribute telling us value is null.
 
                 if ((xsiNilString != null) && XmlConvert.ToBoolean(xsiNilString))
                 {
                     if (!useXmlSerializer)
-                    {                    // See if need to set typed null.
+                    { // See if need to set typed null.
                         if (typeName != null && typeName.Length > 0)
                         {
                             // Got type name
-                            columnValue = SqlUdtStorage.GetStaticNullForUdtType(DataStorage.GetType(typeName));
+                            columnValue = SqlUdtStorage.GetStaticNullForUdtType(
+                                DataStorage.GetType(typeName)
+                            );
                         }
                     }
 
                     if (null == columnValue)
-                    {                  // If no value,
-                        columnValue = DBNull.Value;             // change to DBNull;
+                    { // If no value,
+                        columnValue = DBNull.Value; // change to DBNull;
                     }
 
-                    if (!_dataReader.IsEmptyElement)           // In case element is not empty
-                        while (_dataReader.Read() && (entryDepth < _dataReader.Depth)) ;
+                    if (!_dataReader.IsEmptyElement) // In case element is not empty
+                        while (_dataReader.Read() && (entryDepth < _dataReader.Depth))
+                            ;
                     // Read current elements
-                    _dataReader.Read();                          // And start reading next element.
+                    _dataReader.Read(); // And start reading next element.
                 }
                 else
-                {                                          // No NIL attribute. Get value
+                { // No NIL attribute. Get value
                     bool skipped = false;
 
                     if (column.Table!.DataSet != null && column.Table.DataSet._udtIsWrapped)
@@ -1202,7 +1306,7 @@ namespace System.Data
                     }
 
                     if (useXmlSerializer)
-                    {                     // Create an attribute for XmlSerializer
+                    { // Create an attribute for XmlSerializer
                         if (skipped)
                         {
                             xmlAttrib = new XmlRootAttribute(_dataReader.LocalName);
@@ -1223,34 +1327,38 @@ namespace System.Data
                     }
                 }
 
-                foundColumns[column.Ordinal] = columnValue;     // Store value
+                foundColumns[column.Ordinal] = columnValue; // Store value
             }
             else
-            {                                                  // Not a custom type.
+            { // Not a custom type.
                 if (_dataReader.Read() && entryDepth < _dataReader.Depth)
                 {
                     // Read to the next element and see if we're inside.
                     while (entryDepth < _dataReader.Depth)
                     {
                         switch (_dataReader.NodeType)
-                        {              // Process nodes based on type
-                            case XmlNodeType.Text:                      // It looks like a text. And we need it.
+                        { // Process nodes based on type
+                            case XmlNodeType.Text: // It looks like a text. And we need it.
                             case XmlNodeType.Whitespace:
                             case XmlNodeType.CDATA:
                             case XmlNodeType.SignificantWhitespace:
                                 if (0 == text.Length)
-                                {                 // In case we do not have value already
-                                    text = _dataReader.Value;            // Get value.
+                                { // In case we do not have value already
+                                    text = _dataReader.Value; // Get value.
 
                                     // See if we have other text nodes near. In most cases this loop will not be executed.
                                     StringBuilder? builder = null;
-                                    while (_dataReader.Read() && entryDepth < _dataReader.Depth && IsTextLikeNode(_dataReader.NodeType))
+                                    while (
+                                        _dataReader.Read()
+                                        && entryDepth < _dataReader.Depth
+                                        && IsTextLikeNode(_dataReader.NodeType)
+                                    )
                                     {
                                         builder ??= new StringBuilder(text);
-                                        builder.Append(_dataReader.Value);  // Concatenate other sequential text like
-                                                                            // nodes we might have. This is rare.
-                                                                            // We're using this instead of dataReader.ReadString()
-                                                                            // which would do the same thing but slower.
+                                        builder.Append(_dataReader.Value); // Concatenate other sequential text like
+                                        // nodes we might have. This is rare.
+                                        // We're using this instead of dataReader.ReadString()
+                                        // which would do the same thing but slower.
                                     }
 
                                     if (builder != null)
@@ -1260,27 +1368,31 @@ namespace System.Data
                                 }
                                 else
                                 {
-                                    _dataReader.ReadString();            // We've got column value already. Read this one and ignore it.
+                                    _dataReader.ReadString(); // We've got column value already. Read this one and ignore it.
                                 }
                                 break;
                             case XmlNodeType.Element:
                                 if (ProcessXsdSchema())
-                                {               // Check for schema. Skip or load if found.
-                                    continue;                           // Schema has been found. Process the next element
-                                                                        // we're already at (done by schema processing).
+                                { // Check for schema. Skip or load if found.
+                                    continue; // Schema has been found. Process the next element
+                                    // we're already at (done by schema processing).
                                 }
                                 else
                                 {
                                     // We've got element which is not supposed to he here.
                                     // That might be table which was misplaced.
                                     // Or it might be a column inside column (also misplaced).
-                                    object? o = _nodeToSchemaMap!.GetColumnSchema(column.Table!, _dataReader, FIgnoreNamespace(_dataReader));
+                                    object? o = _nodeToSchemaMap!.GetColumnSchema(
+                                        column.Table!,
+                                        _dataReader,
+                                        FIgnoreNamespace(_dataReader)
+                                    );
                                     // Get dataset element for this XML element
-                                    DataColumn? c = o as DataColumn;     // Perhaps, it's a column?
+                                    DataColumn? c = o as DataColumn; // Perhaps, it's a column?
 
                                     if (c != null)
-                                    {                  // Do we have matched column in this table?
-                                                       // Let's load column data
+                                    { // Do we have matched column in this table?
+                                        // Let's load column data
 
                                         if (foundColumns[c.Ordinal] == null)
                                         {
@@ -1290,7 +1402,7 @@ namespace System.Data
                                         }
                                         else
                                         {
-                                            _dataReader.Read();          // Already loaded, proceed to the next element
+                                            _dataReader.Read(); // Already loaded, proceed to the next element
                                         }
                                     }
                                     else
@@ -1300,39 +1412,49 @@ namespace System.Data
                                         if (nestedTable != null)
                                         {
                                             // Do we have matched table in DataSet ?
-                                            LoadTable(nestedTable, true /* isNested */);
+                                            LoadTable(
+                                                nestedTable,
+                                                true /* isNested */
+                                            );
                                             // Yes. Load nested table (recursive)
                                         }
                                         else
-                                        {                          // Not a nested column nor nested table.
-                                                                   // Let's try other tables in the DataSet
+                                        { // Not a nested column nor nested table.
+                                            // Let's try other tables in the DataSet
 
-                                            DataTable? misplacedTable = _nodeToSchemaMap.GetTableForNode(_dataReader, FIgnoreNamespace(_dataReader));
+                                            DataTable? misplacedTable =
+                                                _nodeToSchemaMap.GetTableForNode(
+                                                    _dataReader,
+                                                    FIgnoreNamespace(_dataReader)
+                                                );
                                             // Try to get table for node
                                             if (misplacedTable != null)
                                             {
                                                 // Got some table to match?
-                                                LoadTable(misplacedTable, false /* isNested */);
+                                                LoadTable(
+                                                    misplacedTable,
+                                                    false /* isNested */
+                                                );
                                                 // While table's XML element is nested,
                                                 // the table itself is not. Load it this way.
                                             }
                                             else
                                             {
-                                                _dataReader.Read();      // No match? Try next element
+                                                _dataReader.Read(); // No match? Try next element
                                             }
                                         }
                                     }
                                 }
                                 break;
-                            case XmlNodeType.EntityReference:           // Oops. No support for Entity Reference
+                            case XmlNodeType.EntityReference: // Oops. No support for Entity Reference
                                 throw ExceptionBuilder.FoundEntity();
                             default:
-                                _dataReader.Read();                      // We don't process that, skip to the next element.
+                                _dataReader.Read(); // We don't process that, skip to the next element.
                                 break;
                         }
                     }
 
-                    _dataReader.Read();                              // We're done here. To the next element.
+                    _dataReader.Read(); // We're done here. To the next element.
                 }
 
                 if (0 == text.Length && xsiNilString != null && XmlConvert.ToBoolean(xsiNilString))
@@ -1353,39 +1475,52 @@ namespace System.Data
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         private bool ProcessXsdSchema()
         {
-            if (((object)_dataReader!.LocalName == _XSD_SCHEMA && (object)_dataReader.NamespaceURI == _XSDNS))
+            if (
+                (
+                    (object)_dataReader!.LocalName == _XSD_SCHEMA
+                    && (object)_dataReader.NamespaceURI == _XSDNS
+                )
+            )
             {
                 // Found XSD schema
                 if (_ignoreSchema)
-                {                               // Should ignore it?
-                    _dataReader.Skip();                              // Yes, skip it
+                { // Should ignore it?
+                    _dataReader.Skip(); // Yes, skip it
                 }
                 else
-                {                                              // Have to load schema.
+                { // Have to load schema.
                     if (_isTableLevel)
-                    {                           // Loading into the DataTable ?
+                    { // Loading into the DataTable ?
                         _dataTable!.ReadXSDSchema(_dataReader); // Invoke ReadXSDSchema on a table
                         _nodeToSchemaMap = new XmlToDatasetMap(_dataReader.NameTable, _dataTable);
-                    }                                               // Rebuild XML to DataSet map with new schema.
+                    } // Rebuild XML to DataSet map with new schema.
                     else
-                    {                                          // Loading into the DataSet ?
-                        _dataSet!.ReadXSDSchema(_dataReader);   // Invoke ReadXSDSchema on a DataSet
+                    { // Loading into the DataSet ?
+                        _dataSet!.ReadXSDSchema(_dataReader); // Invoke ReadXSDSchema on a DataSet
                         _nodeToSchemaMap = new XmlToDatasetMap(_dataReader.NameTable, _dataSet);
-                    }                                               // Rebuild XML to DataSet map with new schema.
+                    } // Rebuild XML to DataSet map with new schema.
                 }
             }
-            else if (((object)_dataReader.LocalName == _XDR_SCHEMA && (object)_dataReader.NamespaceURI == _XDRNS) ||
-                    ((object)_dataReader.LocalName == _SQL_SYNC && (object)_dataReader.NamespaceURI == _UPDGNS))
+            else if (
+                (
+                    (object)_dataReader.LocalName == _XDR_SCHEMA
+                    && (object)_dataReader.NamespaceURI == _XDRNS
+                )
+                || (
+                    (object)_dataReader.LocalName == _SQL_SYNC
+                    && (object)_dataReader.NamespaceURI == _UPDGNS
+                )
+            )
             {
-                _dataReader.Skip();                                  // Skip XDR or SQL sync
+                _dataReader.Skip(); // Skip XDR or SQL sync
             }
             else
             {
-                return false;                                       // No schema found. That means reader's position
-                                                                    // is unchganged. Report that to the caller.
+                return false; // No schema found. That means reader's position
+                // is unchganged. Report that to the caller.
             }
 
-            return true;                                            // Schema found, reader's position changed.
+            return true; // Schema found, reader's position changed.
         }
     }
 }

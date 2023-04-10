@@ -6,13 +6,13 @@ using System;
 [Obsolete("Is obsolete", true)]
 class C
 {
-	public static string SS;
+    public static string SS;
 }
 
 class MainClass
 {
-    public static void Main ()
+    public static void Main()
     {
-        Console.WriteLine (C.SS);
+        Console.WriteLine(C.SS);
     }
 }

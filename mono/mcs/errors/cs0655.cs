@@ -5,10 +5,8 @@ using System;
 
 class TestAttribute : Attribute
 {
-   public decimal d;
+    public decimal d;
 }
 
-[Test (d = 44444)]
-class C
-{
-}
+[Test(d = 44444)]
+class C { }

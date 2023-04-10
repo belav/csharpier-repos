@@ -14,7 +14,12 @@ public class BCRYPT_KEY_LENGTHS_STRUCT_Tests
     [InlineData(128, 256, 64, 128)]
     [InlineData(128, 256, 64, 192)]
     [InlineData(128, 256, 64, 256)]
-    public void EnsureValidKeyLength_SuccessCases(int minLength, int maxLength, int increment, int testValue)
+    public void EnsureValidKeyLength_SuccessCases(
+        int minLength,
+        int maxLength,
+        int increment,
+        int testValue
+    )
     {
         // Arrange
         var keyLengthsStruct = new BCRYPT_KEY_LENGTHS_STRUCT
@@ -37,7 +42,12 @@ public class BCRYPT_KEY_LENGTHS_STRUCT_Tests
     [InlineData(128, 256, 64, 512)]
     [InlineData(128, 256, 64, 160)]
     [InlineData(128, 256, 64, 129)]
-    public void EnsureValidKeyLength_FailureCases(int minLength, int maxLength, int increment, int testValue)
+    public void EnsureValidKeyLength_FailureCases(
+        int minLength,
+        int maxLength,
+        int increment,
+        int testValue
+    )
     {
         // Arrange
         var keyLengthsStruct = new BCRYPT_KEY_LENGTHS_STRUCT
@@ -51,6 +61,12 @@ public class BCRYPT_KEY_LENGTHS_STRUCT_Tests
         ExceptionAssert.ThrowsArgumentOutOfRange(
             () => keyLengthsStruct.EnsureValidKeyLength((uint)testValue),
             paramName: "keyLengthInBits",
-            exceptionMessage: Resources.FormatBCRYPT_KEY_LENGTHS_STRUCT_InvalidKeyLength(testValue, minLength, maxLength, increment));
+            exceptionMessage: Resources.FormatBCRYPT_KEY_LENGTHS_STRUCT_InvalidKeyLength(
+                testValue,
+                minLength,
+                maxLength,
+                increment
+            )
+        );
     }
 }

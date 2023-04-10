@@ -27,36 +27,42 @@ using System;
 
 namespace System.Windows.Forms
 {
-	public class NumericUpDownAcceleration
-	{
-		#region Fields
-		private decimal increment;
-		private int seconds;
-		#endregion
+    public class NumericUpDownAcceleration
+    {
+        #region Fields
+        private decimal increment;
+        private int seconds;
+        #endregion
 
-		#region Properties
-		public decimal Increment {
-			get { return increment;}
-			set { increment = value;}
-		}
+        #region Properties
+        public decimal Increment
+        {
+            get { return increment; }
+            set { increment = value; }
+        }
 
-		public int Seconds {
-			get { return seconds;}
-			set { seconds = value;}
-		}
-		#endregion
+        public int Seconds
+        {
+            get { return seconds; }
+            set { seconds = value; }
+        }
+        #endregion
 
-		#region Constructor
-		public NumericUpDownAcceleration (int seconds, decimal increment)
-		{
-			if (seconds < 0)
-				throw new ArgumentOutOfRangeException ("Invalid seconds value. The seconds value must be equal or greater than zero.");
-			if (increment < 0)
-				throw new ArgumentOutOfRangeException ("Invalid increment value. The increment value must be equal or greater than zero.");
-	
-			this.increment = increment;
-			this.seconds = seconds;
-		}
-		#endregion
-	}
+        #region Constructor
+        public NumericUpDownAcceleration(int seconds, decimal increment)
+        {
+            if (seconds < 0)
+                throw new ArgumentOutOfRangeException(
+                    "Invalid seconds value. The seconds value must be equal or greater than zero."
+                );
+            if (increment < 0)
+                throw new ArgumentOutOfRangeException(
+                    "Invalid increment value. The increment value must be equal or greater than zero."
+                );
+
+            this.increment = increment;
+            this.seconds = seconds;
+        }
+        #endregion
+    }
 }

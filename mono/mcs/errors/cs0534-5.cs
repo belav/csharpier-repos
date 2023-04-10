@@ -3,16 +3,12 @@
 
 public abstract class A
 {
-	public abstract void M (int i);
+    public abstract void M(int i);
 }
 
 internal class C0 : A
 {
-	public override void M (int i)
-	{
-	}
+    public override void M(int i) { }
 }
 
-internal class C1 : A
-{
-}
+internal class C1 : A { }

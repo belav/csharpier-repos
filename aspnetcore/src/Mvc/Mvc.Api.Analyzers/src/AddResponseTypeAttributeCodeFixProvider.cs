@@ -13,9 +13,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 [Shared]
 public class AddResponseTypeAttributeCodeFixProvider : CodeFixProvider
 {
-    public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(
-        ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id,
-        ApiDiagnosticDescriptors.API1001_ActionReturnsUndocumentedSuccessResult.Id);
+    public override ImmutableArray<string> FixableDiagnosticIds =>
+        ImmutableArray.Create(
+            ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id,
+            ApiDiagnosticDescriptors.API1001_ActionReturnsUndocumentedSuccessResult.Id
+        );
 
     public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 

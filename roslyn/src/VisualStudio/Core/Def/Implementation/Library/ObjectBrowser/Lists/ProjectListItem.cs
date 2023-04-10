@@ -29,7 +29,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                 case LanguageNames.VisualBasic:
                     return StandardGlyphGroup.GlyphVBProject;
                 default:
-                    throw new InvalidOperationException("Unsupported language: " + project.Language);
+                    throw new InvalidOperationException(
+                        "Unsupported language: " + project.Language
+                    );
             }
         }
 

@@ -3,14 +3,10 @@
 
 class Foo
 {
-	protected internal virtual void X ()
-	{
-	}
+    protected internal virtual void X() { }
 }
 
 class Bar : Foo
 {
-	protected override void X ()
-	{
-	}
+    protected override void X() { }
 }

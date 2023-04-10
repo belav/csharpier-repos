@@ -14,10 +14,24 @@ namespace ILCompiler
     {
         private readonly bool _supportsLazyCctors;
 
-        public PreinitializationManager(TypeSystemContext context, CompilationModuleGroup compilationGroup, ILProvider ilprovider, TypePreinit.TypePreinitializationPolicy policy)
+        public PreinitializationManager(
+            TypeSystemContext context,
+            CompilationModuleGroup compilationGroup,
+            ILProvider ilprovider,
+            TypePreinit.TypePreinitializationPolicy policy
+        )
         {
-            _supportsLazyCctors = context.SystemModule.GetType("System.Runtime.CompilerServices", "ClassConstructorRunner", throwIfNotFound: false) != null;
-            _preinitHashTable = new PreinitializationInfoHashtable(compilationGroup, ilprovider, policy);
+            _supportsLazyCctors =
+                context.SystemModule.GetType(
+                    "System.Runtime.CompilerServices",
+                    "ClassConstructorRunner",
+                    throwIfNotFound: false
+                ) != null;
+            _preinitHashTable = new PreinitializationInfoHashtable(
+                compilationGroup,
+                ilprovider,
+                policy
+            );
         }
 
         /// <summary>
@@ -74,8 +88,11 @@ namespace ILCompiler
         private static bool HasEagerConstructorAttribute(TypeDesc type)
         {
             MetadataType mdType = type as MetadataType;
-            return mdType != null &&
-                mdType.HasCustomAttribute("System.Runtime.CompilerServices", "EagerStaticClassConstructionAttribute");
+            return mdType != null
+                && mdType.HasCustomAttribute(
+                    "System.Runtime.CompilerServices",
+                    "EagerStaticClassConstructionAttribute"
+                );
         }
 
         public bool IsPreinitialized(MetadataType type)
@@ -104,7 +121,12 @@ namespace ILCompiler
 
             if (logger.IsVerbose)
             {
-                foreach (var item in LockFreeReaderHashtable<MetadataType, TypePreinit.PreinitializationInfo>.Enumerator.Get(_preinitHashTable))
+                foreach (
+                    var item in LockFreeReaderHashtable<
+                        MetadataType,
+                        TypePreinit.PreinitializationInfo
+                    >.Enumerator.Get(_preinitHashTable)
+                )
                 {
                     // Canonical types are not actual types. They represent the pessimized version of all types that share the form.
                     if (item.Type.IsCanonicalSubtype(CanonicalFormKind.Any))
@@ -118,11 +140,15 @@ namespace ILCompiler
                     }
                     else
                     {
-                        logger.LogMessage($"Could not preinitialize '{item.Type}': {item.FailureReason}");
+                        logger.LogMessage(
+                            $"Could not preinitialize '{item.Type}': {item.FailureReason}"
+                        );
                     }
                 }
 
-                logger.LogMessage($"Preinitialized {totalPreinitializedTypes} types out of {totalEligibleTypes}.");
+                logger.LogMessage(
+                    $"Preinitialized {totalPreinitializedTypes} types out of {totalEligibleTypes}."
+                );
             }
         }
 
@@ -131,37 +157,63 @@ namespace ILCompiler
             return _preinitHashTable.GetOrCreateValue(type);
         }
 
-        private sealed class PreinitializationInfoHashtable : LockFreeReaderHashtable<MetadataType, TypePreinit.PreinitializationInfo>
+        private sealed class PreinitializationInfoHashtable
+            : LockFreeReaderHashtable<MetadataType, TypePreinit.PreinitializationInfo>
         {
             private readonly CompilationModuleGroup _compilationGroup;
             private readonly ILProvider _ilProvider;
             internal readonly TypePreinit.TypePreinitializationPolicy _policy;
 
-            public PreinitializationInfoHashtable(CompilationModuleGroup compilationGroup, ILProvider ilProvider, TypePreinit.TypePreinitializationPolicy policy)
+            public PreinitializationInfoHashtable(
+                CompilationModuleGroup compilationGroup,
+                ILProvider ilProvider,
+                TypePreinit.TypePreinitializationPolicy policy
+            )
             {
                 _compilationGroup = compilationGroup;
                 _ilProvider = ilProvider;
                 _policy = policy;
             }
 
-            protected override bool CompareKeyToValue(MetadataType key, TypePreinit.PreinitializationInfo value) => key == value.Type;
-            protected override bool CompareValueToValue(TypePreinit.PreinitializationInfo value1, TypePreinit.PreinitializationInfo value2) => value1.Type == value2.Type;
-            protected override int GetKeyHashCode(MetadataType key) => key.GetHashCode();
-            protected override int GetValueHashCode(TypePreinit.PreinitializationInfo value) => value.Type.GetHashCode();
+            protected override bool CompareKeyToValue(
+                MetadataType key,
+                TypePreinit.PreinitializationInfo value
+            ) => key == value.Type;
 
-            protected override TypePreinit.PreinitializationInfo CreateValueFromKey(MetadataType key)
+            protected override bool CompareValueToValue(
+                TypePreinit.PreinitializationInfo value1,
+                TypePreinit.PreinitializationInfo value2
+            ) => value1.Type == value2.Type;
+
+            protected override int GetKeyHashCode(MetadataType key) => key.GetHashCode();
+
+            protected override int GetValueHashCode(TypePreinit.PreinitializationInfo value) =>
+                value.Type.GetHashCode();
+
+            protected override TypePreinit.PreinitializationInfo CreateValueFromKey(
+                MetadataType key
+            )
             {
                 var info = TypePreinit.ScanType(_compilationGroup, _ilProvider, _policy, key);
 
                 // We either successfully preinitialized or
                 // the type doesn't have a canonical form or
                 // the policy doesn't allow treating canonical forms of this type as preinitialized
-                Debug.Assert(info.IsPreinitialized ||
-                    (key.ConvertToCanonForm(CanonicalFormKind.Specific) is DefType canonType && (key == canonType || !_policy.CanPreinitializeAllConcreteFormsForCanonForm(canonType))));
+                Debug.Assert(
+                    info.IsPreinitialized
+                        || (
+                            key.ConvertToCanonForm(CanonicalFormKind.Specific) is DefType canonType
+                            && (
+                                key == canonType
+                                || !_policy.CanPreinitializeAllConcreteFormsForCanonForm(canonType)
+                            )
+                        )
+                );
 
                 return info;
             }
         }
+
         private PreinitializationInfoHashtable _preinitHashTable;
     }
 }

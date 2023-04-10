@@ -15,9 +15,7 @@ namespace System.ServiceModel.Dispatcher
     abstract class HeaderFilter : MessageFilter
     {
         protected HeaderFilter()
-            : base()
-        {
-        }
+            : base() { }
 
         public override bool Match(MessageBuffer buffer)
         {

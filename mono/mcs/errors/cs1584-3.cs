@@ -5,6 +5,4 @@
 using System;
 
 /// <see cref="." />
-public class Test
-{
-}
+public class Test { }
