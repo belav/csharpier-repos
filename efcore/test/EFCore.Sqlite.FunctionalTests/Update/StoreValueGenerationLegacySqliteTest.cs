@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 #nullable enable
 
 // Old Sqlite versions don't support the RETURNING clause, so we use the INSERT/UPDATE+SELECT behavior for fetching back database-

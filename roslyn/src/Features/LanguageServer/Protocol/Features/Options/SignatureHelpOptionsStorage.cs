@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.SignatureHelp;
 
-
 internal static class SignatureHelpOptionsStorage
 {
     public static SignatureHelpOptions GetSignatureHelpOptions(

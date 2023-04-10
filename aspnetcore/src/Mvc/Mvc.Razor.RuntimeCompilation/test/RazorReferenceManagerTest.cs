@@ -7,7 +7,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 public class RazorReferenceManagerTest
 {
     private static readonly string ApplicationPartReferencePath = "some-path";

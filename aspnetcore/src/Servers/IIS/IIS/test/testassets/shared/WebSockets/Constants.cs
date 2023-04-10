@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 public static class Constants
 {
     public static class Headers

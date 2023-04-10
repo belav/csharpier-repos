@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Creates a new instance of a persistence store for roles.
 /// </summary>

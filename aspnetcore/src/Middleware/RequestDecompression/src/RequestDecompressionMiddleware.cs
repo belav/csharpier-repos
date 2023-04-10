@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.RequestDecompression;
 
-
 /// <summary>
 /// Enables HTTP request decompression.
 /// </summary>

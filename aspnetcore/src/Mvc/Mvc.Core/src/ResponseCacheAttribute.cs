@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Specifies the parameters necessary for setting appropriate headers in response caching.
 /// </summary>

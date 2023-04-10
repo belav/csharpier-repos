@@ -9,7 +9,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.Configuration.KeyPerFile;
 
-
 /// <summary>
 /// A <see cref="ConfigurationProvider"/> that uses a directory's files as configuration key/values.
 /// </summary>

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-
 internal class DefaultCodeRenderingContext : CodeRenderingContext
 {
     private readonly Stack<IntermediateNode> _ancestors;

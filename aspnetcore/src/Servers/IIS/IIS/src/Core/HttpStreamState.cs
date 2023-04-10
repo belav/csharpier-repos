@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-
 enum HttpStreamState
 {
     Open,

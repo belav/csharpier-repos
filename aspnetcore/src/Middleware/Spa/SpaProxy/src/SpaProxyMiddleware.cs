@@ -11,7 +11,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.SpaProxy;
 
-
 /// <summary>
 /// Middleware to display a page while the SPA proxy is launching and redirect to the proxy url once the proxy is
 /// ready or we have given up trying to start it.

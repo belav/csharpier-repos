@@ -12,7 +12,6 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.NavigateTo;
 
-
 internal sealed partial class RoslynSearchItemsSourceProvider
 {
     /// <summary>

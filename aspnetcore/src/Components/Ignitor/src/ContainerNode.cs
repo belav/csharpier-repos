@@ -7,7 +7,6 @@ using System.Collections.Generic;
 #nullable enable
 namespace Ignitor;
 
-
 public abstract class ContainerNode : Node
 {
     private readonly List<Node> _children;

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorParserOptionsBuilder
 {
     public virtual RazorConfiguration Configuration => null;

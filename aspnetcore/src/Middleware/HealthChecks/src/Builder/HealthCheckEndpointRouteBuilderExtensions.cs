@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Provides extension methods for <see cref="IEndpointRouteBuilder"/> to add health checks.
 /// </summary>

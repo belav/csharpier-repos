@@ -10,7 +10,6 @@ using System.Runtime.CompilerServices;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public class InternalEntryEntrySubscriberTest
 {
     [ConditionalTheory]

@@ -7,7 +7,6 @@ using Microsoft.JSInterop.Implementation;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
-
 internal sealed class JSObjectReferenceJsonConverter : JsonConverter<IJSObjectReference>
 {
     private readonly JSRuntime _jsRuntime;

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 /// <summary>
 /// A tag helper for generating client parameters for a given oauth/openid client as data attributes.
 /// </summary>

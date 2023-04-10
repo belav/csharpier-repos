@@ -8,7 +8,6 @@ using System.Text;
 
 namespace Microsoft.CodeAnalysis.Host;
 
-
 internal interface IWorkspaceTestLogger : IWorkspaceService
 {
     public void Log(string message);

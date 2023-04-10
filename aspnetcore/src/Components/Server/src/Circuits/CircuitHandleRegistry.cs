@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 internal sealed class CircuitHandleRegistry : ICircuitHandleRegistry
 {
     public CircuitHandle GetCircuitHandle(

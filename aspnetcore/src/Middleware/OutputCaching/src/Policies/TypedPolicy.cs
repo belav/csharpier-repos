@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.OutputCaching.Policies;
 
-
 /// <summary>
 /// A type base policy.
 /// </summary>

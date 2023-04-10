@@ -5,7 +5,6 @@ using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
-
 /// <summary>
 ///     Detects the exceptions caused by SQL Server transient failures.
 /// </summary>

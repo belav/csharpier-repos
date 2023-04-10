@@ -8,7 +8,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Displays the specified content inside the specified layout and any further
 /// nested layouts.

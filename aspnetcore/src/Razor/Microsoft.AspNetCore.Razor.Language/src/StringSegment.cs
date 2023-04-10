@@ -8,7 +8,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor;
 
-
 /// <summary>
 /// An optimized representation of a substring.
 /// <p>

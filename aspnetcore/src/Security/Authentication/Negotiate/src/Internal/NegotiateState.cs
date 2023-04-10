@@ -8,7 +8,6 @@ using System.Security.Principal;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 internal sealed class NegotiateState : INegotiateState
 {
     private static readonly NegotiateAuthenticationServerOptions _serverOptions = new();

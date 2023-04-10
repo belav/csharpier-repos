@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 internal interface ISystemDateTime
 {
     /// <summary>

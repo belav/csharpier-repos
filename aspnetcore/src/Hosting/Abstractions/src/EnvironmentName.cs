@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 /// <summary>
 /// Commonly used environment names.
 /// </summary>

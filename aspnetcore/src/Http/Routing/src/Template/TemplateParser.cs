@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
-
 /// <summary>
 /// Provides methods for parsing route template strings.
 /// </summary>

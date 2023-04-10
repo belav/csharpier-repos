@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal sealed class ThrowingWasUpgradedWriteOnlyStream : WriteOnlyStream
 {
     public override bool CanSeek => false;

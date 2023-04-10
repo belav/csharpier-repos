@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Update.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 public class MigrationCommandListBuilderTest
 {
     [ConditionalTheory]

@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 public class ApiResponseTypeProviderTest
 {
     [Fact]

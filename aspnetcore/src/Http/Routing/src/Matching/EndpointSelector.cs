@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 /// <summary>
 /// A service that is responsible for the final <see cref="Endpoint"/> selection
 /// decision. To use a custom <see cref="EndpointSelector"/> register an implementation

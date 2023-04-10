@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
-
 /// <summary>
 /// A descriptor for model bound properties of a controller.
 /// </summary>

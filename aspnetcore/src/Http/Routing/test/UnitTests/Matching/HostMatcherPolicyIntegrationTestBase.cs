@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 // End-to-end tests for the host matching functionality
 public abstract class HostMatcherPolicyIntegrationTestBase
 {

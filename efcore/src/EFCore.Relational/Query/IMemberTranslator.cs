@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         A SQL translator for LINQ <see cref="MemberExpression" /> expression.

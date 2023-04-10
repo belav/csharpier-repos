@@ -5,7 +5,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 /// <summary>
 /// Options for the <see cref="W3CLogger"/>.
 /// </summary>

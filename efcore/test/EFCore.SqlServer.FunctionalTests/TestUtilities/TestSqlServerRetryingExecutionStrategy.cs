@@ -5,7 +5,6 @@ using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestSqlServerRetryingExecutionStrategy : SqlServerRetryingExecutionStrategy
 {
     private const bool ErrorNumberDebugMode = false;

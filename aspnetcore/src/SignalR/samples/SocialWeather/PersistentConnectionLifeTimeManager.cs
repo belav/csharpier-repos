@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http.Connections;
 
 namespace SocialWeather;
 
-
 public class PersistentConnectionLifeTimeManager
 {
     private readonly FormatterResolver _formatterResolver;

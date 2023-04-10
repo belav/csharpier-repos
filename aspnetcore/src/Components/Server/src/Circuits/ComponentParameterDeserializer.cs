@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
-
 internal sealed partial class ComponentParameterDeserializer
 {
     private readonly ILogger<ComponentParameterDeserializer> _logger;

@@ -17,7 +17,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Options;
 
-
 internal abstract class VisualStudioOptionStorage
 {
     internal sealed class RoamingProfileStorage : VisualStudioOptionStorage

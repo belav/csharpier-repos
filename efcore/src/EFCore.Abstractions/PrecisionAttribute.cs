@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Configures the precision of data that is allowed in this property.
 ///     For example, if the property is a <see cref="decimal" />

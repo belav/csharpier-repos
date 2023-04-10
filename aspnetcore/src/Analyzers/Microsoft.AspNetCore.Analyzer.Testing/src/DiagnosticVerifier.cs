@@ -19,7 +19,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Analyzer.Testing;
 
-
 /// <summary>
 /// Superclass of all Unit Tests for DiagnosticAnalyzers
 /// </summary>

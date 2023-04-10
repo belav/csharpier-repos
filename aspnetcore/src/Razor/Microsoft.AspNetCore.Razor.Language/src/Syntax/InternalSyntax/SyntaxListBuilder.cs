@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
-
 internal class SyntaxListBuilder
 {
     private ArrayElement<GreenNode>[] _nodes;

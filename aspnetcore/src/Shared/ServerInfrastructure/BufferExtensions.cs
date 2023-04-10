@@ -11,7 +11,6 @@ using System.Text;
 
 namespace System.Buffers;
 
-
 internal static class BufferExtensions
 {
     private const int _maxULongByteLength = 20;

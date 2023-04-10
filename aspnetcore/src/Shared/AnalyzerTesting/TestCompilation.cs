@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
-
 internal sealed class TestCompilation
 {
     public static Compilation Create(string source)

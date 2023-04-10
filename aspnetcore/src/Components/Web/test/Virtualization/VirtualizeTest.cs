@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.Virtualization;
 
-
 public class VirtualizeTest
 {
     [Fact]

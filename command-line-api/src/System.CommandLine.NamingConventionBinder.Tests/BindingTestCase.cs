@@ -3,7 +3,6 @@
 
 namespace System.CommandLine.NamingConventionBinder.Tests;
 
-
 public class BindingTestCase
 {
     private readonly Action<object> _assertBoundValue;

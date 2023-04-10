@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 /// <summary>
 /// Interface so that adapters provide their relevant values to error messages.
 /// </summary>

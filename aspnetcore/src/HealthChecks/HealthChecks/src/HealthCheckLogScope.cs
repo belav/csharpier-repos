@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 internal sealed class HealthCheckLogScope : IReadOnlyList<KeyValuePair<string, object>>
 {
     public string HealthCheckName { get; }

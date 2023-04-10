@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
-
 /// <summary>
 /// Determines how an HTML attribute value appears in markup.
 /// </summary>

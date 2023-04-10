@@ -20,7 +20,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
-
 public class MapConnectionHandlerTests
 {
     private readonly ITestOutputHelper _output;

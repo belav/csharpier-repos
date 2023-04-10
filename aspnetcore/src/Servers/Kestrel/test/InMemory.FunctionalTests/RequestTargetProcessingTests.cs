@@ -12,7 +12,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
-
 public class RequestTargetProcessingTests : LoggedTest
 {
     [Fact]

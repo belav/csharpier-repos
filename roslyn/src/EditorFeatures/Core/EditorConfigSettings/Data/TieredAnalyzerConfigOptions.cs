@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
 
-
 internal sealed class TieredAnalyzerConfigOptions
 {
     public readonly AnalyzerConfigOptions EditorConfigOptions;

@@ -6,7 +6,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class IntegerDecoderBenchmark
 {
     private const int Iterations = 50_000;

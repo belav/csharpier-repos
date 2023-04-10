@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Microsoft.Extensions.StackTrace.Sources;
 
-
 /// <summary>
 /// Contains the source code where the exception occurred.
 /// </summary>

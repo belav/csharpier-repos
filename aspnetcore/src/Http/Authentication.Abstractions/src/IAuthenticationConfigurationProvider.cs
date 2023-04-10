@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Provides an interface for implmenting a construct that provides
 /// access to authentication-related configuration sections.

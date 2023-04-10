@@ -20,7 +20,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Session;
 
-
 public class SessionTests
 {
     [Fact]

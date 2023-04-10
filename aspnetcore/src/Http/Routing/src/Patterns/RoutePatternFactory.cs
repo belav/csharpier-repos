@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
-
 /// <summary>
 /// Contains factory methods for creating <see cref="RoutePattern"/> and related types.
 /// Use <see cref="Parse(string)"/> to parse a route pattern in

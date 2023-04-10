@@ -5,7 +5,6 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// A builder used to register health checks.
 /// </summary>

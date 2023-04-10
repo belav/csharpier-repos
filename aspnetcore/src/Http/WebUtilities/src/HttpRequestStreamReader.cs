@@ -8,7 +8,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 /// <summary>
 /// A <see cref="TextReader"/> to read the HTTP request stream.
 /// </summary>

@@ -11,7 +11,6 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.AspNetCore.Routing.Tree;
 
-
 /// <summary>
 /// Builder for <see cref="TreeRouter"/> instances.
 /// </summary>

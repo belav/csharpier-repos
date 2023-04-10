@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
-
 /// <summary>
 /// Represents a segment of a route template.
 /// </summary>

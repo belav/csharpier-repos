@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.CookiePolicy;
 
-
 /// <summary>
 /// Describes the HttpOnly behavior for cookies.
 /// </summary>

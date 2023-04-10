@@ -7,7 +7,6 @@ using System.Transactions;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class ExecutionStrategyTest : IDisposable
 {
     private readonly DbContext Context;

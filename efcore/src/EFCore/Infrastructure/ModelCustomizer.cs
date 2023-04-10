@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     <para>
 ///         Builds the model for a given context. This implementation builds the model by calling

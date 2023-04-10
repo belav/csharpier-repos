@@ -7,7 +7,6 @@ using Xunit.Abstractions;
 
 namespace Templates.Test;
 
-
 public class MvcTemplateTest : LoggedTest
 {
     public MvcTemplateTest(ProjectFactoryFixture projectFactory)

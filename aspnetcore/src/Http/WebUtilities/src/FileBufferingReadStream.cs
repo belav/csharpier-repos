@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 /// <summary>
 /// A Stream that wraps another stream and enables rewinding by buffering the content as it is read.
 /// The content is buffered in memory up to a certain size and then spooled to a temp file on disk.

@@ -23,7 +23,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 public partial class TestServer : IDisposable
 {
     private const string InProcessHandlerDll = "aspnetcorev2_inprocess.dll";

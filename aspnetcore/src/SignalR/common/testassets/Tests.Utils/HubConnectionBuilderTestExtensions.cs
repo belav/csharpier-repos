@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
-
 public static class HubConnectionBuilderTestExtensions
 {
     // Tests want to override the built in LoggerFactory, it internally calls AddLogging

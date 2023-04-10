@@ -3,7 +3,6 @@
 
 namespace Microsoft.JSInterop;
 
-
 /// <summary>
 /// Represents errors that occur during an interop call from .NET to JavaScript.
 /// </summary>

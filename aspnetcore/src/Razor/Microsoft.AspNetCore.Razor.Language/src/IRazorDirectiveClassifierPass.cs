@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public interface IRazorDirectiveClassifierPass : IRazorEngineFeature
 {
     int Order { get; }

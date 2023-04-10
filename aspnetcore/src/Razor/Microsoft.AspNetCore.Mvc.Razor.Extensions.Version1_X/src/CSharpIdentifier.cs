@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
-
 internal static class CSharpIdentifier
 {
     private const string CshtmlExtension = ".cshtml";

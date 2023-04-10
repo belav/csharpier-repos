@@ -7,7 +7,6 @@ using Microsoft.Build.Evaluation;
 
 namespace Microsoft.DotNet.OpenApi;
 
-
 public static class ProjectExtensions
 {
     public static void AddElementWithAttributes(

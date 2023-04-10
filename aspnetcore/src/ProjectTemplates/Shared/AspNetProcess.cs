@@ -23,7 +23,6 @@ using Xunit.Abstractions;
 
 namespace Templates.Test.Helpers;
 
-
 [DebuggerDisplay("{ToString(),nq}")]
 public class AspNetProcess : IDisposable
 {

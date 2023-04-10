@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-
 public class FiltersInheritanceBulkUpdatesSqlServerTest
     : FiltersInheritanceBulkUpdatesTestBase<FiltersInheritanceBulkUpdatesSqlServerFixture>
 {

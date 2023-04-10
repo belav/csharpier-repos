@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels;
 
-
 public class SnapshotMonsterContext
     : MonsterContext<
         SnapshotMonsterContext.Customer,

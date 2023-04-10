@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Provides validation services for user classes.
 /// </summary>

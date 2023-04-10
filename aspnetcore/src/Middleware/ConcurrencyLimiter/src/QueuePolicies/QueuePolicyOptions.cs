@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 
-
 /// <summary>
 /// Specifies options for the <see cref="IQueuePolicy"/>
 /// </summary>

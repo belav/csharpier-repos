@@ -17,7 +17,6 @@ using MBU = Microsoft.Build.Utilities;
 
 namespace Microsoft.WebAssembly.Build.Tasks;
 
-
 public class GetChromeVersions : MBU.Task
 {
     private const string s_allJsonUrl = "http://omahaproxy.appspot.com/all.json";

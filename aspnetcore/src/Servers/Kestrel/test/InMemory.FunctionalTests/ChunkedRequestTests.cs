@@ -19,7 +19,6 @@ using BadHttpRequestException = Microsoft.AspNetCore.Server.Kestrel.Core.BadHttp
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
-
 public class ChunkedRequestTests : LoggedTest
 {
     private async Task App(HttpContext httpContext)

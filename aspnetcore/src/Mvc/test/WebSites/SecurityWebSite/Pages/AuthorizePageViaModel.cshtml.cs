@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SecurityWebSite;
 
-
 [Authorize("RequireClaimB")]
 public class AuthorizePageViaModel : PageModel
 {

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 internal sealed class WebEventData
 {
     // This class represents the second half of parsing incoming event data,

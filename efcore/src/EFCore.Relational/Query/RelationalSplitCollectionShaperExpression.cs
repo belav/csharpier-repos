@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         An expression that represents creation of a collection during split query for relational provider in

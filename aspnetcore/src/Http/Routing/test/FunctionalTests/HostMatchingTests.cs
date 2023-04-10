@@ -7,7 +7,6 @@ using RoutingWebSite;
 
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
-
 public class HostMatchingTests : IClassFixture<RoutingTestFixture<UseEndpointRoutingStartup>>
 {
     private readonly RoutingTestFixture<UseEndpointRoutingStartup> _fixture;

@@ -22,7 +22,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 internal static class TestContextFactory
 {
     public static ServiceContext CreateServiceContext(

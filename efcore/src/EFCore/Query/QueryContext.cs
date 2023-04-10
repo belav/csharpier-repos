@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         The principal data structure used by a compiled query during execution.

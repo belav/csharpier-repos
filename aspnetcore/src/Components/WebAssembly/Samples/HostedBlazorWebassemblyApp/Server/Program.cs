@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace HostedBlazorWebassemblyApp.Server;
 
-
 public class Program
 {
     public static void Main(string[] args)

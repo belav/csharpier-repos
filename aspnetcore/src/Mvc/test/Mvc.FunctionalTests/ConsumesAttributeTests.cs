@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class ConsumesAttributeTests
     : ConsumesAttributeTestsBase<BasicWebSite.StartupWithoutEndpointRouting>
 {

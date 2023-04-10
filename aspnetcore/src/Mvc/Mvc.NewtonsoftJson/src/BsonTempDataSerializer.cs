@@ -13,7 +13,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
-
 internal sealed class BsonTempDataSerializer : TempDataSerializer
 {
     private readonly JsonSerializer _jsonSerializer = JsonSerializer.Create(

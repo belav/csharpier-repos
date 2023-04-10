@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 /// <summary>
 /// Represents the result of trying to provision an access token.
 /// </summary>

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
-
 /// <summary>
 /// Options that control how an <see cref="IKeyManager"/> should behave.
 /// </summary>

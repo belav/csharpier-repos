@@ -7,7 +7,6 @@ using Interop = Microsoft.AspNetCore.Components.Web.BrowserNavigationManagerInte
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
-
 internal sealed class WebAssemblyNavigationInterception : INavigationInterception
 {
     public static readonly WebAssemblyNavigationInterception Instance =

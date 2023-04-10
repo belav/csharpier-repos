@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
-
 internal static class RenderTreeDiffBuilder
 {
     enum DiffAction

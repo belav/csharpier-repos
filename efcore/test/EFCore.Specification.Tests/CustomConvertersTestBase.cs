@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestBase<TFixture>
     where TFixture : BuiltInDataTypesTestBase<TFixture>.BuiltInDataTypesFixtureBase, new()
 {

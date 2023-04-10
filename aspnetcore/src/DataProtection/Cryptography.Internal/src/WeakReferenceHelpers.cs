@@ -7,7 +7,6 @@ using System.Threading;
 
 namespace Microsoft.AspNetCore.Cryptography;
 
-
 internal static class WeakReferenceHelpers
 {
     public static T GetSharedInstance<T>(ref WeakReference<T>? weakReference, Func<T> factory)

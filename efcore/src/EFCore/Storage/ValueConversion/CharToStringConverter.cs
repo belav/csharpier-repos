@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-
 /// <summary>
 ///     Converts a <see cref="char" /> to and from a single-character <see cref="string" />.
 /// </summary>

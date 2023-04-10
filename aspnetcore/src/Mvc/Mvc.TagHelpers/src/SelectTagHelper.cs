@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// <see cref="ITagHelper"/> implementation targeting &lt;select&gt; elements with <c>asp-for</c> and/or
 /// <c>asp-items</c> attribute(s).

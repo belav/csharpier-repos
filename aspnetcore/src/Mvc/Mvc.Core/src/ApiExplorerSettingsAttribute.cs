@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Controls the visibility and group name for an <c>ApiDescription</c>
 /// of the associated controller class or action method.

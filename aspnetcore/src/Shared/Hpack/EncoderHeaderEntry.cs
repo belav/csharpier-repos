@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace System.Net.Http.HPack;
 
-
 [DebuggerDisplay("Name = {Name} Value = {Value}")]
 internal sealed class EncoderHeaderEntry
 {

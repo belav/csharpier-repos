@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal class CommandException : Exception
 {
     public CommandException(string message)

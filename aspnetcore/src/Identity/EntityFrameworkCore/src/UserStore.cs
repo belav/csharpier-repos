@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-
 /// <summary>
 /// Represents a new instance of a persistence store for users, using the default implementation
 /// of <see cref="IdentityUser{TKey}"/> with a string as a primary key.

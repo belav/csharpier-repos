@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal static class Json
 {
     public static CommandOption ConfigureOption(CommandLineApplication command) =>

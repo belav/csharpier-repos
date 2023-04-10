@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class Self_referencing_existing_destination : AutoMapperSpecBase
 {
     public class BaseType

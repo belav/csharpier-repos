@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 internal static class NormalizedRouteValue
 {
     /// <summary>

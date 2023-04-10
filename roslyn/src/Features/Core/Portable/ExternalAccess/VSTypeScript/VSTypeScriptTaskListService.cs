@@ -14,7 +14,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
-
 [ExportLanguageService(typeof(ITaskListService), InternalLanguageNames.TypeScript), Shared]
 internal sealed class VSTypeScriptTaskListService : ITaskListService
 {

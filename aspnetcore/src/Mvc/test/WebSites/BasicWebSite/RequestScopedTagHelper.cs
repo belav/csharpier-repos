@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BasicWebSite;
 
-
 public class RequestScopedTagHelper : TagHelper
 {
     public RequestScopedTagHelper(RequestIdService service)

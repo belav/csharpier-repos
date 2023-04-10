@@ -7,7 +7,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
-
 /// <summary>
 /// A descriptor which can create an authenticated encryption system based upon the
 /// configuration provided by an <see cref="CngCbcAuthenticatedEncryptorConfiguration"/> object.

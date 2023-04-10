@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 /// <summary>
 /// A single diagnostic message.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable PossibleNullReferenceException
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 internal class AnnotationComparer : IEqualityComparer<IAnnotation>, IComparer<IAnnotation>
 {
     public static readonly AnnotationComparer Instance = new();

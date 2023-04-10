@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Owin;
 
-
 public class OwinEnvironmentTests
 {
     private T Get<T>(IDictionary<string, object> environment, string key)

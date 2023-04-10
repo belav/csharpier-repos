@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Https;
 
 namespace Http3SampleApp;
 
-
 public class Program
 {
     public static void Main(string[] args)

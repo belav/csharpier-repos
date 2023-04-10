@@ -16,7 +16,6 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.AspNetCore.Analyzers.Http.Fixers;
 
-
 [ExportCodeFixProvider(LanguageNames.CSharp), Shared]
 public sealed class HeaderDictionaryAddFixer : CodeFixProvider
 {

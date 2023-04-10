@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Metadata which specifies the data source for model binding.
 /// </summary>

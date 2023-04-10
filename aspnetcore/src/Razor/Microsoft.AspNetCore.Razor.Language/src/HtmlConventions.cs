@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public static class HtmlConventions
 {
     private const string HtmlCaseRegexReplacement = "-$1$2";

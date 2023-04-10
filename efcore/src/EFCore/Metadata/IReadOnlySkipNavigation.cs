@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Represents a navigation property that is part of a relationship
 ///     that is forwarded through a third entity type.

@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Provides CLR methods that get translated to database functions when used in LINQ to Entities queries.
 ///     The methods on this class are accessed via <see cref="EF.Functions" />.

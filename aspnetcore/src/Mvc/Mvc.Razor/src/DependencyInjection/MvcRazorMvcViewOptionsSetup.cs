@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Configures <see cref="MvcViewOptions"/> to use <see cref="RazorViewEngine"/>.
 /// </summary>

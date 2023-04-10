@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
-
 /// <summary>
 /// A base class for <see cref="AuthenticationStateProvider"/> services that receive an
 /// authentication state from the host environment, and revalidate it at regular intervals.

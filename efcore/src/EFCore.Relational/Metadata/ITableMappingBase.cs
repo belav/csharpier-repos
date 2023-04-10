@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Represents entity type mapping to a table-like object.
 /// </summary>

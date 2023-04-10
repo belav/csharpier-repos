@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 
-
 /// <summary>
 ///     A <see cref="MigrationOperation" /> for dropping an existing foreign key.
 /// </summary>

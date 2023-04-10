@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 public partial class DataAnnotationsValidator : Microsoft.AspNetCore.Components.ComponentBase
 {
     public DataAnnotationsValidator() { }

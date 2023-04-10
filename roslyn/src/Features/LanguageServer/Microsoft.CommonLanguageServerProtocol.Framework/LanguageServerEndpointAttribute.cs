@@ -6,7 +6,6 @@ using System;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
-
 /// <summary>
 /// An attribute which identifies the method which an <see cref="IMethodHandler"/> implements.
 /// </summary>

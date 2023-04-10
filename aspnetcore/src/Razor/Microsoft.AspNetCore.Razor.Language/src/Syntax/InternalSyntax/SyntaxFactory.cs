@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
-
 internal static partial class SyntaxFactory
 {
     internal static SyntaxToken Token(

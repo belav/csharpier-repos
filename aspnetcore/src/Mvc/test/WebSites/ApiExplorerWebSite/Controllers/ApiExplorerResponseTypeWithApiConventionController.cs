@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
-
 [ApiController]
 [Route("ApiExplorerResponseTypeWithApiConventionController/[Action]")]
 [ApiConventionType(typeof(DefaultApiConventions))]

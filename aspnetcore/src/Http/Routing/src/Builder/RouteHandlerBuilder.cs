@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Builds conventions that will be used for customization of MapAction <see cref="EndpointBuilder"/> instances.
 /// </summary>

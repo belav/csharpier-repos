@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Abstractions;
 
-
 /// <summary>
 /// Extension methods for <see cref="ActionDescriptor"/>.
 /// </summary>

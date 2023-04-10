@@ -9,7 +9,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Core.Builder;
 
-
 public class MvcApplicationBuilderExtensionsTest
 {
     [Fact]

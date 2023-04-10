@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class HttpProtocolFeatureCollection
 {
     private readonly IFeatureCollection _collection;

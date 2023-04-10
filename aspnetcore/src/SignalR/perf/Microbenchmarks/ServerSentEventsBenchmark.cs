@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
-
 public class ServerSentEventsBenchmark
 {
     private ServerSentEventsMessageParser _parser;

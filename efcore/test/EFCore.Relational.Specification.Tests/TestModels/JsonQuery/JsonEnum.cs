@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.JsonQuery;
 
-
 public enum JsonEnum
 {
     One,

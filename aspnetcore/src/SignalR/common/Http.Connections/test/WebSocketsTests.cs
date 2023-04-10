@@ -20,7 +20,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
-
 public class WebSocketsTests : VerifiableLoggedTest
 {
     // Using nameof with WebSocketMessageType because it is a GACed type and xunit can't serialize it

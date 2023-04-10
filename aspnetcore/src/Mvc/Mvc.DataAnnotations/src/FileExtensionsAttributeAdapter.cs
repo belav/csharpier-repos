@@ -8,7 +8,6 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 internal sealed class FileExtensionsAttributeAdapter : AttributeAdapterBase<FileExtensionsAttribute>
 {
     private readonly string _extensions;

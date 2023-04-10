@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 /// <summary>
 /// Extension methods for <see cref="ApiDescription"/>.
 /// </summary>

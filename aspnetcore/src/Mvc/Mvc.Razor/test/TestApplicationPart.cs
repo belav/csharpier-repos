@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class TestApplicationPart : ApplicationPart, IApplicationPartTypeProvider
 {
     public TestApplicationPart()

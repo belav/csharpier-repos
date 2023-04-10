@@ -8,7 +8,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal sealed class StreamSourceDocument : RazorSourceDocument
 {
     // Internal for testing

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public sealed class ItemCollection : ICollection<KeyValuePair<object, object>>, ICollection
 {
     private readonly Dictionary<object, object> _inner;

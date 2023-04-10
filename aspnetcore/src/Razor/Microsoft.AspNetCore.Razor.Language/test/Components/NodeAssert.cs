@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 internal static class NodeAssert
 {
     public static HtmlAttributeIntermediateNode Attribute(

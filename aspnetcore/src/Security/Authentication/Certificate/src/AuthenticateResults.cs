@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
-
 internal static class AuthenticateResults
 {
     internal static AuthenticateResult NoSelfSigned = AuthenticateResult.Fail(

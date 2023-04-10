@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering;
 
-
 internal static class RendererRegistry
 {
     // In case there are multiple concurrent Blazor renderers in the same .NET WebAssembly

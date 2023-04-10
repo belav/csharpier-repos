@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// Holds arbitrary key/value pairs associated with an <see cref="EditContext"/>.
 /// This can be used to track additional metadata for application-specific purposes.

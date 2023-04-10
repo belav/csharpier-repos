@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Features.Authentication;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Keeps the User and AuthenticationResult consistent with each other
 /// </summary>

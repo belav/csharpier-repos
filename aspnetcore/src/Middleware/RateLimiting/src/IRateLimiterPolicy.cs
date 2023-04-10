@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 /// <summary>
 /// An interface which is used to represent a RateLimiter policy.
 /// </summary>

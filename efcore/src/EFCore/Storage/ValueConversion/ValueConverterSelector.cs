@@ -8,7 +8,6 @@ using System.Net.NetworkInformation;
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-
 /// <summary>
 ///     A registry of <see cref="ValueConverter" /> instances that can be used to find
 ///     the preferred converter to use to convert to and from a given model type

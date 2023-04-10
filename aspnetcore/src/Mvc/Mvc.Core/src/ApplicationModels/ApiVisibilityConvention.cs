@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// A <see cref="IActionModelConvention"/> that sets Api Explorer visibility.
 /// </summary>

@@ -7,7 +7,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class SpatialQueryFixtureBase
     : SharedStoreFixtureBase<SpatialContext>,
         IQueryFixtureBase

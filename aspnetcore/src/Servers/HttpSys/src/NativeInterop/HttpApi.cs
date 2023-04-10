@@ -8,7 +8,6 @@ using static Microsoft.AspNetCore.HttpSys.Internal.HttpApiTypes;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal static unsafe partial class HttpApi
 {
     private const string HTTPAPI = "httpapi.dll";

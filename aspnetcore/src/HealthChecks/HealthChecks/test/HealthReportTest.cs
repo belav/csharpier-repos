@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 public class HealthReportTest
 {
     [Theory]

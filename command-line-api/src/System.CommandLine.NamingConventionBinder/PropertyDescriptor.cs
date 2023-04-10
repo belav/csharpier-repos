@@ -6,7 +6,6 @@ using System.Reflection;
 
 namespace System.CommandLine.NamingConventionBinder;
 
-
 /// <inheritdoc />
 public class PropertyDescriptor : IValueDescriptor
 {

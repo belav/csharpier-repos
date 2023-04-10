@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Static class that adds extension methods to <see cref="IAntiforgery"/>. This class cannot be inherited.
 /// </summary>

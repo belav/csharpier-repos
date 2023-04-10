@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Https;
 
-
 /// <summary>
 /// Options used to configure a per connection callback for TLS configuration.
 /// </summary>

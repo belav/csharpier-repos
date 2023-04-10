@@ -9,7 +9,6 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 internal sealed class CompareAttributeAdapter : AttributeAdapterBase<CompareAttribute>
 {
     private readonly string _otherProperty;

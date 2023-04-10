@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class StringToDateTimeOffsetConverterTest
 {
     private static readonly StringToDateTimeOffsetConverter _stringToDateTimeOffset = new();

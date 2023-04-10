@@ -10,7 +10,6 @@ using static Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyCult
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-
 public class WebAssemblyCultureProviderTest
 {
     [Theory]

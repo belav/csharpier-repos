@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 /// <summary>
 /// Summary description for Disposable
 /// </summary>

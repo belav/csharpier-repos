@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Indicates that this <see cref="Endpoint"/> should not be included in the generated API metadata.
 /// </summary>

@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 
 namespace AutoMapper;
 
-
 [DebuggerDisplay("{Name}")]
 [EditorBrowsable(EditorBrowsableState.Never)]
 public class ProfileMap

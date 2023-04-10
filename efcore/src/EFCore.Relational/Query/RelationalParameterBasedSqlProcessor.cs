@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         A class that processes the query expression after parementer values are known.

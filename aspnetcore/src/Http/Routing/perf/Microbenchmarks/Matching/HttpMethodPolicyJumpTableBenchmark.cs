@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 public class HttpMethodPolicyJumpTableBenchmark
 {
     private PolicyJumpTable _dictionaryJumptable;

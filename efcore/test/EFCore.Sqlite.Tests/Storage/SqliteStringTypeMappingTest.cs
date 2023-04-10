@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal;
 
-
 public class SqliteStringTypeMappingTest
 {
     [ConditionalTheory]

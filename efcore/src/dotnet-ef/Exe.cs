@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal static class Exe
 {
     public static int Run(

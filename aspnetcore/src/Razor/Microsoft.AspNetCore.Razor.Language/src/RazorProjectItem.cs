@@ -6,7 +6,6 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 /// <summary>
 /// An item in a <see cref="RazorProjectFileSystem"/>.
 /// </summary>

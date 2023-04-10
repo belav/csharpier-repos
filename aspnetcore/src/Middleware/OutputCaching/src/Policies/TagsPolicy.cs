@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// A policy that defines custom tags on the cache entry.
 /// </summary>

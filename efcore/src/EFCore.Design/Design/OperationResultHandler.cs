@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     Used with <see cref="OperationExecutor" /> to handle operation results.
 /// </summary>

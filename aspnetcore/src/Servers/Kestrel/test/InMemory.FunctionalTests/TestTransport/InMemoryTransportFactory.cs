@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 
-
 internal class InMemoryTransportFactory : IConnectionListenerFactory, IConnectionListener
 {
     private readonly Channel<ConnectionContext> _acceptQueue =

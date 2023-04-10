@@ -9,7 +9,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis;
 
-
 public partial struct SyntaxValueProvider
 {
     private class ImmutableArrayValueComparer<T> : IEqualityComparer<ImmutableArray<T>>

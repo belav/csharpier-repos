@@ -19,7 +19,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 public partial class WebHostTests
 {
     [Fact]

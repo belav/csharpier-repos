@@ -9,7 +9,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal class ControllerEndpointFilterInvocationContext : EndpointFilterInvocationContext
 {
     public ControllerEndpointFilterInvocationContext(

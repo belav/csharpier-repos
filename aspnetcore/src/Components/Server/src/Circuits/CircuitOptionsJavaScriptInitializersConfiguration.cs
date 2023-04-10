@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 internal sealed class CircuitOptionsJavaScriptInitializersConfiguration
     : IConfigureOptions<CircuitOptions>
 {

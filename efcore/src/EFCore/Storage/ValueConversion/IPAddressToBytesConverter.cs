@@ -5,7 +5,6 @@ using System.Net;
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-
 /// <summary>
 ///     Converts a <see cref="IPAddress" /> to and from a <see cref="byte" />.
 /// </summary>

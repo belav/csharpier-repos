@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth;
 
-
 /// <summary>
 /// Configuration options OAuth.
 /// </summary>

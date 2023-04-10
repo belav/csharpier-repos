@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 internal abstract class SyntaxList : SyntaxNode
 {
     internal SyntaxList(InternalSyntax.SyntaxList green, SyntaxNode parent, int position)

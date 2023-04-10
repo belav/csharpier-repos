@@ -7,7 +7,6 @@ using TestHelper;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
-
 public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
 {
     public ComponentParameterUsageAnalyzerTest()

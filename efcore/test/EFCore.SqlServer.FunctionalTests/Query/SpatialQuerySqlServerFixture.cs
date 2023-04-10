@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.TestModels.SpatialModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class SpatialQuerySqlServerFixture : SpatialQueryRelationalFixture
 {
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;

@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core.IO;
 
-
 internal sealed partial class AsyncIOEngine : IAsyncIOEngine
 {
     private const ushort ResponseMaxChunks = 65533;

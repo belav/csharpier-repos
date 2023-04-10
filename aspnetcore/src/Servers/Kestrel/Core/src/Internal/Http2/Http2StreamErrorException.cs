@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-
 internal sealed class Http2StreamErrorException : Exception
 {
     public Http2StreamErrorException(int streamId, string message, Http2ErrorCode errorCode)

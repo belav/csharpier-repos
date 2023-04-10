@@ -6,7 +6,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class NullSemanticsQuerySqliteTest
     : NullSemanticsQueryTestBase<NullSemanticsQuerySqliteFixture>
 {

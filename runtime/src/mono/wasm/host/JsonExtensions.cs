@@ -8,7 +8,6 @@ using System.Text.Json;
 
 namespace Microsoft.WebAssembly.AppHost;
 
-
 internal static class JsonExtensions
 {
     public static bool TryGetPropertyByPath(

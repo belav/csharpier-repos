@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 internal sealed class AuthorizationPageApplicationModelProvider : IPageApplicationModelProvider
 {
     private readonly IAuthorizationPolicyProvider _policyProvider;

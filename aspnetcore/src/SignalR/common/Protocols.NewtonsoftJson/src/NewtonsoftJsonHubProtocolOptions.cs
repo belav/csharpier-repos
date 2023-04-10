@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// Options used to configure a <see cref="NewtonsoftJsonHubProtocol"/> instance.
 /// </summary>

@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 public class CandidateSetTest
 {
     [Fact]

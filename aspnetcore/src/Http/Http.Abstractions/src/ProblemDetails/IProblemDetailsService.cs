@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Defines a type that provide functionality to
 /// create a <see cref="Mvc.ProblemDetails"/> response.

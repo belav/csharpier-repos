@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class ListLoggerFactory : ILoggerFactory
 {
     private readonly Func<string, bool> _shouldLogCategory;

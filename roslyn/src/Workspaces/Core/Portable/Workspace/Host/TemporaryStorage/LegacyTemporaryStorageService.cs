@@ -14,7 +14,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Host;
 
-
 /// <summary>
 /// Legacy implementation of obsolete public API <see cref="ITemporaryStorageService"/>.
 /// </summary>

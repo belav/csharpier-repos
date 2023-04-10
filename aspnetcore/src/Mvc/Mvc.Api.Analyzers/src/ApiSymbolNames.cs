@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 internal static class ApiSymbolNames
 {
     public const string ActionResultStatusCodeAttribute = "ActionResultStatusCodeAttribute";

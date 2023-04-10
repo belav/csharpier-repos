@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorCodeGenerationOptionsBuilder
 {
     public virtual RazorConfiguration Configuration => null;

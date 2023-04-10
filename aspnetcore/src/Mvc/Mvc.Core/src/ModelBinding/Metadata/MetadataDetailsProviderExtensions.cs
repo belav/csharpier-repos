@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-
 /// <summary>
 /// Extension methods for <see cref="IMetadataDetailsProvider"/>.
 /// </summary>

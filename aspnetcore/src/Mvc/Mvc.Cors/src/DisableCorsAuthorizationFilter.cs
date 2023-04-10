@@ -8,7 +8,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
-
 /// <summary>
 /// An <see cref="ICorsAuthorizationFilter"/> which ensures that an action does not run for a pre-flight request.
 /// </summary>

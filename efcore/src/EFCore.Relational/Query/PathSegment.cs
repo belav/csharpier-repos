@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         A struct representing a component of JSON path used in <see cref="JsonQueryExpression" /> or <see cref="JsonScalarExpression" />.

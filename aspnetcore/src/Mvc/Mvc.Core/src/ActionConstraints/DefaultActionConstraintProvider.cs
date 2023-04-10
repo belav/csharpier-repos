@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ActionConstraints;
 
-
 /// <summary>
 /// A default implementation of <see cref="IActionConstraintProvider"/>.
 /// </summary>

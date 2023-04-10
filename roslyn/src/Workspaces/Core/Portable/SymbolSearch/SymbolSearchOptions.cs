@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.SymbolSearch;
 
-
 [DataContract]
 internal readonly record struct SymbolSearchOptions
 {

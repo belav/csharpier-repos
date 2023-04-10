@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 
-
 public partial class ConventionDispatcher
 {
     private sealed class ImmediateConventionScope : ConventionScope

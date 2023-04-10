@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-
 internal class MvcImportProjectFeature : RazorProjectEngineFeatureBase, IImportProjectFeature
 {
     private const string ImportsFileName = "_ViewImports.cshtml";

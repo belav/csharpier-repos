@@ -6,7 +6,6 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-
 internal interface IRequestExecutionQueueProvider<RequestContext> : ILspService
 {
     IRequestExecutionQueue<RequestContext> CreateRequestExecutionQueue(

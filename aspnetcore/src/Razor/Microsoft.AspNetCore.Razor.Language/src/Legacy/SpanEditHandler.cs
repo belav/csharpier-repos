@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal class SpanEditHandler
 {
     private static readonly int TypeHashCode = typeof(SpanEditHandler).GetHashCode();

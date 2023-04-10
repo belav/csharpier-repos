@@ -6,7 +6,6 @@ using Duende.IdentityServer.Models;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 /// <summary>
 /// A builder for Clients.
 /// </summary>

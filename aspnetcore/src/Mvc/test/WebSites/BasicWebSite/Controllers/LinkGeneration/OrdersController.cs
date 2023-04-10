@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers.LinkGeneration;
 
-
 [Route("api/orders/{id?}", Name = "OrdersApi")]
 public class OrdersController : Controller
 {

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.DataProtection;
 
 namespace TestServer;
 
-
 public class ServerStartup
 {
     public ServerStartup(IConfiguration configuration)

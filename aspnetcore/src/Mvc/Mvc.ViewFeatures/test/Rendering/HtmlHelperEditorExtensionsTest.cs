@@ -6,7 +6,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 public class HtmlHelperEditorExtensionsTest
 {
     [Theory]

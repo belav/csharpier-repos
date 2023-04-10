@@ -1,6 +1,5 @@
 namespace AutoMapper.UnitTests;
 
-
 public abstract class AutoMapperSpecBase : NonValidatingSpecBase
 {
     protected override void OnConfig(MapperConfiguration mapperConfiguration) =>

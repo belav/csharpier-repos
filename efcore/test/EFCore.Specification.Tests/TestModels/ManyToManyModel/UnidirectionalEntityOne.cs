@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
-
 public class UnidirectionalEntityOne
 {
     public virtual int Id { get; set; }

@@ -7,7 +7,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Antiforgery.Internal;
 
-
 public class DefaultClaimUidExtractorTest
 {
     private static readonly ObjectPool<AntiforgerySerializationContext> _pool =

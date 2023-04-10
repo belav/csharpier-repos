@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Localization;
 
 namespace LocalizationWebsite;
 
-
 public class StartupCustomCulturePreserved
 {
     public void ConfigureServices(IServiceCollection services)

@@ -9,7 +9,6 @@ using System.Threading.Tasks.Sources;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl;
 
-
 internal class StreamOutputFlowControl
 {
     private readonly OutputFlowControl _connectionLevelFlowControl;

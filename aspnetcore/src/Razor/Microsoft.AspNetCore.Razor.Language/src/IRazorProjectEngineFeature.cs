@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public interface IRazorProjectEngineFeature : IRazorFeature
 {
     RazorProjectEngine ProjectEngine { get; set; }

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed class ControllerActionInvokerCacheEntry
 {
     internal ControllerActionInvokerCacheEntry(

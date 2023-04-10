@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
 
-
 internal sealed class Setting<TOptionValue> : Setting
 {
     /// <summary>

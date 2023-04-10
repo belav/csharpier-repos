@@ -20,7 +20,6 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CodeActions;
 
-
 internal readonly struct CodeFixOptionsProvider
 {
     /// <summary>

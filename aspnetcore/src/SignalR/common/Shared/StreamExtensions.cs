@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace System.IO;
 
-
 internal static class StreamExtensions
 {
     public static ValueTask WriteAsync(

@@ -5,7 +5,6 @@ using System.Transactions;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     The base class for <see cref="IExecutionStrategy" /> implementations.
 /// </summary>

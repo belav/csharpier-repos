@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 public class SerializableErrorWrapperTests
 {
     [Fact]

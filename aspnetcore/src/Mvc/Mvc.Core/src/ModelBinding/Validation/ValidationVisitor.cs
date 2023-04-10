@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// A visitor implementation that interprets <see cref="ValidationStateDictionary"/> to traverse
 /// a model object graph and perform validation.

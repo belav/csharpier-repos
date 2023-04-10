@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Microsoft.Extensions.StackTrace.Sources;
 
-
 internal sealed class StackFrameInfo
 {
     public StackFrameInfo(

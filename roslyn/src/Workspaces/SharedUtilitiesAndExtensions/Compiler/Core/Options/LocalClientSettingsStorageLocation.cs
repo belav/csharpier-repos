@@ -6,7 +6,6 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Options;
 
-
 /// <summary>
 /// Specifies that the option should be stored into local client settings storage.
 /// </summary>

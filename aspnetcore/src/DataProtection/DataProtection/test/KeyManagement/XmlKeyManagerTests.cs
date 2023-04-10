@@ -18,7 +18,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
-
 public class XmlKeyManagerTests
 {
     private static readonly XElement serializedDescriptor = XElement.Parse(

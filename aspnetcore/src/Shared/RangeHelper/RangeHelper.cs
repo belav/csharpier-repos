@@ -14,7 +14,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 /// <summary>
 /// Provides a parser for the Range Header in an <see cref="HttpContext.Request"/>.
 /// </summary>

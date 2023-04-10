@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace System;
 
-
 /// <summary>
 /// Helpful logging-related extension methods on <see cref="IServiceProvider"/>.
 /// </summary>

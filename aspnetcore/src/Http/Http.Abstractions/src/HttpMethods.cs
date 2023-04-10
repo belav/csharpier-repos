@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Contains methods to verify the request method of an HTTP request.
 /// </summary>

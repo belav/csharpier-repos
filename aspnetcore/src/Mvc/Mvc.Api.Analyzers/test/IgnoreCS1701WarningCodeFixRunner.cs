@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 public class IgnoreCS1701WarningCodeFixRunner : CodeFixRunner
 {
     protected override CompilationOptions ConfigureCompilationOptions(CompilationOptions options)

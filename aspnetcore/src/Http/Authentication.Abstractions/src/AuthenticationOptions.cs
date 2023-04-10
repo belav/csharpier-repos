@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Options to configure authentication.
 /// </summary>

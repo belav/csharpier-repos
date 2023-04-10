@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 
 namespace Identity.DefaultUI.WebSite;
 
-
 public class ContosoAuthenticationHandler : AuthenticationHandler<ContosoAuthenticationOptions>
 {
     public ContosoAuthenticationHandler(

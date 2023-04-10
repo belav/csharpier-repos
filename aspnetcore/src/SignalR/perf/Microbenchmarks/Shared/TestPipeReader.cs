@@ -5,7 +5,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared;
 
-
 public class TestPipeReader : PipeReader
 {
     public List<ValueTask<ReadResult>> ReadResults { get; }

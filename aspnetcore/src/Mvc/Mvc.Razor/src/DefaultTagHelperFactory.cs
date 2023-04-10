@@ -11,7 +11,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// Default implementation for <see cref="ITagHelperFactory"/>.
 /// </summary>

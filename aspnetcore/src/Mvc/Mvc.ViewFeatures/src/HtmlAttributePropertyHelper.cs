@@ -10,7 +10,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal sealed class HtmlAttributePropertyHelper
 {
     private static readonly ConcurrentDictionary<

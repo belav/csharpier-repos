@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         An expression that combines a query expression and shaper expression.

@@ -3,7 +3,6 @@
 
 namespace System.Diagnostics.CodeAnalysis;
 
-
 public sealed class DoesNotReturnIfAttribute : Attribute
 {
     /// <summary>Initializes the attribute with the specified parameter value.</summary>

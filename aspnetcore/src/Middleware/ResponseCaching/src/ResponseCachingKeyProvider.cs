@@ -9,7 +9,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
-
 internal sealed class ResponseCachingKeyProvider : IResponseCachingKeyProvider
 {
     // Use the record separator for delimiting components of the cache key to avoid possible collisions

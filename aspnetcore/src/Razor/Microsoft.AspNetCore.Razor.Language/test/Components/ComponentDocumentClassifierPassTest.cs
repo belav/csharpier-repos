@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 public class ComponentDocumentClassifierPassTest : RazorProjectEngineTestBase
 {
     protected override RazorLanguageVersion Version => RazorLanguageVersion.Latest;

@@ -5,7 +5,6 @@ using Microsoft.Data.Sqlite;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class SqliteRelationalConnectionTest
 {
     [ConditionalFact]

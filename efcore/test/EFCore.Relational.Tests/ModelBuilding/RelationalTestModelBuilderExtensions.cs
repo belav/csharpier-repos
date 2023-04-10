@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
-
 public static class RelationalTestModelBuilderExtensions
 {
     public static ModelBuilderTest.TestModelBuilder HasDefaultSchema(

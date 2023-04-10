@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 /// <summary>
 /// Sets the status code to 204 if the content is null.
 /// </summary>

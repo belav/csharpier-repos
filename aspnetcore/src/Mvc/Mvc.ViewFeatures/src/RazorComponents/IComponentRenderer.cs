@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal interface IComponentRenderer
 {
     ValueTask<IHtmlContent> RenderComponentAsync(

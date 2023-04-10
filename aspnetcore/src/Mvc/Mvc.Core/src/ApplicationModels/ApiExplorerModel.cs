@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// A model for ApiExplorer properties associated with a controller or action.
 /// </summary>

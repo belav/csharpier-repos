@@ -13,7 +13,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class AspNetTestAssemblyRunner : XunitTestAssemblyRunner
 {
     private readonly Dictionary<Type, object> _assemblyFixtureMappings = new();

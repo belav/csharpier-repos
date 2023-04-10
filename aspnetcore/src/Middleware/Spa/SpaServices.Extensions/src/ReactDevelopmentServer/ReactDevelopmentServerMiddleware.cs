@@ -15,7 +15,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
-
 internal static class ReactDevelopmentServerMiddleware
 {
     private const string LogCategoryName = "Microsoft.AspNetCore.SpaServices";

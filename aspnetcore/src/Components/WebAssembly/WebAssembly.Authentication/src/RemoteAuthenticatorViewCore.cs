@@ -9,7 +9,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 /// <summary>
 /// A component that handles remote authentication operations in an application.
 /// </summary>

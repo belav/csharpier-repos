@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Represents a reference to a rendered element.
 /// </summary>

@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
 
-
 public class ReadonlyCollectionPropertiesOverride : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>

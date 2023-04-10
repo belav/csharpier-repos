@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
-
 internal partial struct VirtualCharSequence
 {
     /// <summary>

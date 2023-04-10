@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 public partial class HubConnectionHandlerTests
 {
     [Fact]

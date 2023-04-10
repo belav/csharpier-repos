@@ -3,7 +3,6 @@
 
 namespace XmlFormattersWebSite;
 
-
 public class DummyClass
 {
     public int SampleInt { get; set; }

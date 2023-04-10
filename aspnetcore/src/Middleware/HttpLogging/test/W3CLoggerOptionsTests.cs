@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 public class W3CLoggerOptionsTests
 {
     [Fact]

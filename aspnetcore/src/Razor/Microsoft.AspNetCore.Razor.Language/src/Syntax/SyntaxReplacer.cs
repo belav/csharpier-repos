@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 internal static class SyntaxReplacer
 {
     internal static SyntaxNode Replace<TNode>(

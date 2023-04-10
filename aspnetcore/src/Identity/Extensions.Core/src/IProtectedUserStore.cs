@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Marker interface used to signal that the store supports the <see cref="StoreOptions.ProtectPersonalData"/> flag.
 /// </summary>

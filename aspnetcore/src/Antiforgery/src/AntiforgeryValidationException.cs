@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-
 /// <summary>
 /// The <see cref="Exception"/> that is thrown when the antiforgery token validation fails.
 /// </summary>

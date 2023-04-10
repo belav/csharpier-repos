@@ -20,7 +20,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Tests;
 
-
 [Collection(nameof(NoParallelCollection))]
 public class QuicStreamContextTests : TestApplicationErrorLoggerLoggedTest
 {

@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 internal sealed class DefaultOidcOptionsConfiguration
     : IPostConfigureOptions<RemoteAuthenticationOptions<OidcProviderOptions>>
 {

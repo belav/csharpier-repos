@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Internal.Tests;
 
-
 public class AdaptiveCapacityDictionaryTests
 {
     [Fact]

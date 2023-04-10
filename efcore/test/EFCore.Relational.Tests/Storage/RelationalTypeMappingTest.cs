@@ -6,7 +6,6 @@ using System.Data;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public abstract class RelationalTypeMappingTest
 {
     protected class FakeValueConverter<TModel, TProvider> : ValueConverter<TModel, TProvider>

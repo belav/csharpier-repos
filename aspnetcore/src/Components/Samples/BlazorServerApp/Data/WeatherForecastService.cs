@@ -3,7 +3,6 @@
 
 namespace BlazorServerApp.Data;
 
-
 public class WeatherForecastService
 {
     private static readonly string[] Summaries = new[]

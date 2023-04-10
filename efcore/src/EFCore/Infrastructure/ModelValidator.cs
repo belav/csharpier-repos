@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     The validator that enforces core rules common for all providers.
 /// </summary>

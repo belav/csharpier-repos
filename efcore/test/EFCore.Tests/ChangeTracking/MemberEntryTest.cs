@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 public class MemberEntryTest
 {
     [ConditionalFact]

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-
 /// <summary>
 ///     Converts a <see cref="Uri" /> to and from a <see cref="string" />.
 /// </summary>

@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 public class ModelStateInvalidFilterTest
 {
     [Fact]

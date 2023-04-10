@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// A filter that saves the <see cref="ITempDataDictionary"/> for a request.
 /// </summary>

@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
-
 /// <summary>
 /// An optimized encryptor that can avoid buffer allocations in common code paths.
 /// </summary>

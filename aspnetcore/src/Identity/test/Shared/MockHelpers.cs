@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
-
 public static class MockHelpers
 {
     public static StringBuilder LogMessage = new StringBuilder();

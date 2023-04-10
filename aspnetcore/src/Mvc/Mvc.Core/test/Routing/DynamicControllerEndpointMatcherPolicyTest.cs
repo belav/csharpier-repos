@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 public class DynamicControllerEndpointMatcherPolicyTest
 {
     public DynamicControllerEndpointMatcherPolicyTest()

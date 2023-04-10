@@ -6,7 +6,6 @@ using Grpc.AspNetCore.Server.Model;
 
 namespace IntegrationTestsWebsite.Infrastructure;
 
-
 public class DynamicServiceModelProvider : IServiceMethodProvider<DynamicService>
 {
     public Action<ServiceMethodProviderContext<DynamicService>>? CreateMethod { get; set; }

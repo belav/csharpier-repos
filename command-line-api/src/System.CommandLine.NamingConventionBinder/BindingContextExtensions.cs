@@ -5,7 +5,6 @@ using System.CommandLine.Binding;
 
 namespace System.CommandLine.NamingConventionBinder;
 
-
 /// <summary>
 /// Methods for working with binding contexts.
 /// </summary>

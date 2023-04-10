@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     Supports queryable Include/ThenInclude chaining operators.
 /// </summary>

@@ -11,7 +11,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-
 // https://datatracker.ietf.org/doc/html/rfc8441
 public class Http2WebSocketTests : Http2TestBase
 {

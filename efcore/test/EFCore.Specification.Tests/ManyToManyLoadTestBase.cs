@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract partial class ManyToManyLoadTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : ManyToManyLoadTestBase<TFixture>.ManyToManyLoadFixtureBase
 {

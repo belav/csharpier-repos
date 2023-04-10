@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class GuidToBytesConverterTest
 {
     private static readonly GuidToBytesConverter _guidToBytes = new();

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 
 namespace Microsoft.AspNetCore.Analyzers.RenderTreeBuilder;
 
-
 public class DisallowNonLiteralSequenceNumbersTest
 {
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new RenderTreeBuilderAnalyzer());

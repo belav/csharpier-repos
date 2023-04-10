@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal sealed class HeartbeatManager : IHeartbeatHandler, ISystemClock
 {
     private readonly ConnectionManager _connectionManager;

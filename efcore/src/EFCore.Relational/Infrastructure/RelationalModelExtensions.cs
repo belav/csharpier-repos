@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     Relational-specific extension methods for <see cref="IModel" />.
 /// </summary>

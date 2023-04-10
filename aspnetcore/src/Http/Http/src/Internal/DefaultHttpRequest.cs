@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 internal sealed class DefaultHttpRequest : HttpRequest
 {
     private const string Http = "http";

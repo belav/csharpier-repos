@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-
 /// <summary>
 /// A helper for wrapping a Stream decorator from an <see cref="IDuplexPipe"/>.
 /// </summary>

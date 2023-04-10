@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 // See http://tools.ietf.org/html/rfc3548#section-5
 internal static class Base32
 {

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Session;
 
-
 /// <summary>
 /// Storage for sessions that maintain user data while the user browses a web application.
 /// </summary>

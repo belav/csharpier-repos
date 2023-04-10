@@ -7,7 +7,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// Tests the <see cref="IHtmlHelper"/>'s <see cref="IHtmlHelper.BeginForm"/> and
 /// <see cref="IHtmlHelper.BeginRouteForm"/> methods.

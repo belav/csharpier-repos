@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
-
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="ValueGeneratorCache" />

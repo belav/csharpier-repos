@@ -17,7 +17,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
-
 public class RedisProtocolTests
 {
     private static readonly Dictionary<string, ProtocolTestData<int>> _ackTestData = new[]

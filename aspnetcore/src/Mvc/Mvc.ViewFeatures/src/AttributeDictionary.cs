@@ -8,7 +8,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// A dictionary for HTML attributes.
 /// </summary>

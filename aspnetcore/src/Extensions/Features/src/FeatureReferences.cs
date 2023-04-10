@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// A reference to a collection of features.
 /// </summary>

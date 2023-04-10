@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-
 public class PipelineExtensionTests : IDisposable
 {
     // ulong.MaxValue.ToString().Length

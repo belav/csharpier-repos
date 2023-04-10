@@ -9,7 +9,6 @@ using CSharpSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
 {

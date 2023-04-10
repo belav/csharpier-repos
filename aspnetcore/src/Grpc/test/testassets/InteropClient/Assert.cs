@@ -22,7 +22,6 @@ using System.Threading.Tasks;
 
 namespace InteropTestsClient;
 
-
 internal static class Assert
 {
     public static void IsTrue(bool condition)

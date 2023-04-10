@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
-
 [Collection(nameof(ModelCodeGeneratorTestCollection))]
 public abstract class ModelCodeGeneratorTestBase
 {

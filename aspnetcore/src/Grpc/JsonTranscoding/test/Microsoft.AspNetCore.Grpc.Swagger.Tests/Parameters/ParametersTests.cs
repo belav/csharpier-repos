@@ -8,7 +8,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.Parameters;
 
-
 public class ParametersTests
 {
     private readonly ITestOutputHelper _testOutputHelper;

@@ -2,7 +2,6 @@
 
 namespace AutoMapper.UnitTests;
 
-
 public abstract class SourceToDestinationMapperAttribute : Attribute
 {
     public abstract bool IsMatch(

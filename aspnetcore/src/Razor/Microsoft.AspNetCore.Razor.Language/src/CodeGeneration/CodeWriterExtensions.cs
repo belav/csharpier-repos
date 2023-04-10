@@ -9,7 +9,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-
 internal static class CodeWriterExtensions
 {
     private const string InstanceMethodFormat = "{0}.{1}";

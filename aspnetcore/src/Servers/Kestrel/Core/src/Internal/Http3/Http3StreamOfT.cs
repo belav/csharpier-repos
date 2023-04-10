@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
-
 internal sealed class Http3Stream<TContext> : Http3Stream, IHostContextContainer<TContext>
     where TContext : notnull
 {

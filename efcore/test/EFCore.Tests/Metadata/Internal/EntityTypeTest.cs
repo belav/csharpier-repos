@@ -14,7 +14,6 @@ using System.Globalization;
 // ReSharper disable ImplicitlyCapturedClosure
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-
 public partial class EntityTypeTest
 {
     [ConditionalFact]

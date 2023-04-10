@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
-
 /// <summary>
 /// Cache used to store <see cref="AuthenticateResult"/> results after the certificate has been validated
 /// </summary>

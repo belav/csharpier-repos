@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers.Testing;
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
-
 public class TagHelperAttributeListTest
 {
     [Theory]

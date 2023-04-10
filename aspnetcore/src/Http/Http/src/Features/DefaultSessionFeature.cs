@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// This type exists only for the purpose of unit testing where the user can directly set the
 /// <see cref="HttpContext.Session"/> property without the need for creating a <see cref="ISessionFeature"/>.

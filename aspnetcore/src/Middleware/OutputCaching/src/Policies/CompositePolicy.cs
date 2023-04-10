@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.OutputCaching.Policies;
 
-
 /// <summary>
 /// A composite policy.
 /// </summary>

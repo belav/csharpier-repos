@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace IStartupInjectionAssemblyName;
 
-
 public class Program
 {
     public static void Main(string[] args)

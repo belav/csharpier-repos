@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 internal class ComponentTagHelperDescriptorProvider
     : RazorEngineFeatureBase,
         ITagHelperDescriptorProvider

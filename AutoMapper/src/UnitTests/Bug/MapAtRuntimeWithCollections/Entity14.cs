@@ -1,6 +1,5 @@
 ﻿namespace OmmitedDatabaseModel3WithCollections;
 
-
 public class Entity14 : BaseEntity
 {
     public Entity14()

@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-
 internal sealed class SniOptionsSelector
 {
     private const string WildcardHost = "*";

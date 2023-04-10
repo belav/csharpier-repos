@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Hosting.FunctionalTests;
 
-
 public class ShutdownTests : LoggedTest
 {
     private static readonly string StartedMessage = "Started";

@@ -6,7 +6,6 @@ using System.IO.Pipes;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes;
 
-
 /// <summary>
 /// Options for named pipe based transports.
 /// </summary>

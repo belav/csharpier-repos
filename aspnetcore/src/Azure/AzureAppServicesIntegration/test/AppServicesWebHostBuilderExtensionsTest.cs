@@ -6,7 +6,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Hosting.Azure.AppServices.Tests;
 
-
 public class AppServicesWebHostBuilderExtensionsTest
 {
     [Fact]

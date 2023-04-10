@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-
 /// <summary>
 /// Holds associated metadata objects for a <see cref="DefaultModelMetadata"/>.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 /// <summary>
 /// Specifies the contract for an exception representing compilation failure.
 /// </summary>

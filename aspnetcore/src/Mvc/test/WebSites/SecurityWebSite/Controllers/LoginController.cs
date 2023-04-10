@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SecurityWebSite.Controllers;
 
-
 [AllowAnonymous]
 public class LoginController : ControllerBase
 {

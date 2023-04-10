@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 
-
 public class TagHelperRunner
 {
     public Task RunAsync(TagHelperExecutionContext executionContext)

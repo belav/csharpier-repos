@@ -11,7 +11,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 public static class HtmlGeneratorUtilities
 {
     public static IHtmlGenerator GetHtmlGenerator(IModelMetadataProvider provider)

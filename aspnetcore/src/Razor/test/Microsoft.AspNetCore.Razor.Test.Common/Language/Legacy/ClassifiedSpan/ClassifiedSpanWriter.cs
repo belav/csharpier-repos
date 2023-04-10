@@ -5,7 +5,6 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal class ClassifiedSpanWriter
 {
     private readonly RazorSyntaxTree _syntaxTree;

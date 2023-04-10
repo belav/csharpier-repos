@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     A <see cref="DiagnosticSource" /> event payload class for events that have
 ///     an entity update entry.

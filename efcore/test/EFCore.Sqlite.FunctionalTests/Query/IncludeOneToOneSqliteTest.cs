@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class IncludeOneToOneSqliteTest
     : IncludeOneToOneTestBase<IncludeOneToOneSqliteTest.OneToOneQuerySqliteFixture>
 {

@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity.ExternalClaims.Pages.Account;
 
-
 public class LoginWithRecoveryCodeModel : PageModel
 {
     private readonly SignInManager<ApplicationUser> _signInManager;

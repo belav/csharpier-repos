@@ -6,7 +6,6 @@ using System.IO;
 
 namespace Microsoft.Extensions.RazorViews;
 
-
 /// <summary>
 /// Represents a deferred write operation in a <see cref="BaseView"/>.
 /// </summary>

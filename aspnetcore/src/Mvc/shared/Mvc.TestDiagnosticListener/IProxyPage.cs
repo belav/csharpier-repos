@@ -3,5 +3,4 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public interface IProxyPage { }

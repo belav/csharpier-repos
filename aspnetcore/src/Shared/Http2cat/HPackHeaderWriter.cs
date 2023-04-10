@@ -8,7 +8,6 @@ using System.Net.Http.HPack;
 
 namespace Microsoft.AspNetCore.Http2Cat;
 
-
 internal static class HPackHeaderWriter
 {
     /// <summary>

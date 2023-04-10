@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp;
 
-
 [ExportLanguageService(typeof(SnippetFunctionService), LanguageNames.CSharp), Shared]
 internal class CSharpSnippetFunctionService : SnippetFunctionService
 {

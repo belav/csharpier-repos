@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 /// <summary>
 /// Implements the SignalR Hub Protocol using MessagePack.
 /// </summary>

@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal static class SourceLocationTracker
 {
     public static SourceLocation Advance(SourceLocation location, string text) =>

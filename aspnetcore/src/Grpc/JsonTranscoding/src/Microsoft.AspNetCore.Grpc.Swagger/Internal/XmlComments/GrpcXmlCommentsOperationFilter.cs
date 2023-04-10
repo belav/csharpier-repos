@@ -10,7 +10,6 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Internal.XmlComments;
 
-
 internal sealed class GrpcXmlCommentsOperationFilter : IOperationFilter
 {
     private readonly XPathNavigator _xmlNavigator;

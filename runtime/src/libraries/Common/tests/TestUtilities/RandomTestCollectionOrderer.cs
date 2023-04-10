@@ -9,7 +9,6 @@ using Xunit.Sdk;
 
 namespace TestUtilities;
 
-
 public class RandomTestCollectionOrderer : ITestCollectionOrderer
 {
     private readonly IMessageSink _diagnosticMessageSink;

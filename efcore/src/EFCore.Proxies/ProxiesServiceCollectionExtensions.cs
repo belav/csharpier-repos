@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Proxies.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 ///     EntityFrameworkCore.Proxies extension methods for <see cref="IServiceCollection" />.
 /// </summary>

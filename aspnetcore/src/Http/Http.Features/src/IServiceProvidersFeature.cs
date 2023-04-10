@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Provides acccess to the request-scoped <see cref="IServiceProvider"/>.
 /// </summary>

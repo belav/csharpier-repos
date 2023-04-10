@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 
-
 /// <summary>
 ///     A <see cref="MigrationOperation" /> for operations on sequences.
 ///     See also <see cref="CreateSequenceOperation" /> and <see cref="AlterSequenceOperation" />.

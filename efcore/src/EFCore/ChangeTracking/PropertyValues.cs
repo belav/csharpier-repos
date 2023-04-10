@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 /// <summary>
 ///     A collection of all property values for an entity.
 /// </summary>

@@ -11,7 +11,6 @@ using System.Text;
 
 namespace Microsoft.Extensions.Tools.Internal;
 
-
 public class TemporaryCSharpProject
 {
     private readonly string _filename;

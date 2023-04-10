@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 public class ViewEnginePathTest
 {
     [Theory]

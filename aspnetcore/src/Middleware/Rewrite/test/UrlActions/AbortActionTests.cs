@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Rewrite.UrlActions;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlActions;
 
-
 public class AbortActionTests
 {
     public void AbortAction_VerifyEndResponseResult()

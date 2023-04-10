@@ -3,7 +3,6 @@
 
 namespace MockHostTypes;
 
-
 public class WebHostBuilder : IWebHostBuilder
 {
     public IWebHost Build() => new WebHost();

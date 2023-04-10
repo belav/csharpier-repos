@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 [AttributeUsage(
     AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly,
     AllowMultiple = true

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace RoutingWebSite;
 
-
 public class UseRouterStartup
 {
     private static readonly TimeSpan RegexMatchTimeout = TimeSpan.FromSeconds(10);

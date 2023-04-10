@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     A <see cref="ISingletonInterceptor" /> used to intercept the various parts of object creation and initialization when
 ///     Entity Framework is creating an object, typically from data returned by a query.

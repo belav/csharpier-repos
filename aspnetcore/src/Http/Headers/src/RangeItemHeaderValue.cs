@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
-
 /// <summary>
 /// Represents a byte range in a Range header value.
 /// <para>

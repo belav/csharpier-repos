@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.InMemory.Metadata.Conventions;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 public class ConventionSetBuilderTests
 {
     [ConditionalFact]

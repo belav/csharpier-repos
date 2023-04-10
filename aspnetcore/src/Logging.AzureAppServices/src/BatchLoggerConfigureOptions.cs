@@ -6,7 +6,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
-
 internal class BatchLoggerConfigureOptions : IConfigureOptions<BatchingLoggerOptions>
 {
     private readonly IConfiguration _configuration;

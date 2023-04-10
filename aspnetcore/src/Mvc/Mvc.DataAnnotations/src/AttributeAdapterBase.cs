@@ -7,7 +7,6 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 /// <summary>
 /// An abstract subclass of <see cref="ValidationAttributeAdapter{TAttribute}"/> which wraps up all the required
 /// interfaces for the adapters.

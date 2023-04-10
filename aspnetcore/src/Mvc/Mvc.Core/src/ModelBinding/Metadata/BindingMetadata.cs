@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.Core;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-
 /// <summary>
 /// Binding metadata details for a <see cref="ModelMetadata"/>.
 /// </summary>

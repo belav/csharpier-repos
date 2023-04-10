@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class FakeDiagnosticsLogger<T> : IDiagnosticsLogger<T>, ILogger
     where T : LoggerCategory<T>, new()
 {

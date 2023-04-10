@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
-
 public class ModelExpressionPass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     private const string ModelExpressionTypeName =

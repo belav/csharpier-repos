@@ -10,7 +10,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.SecretManager.Tools.Tests;
 
-
 public class SetCommandTest
 {
     private readonly ITestOutputHelper _output;

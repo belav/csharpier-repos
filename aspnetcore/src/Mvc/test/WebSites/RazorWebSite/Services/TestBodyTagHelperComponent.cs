@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace RazorWebSite;
 
-
 public class TestBodyTagHelperComponent : ITagHelperComponent
 {
     private readonly int _order;

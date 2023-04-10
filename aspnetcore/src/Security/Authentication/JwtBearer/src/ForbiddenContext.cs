@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
-
 /// <summary>
 /// A <see cref="ResultContext{TOptions}"/> when access to a resource is forbidden.
 /// </summary>

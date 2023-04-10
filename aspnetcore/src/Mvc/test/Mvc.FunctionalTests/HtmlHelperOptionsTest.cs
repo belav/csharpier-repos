@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class HtmlHelperOptionsTest : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>
 {
     public HtmlHelperOptionsTest(MvcTestFixture<RazorWebSite.Startup> fixture)

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class NumberToStringConverterTest
 {
     private static readonly NumberToStringConverter<ulong> _ulongToNaturalString = new();

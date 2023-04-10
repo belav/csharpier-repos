@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal static class CSharpIdentifier
 {
     // CSharp Spec §2.4.2

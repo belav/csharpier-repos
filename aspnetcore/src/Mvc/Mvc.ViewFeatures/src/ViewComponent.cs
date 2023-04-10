@@ -17,7 +17,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// A base class for view components.
 /// </summary>

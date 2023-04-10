@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Defines the contract for temporary-data providers that store data that is viewed on the next request.
 /// </summary>

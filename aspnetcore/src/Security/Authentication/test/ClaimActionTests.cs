@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 public class ClaimActionTests
 {
     [Fact]

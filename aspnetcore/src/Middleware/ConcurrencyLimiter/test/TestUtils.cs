@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests;
 
-
 public static class TestUtils
 {
     public static ConcurrencyLimiterMiddleware CreateTestMiddleware(

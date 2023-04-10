@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     <para>
 ///         Represents the mapping between a .NET <see cref="byte" /> array type and a database type.

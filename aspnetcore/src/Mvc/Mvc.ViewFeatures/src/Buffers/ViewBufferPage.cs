@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
-
 internal sealed class ViewBufferPage
 {
     public ViewBufferPage(ViewBufferValue[] buffer)

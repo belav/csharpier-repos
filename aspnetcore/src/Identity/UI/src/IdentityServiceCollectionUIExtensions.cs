@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Default UI extensions to <see cref="IServiceCollection"/>.
 /// </summary>

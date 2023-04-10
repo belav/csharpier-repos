@@ -5,7 +5,6 @@ using Microsoft.JSInterop;
 
 namespace BasicTestApp.ServerReliability;
 
-
 public class JSInterop
 {
     [JSInvokable]

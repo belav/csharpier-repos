@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public static class BoundAttributeDescriptorBuilderExtensions
 {
     public static void SetPropertyName(

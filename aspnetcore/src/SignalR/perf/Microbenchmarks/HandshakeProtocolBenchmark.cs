@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
-
 public class HandshakeProtocolBenchmark
 {
     ReadOnlySequence<byte> _requestMessage1;

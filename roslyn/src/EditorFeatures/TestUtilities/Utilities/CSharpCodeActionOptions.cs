@@ -18,7 +18,6 @@ using Microsoft.CodeAnalysis.Formatting;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities;
 
-
 internal static class CSharpCodeActionOptions
 {
     public static CodeActionOptions Default =

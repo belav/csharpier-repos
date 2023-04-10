@@ -16,7 +16,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 public class ViewExecutorTest
 {
     public static TheoryData<

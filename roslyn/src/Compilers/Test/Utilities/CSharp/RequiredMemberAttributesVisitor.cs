@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 
 namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 
-
 internal class RequiredMemberAttributesVisitor : TestAttributesVisitor
 {
     internal static string GetString(PEModuleSymbol module)

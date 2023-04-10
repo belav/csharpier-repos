@@ -20,7 +20,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 [Collection(EndToEndTestsCollection.Name)]
 public class WebSocketsTransportTests : FunctionalTestBase
 {

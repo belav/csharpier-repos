@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControllersFromServicesClassLibrary;
 
-
 [NonController]
 public class ClientUIStubController
 {

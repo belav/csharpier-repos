@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Represents property facet overrides for a particular table-like store object.
 /// </summary>

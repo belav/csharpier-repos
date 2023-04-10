@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
-
 /// <summary>
 /// An ephemeral XML repository backed by process memory. This class must not be used for
 /// anything other than dev scenarios as the keys will not be persisted to storage.

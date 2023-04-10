@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     A <see cref="DiagnosticSource" /> event payload class for events that have involving mapping of a property to a stored procedure.
 /// </summary>

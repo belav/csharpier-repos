@@ -14,7 +14,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Workspaces;
 
-
 public class LspWorkspaceRegistrationServiceTests : AbstractLanguageServerProtocolTests
 {
     public LspWorkspaceRegistrationServiceTests(ITestOutputHelper testOutputHelper)

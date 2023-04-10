@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore.Update.Internal;
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 public class ReaderModificationCommandBatchTest
 {
     [ConditionalFact]

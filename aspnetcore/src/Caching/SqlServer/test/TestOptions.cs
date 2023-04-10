@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Caching.SqlServer;
 
-
 internal class TestSqlServerCacheOptions : IOptions<SqlServerCacheOptions>
 {
     private readonly SqlServerCacheOptions _innerOptions;

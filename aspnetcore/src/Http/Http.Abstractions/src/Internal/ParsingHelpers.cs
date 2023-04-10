@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 internal static class ParsingHelpers
 {
     public static StringValues GetHeader(IHeaderDictionary headers, string key)

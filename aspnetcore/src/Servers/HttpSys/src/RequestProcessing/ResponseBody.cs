@@ -9,7 +9,6 @@ using static Microsoft.AspNetCore.HttpSys.Internal.UnsafeNclNativeMethods;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 #pragma warning disable CA1844 // Provide memory-based overrides of async methods when subclassing 'Stream'. Fixing this is too gnarly.
 internal sealed partial class ResponseBody : Stream
 #pragma warning restore CA1844

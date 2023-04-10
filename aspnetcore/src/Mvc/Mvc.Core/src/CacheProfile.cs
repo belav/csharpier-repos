@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Defines a set of settings which can be used for response caching.
 /// </summary>

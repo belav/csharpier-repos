@@ -7,7 +7,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-
 [DebuggerDisplay("{PropertyInfo, nq}")]
 internal readonly struct LifecycleProperty
 {

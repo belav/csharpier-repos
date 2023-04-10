@@ -7,7 +7,6 @@ using StackExchange.Redis;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
-
 // We don't want to use our nested static class here because RedisHubLifetimeManager is generic.
 // We'd end up creating separate instances of all the LoggerMessage.Define values for each Hub.
 internal static partial class RedisLog

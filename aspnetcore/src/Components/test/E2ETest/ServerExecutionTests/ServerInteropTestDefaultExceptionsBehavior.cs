@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-
 public class ServerInteropTestDefaultExceptionsBehavior
     : ServerTestBase<BasicTestAppServerSiteFixture<ServerStartup>>
 {

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 internal static class SyntaxUtilities
 {
     public static MarkupTextLiteralSyntax MergeTextLiterals(

@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class QueryLoggingCosmosTest
     : QueryLoggingCosmosTestBase,
         IClassFixture<QueryLoggingCosmosTest.NorthwindQueryCosmosFixtureInsensitive<NoopModelCustomizer>>

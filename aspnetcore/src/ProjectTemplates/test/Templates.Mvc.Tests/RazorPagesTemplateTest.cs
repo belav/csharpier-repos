@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Templates.Mvc.Test;
 
-
 public class RazorPagesTemplateTest : LoggedTest
 {
     public RazorPagesTemplateTest(ProjectFactoryFixture projectFactory)

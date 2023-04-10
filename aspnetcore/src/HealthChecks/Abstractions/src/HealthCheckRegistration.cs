@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 /// <summary>
 /// Represent the registration information associated with an <see cref="IHealthCheck"/> implementation.
 /// </summary>

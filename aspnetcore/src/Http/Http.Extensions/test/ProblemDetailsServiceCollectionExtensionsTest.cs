@@ -7,7 +7,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Http.Extensions.Tests;
 
-
 public class ProblemDetailsServiceCollectionExtensionsTest
 {
     [Fact]

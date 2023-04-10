@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Specifies the <see cref="BindingBehavior"/> that should be applied.
 /// </summary>

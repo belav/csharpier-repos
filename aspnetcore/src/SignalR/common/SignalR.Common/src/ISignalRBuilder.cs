@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// A builder abstraction for configuring SignalR object instances.
 /// </summary>

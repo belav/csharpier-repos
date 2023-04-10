@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace RazorSyntaxGenerator;
 
-
 internal abstract class AbstractFileWriter
 {
     private readonly TextWriter _writer;

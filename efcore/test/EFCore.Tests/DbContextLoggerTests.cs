@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class DbContextLoggerTests
 {
     private const string ContextInitialized =

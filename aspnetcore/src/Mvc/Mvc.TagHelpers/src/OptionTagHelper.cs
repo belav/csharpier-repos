@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// <see cref="ITagHelper"/> implementation targeting &lt;option&gt; elements.
 /// </summary>

@@ -9,7 +9,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace JwtSample;
 
-
 public class Startup
 {
     private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(

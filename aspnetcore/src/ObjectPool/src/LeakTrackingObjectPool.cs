@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.Extensions.ObjectPool;
 
-
 /// <summary>
 /// An <see cref="ObjectPool{T}"/> implementation that detects leaks in the use of the object pool.
 /// <para>

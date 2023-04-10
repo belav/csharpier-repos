@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Antiforgery.Internal;
 
-
 public class DefaultAntiforgeryTest
 {
     private const string ResponseCacheHeadersOverrideWarningMessage =

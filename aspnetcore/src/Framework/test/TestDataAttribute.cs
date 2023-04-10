@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore;
 
-
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 internal class TestDataAttribute : Attribute
 {

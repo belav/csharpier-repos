@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 internal static class ProtocolHelper
 {
     internal static Type? TryGetReturnType(IInvocationBinder binder, string invocationId)

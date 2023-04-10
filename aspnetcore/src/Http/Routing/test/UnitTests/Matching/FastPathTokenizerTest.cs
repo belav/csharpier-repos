@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 public class FastPathTokenizerTest
 {
     // Generally this will only happen in tests when the HttpContext hasn't been

@@ -11,7 +11,6 @@ using Xunit.Sdk;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 public class CommandBatchPreparerTest
 {
     [ConditionalFact]

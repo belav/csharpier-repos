@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed class ControllerActionEndpointDataSourceFactory
 {
     private readonly ControllerActionEndpointDataSourceIdProvider _dataSourceIdProvider;

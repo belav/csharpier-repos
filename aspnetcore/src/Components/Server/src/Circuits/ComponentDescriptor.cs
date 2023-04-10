@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Server;
 
-
 internal sealed class ComponentDescriptor
 {
     public Type ComponentType { get; set; }

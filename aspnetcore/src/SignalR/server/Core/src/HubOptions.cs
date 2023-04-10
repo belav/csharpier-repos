@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// Options used to configure hub instances.
 /// </summary>

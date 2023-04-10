@@ -5,7 +5,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 public partial interface IHeaderDictionary
 {
     /// <summary>Gets or sets the <c>Accept</c> HTTP header.</summary>

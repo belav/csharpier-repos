@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class UpdatesRelationalFixture : UpdatesFixtureBase
 {
     public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;

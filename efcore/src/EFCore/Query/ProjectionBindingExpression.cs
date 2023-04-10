@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         An expression that gets values from <see cref="ShapedQueryExpression.QueryExpression" /> to be used in

@@ -12,7 +12,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-
 internal static partial class AnalyzerOptionsProviders
 {
     public static async ValueTask<AnalyzerOptionsProvider> GetAnalyzerOptionsProviderAsync(

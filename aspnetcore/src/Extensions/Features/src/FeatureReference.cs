@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// A cached reference to a feature.
 /// </summary>

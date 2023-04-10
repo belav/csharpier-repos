@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components;
 
 namespace BasicTestApp.ServerReliability;
 
-
 public class ThrowingConstructorComponent : IComponent
 {
     public ThrowingConstructorComponent()

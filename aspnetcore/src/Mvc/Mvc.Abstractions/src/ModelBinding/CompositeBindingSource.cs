@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// A <see cref="BindingSources"/> which can represent multiple value-provider data sources.
 /// </summary>

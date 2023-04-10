@@ -6,7 +6,6 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 /// <summary>
 /// An exception thrown when the connection is reset.
 /// </summary>

@@ -5,7 +5,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 #pragma warning disable CS0618 // Type or member is obsolete
 internal sealed class GenericWebHostApplicationLifetime : IApplicationLifetime
 #pragma warning restore CS0618 // Type or member is obsolete

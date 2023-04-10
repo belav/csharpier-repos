@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
-
 /// <summary>
 /// Implementation of <see cref="IComparer{T}"/> that can compare content negotiation header fields
 /// based on their quality values (a.k.a q-values). This applies to values used in accept-charset,

@@ -6,7 +6,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-
 internal sealed class ConnectionLogScope : IReadOnlyList<KeyValuePair<string, object>>
 {
     private readonly string _connectionId;

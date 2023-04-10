@@ -21,7 +21,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 /// <summary>
 /// These features/tests Are only supported on newer versions of Windows and IIS. They are not supported
 /// on IIS Express even on the new Windows versions because IIS Express has its own outdated copy of IIS.

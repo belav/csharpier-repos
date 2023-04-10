@@ -17,7 +17,6 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.References;
 
-
 public class FindAllReferencesHandlerFeaturesTests : AbstractLanguageServerProtocolTests
 {
     public FindAllReferencesHandlerFeaturesTests(ITestOutputHelper? testOutputHelper)

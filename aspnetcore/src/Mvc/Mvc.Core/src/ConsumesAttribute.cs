@@ -13,7 +13,6 @@ using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// A filter that specifies the supported request content types. <see cref="ContentTypes"/> is used to select an
 /// action when there would otherwise be multiple matches.

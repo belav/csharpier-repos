@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 [ExportCodeFixProvider(LanguageNames.CSharp)]
 [Shared]
 public class AddResponseTypeAttributeCodeFixProvider : CodeFixProvider

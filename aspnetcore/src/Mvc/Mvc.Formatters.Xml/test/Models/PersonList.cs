@@ -3,5 +3,4 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 public class PersonList : List<Person> { }

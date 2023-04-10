@@ -7,7 +7,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// Represents a handler in a <see cref="PageApplicationModel"/>.
 /// </summary>

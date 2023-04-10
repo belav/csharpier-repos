@@ -12,7 +12,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 internal sealed class PropertyAsParameterInfo : ParameterInfo
 {
     private readonly PropertyInfo _underlyingProperty;

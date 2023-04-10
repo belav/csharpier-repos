@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Represents an entity which can provide model name as metadata.
 /// </summary>

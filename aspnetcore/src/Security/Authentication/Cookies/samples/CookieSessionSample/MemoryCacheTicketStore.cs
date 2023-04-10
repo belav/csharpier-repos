@@ -7,7 +7,6 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace CookieSessionSample;
 
-
 public class MemoryCacheTicketStore : ITicketStore
 {
     private const string KeyPrefix = "AuthSessionStore-";

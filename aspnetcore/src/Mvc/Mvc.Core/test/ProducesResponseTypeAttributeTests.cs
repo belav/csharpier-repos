@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class ProducesResponseTypeAttributeTests
 {
     [Fact]

@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// An implementation for <see cref="IServiceProvidersFeature"/> for accessing request services.
 /// </summary>

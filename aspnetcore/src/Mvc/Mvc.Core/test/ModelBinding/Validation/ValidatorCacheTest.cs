@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 public class ValidatorCacheTest
 {
     [Fact]

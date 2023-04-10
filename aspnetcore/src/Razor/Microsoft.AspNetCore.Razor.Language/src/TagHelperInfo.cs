@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class TagHelperInfo
 {
     public TagHelperInfo(string tagName, TagMode tagMode, TagHelperBinding bindingResult)

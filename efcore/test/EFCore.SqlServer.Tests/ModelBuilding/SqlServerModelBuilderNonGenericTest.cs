@@ -6,7 +6,6 @@
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
-
 public class SqlServerModelBuilderNonGenericTest : SqlServerModelBuilderTestBase
 {
     public class SqlServerNonGenericNonRelationship : SqlServerNonRelationship

@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Maps a static CLR method to a database function so that the CLR method may be used in LINQ queries.
 ///     By convention uses the .NET method name as name of the database function and the default schema.

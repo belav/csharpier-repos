@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Represents a set of data that persists only from one request to the next.
 /// </summary>

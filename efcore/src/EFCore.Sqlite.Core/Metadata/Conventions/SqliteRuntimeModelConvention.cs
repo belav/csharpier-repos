@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that creates an optimized copy of the mutable model.
 /// </summary>

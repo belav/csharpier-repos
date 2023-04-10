@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
-
 /// <summary>
 /// A response to a '/negotiate' request.
 /// </summary>

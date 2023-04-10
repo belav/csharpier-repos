@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// <see cref="ITagHelper"/> implementation targeting &lt;form&gt; elements.
 /// </summary>

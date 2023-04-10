@@ -6,7 +6,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 public class Transaction
 {
     public HttpRequestMessage Request { get; set; }

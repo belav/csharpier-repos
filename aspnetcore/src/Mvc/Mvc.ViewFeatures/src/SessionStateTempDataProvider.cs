@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Provides session-state data to the current <see cref="ITempDataDictionary"/> object.
 /// </summary>

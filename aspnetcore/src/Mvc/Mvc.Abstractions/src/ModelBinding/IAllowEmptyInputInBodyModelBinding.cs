@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 internal interface IConfigureEmptyBodyBehavior
 {
     public EmptyBodyBehavior EmptyBodyBehavior { get; }

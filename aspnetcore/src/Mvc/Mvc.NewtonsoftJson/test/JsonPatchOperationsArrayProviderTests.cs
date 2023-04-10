@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
-
 public class JsonPatchOperationsArrayProviderTests
 {
     [Fact]

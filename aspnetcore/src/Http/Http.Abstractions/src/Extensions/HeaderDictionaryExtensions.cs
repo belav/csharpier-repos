@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Contains extension methods for modifying an <see cref="IHeaderDictionary"/> instance.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
-
 /// <summary>
 /// A type that knows how to create instances of an <see cref="IAuthenticatedEncryptorDescriptor"/>
 /// given specific secret key material.

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 
-
 /// <summary>
 /// Implements an <see cref="IAuthorizationHandler"/> and <see cref="IAuthorizationRequirement"/>
 /// which requires the current user must be authenticated.

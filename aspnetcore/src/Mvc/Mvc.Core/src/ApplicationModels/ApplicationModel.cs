@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// A model for configuring controllers in an MVC application.
 /// </summary>

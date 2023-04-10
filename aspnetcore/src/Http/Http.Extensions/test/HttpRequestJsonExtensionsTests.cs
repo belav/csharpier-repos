@@ -8,7 +8,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Http.Extensions.Tests;
 
-
 public class HttpRequestJsonExtensionsTests
 {
     [Fact]

@@ -8,7 +8,6 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
-
 /// <summary>
 /// Specifies settings for how to decrypt XML keys.
 /// </summary>

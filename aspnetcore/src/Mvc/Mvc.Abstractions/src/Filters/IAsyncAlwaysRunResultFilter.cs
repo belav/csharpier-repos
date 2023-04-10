@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// A filter that asynchronously surrounds execution of all action results.
 /// </summary>

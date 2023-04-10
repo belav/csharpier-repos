@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Represents a template which keeps track of visited objects.
 /// </summary>

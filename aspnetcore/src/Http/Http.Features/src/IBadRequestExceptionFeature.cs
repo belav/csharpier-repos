@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Provides information about rejected HTTP requests.
 /// </summary>

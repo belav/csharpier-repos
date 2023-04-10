@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
-
 // These tests cover the methods on ExtensionIntermediateNode that are used to implement visitors
 // that special case an extension node.
 public class ExtensionIntermediateNodeTest

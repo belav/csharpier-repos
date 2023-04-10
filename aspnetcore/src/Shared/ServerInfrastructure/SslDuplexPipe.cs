@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal;
 
-
 internal sealed class SslDuplexPipe : DuplexPipeStreamAdapter<SslStream>
 {
     public SslDuplexPipe(

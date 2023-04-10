@@ -15,7 +15,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 /// <summary>
 /// Functional test to verify the error reporting of Razor compilation by diagnostic middleware.
 /// </summary>

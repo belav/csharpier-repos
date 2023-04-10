@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.Infrastructure;
 
-
 public class SyncPoint
 {
     private readonly TaskCompletionSource<object?> _atSyncPoint;

@@ -15,7 +15,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
-
 internal class TestServerBuilder
 {
     public static readonly string DefaultAuthority = @"https://login.microsoftonline.com/common";

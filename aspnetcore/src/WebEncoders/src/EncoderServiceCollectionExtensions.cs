@@ -9,7 +9,6 @@ using Microsoft.Extensions.WebEncoders;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for setting up web encoding services in an <see cref="IServiceCollection" />.
 /// </summary>

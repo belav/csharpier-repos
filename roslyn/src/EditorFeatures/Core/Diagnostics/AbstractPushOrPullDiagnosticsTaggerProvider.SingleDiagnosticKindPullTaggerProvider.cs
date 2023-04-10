@@ -28,7 +28,6 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-
 internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
 {
     /// <summary>

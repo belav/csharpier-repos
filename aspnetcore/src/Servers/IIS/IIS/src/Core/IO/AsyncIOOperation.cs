@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core.IO;
 
-
 internal abstract class AsyncIOOperation : IValueTaskSource<int>, IValueTaskSource
 {
     private static readonly Action<object?> CallbackCompleted = _ =>

@@ -15,7 +15,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.E2ETesting;
 
-
 // XUnit assertions, but hooked into Selenium's polling mechanism
 
 public static class WaitAssert

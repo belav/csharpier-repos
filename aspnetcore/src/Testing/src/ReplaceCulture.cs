@@ -8,7 +8,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// Replaces the current culture and UI culture for the test.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace SocialWeather;
 
-
 public class FormatterResolver
 {
     private readonly IServiceProvider _serviceProvider;

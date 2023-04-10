@@ -12,7 +12,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.WebAssembly.AppHost;
 
-
 internal sealed class PassThroughConsoleFormatter : ConsoleFormatter, IDisposable
 {
     private readonly IDisposable? _optionsReloadToken;

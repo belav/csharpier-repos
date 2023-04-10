@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
 
-
 public class OpenGenericsWithAs : AutoMapperSpecBase
 {
     public class Source

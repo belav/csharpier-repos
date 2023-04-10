@@ -5,7 +5,6 @@ using System.Collections;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 /// <summary>
 /// Delegates enumeration of elements to the original enumerator and wraps the items
 /// with the supplied <see cref="IWrapperProvider"/>.

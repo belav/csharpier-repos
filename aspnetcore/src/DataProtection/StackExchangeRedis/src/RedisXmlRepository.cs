@@ -10,7 +10,6 @@ using StackExchange.Redis;
 
 namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis;
 
-
 /// <summary>
 /// An XML repository backed by a Redis list entry.
 /// </summary>

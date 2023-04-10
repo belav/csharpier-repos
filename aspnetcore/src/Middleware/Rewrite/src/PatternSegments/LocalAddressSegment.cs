@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
-
 internal sealed class LocalAddressSegment : PatternSegment
 {
     public override string? Evaluate(

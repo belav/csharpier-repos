@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
-
 /// <summary>
 /// Provides methods for creation and disposal of controllers.
 /// </summary>

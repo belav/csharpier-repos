@@ -5,7 +5,6 @@
 
 namespace System.Diagnostics.CodeAnalysis;
 
-
 /// <summary>
 /// Indicates that the specified method requires dynamic access to code that is not referenced
 /// statically, for example through <see cref="System.Reflection"/>.

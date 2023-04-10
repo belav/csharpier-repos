@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Supplies information about an drag event that is being raised.
 /// </summary>

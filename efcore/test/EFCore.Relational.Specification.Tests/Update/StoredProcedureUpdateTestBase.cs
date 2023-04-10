@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
 {
     protected override string StoreName => "StoredProcedureUpdateTest";

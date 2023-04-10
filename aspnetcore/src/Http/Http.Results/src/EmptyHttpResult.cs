@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-
 /// <summary>
 /// Represents an <see cref="IResult"/> that when executed will
 /// do nothing.

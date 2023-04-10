@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class NorthwindDbFunctionsQueryRelationalTestBase<TFixture>
     : NorthwindDbFunctionsQueryTestBase<TFixture>
     where TFixture : NorthwindQueryRelationalFixture<NoopModelCustomizer>, new()

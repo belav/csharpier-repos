@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace BasicWebSite;
 
-
 [BindProperties(SupportsGet = true)]
 public class BindPropertiesWithValidationController : Controller
 {

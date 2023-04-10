@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Rewrite;
 
-
 internal sealed class MatchResults
 {
     public static readonly MatchResults EmptySuccess = new MatchResults(success: true);

@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public class DefaultRazorIntermediateNodeLoweringPhaseTest
 {
     [Fact]

@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 /// <summary>
 /// Defines an interface that provides the mechanisms to configure a connection pipeline.
 /// </summary>

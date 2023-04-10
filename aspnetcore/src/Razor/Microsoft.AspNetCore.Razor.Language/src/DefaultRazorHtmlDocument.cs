@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class DefaultRazorHtmlDocument : RazorHtmlDocument
 {
     private readonly string _generatedHtml;

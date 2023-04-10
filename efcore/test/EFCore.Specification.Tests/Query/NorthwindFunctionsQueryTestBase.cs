@@ -16,7 +16,6 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 #pragma warning disable RCS1155 // Use StringComparison when comparing strings.
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 // ReSharper disable once UnusedTypeParameter
 public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()

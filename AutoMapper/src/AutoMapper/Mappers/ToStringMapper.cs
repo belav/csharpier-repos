@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.Internal.Mappers;
 
-
 public class ToStringMapper : IObjectMapper
 {
     public bool IsMatch(TypePair context) => context.DestinationType == typeof(string);

@@ -22,7 +22,6 @@ using Microsoft.Extensions.Logging;
 
 namespace SampleApp;
 
-
 public class Startup
 {
     public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)

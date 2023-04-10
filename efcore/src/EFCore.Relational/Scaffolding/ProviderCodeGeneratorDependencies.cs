@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
-
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="ProviderCodeGenerator" />

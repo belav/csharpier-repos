@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class TemporalManyToManyQuerySqlServerFixture : ManyToManyQueryFixtureBase
 {
     protected override string StoreName => "TemporalManyToManyQueryTest";

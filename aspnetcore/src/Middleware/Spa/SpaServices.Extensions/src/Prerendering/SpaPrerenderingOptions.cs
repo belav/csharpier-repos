@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.SpaServices.Prerendering;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Represents options for the SPA prerendering middleware.
 /// </summary>

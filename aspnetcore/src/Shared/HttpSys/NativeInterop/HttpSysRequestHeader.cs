@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
-
 internal enum HttpSysRequestHeader
 {
     CacheControl = 0, // general-header [section 4.5]

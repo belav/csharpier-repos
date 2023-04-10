@@ -9,7 +9,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
-
 public class CorsHttpMethodActionConstraintTest
 {
     public static TheoryData AcceptCaseInsensitiveData = new TheoryData<IEnumerable<string>, string>

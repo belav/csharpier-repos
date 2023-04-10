@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-
 internal class ViewCssScopePass : IntermediateNodePassBase, IRazorOptimizationPass
 {
     // Runs after taghelpers are bound

@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 public class DefaultPageActivatorProviderTest
 {
     [Fact]

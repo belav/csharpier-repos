@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// A value provider which can filter its contents to remove keys rewritten compared to the request data.
 /// </summary>

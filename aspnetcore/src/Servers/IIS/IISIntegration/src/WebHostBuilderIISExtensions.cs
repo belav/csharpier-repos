@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 /// <summary>
 /// Extension methods for the IIS Out-Of-Process.
 /// </summary>

@@ -8,7 +8,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
-
 /// <summary>
 /// Used to setup defaults for all <see cref="JwtBearerOptions"/>.
 /// </summary>

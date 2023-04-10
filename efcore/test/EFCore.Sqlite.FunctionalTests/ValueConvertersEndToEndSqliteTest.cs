@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class ValueConvertersEndToEndSqliteTest
     : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndSqliteTest.ValueConvertersEndToEndSqliteFixture>
 {

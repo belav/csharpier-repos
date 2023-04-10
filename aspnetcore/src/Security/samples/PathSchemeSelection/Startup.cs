@@ -19,7 +19,6 @@ using Microsoft.Extensions.Options;
 
 namespace AuthSamples.PathSchemeSelection;
 
-
 public class Startup
 {
     public Startup(IConfiguration configuration)

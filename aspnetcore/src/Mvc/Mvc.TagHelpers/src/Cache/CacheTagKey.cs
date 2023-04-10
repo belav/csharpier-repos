@@ -11,7 +11,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
-
 /// <summary>
 /// An instance of <see cref="CacheTagKey"/> represents the state of <see cref="CacheTagHelper"/>
 /// or <see cref="DistributedCacheTagHelper"/> keys.

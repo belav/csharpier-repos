@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// Represents a deferred write operation in a <see cref="RazorPage"/>.
 /// </summary>

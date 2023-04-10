@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 public class DataMemberRequiredBindingMetadataProviderTest
 {
     [Fact]

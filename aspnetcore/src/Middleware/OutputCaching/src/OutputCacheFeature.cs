@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 internal sealed class OutputCacheFeature : IOutputCacheFeature
 {
     public OutputCacheFeature(OutputCacheContext context)

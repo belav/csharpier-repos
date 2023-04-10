@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 public class CompilerFailedExceptionFactoryTest
 {
     [Fact]

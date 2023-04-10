@@ -3,7 +3,6 @@
 
 namespace RazorPagesWebSite;
 
-
 public class PageTestDisposeAsync
 {
     public bool DisposeAsyncInvoked { get; set; }

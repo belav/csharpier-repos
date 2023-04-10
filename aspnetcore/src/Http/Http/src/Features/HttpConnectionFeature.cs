@@ -5,7 +5,6 @@ using System.Net;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Default implementation for <see cref="IHttpConnectionFeature"/>.
 /// </summary>

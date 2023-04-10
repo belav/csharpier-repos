@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Defines a contract to generate absolute and related URIs based on endpoint routing.
 /// </summary>

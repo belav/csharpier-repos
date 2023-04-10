@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Routing.LinkGeneration;
 
-
 public class SingleRouteWithParametersBenchmark : EndpointRoutingBenchmarkBase
 {
     private TreeRouter _treeRouter;

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Identity.DefaultUI.WebSite;
 
-
 public class NoIdentityStartup
 {
     public NoIdentityStartup(IConfiguration configuration)

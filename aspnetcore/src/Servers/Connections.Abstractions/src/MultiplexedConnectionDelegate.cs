@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 /// <summary>
 /// A function that can process a connection.
 /// </summary>

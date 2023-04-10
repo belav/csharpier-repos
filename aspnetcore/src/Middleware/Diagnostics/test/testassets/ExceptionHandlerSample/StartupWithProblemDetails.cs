@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http.Metadata;
 
 namespace ExceptionHandlerSample;
 
-
 public class StartupWithProblemDetails
 {
     public void ConfigureServices(IServiceCollection services)

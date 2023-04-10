@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
-
 // Uses Windows Job Objects to ensure external processes are killed if the current process is terminated non-gracefully.
 internal static partial class ProcessTracker
 {

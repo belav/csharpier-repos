@@ -8,7 +8,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
-
 /// <summary>
 /// A context for <see cref="OpenIdConnectEvents.UserInformationReceived(UserInformationReceivedContext)"/>.
 /// </summary>

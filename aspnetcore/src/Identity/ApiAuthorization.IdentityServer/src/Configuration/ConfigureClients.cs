@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 internal sealed class ConfigureClients : IConfigureOptions<ApiAuthorizationOptions>
 {
     private const string DefaultLocalSPARelativeRedirectUri = "/authentication/login-callback";

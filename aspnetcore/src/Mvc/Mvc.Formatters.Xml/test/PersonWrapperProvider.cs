@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 public class PersonWrapperProvider : IWrapperProvider
 {
     public object Wrap(object obj)

@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Contains extension methods for using Razor Pages with <see cref="IEndpointRouteBuilder"/>.
 /// </summary>

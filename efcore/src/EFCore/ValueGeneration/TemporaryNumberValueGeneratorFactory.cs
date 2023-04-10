@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
-
 /// <summary>
 ///     Factory for creation of temporary integer value generators appropriate
 ///     for the numeric type of the property.

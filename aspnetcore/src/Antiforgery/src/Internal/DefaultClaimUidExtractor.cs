@@ -8,7 +8,6 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-
 /// <summary>
 /// Default implementation of <see cref="IClaimUidExtractor"/>.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Interface implemented by components that receive notification of state changes.
 /// </summary>

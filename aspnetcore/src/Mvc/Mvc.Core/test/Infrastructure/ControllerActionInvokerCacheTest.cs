@@ -15,7 +15,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 public class ControllerActionInvokerCacheTest
 {
     [Fact]

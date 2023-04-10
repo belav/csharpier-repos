@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// This feature provides access to request server variables set.
 /// </summary>

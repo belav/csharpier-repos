@@ -16,7 +16,6 @@ using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestExceptio
 
 namespace IIS.Tests;
 
-
 [SkipIfHostableWebCoreNotAvailable]
 [MinimumOSVersion(
     OperatingSystems.Windows,

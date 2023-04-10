@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
-
 [ApiExplorerSettings(IgnoreApi = true)]
 [Route("ApiExplorerVisibilitySetExplicitly")]
 public class ApiExplorerVisibilitySetExplicitlyController : Controller

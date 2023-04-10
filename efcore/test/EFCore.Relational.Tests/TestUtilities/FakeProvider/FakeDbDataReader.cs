@@ -5,7 +5,6 @@ using System.Collections;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
-
 public class FakeDbDataReader : DbDataReader
 {
     private readonly string[] _columnNames;

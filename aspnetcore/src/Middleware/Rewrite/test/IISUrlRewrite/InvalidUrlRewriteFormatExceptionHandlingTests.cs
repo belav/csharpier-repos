@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite;
 
-
 public class InvalidUrlRewriteFormatExceptionHandlingTests
 {
     [Theory]

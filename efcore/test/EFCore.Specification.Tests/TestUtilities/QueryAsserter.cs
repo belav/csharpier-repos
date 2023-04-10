@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class QueryAsserter
 {
     private static readonly MethodInfo _assertIncludeEntity = typeof(QueryAsserter)

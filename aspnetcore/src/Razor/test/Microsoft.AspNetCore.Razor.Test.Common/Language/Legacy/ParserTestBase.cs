@@ -13,7 +13,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 [IntializeTestFile]
 public abstract class ParserTestBase
 {

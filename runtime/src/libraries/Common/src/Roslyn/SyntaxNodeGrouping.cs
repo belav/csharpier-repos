@@ -8,7 +8,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions;
 
-
 internal static partial class SyntaxValueProviderExtensions
 {
     /// <summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering;
 
-
 internal sealed class NullDispatcher : Dispatcher
 {
     public static readonly Dispatcher Instance = new NullDispatcher();

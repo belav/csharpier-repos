@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// A context object for <see cref="IRouter.RouteAsync(RouteContext)"/>.
 /// </summary>

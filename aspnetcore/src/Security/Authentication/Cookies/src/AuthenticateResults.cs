@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
-
 internal static class AuthenticateResults
 {
     internal static AuthenticateResult FailedUnprotectingTicket = AuthenticateResult.Fail(

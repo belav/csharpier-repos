@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
-
 public class RoleValidatorTest
 {
     [Fact]

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 
-
 public class TagHelperExecutionContext
 {
     public TagHelperExecutionContext(

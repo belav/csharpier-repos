@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
-
 public class RenderBatchWriterTest
 {
     static readonly object NullStringMarker = new object();

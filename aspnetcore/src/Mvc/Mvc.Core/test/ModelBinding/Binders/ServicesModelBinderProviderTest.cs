@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 public class ServicesModelBinderProviderTest
 {
     public static TheoryData<BindingSource> NonServicesBindingSources

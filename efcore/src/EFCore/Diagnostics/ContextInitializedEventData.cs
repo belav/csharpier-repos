@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     A <see cref="DiagnosticSource" /> event payload class for context initialization events.
 /// </summary>

@@ -11,7 +11,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Http.Extensions.Tests;
 
-
 public class ParameterBindingMethodCacheTests
 {
     [Theory]

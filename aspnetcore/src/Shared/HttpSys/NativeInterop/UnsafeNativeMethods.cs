@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
-
 internal static unsafe partial class UnsafeNclNativeMethods
 {
     private const string sspicli_LIB = "sspicli.dll";

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 internal sealed class TestAssembly : Assembly
 {
     private readonly Type[] _types;

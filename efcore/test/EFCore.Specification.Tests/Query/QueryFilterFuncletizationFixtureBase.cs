@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class QueryFilterFuncletizationFixtureBase
     : SharedStoreFixtureBase<QueryFilterFuncletizationContext>
 {

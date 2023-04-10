@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-
 internal sealed class LoggingDuplexPipe : DuplexPipeStreamAdapter<LoggingStream>
 {
     private static readonly StreamPipeReaderOptions _defaultReaderOptions =

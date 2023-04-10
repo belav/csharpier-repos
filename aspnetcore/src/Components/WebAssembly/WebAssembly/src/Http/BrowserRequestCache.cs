@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Http;
 
-
 /// <summary>
 /// The cache mode of the request. It controls how the request will interact with the browser's HTTP cache.
 /// See <see href="https://developer.mozilla.org/en-US/docs/Web/API/Request/cache"/>.

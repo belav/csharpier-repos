@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorEngineFeatureBase : IRazorEngineFeature
 {
     private RazorEngine _engine;

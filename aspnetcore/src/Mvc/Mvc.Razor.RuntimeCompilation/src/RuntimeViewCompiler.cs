@@ -19,7 +19,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 #pragma warning disable CA1852 // Seal internal types
 internal partial class RuntimeViewCompiler : IViewCompiler
 #pragma warning restore CA1852 // Seal internal types

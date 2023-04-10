@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI.AzureAD.Controllers.Internal;
 
-
 [NonController]
 [AllowAnonymous]
 [Area("AzureAD")]

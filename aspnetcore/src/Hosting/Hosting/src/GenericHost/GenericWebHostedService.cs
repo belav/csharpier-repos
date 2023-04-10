@@ -19,7 +19,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal sealed partial class GenericWebHostService : IHostedService
 {
     public GenericWebHostService(

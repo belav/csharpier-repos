@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Metadata;
 
-
 /// <summary>
 /// Interface for accepting request media types.
 /// </summary>

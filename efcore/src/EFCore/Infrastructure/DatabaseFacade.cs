@@ -6,7 +6,6 @@ using System.Data.Common;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     Provides access to database related information and operations for a context.
 ///     Instances of this class are typically obtained from <see cref="DbContext.Database" /> and it is not designed

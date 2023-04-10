@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace IdentitySample;
 
-
 public class Startup
 {
     public Startup(IWebHostEnvironment env)

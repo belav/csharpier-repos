@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// A type that wraps either an <typeparamref name="TValue"/> instance or an <see cref="ActionResult"/>.
 /// </summary>

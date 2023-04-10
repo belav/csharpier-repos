@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
-
 public class JsonPatchDocumentGetPathTest
 {
     [Fact]

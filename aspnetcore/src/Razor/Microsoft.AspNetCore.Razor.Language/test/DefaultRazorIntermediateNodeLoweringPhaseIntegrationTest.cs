@@ -12,7 +12,6 @@ using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAs
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 {
     [Fact]

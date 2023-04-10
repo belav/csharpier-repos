@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
-
 public static class ComponentsTestDeclarations
 {
     public static readonly string Source =

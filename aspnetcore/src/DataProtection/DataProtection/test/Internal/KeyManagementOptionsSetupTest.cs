@@ -12,7 +12,6 @@ using Microsoft.Win32;
 
 namespace Microsoft.AspNetCore.DataProtection.Internal;
 
-
 public class KeyManagementOptionsSetupTest
 {
     [Fact]

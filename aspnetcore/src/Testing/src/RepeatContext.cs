@@ -5,7 +5,6 @@ using System.Threading;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class RepeatContext
 {
     private static readonly AsyncLocal<RepeatContext> _current = new AsyncLocal<RepeatContext>();

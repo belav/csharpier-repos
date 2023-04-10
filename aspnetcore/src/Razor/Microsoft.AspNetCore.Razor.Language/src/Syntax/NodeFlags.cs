@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 [Flags]
 internal enum NodeFlags : byte
 {

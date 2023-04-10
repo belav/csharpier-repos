@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 public class ClientCertificateFixture : IDisposable
 {
     private X509Certificate2 _certificate;

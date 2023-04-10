@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 internal static class ViewEnginePath
 {
     public static readonly char[] PathSeparators = new[] { '/', '\\' };

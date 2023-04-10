@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.WebSockets;
 
-
 /// <summary>
 /// Extends the <see cref="WebSocketAcceptContext"/> class with additional properties.
 /// </summary>

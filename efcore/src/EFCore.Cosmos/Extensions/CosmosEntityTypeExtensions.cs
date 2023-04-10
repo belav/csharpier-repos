@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Entity type extension methods for Cosmos metadata.
 /// </summary>

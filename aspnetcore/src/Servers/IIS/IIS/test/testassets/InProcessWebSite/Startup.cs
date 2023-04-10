@@ -33,7 +33,6 @@ using Xunit;
 
 namespace TestSite;
 
-
 public partial class Startup
 {
     public static bool StartupHookCalled;

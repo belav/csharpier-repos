@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Contains the result of model binding.
 /// </summary>

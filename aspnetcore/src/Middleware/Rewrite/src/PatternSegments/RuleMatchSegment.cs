@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
-
 internal sealed class RuleMatchSegment : PatternSegment
 {
     private readonly int _index;

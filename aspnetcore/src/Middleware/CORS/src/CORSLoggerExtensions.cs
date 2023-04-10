@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Cors;
 
-
 internal static partial class CORSLoggerExtensions
 {
     [LoggerMessage(

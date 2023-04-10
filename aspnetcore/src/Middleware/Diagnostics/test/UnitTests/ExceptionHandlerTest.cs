@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 public class ExceptionHandlerTest
 {
     [Theory]

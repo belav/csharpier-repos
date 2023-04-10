@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.DataProtection.SP800_108;
 
 namespace Microsoft.AspNetCore.DataProtection.Managed;
 
-
 // An encryptor that uses AesGcm to do encryption
 internal sealed unsafe class AesGcmAuthenticatedEncryptor
     : IOptimizedAuthenticatedEncryptor,

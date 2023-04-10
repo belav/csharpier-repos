@@ -14,7 +14,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
-
 [
     ExportCodeFixProvider(
         LanguageNames.CSharp,

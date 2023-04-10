@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Provides protection and validation of identity tokens.
 /// </summary>

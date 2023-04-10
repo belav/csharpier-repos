@@ -7,7 +7,6 @@ using System.Collections;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed class CopyOnWriteList<T> : IList<T>
 {
     private readonly IReadOnlyList<T> _source;

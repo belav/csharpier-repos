@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HeaderPropagation;
 
-
 /// <summary>
 /// Contains the outbound header values for the <see cref="HeaderPropagationMessageHandler"/>.
 /// </summary>

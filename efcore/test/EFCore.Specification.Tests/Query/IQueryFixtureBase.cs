@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public interface IQueryFixtureBase
 {
     Func<DbContext> GetContextCreator();

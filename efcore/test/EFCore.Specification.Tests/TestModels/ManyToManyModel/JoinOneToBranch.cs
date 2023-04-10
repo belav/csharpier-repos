@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
-
 public class JoinOneToBranch
 {
     public virtual int EntityOneId { get; set; }

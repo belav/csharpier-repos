@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     The metadata about the shape of entities, the relationships between them, and how they map to the database.
 ///     Also includes all the information necessary to initialize the database.

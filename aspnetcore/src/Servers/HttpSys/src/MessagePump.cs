@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal sealed partial class MessagePump : IServer, IServerDelegationFeature
 {
     private readonly ILogger _logger;

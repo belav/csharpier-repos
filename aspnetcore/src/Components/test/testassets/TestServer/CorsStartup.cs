@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace TestServer;
 
-
 public class CorsStartup
 {
     public CorsStartup(IConfiguration configuration)

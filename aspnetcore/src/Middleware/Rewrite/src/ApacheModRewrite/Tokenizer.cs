@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
-
 /// <summary>
 /// Tokenizes a mod_rewrite rule, delimited by spaces.
 /// </summary>

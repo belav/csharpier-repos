@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Configures the <see cref="IMvcBuilder"/>. Implement this interface to enable design-time configuration
 /// (for instance during pre-compilation of views) of <see cref="IMvcBuilder"/>.

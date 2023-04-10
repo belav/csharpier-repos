@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public abstract class RelationalTypeMapperTestBase
 {
     protected IMutableEntityType CreateEntityType<TEntity>()

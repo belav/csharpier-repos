@@ -6,7 +6,6 @@ using System.Threading.Channels;
 
 namespace SignalRSamples;
 
-
 public static class ObservableExtensions
 {
     public static ChannelReader<T> AsChannelReader<T>(

@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 /// <summary>
 /// Options for API authorization.
 /// </summary>

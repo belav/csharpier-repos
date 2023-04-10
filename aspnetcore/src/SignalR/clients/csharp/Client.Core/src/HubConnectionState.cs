@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
-
 /// <summary>
 /// Describes the current state of the <see cref="HubConnection"/> to the server.
 /// </summary>

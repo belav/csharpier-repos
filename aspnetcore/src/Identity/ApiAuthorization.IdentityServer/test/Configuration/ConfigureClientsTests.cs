@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
-
 public class ConfigureClientsTests
 {
     [Fact]

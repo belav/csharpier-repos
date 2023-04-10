@@ -13,7 +13,6 @@ using Microsoft.VisualStudio.Debugger.Contracts.HotReload;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests;
 
-
 [Export(typeof(IManagedHotReloadService)), PartNotDiscoverable, Shared]
 internal class MockManagedHotReloadService : IManagedHotReloadService
 {

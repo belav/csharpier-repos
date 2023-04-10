@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
-
 /// <summary>
 /// Context used when certificates are being validated.
 /// </summary>

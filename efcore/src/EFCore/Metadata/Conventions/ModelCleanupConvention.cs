@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that removes any state that is only used during model building.
 /// </summary>

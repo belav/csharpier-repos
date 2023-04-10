@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authorization.Policy.Test;
 
-
 public class PolicyEvaluatorTests
 {
     [Fact]

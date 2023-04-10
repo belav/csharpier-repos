@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.DiagnosticsViewPage.Views;
 
-
 internal sealed class AttributeValue
 {
     public AttributeValue(string prefix, object value, bool literal)

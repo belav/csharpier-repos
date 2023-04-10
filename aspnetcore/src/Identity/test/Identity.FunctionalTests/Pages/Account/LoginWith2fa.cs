@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 
-
 public class LoginWith2fa : DefaultUIPage
 {
     public const string Path = "/Identity/Account/LoginWith2fa";

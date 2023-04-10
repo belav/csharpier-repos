@@ -10,7 +10,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
-
 /// <summary>
 /// A filter that applies the given <see cref="CorsPolicy"/> and adds appropriate response headers.
 /// </summary>

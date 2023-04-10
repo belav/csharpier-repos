@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// Renders a partial view.
 /// </summary>

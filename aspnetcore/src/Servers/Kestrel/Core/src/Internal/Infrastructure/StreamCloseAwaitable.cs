@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal sealed class StreamCloseAwaitable : ICriticalNotifyCompletion
 {
     private static readonly Action _callbackCompleted = () => { };

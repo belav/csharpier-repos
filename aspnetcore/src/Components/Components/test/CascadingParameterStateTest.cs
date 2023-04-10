@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.Test.Helpers;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 public class CascadingParameterStateTest
 {
     [Fact]

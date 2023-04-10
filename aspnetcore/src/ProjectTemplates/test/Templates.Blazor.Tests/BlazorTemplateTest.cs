@@ -11,7 +11,6 @@ using Xunit;
 
 namespace BlazorTemplates.Tests;
 
-
 public abstract class BlazorTemplateTest : BrowserTestBase
 {
     public const int BUILDCREATEPUBLISH_PRIORITY = -1000;

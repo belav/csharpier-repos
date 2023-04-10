@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Represents a database sequence in the model in a form that
 ///     can be mutated while building the model.

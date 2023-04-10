@@ -5,7 +5,6 @@ using System.CommandLine.Binding;
 
 namespace System.CommandLine.NamingConventionBinder;
 
-
 internal class MissingValueSource : IValueSource
 {
     public bool TryGetValue(

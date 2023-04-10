@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class Http2ConnectionHeadersBenchmark : Http2ConnectionBenchmarkBase
 {
     [Params(1, 4, 32)]

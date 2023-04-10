@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Defines an interface for model binders.
 /// </summary>

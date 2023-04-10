@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures a property as a concurrency token if it has the <see cref="ConcurrencyCheckAttribute" />.
 /// </summary>

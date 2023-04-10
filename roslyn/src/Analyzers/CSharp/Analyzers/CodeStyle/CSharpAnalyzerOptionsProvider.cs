@@ -15,7 +15,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-
 /// <summary>
 /// Provides C# analyzers a convenient access to editorconfig options with fallback to IDE default values.
 /// </summary>

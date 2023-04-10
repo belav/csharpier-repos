@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
-
 public class CustomerQueryWithQueryFilter
 {
     public string CompanyName { get; set; }

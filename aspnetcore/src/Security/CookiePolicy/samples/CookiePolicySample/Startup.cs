@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace CookiePolicySample;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

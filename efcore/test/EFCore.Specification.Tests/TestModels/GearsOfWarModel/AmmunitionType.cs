@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
-
 public enum AmmunitionType
 {
     Cartridge = 1,

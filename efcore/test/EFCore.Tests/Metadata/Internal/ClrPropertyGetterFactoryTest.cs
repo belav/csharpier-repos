@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-
 public class ClrPropertyGetterFactoryTest
 {
     [ConditionalFact]

@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 internal sealed class RazorPagesRazorViewEngineOptionsSetup
     : IConfigureOptions<RazorViewEngineOptions>
 {

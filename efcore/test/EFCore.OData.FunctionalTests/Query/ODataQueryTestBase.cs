@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class ODataQueryTestBase
 {
     public ODataQueryTestBase(IODataQueryTestFixture fixture)

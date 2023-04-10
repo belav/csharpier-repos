@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class AspNetIdentityCustomTypesDefaultInMemoryTest
     : AspNetIdentityCustomTypesDefaultTestBase<AspNetIdentityCustomTypesDefaultInMemoryTest.AspNetIdentityCustomTypesDefaultInMemoryFixture>
 {

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-
 /// <summary>
 /// Applies attributes required for hot reload.
 /// </summary>

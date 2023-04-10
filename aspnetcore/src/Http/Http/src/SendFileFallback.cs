@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Helper type that allows copying a file to a Stream.
 /// <para>

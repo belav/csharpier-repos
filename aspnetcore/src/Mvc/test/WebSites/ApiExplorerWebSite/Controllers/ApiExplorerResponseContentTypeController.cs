@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
-
 [Route("ApiExplorerResponseContentType/[Action]")]
 public class ApiExplorerResponseContentTypeController : Controller
 {

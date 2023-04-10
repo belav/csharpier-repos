@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 /// <summary>
 /// Provides methods to instantiate and release a ViewComponent.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     Represents a plugin type mapping source.
 /// </summary>

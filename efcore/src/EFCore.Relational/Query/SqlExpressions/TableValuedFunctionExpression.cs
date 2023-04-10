@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
-
 /// <summary>
 ///     <para>
 ///         An expression that represents a table value function as a table source in a SQL tree.

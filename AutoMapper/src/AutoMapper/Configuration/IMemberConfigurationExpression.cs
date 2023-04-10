@@ -1,6 +1,5 @@
 namespace AutoMapper;
 
-
 /// <summary>
 /// Member configuration options
 /// </summary>

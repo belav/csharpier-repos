@@ -5,7 +5,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 
-
 public class ToggleExecutionModeServerFixture<TClientProgram> : ServerFixture
 {
     public string PathBase { get; set; }

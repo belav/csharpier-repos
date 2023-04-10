@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding;
 
-
 /// <summary>
 /// Provides settings for serializing JSON.
 /// </summary>

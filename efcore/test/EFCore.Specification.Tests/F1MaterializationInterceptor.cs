@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class F1MaterializationInterceptor : IMaterializationInterceptor
 {
     public InterceptionResult<object> CreatingInstance(

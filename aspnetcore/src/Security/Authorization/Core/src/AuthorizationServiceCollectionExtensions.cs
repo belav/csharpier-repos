@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for setting up authorization services in an <see cref="IServiceCollection" />.
 /// </summary>

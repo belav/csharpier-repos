@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace RoutingSandbox;
 
-
 public class SlugifyParameterTransformer : IOutboundParameterTransformer
 {
     public string TransformOutbound(object value)

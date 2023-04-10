@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner;
 
-
 public class SessionAttendee
 {
     public int SessionId { get; set; }

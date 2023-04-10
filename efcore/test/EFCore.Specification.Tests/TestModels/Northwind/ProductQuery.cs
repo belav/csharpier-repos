@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
-
 public class ProductQuery
 {
     public int ProductID { get; set; }

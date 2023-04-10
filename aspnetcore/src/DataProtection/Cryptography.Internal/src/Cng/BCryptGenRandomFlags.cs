@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
-
 // from bcrypt.h
 [Flags]
 internal enum BCryptGenRandomFlags

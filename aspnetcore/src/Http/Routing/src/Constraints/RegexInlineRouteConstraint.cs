@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
-
 /// <summary>
 /// Represents a regex constraint which can be used as an inlineConstraint.
 /// </summary>

@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// Skips a test when the value of an environment variable matches any of the supplied values.
 /// </summary>

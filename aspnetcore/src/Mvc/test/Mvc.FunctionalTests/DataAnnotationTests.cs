@@ -8,7 +8,6 @@ using RazorWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class DataAnnotationTests : IClassFixture<MvcTestFixture<StartupDataAnnotations>>
 {
     private HttpClient Client { get; set; }

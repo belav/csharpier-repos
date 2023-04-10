@@ -8,7 +8,6 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-
 internal interface IOnInitialized
 {
     Task OnInitializedAsync(

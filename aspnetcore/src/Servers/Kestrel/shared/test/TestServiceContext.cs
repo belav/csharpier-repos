@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 internal class TestServiceContext : ServiceContext
 {
     public TestServiceContext()

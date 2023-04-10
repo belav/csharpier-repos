@@ -6,7 +6,6 @@ using StackExchange.Redis;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis;
 
-
 /// <summary>
 /// Options used to configure <see cref="RedisHubLifetimeManager{THub}"/>.
 /// </summary>

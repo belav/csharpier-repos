@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 
-
 public class TagHelperScopeManager
 {
     public TagHelperScopeManager(

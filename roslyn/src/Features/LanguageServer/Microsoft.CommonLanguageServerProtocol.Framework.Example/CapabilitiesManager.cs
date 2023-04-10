@@ -7,7 +7,6 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.Example;
 
-
 internal class CapabilitiesManager : IInitializeManager<InitializeParams, InitializeResult>
 {
     private InitializeParams? _initializeParams;

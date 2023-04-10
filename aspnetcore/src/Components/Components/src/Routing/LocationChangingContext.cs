@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 /// <summary>
 /// Contains context for a change to the browser's current location.
 /// </summary>

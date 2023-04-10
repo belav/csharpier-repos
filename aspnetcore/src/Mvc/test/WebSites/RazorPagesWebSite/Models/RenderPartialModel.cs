@@ -3,7 +3,6 @@
 
 namespace RazorPagesWebSite.Models;
 
-
 public class RenderPartialModel
 {
     public string Value { get; set; }

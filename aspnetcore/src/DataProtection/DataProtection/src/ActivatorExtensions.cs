@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Extension methods for working with <see cref="IActivator"/>.
 /// </summary>

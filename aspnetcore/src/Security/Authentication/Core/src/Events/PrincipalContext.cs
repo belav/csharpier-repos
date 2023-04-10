@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Base context for authentication events which deal with a ClaimsPrincipal.
 /// </summary>

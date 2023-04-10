@@ -7,7 +7,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Renders content provided by <see cref="HeadContent"/> components.
 /// </summary>

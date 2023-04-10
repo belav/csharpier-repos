@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-
 // Abstracts out the serialization process for an antiforgery token
 internal interface IAntiforgeryTokenSerializer
 {

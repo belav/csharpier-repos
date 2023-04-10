@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal abstract class RazorParserFeatureFlags
 {
     public static RazorParserFeatureFlags Create(RazorLanguageVersion version, string fileKind)

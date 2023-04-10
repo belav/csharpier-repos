@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 public class RemoteWindowsDeploymentParameters : DeploymentParameters
 {
     public RemoteWindowsDeploymentParameters(

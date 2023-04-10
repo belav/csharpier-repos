@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     Represents usage of an attribute.
 /// </summary>

@@ -6,7 +6,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
-
 internal static class EventArgsTypeCache
 {
     private static readonly ConcurrentDictionary<MethodInfo, Type> Cache =

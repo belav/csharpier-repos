@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// Base JSON helpers.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class OptimisticConcurrencyRelationalTestBase<TFixture, TRowVersion>
     : OptimisticConcurrencyTestBase<TFixture, TRowVersion>
     where TFixture : F1RelationalFixture<TRowVersion>, new()

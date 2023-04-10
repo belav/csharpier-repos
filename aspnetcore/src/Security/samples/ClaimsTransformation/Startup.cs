@@ -16,7 +16,6 @@ using Microsoft.Extensions.Options;
 
 namespace AuthSamples.ClaimsTransformer;
 
-
 public class Startup
 {
     public Startup(IConfiguration configuration)

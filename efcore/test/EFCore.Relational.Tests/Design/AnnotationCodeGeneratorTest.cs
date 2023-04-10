@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 public class AnnotationCodeGeneratorTest
 {
     [ConditionalFact]

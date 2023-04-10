@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Extension methods for enabling buffering in an <see cref="HttpRequest"/>.
 /// </summary>

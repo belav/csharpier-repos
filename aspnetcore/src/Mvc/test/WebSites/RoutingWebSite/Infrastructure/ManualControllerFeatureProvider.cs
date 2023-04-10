@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace Mvc.RoutingWebSite.Infrastructure;
 
-
 internal class ManualControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
 {
     private readonly Action<ControllerFeature> _action;

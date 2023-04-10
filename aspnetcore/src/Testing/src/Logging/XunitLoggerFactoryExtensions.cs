@@ -8,7 +8,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.Logging;
 
-
 public static class XunitLoggerFactoryExtensions
 {
     public static ILoggingBuilder AddXunit(this ILoggingBuilder builder, ITestOutputHelper output)

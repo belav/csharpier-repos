@@ -17,7 +17,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
-
 public class UpgradeTests : LoggedTest
 {
     [Fact]

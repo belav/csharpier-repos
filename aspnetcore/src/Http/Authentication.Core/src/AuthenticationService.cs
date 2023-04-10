@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Implements <see cref="IAuthenticationService"/>.
 /// </summary>

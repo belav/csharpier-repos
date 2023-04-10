@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting.Server.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
-
 internal sealed class Http3ControlStream<TContext>
     : Http3ControlStream,
         IHostContextContainer<TContext>

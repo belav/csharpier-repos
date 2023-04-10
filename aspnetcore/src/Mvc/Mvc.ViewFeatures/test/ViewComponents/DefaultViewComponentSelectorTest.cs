@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 public class DefaultViewComponentSelectorTest
 {
     private static readonly string Namespace = typeof(DefaultViewComponentSelectorTest).Namespace;

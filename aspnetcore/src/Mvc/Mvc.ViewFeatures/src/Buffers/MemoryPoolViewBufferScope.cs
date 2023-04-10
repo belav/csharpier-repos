@@ -5,7 +5,6 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
-
 /// <summary>
 /// A <see cref="IViewBufferScope"/> that uses pooled memory.
 /// </summary>

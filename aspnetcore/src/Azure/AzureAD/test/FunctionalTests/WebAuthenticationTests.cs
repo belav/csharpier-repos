@@ -17,7 +17,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.AzureAD.FunctionalTests;
 
-
 public class WebAuthenticationTests : IClassFixture<WebApplicationFactory<Startup>>
 {
     public WebAuthenticationTests(WebApplicationFactory<Startup> fixture)

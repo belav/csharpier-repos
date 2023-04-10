@@ -6,7 +6,6 @@ using Xunit.Sdk;
 // ReSharper disable once CheckNamespace
 namespace Xunit;
 
-
 [AttributeUsage(AttributeTargets.Method)]
 [XunitTestCaseDiscoverer(
     "Microsoft.EntityFrameworkCore.TestUtilities.Xunit.ConditionalTheoryDiscoverer",

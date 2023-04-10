@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Provides programmatic configuration for the HTML helpers and <see cref="ViewContext"/>.
 /// </summary>

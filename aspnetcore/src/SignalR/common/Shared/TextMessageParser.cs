@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal static class TextMessageParser
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

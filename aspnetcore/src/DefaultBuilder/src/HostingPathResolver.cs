@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore;
 
-
 internal static class HostingPathResolver
 {
     public static string ResolvePath(string? contentRootPath) =>

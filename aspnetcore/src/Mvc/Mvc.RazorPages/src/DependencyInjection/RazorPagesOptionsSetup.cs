@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 internal sealed class RazorPagesOptionsSetup : IConfigureOptions<RazorPagesOptions>
 {
     private readonly IServiceProvider _serviceProvider;

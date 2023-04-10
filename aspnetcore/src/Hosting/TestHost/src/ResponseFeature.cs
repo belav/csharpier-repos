@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 internal sealed class ResponseFeature : IHttpResponseFeature, IHttpResponseBodyFeature
 {
     private readonly HeaderDictionary _headers = new HeaderDictionary();

@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class InMemoryDatabaseTest
 {
     [ConditionalFact]

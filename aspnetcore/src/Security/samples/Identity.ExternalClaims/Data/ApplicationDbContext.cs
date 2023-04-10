@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Identity.ExternalClaims.Data;
 
-
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

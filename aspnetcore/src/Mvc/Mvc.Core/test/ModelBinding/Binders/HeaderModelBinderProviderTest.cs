@@ -9,7 +9,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 public class HeaderModelBinderProviderTest
 {
     public static TheoryData<BindingSource> NonHeaderBindingSources

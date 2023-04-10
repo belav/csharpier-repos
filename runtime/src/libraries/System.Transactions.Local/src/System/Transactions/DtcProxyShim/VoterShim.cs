@@ -5,7 +5,6 @@ using System.Transactions.DtcProxyShim.DtcInterfaces;
 
 namespace System.Transactions.DtcProxyShim;
 
-
 internal sealed class VoterBallotShim
 {
     private VoterNotifyShim _voterNotifyShim;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public static class ServiceCollectionExtensions
 {
     private static readonly MethodInfo _addDbContext =

@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class SqlServerValueGeneratorCacheTest
 {
     [ConditionalFact]

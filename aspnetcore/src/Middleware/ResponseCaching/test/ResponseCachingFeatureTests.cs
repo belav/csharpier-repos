@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ResponseCaching.Tests;
 
-
 public class ResponseCachingFeatureTests
 {
     public static TheoryData<string[]> ValidNullOrEmptyVaryRules

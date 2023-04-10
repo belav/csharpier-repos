@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Contoso;
 
-
 public class Login : DefaultUIPage
 {
     private readonly IHtmlFormElement _loginForm;

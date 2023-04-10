@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace CustomAuthorizationFailureResponse.Authorization;
 
-
 public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewareResultHandler
 {
     private readonly IAuthorizationMiddlewareResultHandler _handler;

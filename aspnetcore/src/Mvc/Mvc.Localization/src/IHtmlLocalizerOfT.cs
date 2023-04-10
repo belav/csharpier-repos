@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
-
 /// <summary>
 /// An <see cref="IHtmlLocalizer"/> that provides localized HTML content.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     <para>
 ///         The primary point where a database provider can tell EF that it has been selected for the current context.

@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.Extensions.ApiDescription.Tool;
 
-
 internal sealed class CommandException : Exception
 {
     public CommandException(string message)

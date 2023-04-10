@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 public class ServerDeferralTests
 {
     [Fact]

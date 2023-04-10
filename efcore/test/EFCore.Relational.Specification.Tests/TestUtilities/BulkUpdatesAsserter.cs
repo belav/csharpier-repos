@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.BulkUpdates;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class BulkUpdatesAsserter
 {
     private readonly Func<DbContext> _contextCreator;

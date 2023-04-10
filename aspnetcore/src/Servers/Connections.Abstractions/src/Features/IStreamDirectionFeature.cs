@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// The direction of a connection stream
 /// </summary>

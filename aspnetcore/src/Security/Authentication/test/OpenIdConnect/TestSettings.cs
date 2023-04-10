@@ -14,7 +14,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
-
 /// <summary>
 /// This helper class is used to check that query string parameters are as expected.
 /// </summary>

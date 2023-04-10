@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
-
 internal class LazyIntermediateToken : IntermediateToken
 {
     public object FactoryArgument { get; set; }

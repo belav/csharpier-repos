@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
 
-
 public class TypeExtensionsTests
 {
     public class Foo

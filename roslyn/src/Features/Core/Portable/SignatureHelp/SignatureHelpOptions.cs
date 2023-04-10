@@ -7,7 +7,6 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.SignatureHelp;
 
-
 [DataContract]
 internal readonly record struct SignatureHelpOptions
 {

@@ -8,7 +8,6 @@ using System.Diagnostics.CodeAnalysis;
 // ReSharper disable once CheckNamespace
 namespace System.Linq.Expressions;
 
-
 [DebuggerStepThrough]
 internal static class ExpressionExtensions
 {

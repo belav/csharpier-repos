@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
-
 public class RemoteAttribute_VerifyController : Controller
 {
     // This action is overloaded and may receive requests to validate UserId1, UserId2 or UserId5.

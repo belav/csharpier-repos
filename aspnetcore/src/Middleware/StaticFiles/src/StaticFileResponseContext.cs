@@ -6,7 +6,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 /// <summary>
 /// Contains information about the request and the file that will be served in response.
 /// </summary>

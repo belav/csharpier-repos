@@ -5,7 +5,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// Represents a cached response body.
 /// </summary>

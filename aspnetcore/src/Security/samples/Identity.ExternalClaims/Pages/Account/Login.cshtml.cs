@@ -15,7 +15,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity.ExternalClaims.Pages.Account;
 
-
 public class LoginModel : PageModel
 {
     private readonly SignInManager<ApplicationUser> _signInManager;

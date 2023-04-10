@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
-
 internal sealed class CookieHeaderParser : HttpHeaderParser<CookieHeaderValue>
 {
     internal CookieHeaderParser(bool supportsMultipleValues)

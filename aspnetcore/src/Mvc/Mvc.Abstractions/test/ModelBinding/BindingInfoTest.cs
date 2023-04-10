@@ -6,7 +6,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 public class BindingInfoTest
 {
     [Fact]

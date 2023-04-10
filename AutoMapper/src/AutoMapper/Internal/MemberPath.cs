@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.Internal;
 
-
 [EditorBrowsable(EditorBrowsableState.Never)]
 public readonly record struct MemberPath(MemberInfo[] Members)
 {

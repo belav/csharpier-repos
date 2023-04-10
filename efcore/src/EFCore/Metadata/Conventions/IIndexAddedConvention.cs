@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     Represents an operation that should be performed when an index is added to the entity type.
 /// </summary>

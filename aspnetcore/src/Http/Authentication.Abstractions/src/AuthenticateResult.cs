@@ -6,7 +6,6 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Contains the result of an Authenticate call
 /// </summary>

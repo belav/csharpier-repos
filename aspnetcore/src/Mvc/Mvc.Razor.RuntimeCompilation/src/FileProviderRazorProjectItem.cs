@@ -6,7 +6,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 /// <summary>
 /// A file provider <see cref="RazorProjectItem"/>.
 /// </summary>

@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Hosting.TestSites;
 
-
 public class StartupShutdown
 {
     public void Configure(

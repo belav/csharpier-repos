@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
-
 public class UnidirectionalEntityBranch : UnidirectionalEntityRoot
 {
     public virtual long Number { get; set; }

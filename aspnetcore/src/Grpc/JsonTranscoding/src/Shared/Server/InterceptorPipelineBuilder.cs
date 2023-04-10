@@ -24,7 +24,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Grpc.Shared.Server;
 
-
 internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
     where TRequest : class
     where TResponse : class

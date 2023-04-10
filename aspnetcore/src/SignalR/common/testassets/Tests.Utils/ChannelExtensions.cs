@@ -3,7 +3,6 @@
 
 namespace System.Threading.Channels;
 
-
 public static class ChannelExtensions
 {
     public static async Task<List<T>> ReadAndCollectAllAsync<T>(

@@ -5,7 +5,6 @@ using System.Text.Json;
 
 namespace HttpLogging.Sample;
 
-
 public class Program
 {
     public static void Main(string[] args)

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace FunctionalTests;
 
-
 [Authorize(JwtBearerDefaults.AuthenticationScheme)]
 public class HubWithAuthorization : Hub
 {

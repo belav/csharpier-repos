@@ -3,5 +3,4 @@
 
 namespace RazorPagesWebSite;
 
-
 public interface IUserModel { }

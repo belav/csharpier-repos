@@ -17,7 +17,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
-
 public class ValidationWithRecordIntegrationTests
 {
     private record TransferInfo([Range(25, 50)] int AccountId, double Amount);

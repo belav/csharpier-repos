@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 internal static class Utilities
 {
     internal static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(15);

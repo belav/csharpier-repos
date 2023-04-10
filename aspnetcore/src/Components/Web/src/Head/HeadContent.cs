@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.Sections;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Provides content to <see cref="HeadOutlet"/> components.
 /// </summary>

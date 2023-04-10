@@ -9,7 +9,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
-
 internal static class Constants
 {
     public static readonly string UserAgent = OperatingSystem.IsBrowser()

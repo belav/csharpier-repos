@@ -6,7 +6,6 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
-
 /// <summary>
 /// Extension methods for <see cref="X509Certificate2"/>.
 /// </summary>

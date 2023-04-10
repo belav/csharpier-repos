@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 /// <summary>
 /// A part of an MVC application.
 /// </summary>

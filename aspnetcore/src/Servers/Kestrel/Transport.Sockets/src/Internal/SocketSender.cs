@@ -9,7 +9,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal;
 
-
 internal sealed class SocketSender : SocketAwaitableEventArgs
 {
     private List<ArraySegment<byte>>? _bufferList;

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
-
 public class DisableCorsAuthorizationFilterTest
 {
     [Fact]

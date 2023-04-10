@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 /// <summary>
 /// A policy which <see cref="IInputFormatter"/>s can implement to indicate if they want the body model binder
 /// to handle all exceptions. By default, all default <see cref="IInputFormatter"/>s implement this interface and

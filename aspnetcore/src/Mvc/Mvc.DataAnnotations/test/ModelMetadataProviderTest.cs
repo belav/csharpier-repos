@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 // Integration tests for the default provider configuration.
 public class ModelMetadataProviderTest
 {

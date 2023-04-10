@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal static class AnsiConstants
 {
     public const string Reset = "\x1b[22m\x1b[39m";

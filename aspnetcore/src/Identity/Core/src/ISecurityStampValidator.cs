@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Provides an abstraction for a validating a security stamp of an incoming identity, and regenerating or rejecting the
 /// identity based on the validation result.

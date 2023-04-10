@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class UpdatesSqlServerTestBase<TFixture> : UpdatesRelationalTestBase<TFixture>
     where TFixture : UpdatesSqlServerTestBase<TFixture>.UpdatesSqlServerFixtureBase
 {

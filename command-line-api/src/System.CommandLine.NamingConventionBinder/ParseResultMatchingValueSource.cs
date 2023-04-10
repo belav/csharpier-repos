@@ -6,7 +6,6 @@ using System.CommandLine.Parsing;
 
 namespace System.CommandLine.NamingConventionBinder;
 
-
 internal class ParseResultMatchingValueSource : IValueSource
 {
     public bool TryGetValue(

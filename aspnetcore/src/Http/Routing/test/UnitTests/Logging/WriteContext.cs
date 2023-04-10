@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class WriteContext
 {
     public LogLevel LogLevel { get; set; }

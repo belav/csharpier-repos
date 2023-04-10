@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// A filter that configures <see cref="FormOptions"/> for the current request.
 /// </summary>

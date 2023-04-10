@@ -3,7 +3,6 @@
 
 namespace Ignitor;
 
-
 public class ComponentNode : ContainerNode
 {
     private readonly int _componentId;

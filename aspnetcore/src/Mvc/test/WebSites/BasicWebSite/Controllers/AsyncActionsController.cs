@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BasicWebSite.Controllers;
 
-
 public class AsyncActionsController : Controller
 {
     const int SimulateDelayMilliseconds = 20;

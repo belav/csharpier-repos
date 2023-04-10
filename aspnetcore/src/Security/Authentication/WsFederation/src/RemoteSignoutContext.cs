@@ -6,7 +6,6 @@ using Microsoft.IdentityModel.Protocols.WsFederation;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
-
 /// <summary>
 /// An event context for RemoteSignOut.
 /// </summary>

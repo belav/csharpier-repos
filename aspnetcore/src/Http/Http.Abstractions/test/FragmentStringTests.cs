@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Abstractions.Tests;
 
-
 public class FragmentStringTests
 {
     [Fact]

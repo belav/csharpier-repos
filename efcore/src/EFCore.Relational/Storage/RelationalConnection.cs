@@ -10,7 +10,6 @@ using IsolationLevel = System.Data.IsolationLevel;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     <para>
 ///         Represents a connection with a relational database.

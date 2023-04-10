@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HtmlGenerationWebSite.Controllers;
 
-
 public class HtmlGeneration_HomeController : Controller
 {
     private readonly List<Product> _products = new List<Product>

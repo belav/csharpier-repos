@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 /// <summary>
 /// A <see cref="TextOutputFormatter"/> for JSON content.
 /// </summary>

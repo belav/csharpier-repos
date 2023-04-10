@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Extension methods for using <see cref="LinkParser"/> with an endpoint name.
 /// </summary>

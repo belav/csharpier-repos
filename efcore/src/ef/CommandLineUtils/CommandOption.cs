@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.DotNet.Cli.CommandLine;
 
-
 internal class CommandOption
 {
     public CommandOption(string template, CommandOptionType optionType)

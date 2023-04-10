@@ -23,7 +23,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SpaServices.Extensions.Tests;
 
-
 public class SpaServicesExtensionsTests
 {
     [Fact]

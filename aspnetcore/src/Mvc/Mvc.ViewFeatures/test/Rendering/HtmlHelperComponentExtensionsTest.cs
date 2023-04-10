@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 public class HtmlHelperComponentExtensionsTest
 {
     [Fact]

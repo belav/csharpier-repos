@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal struct TagHelperSpanInternal
 {
     public TagHelperSpanInternal(SourceSpan span, TagHelperBinding binding)

@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.CallHandlers;
 
-
 internal sealed class UnaryServerCallHandler<TService, TRequest, TResponse>
     : ServerCallHandlerBase<TService, TRequest, TResponse>
     where TService : class

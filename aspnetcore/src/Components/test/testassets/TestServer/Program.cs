@@ -9,7 +9,6 @@ using DevServerProgram = Microsoft.AspNetCore.Components.WebAssembly.DevServer.S
 
 namespace TestServer;
 
-
 public class Program
 {
     public static async Task Main(string[] args)

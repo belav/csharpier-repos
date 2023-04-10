@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 public class SqlServerConventionSetBuilderTests : ConventionSetBuilderTests
 {
     public override IReadOnlyModel Can_build_a_model_with_default_conventions_without_DI()

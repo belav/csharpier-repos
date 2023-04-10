@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.JsonQuery;
 
-
 public class JsonOwnedAllTypes
 {
     public string TestDefaultString { get; set; }

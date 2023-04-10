@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 
-
 /// <summary>
 /// Class used to store information about a <see cref="ITagHelper"/>'s execution lifetime.
 /// </summary>

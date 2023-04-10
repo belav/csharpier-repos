@@ -7,7 +7,6 @@ using System.Threading.Tasks.Sources;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 
-
 /// <summary>
 /// Custom awaiter to allow the StackPolicy to reduce allocations.
 /// When this completion source has its result checked, it resets itself and returns itself to the cache of its parent StackPolicy.

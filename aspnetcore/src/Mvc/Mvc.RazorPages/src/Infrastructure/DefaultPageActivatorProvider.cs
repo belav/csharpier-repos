@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 /// <summary>
 /// <see cref="IPageActivatorProvider"/> that uses type activation to create Pages.
 /// </summary>

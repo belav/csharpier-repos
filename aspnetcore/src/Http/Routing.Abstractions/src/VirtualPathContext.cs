@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// A context for virtual path generation operations.
 /// </summary>

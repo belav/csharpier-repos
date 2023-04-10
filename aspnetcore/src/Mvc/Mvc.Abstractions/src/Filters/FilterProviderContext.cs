@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// A context for filter providers i.e. <see cref="IFilterProvider"/> implementations.
 /// </summary>

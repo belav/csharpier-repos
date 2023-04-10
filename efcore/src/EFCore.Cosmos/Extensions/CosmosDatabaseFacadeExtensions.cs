@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Extension methods for the <see cref="DatabaseFacade" /> returned from <see cref="DbContext.Database" />
 ///     that can be used only with the Cosmos provider.

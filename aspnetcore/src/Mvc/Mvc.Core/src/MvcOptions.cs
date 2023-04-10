@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Provides programmatic configuration for the MVC framework.
 /// </summary>

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
-
 public abstract class IntermediateNodeFormatter
 {
     public abstract void WriteChildren(IntermediateNodeCollection children);

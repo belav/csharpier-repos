@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 /// <summary>
 /// Determines the matching behavior an API convention method or parameter by name.
 /// <see cref="ApiConventionNameMatchBehavior"/> for supported options.

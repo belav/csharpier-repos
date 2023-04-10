@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
-
 internal static class CacheEntryHelpers
 {
     internal static long EstimateCachedResponseSize(CachedResponse cachedResponse)

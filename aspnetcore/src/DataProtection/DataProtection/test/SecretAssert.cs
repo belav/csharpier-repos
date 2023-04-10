@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Helpful ISecret-based assertions.
 /// </summary>

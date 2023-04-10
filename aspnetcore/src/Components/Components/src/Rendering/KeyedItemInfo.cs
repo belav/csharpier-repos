@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
-
 // Used internally during diffing to track what we know about keyed items and their positions
 internal readonly struct KeyedItemInfo
 {

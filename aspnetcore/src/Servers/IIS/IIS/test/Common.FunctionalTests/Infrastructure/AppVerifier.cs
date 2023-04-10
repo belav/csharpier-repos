@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 public class AppVerifier
 {
     private static readonly TimeSpan AppVerifierCommandTimeout = TimeSpan.FromSeconds(5);

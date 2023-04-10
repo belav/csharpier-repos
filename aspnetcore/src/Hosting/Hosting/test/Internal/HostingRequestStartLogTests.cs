@@ -6,7 +6,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Hosting.Tests;
 
-
 public class HostingRequestStartLogTests
 {
     [Theory]

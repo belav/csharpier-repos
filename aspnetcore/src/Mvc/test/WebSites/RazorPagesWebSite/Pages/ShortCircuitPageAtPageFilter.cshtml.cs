@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite.Pages;
 
-
 [AsyncTestPageFilter]
 [SyncTestPageFilter]
 public class ShortCircuitAtPageFilterPageModel : PageModel

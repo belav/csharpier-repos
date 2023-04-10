@@ -18,7 +18,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 public class DefaultHealthCheckServiceTest
 {
     [Fact]

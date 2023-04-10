@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// Checks policy based permissions for a user
 /// </summary>

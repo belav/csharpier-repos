@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Wasm.Build.Tests;
 
-
 public class ConfigSrcTests : BuildTestBase
 {
     public ConfigSrcTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)

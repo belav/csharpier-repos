@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.Extensions.Localization;
 
-
 /// <summary>
 /// Provides the RootNamespace of an Assembly. The RootNamespace of the assembly is used by Localization to
 /// determine the resource name to look for when RootNamespace differs from the AssemblyName.

@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Routing.LinkGeneration;
 
-
 public partial class LinkGenerationGithubBenchmark
 {
     private LinkGenerator _linkGenerator;

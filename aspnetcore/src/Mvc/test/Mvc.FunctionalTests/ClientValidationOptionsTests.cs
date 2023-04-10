@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class ClientValidationOptionsTests : IClassFixture<MvcTestFixture<RazorPagesWebSite.Startup>>
 {
     public ClientValidationOptionsTests(MvcTestFixture<RazorPagesWebSite.Startup> fixture) =>

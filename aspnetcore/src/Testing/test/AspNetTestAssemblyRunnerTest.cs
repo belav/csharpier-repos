@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class AspNetTestAssemblyRunnerTest
 {
     private const int NotCalled = -1;

@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests.MaxDepth;
 
-
 public class MaxDepthWithCollections : IntegrationTest<MaxDepthWithCollections.DatabaseInitializer>
 {
     TrainingCourseDto _course;

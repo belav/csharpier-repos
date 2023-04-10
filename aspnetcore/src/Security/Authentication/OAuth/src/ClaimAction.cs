@@ -6,7 +6,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
-
 /// <summary>
 /// Infrastructure for mapping user data from a json structure to claims on the ClaimsIdentity.
 /// </summary>

@@ -7,7 +7,6 @@ using System.Globalization;
 
 namespace System.Text;
 
-
 internal static class StringBuilderExtensions
 {
     public static StringBuilder AppendJoin(

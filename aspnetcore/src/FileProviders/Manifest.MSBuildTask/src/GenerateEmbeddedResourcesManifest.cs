@@ -10,7 +10,6 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task;
 
-
 /// <summary>
 /// Task for generating a manifest file out of the embedded resources in an
 /// assembly.

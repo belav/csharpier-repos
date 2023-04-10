@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     Validates a model after it is built.
 /// </summary>

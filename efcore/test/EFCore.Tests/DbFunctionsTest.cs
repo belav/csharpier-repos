@@ -6,7 +6,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class DbFunctionsTest
 {
     [ConditionalFact]

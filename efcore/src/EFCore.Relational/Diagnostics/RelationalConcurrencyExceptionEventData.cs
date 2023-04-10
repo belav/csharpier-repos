@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     A <see cref="DiagnosticSource" /> event payload used when a <see cref="DbUpdateConcurrencyException" /> is being thrown
 ///     from a relational database provider.

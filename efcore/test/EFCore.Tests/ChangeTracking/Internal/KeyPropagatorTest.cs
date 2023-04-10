@@ -6,7 +6,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public class KeyPropagatorTest
 {
     [ConditionalTheory]

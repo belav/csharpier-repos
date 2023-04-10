@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
-
 internal sealed class InternalUseFieldName
 {
     public static InternalUseFieldName Hidden = new(nameof(Hidden));

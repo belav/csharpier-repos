@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     Represents a call to a method.
 /// </summary>

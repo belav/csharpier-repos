@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authentication.WsFederation;
 
 namespace WsFedSample;
 
-
 public class Startup
 {
     public Startup(IConfiguration configuration)

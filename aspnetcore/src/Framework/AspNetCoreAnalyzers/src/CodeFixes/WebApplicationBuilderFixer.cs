@@ -14,7 +14,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.AspNetCore.Analyzers.WebApplicationBuilder.Fixers;
 
-
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(WebApplicationBuilderFixer)), Shared]
 public sealed class WebApplicationBuilderFixer : CodeFixProvider
 {

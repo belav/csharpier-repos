@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-
 internal sealed class HttpUpgradeStream : Stream
 {
     private readonly Stream _requestStream;

@@ -8,7 +8,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Rewrite;
 
-
 /// <summary>
 /// Extensions for adding IIS Url Rewrite rules to <see cref="RewriteOptions"/>
 /// </summary>

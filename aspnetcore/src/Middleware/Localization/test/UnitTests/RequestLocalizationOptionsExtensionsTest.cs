@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.Localization;
 
-
 public class RequestLocalizationOptionsExtensionsTest
 {
     [Fact]

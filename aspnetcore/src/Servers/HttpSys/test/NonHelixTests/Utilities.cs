@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal static class Utilities
 {
     internal static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(15);

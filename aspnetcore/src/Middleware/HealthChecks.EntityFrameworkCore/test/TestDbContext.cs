@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-
 public class TestDbContext : DbContext
 {
     public TestDbContext(DbContextOptions<TestDbContext> options)

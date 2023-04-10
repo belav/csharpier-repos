@@ -5,7 +5,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 // Test to verify compilation options from the application are used to compile
 // precompiled and dynamically compiled views.
 public class CompilationOptionsTests : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>

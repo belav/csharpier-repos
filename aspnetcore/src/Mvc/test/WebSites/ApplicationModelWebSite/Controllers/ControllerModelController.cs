@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ApplicationModelWebSite;
 
-
 // This controller uses an reflected model attribute to change the controller name, and thus
 // the URL.
 [ControllerName("CoolController")]

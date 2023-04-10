@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Hosting.Builder;
 
-
 /// <summary>
 /// Provides an interface for implementing a factory that produces <see cref="IApplicationBuilder"/> instances.
 /// </summary>

@@ -9,7 +9,6 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
-
 public interface IRequestHandler<TRequest, TResponse, TRequestContext> : IMethodHandler
 {
     /// <summary>

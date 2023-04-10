@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.RequestDecompression;
 
-
 /// <summary>
 /// Used to examine requests to see if decompression should be used.
 /// </summary>

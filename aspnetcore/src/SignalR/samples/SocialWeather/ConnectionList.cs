@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Connections;
 
 namespace SocialWeather;
 
-
 internal class ConnectionList : IReadOnlyCollection<ConnectionContext>
 {
     private readonly ConcurrentDictionary<string, ConnectionContext> _connections =

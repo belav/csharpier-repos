@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Internal;
 
-
 internal sealed class NamedPipeTransportFactory
     : IConnectionListenerFactory,
         IConnectionListenerFactorySelector

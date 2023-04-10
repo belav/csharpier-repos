@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.Infrastructure.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     Allows Cosmos specific configuration to be performed on <see cref="DbContextOptions" />.
 /// </summary>

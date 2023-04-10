@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ApplicationModelWebSite;
 
-
 public class MultipleAreasControllerConvention : IApplicationModelConvention
 {
     public void Apply(ApplicationModel application)

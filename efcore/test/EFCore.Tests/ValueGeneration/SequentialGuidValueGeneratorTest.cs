@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
-
 public class SequentialGuidValueGeneratorTest
 {
     [ConditionalFact]

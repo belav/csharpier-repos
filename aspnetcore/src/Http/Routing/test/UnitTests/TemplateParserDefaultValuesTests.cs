@@ -9,7 +9,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing.Tests;
 
-
 public class TemplateParserDefaultValuesTests
 {
     private static readonly IInlineConstraintResolver _inlineConstraintResolver =

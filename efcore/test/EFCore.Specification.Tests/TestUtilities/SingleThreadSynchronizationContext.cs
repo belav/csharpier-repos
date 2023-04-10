@@ -5,7 +5,6 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class SingleThreadSynchronizationContext : SynchronizationContext, IDisposable
 {
     private readonly BlockingCollection<(SendOrPostCallback callback, object state)> _tasks = new();

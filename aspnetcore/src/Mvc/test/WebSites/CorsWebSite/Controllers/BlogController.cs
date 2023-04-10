@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CorsWebSite;
 
-
 [Route("Cors/[action]")]
 [EnableCors("AllowAnySimpleRequest")]
 public class BlogController : Controller

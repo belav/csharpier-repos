@@ -8,7 +8,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 internal static class ExecutorFactory
 {
     public static PageHandlerExecutorDelegate CreateExecutor(

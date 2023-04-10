@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
-
 public class Software : Product
 {
     public string Version { get; set; }

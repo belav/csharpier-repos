@@ -6,7 +6,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class ApplicationModelTest : IClassFixture<MvcTestFixture<ApplicationModelWebSite.Startup>>
 {
     public ApplicationModelTest(MvcTestFixture<ApplicationModelWebSite.Startup> fixture)

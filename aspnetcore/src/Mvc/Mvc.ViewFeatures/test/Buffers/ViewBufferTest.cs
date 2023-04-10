@@ -7,7 +7,6 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
-
 public class ViewBufferTest
 {
     [Fact]

@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Represents a secret value.
 /// </summary>

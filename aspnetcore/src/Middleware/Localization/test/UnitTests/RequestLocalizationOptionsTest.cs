@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.Localization;
 
-
 public class RequestLocalizationOptionsTest : IDisposable
 {
     private readonly CultureInfo _initialCulture;

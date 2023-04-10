@@ -13,7 +13,6 @@ using Microsoft.DotNet.XHarness.Common;
 
 namespace Microsoft.WebAssembly.Internal;
 
-
 internal sealed class WasmSymbolicator
 {
     private const string ReplaceSectionGroupName = "replaceSection";

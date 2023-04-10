@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels;
 
-
 public interface IBackOrderLine : IOrderLine
 {
     DateTime ETA { get; set; }

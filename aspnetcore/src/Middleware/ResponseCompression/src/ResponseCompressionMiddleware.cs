@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.ResponseCompression;
 
-
 /// <summary>
 /// Enable HTTP response compression.
 /// </summary>

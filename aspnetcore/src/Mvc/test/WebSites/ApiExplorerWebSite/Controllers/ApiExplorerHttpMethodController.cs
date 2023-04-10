@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
-
 [Route("ApiExplorerHttpMethod")]
 public class ApiExplorerHttpMethodController : Controller
 {

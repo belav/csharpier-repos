@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure.EmbeddedSyntax;
 
-
 internal struct EmbeddedDiagnostic : IEquatable<EmbeddedDiagnostic>
 {
     public readonly string Message;

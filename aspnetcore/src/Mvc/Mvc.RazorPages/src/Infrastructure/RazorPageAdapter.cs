@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 /// <summary>
 /// Implements IRazorPage so that RazorPageBase-derived classes don't get activated twice.
 /// The page gets activated before handler methods run, but the RazorView will also activate

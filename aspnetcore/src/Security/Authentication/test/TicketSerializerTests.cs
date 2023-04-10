@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 public class TicketSerializerTests
 {
     [Fact]

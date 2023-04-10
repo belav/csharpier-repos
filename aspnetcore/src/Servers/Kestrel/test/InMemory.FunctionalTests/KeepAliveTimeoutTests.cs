@@ -15,7 +15,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
-
 public class KeepAliveTimeoutTests : LoggedTest
 {
     private static readonly TimeSpan _keepAliveTimeout = TimeSpan.FromSeconds(10);

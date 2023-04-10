@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ResponseCompression;
 
-
 /// <summary>
 /// Provides a specific compression implementation to compress HTTP responses.
 /// </summary>

@@ -11,7 +11,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.OutputCaching.Tests;
 
-
 public class OutputCacheMiddlewareTests
 {
     [Fact]

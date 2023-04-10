@@ -6,7 +6,6 @@ using TagHelpersWebSite.Models;
 
 namespace TagHelpersWebSite.Controllers;
 
-
 public class EmployeeController : Controller
 {
     // GET: Employee

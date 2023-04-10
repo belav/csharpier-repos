@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 /// <summary>
 ///     SQLite-specific implementation of <see cref="MigrationsSqlGenerator" />.
 /// </summary>

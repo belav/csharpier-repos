@@ -6,7 +6,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop;
 
-
 /// <summary>
 /// Provides convenience methods to produce a <see cref="DotNetObjectReference{TValue}" />.
 /// </summary>

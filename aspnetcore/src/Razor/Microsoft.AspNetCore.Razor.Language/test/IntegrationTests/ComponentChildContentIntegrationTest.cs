@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
-
 public class ComponentChildContentIntegrationTest : RazorIntegrationTestBase
 {
     private readonly CSharpSyntaxTree RenderChildContentComponent = Parse(

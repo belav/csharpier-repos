@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-
 internal sealed class ControllerViewDataAttributeFilter
     : IActionFilter,
         IViewDataValuesProviderFeature

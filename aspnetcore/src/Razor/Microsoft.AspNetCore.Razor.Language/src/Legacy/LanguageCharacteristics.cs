@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal abstract class LanguageCharacteristics<TTokenizer>
     where TTokenizer : Tokenizer
 {

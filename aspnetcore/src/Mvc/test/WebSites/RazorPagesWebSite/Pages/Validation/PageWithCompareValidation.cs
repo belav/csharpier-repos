@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
-
 public class PageWithCompareValidation : PageModel
 {
     [BindProperty(SupportsGet = true)]

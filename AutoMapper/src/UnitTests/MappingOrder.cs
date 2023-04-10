@@ -2,7 +2,6 @@ using static AutoMapper.UnitTests.Bug.MapFromClosureBug;
 
 namespace AutoMapper.UnitTests;
 
-
 public class When_specifying_a_mapping_order_for_base_members : AutoMapperSpecBase
 {
     Destination _destination;

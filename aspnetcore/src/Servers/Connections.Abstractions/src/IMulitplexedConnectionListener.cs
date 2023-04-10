@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 /// <summary>
 /// Defines an interface that represents a listener bound to a specific <see cref="EndPoint"/>.
 /// </summary>

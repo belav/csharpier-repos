@@ -7,7 +7,6 @@ using Mono.Options;
 
 namespace PrepareTests;
 
-
 internal static class Program
 {
     internal const int ExitFailure = 1;

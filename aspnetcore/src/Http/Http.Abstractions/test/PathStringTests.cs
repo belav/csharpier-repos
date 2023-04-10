@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 public class PathStringTests
 {
     [Fact]

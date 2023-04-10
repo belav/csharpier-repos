@@ -6,7 +6,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class RazorViewLocationSpecificationTest
     : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>
 {

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 internal sealed class UpgradeFeatureLoggingDecorator : IHttpUpgradeFeature
 {
     private readonly IHttpUpgradeFeature _innerUpgradeFeature;

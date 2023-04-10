@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
-
 [ApiExplorerSettings(GroupName = "SetOnController")]
 [Route("ApiExplorerNameSetExplicitly")]
 public class ApiExplorerNameSetExplicitlyController : Controller

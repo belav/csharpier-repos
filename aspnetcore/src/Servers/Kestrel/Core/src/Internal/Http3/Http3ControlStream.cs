@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
-
 internal abstract class Http3ControlStream : IHttp3Stream, IThreadPoolWorkItem
 {
     private const int ControlStreamTypeId = 0;

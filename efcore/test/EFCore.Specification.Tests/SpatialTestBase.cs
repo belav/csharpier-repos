@@ -6,7 +6,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class SpatialTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : SpatialFixtureBase, new()
 {

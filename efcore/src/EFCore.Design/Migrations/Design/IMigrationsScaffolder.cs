@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
-
 /// <summary>
 ///     Used to scaffold new migrations.
 /// </summary>

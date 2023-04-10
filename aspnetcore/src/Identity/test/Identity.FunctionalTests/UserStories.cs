@@ -11,7 +11,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-
 public class UserStories
 {
     internal static async Task<Index> RegisterNewUserAsync(

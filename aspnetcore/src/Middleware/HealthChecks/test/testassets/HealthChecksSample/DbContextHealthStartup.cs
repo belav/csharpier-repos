@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthChecksSample;
 
-
 // Pass in `--scenario dbcontext` at the command line to run this sample.
 public class DbContextHealthStartup
 {

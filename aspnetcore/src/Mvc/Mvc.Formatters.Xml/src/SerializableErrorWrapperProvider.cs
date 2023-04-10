@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 /// <summary>
 /// Wraps the object of type <see cref="Microsoft.AspNetCore.Mvc.SerializableError"/>.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
-
 public class AppendSelectIdentityExpressionMutator : ExpressionMutator
 {
     public AppendSelectIdentityExpressionMutator(DbContext context)

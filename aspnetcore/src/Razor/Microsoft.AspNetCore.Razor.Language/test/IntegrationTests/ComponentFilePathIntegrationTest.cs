@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
-
 // Integration tests focused on file path handling for class/namespace names
 public class ComponentFilePathIntegrationTest : RazorIntegrationTestBase
 {

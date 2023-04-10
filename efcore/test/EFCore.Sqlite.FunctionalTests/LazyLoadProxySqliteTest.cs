@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class LazyLoadProxySqliteTest
     : LazyLoadProxyTestBase<LazyLoadProxySqliteTest.LoadSqliteFixture>
 {

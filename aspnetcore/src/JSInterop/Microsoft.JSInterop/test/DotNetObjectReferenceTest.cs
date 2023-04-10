@@ -3,7 +3,6 @@
 
 namespace Microsoft.JSInterop;
 
-
 public class DotNetObjectReferenceTest
 {
     [Fact]

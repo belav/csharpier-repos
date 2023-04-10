@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// An abstraction that provides access to client connections, including the one that sent the current invocation.
 /// </summary>

@@ -12,7 +12,6 @@ using System.ComponentModel;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure;
 
-
 internal static class ParsabilityHelper
 {
     private static bool IsTypeAlwaysParsableOrBindable(

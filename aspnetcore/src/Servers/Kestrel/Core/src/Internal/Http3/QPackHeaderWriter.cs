@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
-
 internal static class QPackHeaderWriter
 {
     public static bool BeginEncodeHeaders(

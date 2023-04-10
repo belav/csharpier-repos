@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 ///     EntityFrameworkCore.SqlServer.NetTopologySuite extension methods for <see cref="IServiceCollection" />.
 /// </summary>

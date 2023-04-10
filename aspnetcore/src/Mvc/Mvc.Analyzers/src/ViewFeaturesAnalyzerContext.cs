@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
-
 public class ViewFeaturesAnalyzerContext
 {
 #pragma warning disable RS1012 // Start action has no registered actions.

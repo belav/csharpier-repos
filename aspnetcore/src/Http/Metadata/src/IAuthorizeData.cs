@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// Defines the set of data required to apply authorization rules to a resource.
 /// </summary>

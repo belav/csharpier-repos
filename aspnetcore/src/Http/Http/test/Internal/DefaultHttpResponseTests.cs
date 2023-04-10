@@ -7,7 +7,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 public class DefaultHttpResponseTests
 {
     [Theory]

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Internal;
 
-
 /// <summary>
 ///     <para>
 ///         This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -8,7 +8,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 [TestCaseOrderer(
     "Microsoft.AspNetCore.Testing.AlphabeticalOrderer",
     "Microsoft.AspNetCore.Testing.Tests"

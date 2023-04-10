@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace RazorWebSite;
 
-
 public abstract class MyBasePage<TModel> : RazorPage<TModel>
 {
     public override void WriteLiteral(object value)

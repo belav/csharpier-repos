@@ -9,7 +9,6 @@ using System.IO;
 
 namespace Microsoft.Extensions.Tools.Internal;
 
-
 public class TemporaryDirectory : IDisposable
 {
     private readonly List<TemporaryCSharpProject> _projects = new List<TemporaryCSharpProject>();

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-
 internal static class IReadOnlyListExtensions
 {
     public static bool Any<T, TArg>(

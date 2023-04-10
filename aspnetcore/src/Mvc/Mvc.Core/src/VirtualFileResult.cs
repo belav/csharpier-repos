@@ -9,7 +9,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// A <see cref="FileResult" /> that on execution writes the file specified using a virtual path to the response
 /// using mechanisms provided by the host.

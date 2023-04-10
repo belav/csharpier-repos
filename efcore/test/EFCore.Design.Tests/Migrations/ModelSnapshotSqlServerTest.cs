@@ -20,7 +20,6 @@ using Xunit.Sdk;
 // ReSharper disable UnusedTypeParameter
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 public class ModelSnapshotSqlServerTest
 {
     private class EntityWithManyProperties

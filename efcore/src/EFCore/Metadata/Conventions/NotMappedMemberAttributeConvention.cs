@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that ignores members on entity types that have the <see cref="NotMappedAttribute" />.
 /// </summary>

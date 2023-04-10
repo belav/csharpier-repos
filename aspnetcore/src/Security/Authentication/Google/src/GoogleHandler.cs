@@ -15,7 +15,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Authentication.Google;
 
-
 /// <summary>
 /// Authentication handler for Google's OAuth based authentication.
 /// </summary>

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Diagnostics;
 
 namespace StatusCodePagesSample;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

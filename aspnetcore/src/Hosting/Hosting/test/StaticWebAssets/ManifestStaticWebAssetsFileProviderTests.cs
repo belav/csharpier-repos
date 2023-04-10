@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Hosting.Tests.StaticWebAssets;
 
-
 public class ManifestStaticWebAssetsFileProviderTest
 {
     [Fact]

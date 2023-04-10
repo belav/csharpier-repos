@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 internal static class FilePathComparer
 {
     private static StringComparer _instance;

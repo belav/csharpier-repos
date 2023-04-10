@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 // FYI: This class is also linked into MVC. If you make changes to the API you will
 // also need to change MVC's usage.
 internal sealed class DataSourceDependentCache<T> : IDisposable

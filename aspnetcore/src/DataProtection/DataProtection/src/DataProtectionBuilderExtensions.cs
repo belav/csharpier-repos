@@ -21,7 +21,6 @@ using Microsoft.Win32;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Extensions for configuring data protection using an <see cref="IDataProtectionBuilder"/>.
 /// </summary>

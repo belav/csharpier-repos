@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Provides an abstraction for querying users in a User store.
 /// </summary>

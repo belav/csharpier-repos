@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.ExternalAccess.VSCode.API;
 
-
 /// <summary>
 /// Allows VSCode to implement a telemetry logger for <see cref="ILogger"/> events.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorExtension
 {
     public abstract string ExtensionName { get; }

@@ -9,7 +9,6 @@ using System.Collections;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     A comparer which implements <see cref="IEqualityComparer{T}" /> for <see cref="Expression" />.
 /// </summary>

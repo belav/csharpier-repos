@@ -12,7 +12,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindUsages;
 
-
 /// <summary>
 /// An impl of <see cref="IFindUsagesContext"/> that will buffer results internally to either be shown to the
 /// user immediately if the find command completes quickly, or which will be pushed into the streaming presenter

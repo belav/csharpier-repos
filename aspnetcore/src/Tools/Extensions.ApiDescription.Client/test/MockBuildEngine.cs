@@ -9,7 +9,6 @@ using Microsoft.Build.Framework;
 // Inspired by https://github.com/microsoft/msbuild/blob/master/src/Utilities.UnitTests/MockEngine.cs
 namespace Microsoft.Extensions.ApiDescription.Client;
 
-
 internal sealed class MockBuildEngine : IBuildEngine3
 {
     private readonly StringBuilder _log = new StringBuilder();

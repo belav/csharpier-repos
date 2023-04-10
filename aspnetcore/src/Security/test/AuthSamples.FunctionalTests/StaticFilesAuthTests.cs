@@ -9,7 +9,6 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
-
 public class StaticFilesAuthTests : IClassFixture<WebApplicationFactory<StaticFilesAuth.Startup>>
 {
     public StaticFilesAuthTests(WebApplicationFactory<StaticFilesAuth.Startup> fixture)

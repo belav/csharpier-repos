@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 public class GlobalQualifiedTypeNameRewriterTest
 {
     [Theory]

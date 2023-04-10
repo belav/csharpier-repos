@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-
 // A mechanism for queuing JS-to-.NET calls so they aren't nested on the call stack and hence
 // have the same ordering behaviors as in Blazor Server. This eliminates serveral inconsistency
 // problems and bugs that otherwise require special-case solutions in other parts of the code.

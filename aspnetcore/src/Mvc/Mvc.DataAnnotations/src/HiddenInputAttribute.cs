@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Indicates associated property or all properties with the associated type should be edited using an
 /// &lt;input&gt; element of type "hidden".

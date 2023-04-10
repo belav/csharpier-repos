@@ -7,7 +7,6 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-
 /// <summary>
 /// Contains options for the <see cref="HealthCheckMiddleware"/>.
 /// </summary>

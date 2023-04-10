@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.Remote;
 
-
 /// <summary>
 /// Client-side object that is called back from the server when options for a certain language are required.
 /// Can be used when the remote API does not have an existing callback. If it does it can implement

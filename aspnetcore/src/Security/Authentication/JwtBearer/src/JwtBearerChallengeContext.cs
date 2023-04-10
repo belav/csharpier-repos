@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
-
 /// <summary>
 /// A <see cref="PropertiesContext{TOptions}"/> when access to a resource authenticated using JWT bearer is challenged.
 /// </summary>

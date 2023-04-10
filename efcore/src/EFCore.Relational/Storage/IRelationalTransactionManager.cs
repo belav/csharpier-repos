@@ -5,7 +5,6 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     <para>
 ///         Creates and manages the current transaction for a relational database.

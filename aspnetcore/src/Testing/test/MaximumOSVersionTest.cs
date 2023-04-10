@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
 public class MaximumOSVersionTest
 {

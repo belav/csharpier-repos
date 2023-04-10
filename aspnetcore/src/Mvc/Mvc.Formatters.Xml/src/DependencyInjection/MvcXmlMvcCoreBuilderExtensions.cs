@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for adding XML formatters to MVC.
 /// </summary>

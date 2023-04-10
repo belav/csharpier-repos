@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-
 internal static class InternalDiagnosticsOptions
 {
     /// <summary>

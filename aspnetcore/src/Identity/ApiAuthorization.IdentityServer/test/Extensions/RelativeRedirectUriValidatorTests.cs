@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 public class RelativeRedirectUriValidatorTests
 {
     [Fact]

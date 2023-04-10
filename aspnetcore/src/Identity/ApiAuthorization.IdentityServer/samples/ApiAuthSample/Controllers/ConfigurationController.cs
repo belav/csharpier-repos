@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiAuthSample.Controllers;
 
-
 public class ConfigurationController : ControllerBase
 {
     private readonly IClientRequestParametersProvider _clientRequestParametersProvider;

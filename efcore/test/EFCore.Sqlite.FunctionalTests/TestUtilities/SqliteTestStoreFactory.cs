@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class SqliteTestStoreFactory : RelationalTestStoreFactory
 {
     public static SqliteTestStoreFactory Instance { get; } = new();

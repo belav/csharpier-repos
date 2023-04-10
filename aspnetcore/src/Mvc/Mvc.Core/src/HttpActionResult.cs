@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// An <see cref="ActionResult"/> that when executed will produce a response based on the <see cref="IResult"/> provided.
 /// </summary>

@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 // Tests Controller for the unit testability with which users can simply instantiate controllers for unit tests
 public class ControllerUnitTestabilityTests
 {

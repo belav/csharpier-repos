@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class NorthwindODataQueryTests
     : ODataQueryTestBase,
         IClassFixture<NorthwindODataQueryTestFixture>

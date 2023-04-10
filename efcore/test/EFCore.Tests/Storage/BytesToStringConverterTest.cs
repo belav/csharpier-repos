@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class BytesToStringConverterTest
 {
     private static readonly BytesToStringConverter _bytesToStringConverter = new();

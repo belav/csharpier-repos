@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.Internal.Mappers;
 
-
 public class ParseStringMapper : IObjectMapper
 {
     public bool IsMatch(TypePair context) =>

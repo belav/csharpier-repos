@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-
 /// <summary>
 ///     Converts <see cref="bool" /> values to and from two string values.
 /// </summary>

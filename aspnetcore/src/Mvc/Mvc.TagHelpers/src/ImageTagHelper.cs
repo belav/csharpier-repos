@@ -13,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// <see cref="ITagHelper"/> implementation targeting &lt;img&gt; elements that supports file versioning.
 /// </summary>

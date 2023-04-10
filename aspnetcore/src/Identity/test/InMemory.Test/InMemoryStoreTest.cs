@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.InMemory.Test;
 
-
 public class InMemoryStoreTest : IdentitySpecificationTestBase<PocoUser, PocoRole>
 {
     protected override object CreateTestContext()

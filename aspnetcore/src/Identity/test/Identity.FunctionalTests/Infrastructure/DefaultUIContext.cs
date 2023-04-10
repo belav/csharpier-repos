@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-
 public class DefaultUIContext : HtmlPageContext
 {
     public DefaultUIContext() { }

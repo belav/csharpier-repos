@@ -8,7 +8,6 @@ using System.IO;
 
 namespace RunTests;
 
-
 public readonly record struct AssemblyInfo(string AssemblyPath) : IComparable<AssemblyInfo>
 {
     public string AssemblyName => Path.GetFileName(AssemblyPath);

@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 /// <summary>
 ///     Provides access to change tracking information and operations for a given entity.
 /// </summary>

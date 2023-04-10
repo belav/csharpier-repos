@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 /// <summary>
 /// This class handles deserialization of input XML data
 /// to strongly-typed objects using <see cref="XmlSerializer"/>

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.Abstractions;
 
-
 /// <summary>
 /// Describes an MVC action.
 /// </summary>

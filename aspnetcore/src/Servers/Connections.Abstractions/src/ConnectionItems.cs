@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 /// <summary>
 /// The items associated with a given connection.
 /// </summary>

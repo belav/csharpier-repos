@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FormatterWebSite;
 
-
 public class Developer
 {
     [Required]

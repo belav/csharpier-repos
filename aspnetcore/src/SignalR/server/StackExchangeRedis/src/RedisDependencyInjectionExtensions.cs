@@ -7,7 +7,6 @@ using StackExchange.Redis;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for configuring Redis-based scale-out for a SignalR Server in an <see cref="ISignalRServerBuilder" />.
 /// </summary>

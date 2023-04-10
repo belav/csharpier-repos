@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
-
 public class CapturedBatch
 {
     public IDictionary<int, List<RenderTreeDiff>> DiffsByComponentId { get; } =

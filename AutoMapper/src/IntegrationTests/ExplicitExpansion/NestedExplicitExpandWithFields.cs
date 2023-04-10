@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-
 public class NestedExplicitExpandWithFields
     : IntegrationTest<NestedExplicitExpandWithFields.DatabaseInitializer>
 {

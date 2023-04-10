@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ApplicationModelWebSite;
 
-
 public class CloneActionConvention : IControllerModelConvention
 {
     public void Apply(ControllerModel controller)

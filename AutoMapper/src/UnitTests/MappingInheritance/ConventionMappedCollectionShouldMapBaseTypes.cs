@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class ConventionMappedCollectionShouldMapBaseTypes
 {
     public class ItemBase { }

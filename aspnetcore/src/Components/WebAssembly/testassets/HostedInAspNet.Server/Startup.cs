@@ -3,7 +3,6 @@
 
 namespace HostedInAspNet.Server;
 
-
 public class Startup
 {
     public Startup(IConfiguration configuration)

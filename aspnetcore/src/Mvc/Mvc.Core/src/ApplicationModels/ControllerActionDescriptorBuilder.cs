@@ -12,7 +12,6 @@ using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// Creates instances of <see cref="ControllerActionDescriptor"/> from application model
 /// types.

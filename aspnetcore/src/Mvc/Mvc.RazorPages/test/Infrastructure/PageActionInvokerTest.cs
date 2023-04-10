@@ -23,7 +23,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 public class PageActionInvokerTest : CommonResourceInvokerTest
 {
     #region Diagnostics

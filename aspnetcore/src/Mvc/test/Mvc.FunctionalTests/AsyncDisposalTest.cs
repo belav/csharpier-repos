@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class AsyncDisposalTest : IClassFixture<MvcTestFixture<BasicWebSite.Startup>>
 {
     public AsyncDisposalTest(MvcTestFixture<BasicWebSite.Startup> fixture)

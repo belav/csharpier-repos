@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class BadRequestResultTests
 {
     [Fact]

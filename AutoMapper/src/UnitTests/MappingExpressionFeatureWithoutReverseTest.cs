@@ -2,7 +2,6 @@
 
 namespace AutoMapper.UnitTests;
 
-
 public class MappingExpressionFeatureWithoutReverseTest
 {
     [Fact]

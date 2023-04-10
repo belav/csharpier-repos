@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures the principal side of the relationship as required if the
 ///     <see cref="RequiredAttribute" /> is applied on the navigation property to the principal entity type.

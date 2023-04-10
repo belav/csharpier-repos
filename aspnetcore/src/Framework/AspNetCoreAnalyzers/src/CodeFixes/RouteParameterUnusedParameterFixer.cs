@@ -16,7 +16,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Fixers;
 
-
 [ExportCodeFixProvider(LanguageNames.CSharp), Shared]
 public class RouteParameterUnusedParameterFixer : CodeFixProvider
 {

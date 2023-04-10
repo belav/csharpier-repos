@@ -5,7 +5,6 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
-
 internal sealed class RedisSubscriptionManager
 {
     private readonly ConcurrentDictionary<string, HubConnectionStore> _subscriptions =

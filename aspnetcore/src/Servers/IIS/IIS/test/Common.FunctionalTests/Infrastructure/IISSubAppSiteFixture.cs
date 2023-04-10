@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 public class IISSubAppSiteFixture : IISTestSiteFixture
 {
     public IISSubAppSiteFixture()

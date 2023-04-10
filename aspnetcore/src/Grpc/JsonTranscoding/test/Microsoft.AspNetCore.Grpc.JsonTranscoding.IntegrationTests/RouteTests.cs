@@ -15,7 +15,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests;
 
-
 public class RouteTests : IntegrationTestBase
 {
     public RouteTests(GrpcTestFixture<Startup> fixture, ITestOutputHelper outputHelper)

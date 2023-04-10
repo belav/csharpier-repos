@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
-
 internal abstract class Graph<TVertex>
 {
     public abstract IEnumerable<TVertex> Vertices { get; }

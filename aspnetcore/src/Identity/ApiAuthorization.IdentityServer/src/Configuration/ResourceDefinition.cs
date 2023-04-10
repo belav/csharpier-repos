@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 internal class ResourceDefinition : ServiceDefinition
 {
     public string Scopes { get; set; }

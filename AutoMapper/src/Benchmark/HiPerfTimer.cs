@@ -2,7 +2,6 @@ using System.Runtime.InteropServices;
 
 namespace Benchmark;
 
-
 public class HiPerfTimer
 {
     [DllImport("Kernel32.dll")]

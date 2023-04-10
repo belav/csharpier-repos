@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.SignalR.Client.SourceGenerator;
 
-
 internal static class GeneratorHelpers
 {
     public static string GetAccessibilityString(Accessibility accessibility)

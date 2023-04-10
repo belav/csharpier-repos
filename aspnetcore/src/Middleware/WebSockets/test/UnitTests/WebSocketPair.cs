@@ -5,7 +5,6 @@ using System.Net.WebSockets;
 
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
-
 internal class WebSocketPair
 {
     public WebSocket ClientSocket { get; }

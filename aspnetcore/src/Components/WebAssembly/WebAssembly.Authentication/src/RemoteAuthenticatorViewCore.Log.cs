@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 public partial class RemoteAuthenticatorViewCore<TAuthenticationState>
     where TAuthenticationState : RemoteAuthenticationState
 {

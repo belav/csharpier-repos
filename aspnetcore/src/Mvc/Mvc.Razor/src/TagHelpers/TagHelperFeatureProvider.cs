@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 
-
 /// <summary>
 /// An <see cref="IApplicationFeatureProvider"/> for the <see cref="TagHelperFeature"/>.
 /// </summary>

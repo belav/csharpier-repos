@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class MockMethodInfo : MethodInfo
 {
     private readonly Action<object[]> _invoke;

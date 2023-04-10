@@ -9,7 +9,6 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools.Tests;
 
-
 public class UserJwtsTestFixture : IDisposable
 {
     private Stack<Action> _disposables = new Stack<Action>();

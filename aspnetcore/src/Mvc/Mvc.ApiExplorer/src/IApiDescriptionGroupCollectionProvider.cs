@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 /// <summary>
 /// Provides access to a collection of <see cref="ApiDescriptionGroup"/>.
 /// </summary>

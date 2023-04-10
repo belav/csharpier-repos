@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Provides an abstraction for a storing information which can be used to implement account lockout,
 /// including access failures and lockout status

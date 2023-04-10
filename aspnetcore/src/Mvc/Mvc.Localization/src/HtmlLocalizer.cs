@@ -5,7 +5,6 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
-
 /// <summary>
 /// An <see cref="IHtmlLocalizer"/> that uses the provided <see cref="IStringLocalizer"/> to do HTML-aware
 /// localization of content.

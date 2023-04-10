@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
-
 internal interface ICharBufferSource
 {
     char[] Rent(int bufferSize);

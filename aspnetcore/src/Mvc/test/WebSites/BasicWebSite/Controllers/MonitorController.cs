@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace BasicWebSite;
 
-
 public class MonitorController : Controller
 {
     private readonly ActionDescriptorCreationCounter _counterService;

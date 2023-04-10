@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 /// <summary>
 /// A factory for creating <see cref="IWebHostBuilder" /> instances.
 /// </summary>

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FormatterWebSite;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

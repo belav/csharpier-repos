@@ -11,7 +11,6 @@ using System.Threading.Tasks.Sources;
 
 namespace System.Net.Quic;
 
-
 internal sealed class ValueTaskSource : IValueTaskSource
 {
     // None -> [TryInitialize] -> Awaiting -> [TrySetResult|TrySetException] -> Completed

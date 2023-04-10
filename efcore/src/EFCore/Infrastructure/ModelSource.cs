@@ -5,7 +5,6 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     <para>
 ///         An implementation of <see cref="IModelSource" /> that produces a model based on

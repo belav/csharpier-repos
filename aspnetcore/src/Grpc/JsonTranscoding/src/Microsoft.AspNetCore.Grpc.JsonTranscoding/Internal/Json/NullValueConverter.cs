@@ -8,7 +8,6 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-
 internal sealed class NullValueConverter : JsonConverter<NullValue>
 {
     public override bool HandleNull => true;

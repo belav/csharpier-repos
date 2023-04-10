@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class FindInMemoryTest : FindTestBase<FindInMemoryTest.FindInMemoryFixture>
 {
     protected FindInMemoryTest(FindInMemoryFixture fixture)

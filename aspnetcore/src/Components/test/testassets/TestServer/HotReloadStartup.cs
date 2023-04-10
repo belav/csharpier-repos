@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.HotReload;
 
 namespace TestServer;
 
-
 public class HotReloadStartup
 {
     public HotReloadStartup()

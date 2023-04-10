@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Supplies information about a keyboard event that is being raised.
 /// </summary>

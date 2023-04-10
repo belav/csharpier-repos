@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Https;
 
-
 /// <summary>
 /// Enables loading TLS certificates from the certificate store.
 /// </summary>

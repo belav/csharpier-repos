@@ -6,7 +6,6 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator;
 
-
 internal interface IBackgroundWorkIndicatorContext : IUIThreadOperationContext
 {
     /// <summary>

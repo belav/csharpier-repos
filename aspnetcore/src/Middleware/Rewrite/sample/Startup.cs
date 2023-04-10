@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Rewrite;
 
 namespace RewriteSample;
 
-
 public class Startup
 {
     public Startup(IWebHostEnvironment environment)

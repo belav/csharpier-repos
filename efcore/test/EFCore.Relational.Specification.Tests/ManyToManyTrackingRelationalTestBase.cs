@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class ManyToManyTrackingRelationalTestBase<TFixture>
     : ManyToManyTrackingTestBase<TFixture>
     where TFixture : ManyToManyTrackingRelationalTestBase<TFixture>.ManyToManyTrackingRelationalFixture

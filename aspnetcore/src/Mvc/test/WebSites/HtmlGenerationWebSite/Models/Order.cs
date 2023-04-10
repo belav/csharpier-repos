@@ -3,7 +3,6 @@
 
 namespace HtmlGenerationWebSite.Models;
 
-
 public class Order
 {
     public bool NeedSpecialHandle { get; set; }

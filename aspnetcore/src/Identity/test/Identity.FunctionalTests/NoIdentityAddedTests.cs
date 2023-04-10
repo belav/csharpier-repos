@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-
 public class NoIdentityAddedTests
     : IClassFixture<ServerFactory<NoIdentityStartup, IdentityDbContext>>
 {

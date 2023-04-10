@@ -12,7 +12,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 internal sealed partial class CircuitFactory : ICircuitFactory
 {
     private readonly IServiceScopeFactory _scopeFactory;

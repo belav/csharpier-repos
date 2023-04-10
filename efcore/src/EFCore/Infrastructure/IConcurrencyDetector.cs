@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     Used by EF internal code and database providers to detect concurrent access to non-thread-safe
 ///     resources.

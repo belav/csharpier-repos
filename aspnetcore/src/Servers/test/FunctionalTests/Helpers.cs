@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Server.IntegrationTesting;
 
 namespace ServerComparison.FunctionalTests;
 
-
 public class Helpers
 {
     public static string GetApplicationPath()

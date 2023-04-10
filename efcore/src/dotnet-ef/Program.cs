@@ -5,7 +5,6 @@ using Microsoft.DotNet.Cli.CommandLine;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal static class Program
 {
     private static int Main(string[] args)

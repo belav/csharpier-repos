@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace CustomPolicyProvider;
 
-
 public class Program
 {
     public static void Main(string[] args)

@@ -13,7 +13,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-
 public class CreateNewOnMetadataUpdateAttributePassTest : RazorProjectEngineTestBase
 {
     protected override RazorLanguageVersion Version => RazorLanguageVersion.Version_6_0;

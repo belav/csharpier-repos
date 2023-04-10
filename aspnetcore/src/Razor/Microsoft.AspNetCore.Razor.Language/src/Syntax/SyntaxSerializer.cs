@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 internal class SyntaxSerializer
 {
     internal static string Serialize(SyntaxNode node)

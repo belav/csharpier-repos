@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
-
 internal static class GrpcProtocolHelpers
 {
     public static byte[] ParseBinaryHeader(string base64)

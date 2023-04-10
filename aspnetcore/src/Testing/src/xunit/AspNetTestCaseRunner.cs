@@ -10,7 +10,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 internal sealed class AspNetTestCaseRunner : XunitTestCaseRunner
 {
     public AspNetTestCaseRunner(

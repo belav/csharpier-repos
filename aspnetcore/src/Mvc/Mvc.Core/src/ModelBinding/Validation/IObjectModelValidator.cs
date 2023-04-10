@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// Provides methods to validate an object graph.
 /// </summary>

@@ -5,7 +5,6 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
-
 internal static class ServerSentEventsMessageFormatter
 {
     private static readonly ReadOnlyMemory<byte> DataPrefix = new[]

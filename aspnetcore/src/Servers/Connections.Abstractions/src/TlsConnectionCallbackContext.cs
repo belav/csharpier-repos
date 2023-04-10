@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 /// <summary>
 /// Per connection state used to determine the TLS options.
 /// </summary>

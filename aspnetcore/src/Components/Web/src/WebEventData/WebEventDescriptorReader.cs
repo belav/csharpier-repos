@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 internal static class WebEventDescriptorReader
 {
     private static readonly JsonEncodedText EventHandlerIdKey = JsonEncodedText.Encode(

@@ -15,7 +15,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Options;
 
-
 public sealed class DocumentOptionSetTests
 {
     [Fact]

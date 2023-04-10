@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 public class FileLoggerProcessorTests
 {
     private string _messageOne = "Message one";

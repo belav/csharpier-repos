@@ -1,6 +1,5 @@
 namespace AutoMapper.Configuration.Conventions;
 
-
 public interface ISourceToDestinationNameMapper
 {
     MemberInfo GetSourceMember(

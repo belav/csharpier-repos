@@ -8,7 +8,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 internal sealed class ResponseCacheFilterExecutor
 {
     private readonly CacheProfile _cacheProfile;

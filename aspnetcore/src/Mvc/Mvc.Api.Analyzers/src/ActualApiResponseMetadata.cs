@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 internal readonly struct ActualApiResponseMetadata
 {
     private readonly int? _statusCode;

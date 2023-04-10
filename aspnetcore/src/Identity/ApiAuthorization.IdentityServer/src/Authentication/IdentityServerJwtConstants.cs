@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 /// <summary>
 /// Constants for a default API authentication handler.
 /// </summary>

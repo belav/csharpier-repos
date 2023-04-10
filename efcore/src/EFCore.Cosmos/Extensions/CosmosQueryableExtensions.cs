@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Cosmos-specific extension methods for LINQ queries.
 /// </summary>

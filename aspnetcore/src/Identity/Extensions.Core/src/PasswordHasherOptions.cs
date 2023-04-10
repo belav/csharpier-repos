@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Specifies options for password hashing.
 /// </summary>

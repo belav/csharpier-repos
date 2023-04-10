@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 // ReSharper disable StringEndsWithIsCultureSpecific
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : InheritanceQueryFixtureBase, new()
 {

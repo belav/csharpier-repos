@@ -11,7 +11,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-
 // Blazor WebAssembly loads ICU (globalization) data for subset of cultures by default.
 // This app covers testing this along with verifying the behavior for fallback culture for localized resources.
 public class WebAssemblyICUShardingTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>

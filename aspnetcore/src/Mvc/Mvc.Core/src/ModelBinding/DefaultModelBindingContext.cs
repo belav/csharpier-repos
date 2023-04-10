@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// A context that contains operating information for model binding and validation.
 /// </summary>

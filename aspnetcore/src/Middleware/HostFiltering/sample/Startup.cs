@@ -6,7 +6,6 @@ using Microsoft.Extensions.Options;
 
 namespace HostFilteringSample;
 
-
 public class Startup
 {
     public IConfiguration Config { get; }

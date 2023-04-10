@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class VirtualRazorProjectFileSystem : RazorProjectFileSystem
 {
     private readonly DirectoryNode _root = new DirectoryNode("/");

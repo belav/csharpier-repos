@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 
-
 /// <summary>
 /// Default values for Microsoft account authentication
 /// </summary>

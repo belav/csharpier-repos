@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
-
 public class TestClock : ISystemClock
 {
     public TestClock()

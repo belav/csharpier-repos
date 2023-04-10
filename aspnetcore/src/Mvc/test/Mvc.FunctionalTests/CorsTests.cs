@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class CorsTests : CorsTestsBase<CorsWebSite.StartupWithoutEndpointRouting>
 {
     public CorsTests(MvcTestFixture<CorsWebSite.StartupWithoutEndpointRouting> fixture)

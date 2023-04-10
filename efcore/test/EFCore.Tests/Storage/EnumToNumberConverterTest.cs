@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class EnumToNumberConverterTest
 {
     private static readonly ValueConverter<Beatles, int> _enumToNumber =

@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// A read-only collection of <see cref="ModelMetadata"/> objects which represent model properties.
 /// </summary>

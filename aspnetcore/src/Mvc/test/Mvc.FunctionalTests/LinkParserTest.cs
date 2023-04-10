@@ -8,7 +8,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 // Functional tests for MVC's scenarios with LinkParser
 public class LinkParserTest : IClassFixture<MvcTestFixture<RoutingWebSite.StartupForLinkGenerator>>
 {

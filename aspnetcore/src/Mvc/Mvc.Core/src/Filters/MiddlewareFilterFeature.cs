@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 internal sealed class MiddlewareFilterFeature : IMiddlewareFilterFeature
 {
     public ResourceExecutingContext? ResourceExecutingContext { get; set; }

@@ -13,7 +13,6 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.XmlComments;
 
-
 public class XmlCommentsDocumentFilterTests
 {
     private class TestMethod : IMethod

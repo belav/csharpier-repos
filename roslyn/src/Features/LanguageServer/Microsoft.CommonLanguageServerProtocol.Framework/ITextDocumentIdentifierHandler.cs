@@ -4,7 +4,6 @@
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
-
 public interface ITextDocumentIdentifierHandler<TRequest, TTextDocumentIdentifier>
     : ITextDocumentIdentifierHandler
 {

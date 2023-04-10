@@ -9,7 +9,6 @@ using Microsoft.Extensions.Localization;
 
 namespace LocalizationWebsite;
 
-
 public class StartupResourcesAtRootFolder
 {
     public void ConfigureServices(IServiceCollection services)

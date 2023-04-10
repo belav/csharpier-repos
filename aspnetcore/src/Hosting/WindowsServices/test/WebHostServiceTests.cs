@@ -11,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 public class WebHostServiceTests
 {
     // Reasonable timeout for our test operations to complete.

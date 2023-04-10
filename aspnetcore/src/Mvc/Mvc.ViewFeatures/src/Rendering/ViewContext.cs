@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// Context for view execution.
 /// </summary>

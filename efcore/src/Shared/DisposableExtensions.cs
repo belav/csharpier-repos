@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
-
 internal static class DisposableExtensions
 {
     public static ValueTask DisposeAsyncIfAvailable(this IDisposable? disposable)

@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public interface ILoggedTest : IDisposable
 {
     ILogger Logger { get; }

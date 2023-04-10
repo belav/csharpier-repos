@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace System;
 
-
 /// <summary>Provides format strings and related information for use with the current terminal.</summary>
 internal sealed class TerminalFormatStrings
 {

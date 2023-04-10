@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace RoutingWebSite;
 
-
 internal class EndsWithStringRouteConstraint : IRouteConstraint
 {
     private readonly string _endsWith;

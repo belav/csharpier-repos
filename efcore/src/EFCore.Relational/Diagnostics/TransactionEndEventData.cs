@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     The <see cref="DiagnosticSource" /> event payload base class for
 ///     <see cref="RelationalEventId" /> transaction end events.

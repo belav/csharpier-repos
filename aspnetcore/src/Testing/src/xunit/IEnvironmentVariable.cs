@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 internal interface IEnvironmentVariable
 {
     string Get(string name);

@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Hosting.Internal;
 
-
 // Workaround for linker bug: https://github.com/dotnet/linker/issues/1981
 internal readonly struct UseStartupState
 {

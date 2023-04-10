@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
-
 public class ValidationVisitorModelWithValidatedProperties : ValidationVisitorBenchmarkBase
 {
     public class Person

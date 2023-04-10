@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// An authorization filter that confirms requests are received over HTTPS.
 /// </summary>

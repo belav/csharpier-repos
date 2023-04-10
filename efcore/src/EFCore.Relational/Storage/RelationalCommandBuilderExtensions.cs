@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     Extension methods for the <see cref="IRelationalCommandBuilder" /> class.
 /// </summary>

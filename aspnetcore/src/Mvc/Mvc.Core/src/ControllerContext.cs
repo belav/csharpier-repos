@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// The context associated with the current request for a controller.
 /// </summary>

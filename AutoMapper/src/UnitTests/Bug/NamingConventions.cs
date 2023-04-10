@@ -1,6 +1,5 @@
 namespace AutoMapper.UnitTests.Bug.NamingConventions;
 
-
 public class RemoveNameSplitMapper : NonValidatingSpecBase
 {
     class Source

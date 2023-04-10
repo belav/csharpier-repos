@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
-
 public class NestedCollectionBase
 {
     public int Id { get; set; }

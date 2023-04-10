@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class NullableEnumToNullableValueType
 {
     public class CannotConvertEnumToNullableWhenPassedNull : AutoMapperSpecBase

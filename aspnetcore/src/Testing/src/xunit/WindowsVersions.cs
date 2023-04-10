@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// https://en.wikipedia.org/wiki/Windows_10_version_history
 /// </summary>

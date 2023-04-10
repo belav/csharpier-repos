@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
-
 /// <summary>
 /// Wraps utility BCRYPT APIs that don't work directly with handles.
 /// </summary>

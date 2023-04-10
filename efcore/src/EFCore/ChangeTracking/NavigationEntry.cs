@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 /// <summary>
 ///     Provides access to change tracking and loading information for a navigation property
 ///     that associates this entity to one or more other entities.

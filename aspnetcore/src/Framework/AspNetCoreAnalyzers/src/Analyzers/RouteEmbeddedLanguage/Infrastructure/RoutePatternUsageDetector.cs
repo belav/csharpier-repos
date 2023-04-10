@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
-
 internal readonly record struct RoutePatternUsageContext(
     IMethodSymbol? MethodSymbol,
     bool IsMinimal,

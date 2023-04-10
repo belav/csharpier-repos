@@ -5,7 +5,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-
 internal interface IHttpResponseControl
 {
     ValueTask<FlushResult> ProduceContinueAsync();

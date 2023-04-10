@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// A default in-memory lifetime manager abstraction for <see cref="Hub"/> instances.
 /// </summary>

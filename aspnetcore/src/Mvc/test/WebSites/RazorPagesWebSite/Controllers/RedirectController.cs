@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorPagesWebSite;
 
-
 public class RedirectController : Controller
 {
     [HttpGet("/RedirectToPage")]

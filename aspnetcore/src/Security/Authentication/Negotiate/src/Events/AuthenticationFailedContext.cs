@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 /// <summary>
 /// State for the AuthenticationFailed event.
 /// </summary>

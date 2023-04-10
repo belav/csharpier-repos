@@ -13,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
-
 public static class TcpHubConnectionBuilderExtensions
 {
     public static IHubConnectionBuilder WithEndPoint(this IHubConnectionBuilder builder, Uri uri)

@@ -20,7 +20,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.E2ETesting;
 
-
 public class SauceConnectServer : IDisposable
 {
     private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1);

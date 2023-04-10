@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
-
 public class Order
 {
     private int? _orderId;

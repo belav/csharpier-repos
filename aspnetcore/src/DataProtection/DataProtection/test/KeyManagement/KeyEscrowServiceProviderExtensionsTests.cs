@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
-
 public class KeyEscrowServiceProviderExtensionsTests
 {
     [Fact]

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class StringToEnumConverterTest
 {
     private static readonly ValueConverter<string, Beatles> _stringToEnum =

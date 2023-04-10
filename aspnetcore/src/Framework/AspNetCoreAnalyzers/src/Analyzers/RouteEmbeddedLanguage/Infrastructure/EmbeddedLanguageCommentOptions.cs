@@ -8,7 +8,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
-
 // Copied from https://github.com/dotnet/roslyn/blob/9fee6f5461baae5152c956c3c3024ca15b85feb9/src/Features/Core/Portable/EmbeddedLanguages/EmbeddedLanguageCommentOptions.cs
 
 /// <summary>

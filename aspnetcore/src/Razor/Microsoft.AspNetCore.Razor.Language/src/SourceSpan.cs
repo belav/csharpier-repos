@@ -7,7 +7,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public struct SourceSpan : IEquatable<SourceSpan>
 {
     public static readonly SourceSpan Undefined = new SourceSpan(SourceLocation.Undefined, 0);

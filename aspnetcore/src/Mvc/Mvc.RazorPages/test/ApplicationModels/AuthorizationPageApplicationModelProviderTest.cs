@@ -12,7 +12,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 public class AuthorizationPageApplicationModelProviderTest
 {
     private readonly IOptions<MvcOptions> OptionsWithoutEndpointRouting = Options.Create(

@@ -5,7 +5,6 @@ using Microsoft.Extensions.DiagnosticAdapter;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class TestDiagnosticListener
 {
     public class OnBeforeActionEventData

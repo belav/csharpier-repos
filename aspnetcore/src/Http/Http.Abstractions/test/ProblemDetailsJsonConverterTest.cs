@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.AspNetCore.Http.Abstractions.Tests;
 
-
 public class ProblemDetailsJsonConverterTest
 {
     private static JsonSerializerOptions JsonSerializerOptions =>

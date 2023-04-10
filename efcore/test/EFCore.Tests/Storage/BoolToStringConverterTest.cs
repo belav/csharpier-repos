@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class BoolToStringConverterTest
 {
     private static readonly BoolToStringConverter _boolToTrueFalse = new("False", "True");

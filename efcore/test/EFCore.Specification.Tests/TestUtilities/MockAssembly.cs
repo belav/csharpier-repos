@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class MockAssembly : Assembly
 {
     public static Assembly Create(params Type[] definedTypes) =>

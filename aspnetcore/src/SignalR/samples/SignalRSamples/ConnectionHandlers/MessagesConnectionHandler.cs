@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http.Connections.Features;
 
 namespace SignalRSamples.ConnectionHandlers;
 
-
 public class MessagesConnectionHandler : ConnectionHandler
 {
     private ConnectionList Connections { get; } = new ConnectionList();

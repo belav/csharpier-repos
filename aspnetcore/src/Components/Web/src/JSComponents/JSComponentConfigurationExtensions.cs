@@ -7,7 +7,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Extension methods for working on an <see cref="IJSComponentConfiguration"/>.
 /// </summary>

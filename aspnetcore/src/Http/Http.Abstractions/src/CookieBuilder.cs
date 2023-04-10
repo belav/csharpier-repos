@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http.Abstractions;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Defines settings used to create a cookie.
 /// </summary>

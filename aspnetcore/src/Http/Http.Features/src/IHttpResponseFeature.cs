@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Represents the fields and state of an HTTP response.
 /// </summary>

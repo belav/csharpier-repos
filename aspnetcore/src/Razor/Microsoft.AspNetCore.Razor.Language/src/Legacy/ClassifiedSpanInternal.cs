@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal struct ClassifiedSpanInternal
 {
     public ClassifiedSpanInternal(

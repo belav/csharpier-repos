@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace MvcSample.Web.Components;
 
-
 [HtmlTargetElement("tag-cloud")]
 [ViewComponent(Name = "Tags")]
 public class TagCloudViewComponentTagHelper : ITagHelper

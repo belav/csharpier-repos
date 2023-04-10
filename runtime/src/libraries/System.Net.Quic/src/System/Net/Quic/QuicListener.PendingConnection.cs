@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace System.Net.Quic;
 
-
 public sealed partial class QuicListener
 {
     /// <summary>

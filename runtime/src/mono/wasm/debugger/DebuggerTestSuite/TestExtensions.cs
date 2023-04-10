@@ -6,7 +6,6 @@ using Xunit;
 
 namespace DebuggerTests;
 
-
 internal static class TestExtensions
 {
     public static void AssertOk(this Result res, string prefix = "") =>

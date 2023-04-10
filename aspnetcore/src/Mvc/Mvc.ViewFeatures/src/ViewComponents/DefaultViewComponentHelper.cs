@@ -13,7 +13,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 /// <summary>
 /// Default implementation for <see cref="IViewComponentHelper"/>.
 /// </summary>

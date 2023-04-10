@@ -14,7 +14,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class CreatedAtRouteResultTests
 {
     public static IEnumerable<object[]> CreatedAtRouteData

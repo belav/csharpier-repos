@@ -7,7 +7,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class AspNetTestFramework : XunitTestFramework
 {
     public AspNetTestFramework(IMessageSink messageSink)

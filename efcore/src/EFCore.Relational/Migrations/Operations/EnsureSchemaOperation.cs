@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 
-
 /// <summary>
 ///     A <see cref="MigrationOperation" /> for ensuring that a schema exists. That is, the
 ///     schema will be created if and only if it does not already exist.

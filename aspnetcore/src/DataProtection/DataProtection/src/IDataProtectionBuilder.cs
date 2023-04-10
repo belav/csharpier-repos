@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Provides access to configuration for the data protection system, which allows the
 /// developer to configure default cryptographic algorithms, key storage locations,

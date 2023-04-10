@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-
 public class Http2KeepAliveTests : Http2TestBase
 {
     [Fact]

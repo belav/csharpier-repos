@@ -10,7 +10,6 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.Handlers;
 
-
 [LanguageServerEndpoint("shutdown")]
 public class ShutdownHandler<TRequestContext> : INotificationHandler<TRequestContext>
 {

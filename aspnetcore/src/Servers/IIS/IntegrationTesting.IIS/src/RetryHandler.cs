@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
-
 public class RetryHandler : DelegatingHandler
 {
     private const int MaxRetries = 5;

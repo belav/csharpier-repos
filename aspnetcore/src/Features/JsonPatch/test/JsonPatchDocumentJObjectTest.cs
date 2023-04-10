@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
-
 public class JsonPatchDocumentJObjectTest
 {
     [Fact]

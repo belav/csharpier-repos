@@ -5,7 +5,6 @@ using System.Net.WebSockets;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Manages the establishment of WebSocket connections for a specific HTTP request.
 /// </summary>

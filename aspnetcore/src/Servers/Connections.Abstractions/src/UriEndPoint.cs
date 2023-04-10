@@ -6,7 +6,6 @@ using System.Net;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 /// <summary>
 /// An <see cref="EndPoint"/> defined by a <see cref="System.Uri"/>.
 /// </summary>

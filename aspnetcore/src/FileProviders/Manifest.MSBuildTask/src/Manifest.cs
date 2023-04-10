@@ -7,7 +7,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest.Task;
 
-
 public class Manifest
 {
     public Entry Root { get; set; } = Entry.Directory("");

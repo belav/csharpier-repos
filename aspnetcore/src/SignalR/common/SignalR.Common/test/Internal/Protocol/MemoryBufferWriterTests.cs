@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
-
 public class MemoryBufferWriterTests
 {
     private static readonly int MinimumSegmentSize;

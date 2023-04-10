@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VersioningWebSite;
 
-
 // Scenario
 // Actions define version ranges and some
 // versions overlap.

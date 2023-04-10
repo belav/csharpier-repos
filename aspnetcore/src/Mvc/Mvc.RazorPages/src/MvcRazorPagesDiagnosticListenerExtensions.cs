@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 internal static class MvcRazorPagesDiagnosticListenerExtensions
 {
     public static void BeforeHandlerMethod(

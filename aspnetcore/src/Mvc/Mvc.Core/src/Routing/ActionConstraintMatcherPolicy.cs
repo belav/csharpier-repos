@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Routing.Matching;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 // This is a bridge that allows us to execute IActionConstraint instance when
 // used with Matcher.
 internal sealed class ActionConstraintMatcherPolicy : MatcherPolicy, IEndpointSelectorPolicy

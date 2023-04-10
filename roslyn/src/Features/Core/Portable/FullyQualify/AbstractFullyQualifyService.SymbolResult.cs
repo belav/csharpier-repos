@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify;
 
-
 internal abstract partial class AbstractFullyQualifyService<TSimpleNameSyntax>
     where TSimpleNameSyntax : SyntaxNode
 {

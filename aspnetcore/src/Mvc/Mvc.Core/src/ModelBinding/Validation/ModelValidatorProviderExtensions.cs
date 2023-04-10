@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// Extension methods for <see cref="IModelValidatorProvider"/>.
 /// </summary>

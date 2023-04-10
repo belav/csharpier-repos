@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 /// <summary>
 /// Deployer for WebListener and Kestrel.
 /// </summary>

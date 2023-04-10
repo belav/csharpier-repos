@@ -6,7 +6,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class GlobalDatabaseTest
 {
     private static readonly InMemoryDatabaseRoot _databaseRoot = new();

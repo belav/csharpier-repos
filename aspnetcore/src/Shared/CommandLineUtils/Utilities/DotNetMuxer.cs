@@ -13,7 +13,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Extensions.CommandLineUtils;
 
-
 /// <summary>
 /// Utilities for finding the "dotnet.exe" file from the currently running .NET Core application
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 /// <summary>
 ///     An interface for the repository used to access the '__EFMigrationsHistory' table that tracks metadata
 ///     about EF Core Migrations such as which migrations have been applied.

@@ -25,7 +25,6 @@ using static Microsoft.CodeAnalysis.LanguageServer.Handler.InlineCompletions.Xml
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlineCompletions;
 
-
 /// <summary>
 /// Supports built in legacy snippets for razor scenarios.
 /// </summary>

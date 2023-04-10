@@ -11,7 +11,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests;
 
-
 public class FileModifierParsingTests : ParsingTests
 {
     public FileModifierParsingTests(ITestOutputHelper output)

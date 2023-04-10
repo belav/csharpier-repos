@@ -5,7 +5,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class RelationalGeometryTypeMappingTest
 {
     [ConditionalFact]

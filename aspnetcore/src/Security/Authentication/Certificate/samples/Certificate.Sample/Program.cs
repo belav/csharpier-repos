@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Https;
 
 namespace Certificate.Sample;
 
-
 public class Program
 {
     public static void Main(string[] args)

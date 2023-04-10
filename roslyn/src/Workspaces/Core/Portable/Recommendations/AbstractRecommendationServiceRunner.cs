@@ -17,7 +17,6 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Recommendations;
 
-
 internal abstract partial class AbstractRecommendationService<TSyntaxContext>
 {
     protected abstract class AbstractRecommendationServiceRunner

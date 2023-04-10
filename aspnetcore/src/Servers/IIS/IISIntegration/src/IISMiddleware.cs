@@ -15,7 +15,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Server.IISIntegration;
 
-
 /// <summary>
 /// The middleware that enables IIS Out-Of-Process to work.
 /// </summary>

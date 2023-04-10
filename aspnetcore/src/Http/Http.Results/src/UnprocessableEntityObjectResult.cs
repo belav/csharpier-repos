@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 internal sealed class UnprocessableEntityObjectResult : ObjectResult
 {
     public UnprocessableEntityObjectResult(object? error)

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class RouteValueEqualityComparerTest
 {
     private readonly RouteValueEqualityComparer _comparer;

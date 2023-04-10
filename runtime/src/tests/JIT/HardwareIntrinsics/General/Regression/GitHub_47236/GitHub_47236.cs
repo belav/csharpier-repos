@@ -8,7 +8,6 @@ using Xunit;
 
 namespace GitHub_47236;
 
-
 public static class Program
 {
     [Fact]

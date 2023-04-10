@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace VersioningWebSite;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices.Test;
 
-
 public class WebConfigurationLevelSwitchTests
 {
     [Theory]

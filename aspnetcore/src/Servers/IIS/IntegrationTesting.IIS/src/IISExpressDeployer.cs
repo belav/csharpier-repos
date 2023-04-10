@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
-
 /// <summary>
 /// Deployment helper for IISExpress.
 /// </summary>

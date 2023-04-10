@@ -3,7 +3,6 @@
 
 namespace IdentitySamples;
 
-
 public static class MessageServices
 {
     public static Task SendEmailAsync(string email, string subject, string message)

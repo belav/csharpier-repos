@@ -6,7 +6,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal class LiteralAttributeChunkGenerator : SpanChunkGenerator
 {
     public LiteralAttributeChunkGenerator(

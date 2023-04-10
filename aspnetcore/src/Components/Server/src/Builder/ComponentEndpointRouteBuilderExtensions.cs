@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Extensions for <see cref="IEndpointRouteBuilder"/>.
 /// </summary>

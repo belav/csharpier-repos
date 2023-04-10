@@ -9,7 +9,6 @@ using System.Collections;
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public class NavigationFixerTest
 {
     [ConditionalFact]

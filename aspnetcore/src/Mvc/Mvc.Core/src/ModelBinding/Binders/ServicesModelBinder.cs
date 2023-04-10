@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 /// <summary>
 /// An <see cref="IModelBinder"/> which binds models from the request services when a model
 /// has the binding source <see cref="BindingSource.Services"/>.

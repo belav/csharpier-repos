@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-
 internal class TagHelperHtmlAttributeRuntimeNodeWriter : RuntimeNodeWriter
 {
     public override string WriteAttributeValueMethod { get; set; } = "AddHtmlAttributeValue";

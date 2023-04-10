@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal partial class RequestContext
 {
     private static partial class Log

@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// An interface that can provide data protection services for data which has been persisted
 /// to long-term storage.

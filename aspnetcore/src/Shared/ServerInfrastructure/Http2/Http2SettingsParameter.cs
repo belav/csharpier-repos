@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-
 // https://www.iana.org/assignments/http2-parameters/http2-parameters.xhtml#settings
 internal enum Http2SettingsParameter : ushort
 {

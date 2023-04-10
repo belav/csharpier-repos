@@ -13,7 +13,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Interop.FunctionalTests;
 
-
 /// <summary>
 /// This tests interop with System.Net.Http.HttpClient (SocketHttpHandler) using HTTP/2 (H2 and H2C) WebSockets
 /// https://www.rfc-editor.org/rfc/rfc8441.html

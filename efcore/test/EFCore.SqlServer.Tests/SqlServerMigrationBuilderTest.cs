@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Tests;
 
-
 public class SqlServerMigrationBuilderTest
 {
     [ConditionalFact]

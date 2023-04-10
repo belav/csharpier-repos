@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 /// <summary>
 /// Defines an interface for objects to be un-wrappable after deserialization.
 /// </summary>

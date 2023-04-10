@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 internal readonly struct ConventionalRouteEntry
 {
     public readonly RoutePattern Pattern;

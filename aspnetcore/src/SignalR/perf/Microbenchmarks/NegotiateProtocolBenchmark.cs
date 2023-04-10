@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
-
 public class NegotiateProtocolBenchmark
 {
     private NegotiationResponse _negotiateResponse;

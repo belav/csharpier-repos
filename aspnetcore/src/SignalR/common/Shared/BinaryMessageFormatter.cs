@@ -6,7 +6,6 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal static class BinaryMessageFormatter
 {
     public static void WriteLengthPrefix(long length, IBufferWriter<byte> output)

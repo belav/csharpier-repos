@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Provides extension methods for the <see cref="NavigationManager"/> type.
 /// </summary>

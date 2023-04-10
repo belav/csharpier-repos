@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace SignalRSamples.Hubs;
 
-
 public class UploadHub : Hub
 {
     public string Echo(string word)

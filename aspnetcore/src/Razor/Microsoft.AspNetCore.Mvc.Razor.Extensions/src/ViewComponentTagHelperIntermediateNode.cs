@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-
 public sealed class ViewComponentTagHelperIntermediateNode : ExtensionIntermediateNode
 {
     public override IntermediateNodeCollection Children { get; } =

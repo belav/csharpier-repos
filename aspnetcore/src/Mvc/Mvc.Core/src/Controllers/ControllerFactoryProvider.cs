@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Core;
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
-
 internal sealed class ControllerFactoryProvider : IControllerFactoryProvider
 {
     private readonly IControllerActivatorProvider _activatorProvider;

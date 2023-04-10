@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class ProjectUsingTheQueriedEntity : AutoMapperSpecBase
 {
     private Destination _destination;

@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 public class ApiVisibilityConventionTest
 {
     [Fact]

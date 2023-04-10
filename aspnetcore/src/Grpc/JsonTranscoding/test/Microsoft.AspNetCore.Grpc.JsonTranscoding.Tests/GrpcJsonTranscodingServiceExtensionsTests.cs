@@ -6,7 +6,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 
-
 public class GrpcJsonTranscodingServiceExtensionsTests
 {
     [Fact]

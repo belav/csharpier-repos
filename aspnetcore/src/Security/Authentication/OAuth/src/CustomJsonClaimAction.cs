@@ -6,7 +6,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication.OAuth.Claims;
 
-
 /// <summary>
 /// A ClaimAction that selects the value from the JSON user data by running the given Func resolver.
 /// </summary>

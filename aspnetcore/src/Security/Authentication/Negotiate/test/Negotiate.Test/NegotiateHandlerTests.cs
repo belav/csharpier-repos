@@ -18,7 +18,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 public class NegotiateHandlerTests
 {
     [Fact]

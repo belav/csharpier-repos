@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace RazorWebSite;
 
-
 public class TestHeadTagHelperComponent : TagHelperComponent
 {
     public override int Order => 1;

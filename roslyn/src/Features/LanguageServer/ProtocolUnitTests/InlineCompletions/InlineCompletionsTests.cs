@@ -15,7 +15,6 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests;
 
-
 public class InlineCompletionsTests : AbstractLanguageServerProtocolTests
 {
     public InlineCompletionsTests(ITestOutputHelper testOutputHelper)

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Relational database specific extension methods for <see cref="OwnedNavigationBuilder" />.
 /// </summary>

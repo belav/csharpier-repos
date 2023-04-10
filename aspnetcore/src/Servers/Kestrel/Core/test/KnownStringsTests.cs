@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.KestrelTests;
 
-
 public class KnownStringsTests
 {
     static readonly byte[] _methodConnect = Encoding.ASCII.GetBytes("CONNECT ");

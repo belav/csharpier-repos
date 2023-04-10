@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
-
 public class CustomModelTypeModel : PageModel
 {
     [BindProperty]

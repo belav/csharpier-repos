@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Https;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 
-
 /// <summary>
 /// Describes either an <see cref="System.Net.IPEndPoint"/>, Unix domain socket path, named pipe name, or a file descriptor for an already open
 /// socket that Kestrel should bind to or open.

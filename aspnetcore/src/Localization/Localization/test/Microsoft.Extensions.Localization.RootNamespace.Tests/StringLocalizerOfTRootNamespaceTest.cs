@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Localization.RootNamespace.Tests;
 
-
 public class StringLocalizerOfTRootNamespaceTest
 {
     [Fact]

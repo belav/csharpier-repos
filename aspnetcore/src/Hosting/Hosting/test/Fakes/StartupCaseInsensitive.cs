@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting.Tests.Fakes;
 
-
 class StartupCaseInsensitive
 {
     public static IServiceProvider ConfigureCaseInsensitiveServices(IServiceCollection services)

@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace IgnitorSample;
 
-
 /// <summary>
 /// This is a minimal sample that lets you try out Ignitor against a Blazor Server app.
 /// To use this, first launch the server app. Update the code below to point to the host url and run the test.

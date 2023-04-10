@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Static class for url helper extension methods.
 /// </summary>

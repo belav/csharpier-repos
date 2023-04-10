@@ -5,7 +5,6 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Used to pass information during the SecurityStamp validation event.
 /// </summary>

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure;
 
-
 // This type is copied from https://github.com/dotnet/roslyn-analyzers/blob/9b58ec3ad33353d1a523cda8c4be38eaefc80ad8/src/Utilities/Compiler/BoundedCacheWithFactory.cs
 
 /// <summary>

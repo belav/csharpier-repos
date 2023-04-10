@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Cosmos-specific extension methods for <see cref="ModelBuilder" />.
 /// </summary>

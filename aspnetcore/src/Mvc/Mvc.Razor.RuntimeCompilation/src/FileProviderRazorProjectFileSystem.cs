@@ -7,7 +7,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 internal sealed class FileProviderRazorProjectFileSystem : RazorProjectFileSystem
 {
     private const string RazorFileExtension = ".cshtml";

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that ensures that the triggers on the derived types are compatible with the triggers on the base type.
 ///     And also ensures that the declaring type is current.

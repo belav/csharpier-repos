@@ -7,7 +7,6 @@ using RoutingWebSite;
 
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
-
 public class MapFallbackTest : IClassFixture<RoutingTestFixture<MapFallbackStartup>>
 {
     private readonly RoutingTestFixture<MapFallbackStartup> _fixture;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 public class DelegatingEnumerableTest
 {
     [Fact]

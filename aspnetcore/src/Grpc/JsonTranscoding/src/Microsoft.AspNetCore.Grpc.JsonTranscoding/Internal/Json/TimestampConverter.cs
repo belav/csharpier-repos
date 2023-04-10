@@ -8,7 +8,6 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-
 internal sealed class TimestampConverter<TMessage> : SettingsConverterBase<TMessage>
     where TMessage : IMessage, new()
 {

@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class CSharpUniqueNamerTest
 {
     [ConditionalFact]

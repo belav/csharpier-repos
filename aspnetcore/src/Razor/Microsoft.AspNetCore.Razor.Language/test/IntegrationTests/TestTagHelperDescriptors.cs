@@ -7,7 +7,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
-
 public class TestTagHelperDescriptors
 {
     public static IEnumerable<TagHelperDescriptor> SimpleTagHelperDescriptors

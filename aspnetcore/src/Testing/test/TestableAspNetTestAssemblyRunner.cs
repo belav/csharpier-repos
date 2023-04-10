@@ -12,7 +12,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class TestableAspNetTestAssemblyRunner : AspNetTestAssemblyRunner
 {
     private TestableAspNetTestAssemblyRunner(

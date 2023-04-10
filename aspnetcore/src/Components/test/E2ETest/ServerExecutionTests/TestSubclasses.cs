@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-
 public class ServerBindTest : BindTest
 {
     public ServerBindTest(

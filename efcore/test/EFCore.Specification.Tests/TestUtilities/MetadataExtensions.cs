@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public static class MetadataExtensions
 {
     public static IQueryable<TEntity> AsTracking<TEntity>(

@@ -19,7 +19,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration;
 
-
 [DataContract]
 internal sealed class CSharpCodeGenerationOptions
     : CodeGenerationOptions,

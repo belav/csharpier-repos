@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace JwtSample;
 
-
 [Authorize(JwtBearerDefaults.AuthenticationScheme)]
 public class Broadcaster : Hub
 {

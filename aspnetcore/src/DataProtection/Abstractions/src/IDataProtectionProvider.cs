@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// An interface that can be used to create <see cref="IDataProtector"/> instances.
 /// </summary>

@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.SignalR.Client;
 #nullable enable
 namespace Ignitor;
 
-
 public class ElementNode : ContainerNode
 {
     private readonly Dictionary<string, object> _attributes;

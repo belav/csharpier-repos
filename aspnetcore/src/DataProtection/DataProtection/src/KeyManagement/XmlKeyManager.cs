@@ -28,7 +28,6 @@ using Microsoft.Win32;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
-
 /// <summary>
 /// A key manager backed by an <see cref="IXmlRepository"/>.
 /// </summary>

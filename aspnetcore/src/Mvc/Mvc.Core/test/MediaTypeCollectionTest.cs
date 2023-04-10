@@ -5,7 +5,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 public class MediaTypeCollectionTest
 {
     [Fact]

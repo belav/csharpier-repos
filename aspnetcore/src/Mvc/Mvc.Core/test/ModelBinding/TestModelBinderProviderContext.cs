@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 public class TestModelBinderProviderContext : ModelBinderProviderContext
 {
     private BindingInfo _bindingInfo;

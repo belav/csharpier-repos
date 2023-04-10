@@ -11,7 +11,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
 
-
 [Collection(PublishedSitesCollection.Name)]
 public class NewHandlerTests : IISFunctionalTestBase
 {

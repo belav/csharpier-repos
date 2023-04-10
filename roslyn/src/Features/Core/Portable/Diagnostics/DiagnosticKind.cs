@@ -6,7 +6,6 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-
 internal enum DiagnosticKind
 {
     All = 0,

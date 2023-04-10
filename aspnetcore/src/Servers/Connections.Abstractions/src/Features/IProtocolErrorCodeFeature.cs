@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// The error code for the protocol being used.
 /// </summary>

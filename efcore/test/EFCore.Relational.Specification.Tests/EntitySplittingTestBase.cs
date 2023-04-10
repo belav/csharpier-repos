@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class EntitySplittingTestBase : NonSharedModelTestBase
 {
     protected EntitySplittingTestBase(ITestOutputHelper testOutputHelper)

@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
-
 /// <summary>
 ///     <para>
 ///         An expression that represents a SELECT in a SQL tree.

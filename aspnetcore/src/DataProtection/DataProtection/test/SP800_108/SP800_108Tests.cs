@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.DataProtection.SP800_108;
 
-
 public unsafe class SP800_108Tests
 {
     private delegate ISP800_108_CTR_HMACSHA512Provider ProviderFactory(byte* pbKdk, uint cbKdk);

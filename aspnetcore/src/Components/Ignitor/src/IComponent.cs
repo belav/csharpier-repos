@@ -3,5 +3,4 @@
 
 namespace Ignitor;
 
-
 public interface IComponent { }

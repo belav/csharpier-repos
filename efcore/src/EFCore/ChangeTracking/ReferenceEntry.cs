@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 /// <summary>
 ///     Provides access to change tracking and loading information for a reference (i.e. non-collection)
 ///     navigation property that associates this entity to another entity.

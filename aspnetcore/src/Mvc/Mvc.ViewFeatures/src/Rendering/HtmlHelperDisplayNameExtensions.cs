@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// DisplayName-related extensions for <see cref="IHtmlHelper"/> and <see cref="IHtmlHelper{TModel}"/>.
 /// </summary>

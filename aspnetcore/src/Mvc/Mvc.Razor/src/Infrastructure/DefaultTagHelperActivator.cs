@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure;
 
-
 /// <summary>
 /// Default implementation of <see cref="ITagHelperActivator"/>.
 /// </summary>

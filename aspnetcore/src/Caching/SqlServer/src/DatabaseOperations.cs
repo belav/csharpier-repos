@@ -12,7 +12,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.Extensions.Caching.SqlServer;
 
-
 internal sealed class DatabaseOperations : IDatabaseOperations
 {
     /// <summary>

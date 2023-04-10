@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
-
 /// <summary>
 ///     A service typically implemented by database providers to generate code fragments
 ///     for reverse engineering.

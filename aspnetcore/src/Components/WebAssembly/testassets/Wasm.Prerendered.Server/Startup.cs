@@ -3,7 +3,6 @@
 
 namespace Wasm.Prerendered.Server;
 
-
 public class Startup
 {
     public Startup(IConfiguration configuration)

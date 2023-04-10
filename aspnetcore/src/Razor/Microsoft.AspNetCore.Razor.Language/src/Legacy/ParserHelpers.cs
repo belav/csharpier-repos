@@ -9,7 +9,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal static class ParserHelpers
 {
     public static bool IsNewLine(char value)

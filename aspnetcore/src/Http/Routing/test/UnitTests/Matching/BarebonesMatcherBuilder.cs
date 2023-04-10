@@ -6,7 +6,6 @@ using static Microsoft.AspNetCore.Routing.Matching.BarebonesMatcher;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal class BarebonesMatcherBuilder : MatcherBuilder
 {
     private readonly List<RouteEndpoint> _endpoints = new List<RouteEndpoint>();

@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Extension methods for <see cref="ObservableCollection{T}" />.
 /// </summary>

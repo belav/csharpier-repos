@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Rewrite.Logging;
 
 namespace Microsoft.AspNetCore.Rewrite.UrlActions;
 
-
 internal sealed class CustomResponseAction : UrlAction
 {
     public int StatusCode { get; }

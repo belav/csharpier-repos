@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
-
 internal sealed class AzureADB2CSchemeOptions
 {
     public IDictionary<string, AzureADB2COpenIDSchemeMapping> OpenIDMappings { get; set; } =

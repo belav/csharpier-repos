@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// Represents vary-by rules.
 /// </summary>

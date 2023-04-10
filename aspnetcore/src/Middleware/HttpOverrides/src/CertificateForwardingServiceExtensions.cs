@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for using certificate fowarding.
 /// </summary>

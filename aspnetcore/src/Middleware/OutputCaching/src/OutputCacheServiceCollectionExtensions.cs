@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for the OutputCaching middleware.
 /// </summary>

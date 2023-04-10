@@ -7,7 +7,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 internal static class ChangeEventArgsReader
 {
     private static readonly JsonEncodedText ValueKey = JsonEncodedText.Encode("value");

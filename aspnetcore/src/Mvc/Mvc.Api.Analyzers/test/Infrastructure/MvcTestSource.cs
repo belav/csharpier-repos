@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public static class MvcTestSource
 {
     // Test files are copied to both the bin/ and publish/ folders. Use BaseDirectory on or off Helix.

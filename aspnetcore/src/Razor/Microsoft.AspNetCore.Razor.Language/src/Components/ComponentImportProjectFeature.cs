@@ -9,7 +9,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 internal class ComponentImportProjectFeature : IImportProjectFeature
 {
     // Using explicit newlines here to avoid fooling our baseline tests

@@ -7,7 +7,6 @@ using System.Threading;
 
 namespace Microsoft.Extensions.Internal;
 
-
 // A convenience API for interacting with System.Threading.Timer in a way
 // that doesn't capture the ExecutionContext. We should be using this (or equivalent)
 // everywhere we use timers to avoid rooting any values stored in asynclocals.

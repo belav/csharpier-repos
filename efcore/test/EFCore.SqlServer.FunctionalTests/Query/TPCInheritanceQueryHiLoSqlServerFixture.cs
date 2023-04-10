@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class TPCInheritanceQueryHiLoSqlServerFixture : TPCInheritanceQuerySqlServerFixtureBase
 {
     protected override string StoreName => "TPCHiLoInheritanceTest";

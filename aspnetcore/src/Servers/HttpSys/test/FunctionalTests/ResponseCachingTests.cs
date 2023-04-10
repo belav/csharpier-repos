@@ -14,7 +14,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests;
 
-
 public class ResponseCachingTests
 {
     private readonly string _absoluteFilePath;

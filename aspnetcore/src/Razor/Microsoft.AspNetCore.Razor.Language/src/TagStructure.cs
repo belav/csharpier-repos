@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 /// <summary>
 /// The structure the element should be written in.
 /// </summary>

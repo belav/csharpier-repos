@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel;
 
-
 public class TransportationContext : PoolableDbContext
 {
     public TransportationContext(DbContextOptions options)

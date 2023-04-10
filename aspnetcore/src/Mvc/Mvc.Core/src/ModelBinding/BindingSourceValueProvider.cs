@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Core;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// A value provider which provides data from a specific <see cref="BindingSource"/>.
 /// </summary>

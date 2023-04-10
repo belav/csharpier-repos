@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
-
 internal sealed class CircuitOptionsJSInteropDetailedErrorsConfiguration
     : IConfigureOptions<CircuitOptions>
 {

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Identity.UI.Services;
 
-
 internal sealed class EmailSender : IEmailSender
 {
     public Task SendEmailAsync(string email, string subject, string htmlMessage)

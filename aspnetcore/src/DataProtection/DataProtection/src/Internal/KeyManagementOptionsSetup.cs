@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.DataProtection.Internal;
 
-
 internal sealed class KeyManagementOptionsSetup : IConfigureOptions<KeyManagementOptions>
 {
     private readonly IRegistryPolicyResolver? _registryPolicyResolver;

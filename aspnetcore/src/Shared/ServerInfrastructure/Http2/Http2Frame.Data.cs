@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-
 /*
     +---------------+
     |Pad Length? (8)|

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 /// <summary>
 ///     Provides a simple API for configuring a one-to-one relationship.
 /// </summary>

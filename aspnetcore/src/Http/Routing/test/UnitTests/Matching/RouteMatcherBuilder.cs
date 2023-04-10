@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal class RouteMatcherBuilder : MatcherBuilder
 {
     private readonly IInlineConstraintResolver _constraintResolver;

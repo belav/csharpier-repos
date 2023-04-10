@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-
 internal sealed class DefaultAntiforgeryTokenGenerator : IAntiforgeryTokenGenerator
 {
     private readonly IClaimUidExtractor _claimUidExtractor;

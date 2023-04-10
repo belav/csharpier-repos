@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-
 public class ControllerViewDataAttributeFilterTest
 {
     [Fact]

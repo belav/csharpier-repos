@@ -9,7 +9,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
-
 public abstract class Shape
 {
     public string ShapeProperty { get; set; }

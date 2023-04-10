@@ -7,7 +7,6 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-
 internal sealed class BoolConverter : JsonConverter<bool>
 {
     public override bool Read(

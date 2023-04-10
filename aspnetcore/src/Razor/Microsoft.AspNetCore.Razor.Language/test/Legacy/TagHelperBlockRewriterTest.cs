@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 public class TagHelperBlockRewriterTest : TagHelperRewritingTestBase
 {
     public static TagHelperDescriptor[] SymbolBoundAttributes_Descriptors = new[]

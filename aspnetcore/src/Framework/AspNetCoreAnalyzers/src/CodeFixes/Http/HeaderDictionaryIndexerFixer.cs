@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.AspNetCore.Analyzers.Http.Fixers;
 
-
 [ExportCodeFixProvider(LanguageNames.CSharp), Shared]
 public class HeaderDictionaryIndexerFixer : CodeFixProvider
 {

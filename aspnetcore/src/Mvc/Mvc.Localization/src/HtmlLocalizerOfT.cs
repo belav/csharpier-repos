@@ -5,7 +5,6 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
-
 /// <summary>
 /// An <see cref="IHtmlLocalizer"/> implementation that provides localized HTML content for the specified type
 /// <typeparamref name="TResource"/>.

@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace CustomAuthorizationFailureResponse.Authentication;
 
-
 public class SampleAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     private readonly ClaimsPrincipal _id;

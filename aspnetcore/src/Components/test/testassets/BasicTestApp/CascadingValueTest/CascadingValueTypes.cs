@@ -3,7 +3,6 @@
 
 namespace BasicTestApp.CascadingValueTest;
 
-
 public class CounterDTO
 {
     public int NumClicks { get; set; }

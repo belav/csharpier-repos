@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
-
 public class CorsEndpointConventionBuilderExtensionsTests
 {
     [Fact]

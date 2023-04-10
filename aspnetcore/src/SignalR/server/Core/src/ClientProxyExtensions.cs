@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// Extension methods for <see cref="IClientProxy"/>.
 /// </summary>

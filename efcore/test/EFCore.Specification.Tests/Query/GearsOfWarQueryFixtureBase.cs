@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class GearsOfWarQueryFixtureBase
     : SharedStoreFixtureBase<GearsOfWarContext>,
         IQueryFixtureBase

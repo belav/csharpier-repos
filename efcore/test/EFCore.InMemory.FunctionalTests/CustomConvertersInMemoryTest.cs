@@ -6,7 +6,6 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class CustomConvertersInMemoryTest
     : CustomConvertersTestBase<CustomConvertersInMemoryTest.CustomConvertersInMemoryFixture>
 {

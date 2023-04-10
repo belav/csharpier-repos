@@ -7,7 +7,6 @@ using static Microsoft.AspNetCore.Razor.Language.Intermediate.IntermediateNodeAs
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-
 public class SectionDirectivePassTest
 {
     [Fact]

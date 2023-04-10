@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Represents a column in a table-valued function.
 /// </summary>

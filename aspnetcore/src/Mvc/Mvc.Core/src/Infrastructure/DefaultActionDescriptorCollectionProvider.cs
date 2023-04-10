@@ -12,7 +12,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed partial class DefaultActionDescriptorCollectionProvider
     : ActionDescriptorCollectionProvider
 {

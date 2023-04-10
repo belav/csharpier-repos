@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-
 public sealed class SectionTargetExtension : ISectionTargetExtension
 {
     // Compatibility for 1.X projects

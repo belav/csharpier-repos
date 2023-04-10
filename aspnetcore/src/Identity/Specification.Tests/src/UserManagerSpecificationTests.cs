@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
-
 /// <summary>
 /// Base class for tests that exercise basic identity functionality that all stores should support.
 /// </summary>

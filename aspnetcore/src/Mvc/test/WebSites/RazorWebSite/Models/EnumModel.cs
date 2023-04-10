@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RazorWebSite.Models;
 
-
 public enum ModelEnum
 {
     [Display(Name = "FirstOptionDisplay")]

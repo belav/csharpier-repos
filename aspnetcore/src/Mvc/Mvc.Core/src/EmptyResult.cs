@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Represents an <see cref="ActionResult"/> that when executed will
 /// do nothing.

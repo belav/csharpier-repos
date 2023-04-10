@@ -18,7 +18,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// A base class for an MVC controller without view support.
 /// </summary>

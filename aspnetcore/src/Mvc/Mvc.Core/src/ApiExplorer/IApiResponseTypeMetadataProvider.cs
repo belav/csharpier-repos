@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 /// <summary>
 /// Provides metadata information about the response format to an <c>IApiDescriptionProvider</c>.
 /// </summary>

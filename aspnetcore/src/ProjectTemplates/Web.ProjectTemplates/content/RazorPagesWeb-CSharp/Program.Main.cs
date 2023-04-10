@@ -33,7 +33,6 @@ using Company.WebApplication1.Data;
 #endif
 namespace Company.WebApplication1;
 
-
 public class Program
 {
     public static void Main(string[] args)

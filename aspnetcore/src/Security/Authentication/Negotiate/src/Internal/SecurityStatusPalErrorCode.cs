@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 internal enum SecurityStatusPalErrorCode
 {
     NotSet = 0,

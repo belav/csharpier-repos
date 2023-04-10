@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
-
 internal sealed class DefaultKeyStorageDirectories : IDefaultKeyStorageDirectories
 {
     private static readonly Lazy<DirectoryInfo?> _defaultDirectoryLazy = new Lazy<DirectoryInfo?>(

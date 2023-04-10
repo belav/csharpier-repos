@@ -13,7 +13,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 public class RazorPageCreateModelExpressionTest
 {
     [Fact]

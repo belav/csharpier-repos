@@ -5,7 +5,6 @@ using System.Collections;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
-
 public class FakeDbParameterCollection : DbParameterCollection
 {
     private readonly List<object> _parameters = new();

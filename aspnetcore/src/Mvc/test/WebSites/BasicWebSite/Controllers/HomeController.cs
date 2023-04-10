@@ -8,7 +8,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace BasicWebSite.Controllers;
 
-
 public class HomeController : Controller
 {
     public IActionResult Index()

@@ -7,7 +7,6 @@ using MessagePack;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 internal sealed class DefaultMessagePackHubProtocolWorker : MessagePackHubProtocolWorker
 {
     private readonly MessagePackSerializerOptions _messagePackSerializerOptions;

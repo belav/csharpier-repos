@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace BasicWebSite;
 
-
 [ApiController]
 [Route("/contact")]
 public class ContactApiController : Controller

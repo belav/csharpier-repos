@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.AzureAppServices.HostingStartup;
 
-
 /// <summary>
 /// A dynamic azure lightup experience
 /// </summary>

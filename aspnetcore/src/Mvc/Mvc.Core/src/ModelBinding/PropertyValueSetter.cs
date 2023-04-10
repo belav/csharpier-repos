@@ -7,7 +7,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 internal static class PropertyValueSetter
 {
     private static readonly MethodInfo CallPropertyAddRangeOpenGenericMethod =

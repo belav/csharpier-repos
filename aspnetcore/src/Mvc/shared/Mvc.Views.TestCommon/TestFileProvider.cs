@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders;
 
-
 public class TestFileProvider : IFileProvider
 {
     private readonly Dictionary<string, IFileInfo> _lookup = new Dictionary<string, IFileInfo>(

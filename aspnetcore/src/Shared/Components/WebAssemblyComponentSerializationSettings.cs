@@ -7,7 +7,6 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 internal static class WebAssemblyComponentSerializationSettings
 {
     public static readonly JsonSerializerOptions JsonSerializationOptions =

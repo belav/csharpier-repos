@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
-
 public class BodyValidationIntegrationTests
 {
     [Fact]

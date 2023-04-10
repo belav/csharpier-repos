@@ -6,7 +6,6 @@ using XmlFormattersWebSite.Models;
 
 namespace XmlFormattersWebSite.Controllers;
 
-
 public class SerializableErrorController : Controller
 {
     [HttpGet]

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Sections;
 
-
 /// <summary>
 /// Provides content to <see cref="SectionOutlet"/> components with matching <see cref="Name"/>s.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 // WriteContext, but with a timestamp...
 public class LogRecord
 {

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 /// <summary>
 /// Possible type of the response body which is formatted by <see cref="ApiResponseFormats"/>.
 /// </summary>

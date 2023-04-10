@@ -3,5 +3,4 @@
 
 namespace LocalizationTest.Abc.Controllers;
 
-
 public class ValuesController { }

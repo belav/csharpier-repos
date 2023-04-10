@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 public class VerifyNoErrorsScope : IDisposable
 {
     private readonly IDisposable _wrappedDisposable;

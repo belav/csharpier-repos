@@ -25,7 +25,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class ViewComponentResultTest
 {
     private readonly ITempDataDictionary _tempDataDictionary = new TempDataDictionary(

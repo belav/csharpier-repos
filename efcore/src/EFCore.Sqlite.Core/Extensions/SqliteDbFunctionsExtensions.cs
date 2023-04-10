@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Contains extension methods on <see cref="DbFunctions" /> for the Microsoft.EntityFrameworkCore.Sqlite provider.
 /// </summary>

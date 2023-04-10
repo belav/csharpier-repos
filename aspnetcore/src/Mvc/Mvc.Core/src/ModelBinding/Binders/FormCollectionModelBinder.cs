@@ -11,7 +11,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 /// <summary>
 /// <see cref="IModelBinder"/> implementation to bind form values to <see cref="IFormCollection"/>.
 /// </summary>

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 /// <summary>
 /// A context object used by an input formatter for deserializing the request body into an object.
 /// </summary>

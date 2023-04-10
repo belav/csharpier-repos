@@ -13,7 +13,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
-
 [Method(Methods.InitializeName)]
 internal class InitializeHandler : ILspServiceRequestHandler<InitializeParams, InitializeResult>
 {

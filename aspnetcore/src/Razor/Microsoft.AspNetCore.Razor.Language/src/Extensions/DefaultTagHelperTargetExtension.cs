@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-
 internal sealed class DefaultTagHelperTargetExtension : IDefaultTagHelperTargetExtension
 {
     private static readonly string[] FieldUnintializedModifiers = { "0649", };

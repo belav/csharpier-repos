@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.StoredProcedureUpdateModel;
 
-
 public class EntityWithAdditionalProperty
 {
     public int Id { get; set; }

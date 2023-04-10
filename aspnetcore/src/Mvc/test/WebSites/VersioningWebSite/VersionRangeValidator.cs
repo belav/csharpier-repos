@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
 namespace VersioningWebSite;
 
-
 public class VersionRangeValidator : IActionConstraint
 {
     private readonly int? _minVersion;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 internal sealed class ProblemDetailsWrapperProviderFactory : IWrapperProviderFactory
 {
     public IWrapperProvider? GetProvider(WrapperProviderContext context)

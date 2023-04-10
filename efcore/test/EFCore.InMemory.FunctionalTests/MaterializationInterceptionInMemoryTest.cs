@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class MaterializationInterceptionInMemoryTest
     : MaterializationInterceptionTestBase,
         IClassFixture<MaterializationInterceptionInMemoryTest.MaterializationInterceptionInMemoryFixture>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-
 public class ViewDataAttributePropertyProviderTest
 {
     [Fact]

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed class OrderedEndpointsSequenceProvider
 {
     // In traditional conventional routing setup, the routes defined by a user have a order

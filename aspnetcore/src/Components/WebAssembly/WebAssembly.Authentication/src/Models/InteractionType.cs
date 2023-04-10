@@ -5,7 +5,6 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 /// <summary>
 /// The type of authentication request.
 /// </summary>

@@ -12,7 +12,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 // There are some basic sanity tests here for the details of how actions
 // are turned into endpoints. See ActionEndpointFactoryTest for detailed tests.
 public abstract class ActionEndpointDataSourceBaseTest

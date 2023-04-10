@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 internal static class ComponentDetectionConventions
 {
     public static bool IsComponent(INamedTypeSymbol symbol, INamedTypeSymbol icomponentSymbol)

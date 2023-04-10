@@ -5,7 +5,6 @@ using Microsoft.Extensions.CommandLineUtils;
 
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
-
 internal sealed class RemoveCommand : ICommand
 {
     private readonly string _keyName;

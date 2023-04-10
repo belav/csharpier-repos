@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace CustomEncryptorSample;
 
-
 public class Program
 {
     public static void Main(string[] args)

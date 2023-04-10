@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
-
 /// <summary>
 /// Tracks the rendering state associated with an <see cref="IComponent"/> instance
 /// within the context of a <see cref="Renderer"/>. This is an internal implementation

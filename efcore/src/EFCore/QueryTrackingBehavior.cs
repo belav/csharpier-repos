@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Indicates how the results of a query are tracked by the <see cref="ChangeTracker" />.
 /// </summary>

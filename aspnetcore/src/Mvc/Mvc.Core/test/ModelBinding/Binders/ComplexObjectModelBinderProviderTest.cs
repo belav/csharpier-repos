@@ -5,7 +5,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 public class ComplexObjectModelBinderProviderTest
 {
     [Theory]

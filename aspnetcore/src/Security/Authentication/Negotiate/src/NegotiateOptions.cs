@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 /// <summary>
 /// Options class provides information needed to control Negotiate Authentication handler behavior
 /// </summary>

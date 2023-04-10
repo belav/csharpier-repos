@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace Microsoft.AspNetCore.Identity.UI;
 
-
 internal sealed class IdentityPageModelConvention<TUser> : IPageApplicationModelConvention
     where TUser : class
 {

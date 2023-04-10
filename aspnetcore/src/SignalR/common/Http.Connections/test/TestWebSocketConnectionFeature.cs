@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.SignalR.Tests;
 
 namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
-
 internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposable
 {
     public TestWebSocketConnectionFeature() { }

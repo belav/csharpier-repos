@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GenericHostWebSite.Controllers;
 
-
 public class TestingController : Controller
 {
     public TestingController(TestGenericService service)

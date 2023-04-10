@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 internal readonly struct DeclaredApiResponseMetadata
 {
     public static DeclaredApiResponseMetadata ImplicitResponse { get; } =

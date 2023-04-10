@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 /// <summary>
 /// A default implementation of <see cref="IViewComponentActivator"/>.
 /// </summary>

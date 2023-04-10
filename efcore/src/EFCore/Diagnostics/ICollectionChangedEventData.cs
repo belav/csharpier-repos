@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     An interface implemented by any <see cref="EventData" /> subclass that represents a change to either
 ///     a skip collection navigation or a regular collection navigation.

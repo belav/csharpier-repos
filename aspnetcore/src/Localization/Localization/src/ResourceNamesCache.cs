@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.Localization;
 
-
 /// <summary>
 /// An implementation of <see cref="IResourceNamesCache"/> backed by a <see cref="ConcurrentDictionary{TKey, TValue}"/>.
 /// </summary>

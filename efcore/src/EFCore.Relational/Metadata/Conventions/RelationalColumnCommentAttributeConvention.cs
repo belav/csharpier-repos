@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures the column comment for a property or field based on the applied <see cref="CommentAttribute" />.
 /// </summary>

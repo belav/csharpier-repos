@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class CosmosTestHelpers : TestHelpers
 {
     protected CosmosTestHelpers() { }

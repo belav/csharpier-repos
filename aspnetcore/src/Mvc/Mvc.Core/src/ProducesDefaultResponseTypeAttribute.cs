@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// A filter that specifies the <see cref="System.Type"/> for all HTTP status codes that are not covered by <see cref="ProducesResponseTypeAttribute"/>.
 /// </summary>

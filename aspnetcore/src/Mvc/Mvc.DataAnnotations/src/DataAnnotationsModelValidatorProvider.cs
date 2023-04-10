@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 /// <summary>
 /// An implementation of <see cref="IModelValidatorProvider"/> which provides validators
 /// for attributes which derive from <see cref="ValidationAttribute"/>. It also provides

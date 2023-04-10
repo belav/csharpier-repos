@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 internal readonly struct FilterCursorItem<TFilter, TFilterAsync>
 {
     public FilterCursorItem(TFilter filter, TFilterAsync filterAsync)

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Defines the binding of parameters to a factory method.
 /// </summary>

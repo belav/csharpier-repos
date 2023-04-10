@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.CodeAnalysis.Razor.Serialization;
 
-
 internal static class JsonReaderExtensions
 {
     public static bool ReadTokenAndAdvance(

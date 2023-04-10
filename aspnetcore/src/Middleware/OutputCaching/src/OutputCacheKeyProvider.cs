@@ -10,7 +10,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 internal sealed class OutputCacheKeyProvider : IOutputCacheKeyProvider
 {
     // Use the record separator for delimiting components of the cache key to avoid possible collisions

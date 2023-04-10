@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class ChunkWriterBenchmark
 {
     private const int InnerLoopCount = 1024;

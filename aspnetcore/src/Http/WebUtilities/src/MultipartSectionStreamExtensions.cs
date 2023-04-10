@@ -6,7 +6,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 /// <summary>
 /// Various extension methods for dealing with the section body stream
 /// </summary>

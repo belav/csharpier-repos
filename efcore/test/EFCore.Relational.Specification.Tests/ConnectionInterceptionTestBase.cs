@@ -7,7 +7,6 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 {
     protected ConnectionInterceptionTestBase(InterceptionFixtureBase fixture)

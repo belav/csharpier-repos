@@ -6,7 +6,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 /// <summary>
 /// Options for remote authentication.
 /// </summary>

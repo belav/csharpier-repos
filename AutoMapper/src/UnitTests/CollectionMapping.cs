@@ -3,7 +3,6 @@ using System.Collections.Immutable;
 
 namespace AutoMapper.UnitTests;
 
-
 public class NonPublicEnumeratorCurrent : AutoMapperSpecBase
 {
     class Source

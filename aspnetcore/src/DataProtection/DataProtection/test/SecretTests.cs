@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 public unsafe class SecretTests
 {
     [Fact]

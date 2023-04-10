@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 
-
 public class TimeExpirationTests
 {
     private const string SkipReason =

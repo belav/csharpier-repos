@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server;
 
-
 [System.Diagnostics.CodeAnalysis.SuppressMessage(
     "Performance",
     "CA1802:Use literals where appropriate",

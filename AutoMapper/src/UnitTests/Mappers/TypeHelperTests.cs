@@ -1,6 +1,5 @@
 namespace AutoMapper.UnitTests.Mappers;
 
-
 public class TypeHelperTests
 {
     [Fact]

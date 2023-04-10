@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal interface IOperationExecutor : IDisposable
 {
     IDictionary AddMigration(

@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 public class RazorCompiledItemFeatureProviderTest
 {
     [Fact]

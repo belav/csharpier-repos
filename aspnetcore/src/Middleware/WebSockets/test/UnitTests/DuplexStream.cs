@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
-
 // A duplex wrapper around a read and write stream.
 public class DuplexStream : Stream
 {

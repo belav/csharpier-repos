@@ -20,7 +20,6 @@ using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class AssemblyTestLog : IAcceptFailureReports, IDisposable
 {
     private const string MaxPathLengthEnvironmentVariableName = "ASPNETCORE_TEST_LOG_MAXPATH";

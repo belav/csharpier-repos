@@ -11,7 +11,6 @@ using DependencyContextCompilationOptions = Microsoft.Extensions.DependencyModel
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 public class CSharpCompilerTest
 {
     private readonly RazorReferenceManager ReferenceManager = new TestRazorReferenceManager();

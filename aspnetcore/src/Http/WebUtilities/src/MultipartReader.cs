@@ -6,7 +6,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 // https://www.ietf.org/rfc/rfc2046.txt
 /// <summary>
 /// Reads multipart form content from the specified <see cref="Stream"/>.

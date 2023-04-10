@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 public class RouterTest
 {
     private readonly Router _router;

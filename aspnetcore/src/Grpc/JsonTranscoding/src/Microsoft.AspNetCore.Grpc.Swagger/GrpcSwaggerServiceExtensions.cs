@@ -13,7 +13,6 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for the gRPC JSON transcoding services.
 /// </summary>

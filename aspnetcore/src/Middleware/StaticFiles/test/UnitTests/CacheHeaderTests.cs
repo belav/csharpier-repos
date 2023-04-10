@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.TestHost;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 public class CacheHeaderTests
 {
     [Fact]

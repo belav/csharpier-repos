@@ -3,7 +3,6 @@ using GrpcService_CSharp;
 
 namespace GrpcService_CSharp.Services;
 
-
 public class GreeterService : Greeter.GreeterBase
 {
     private readonly ILogger<GreeterService> _logger;

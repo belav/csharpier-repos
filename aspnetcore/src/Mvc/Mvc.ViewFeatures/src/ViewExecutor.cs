@@ -16,7 +16,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Executes an <see cref="IView"/>.
 /// </summary>

@@ -7,7 +7,6 @@ using System.Reflection;
 
 namespace System.CommandLine.NamingConventionBinder;
 
-
 internal class MethodInfoHandlerDescriptor : HandlerDescriptor
 {
     private readonly MethodInfo _handlerMethodInfo;

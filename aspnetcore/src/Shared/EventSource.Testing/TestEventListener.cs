@@ -5,7 +5,6 @@ using System.Diagnostics.Tracing;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal sealed class TestEventListener : EventListener
 {
     private readonly int _eventId;

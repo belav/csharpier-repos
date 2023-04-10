@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// An <see cref="IModelValidatorProvider" /> that provides <see cref="IModelValidator"/> instances
 /// exclusively using values in <see cref="ModelMetadata.ValidatorMetadata"/> or the model type.

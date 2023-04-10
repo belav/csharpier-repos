@@ -6,7 +6,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
-
 /// <summary>
 /// mod_rewrite lookups for specific string constants.
 /// </summary>

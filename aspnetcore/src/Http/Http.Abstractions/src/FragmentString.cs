@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Provides correct handling for FragmentString value when needed to generate a URI string
 /// </summary>

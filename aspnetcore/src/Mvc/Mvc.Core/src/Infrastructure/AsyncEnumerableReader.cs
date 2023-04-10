@@ -12,12 +12,10 @@ using Microsoft.Extensions.Internal;
 #if JSONNET
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
-
 #else
 using Microsoft.AspNetCore.Mvc.Core;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
-
 
 #endif
 

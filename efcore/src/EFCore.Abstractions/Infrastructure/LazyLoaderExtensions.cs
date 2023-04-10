@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     Extension methods for the <see cref="ILazyLoader" /> service that make it more
 ///     convenient to use from entity classes.

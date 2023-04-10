@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal class FirstDirectiveCSharpLanguageCharacteristics : CSharpLanguageCharacteristics
 {
     private static readonly FirstDirectiveCSharpLanguageCharacteristics _instance =

@@ -4,7 +4,6 @@
 
 namespace Microsoft.CodeAnalysis.GoToDefinition;
 
-
 internal static class WellKnownSymbolTypes
 {
     public const string Definition = nameof(Definition);

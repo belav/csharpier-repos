@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal static class SharedUrlHelper
 {
     [return: NotNullIfNotNull("contentPath")]

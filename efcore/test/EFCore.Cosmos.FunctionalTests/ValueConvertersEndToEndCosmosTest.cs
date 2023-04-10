@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
-
 public class ValueConvertersEndToEndCosmosTest
     : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndCosmosTest.ValueConvertersEndToEndCosmosFixture>
 {

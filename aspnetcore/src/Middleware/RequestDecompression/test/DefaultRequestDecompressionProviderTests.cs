@@ -11,7 +11,6 @@ using System.IO.Compression;
 
 namespace Microsoft.AspNetCore.RequestDecompression.Tests;
 
-
 public class DefaultRequestDecompressionProviderTests
 {
     [Theory]

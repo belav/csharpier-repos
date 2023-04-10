@@ -10,7 +10,6 @@ using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpAnalyzerVerifier
 
 namespace Microsoft.AspNetCore.Analyzers.Http;
 
-
 public class HeaderDictionaryIndexerAnalyzerTests
 {
     [Fact]

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 /// <summary>
 ///     A service for finding differences between two <see cref="IRelationalModel" />s and transforming
 ///     those differences into <see cref="MigrationOperation" />s that can be used to

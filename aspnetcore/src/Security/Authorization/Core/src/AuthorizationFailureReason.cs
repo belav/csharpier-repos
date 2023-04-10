@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// Encapsulates a reason why authorization failed.
 /// </summary>

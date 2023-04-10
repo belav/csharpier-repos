@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
-
 /// <summary>
 /// An <see cref="IXmlEncryptor"/> that can perform XML encryption by using an X.509 certificate.
 /// </summary>

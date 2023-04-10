@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 public class TryParseTypeModelBinderTest
 {
     public static TheoryData<Type> ConvertibleTypeData

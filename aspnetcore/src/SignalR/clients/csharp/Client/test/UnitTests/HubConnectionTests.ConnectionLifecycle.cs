@@ -20,7 +20,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
-
 public partial class HubConnectionTests
 {
     public class ConnectionLifecycle : VerifiableLoggedTest

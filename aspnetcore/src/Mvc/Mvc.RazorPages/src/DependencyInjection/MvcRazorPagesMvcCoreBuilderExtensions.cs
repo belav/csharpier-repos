@@ -16,7 +16,6 @@ using Resources = Microsoft.AspNetCore.Mvc.RazorPages.Resources;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Static class that adds razor page functionality to <see cref="IMvcCoreBuilder"/>.
 /// </summary>

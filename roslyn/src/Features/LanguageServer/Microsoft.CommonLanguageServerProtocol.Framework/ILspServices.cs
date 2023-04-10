@@ -9,7 +9,6 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
-
 public interface ILspServices : IDisposable
 {
     T GetRequiredService<T>()

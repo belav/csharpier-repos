@@ -8,7 +8,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.ResponseCaching.Tests;
 
-
 public class ResponseCachingTests
 {
     [Theory]

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.IISUrlRewrite;
 
-
 public class ServerVariableTests
 {
     [Theory]

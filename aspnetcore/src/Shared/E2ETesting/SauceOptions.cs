@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.E2ETesting;
 
-
 public class SauceOptions
 {
     public string Username { get; set; }

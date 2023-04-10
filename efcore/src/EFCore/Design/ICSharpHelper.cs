@@ -5,7 +5,6 @@ using System.Numerics;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     Helper for generating C# code.
 /// </summary>

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ApiExplorerWebSite;
 
-
 public class ApiExplorerRouteChangeConvention : Attribute, IActionModelConvention
 {
     public ApiExplorerRouteChangeConvention(WellKnownChangeToken changeToken)

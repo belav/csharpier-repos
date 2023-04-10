@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-
 public class RazorPageDocumentClassifierPassTest : RazorProjectEngineTestBase
 {
     protected override RazorLanguageVersion Version => RazorLanguageVersion.Version_3_0;

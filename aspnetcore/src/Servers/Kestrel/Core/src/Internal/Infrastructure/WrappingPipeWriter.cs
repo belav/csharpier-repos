@@ -5,7 +5,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal sealed class WrappingPipeWriter : PipeWriter
 {
     private PipeWriter _inner;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Describes the binding from an <see cref="IProperty" /> to a parameter in a constructor, factory method,
 ///     or similar.

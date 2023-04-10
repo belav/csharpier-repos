@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect.Claims;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
-
 public class UniqueJsonKeyClaimActionTests
 {
     [Fact]

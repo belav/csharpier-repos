@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Sql Server database specific extension methods for LINQ queries rooted in DbSet.
 /// </summary>

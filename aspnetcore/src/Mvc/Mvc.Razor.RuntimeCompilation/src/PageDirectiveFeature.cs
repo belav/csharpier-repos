@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 internal static partial class PageDirectiveFeature
 {
     private static readonly RazorProjectEngine PageDirectiveEngine = RazorProjectEngine.Create(

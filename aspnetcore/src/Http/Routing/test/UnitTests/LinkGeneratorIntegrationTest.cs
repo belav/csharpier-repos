@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 // This is a set of integration tests that are similar to a typical MVC configuration.
 //
 // We're doing this here because it's relatively expensive to test these scenarios

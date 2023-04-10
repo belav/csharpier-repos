@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace XmlFormattersWebSite;
 
-
 public class Startup
 {
     // Set up application services

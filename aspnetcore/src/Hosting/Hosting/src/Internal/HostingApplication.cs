@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal sealed class HostingApplication : IHttpApplication<HostingApplication.Context>
 {
     private readonly RequestDelegate _application;

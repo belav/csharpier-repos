@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
-
 internal sealed class StartupAnalysis
 {
     private readonly ImmutableDictionary<INamedTypeSymbol, ImmutableArray<object>> _analysesByType;

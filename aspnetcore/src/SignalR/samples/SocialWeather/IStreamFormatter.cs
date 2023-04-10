@@ -3,7 +3,6 @@
 
 namespace SocialWeather;
 
-
 public interface IStreamFormatter<T>
 {
     Task<T> ReadAsync(Stream stream);

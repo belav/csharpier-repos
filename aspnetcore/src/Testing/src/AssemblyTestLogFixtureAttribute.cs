@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class AssemblyTestLogFixtureAttribute : AssemblyFixtureAttribute
 {
     public AssemblyTestLogFixtureAttribute()

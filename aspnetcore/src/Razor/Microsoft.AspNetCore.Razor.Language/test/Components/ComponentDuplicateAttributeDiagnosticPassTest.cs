@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 // These tests are really basic and cover a few different structures. The components part of this
 // pass is hard to unit test, so component cases are covered by integration tests.
 public class ComponentDuplicateAttributeDiagnosticPassTest

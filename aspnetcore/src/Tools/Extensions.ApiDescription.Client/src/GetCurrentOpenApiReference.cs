@@ -6,7 +6,6 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.Extensions.ApiDescription.Client;
 
-
 /// <summary>
 /// Restore <see cref="ITaskItem"/>s from given property value.
 /// </summary>

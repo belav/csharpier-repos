@@ -9,7 +9,6 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-
 internal class AbstractLspServiceProvider
 {
     private readonly ImmutableArray<Lazy<ILspService, LspServiceMetadataView>> _lspServices;

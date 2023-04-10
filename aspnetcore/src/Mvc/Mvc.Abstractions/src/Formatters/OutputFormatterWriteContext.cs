@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 /// <summary>
 /// A context object for <see cref="IOutputFormatter.WriteAsync(OutputFormatterWriteContext)"/>.
 /// </summary>

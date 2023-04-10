@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Reader and, if GenerateBaselines is set to true, writer for files compiled into an assembly as resources.
 /// </summary>

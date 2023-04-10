@@ -14,7 +14,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
-
 public class JsonResultTest
 {
     [Fact]

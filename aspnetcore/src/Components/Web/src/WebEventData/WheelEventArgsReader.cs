@@ -7,7 +7,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 internal static class WheelEventArgsReader
 {
     private static readonly JsonEncodedText DeltaX = JsonEncodedText.Encode("deltaX");

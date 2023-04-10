@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// Contains methods and properties that are used to create HTML elements. This class is often used to write HTML
 /// helpers and tag helpers.

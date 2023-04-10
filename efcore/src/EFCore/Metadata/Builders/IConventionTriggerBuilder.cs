@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 /// <summary>
 ///     Provides an API point for provider-specific extensions for configuring a <see cref="IConventionTrigger" />.
 /// </summary>

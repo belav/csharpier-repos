@@ -3,7 +3,6 @@
 
 namespace Ignitor;
 
-
 public class CapturedRenderBatch
 {
     public CapturedRenderBatch(int id, byte[] data)

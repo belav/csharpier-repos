@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// A type that represents a selector.
 /// </summary>

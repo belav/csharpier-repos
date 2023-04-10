@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Contains options for the <see cref="DataProtectorTokenProvider{TUser}"/>.
 /// </summary>

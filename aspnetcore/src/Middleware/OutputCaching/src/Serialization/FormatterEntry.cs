@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.OutputCaching.Serialization;
 
-
 internal sealed class FormatterEntry
 {
     public DateTimeOffset Created { get; set; }

@@ -14,7 +14,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// A <see cref="TagHelper"/> that saves the state of Razor components rendered on the page up to that point.
 /// </summary>

@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// Descriptor for an <see cref="IFilterMetadata"/>.
 /// </summary>

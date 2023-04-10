@@ -3,7 +3,6 @@ using System.Dynamic;
 
 namespace AutoMapper.Internal;
 
-
 public static class TypeExtensions
 {
     public const BindingFlags InstanceFlags =

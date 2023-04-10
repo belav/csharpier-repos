@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// <see cref="ITagHelper"/> implementation targeting all form elements
 /// to generate content before the form end tag.

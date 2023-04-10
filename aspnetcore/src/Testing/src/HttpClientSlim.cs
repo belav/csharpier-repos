@@ -16,7 +16,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// Lightweight version of HttpClient implemented using Socket and SslStream.
 /// </summary>

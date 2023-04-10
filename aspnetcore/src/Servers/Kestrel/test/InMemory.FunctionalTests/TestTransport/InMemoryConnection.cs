@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 
-
 internal class InMemoryConnection : StreamBackedTestConnection
 {
     public InMemoryConnection(InMemoryTransportConnection transportConnection, Encoding encoding)

@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class CustomValueProviderTest
     : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithCustomValueProvider>>
 {

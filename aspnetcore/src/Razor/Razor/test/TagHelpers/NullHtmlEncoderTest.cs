@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
-
 public class NullHtmlEncoderTest
 {
     [Fact]

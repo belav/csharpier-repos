@@ -15,7 +15,6 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.HttpsPolicy.Tests;
 
-
 public class HttpsRedirectionMiddlewareTests
 {
     [Fact]

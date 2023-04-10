@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSamples.PathSchemeSelection.Controllers;
 
-
 public class AccountController : Controller
 {
     [HttpGet]

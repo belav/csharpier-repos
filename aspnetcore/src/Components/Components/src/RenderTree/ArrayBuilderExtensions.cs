@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
-
 internal static class ArrayBuilderExtensions
 {
     /// <summary>

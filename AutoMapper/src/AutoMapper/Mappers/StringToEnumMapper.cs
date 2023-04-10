@@ -2,7 +2,6 @@ using System.Runtime.Serialization;
 
 namespace AutoMapper.Internal.Mappers;
 
-
 public class StringToEnumMapper : IObjectMapper
 {
     private static readonly MethodInfo EqualsMethod = typeof(StringToEnumMapper).GetMethod(

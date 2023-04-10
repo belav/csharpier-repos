@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests;
 
-
 public class IEnumerableAggregateProjections
     : IntegrationTest<IEnumerableAggregateProjections.DatabaseInitializer>
 {

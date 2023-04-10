@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 /// <summary>
 ///     Defines different strategies for when cascading actions will be performed.
 ///     See <see cref="ChangeTracker.CascadeDeleteTiming" /> and <see cref="ChangeTracker.DeleteOrphansTiming" />.

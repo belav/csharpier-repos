@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 
 namespace QueueSharing;
 
-
 public static class Program
 {
     public static void Main(string[] args)

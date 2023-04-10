@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 /// <summary>
 /// Interface for delegating requests to other Http.Sys request queues.
 /// </summary>

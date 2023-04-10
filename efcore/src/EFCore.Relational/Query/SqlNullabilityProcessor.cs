@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         A class that processes a SQL tree based on nullability of nodes to apply null semantics in use and

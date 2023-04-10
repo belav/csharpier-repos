@@ -6,7 +6,6 @@ using ComponentsWebAssembly_CSharp.Server.Models;
 
 namespace ComponentsWebAssembly_CSharp.Server.Data;
 
-
 public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 {
     public ApplicationDbContext(

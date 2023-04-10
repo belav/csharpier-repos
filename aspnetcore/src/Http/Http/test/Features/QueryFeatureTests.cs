@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 public class QueryFeatureTests
 {
     [Fact]

@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
-
 public class DynamicObjectAdapterTest
 {
     [Fact]

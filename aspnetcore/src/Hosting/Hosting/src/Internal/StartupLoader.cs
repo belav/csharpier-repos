@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal sealed class StartupLoader
 {
     // Creates an <see cref="StartupMethods"/> instance with the actions to run for configuring the application services and the

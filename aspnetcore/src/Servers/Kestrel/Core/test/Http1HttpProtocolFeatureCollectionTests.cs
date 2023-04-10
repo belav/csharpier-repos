@@ -18,7 +18,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-
 public class Http1HttpProtocolFeatureCollectionTests
 {
     private readonly TestHttp1Connection _http1Connection;

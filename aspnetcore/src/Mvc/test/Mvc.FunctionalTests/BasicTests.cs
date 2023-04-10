@@ -12,7 +12,6 @@ using BasicWebSite.Models;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {
     // Some tests require comparing the actual response body against an expected response baseline

@@ -1,6 +1,5 @@
 namespace AutoMapper.UnitTests.Bug;
 
-
 public class MultipleInterfaceInheritance : AutoMapperSpecBase
 {
     private ThingDto _thingDto;

@@ -8,7 +8,6 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-
 internal sealed class ByteStringConverter : JsonConverter<ByteString>
 {
     public override ByteString? Read(

@@ -6,7 +6,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Information about the current &lt;form&gt;.
 /// </summary>

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Rewrite.UrlMatches;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite;
 
-
 public class FileParserTests
 {
     [Fact]

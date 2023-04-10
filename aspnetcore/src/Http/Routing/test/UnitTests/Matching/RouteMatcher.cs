@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 // This is an adapter to use Route in the conformance tests
 internal class RouteMatcher : Matcher
 {

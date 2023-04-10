@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http.Features.Authentication;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Used to capture the <see cref="AuthenticateResult"/> from the authorization middleware.
 /// </summary>

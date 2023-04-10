@@ -7,7 +7,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 /// <summary>
 /// The client's view of the response body.
 /// </summary>

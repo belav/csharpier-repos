@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.InMemory.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class InMemoryEventIdTest : EventIdTestBase
 {
     [ConditionalFact]

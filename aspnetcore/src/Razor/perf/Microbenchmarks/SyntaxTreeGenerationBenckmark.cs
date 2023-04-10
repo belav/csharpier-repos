@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Razor.Microbenchmarks;
 
-
 public class SyntaxTreeGenerationBenchmark
 {
     public SyntaxTreeGenerationBenchmark()

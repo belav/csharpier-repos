@@ -14,7 +14,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 public class RedirectToRouteResultTest
 {
     [Fact]

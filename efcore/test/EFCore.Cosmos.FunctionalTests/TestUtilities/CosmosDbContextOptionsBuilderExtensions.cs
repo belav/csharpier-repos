@@ -5,7 +5,6 @@ using Microsoft.Azure.Cosmos;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public static class CosmosDbContextOptionsBuilderExtensions
 {
     public static CosmosDbContextOptionsBuilder ApplyConfiguration(

@@ -13,7 +13,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed partial class SystemTextJsonResultExecutor : IActionResultExecutor<JsonResult>
 {
     private static readonly string DefaultContentType = new MediaTypeHeaderValue("application/json")

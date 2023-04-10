@@ -7,7 +7,6 @@ using Microsoft.Extensions.Localization;
 
 namespace LocalizationWebsite;
 
-
 public class StartupBuilderAPIs
 {
     public void ConfigureServices(IServiceCollection services)

@@ -3,7 +3,6 @@ using System.Reflection;
 
 namespace System.CommandLine.NamingConventionBinder;
 
-
 internal static class ExpressionExtensions
 {
     internal static (Type memberType, string memberName) MemberTypeAndName<T, TValue>(

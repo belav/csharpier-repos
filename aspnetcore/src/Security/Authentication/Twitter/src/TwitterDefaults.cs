@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
-
 /// <summary>
 /// Default values for the Twitter authentication handler.
 /// </summary>

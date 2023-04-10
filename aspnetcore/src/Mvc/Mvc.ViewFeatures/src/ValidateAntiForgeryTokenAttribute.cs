@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Specifies that the class or method that this attribute is applied validates the anti-forgery token.
 /// If the anti-forgery token is not available, or if the token is invalid, the validation will fail

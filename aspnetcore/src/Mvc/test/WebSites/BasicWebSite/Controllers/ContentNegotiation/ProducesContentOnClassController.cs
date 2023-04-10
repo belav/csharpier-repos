@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
-
 [Produces("application/custom_ProducesContentOnClassController")]
 public class ProducesContentOnClassController : ProducesContentBaseController
 {

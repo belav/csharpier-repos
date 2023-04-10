@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public class DefaultRazorDirectiveClassifierPhaseTest
 {
     [Fact]

@@ -12,7 +12,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.RenderTree;
 
-
 /// <summary>
 /// A <see cref="Renderer"/> that attaches its components to a browser DOM.
 /// </summary>

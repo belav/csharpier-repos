@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Extension methods that combine all of the static file middleware components:
 /// Default files, directory browsing, send file, and static files

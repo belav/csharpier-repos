@@ -9,7 +9,6 @@ using Microsoft.Win32;
 
 namespace Microsoft.Extensions.Logging;
 
-
 /// <summary>
 /// Helpful extension methods on <see cref="ILogger"/>.
 /// </summary>

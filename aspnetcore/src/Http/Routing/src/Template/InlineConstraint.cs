@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
-
 /// <summary>
 /// The parsed representation of an inline constraint in a route parameter.
 /// </summary>

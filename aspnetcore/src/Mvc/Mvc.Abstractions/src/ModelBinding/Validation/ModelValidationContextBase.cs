@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// A common base class for <see cref="ModelValidationContext"/> and <see cref="ClientModelValidationContext"/>.
 /// </summary>

@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Represents a <see cref="IStoreFunction" /> parameter.
 /// </summary>

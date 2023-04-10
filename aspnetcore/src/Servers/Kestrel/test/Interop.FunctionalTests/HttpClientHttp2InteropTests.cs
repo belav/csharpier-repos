@@ -23,7 +23,6 @@ using Xunit;
 
 namespace Interop.FunctionalTests;
 
-
 /// <summary>
 /// This tests interop with System.Net.Http.HttpClient (SocketHttpHandler) using HTTP/2 (H2 and H2C)
 /// </summary>

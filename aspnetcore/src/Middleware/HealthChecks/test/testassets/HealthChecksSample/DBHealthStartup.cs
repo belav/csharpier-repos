@@ -3,7 +3,6 @@
 
 namespace HealthChecksSample;
 
-
 // Pass in `--scenario db` at the command line to run this sample.
 public class DbHealthStartup
 {

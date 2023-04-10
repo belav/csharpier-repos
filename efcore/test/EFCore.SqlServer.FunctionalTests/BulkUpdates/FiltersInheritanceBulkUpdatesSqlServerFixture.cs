@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-
 public class FiltersInheritanceBulkUpdatesSqlServerFixture : InheritanceBulkUpdatesSqlServerFixture
 {
     protected override string StoreName => "FiltersInheritanceBulkUpdatesTest";

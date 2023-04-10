@@ -10,7 +10,6 @@ using Xunit.Sdk;
 
 namespace System.Transactions.Tests;
 
-
 #nullable enable
 
 [PlatformSpecific(TestPlatforms.Windows)]

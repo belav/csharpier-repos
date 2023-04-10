@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Represents HttpRequest and HttpResponse headers
 /// </summary>

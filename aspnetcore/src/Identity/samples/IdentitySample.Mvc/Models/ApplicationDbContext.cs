@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IdentitySample.Models;
 
-
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions options)

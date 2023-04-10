@@ -9,7 +9,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal class AddTagHelperChunkGenerator : SpanChunkGenerator
 {
     public AddTagHelperChunkGenerator(

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
-
 /// <summary>
 /// A factory for producing <see cref="IAuthenticatedEncryptorDescriptor"/>.
 /// </summary>

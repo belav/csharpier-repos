@@ -3,7 +3,6 @@
 
 namespace System;
 
-
 internal static partial class TermInfo
 {
     internal enum WellKnownNumbers

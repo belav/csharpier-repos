@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.DataProtection;
 
 namespace NonDISample;
 
-
 public class Program
 {
     public static void Main(string[] args)

@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
-
 /// <summary>
 /// A provider of <see cref="BatchingLogger"/> instances.
 /// </summary>

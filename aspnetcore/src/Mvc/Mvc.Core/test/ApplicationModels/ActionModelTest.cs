@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 public class ActionModelTest
 {
     [Fact]

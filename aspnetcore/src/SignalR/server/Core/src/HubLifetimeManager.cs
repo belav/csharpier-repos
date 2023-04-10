@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// A lifetime manager abstraction for <see cref="Hub"/> instances.
 /// </summary>

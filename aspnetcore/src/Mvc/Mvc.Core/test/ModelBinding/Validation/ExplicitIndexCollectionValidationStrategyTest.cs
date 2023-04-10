@@ -5,7 +5,6 @@ using System.Collections;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 public class ExplicitIndexCollectionValidationStrategyTest
 {
     [Fact]

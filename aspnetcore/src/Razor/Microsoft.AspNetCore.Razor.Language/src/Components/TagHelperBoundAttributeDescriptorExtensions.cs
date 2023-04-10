@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 internal static class TagHelperBoundAttributeDescriptorExtensions
 {
     public static bool IsDelegateProperty(this BoundAttributeDescriptor attribute)

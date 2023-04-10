@@ -5,7 +5,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 public class ComponentApplicationStateTest
 {
     [Fact]

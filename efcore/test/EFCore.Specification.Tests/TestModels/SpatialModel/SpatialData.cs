@@ -5,7 +5,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel;
 
-
 public class SpatialData : ISetSource
 {
     private readonly IReadOnlyList<PointEntity> _pointEntities;

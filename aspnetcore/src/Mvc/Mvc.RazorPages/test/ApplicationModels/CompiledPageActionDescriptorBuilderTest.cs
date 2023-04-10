@@ -11,7 +11,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 public class CompiledPageActionDescriptorBuilderTest
 {
     [Fact]

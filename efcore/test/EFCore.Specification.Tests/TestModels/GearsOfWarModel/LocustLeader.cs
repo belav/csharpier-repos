@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
-
 public class LocustLeader
 {
     public string Name { get; set; }

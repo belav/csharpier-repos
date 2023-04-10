@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class DefaultRazorSyntaxTree : RazorSyntaxTree
 {
     private readonly IReadOnlyList<RazorDiagnostic> _diagnostics;

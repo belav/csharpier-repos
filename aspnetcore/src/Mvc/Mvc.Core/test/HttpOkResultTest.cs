@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class HttpOkResultTest
 {
     [Fact]

@@ -13,7 +13,6 @@ using XmlFormattersWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class XmlDataContractSerializerFormattersWrappingTest
     : IClassFixture<MvcTestFixture<Startup>>
 {

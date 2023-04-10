@@ -7,7 +7,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-
 public class ProductWithBytes : ProductBase
 {
     public string? Name { get; set; }

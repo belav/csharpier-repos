@@ -7,7 +7,6 @@ using SocialWeather.Protobuf;
 
 namespace SocialWeather;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

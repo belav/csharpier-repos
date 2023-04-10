@@ -3,7 +3,6 @@
 
 namespace BasicWebSite;
 
-
 public class StartupWithCookieTempDataProviderAndCookieConsent
 {
     public void ConfigureServices(IServiceCollection services)

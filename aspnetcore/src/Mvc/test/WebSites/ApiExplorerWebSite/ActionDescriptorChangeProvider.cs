@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace ApiExplorerWebSite;
 
-
 public class ActionDescriptorChangeProvider : IActionDescriptorChangeProvider
 {
     public ActionDescriptorChangeProvider(WellKnownChangeToken changeToken)

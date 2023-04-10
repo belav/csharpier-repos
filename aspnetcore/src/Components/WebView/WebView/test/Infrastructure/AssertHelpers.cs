@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.WebView;
 
-
 public class AssertHelpers
 {
     internal static void IsAttachWebRendererInteropMessage(string message)

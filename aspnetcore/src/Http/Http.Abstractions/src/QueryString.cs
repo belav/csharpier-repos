@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Provides correct handling for QueryString value when needed to reconstruct a request or redirect URI string
 /// </summary>

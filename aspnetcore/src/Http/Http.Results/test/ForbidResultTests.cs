@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-
 public class ForbidResultTests
 {
     [Fact]

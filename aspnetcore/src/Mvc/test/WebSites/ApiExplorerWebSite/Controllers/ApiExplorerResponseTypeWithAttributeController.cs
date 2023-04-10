@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
-
 [Route("[controller]/[Action]")]
 public class ApiExplorerResponseTypeWithAttributeController : Controller
 {

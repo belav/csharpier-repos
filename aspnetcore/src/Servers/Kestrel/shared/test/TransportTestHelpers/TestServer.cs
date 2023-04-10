@@ -24,7 +24,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 
-
 /// <summary>
 /// Summary description for TestServer
 /// </summary>

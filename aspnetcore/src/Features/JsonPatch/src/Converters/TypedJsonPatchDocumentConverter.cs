@@ -9,7 +9,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.JsonPatch.Converters;
 
-
 public class TypedJsonPatchDocumentConverter : JsonPatchDocumentConverter
 {
     public override object ReadJson(

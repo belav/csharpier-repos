@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 internal static partial class PageLoggerExtensions
 {
     public const string PageFilter = "Page Filter";

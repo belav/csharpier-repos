@@ -8,7 +8,6 @@ using System.Web;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 // Copied from https://github.com/dotnet/runtime/blob/main/src/libraries/Common/tests/System/Security/Cryptography/X509Certificates/RevocationResponder.cs
 internal sealed class RevocationResponder : IDisposable
 {

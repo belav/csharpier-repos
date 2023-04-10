@@ -26,7 +26,6 @@ using Xunit;
 
 namespace Interop.FunctionalTests.Http3;
 
-
 [Collection(nameof(NoParallelCollection))]
 public class Http3RequestTests : LoggedTest
 {

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
-
 public class OverzealousInitializationCosmosTest
     : OverzealousInitializationTestBase<OverzealousInitializationCosmosTest.OverzealousInitializationCosmosFixture>
 {

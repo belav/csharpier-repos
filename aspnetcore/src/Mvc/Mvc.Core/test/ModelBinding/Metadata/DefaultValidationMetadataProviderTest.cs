@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-
 public class DefaultValidationMetadataProviderTest
 {
     [Fact]

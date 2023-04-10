@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
-
 public class JsonPatchDocumentJsonPropertyAttributeTest
 {
     [Fact]

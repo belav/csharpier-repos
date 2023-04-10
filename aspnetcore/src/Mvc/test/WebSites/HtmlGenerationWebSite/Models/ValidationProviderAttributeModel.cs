@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace HtmlGenerationWebSite.Models;
 
-
 public class ValidationProviderAttributeModel
 {
     [FirstName]

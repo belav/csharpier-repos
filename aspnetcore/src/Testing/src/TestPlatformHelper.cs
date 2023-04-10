@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public static class TestPlatformHelper
 {
     public static bool IsMono => Type.GetType("Mono.Runtime") != null;

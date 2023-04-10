@@ -28,7 +28,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-
 internal abstract partial class AbstractPushOrPullDiagnosticsTaggerProvider<TTag>
     where TTag : ITag
 {

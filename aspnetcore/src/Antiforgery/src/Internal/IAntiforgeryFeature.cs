@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-
 internal interface IAntiforgeryFeature
 {
     AntiforgeryToken? CookieToken { get; set; }

@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace RazorPagesClassLibrary;
 
-
 /// <summary>
 /// Empty Startup for testing a Startup file within a class library
 /// </summary>

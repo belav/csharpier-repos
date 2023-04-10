@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
-
 public class HelperPerformanceBenchmark : RuntimePerformanceBenchmarkBase
 {
     public HelperPerformanceBenchmark()

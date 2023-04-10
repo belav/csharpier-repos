@@ -5,7 +5,6 @@ using NetTopologySuite.IO;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class WKTComparer : IEqualityComparer<string>
 {
     private static readonly WKTReader _reader = new();

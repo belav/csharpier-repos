@@ -8,7 +8,6 @@ using static DisabledRuntimeMarshallingNative;
 
 namespace DisabledRuntimeMarshalling;
 
-
 public unsafe class PInvokes_AutoLayout
 {
     [Fact]

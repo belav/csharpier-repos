@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// <see cref="TagHelper"/> base implementation for caching elements.
 /// </summary>

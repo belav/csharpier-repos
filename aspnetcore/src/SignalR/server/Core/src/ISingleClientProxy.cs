@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// A proxy abstraction for invoking hub methods on the client and getting a result.
 /// </summary>

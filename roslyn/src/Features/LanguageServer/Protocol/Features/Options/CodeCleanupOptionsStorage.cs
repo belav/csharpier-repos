@@ -13,7 +13,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeCleanup;
 
-
 internal static class CodeCleanupOptionsStorage
 {
     public static ValueTask<CodeCleanupOptions> GetCodeCleanupOptionsAsync(

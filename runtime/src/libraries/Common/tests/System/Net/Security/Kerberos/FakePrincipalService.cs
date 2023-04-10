@@ -10,7 +10,6 @@ using Kerberos.NET.Server;
 
 namespace System.Net.Security.Kerberos;
 
-
 class FakePrincipalService : IPrincipalService
 {
     private readonly string _realm;

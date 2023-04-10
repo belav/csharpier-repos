@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 
-
 internal sealed class LocalhostListenOptions : ListenOptions
 {
     internal LocalhostListenOptions(int port)

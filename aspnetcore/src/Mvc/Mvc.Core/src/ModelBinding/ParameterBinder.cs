@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Binds and validates models specified by a <see cref="ParameterDescriptor"/>.
 /// </summary>

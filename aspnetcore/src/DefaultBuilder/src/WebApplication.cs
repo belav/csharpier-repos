@@ -15,7 +15,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// The web application used to configure the HTTP pipeline, and routes.
 /// </summary>

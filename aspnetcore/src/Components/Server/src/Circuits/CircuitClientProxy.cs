@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 internal sealed class CircuitClientProxy : IClientProxy
 {
     public CircuitClientProxy()

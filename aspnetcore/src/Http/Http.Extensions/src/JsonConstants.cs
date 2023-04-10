@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 internal static class JsonConstants
 {
     public const string JsonContentType = "application/json";

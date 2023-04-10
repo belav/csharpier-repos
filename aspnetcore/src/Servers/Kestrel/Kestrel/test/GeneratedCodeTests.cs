@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 
-
 public class GeneratedCodeTests
 {
     private readonly ITestOutputHelper _output;

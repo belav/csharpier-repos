@@ -21,7 +21,6 @@ using System.Linq;
 
 namespace DebuggerTests;
 
-
 internal class ChromeProvider : WasmHostProvider
 {
     static readonly Regex s_parseConnection = new(@"listening on (ws?s://[^\s]*)");

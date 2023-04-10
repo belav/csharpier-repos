@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 
-
 /// <summary>
 /// Provides methods to activate properties of <see cref="ITagHelperComponent"/>s.
 /// </summary>

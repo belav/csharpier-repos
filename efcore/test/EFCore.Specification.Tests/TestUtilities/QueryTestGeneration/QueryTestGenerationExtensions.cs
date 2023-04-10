@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
-
 public static class QueryTestGenerationExtensions
 {
     public static TResult Choose<TResult>(this Random random, List<TResult> list)

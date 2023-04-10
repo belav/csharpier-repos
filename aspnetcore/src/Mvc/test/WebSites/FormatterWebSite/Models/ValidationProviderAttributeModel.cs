@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace FormatterWebSite;
 
-
 public class ValidationProviderAttributeModel
 {
     [FirstName]

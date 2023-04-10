@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 internal readonly struct HeaderSegmentCollection
     : IEnumerable<HeaderSegment>,
         IEquatable<HeaderSegmentCollection>

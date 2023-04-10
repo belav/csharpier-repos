@@ -5,7 +5,6 @@ using System.Collections.Concurrent;
 
 namespace HostedInAspNet.Server;
 
-
 public class BootResourceRequestLog
 {
     private readonly ConcurrentBag<string> _requestPaths = new ConcurrentBag<string>();

@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 public class FileProviderRazorProjectFileSystemTest
 {
     [Fact]

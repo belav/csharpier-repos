@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 /// <summary>
 /// Used to indicate if this server instance should create a new Http.Sys request queue
 /// or attach to an existing one.

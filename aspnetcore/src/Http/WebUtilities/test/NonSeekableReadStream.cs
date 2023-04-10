@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 public class NonSeekableReadStream : Stream
 {
     private readonly Stream _inner;

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Rewrite.PatternSegments;
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
-
 /// <summary>
 /// Parses the TestString segment of the mod_rewrite condition.
 /// </summary>

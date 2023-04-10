@@ -7,7 +7,6 @@ using System.Dynamic;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
-
 /// <remarks>
 /// <para>
 /// This class is used specifically to test that JSON patch "replace" operations are functionally equivalent to

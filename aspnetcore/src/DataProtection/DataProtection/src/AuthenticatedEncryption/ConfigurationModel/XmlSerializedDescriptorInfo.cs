@@ -6,7 +6,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
-
 /// <summary>
 /// Wraps an <see cref="XElement"/> that contains the XML-serialized representation of an
 /// <see cref="IAuthenticatedEncryptorDescriptor"/> along with the type that can be used

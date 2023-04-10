@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 /// <summary>
 /// Always copies the <see cref="T:System.IO.Stream" /> to the response,
 /// regardless of requested content type.

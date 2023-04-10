@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.MusicStore;
 
-
 public class ShoppingCartViewModel
 {
     public List<CartItem> CartItems { get; set; }

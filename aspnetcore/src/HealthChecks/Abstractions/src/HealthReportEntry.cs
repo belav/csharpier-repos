@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 /// <summary>
 /// Represents an entry in a <see cref="HealthReport"/>. Corresponds to the result of a single <see cref="IHealthCheck"/>.
 /// </summary>

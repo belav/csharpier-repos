@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
-
 /// <summary>
 /// Flags used to control the creation of protection descriptors.
 /// </summary>

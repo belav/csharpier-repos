@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Hosting.Builder;
 
-
 /// <summary>
 /// A factory for creating <see cref="IApplicationBuilder" /> instances.
 /// </summary>

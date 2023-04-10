@@ -10,7 +10,6 @@ using AngleSharp.Network;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-
 public static class ResponseAssert
 {
     public static Uri IsRedirect(HttpResponseMessage responseMessage)

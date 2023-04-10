@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal sealed class TransportConnectionManager
 {
     private readonly ConnectionManager _connectionManager;

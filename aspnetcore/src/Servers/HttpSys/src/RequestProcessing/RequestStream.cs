@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 #pragma warning disable CA1844 // Provide memory-based overrides of async methods when subclassing 'Stream'. Fixing this is too gnarly.
 internal sealed partial class RequestStream : Stream
 #pragma warning restore CA1844 // Provide memory-based overrides of async methods when subclassing 'Stream'

@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis;
 
 namespace XUnitWrapperGenerator;
 
-
 internal static class SymbolExtensions
 {
     public static IEnumerable<AttributeData> GetAttributesOnSelfAndContainingSymbols(

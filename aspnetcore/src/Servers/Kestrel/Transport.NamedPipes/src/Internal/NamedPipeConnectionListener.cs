@@ -14,7 +14,6 @@ using PipeOptions = System.IO.Pipelines.PipeOptions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Internal;
 
-
 internal sealed class NamedPipeConnectionListener : IConnectionListener
 {
     private readonly ILogger _log;

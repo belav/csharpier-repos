@@ -15,7 +15,6 @@ using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 #pragma warning disable CA1852 // Seal internal types
 internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
 #pragma warning restore CA1852 // Seal internal types

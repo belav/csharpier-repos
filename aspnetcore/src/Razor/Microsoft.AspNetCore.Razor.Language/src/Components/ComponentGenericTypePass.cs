@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 // This pass:
 // 1. Adds diagnostics for missing generic type arguments
 // 2. Rewrites the type name of the component to substitute generic type arguments

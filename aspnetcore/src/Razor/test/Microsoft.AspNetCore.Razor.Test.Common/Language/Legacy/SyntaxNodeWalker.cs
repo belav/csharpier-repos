@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal class SyntaxNodeWalker : SyntaxRewriter
 {
     private readonly List<SyntaxNode> _ancestors = new List<SyntaxNode>();

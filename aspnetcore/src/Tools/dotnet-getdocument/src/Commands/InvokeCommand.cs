@@ -13,7 +13,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
-
 internal sealed class InvokeCommand : HelpCommandBase
 {
     private const string InsideManName = "GetDocument.Insider";

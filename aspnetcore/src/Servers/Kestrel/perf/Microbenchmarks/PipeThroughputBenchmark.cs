@@ -8,7 +8,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class PipeThroughputBenchmark
 {
     private const int _writeLength = 57;

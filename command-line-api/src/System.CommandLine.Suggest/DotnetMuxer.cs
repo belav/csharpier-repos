@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 
 namespace System.CommandLine.Suggest;
 
-
 internal static class DotnetMuxer
 {
     public static FileInfo Path { get; }

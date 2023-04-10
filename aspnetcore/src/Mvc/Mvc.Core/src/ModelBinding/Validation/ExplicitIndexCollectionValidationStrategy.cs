@@ -7,7 +7,6 @@ using System.Collections;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// An implementation of <see cref="IValidationStrategy"/> for a collection bound using 'explicit indexing'
 /// style keys.

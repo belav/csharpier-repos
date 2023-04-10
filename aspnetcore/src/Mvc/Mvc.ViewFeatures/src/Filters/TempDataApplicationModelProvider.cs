@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-
 internal sealed class TempDataApplicationModelProvider : IApplicationModelProvider
 {
     private readonly TempDataSerializer _tempDataSerializer;

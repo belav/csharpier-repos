@@ -17,7 +17,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Interop.FunctionalTests;
 
-
 internal static class HttpHelpers
 {
     public static HttpProtocolException GetProtocolException(this Exception ex)

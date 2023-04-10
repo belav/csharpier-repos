@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Hosting.Server;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal sealed class ApplicationRequestContextFactory<TContext> : IRequestContextFactory
     where TContext : notnull
 {

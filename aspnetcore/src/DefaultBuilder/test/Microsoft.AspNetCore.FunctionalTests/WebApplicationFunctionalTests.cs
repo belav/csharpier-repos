@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging.EventLog;
 
 namespace Microsoft.AspNetCore.Tests;
 
-
 public class WebApplicationFunctionalTests : LoggedTest
 {
     [Fact]

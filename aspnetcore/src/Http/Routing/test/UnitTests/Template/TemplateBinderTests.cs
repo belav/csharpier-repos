@@ -9,7 +9,6 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.AspNetCore.Routing.Template.Tests;
 
-
 public class TemplateBinderTests
 {
     public static TheoryData EmptyAndNullDefaultValues =>

@@ -6,7 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
-
 public class Employee
 {
     private uint? _employeeId;

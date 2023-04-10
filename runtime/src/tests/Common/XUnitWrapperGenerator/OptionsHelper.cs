@@ -4,7 +4,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace XUnitWrapperGenerator;
 
-
 public static class OptionsHelper
 {
     private const string IsMergedTestRunnerAssemblyOption =

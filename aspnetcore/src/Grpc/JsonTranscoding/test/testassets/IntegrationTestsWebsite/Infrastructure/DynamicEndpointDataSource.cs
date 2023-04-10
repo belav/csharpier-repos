@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace IntegrationTestsWebsite.Infrastructure;
 
-
 /// <summary>
 /// This endpoint data source can be modified and will raise a change token event.
 /// It can be used to add new endpoints after the application has started.

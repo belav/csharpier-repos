@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.Test.Helpers;
 
 namespace Microsoft.AspNetCore.Components.Test;
 
-
 public class RouteViewTest
 {
     private readonly TestRenderer _renderer;

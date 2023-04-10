@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// Aggregate of <see cref="IClientModelValidatorProvider"/>s that delegates to its underlying providers.
 /// </summary>

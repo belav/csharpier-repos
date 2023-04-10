@@ -19,7 +19,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 /// <summary>
 /// Abstract class representing a Page
 /// </summary>

@@ -18,7 +18,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 public class RazorPageActivatorTest
 {
     public RazorPageActivatorTest()

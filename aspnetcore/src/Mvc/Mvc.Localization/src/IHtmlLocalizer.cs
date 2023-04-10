@@ -5,7 +5,6 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
-
 /// <summary>
 /// Represents a type that does HTML-aware localization of strings, by HTML encoding arguments that are
 /// formatted in the resource string.

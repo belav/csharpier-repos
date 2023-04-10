@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 public class CompatibilitySwitchTest
 {
     [Fact]

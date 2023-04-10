@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
-
 internal sealed partial class LoggingHttpMessageHandler : DelegatingHandler
 {
     private readonly ILogger<LoggingHttpMessageHandler> _logger;

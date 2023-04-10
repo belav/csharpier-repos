@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 
-
 /// <summary>
 /// Code first model used by <see cref="EntityFrameworkCoreXmlRepository{TContext}"/>.
 /// </summary>

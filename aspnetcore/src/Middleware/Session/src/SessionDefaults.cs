@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Session;
 
-
 /// <summary>
 /// Represents defaults for the Session.
 /// </summary>

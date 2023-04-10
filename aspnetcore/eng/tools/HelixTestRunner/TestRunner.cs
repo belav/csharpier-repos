@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace HelixTestRunner;
 
-
 public class TestRunner
 {
     public TestRunner(HelixTestRunnerOptions options)

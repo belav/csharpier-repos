@@ -7,7 +7,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers.Test;
 
-
 public class EnvironmentTagHelperTest
 {
     [Theory]

@@ -9,7 +9,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 public class DataAnnotationsModelValidatorProviderTest
 {
     private readonly IModelMetadataProvider _metadataProvider =

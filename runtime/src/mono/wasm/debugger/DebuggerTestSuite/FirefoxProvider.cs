@@ -17,7 +17,6 @@ using Wasm.Tests.Internal;
 
 namespace DebuggerTests;
 
-
 internal class FirefoxProvider : WasmHostProvider
 {
     private WebSocket? _ideWebSocket;

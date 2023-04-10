@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
-
 public abstract class IdentityDbContext<
     TUser,
     TRole,

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 /// <summary>
 ///     <para>
 ///         Parameters for creating a <see cref="INonTrackedModificationCommand" /> instance.

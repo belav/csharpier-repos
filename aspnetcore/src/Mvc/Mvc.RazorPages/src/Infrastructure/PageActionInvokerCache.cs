@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 internal sealed class PageActionInvokerCache
 {
     private readonly IPageFactoryProvider _pageFactoryProvider;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
-
 internal sealed class ParsedModRewriteInput
 {
     public bool Invert { get; set; }

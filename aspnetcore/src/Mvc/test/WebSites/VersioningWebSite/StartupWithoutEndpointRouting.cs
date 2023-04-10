@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VersioningWebSite;
 
-
 public class StartupWithoutEndpointRouting : Startup
 {
     public override void Configure(IApplicationBuilder app)

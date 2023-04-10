@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal sealed class ConfigureBuilder
 {
     public ConfigureBuilder(MethodInfo configure)

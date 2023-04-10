@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     Represents an operation that should be performed when a navigation is set to <see langword="null" /> on a foreign key.
 /// </summary>

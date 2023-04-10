@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
 
-
 public class ProjectCollectionEnumerableTest
 {
     private MapperConfiguration _config;

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 public class ModelMetadataTest
 {
     // IsComplexType

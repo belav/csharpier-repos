@@ -13,7 +13,6 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
-
 [ExportCSharpVisualBasicStatelessLspService(typeof(ExecuteWorkspaceCommandHandler)), Shared]
 [Method(Methods.WorkspaceExecuteCommandName)]
 internal class ExecuteWorkspaceCommandHandler

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 public class JsonUpdateSqlServerFixture : JsonUpdateFixtureBase
 {
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;

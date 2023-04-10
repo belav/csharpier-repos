@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
-
 public interface ISugary
 {
     int SugarGrams { get; set; }

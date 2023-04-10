@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.LanguageServer.Handler;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
 
-
 [AttributeUsage(AttributeTargets.Class), MetadataAttribute]
 internal class ExportTypeScriptLspServiceFactoryAttribute : ExportLspServiceFactoryAttribute
 {

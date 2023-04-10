@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
-
 /// <summary>
 /// Default values related to certificate authentication middleware
 /// </summary>

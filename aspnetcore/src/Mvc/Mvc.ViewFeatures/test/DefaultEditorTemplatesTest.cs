@@ -15,7 +15,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 public class DefaultEditorTemplatesTest
 {
     // Mappings from templateName to expected result when using StubbyHtmlHelper.

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class NorthwindChangeTrackingQueryInMemoryTest
     : NorthwindChangeTrackingQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
 {

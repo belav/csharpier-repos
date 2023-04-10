@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.Startup>>
 {
     public ApiExplorerTest(MvcTestFixture<ApiExplorerWebSite.Startup> fixture)

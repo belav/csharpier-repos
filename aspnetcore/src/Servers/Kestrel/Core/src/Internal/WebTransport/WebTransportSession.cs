@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.WebTransport;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.WebTransport;
 
-
 #pragma warning disable CA2252 // WebTransport is a preview feature
 internal sealed class WebTransportSession : IWebTransportSession
 {

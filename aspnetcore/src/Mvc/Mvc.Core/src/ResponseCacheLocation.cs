@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Determines the value for the "Cache-control" header in the response.
 /// </summary>

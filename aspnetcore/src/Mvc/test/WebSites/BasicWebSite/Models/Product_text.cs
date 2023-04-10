@@ -3,5 +3,4 @@
 
 namespace BasicWebSite.Models;
 
-
 public class Product_Text : Product { }

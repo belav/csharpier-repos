@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// Skips a test if the OS is the given type (Windows) and the OS version is greater than specified.
 /// E.g. Specifying Window 8 skips on Win 10, but not on Linux. Combine with OSSkipConditionAttribute as needed.

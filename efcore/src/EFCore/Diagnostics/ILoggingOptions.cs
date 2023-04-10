@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     Options set at the <see cref="IServiceProvider" /> singleton level to control how
 ///     messages are logged and/or thrown in exceptions.

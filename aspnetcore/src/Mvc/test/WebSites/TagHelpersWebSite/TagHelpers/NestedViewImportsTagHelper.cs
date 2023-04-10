@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace TagHelpersWebSite.TagHelpers;
 
-
 [HtmlTargetElement("nested")]
 public class NestedViewImportsTagHelper : TagHelper
 {

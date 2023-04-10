@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Extension methods for the host filtering middleware.
 /// </summary>

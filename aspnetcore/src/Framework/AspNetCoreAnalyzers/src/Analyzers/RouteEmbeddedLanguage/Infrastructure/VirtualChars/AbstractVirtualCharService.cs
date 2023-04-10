@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 
-
 internal abstract partial class AbstractVirtualCharService : IVirtualCharService
 {
     public abstract bool TryGetEscapeCharacter(VirtualChar ch, out char escapedChar);

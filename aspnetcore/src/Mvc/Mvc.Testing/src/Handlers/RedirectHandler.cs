@@ -9,7 +9,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Testing.Handlers;
 
-
 /// <summary>
 /// A <see cref="DelegatingHandler"/> that follows redirect responses.
 /// </summary>

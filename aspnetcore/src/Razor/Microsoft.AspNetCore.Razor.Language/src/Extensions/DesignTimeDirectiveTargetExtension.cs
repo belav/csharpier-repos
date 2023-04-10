@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-
 internal class DesignTimeDirectiveTargetExtension : IDesignTimeDirectiveTargetExtension
 {
     private const string DirectiveTokenHelperMethodName = "__RazorDirectiveTokenHelpers__";

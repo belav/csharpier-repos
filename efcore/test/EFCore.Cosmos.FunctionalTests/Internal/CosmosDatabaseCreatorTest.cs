@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 
-
 public class CosmosDatabaseCreatorTest
 {
     public static IEnumerable<object[]> IsAsyncData = new[]

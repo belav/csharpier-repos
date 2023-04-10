@@ -11,7 +11,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.StaticWebAssets;
 
-
 internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
 {
     private static readonly StringComparison _fsComparison = OperatingSystem.IsWindows()

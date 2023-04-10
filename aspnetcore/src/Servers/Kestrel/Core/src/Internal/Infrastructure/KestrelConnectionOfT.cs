@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal sealed class KestrelConnection<T> : KestrelConnection, IThreadPoolWorkItem
     where T : BaseConnectionContext
 {

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Sqlite.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class TPCManyToManyNoTrackingQuerySqliteTest
     : TPCManyToManyNoTrackingQueryRelationalTestBase<TPCManyToManyQuerySqliteFixture>
 {

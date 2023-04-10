@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 internal class TestSecurityToken : SecurityToken
 {
     public override string Id => "id";

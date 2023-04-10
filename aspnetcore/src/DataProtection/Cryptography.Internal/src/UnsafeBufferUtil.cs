@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Cryptography.SafeHandles;
 
 namespace Microsoft.AspNetCore.Cryptography;
 
-
 internal static unsafe class UnsafeBufferUtil
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

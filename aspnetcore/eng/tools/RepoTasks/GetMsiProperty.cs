@@ -9,7 +9,6 @@ using Microsoft.Deployment.WindowsInstaller.Package;
 
 namespace RepoTasks;
 
-
 public class GetMsiProperty : Microsoft.Build.Utilities.Task
 {
     [Required]

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 public static class EndpointRouteBuilderExtensions
 {
     public static IEndpointConventionBuilder MapHello(

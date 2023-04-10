@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
-
 internal static class ResponseUtils
 {
     public static HttpResponseMessage CreateResponse(HttpStatusCode statusCode) =>

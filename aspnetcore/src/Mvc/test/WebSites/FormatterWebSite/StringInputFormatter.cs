@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace FormatterWebSite;
 
-
 public class StringInputFormatter : TextInputFormatter
 {
     public StringInputFormatter()

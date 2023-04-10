@@ -5,7 +5,6 @@ using System.Threading.RateLimiting;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 internal sealed class DefaultCombinedLease : RateLimitLease
 {
     private readonly RateLimitLease _globalLease;

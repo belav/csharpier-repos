@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 
-
 /// <summary>
 /// Initializes and processes the <see cref="ITagHelperComponent"/>s added to the
 /// <see cref="ITagHelperComponentManager.Components"/> in the specified order.

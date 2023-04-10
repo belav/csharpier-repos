@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.TextTemplating;
 
-
 /// <summary>
 /// Callback interface to be implemented by clients of <see cref="ITextTemplating"/> that wish to process errors and information.
 /// </summary>

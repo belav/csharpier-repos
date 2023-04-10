@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     In-memory specific extension methods for <see cref="DbContext.Database" />.
 /// </summary>

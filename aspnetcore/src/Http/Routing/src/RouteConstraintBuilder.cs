@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// A builder for produding a mapping of keys to see <see cref="IRouteConstraint"/>.
 /// </summary>

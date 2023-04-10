@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
-
 /// <summary>
 ///     <para>
 ///         An expression that represents an AT TIME ZONE operation in a SQL tree.

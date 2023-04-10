@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestTypeMappingSource : TypeMappingSource
 {
     public TestTypeMappingSource(TypeMappingSourceDependencies dependencies)

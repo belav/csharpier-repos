@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class MemberListSourceAndForPath : AutoMapperSpecBase
 {
     bool _equal;

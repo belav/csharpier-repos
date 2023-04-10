@@ -5,7 +5,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.Extensions.ObjectPool.Microbenchmarks;
 
-
 [MemoryDiagnoser]
 public class GetReturnSingleThreaded
 {

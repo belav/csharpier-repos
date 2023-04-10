@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 // Just like TechEmpower Plaintext
 public partial class MatcherSingleEntryBenchmark : EndpointRoutingBenchmarkBase
 {

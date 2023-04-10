@@ -5,7 +5,6 @@ using System.Threading.RateLimiting;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 internal class TestRateLimitLease : RateLimitLease
 {
     internal List<RateLimitLease> _leases;

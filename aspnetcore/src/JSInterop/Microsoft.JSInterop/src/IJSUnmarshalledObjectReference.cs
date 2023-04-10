@@ -3,7 +3,6 @@
 
 namespace Microsoft.JSInterop;
 
-
 /// <summary>
 /// Represents a reference to a JavaScript object whose functions can be invoked synchronously without JSON marshalling.
 /// </summary>

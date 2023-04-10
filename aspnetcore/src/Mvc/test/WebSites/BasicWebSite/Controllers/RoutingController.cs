@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite;
 
-
 public class RoutingController : Controller
 {
     public bool HasEndpointMatch()

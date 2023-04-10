@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class TestFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
 {
     private readonly Func<TypeInfo, bool> _filter;

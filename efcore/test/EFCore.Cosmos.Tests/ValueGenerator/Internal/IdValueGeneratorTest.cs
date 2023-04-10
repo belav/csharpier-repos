@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGenerator.Internal;
 
-
 public class IdValueGeneratorTest
 {
     [ConditionalFact]

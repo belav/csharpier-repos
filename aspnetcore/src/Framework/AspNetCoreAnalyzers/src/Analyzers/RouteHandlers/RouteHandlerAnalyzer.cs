@@ -12,7 +12,6 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
-
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
 {

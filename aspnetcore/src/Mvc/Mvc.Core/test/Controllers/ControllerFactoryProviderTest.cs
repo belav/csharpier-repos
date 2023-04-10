@@ -6,7 +6,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
-
 public class ControllerFactoryProviderTest
 {
     [Fact]

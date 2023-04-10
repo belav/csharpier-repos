@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 internal sealed class AsyncStreamWrapper : Stream
 {
     private readonly Stream _inner;

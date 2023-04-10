@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 /// <summary>
 ///     Debug string customization options for tracked entities.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 public class ApiConventionResultTest
 {
     [Fact]

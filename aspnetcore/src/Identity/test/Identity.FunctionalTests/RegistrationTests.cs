@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-
 public abstract class RegistrationTests<TStartup, TContext>
     : IClassFixture<ServerFactory<TStartup, TContext>>
     where TStartup : class

@@ -9,7 +9,6 @@ using System.Reflection;
 
 namespace RepoTasks;
 
-
 internal static partial class FileUtilities
 {
     private static readonly HashSet<string> s_assemblyExtensions = new HashSet<string>(

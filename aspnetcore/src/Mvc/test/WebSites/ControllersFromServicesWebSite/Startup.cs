@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace ControllersFromServicesWebSite;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

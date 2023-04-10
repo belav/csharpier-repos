@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 /// <summary>
 /// Creates <see cref="TextWriter"/> instances for writing to <see cref="Http.HttpResponse.Body"/>.
 /// </summary>

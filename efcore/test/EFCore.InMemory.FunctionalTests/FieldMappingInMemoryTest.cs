@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class FieldMappingInMemoryTest
     : FieldMappingTestBase<FieldMappingInMemoryTest.FieldMappingInMemoryFixture>
 {

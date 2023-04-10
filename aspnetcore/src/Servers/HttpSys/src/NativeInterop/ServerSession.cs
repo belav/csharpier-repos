@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.HttpSys.Internal;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal sealed class ServerSession : IDisposable
 {
     internal unsafe ServerSession()

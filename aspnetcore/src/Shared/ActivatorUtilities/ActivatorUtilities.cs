@@ -10,7 +10,6 @@ using System.Runtime.ExceptionServices;
 
 namespace Microsoft.Extensions.Internal;
 
-
 internal static class ActivatorUtilities
 {
     private const DynamicallyAccessedMemberTypes ActivatorAccessibility =

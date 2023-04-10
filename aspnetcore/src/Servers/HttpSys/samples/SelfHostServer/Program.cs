@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace SelfHostServer;
 
-
 public static class Program
 {
     public static void Main(string[] args)

@@ -2,7 +2,6 @@
 
 namespace AutoMapper.Internal.Mappers;
 
-
 public class FromStringDictionaryMapper : IObjectMapper
 {
     private static readonly MethodInfo MapDynamicMethod =

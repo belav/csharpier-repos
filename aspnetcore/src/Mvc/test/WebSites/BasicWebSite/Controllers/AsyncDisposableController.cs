@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
-
 public class AsyncDisposableController : Controller, IAsyncDisposable
 {
     private readonly ControllerTestDisposeAsync _testDisposeAsync;

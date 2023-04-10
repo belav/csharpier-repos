@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
-
 [Route("[controller]/[action]")]
 public class RemoteAttribute_HomeController : Controller
 {

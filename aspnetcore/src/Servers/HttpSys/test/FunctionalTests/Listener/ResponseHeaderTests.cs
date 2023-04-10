@@ -14,7 +14,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.HttpSys.Listener;
 
-
 public class ResponseHeaderTests : IDisposable
 {
     private HttpClient _client = new HttpClient();

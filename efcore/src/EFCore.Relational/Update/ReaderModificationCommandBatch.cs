@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 /// <summary>
 ///     <para>
 ///         A base class for <see cref="ModificationCommandBatch" /> implementations that make use

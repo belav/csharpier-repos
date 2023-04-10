@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 // These are really more like integration tests. They verify that these extensions
 // add routes that behave as advertised.
 public class RequestDelegateRouteBuilderExtensionsTest

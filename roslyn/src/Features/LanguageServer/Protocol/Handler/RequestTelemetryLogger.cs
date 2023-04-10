@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Internal.Log;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
-
 /// <summary>
 /// Logs metadata on LSP requests (duration, success / failure metrics)
 /// for this particular LSP server instance.

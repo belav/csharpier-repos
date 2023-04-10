@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.HttpLogging;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for the HttpLogging middleware.
 /// </summary>

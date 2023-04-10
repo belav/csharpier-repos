@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 internal sealed class DefaultEndpointConventionBuilder : IEndpointConventionBuilder
 {
     internal EndpointBuilder EndpointBuilder { get; }

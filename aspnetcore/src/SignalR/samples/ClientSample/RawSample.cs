@@ -14,7 +14,6 @@ using Microsoft.Extensions.CommandLineUtils;
 
 namespace ClientSample;
 
-
 internal class RawSample
 {
     internal static void Register(CommandLineApplication app)

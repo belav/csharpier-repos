@@ -7,7 +7,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 /// <summary>
 /// A SyntaxAnnotation is used to annotate syntax elements with additional information.
 ///

@@ -7,7 +7,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class SpatialFixtureBase : SharedStoreFixtureBase<SpatialContext>
 {
     private readonly GeometryFactory _geometryFactory =

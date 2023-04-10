@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 /// <summary>
 /// Supports retrieving endpoints that fulfill a certain matcher policy.
 /// </summary>

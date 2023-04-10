@@ -1,6 +1,5 @@
 namespace ComponentsWebAssembly_CSharp.Shared;
 
-
 public class WeatherForecast
 {
     public DateOnly Date { get; set; }

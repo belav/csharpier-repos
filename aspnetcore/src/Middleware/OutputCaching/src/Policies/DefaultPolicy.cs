@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// A policy which caches un-authenticated, GET and HEAD, 200 responses.
 /// </summary>

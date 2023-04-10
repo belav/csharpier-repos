@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal sealed class SingleEntryJumpTable : JumpTable
 {
     private readonly int _defaultDestination;

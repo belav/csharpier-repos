@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
-
 public class FileNameRouteConstraintTest
 {
     public static TheoryData<object> FileNameData

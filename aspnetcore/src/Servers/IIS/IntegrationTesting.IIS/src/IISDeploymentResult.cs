@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
-
 public class IISDeploymentResult : DeploymentResult
 {
     public ILogger Logger { get; set; }

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Provides an abstraction for hashing passwords.
 /// </summary>

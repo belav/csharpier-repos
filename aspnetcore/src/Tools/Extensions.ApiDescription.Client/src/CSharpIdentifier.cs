@@ -8,7 +8,6 @@ using System.Text;
 // https://github.com/dotnet/aspnetcore-tooling/blob/master/src/Razor/src/Microsoft.AspNetCore.Razor.Language/CSharpIdentifier.cs
 namespace Microsoft.Extensions.ApiDescription.Client;
 
-
 internal static class CSharpIdentifier
 {
     // CSharp Spec §2.4.2

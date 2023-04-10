@@ -6,7 +6,6 @@ using XmlFormattersWebSite.Models;
 
 namespace XmlFormattersWebSite;
 
-
 public class PersonWrapperProvider : IWrapperProvider
 {
     public object Wrap(object obj)

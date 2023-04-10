@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 /// <summary>
 /// Default implementation for <see cref="IViewComponentInvoker"/>.
 /// </summary>

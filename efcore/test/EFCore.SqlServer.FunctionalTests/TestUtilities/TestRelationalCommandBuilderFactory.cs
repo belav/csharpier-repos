@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFactory
 {
     public TestRelationalCommandBuilderFactory(RelationalCommandBuilderDependencies dependencies)

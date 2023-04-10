@@ -15,7 +15,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 /// <summary>
 /// Authenticates requests using Negotiate, Kerberos, or NTLM.
 /// </summary>

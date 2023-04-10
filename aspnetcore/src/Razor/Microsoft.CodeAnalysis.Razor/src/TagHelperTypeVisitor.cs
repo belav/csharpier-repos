@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 // Visits top-level types and finds interface implementations.
 internal class TagHelperTypeVisitor : SymbolVisitor
 {

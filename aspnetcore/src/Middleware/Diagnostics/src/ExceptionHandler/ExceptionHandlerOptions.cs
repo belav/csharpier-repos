@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Options for configuring the <see cref="ExceptionHandlerMiddleware"/>.
 /// </summary>

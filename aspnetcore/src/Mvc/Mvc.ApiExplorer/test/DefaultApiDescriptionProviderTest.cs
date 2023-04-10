@@ -29,7 +29,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Description;
 
-
 public class DefaultApiDescriptionProviderTest
 {
     [Fact]

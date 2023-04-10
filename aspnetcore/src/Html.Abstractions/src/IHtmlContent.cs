@@ -5,7 +5,6 @@ using System.Text.Encodings.Web;
 
 namespace Microsoft.AspNetCore.Html;
 
-
 /// <summary>
 /// HTML content which can be written to a TextWriter.
 /// </summary>

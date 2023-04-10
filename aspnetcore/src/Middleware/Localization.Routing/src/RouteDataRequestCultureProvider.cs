@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Localization.Routing;
 
-
 /// <summary>
 /// Determines the culture information for a request via values in the route data.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 public class InternalServiceCollectionMapTest
 {
     [ConditionalFact]

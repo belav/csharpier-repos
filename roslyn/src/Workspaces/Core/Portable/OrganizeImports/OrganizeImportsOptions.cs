@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.OrganizeImports;
 
-
 [DataContract]
 internal readonly record struct OrganizeImportsOptions
 {

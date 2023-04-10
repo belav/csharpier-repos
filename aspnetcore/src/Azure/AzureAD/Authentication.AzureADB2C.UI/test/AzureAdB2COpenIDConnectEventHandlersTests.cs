@@ -7,7 +7,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
-
 public class AzureADB2COpenIDConnectEventHandlersTests
 {
     [Fact]

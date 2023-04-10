@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
-
 public class FakeRelationalDbContextOptionsBuilder
     : RelationalDbContextOptionsBuilder<
         FakeRelationalDbContextOptionsBuilder,

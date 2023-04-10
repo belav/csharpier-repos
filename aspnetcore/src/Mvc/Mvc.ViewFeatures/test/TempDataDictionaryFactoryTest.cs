@@ -6,7 +6,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 public class TempDataDictionaryFactoryTest
 {
     [Fact]

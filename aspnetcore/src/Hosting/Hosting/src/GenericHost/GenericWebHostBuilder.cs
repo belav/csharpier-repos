@@ -17,7 +17,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal sealed class GenericWebHostBuilder
     : IWebHostBuilder,
         ISupportsStartup,

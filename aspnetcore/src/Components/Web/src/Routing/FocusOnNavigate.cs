@@ -5,7 +5,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 /// <summary>
 /// After navigating from one page to another, sets focus to an element
 /// matching a CSS selector. This can be used to build an accessible

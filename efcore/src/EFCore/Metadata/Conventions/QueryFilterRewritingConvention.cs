@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     Convention that converts accesses of <see cref="DbSet{TEntity}" /> inside query filters into <see cref="EntityQueryRootExpression" />.
 ///     This makes them consistent with how DbSet accesses in the actual queries are represented, which allows for easier processing in the

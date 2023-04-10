@@ -8,7 +8,6 @@ using Newtonsoft.Json.Linq;
 
 namespace HealthChecksSample;
 
-
 // Pass in `--scenario writer` at the command line to run this sample.
 public class CustomWriterStartup
 {

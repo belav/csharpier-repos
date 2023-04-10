@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel;
 
-
 public class SolidRocket : ContinuousCombustionEngine
 {
     public SolidFuelTank SolidFuelTank { get; set; }

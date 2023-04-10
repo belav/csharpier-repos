@@ -5,7 +5,6 @@ using System.Text.Json;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures default settings for an entity mapped to a JSON column.
 /// </summary>

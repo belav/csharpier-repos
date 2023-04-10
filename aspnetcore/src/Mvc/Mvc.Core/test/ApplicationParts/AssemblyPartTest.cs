@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 public class AssemblyPartTest
 {
     [Fact]

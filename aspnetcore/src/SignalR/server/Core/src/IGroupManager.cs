@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// A manager abstraction for adding and removing connections from groups.
 /// </summary>

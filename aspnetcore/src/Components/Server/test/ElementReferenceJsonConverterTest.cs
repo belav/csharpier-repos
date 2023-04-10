@@ -7,7 +7,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 public class ElementReferenceJsonConverterTest
 {
     private readonly ElementReferenceContext ElementReferenceContext;

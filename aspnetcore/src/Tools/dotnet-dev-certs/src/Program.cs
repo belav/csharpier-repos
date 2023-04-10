@@ -10,7 +10,6 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.AspNetCore.DeveloperCertificates.Tools;
 
-
 internal sealed class Program
 {
     // NOTE: Exercise caution when touching these exit codes, since existing tooling

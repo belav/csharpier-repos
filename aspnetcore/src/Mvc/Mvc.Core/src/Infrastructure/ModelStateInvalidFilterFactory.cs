@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed class ModelStateInvalidFilterFactory : IFilterFactory, IOrderedFilter
 {
     public int Order => ModelStateInvalidFilter.FilterOrder;

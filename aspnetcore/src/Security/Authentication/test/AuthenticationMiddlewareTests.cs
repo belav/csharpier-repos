@@ -16,7 +16,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 public class AuthenticationMiddlewareTests
 {
     [Fact]

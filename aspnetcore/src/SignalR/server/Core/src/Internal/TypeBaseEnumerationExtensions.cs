@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal static class TypeBaseEnumerationExtensions
 {
     public static IEnumerable<Type> AllBaseTypes(this Type type)

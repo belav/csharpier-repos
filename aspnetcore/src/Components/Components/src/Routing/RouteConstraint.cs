@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 internal static class RouteConstraint
 {
     public static UrlValueConstraint Parse(string template, string segment, string constraint)

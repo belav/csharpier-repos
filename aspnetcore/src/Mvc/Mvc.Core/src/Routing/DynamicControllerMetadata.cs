@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 internal sealed class DynamicControllerMetadata : IDynamicEndpointMetadata
 {
     public DynamicControllerMetadata(RouteValueDictionary values)

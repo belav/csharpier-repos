@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Tests;
 
-
 // Define test collection for tests to avoid all other tests.
 // Parallelization disable for QUIC test to avoid test flakiness from msquic refusing connections
 // because of high resource usage. See https://github.com/dotnet/runtime/issues/55979

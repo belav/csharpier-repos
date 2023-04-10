@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Recommendations;
 
-
 #pragma warning disable RS0030 // Do not used banned APIs: PerLanguageOption<T>
 public static class RecommendationOptions
 {

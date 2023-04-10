@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
-
 public abstract class RoutePrecedenceTestsBase
 {
     [Theory]

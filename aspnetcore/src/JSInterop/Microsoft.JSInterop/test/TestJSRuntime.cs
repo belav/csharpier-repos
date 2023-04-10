@@ -5,7 +5,6 @@ using Microsoft.JSInterop.Infrastructure;
 
 namespace Microsoft.JSInterop;
 
-
 internal class TestJSRuntime : JSRuntime
 {
     protected override void BeginInvokeJS(

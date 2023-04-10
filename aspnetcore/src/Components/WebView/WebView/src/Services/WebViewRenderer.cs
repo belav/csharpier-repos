@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.WebView.Services;
 
-
 internal sealed class WebViewRenderer : WebRenderer
 {
     private readonly Queue<UnacknowledgedRenderBatch> _unacknowledgedRenderBatches = new();

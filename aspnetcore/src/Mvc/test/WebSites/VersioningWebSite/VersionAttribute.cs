@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ActionConstraints;
 
 namespace VersioningWebSite;
 
-
 public class VersionAttribute : Attribute, IActionConstraintFactory
 {
     private int? _maxVersion;

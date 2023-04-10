@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Google;
 
-
 /// <summary>
 /// Configuration options for <see cref="GoogleHandler"/>.
 /// </summary>

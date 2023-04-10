@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting.Server;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-
 internal interface IRequestProcessor
 {
     Task ProcessRequestsAsync<TContext>(IHttpApplication<TContext> application)

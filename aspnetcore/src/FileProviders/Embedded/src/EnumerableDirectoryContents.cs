@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.FileProviders.Embedded;
 
-
 internal sealed class EnumerableDirectoryContents : IDirectoryContents
 {
     private readonly IEnumerable<IFileInfo> _entries;

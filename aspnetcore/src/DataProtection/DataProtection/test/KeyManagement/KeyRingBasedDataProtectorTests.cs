@@ -15,7 +15,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
-
 public class KeyRingBasedDataProtectorTests
 {
     [Fact]

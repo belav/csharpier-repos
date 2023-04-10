@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 /// <summary>
 /// Represents options for applications relying on a server for configuration.
 /// </summary>

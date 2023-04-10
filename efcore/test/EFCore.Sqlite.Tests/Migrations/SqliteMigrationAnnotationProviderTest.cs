@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Sqlite.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 public class SqliteMigrationAnnotationProviderTest
 {
     private readonly TestHelpers.TestModelBuilder _modelBuilder =

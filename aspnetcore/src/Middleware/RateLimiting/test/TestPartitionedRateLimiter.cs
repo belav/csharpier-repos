@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 internal class TestPartitionedRateLimiter<TResource> : PartitionedRateLimiter<TResource>
 {
     private List<RateLimiter> limiters = new List<RateLimiter>();

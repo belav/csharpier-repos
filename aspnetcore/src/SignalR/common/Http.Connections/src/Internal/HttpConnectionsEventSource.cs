@@ -6,7 +6,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
-
 internal sealed class HttpConnectionsEventSource : EventSource
 {
     public static readonly HttpConnectionsEventSource Log = new HttpConnectionsEventSource();

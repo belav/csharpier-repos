@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
 
-
 public class BufferedDataReaderTest
 {
     public static IEnumerable<object[]> IsAsyncData = new[]

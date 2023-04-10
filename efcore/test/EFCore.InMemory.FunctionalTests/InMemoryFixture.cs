@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class InMemoryFixture
 {
     public static IServiceProvider DefaultServiceProvider { get; } = BuildServiceProvider();

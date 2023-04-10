@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
-
 /// <summary>
 /// Queues requests to be executed in the proper order.
 /// </summary>

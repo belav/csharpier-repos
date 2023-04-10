@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 // ReSharper disable StringStartsWithIsCultureSpecific
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NorthwindQueryFiltersCustomizer>, new()
 {

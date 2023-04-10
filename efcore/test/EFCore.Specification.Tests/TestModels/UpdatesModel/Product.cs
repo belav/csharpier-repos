@@ -7,7 +7,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-
 public class Product : ProductBase
 {
     public int? DependentId { get; set; }

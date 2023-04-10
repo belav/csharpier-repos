@@ -8,7 +8,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class AspNetTestFrameworkExecutor : XunitTestFrameworkExecutor
 {
     public AspNetTestFrameworkExecutor(

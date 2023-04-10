@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSamples.ClaimsTransformer.Controllers;
 
-
 public class AccountController : Controller
 {
     [HttpGet]

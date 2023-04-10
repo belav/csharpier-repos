@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 
-
 /// <summary>
 ///     An interface for any <see cref="MigrationOperation" /> that alters some existing database object.
 /// </summary>

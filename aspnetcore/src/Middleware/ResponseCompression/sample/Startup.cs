@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.ResponseCompression;
 
 namespace ResponseCompressionSample;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.WebEncoders;
 
-
 public class EncoderServiceCollectionExtensionsTests
 {
     [Fact]

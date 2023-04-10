@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents;
 
-
 [UseExportProvider]
 public class RenameIntentTests : IntentTestsBase
 {

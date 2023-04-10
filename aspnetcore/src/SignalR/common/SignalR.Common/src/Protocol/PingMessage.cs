@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 /// <summary>
 /// A keep-alive message to let the other side of the connection know that the connection is still alive.
 /// </summary>

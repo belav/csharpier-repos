@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BasicWebSite.Models;
 
-
 public class Contact
 {
     public int ContactId { get; set; }

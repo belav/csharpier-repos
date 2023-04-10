@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Allows a <see cref="IParameterBindingFactory" /> to be found from those registered in the
 ///     internal service provider.

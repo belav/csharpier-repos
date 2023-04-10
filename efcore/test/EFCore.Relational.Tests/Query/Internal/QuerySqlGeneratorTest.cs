@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
 
-
 public class QuerySqlGeneratorTest
 {
     [ConditionalTheory]

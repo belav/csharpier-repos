@@ -7,7 +7,6 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.Certificates.Generation;
 
-
 internal sealed class UnixCertificateManager : CertificateManager
 {
     public UnixCertificateManager() { }

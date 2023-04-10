@@ -8,7 +8,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Provides extensions for HttpResponse exposing the SendFile extension.
 /// </summary>

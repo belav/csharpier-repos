@@ -6,7 +6,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// Context for a Hub invocation.
 /// </summary>

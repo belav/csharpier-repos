@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
-
 internal static class ViewComponentTypes
 {
     public const string Assembly = "Microsoft.AspNetCore.Mvc.ViewFeatures";

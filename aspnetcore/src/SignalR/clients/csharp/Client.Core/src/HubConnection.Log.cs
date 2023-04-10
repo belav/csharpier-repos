@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
-
 public partial class HubConnection
 {
     private static partial class Log

@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
-
 public class ScratchDatabaseFixture : IDisposable
 {
     private readonly SqliteConnection _connection;

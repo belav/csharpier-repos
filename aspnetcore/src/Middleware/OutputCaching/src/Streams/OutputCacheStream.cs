@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 internal sealed class OutputCacheStream : Stream
 {
     private readonly Stream _innerStream;

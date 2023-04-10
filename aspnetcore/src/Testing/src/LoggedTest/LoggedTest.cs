@@ -7,7 +7,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class LoggedTest : LoggedTestBase
 {
     // Obsolete but keeping for back compat

@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 internal class DefaultTagHelperDescriptorFactory
 {
     private const string TagHelperNameEnding = "TagHelper";

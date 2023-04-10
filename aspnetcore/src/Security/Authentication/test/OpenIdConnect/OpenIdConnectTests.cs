@@ -19,7 +19,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
-
 public class OpenIdConnectTests
 {
     static readonly string noncePrefix = "OpenIdConnect." + "Nonce.";

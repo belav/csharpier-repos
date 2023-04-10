@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class SqliteDbContextOptionsBuilderExtensionsTest
 {
     [ConditionalFact]

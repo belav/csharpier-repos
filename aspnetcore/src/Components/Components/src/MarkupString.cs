@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// A string value that can be rendered as markup such as HTML.
 /// </summary>

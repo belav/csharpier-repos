@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.TestObjects;
 
-
 internal class TestServiceProvider : IServiceProvider
 {
     public object GetService(Type serviceType)

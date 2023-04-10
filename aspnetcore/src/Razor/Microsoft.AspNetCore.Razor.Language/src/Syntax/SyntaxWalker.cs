@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 /// <summary>
 /// Represents a <see cref="SyntaxVisitor"/> that descends an entire <see cref="SyntaxNode"/> graph
 /// visiting each SyntaxNode and its child SyntaxNodes and <see cref="SyntaxToken"/>s in depth-first order.

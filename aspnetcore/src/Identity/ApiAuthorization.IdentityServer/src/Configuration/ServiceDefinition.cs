@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 internal class ServiceDefinition
 {
     public string Profile { get; set; }

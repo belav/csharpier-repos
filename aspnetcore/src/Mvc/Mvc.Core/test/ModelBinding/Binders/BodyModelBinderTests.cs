@@ -15,7 +15,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 public class BodyModelBinderTests
 {
     [Fact]

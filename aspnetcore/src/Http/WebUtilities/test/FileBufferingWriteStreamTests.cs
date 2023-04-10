@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 public class FileBufferingWriteStreamTests : IDisposable
 {
     private readonly string TempDirectory = Path.Combine(

@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-
 internal class DuplexPipeStream : Stream
 {
     private readonly PipeReader _input;

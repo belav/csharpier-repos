@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     The <see cref="DiagnosticSource" /> event payload base class for events that
 ///     references two <see cref="SqlExpression" />.

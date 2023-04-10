@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.FunctionalTests.Helpers;
 
-
 public class PlatformHelper
 {
     public static bool IsMono

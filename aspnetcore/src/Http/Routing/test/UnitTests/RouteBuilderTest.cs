@@ -7,7 +7,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class RouteBuilderTest
 {
     [Fact]

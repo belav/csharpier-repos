@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public static class TestBoundAttributeDescriptorBuilderExtensions
 {
     public static BoundAttributeDescriptorBuilder Name(

@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Service extension methods for the <see cref="DatabaseDeveloperPageExceptionFilter"/>.
 /// </summary>

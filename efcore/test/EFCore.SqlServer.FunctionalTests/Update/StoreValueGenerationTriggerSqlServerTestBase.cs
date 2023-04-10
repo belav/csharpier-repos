@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.StoreValueGenerationModel;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 public abstract class StoreValueGenerationTriggerSqlServerTestBase<TFixture>
     : StoreValueGenerationTestBase<TFixture>
     where TFixture : StoreValueGenerationTriggerSqlServerFixture

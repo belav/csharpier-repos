@@ -9,7 +9,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.HttpSys.Tests;
 
-
 public class RequestHeaderTests
 {
     private const string CustomHeader1 = "X-Custom-1";

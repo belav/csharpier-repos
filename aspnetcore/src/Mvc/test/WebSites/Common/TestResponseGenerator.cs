@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 // Generates a response based on the expected URL and action context
 public class TestResponseGenerator
 {

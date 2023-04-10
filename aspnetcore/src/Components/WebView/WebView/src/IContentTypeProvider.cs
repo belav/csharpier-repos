@@ -11,7 +11,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components.WebView;
 
-
 /// <summary>
 /// Used to look up MIME types given a file path
 /// </summary>

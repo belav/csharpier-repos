@@ -8,7 +8,6 @@ using NetTopologySuite.Operation.Union;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : SpatialQueryFixtureBase, new()
 {

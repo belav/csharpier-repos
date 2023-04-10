@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-
 /// <summary>
 /// IDE specific options available to analyzers in a specific project (language).
 /// </summary>

@@ -9,7 +9,6 @@ using Xunit;
 
 namespace System.CommandLine.ApiCompatibility.Tests;
 
-
 public class ApiCompatibilityApprovalTests
 {
     [Fact]

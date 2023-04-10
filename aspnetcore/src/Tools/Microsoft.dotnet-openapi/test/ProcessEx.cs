@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.Internal;
 
-
 internal class ProcessEx : IDisposable
 {
     private readonly ITestOutputHelper _output;

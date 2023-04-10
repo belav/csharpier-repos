@@ -13,7 +13,6 @@ using System.Reflection;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
-
 internal sealed class JObjectValueCreator
 {
     private Dictionary<int, ValueTypeClass> _valueTypes = new();

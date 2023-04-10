@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that creates an optimized copy of the mutable model. This convention is typically
 ///     implemented by database providers to update provider annotations when creating a read-only model.

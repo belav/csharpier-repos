@@ -14,7 +14,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 ///     SQL Server specific extension methods for <see cref="IServiceCollection" />.
 /// </summary>

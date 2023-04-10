@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Templates.Test;
 
-
 public class ByteOrderMarkTest : LoggedTest
 {
     private ITestOutputHelper _output;

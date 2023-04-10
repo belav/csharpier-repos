@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 /// <summary>
 /// Specifies protocols for authentication.
 /// </summary>

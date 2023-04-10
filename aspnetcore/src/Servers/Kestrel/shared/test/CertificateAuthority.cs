@@ -8,7 +8,6 @@ using System.Security.Cryptography.X509Certificates;
 // Copied from https://github.com/dotnet/runtime/blob/main/src/libraries/Common/tests/System/Security/Cryptography/X509Certificates/CertificateAuthority.cs
 namespace Microsoft.AspNetCore.Testing;
 
-
 // This class represents only a portion of what is required to be a proper Certificate Authority.
 //
 // Please do not use it as the basis for any real Public/Private Key Infrastructure (PKI) system

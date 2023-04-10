@@ -7,7 +7,6 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class HtmlContentUtilities
 {
     public static string HtmlContentToString(IHtmlContent content, HtmlEncoder encoder = null)

@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class MaterializationInterceptionTestBase : SingletonInterceptorsTestBase
 {
     protected MaterializationInterceptionTestBase(SingletonInterceptorsFixtureBase fixture)

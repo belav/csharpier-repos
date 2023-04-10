@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 
-
 /// <summary>
 /// An exception thrown when a malformed http request has been received.
 /// </summary>

@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 internal static class LdapAdapter
 {
     public static async Task RetrieveClaimsAsync(

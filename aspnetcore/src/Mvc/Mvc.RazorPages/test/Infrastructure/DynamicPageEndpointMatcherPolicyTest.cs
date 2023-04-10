@@ -11,7 +11,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 public class DynamicPageEndpointMatcherPolicyTest
 {
     public DynamicPageEndpointMatcherPolicyTest()

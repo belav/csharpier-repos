@@ -8,7 +8,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace BasicWebSite.Controllers;
 
-
 public class JsonResultWithNewtonsoftJsonController : Controller
 {
     private static readonly JsonSerializerSettings _customSerializerSettings;

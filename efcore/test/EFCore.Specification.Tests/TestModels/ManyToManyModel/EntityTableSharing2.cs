@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
-
 public class EntityTableSharing2
 {
     public virtual int Id { get; set; }

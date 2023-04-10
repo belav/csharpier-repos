@@ -7,7 +7,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
-
 public class UserClaimsPrincipalFactoryTest
 {
     [Fact]

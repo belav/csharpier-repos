@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         A query SQL generator to get <see cref="IRelationalCommand" /> for given <see cref="SelectExpression" />.

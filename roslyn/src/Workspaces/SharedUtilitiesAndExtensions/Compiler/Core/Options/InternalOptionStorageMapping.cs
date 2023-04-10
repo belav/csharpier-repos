@@ -4,7 +4,6 @@
 
 namespace Microsoft.CodeAnalysis.Options;
 
-
 /// <summary>
 /// Some options store their values in a type that's not accessible publicly.
 /// The mapping provides translation between the two representations.

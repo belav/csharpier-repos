@@ -13,7 +13,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.Server.Tests;
 
-
 public class ComponentEndpointRouteBuilderExtensionsTest
 {
     [Fact]

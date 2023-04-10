@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VersioningWebSite;
 
-
 // Scenario
 // Same template disjoint version sets.
 // Same template overlapping version sets disambiguated by order.

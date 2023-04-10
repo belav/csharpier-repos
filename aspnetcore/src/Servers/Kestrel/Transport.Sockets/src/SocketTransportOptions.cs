@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets;
 
-
 /// <summary>
 /// Options for socket based transports.
 /// </summary>

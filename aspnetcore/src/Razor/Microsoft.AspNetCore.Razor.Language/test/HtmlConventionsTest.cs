@@ -5,7 +5,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public class HtmlConventionsTest
 {
     public static TheoryData HtmlConversionData

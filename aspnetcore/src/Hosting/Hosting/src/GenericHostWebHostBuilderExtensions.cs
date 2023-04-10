@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.Hosting;
 
-
 /// <summary>
 /// Contains extensions for an <see cref="IHostBuilder"/>.
 /// </summary>

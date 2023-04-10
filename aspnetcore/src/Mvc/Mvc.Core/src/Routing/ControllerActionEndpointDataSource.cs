@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 internal sealed class ControllerActionEndpointDataSource : ActionEndpointDataSourceBase
 {
     private readonly ActionEndpointFactory _endpointFactory;

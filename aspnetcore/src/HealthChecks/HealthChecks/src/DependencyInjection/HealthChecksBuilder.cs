@@ -6,7 +6,6 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 internal sealed class HealthChecksBuilder : IHealthChecksBuilder
 {
     public HealthChecksBuilder(IServiceCollection services)

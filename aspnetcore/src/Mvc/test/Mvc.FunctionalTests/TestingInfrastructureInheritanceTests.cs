@@ -11,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class TestingInfrastructureInheritanceTests
 {
     [Fact]

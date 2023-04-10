@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
-
 public class ViewComponentTagHelperDescriptorFactoryTest
 {
     private static readonly Assembly _assembly = typeof(ViewComponentTagHelperDescriptorFactoryTest)

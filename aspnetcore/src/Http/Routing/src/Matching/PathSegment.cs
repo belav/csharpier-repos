@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal readonly struct PathSegment : IEquatable<PathSegment>
 {
     public readonly int Start;

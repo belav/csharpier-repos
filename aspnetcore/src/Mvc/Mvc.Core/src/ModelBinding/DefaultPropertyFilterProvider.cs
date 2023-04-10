@@ -8,7 +8,6 @@ using System.Linq.Expressions;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Default implementation for <see cref="IPropertyFilterProvider"/>.
 /// Provides a expression based way to provide include properties.

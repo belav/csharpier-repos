@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Wasm.Performance.ConsoleHost.Scenarios;
 
-
 internal abstract class ComponentRenderingScenarioBase : CommandLineApplication
 {
     protected ComponentRenderingScenarioBase(string name)

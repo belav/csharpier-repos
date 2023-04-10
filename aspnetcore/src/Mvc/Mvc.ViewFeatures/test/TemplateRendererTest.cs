@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 public class TemplateRendererTest
 {
     public static TheoryData<Type, string[]> TypeNameData

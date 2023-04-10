@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 public class TokenExtensionTests
 {
     [Fact]

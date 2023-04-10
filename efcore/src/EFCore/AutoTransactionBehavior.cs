@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Indicates whether or not a transaction will be created automatically by <see cref="DbContext.SaveChanges()" /> if a user transaction
 ///     wasn't created via 'BeginTransaction' or provided via 'UseTransaction'.

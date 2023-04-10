@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
-
 public class TestHub : Hub
 {
     public string HelloWorld() => TestHubMethodsImpl.HelloWorld();

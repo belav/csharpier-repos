@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal sealed class HostingApplicationDiagnostics
 {
     private static readonly double TimestampToTicks =

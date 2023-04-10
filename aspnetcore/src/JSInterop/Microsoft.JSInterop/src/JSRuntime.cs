@@ -10,7 +10,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop;
 
-
 /// <summary>
 /// Abstract base class for a JavaScript runtime.
 /// </summary>

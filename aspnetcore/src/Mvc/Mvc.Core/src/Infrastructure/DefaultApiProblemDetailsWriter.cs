@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed class DefaultApiProblemDetailsWriter : IProblemDetailsWriter
 {
     private readonly OutputFormatterSelector _formatterSelector;

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Extensions for <see cref="JsonPatchDocument{T}"/>
 /// </summary>

@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client;
 
-
 /// <summary>
 /// Exception thrown during negotiate when a transport fails to connect.
 /// </summary>

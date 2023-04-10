@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class OptimisticConcurrencyULongSqlServerTest
     : OptimisticConcurrencySqlServerTestBase<F1ULongSqlServerFixture, ulong>
 {

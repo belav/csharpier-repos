@@ -5,7 +5,6 @@ using System.Threading;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// Represents the lifetime of the connection.
 /// </summary>

@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
-
 public class TextLoaderTests
 {
     private class LoaderNoOverride1 : TextLoader { }

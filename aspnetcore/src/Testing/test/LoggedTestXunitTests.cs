@@ -10,7 +10,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.Logging.Testing.Tests;
 
-
 [LogLevel(LogLevel.Debug)]
 [ShortClassName]
 public class LoggedTestXunitTests : TestLoggedTest

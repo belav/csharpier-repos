@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Cryptography.SafeHandles;
 
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
-
 internal static class OSVersionUtil
 {
     private static readonly OSVersion _osVersion = GetOSVersion();

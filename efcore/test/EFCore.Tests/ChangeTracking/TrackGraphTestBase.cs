@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 public abstract class TrackGraphTestBase
 {
     public class TrackGraphTest : TrackGraphTestBase

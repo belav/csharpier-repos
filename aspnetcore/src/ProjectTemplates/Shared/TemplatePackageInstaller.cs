@@ -14,7 +14,6 @@ using Xunit.Abstractions;
 
 namespace Templates.Test.Helpers;
 
-
 internal static class TemplatePackageInstaller
 {
     private static bool _haveReinstalledTemplatePackages;

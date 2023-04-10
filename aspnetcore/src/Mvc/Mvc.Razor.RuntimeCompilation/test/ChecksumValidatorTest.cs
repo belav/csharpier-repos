@@ -7,7 +7,6 @@ using static Microsoft.AspNetCore.Razor.Hosting.TestRazorCompiledItem;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 public class ChecksumValidatorTest
 {
     private VirtualRazorProjectFileSystem ProjectFileSystem { get; } =

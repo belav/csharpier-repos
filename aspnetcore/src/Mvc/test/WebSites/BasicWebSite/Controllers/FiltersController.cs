@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
-
 public class FiltersController : Controller
 {
     [HttpPost]

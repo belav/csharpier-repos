@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         A class representing a chain of CLR members to bind. Usually generated from successive Select calls in the query.

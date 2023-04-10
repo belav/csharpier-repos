@@ -6,7 +6,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 public class XmlAssertTest
 {
     [Theory]

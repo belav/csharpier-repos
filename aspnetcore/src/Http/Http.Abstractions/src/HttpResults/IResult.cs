@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Defines a contract that represents the result of an HTTP endpoint.
 /// </summary>

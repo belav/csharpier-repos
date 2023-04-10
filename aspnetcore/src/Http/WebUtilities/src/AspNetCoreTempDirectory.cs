@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal static class AspNetCoreTempDirectory
 {
     private static string? _tempDirectory;

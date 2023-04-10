@@ -2,7 +2,6 @@
 
 namespace AutoMapper.UnitTests.Mappers;
 
-
 public class NameValueCollectionMapperTests
 {
     public class Map

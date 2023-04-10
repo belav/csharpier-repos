@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal readonly struct StringTokenizer
 {
     private readonly StringSegment _value;

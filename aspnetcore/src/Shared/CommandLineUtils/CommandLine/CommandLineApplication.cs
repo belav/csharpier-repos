@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.CommandLineUtils;
 
-
 #pragma warning disable CA1852 // Seal internal types
 internal class CommandLineApplication
 #pragma warning restore CA1852 // Seal internal types

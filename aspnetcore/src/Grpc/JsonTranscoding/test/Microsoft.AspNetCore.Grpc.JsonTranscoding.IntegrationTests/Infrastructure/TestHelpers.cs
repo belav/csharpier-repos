@@ -14,7 +14,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.Infrastructure;
 
-
 internal static class TestHelpers
 {
     public static DefaultHttpContext CreateHttpContext(

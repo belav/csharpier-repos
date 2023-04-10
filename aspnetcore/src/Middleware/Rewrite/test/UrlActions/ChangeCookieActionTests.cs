@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlActions;
 
-
 public class ChangeCookieActionTests
 {
     [Fact]

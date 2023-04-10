@@ -3,7 +3,6 @@
 
 namespace Wasm.Performance.Driver;
 
-
 sealed class BenchmarkScenarioResult
 {
     public string Name { get; set; }

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Builder.Extensions;
 
-
 /// <summary>
 /// Represents a middleware that maps a request path to a sub-request pipeline.
 /// </summary>

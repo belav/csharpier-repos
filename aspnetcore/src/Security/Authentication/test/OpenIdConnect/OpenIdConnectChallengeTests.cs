@@ -11,7 +11,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
-
 public class OpenIdConnectChallengeTests
 {
     private static readonly string ChallengeEndpoint =

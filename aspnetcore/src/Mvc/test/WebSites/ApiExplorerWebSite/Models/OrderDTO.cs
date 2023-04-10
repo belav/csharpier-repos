@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite;
 
-
 public class OrderDTO
 {
     public string CustomerId { get; set; }

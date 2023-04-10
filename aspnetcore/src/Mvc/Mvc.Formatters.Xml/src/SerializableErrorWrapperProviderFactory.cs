@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 /// <summary>
 /// Creates an <see cref="IWrapperProvider"/> for the type <see cref="Microsoft.AspNetCore.Mvc.SerializableError"/>.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 /// <summary>
 /// Holds state needed for the OnRejected callback in the RateLimitingMiddleware.
 /// </summary>

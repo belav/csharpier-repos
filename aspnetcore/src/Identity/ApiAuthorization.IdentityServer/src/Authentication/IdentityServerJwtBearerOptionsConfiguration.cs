@@ -11,7 +11,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 internal sealed class IdentityServerJwtBearerOptionsConfiguration
     : IConfigureNamedOptions<JwtBearerOptions>
 {

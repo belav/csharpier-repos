@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="RelationalAnnotationProvider" />

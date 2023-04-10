@@ -5,7 +5,6 @@ using Kerberos.NET.Server;
 
 namespace System.Net.Security.Kerberos;
 
-
 class FakeRealmSettings : IRealmSettings
 {
     private readonly KerberosCompatibilityFlags _compatibilityFlags;

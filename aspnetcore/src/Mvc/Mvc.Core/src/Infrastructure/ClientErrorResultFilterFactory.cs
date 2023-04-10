@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed class ClientErrorResultFilterFactory : IFilterFactory, IOrderedFilter
 {
     public int Order => ClientErrorResultFilter.FilterOrder;

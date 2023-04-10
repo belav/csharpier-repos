@@ -7,7 +7,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class AllowedChildTagDescriptorComparer : IEqualityComparer<AllowedChildTagDescriptor>
 {
     /// <summary>

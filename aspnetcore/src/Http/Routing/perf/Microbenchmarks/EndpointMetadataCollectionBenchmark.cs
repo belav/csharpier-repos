@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class EndpointMetadataCollectionBenchmark
 {
     private object[] _items;

@@ -6,7 +6,6 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public class ObservableBackedBindingListTest
 {
     [ConditionalFact]

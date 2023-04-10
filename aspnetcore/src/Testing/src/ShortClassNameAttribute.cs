@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// Used to specify that <see cref="TestFileOutputContext.TestClassName"/> should used the
 /// unqualified class name. This is needed when a fully-qualified class name exceeds

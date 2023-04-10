@@ -6,7 +6,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 public class ViewDataDictionaryOfTModelTest
 {
     [Fact]

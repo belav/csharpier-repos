@@ -3,7 +3,6 @@
 
 namespace SessionSample;
 
-
 public class Startup
 {
     public Startup() { }

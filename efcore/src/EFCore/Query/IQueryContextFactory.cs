@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     Factory for <see cref="QueryContext" /> instances.
 /// </summary>

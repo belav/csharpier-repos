@@ -5,7 +5,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 public class TestVariant : IXunitSerializable
 {
     public ServerType Server { get; set; }

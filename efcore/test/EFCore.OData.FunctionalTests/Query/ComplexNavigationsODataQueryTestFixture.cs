@@ -8,7 +8,6 @@ using Microsoft.OData.ModelBuilder;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class ComplexNavigationsODataQueryTestFixture
     : ComplexNavigationsQuerySqlServerFixture,
         IODataQueryTestFixture

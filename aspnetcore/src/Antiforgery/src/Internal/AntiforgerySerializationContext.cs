@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-
 internal sealed class AntiforgerySerializationContext
 {
     // Avoid allocating 256 bytes (the default) and using 18 (the AntiforgeryToken minimum). 64 bytes is enough for

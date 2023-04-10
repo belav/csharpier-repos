@@ -10,7 +10,6 @@ using Microsoft.VisualStudio.Threading;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
-
 /// <summary>
 /// A placeholder type to help handle Notification messages.
 /// </summary>

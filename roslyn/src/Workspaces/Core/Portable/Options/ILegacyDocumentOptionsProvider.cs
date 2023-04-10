@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-
 /// <summary>
 /// Enables legacy APIs in VS Mac to provide options for a specified project and document path.
 /// </summary>

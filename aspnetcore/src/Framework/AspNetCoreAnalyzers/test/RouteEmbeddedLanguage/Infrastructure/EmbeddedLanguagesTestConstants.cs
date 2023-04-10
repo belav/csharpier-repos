@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
-
 internal static class EmbeddedLanguagesTestConstants
 {
     public static readonly string StringSyntaxAttributeCodeCSharp =

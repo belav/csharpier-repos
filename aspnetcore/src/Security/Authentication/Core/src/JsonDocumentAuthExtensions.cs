@@ -5,7 +5,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Authentication extensions to <see cref="JsonDocument"/>.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
-
 internal static class SyntaxTokenExtensions
 {
     public static SyntaxNode? TryFindContainer(this SyntaxToken token)

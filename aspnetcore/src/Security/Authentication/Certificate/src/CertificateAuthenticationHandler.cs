@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
-
 internal sealed class CertificateAuthenticationHandler
     : AuthenticationHandler<CertificateAuthenticationOptions>
 {

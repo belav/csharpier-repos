@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 public class RemoteAuthenticationServiceTests
 {
     [Fact]

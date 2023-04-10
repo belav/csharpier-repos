@@ -11,7 +11,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
-
 public static class IntermediateNodeAssert
 {
     public static TNode SingleChild<TNode>(IntermediateNode node)

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     An interface implemented by any <see cref="EventData" /> subclass that represents an
 ///     error event with an <see cref="Exception" />.

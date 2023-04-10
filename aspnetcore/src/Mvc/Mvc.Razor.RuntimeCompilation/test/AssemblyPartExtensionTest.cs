@@ -6,7 +6,6 @@ using System.Reflection.Emit;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 public class AssemblyPartExtensionTest
 {
     [Fact]

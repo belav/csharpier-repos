@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Templates.Test;
 
-
 public class IdentityUIPackageTest : LoggedTest
 {
     public IdentityUIPackageTest(ProjectFactoryFixture projectFactory)

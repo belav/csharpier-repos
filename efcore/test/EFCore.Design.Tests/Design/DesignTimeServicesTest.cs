@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 public class DesignTimeServicesTest
 {
     [ConditionalTheory]

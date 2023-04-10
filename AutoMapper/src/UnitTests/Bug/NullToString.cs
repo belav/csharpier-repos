@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class NullToString : AutoMapperSpecBase
 {
     private Destination _destination;

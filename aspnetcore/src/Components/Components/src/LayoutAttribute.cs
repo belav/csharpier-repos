@@ -6,7 +6,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Indicates that the associated component type uses a specified layout.
 /// </summary>

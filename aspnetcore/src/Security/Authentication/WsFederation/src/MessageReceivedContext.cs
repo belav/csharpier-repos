@@ -6,7 +6,6 @@ using Microsoft.IdentityModel.Protocols.WsFederation;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
-
 /// <summary>
 /// The context object used for <see cref="WsFederationEvents.MessageReceived"/>.
 /// </summary>

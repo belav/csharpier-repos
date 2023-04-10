@@ -7,7 +7,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 internal static class FocusEventArgsReader
 {
     private static readonly JsonEncodedText Type = JsonEncodedText.Encode("type");

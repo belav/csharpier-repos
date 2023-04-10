@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class DefaultRequiredAttributeDescriptor : RequiredAttributeDescriptor
 {
     public DefaultRequiredAttributeDescriptor(

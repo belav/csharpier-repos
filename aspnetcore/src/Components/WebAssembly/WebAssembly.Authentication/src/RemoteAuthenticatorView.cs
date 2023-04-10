@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 /// <summary>
 /// An <see cref="RemoteAuthenticatorViewCore{TAuthenticationState}"/> that uses <see cref="RemoteAuthenticationState"/> as the
 /// state to be persisted across authentication operations.

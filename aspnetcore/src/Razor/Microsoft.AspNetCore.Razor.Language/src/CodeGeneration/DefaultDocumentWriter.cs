@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-
 internal class DefaultDocumentWriter : DocumentWriter
 {
     private readonly CodeTarget _codeTarget;

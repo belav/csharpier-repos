@@ -3,7 +3,6 @@
 
 namespace TestServer;
 
-
 public class ResourceRequestLog
 {
     private readonly List<string> _requestPaths = new List<string>();

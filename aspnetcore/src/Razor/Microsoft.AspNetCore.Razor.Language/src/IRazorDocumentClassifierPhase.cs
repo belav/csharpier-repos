@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 /// <summary>
 /// Modifies the intermediate node document to a desired structure.
 /// </summary>

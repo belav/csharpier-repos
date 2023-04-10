@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Connections;
 
 namespace FunctionalTests;
 
-
 public class EchoConnectionHandler : ConnectionHandler
 {
     public override async Task OnConnectedAsync(ConnectionContext connection)

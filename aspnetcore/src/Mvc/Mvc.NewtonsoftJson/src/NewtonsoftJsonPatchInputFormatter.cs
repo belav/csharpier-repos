@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 /// <summary>
 /// A <see cref="TextInputFormatter"/> for JSON Patch (application/json-patch+json) content.
 /// </summary>

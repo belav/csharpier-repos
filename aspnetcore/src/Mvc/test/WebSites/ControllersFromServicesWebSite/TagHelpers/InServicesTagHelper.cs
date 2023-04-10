@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace ControllersFromServicesWebSite.TagHelpers;
 
-
 [HtmlTargetElement("InServices")]
 public class InServicesTagHelper : TagHelper
 {

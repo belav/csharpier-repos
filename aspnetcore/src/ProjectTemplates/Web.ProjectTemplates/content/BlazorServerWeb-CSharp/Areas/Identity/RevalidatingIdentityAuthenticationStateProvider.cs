@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace BlazorServerWeb_CSharp.Areas.Identity;
 
-
 public class RevalidatingIdentityAuthenticationStateProvider<TUser>
     : RevalidatingServerAuthenticationStateProvider
     where TUser : class

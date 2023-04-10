@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-
 public class ModelExpressionPassTest
 {
     [Fact]

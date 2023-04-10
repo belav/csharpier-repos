@@ -10,7 +10,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace BasicWebSite.Formatters;
 
-
 /// <summary>
 /// Provides contact information of a person through VCard format.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 internal readonly struct ApiControllerSymbolCache
 {
     public static bool TryCreate(Compilation compilation, out ApiControllerSymbolCache symbolCache)

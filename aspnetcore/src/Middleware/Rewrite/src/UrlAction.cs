@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite;
 
-
 internal abstract class UrlAction
 {
     protected Pattern? Url { get; set; }

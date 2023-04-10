@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.IntegrationTests;
 
-
 public class CodeGenerationIntegrationTest : IntegrationTestBase
 {
     private static readonly CSharpCompilation DefaultBaseCompilation =

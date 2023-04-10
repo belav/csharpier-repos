@@ -1,6 +1,5 @@
 ﻿namespace OmmitedDTOModel3;
 
-
 public class EntityDTO20 : BaseEntity
 {
     //TODO Remove comments

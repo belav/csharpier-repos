@@ -7,7 +7,6 @@ using Xmldoc;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.Services;
 
-
 /// <summary>
 /// XmlDocServiceWithComments XML comment!
 /// </summary>

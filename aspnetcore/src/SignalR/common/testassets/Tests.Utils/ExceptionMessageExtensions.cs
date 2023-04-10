@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 public static class ExceptionMessageExtensions
 {
     public static string GetLocalizationSafeMessage(this ArgumentException argEx)

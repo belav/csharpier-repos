@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 public class ApplicationPublisher
 {
     public string ApplicationPath { get; }

@@ -8,7 +8,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 public class ConfigureSigningCredentialsTests
 {
     // We need to cast the underlying int value of the EphemeralKeySet to X509KeyStorageFlags

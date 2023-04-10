@@ -8,7 +8,6 @@ using StackExchange.Redis;
 
 namespace RedisSample;
 
-
 public class Program
 {
     public static void Main(string[] args)

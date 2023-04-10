@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class DefaultRazorProjectEngineBuilder : RazorProjectEngineBuilder
 {
     public DefaultRazorProjectEngineBuilder(

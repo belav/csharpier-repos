@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
-
 public class ProductView
 {
     public int ProductID { get; set; }

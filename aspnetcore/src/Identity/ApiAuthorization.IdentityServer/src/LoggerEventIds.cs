@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 internal static class LoggerEventIds
 {
     public static readonly EventId ConfiguringAPIResource = new EventId(

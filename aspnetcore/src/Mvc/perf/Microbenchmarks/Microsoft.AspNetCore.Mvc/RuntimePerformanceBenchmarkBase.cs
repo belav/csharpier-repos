@@ -24,7 +24,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
-
 public class RuntimePerformanceBenchmarkBase
 {
     private sealed class NullLoggerFactory : ILoggerFactory, ILogger

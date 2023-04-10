@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.Internal.Mappers;
 
-
 public class ToStringDictionaryMapper : IObjectMapper
 {
     private static readonly MethodInfo MembersDictionaryMethodInfo =

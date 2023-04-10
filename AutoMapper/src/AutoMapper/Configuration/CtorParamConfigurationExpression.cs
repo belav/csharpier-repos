@@ -2,7 +2,6 @@
 
 namespace AutoMapper.Configuration;
 
-
 public interface ICtorParamConfigurationExpression
 {
     /// <summary>

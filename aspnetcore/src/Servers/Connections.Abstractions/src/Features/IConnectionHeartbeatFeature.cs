@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// A feature that represents the connection heartbeat.
 /// </summary>

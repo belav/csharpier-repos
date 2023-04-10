@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 /// <summary>
 /// A simple implementation of <see cref="IHealthCheck"/> which uses a provided delegate to
 /// implement the check.

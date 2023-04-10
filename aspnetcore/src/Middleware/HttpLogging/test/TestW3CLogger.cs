@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 internal class TestW3CLogger : W3CLogger
 {
     public TestW3CLogger(

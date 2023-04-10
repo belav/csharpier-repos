@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
-
 internal static class HeaderEncoding
 {
     internal static unsafe string GetString(byte* pBytes, int byteCount, bool useLatin1)

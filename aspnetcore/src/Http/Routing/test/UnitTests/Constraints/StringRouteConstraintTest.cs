@@ -6,7 +6,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
-
 public class StringRouteConstraintTest
 {
     [Fact]

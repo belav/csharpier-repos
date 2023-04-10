@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Server.Circuits;
 
 namespace ComponentsApp.Server;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

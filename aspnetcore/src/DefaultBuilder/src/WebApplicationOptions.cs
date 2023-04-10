@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Options for configuring the behavior for <see cref="WebApplication.CreateBuilder(WebApplicationOptions)"/>.
 /// </summary>

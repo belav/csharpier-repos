@@ -6,7 +6,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
-
 public class ExceptionHandlerSampleTest : IClassFixture<TestFixture<ExceptionHandlerSample.Startup>>
 {
     public ExceptionHandlerSampleTest(TestFixture<ExceptionHandlerSample.Startup> fixture)

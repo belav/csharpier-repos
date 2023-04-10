@@ -5,7 +5,6 @@
 
 namespace System.Transactions;
 
-
 /// <summary>
 ///     Extension methods for the <see cref="DatabaseFacade" /> returned from <see cref="DbContext.Database" />
 ///     for use with <see cref="Transaction" />.

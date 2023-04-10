@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.HttpOverrides;
 
-
 /// <summary>
 /// Flags for controlling which forwarders are processed.
 /// </summary>

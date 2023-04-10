@@ -13,7 +13,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-
 public class HttpClientTest
     : ServerTestBase<BlazorWasmTestAppFixture<BasicTestApp.Program>>,
         IClassFixture<BasicTestAppServerSiteFixture<CorsStartup>>

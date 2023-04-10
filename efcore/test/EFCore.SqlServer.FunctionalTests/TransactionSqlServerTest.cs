@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class TransactionSqlServerTest
     : TransactionTestBase<TransactionSqlServerTest.TransactionSqlServerFixture>
 {

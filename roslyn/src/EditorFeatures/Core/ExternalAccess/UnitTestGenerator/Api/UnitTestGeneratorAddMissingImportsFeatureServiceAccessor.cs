@@ -17,7 +17,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTestGenerator.Api;
 
-
 [Export]
 [Shared]
 internal class UnitTestGeneratorAddMissingImportsFeatureServiceAccessor

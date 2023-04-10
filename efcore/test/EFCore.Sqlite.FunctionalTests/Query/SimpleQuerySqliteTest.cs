@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class SimpleQuerySqliteTest : SimpleQueryRelationalTestBase
 {
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;

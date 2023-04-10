@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     <para>
 ///         Exposes methods allowing providers to register EF service dependency objects on the internal service provider.

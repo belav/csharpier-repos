@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class RoutingEndpointRoutingWithoutRazorPagesTests
     : RoutingWithoutRazorPagesTestsBase<BasicWebSite.Startup>
 {

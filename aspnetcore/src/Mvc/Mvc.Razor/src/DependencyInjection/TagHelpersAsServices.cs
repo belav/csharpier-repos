@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 internal static class TagHelpersAsServices
 {
     public static void AddTagHelpersAsServices(

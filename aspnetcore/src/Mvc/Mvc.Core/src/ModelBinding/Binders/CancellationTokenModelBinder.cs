@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 /// <summary>
 /// <see cref="IModelBinder"/> implementation to bind models of type <see cref="CancellationToken"/>.
 /// </summary>

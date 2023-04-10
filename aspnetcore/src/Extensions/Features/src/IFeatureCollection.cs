@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Represents a collection of HTTP features.
 /// </summary>

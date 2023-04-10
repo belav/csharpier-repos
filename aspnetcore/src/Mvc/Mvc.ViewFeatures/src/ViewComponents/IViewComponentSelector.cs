@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 /// <summary>
 /// Selects a view component based on a view component name.
 /// </summary>

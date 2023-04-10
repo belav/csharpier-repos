@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class RelationalQueryAsserter : QueryAsserter
 {
     private readonly bool _canExecuteQueryString;

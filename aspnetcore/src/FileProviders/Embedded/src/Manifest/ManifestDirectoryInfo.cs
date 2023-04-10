@@ -6,7 +6,6 @@ using System.IO;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
-
 internal sealed class ManifestDirectoryInfo : IFileInfo
 {
     public ManifestDirectoryInfo(ManifestDirectory directory, DateTimeOffset lastModified)

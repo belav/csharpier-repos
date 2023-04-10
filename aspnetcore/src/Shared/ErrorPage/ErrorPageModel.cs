@@ -6,7 +6,6 @@ using Microsoft.Extensions.StackTrace.Sources;
 
 namespace Microsoft.AspNetCore.Hosting.Views;
 
-
 /// <summary>
 /// Holds data to be displayed on the error page.
 /// </summary>

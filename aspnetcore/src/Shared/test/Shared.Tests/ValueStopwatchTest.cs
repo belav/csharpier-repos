@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Internal.Test;
 
-
 public class ValueStopwatchTest
 {
     [Fact]

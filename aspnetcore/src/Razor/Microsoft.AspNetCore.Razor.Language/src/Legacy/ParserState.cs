@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal enum ParserState
 {
     CData,

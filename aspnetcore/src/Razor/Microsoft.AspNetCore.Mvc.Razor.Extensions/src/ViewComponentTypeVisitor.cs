@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-
 internal class ViewComponentTypeVisitor : SymbolVisitor
 {
     private readonly INamedTypeSymbol _viewComponentAttribute;

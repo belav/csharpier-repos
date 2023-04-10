@@ -11,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthenticationTests<TOptions>
     where TOptions : RemoteAuthenticationOptions
 {

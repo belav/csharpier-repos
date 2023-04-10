@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Localization;
 
-
 /// <summary>
 /// Details about the cultures obtained from <see cref="IRequestCultureProvider"/>.
 /// </summary>

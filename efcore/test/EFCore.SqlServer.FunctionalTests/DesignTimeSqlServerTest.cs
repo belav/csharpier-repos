@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Design.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class DesignTimeSqlServerTest
     : DesignTimeTestBase<DesignTimeSqlServerTest.DesignTimeSqlServerFixture>
 {

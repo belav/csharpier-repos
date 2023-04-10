@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UninitializedDbSetDiagnosticSuppressor : DiagnosticSuppressor
 {

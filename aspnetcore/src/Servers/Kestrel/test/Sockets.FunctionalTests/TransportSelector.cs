@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 
-
 public static class TransportSelector
 {
     public static IHostBuilder GetHostBuilder(

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.DataProtection.Extensions;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Wraps an existing <see cref="IDataProtector"/> and appends a purpose that allows
 /// protecting data with a finite lifetime.

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.DataProtection.Internal;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// A simplified default implementation of <see cref="IActivator"/> that understands
 /// how to call ctors which take <see cref="IServiceProvider"/>.

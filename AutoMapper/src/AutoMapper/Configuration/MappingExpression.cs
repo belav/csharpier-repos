@@ -1,6 +1,5 @@
 namespace AutoMapper.Configuration;
 
-
 public class MappingExpression
     : MappingExpressionBase<object, object, IMappingExpression>,
         IMappingExpression

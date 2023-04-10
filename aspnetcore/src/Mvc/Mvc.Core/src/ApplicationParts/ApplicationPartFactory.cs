@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Core;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 /// <summary>
 /// Specifies a contract for synthesizing one or more <see cref="ApplicationPart"/> instances
 /// from an <see cref="Assembly"/>.

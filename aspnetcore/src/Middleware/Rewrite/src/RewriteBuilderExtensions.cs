@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Extension methods for the <see cref="RewriteMiddleware"/>
 /// </summary>

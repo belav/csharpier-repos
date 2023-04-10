@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class DefaultRazorSyntaxTreePhase : RazorEnginePhaseBase, IRazorSyntaxTreePhase
 {
     public IRazorSyntaxTreePass[] Passes { get; private set; }

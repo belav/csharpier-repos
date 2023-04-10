@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
-
 // TODO: Add test variation with non IdentityDbContext
 
 public abstract class SqlStoreTestBase<TUser, TRole, TKey>

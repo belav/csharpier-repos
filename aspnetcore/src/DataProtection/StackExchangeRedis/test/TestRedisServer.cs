@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 internal class TestRedisServer
 {
     public const string ConnectionStringKeyName = "Test:Redis:Server";

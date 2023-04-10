@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
-
 internal enum SegmentType
 {
     Literal,

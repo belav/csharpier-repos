@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     Extension methods for the <see cref="IRelationalTypeMappingSource" /> class.
 /// </summary>

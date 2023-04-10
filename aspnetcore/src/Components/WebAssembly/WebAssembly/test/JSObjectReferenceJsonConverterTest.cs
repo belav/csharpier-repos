@@ -8,7 +8,6 @@ using Microsoft.JSInterop.WebAssembly;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
-
 public class JSObjectReferenceJsonConverterTest
 {
     private readonly JsonSerializerOptions JsonSerializerOptions;

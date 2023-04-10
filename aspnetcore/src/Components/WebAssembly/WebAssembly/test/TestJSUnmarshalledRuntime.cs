@@ -5,7 +5,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-
 internal class TestJSUnmarshalledRuntime : IJSUnmarshalledRuntime
 {
     private readonly string _environment;

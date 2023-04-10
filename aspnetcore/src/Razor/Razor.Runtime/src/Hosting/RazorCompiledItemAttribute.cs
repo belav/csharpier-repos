@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
-
 /// <summary>
 /// Specifies that an assembly contains a compiled Razor asset.
 /// </summary>

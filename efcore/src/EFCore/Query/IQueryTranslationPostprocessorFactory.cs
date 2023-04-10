@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     A factory for creating <see cref="QueryTranslationPostprocessor" /> instances.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class FindCosmosTest : FindTestBase<FindCosmosTest.FindCosmosFixture>
 {
     protected FindCosmosTest(FindCosmosFixture fixture)

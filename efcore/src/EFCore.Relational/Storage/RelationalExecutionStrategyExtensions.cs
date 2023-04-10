@@ -6,7 +6,6 @@ using System.Data;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     Extension methods for <see cref="IExecutionStrategy" /> that can only be used with a
 ///     relational database provider.

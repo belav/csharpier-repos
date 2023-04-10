@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Abstractions;
 
-
 /// <summary>
 /// Defines an interface for components that can create an <see cref="IActionInvoker"/> for the
 /// current request.

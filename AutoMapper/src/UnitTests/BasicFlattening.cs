@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
 
-
 public class BasicFlattening : AutoMapperSpecBase
 {
     public class Address

@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeStructReadOnly;
 
-
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 internal sealed class CSharpMakeStructReadOnlyDiagnosticAnalyzer
     : AbstractBuiltInCodeStyleDiagnosticAnalyzer

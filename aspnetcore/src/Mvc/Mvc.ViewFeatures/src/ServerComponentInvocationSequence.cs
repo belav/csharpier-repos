@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 // Used to produce a monotonically increasing sequence starting at 0 that is unique for the scope of the top-level page/view/component being rendered.
 internal sealed class ServerComponentInvocationSequence
 {

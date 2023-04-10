@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.Configuration.Annotations;
 
-
 /// <summary>
 /// Substitute a custom value when the source member resolves as null
 /// </summary>

@@ -6,7 +6,6 @@ using Kerberos.NET.Server;
 
 namespace System.Net.Security.Kerberos;
 
-
 class FakeRealmReferral : IRealmReferral
 {
     private readonly KrbKdcReqBody _body;

@@ -4,7 +4,6 @@
 #if !NET5_0_OR_GREATER
 namespace System.Diagnostics.CodeAnalysis;
 
-
 /// <summary>Specifies the syntax used in a string.</summary>
 [AttributeUsage(
     AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property,

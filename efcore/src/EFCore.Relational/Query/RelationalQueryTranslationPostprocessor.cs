@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <inheritdoc />
 public class RelationalQueryTranslationPostprocessor : QueryTranslationPostprocessor
 {

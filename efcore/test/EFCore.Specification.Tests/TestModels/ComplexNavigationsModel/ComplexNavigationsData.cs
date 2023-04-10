@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
-
 public abstract class ComplexNavigationsData : ISetSource
 {
     public IReadOnlyList<Level1> LevelOnes { get; }

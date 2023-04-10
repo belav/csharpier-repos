@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-
 public class Utf8ContentResultTests
 {
     [Fact]

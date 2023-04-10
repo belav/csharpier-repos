@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 internal static class CorrelationIdGenerator
 {
     // Base32 encoding - in ascii sort order for easy text based sorting

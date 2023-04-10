@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite.UrlMatches;
 
-
 internal sealed class ExactMatch : UrlMatch
 {
     private readonly bool _ignoreCase;

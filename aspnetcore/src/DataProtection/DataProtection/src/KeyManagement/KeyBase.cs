@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationM
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
-
 /// <summary>
 /// The basic implementation of <see cref="IKey"/>.
 /// </summary>

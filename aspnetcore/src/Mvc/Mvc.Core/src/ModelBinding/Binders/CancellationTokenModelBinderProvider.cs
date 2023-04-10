@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 /// <summary>
 /// An <see cref="IModelBinderProvider"/> for <see cref="CancellationToken"/>.
 /// </summary>

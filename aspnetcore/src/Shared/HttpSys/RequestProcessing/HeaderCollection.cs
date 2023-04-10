@@ -11,7 +11,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
-
 internal sealed class HeaderCollection : IHeaderDictionary
 {
     // https://tools.ietf.org/html/rfc7230#section-4.1.2

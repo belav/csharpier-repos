@@ -8,7 +8,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Provides a collection of <see cref="Endpoint"/> instances.
 /// </summary>

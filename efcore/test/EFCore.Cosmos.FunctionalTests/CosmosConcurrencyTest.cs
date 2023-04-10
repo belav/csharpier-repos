@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
-
 public class CosmosConcurrencyTest : IClassFixture<CosmosConcurrencyTest.CosmosFixture>
 {
     private const string DatabaseName = "CosmosConcurrencyTest";

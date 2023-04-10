@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class TransactionSqliteTest
     : TransactionTestBase<TransactionSqliteTest.TransactionSqliteFixture>
 {

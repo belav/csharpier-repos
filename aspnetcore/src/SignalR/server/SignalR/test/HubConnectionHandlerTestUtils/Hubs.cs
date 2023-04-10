@@ -11,7 +11,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 public class MethodHub : TestHub
 {
     public Task GroupRemoveMethod(string groupName)

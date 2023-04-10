@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class FakeLogger<T> : ILogger<T>
 {
     public void Log<TState>(

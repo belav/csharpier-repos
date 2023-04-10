@@ -16,7 +16,6 @@ using Newtonsoft.Json.Linq;
 
 namespace FunctionalTests;
 
-
 public class Startup
 {
     private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(

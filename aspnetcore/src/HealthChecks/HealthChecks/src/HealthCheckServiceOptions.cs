@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 /// <summary>
 /// Options for the default implementation of <see cref="HealthCheckService"/>
 /// </summary>

@@ -7,7 +7,6 @@ using System.Threading;
 
 namespace System.Transactions.Oletx;
 
-
 [Serializable]
 internal sealed class OletxDependentTransaction : OletxTransaction
 {

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public interface IRazorEnginePhase
 {
     RazorEngine Engine { get; set; }

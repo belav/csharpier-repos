@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets;
 
-
 internal sealed class SocketConnectionListener : IConnectionListener
 {
     private readonly SocketConnectionContextFactory _factory;

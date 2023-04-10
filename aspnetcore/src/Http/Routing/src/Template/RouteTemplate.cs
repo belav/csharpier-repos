@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
-
 /// <summary>
 /// Represents the template for a route.
 /// </summary>

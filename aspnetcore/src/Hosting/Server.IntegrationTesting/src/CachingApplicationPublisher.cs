@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 public class CachingApplicationPublisher : ApplicationPublisher, IDisposable
 {
     private readonly Dictionary<DotnetPublishParameters, PublishedApplication> _publishCache =

@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Core;
 
-
 /// <summary>
 /// Test the <see cref="HtmlHelperNameExtensions" /> class.
 /// </summary>

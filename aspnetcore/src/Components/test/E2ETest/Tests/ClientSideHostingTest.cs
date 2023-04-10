@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-
 /// <summary>
 /// Tests for various MapFallbackToClientSideBlazor overloads. We're just verifying that things render correctly.
 /// That means that routing and file serving is working for the startup pattern under test.

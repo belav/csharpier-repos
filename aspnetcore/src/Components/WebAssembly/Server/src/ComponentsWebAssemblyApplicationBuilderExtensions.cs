@@ -15,7 +15,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Extensions for mapping Blazor WebAssembly applications.
 /// </summary>

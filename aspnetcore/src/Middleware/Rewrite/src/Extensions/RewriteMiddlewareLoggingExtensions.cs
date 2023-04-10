@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Rewrite.Logging;
 
-
 internal static partial class RewriteMiddlewareLoggingExtensions
 {
     [LoggerMessage(

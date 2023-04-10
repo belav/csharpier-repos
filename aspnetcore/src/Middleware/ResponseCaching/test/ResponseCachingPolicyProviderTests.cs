@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.ResponseCaching.Tests;
 
-
 public class ResponseCachingPolicyProviderTests
 {
     public static TheoryData<string> CacheableMethods

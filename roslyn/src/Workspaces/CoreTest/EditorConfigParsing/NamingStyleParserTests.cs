@@ -11,7 +11,6 @@ using static Microsoft.CodeAnalysis.EditorConfig.Parsing.NamingStyles.EditorConf
 
 namespace Microsoft.CodeAnalysis.EditorConfigParsing.NamingStyles.UnitTests;
 
-
 public class NamingStyleParserTests
 {
     [Fact]

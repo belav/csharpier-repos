@@ -6,7 +6,6 @@ using OpenQA.Selenium;
 
 namespace Microsoft.AspNetCore.Components.E2ETest;
 
-
 internal static class BasicTestAppAuthenticationWebDriverExtensions
 {
     public static void SignInAs(

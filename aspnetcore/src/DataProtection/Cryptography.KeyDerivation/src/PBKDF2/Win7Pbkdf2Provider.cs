@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Cryptography.SafeHandles;
 
 namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2;
 
-
 /// <summary>
 /// A PBKDF2 provider which utilizes the Win7 API BCryptDeriveKeyPBKDF2.
 /// </summary>

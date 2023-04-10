@@ -14,7 +14,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis;
 
-
 public class DataProtectionRedisTests
 {
     private readonly ITestOutputHelper _output;

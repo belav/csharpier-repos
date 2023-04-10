@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace CustomPolicyProvider;
 
-
 internal class MinimumAgePolicyProvider : IAuthorizationPolicyProvider
 {
     const string POLICY_PREFIX = "MinimumAge";

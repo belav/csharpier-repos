@@ -13,7 +13,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 /// <summary>
 /// This adapts HttpRequestMessages to ASP.NET Core requests, dispatches them through the pipeline, and returns the
 /// associated HttpResponseMessage.

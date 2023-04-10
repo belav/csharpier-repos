@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestFormattableString : FormattableString
 {
     private readonly object[] _arguments;

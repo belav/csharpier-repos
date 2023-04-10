@@ -6,7 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore.SqlAzure.Model;
 
-
 [Table("SalesOrderHeader", Schema = "SalesLT")]
 public class SalesOrder
 {

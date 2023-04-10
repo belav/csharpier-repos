@@ -9,7 +9,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 
-
 public class UrlResolutionTagHelperTest
 {
     public static TheoryData ResolvableUrlData

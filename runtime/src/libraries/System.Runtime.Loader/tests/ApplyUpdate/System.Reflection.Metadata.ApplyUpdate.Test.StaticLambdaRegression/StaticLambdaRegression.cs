@@ -4,7 +4,6 @@ using System;
 
 namespace System.Reflection.Metadata.ApplyUpdate.Test;
 
-
 public class StaticLambdaRegression
 {
     public int count;

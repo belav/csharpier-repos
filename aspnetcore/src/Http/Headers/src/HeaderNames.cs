@@ -3,7 +3,6 @@
 
 namespace Microsoft.Net.Http.Headers;
 
-
 /// <summary>
 /// Defines constants for well-known HTTP headers.
 /// </summary>

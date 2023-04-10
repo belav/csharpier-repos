@@ -6,7 +6,6 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 // This MUST be kept in sync with Microsoft.Owin.Security.Interop.AspNetTicketSerializer
 /// <summary>
 /// Serializes and deserializes <see cref="AuthenticationTicket"/> instances.

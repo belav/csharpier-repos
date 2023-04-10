@@ -8,7 +8,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
-
 /// <summary>
 /// The context object used for <see cref="WsFederationEvents.SecurityTokenValidated"/>.
 /// </summary>

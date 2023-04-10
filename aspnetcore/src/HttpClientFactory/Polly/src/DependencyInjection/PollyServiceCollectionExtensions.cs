@@ -6,7 +6,6 @@ using Polly.Registry;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Provides convenience extension methods to register <see cref="IPolicyRegistry{String}"/> and
 /// <see cref="IReadOnlyPolicyRegistry{String}"/> in the service collection.

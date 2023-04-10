@@ -9,7 +9,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 [DebuggerDisplay("Handler = {Handler}, Template = {Template}")]
 internal sealed class RouteEntry
 {

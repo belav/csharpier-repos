@@ -7,7 +7,6 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 internal sealed class RegularExpressionAttributeAdapter
     : AttributeAdapterBase<RegularExpressionAttribute>
 {

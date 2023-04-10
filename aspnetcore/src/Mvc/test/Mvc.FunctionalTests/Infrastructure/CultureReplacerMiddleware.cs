@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 /// <summary>
 /// A middleware that ensures web sites run in a consistent culture. Currently useful for tests that format dates,
 /// times, or numbers. Will be more useful when we have localized resources.

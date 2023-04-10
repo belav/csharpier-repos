@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Hosting.FunctionalTests;
 
-
 public class LinkedApplicationTests : LoggedTest
 {
     [Fact]

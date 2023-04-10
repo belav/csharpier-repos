@@ -11,7 +11,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// Enable HTTP response caching.
 /// </summary>

@@ -12,7 +12,6 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
-
 public class CustomPolicyProviderTests
     : IClassFixture<WebApplicationFactory<CustomPolicyProvider.Startup>>
 {

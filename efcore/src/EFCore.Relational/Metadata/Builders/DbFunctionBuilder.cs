@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 /// <summary>
 ///     Provides a simple API for configuring a <see cref="IMutableDbFunction" />.
 /// </summary>

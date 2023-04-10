@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// An interface which is used to represent something with properties.
 /// </summary>

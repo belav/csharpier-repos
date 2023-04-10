@@ -10,7 +10,6 @@ using Xunit.Abstractions;
 
 namespace TestUtilities;
 
-
 /// <summary>
 /// Logging helper for tests.
 /// Logs event source events into test output.

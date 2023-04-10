@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.Web.Xdt.Extensions;
 
-
 public class InsertOrAppendAttributeTests
 {
     [Fact]

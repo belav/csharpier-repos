@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.DataProtection.Internal;
 
-
 /// <summary>
 /// An interface into <see cref="Activator.CreateInstance{T}"/> that also supports
 /// limited dependency injection (of <see cref="IServiceProvider"/>).

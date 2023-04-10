@@ -22,7 +22,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : GearsOfWarQueryFixtureBase, new()
 {

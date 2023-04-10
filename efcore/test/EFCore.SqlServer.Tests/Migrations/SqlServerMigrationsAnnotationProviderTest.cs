@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal;
 
-
 public class SqlServerMigrationsAnnotationProviderTest
 {
     private readonly SqlServerAnnotationProvider _annotations;

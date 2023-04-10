@@ -13,7 +13,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 public class PageTest
 {
     [Fact]

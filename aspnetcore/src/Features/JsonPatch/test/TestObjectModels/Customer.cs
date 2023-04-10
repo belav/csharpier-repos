@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
-
 internal class Customer
 {
     private string _name;

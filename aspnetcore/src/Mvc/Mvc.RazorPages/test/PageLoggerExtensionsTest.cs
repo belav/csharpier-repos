@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class PageLoggerExtensionsTest
 {
     [Fact]

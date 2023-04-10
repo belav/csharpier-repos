@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.JsonQuery;
 
-
 public class JsonOwnedBranch
 {
     public DateTime Date { get; set; }

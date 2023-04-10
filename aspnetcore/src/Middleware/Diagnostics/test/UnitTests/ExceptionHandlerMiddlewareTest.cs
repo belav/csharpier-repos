@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 public class ExceptionHandlerMiddlewareTest
 {
     [Fact]

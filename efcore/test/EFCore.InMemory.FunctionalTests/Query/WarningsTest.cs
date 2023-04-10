@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore.InMemory.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class WarningsTest
 {
     [ConditionalFact]

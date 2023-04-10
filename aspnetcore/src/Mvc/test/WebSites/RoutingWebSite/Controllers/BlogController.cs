@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
-
 // This controller contains actions mapped with a single controller-level route.
 [Route("Blog/[action]/{postId?}")]
 public class BlogController

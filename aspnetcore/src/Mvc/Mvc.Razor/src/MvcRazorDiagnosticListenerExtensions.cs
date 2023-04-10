@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 internal static class MvcRazorDiagnosticListenerExtensions
 {
     public static void BeforeViewPage(

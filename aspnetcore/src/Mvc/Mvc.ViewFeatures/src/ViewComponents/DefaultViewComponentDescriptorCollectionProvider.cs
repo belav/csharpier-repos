@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 /// <summary>
 /// A default implementation of <see cref="IViewComponentDescriptorCollectionProvider"/>
 /// </summary>

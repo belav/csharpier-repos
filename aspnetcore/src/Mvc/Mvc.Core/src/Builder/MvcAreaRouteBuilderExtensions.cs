@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Extension methods for <see cref="IRouteBuilder"/>.
 /// </summary>

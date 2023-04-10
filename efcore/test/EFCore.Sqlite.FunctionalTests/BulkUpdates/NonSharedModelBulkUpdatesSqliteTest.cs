@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-
 public class NonSharedModelBulkUpdatesSqliteTest : NonSharedModelBulkUpdatesTestBase
 {
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;

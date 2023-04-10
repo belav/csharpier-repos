@@ -3,7 +3,6 @@
 
 namespace HtmlGenerationWebSite.Models;
 
-
 public enum DayOfWeek
 {
     Monday,

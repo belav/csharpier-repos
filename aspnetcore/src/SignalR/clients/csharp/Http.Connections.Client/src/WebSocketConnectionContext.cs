@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client;
 
-
 /// <summary>
 /// Used to make a connection to an SignalR using a WebSocket-based transport.
 /// </summary>

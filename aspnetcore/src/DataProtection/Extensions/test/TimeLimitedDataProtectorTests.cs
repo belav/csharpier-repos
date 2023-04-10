@@ -11,7 +11,6 @@ using ExtResources = Microsoft.AspNetCore.DataProtection.Extensions.Resources;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 public class TimeLimitedDataProtectorTests
 {
     private const string TimeLimitedPurposeString =

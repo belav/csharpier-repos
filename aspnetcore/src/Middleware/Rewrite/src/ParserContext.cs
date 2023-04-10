@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite;
 
-
 /// <summary>
 /// Represents a string iterator, with captures.
 /// </summary>

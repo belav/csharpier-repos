@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RazorPagesWebSite;
 
-
 public class UserModel : IUserModel
 {
     [Required]

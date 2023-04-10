@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests;
 
-
 public class ParameterizedQueries : IntegrationTest<ParameterizedQueries.DatabaseInitializer>
 {
     public class Entity

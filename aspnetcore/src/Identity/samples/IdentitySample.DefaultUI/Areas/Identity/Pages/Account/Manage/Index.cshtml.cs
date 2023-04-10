@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace IdentitySample.DefaultUI;
 
-
 public class IndexModel : PageModel
 {
     private readonly UserManager<ApplicationUser> _userManager;

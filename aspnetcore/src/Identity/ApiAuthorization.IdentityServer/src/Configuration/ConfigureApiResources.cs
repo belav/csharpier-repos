@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 internal sealed class ConfigureApiResources : IConfigureOptions<ApiAuthorizationOptions>
 {
     private const char ScopesSeparator = ' ';

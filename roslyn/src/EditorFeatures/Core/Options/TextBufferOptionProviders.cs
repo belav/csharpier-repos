@@ -18,7 +18,6 @@ using Microsoft.VisualStudio.Text.Editor.OptionsExtensionMethods;
 
 namespace Microsoft.CodeAnalysis.Options;
 
-
 internal static class TextBufferOptionProviders
 {
     public static DocumentationCommentOptions GetDocumentationCommentOptions(

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel;
 
-
 public class JoinCompositeKeyToLeaf
 {
     public int CompositeId1;

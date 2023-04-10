@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// Applies conventions to a <see cref="ApplicationModel"/>.
 /// </summary>

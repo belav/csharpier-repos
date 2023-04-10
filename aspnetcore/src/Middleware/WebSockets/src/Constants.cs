@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.WebSockets;
 
-
 internal static class Constants
 {
     public static class Headers

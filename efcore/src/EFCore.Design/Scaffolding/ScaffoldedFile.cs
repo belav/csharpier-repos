@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
-
 /// <summary>
 ///     Represents a scaffolded file.
 /// </summary>

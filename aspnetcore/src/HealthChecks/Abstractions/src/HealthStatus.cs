@@ -3,7 +3,6 @@
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 /// <summary>
 /// Represents the reported status of a health check result.
 /// </summary>

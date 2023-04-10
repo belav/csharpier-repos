@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 internal class ComponentTemplateTargetExtension : ITemplateTargetExtension
 {
     public void WriteTemplate(CodeRenderingContext context, TemplateIntermediateNode node)

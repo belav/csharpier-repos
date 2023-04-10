@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Simplification;
 
-
 internal static partial class SimplifierOptionsProviders
 {
     internal static async ValueTask<SimplifierOptions> GetSimplifierOptionsAsync(

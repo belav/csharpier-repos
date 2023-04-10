@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.InlineHints;
 
-
 [DataContract]
 internal readonly record struct InlineHintsOptions
 {

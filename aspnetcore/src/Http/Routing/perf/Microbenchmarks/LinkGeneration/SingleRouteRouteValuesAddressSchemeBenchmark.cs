@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Routing.LinkGeneration;
 
-
 public class SingleRouteRouteValuesAddressSchemeBenchmark : EndpointRoutingBenchmarkBase
 {
     private IEndpointAddressScheme<RouteValuesAddress> _implementation;

@@ -6,7 +6,6 @@ using Xunit;
 
 namespace System.CommandLine.Tests;
 
-
 public class CommandLineConfigurationTests
 {
     [Fact]

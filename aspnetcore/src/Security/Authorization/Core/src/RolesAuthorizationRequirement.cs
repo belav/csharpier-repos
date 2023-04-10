@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 
-
 /// <summary>
 /// Implements an <see cref="IAuthorizationHandler"/> and <see cref="IAuthorizationRequirement"/>
 /// which requires at least one role claim whose value must be any of the allowed roles.

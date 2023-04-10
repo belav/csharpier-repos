@@ -10,7 +10,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Identity.DefaultUI.WebSite;
 
-
 public class StartupBase<TUser, TContext>
     where TUser : class
     where TContext : DbContext

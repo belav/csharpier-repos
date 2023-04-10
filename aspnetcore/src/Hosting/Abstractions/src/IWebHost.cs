@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 /// <summary>
 /// Represents a configured web host.
 /// </summary>

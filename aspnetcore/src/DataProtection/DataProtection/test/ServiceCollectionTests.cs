@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 public class ServiceCollectionTests
 {
     [Fact]

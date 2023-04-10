@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// Allow custom handling of authorization and handling of the authorization response.
 /// </summary>

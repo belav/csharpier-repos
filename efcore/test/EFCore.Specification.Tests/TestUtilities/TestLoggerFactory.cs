@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestLoggerFactory : ILoggerFactory
 {
     public TestLogger Logger { get; }

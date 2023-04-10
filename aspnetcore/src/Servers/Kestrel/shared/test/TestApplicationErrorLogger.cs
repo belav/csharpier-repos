@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class TestApplicationErrorLogger : ILogger
 {
     // Application errors are logged using 13 as the eventId.

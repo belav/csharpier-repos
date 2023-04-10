@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     A base class for all Entity Framework <see cref="DiagnosticSource" /> event payloads.
 /// </summary>

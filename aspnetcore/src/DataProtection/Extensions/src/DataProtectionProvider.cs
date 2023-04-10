@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Contains factory methods for creating an <see cref="IDataProtectionProvider"/> where keys are stored
 /// at a particular location on the file system.

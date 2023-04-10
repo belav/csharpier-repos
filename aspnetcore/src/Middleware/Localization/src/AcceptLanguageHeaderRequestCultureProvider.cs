@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Localization;
 
-
 /// <summary>
 /// Determines the culture information for a request via the value of the Accept-Language header.
 /// </summary>

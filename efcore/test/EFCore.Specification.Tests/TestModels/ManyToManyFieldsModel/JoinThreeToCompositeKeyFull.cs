@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel;
 
-
 public class JoinThreeToCompositeKeyFull
 {
     public Guid Id;

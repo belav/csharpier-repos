@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
-
 public class ModelBuilderNonGenericTest : ModelBuilderTest
 {
     public class NonGenericNonRelationship : NonRelationshipTestBase

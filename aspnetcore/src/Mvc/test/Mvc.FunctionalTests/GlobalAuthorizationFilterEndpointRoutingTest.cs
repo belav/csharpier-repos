@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class GlobalAuthorizationFilterEndpointRoutingTest
     : GlobalAuthorizationFilterTestBase,
         IClassFixture<MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilter>>

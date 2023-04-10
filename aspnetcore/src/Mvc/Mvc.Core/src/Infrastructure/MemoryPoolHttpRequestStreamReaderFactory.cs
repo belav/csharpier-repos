@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 /// <summary>
 /// An <see cref="IHttpRequestStreamReaderFactory"/> that uses pooled buffers.
 /// </summary>

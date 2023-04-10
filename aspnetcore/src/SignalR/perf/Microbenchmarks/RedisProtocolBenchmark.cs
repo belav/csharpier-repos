@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
-
 public class RedisProtocolBenchmark
 {
     private RedisProtocol _protocol;

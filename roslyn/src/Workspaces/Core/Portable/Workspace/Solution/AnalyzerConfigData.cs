@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis;
 
-
 /// <summary>
 /// Aggregate analyzer config options for a specific path.
 /// </summary>

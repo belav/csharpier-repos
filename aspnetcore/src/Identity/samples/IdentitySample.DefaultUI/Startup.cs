@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace IdentitySample.DefaultUI;
 
-
 public class BadDude : IUserConfirmation<ApplicationUser>
 {
     public Task<bool> IsConfirmedAsync(UserManager<ApplicationUser> manager, ApplicationUser user)

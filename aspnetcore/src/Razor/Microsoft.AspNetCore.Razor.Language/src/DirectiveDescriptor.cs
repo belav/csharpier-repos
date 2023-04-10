@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 /// <summary>
 /// A descriptor type for a directive that can be parsed by the Razor parser.
 /// </summary>

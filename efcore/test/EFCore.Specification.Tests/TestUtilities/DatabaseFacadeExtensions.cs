@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public static class DatabaseFacadeExtensions
 {
     public static bool EnsureCreatedResiliently(this DatabaseFacade façade) =>

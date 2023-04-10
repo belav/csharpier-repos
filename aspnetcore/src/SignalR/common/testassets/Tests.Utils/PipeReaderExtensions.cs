@@ -5,7 +5,6 @@ using System.Buffers;
 
 namespace System.IO.Pipelines;
 
-
 public static class PipeReaderExtensions
 {
     public static async Task<bool> WaitToReadAsync(this PipeReader pipeReader)

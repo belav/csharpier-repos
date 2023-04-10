@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// A type which can provide the <see cref="IAuthorizationHandler"/>s for an authorization request.
 /// </summary>

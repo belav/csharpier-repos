@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// <see cref="ITagHelper"/> implementation targeting &lt;button&gt; elements and &lt;input&gt; elements with
 /// their <c>type</c> attribute set to <c>image</c> or <c>submit</c>.

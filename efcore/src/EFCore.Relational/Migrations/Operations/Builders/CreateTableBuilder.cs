@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations.Builders;
 
-
 /// <summary>
 ///     A builder for <see cref="CreateTableOperation" /> operations.
 /// </summary>

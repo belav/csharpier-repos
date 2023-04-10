@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 /// <summary>
 /// Result of a <see cref="IInputFormatter.ReadAsync"/> operation.
 /// </summary>

@@ -5,7 +5,6 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
-
 public class FakeCommandExecutor
 {
     private readonly Func<FakeDbCommand, int> _executeNonQuery;

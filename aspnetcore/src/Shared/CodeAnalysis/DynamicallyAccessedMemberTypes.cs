@@ -7,7 +7,6 @@
 
 namespace System.Diagnostics.CodeAnalysis;
 
-
 /// <summary>
 /// Specifies the types of members that are dynamically accessed.
 ///

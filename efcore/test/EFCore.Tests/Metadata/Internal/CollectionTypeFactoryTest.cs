@@ -6,7 +6,6 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-
 public class CollectionTypeFactoryTest
 {
     [ConditionalFact]

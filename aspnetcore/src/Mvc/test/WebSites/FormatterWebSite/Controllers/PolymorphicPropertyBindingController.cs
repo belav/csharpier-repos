@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FormatterWebSite.Controllers;
 
-
 public class PolymorphicPropertyBindingController : ControllerBase
 {
     [FromBody]

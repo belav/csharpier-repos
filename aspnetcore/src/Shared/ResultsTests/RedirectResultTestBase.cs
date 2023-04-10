@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 public abstract class RedirectResultTestBase
 {
     protected abstract Task ExecuteAsync(HttpContext httpContext, string contentPath);

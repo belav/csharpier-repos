@@ -6,7 +6,6 @@ using System.Net.Sockets;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.Internal;
 
-
 internal readonly struct SocketOperationResult
 {
     public readonly SocketException? SocketError;

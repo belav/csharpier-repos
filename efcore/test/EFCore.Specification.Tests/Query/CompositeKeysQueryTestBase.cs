@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class CompositeKeysQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : CompositeKeysQueryFixtureBase, new()
 {

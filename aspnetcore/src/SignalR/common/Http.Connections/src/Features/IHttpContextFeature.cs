@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.Http.Connections.Features;
 
-
 /// <summary>
 /// Feature set on the <see cref="ConnectionContext"/> that provides access to the underlying <see cref="Http.HttpContext"/>
 /// associated with the connection if there is one.

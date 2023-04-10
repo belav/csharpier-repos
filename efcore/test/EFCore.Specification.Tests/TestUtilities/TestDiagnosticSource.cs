@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestDiagnosticSource : DiagnosticSource
 {
     public string EnableFor { get; set; }

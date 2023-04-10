@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// Represents the properties and methods that are needed in order to render a view that uses Razor syntax.
 /// </summary>

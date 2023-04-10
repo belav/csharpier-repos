@@ -18,7 +18,6 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration;
 
-
 /// <summary>
 /// Document-specific options for controlling the code produced by code generation.
 /// </summary>

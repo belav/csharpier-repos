@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 internal static class DebugProxyLauncher
 {
     private static readonly object LaunchLock = new object();

@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public static partial class DumpCollector
 {
     public static void Collect(Process process, string fileName)

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Builder.Extensions;
 
-
 public class MapPathMiddlewareTests
 {
     private static Task Success(HttpContext context)

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
-
 /// <summary>
 /// Provides information about the authentication state of the current user.
 /// </summary>

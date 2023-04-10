@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 /// <summary>
 ///     <para>
 ///         A service for preparing a list of <see cref="ModificationCommandBatch" />s for the entities

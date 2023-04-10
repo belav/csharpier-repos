@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace RoutingSandbox.Framework;
 
-
 internal class FrameworkEndpointDataSource : EndpointDataSource, IEndpointConventionBuilder
 {
     private readonly RoutePatternTransformer _routePatternTransformer;

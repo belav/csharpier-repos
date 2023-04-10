@@ -7,7 +7,6 @@ using Microsoft.JSInterop.WebAssembly;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
-
 /// <summary>
 /// A provider of <see cref="WebAssemblyConsoleLogger{T}"/> instances.
 /// </summary>

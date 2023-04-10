@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Allows fine grained configuration of MVC services.
 /// </summary>

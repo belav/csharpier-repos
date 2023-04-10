@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Extensions;
 
 namespace SampleApp;
 
-
 public class Program
 {
     public static void Main(string[] args)

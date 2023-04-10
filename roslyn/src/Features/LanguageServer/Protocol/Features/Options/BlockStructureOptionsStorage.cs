@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Structure;
 
-
 internal static class BlockStructureOptionsStorage
 {
     public static BlockStructureOptions GetBlockStructureOptions(

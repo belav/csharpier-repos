@@ -7,7 +7,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 public class SqliteMigrationsSqlGeneratorTest : MigrationsSqlGeneratorTestBase
 {
     [ConditionalFact]

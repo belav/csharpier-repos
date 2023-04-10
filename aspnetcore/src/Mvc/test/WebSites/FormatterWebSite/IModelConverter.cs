@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 
 namespace FormatterWebSite;
 
-
 public class IModelConverter : JsonConverter
 {
     public override bool CanConvert(Type objectType)

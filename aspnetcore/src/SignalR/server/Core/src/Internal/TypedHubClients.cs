@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal sealed class TypedHubClients<T> : IHubCallerClients<T>
 {
     private readonly IHubCallerClients _hubClients;

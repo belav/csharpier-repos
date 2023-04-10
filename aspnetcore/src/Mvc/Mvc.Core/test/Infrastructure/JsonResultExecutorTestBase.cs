@@ -17,7 +17,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 public abstract class JsonResultExecutorTestBase
 {
     [Fact]

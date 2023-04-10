@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 /// <summary>
 /// Allows consumers to perform cleanup during a graceful shutdown.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Infrastructure;
 
-
 /// <summary>
 /// Manages the persistent state of components in an application.
 /// </summary>

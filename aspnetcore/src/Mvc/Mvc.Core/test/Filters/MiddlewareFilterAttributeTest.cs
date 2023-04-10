@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 public class MiddlewareFilterAttributeTest
 {
     [Fact]

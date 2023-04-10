@@ -6,7 +6,6 @@ using Microsoft.JSInterop;
 
 namespace WebAssembly.JSInterop;
 
-
 [StructLayout(LayoutKind.Explicit, Pack = 4)]
 internal struct JSCallInfo
 {

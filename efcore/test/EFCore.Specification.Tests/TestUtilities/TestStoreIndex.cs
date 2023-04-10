@@ -5,7 +5,6 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestStoreIndex
 {
     private readonly HashSet<string> _createdDatabases = new();

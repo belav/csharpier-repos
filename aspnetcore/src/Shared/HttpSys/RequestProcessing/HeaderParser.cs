@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
-
 internal static class HeaderParser
 {
     internal static IEnumerable<string> Empty = Array.Empty<string>();

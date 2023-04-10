@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Negotiate.Client;
 
-
 public class Program
 {
     public static void Main(string[] args)

@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 public class StringOutputFormatterTests
 {
     public static IEnumerable<object[]> CanWriteStringsData

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
-
 internal abstract class CommandBase
 {
     private readonly IConsole _console;

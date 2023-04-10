@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 internal abstract class ComponentIntermediateNodePassBase : IntermediateNodePassBase
 {
     protected bool IsComponentDocument(DocumentIntermediateNode document)

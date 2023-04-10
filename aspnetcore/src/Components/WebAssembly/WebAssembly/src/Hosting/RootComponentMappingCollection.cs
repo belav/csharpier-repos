@@ -8,7 +8,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-
 /// <summary>
 /// Defines a collection of <see cref="RootComponentMapping"/> items.
 /// </summary>

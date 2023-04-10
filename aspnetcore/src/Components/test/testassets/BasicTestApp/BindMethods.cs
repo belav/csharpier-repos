@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components;
 
-
 // This is a temporary workaround for the fact that public previews of VS look for
 // this type. Without this the tooling won't understand bind or event handlers.
 //

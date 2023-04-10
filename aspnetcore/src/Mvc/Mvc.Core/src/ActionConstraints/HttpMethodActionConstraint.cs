@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.ActionConstraints;
 
-
 /// <summary>
 /// The implementation of <see cref="IActionConstraint" /> used to enforce
 /// HTTP method filtering when MVC is used with legacy <see cref="IRouter" />

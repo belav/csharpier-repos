@@ -5,7 +5,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
-
 public class ReloadTest
 {
     public static IEnumerable<object[]> IsAsyncData = new[]

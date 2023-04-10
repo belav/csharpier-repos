@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
-
 /// <summary>
 /// Default <see cref="TwitterEvents"/> implementation.
 /// </summary>

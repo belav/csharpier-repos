@@ -6,7 +6,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
-
 internal sealed class AckHandler : IDisposable
 {
     private readonly ConcurrentDictionary<int, AckInfo> _acks =

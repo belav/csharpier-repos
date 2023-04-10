@@ -18,7 +18,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IISIntegration;
 
-
 public class IISMiddlewareTests
 {
     [Fact]

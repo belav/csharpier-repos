@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
 
-
 public class ShouldIgnoreOpenGenericMethods : NonValidatingSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>

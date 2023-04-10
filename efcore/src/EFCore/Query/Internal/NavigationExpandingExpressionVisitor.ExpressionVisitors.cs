@@ -7,7 +7,6 @@ using ExpressionExtensions = Microsoft.EntityFrameworkCore.Infrastructure.Expres
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
 
-
 public partial class NavigationExpandingExpressionVisitor
 {
     /// <summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 /// <summary>
 /// Represents group name metadata for an <c>ApiDescription</c>.
 /// </summary>

@@ -17,7 +17,6 @@ using Microsoft.Identity.Web.Resource;
 #endif
 namespace Company.WebApplication1;
 
-
 public class Program
 {
     public static void Main(string[] args)

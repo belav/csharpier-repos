@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CustomAuthorizationFailureResponse.Authorization.Handlers;
 
-
 public class SampleWithCustomMessageRequirementHandler
     : AuthorizationHandler<SampleWithCustomMessageRequirement>
 {

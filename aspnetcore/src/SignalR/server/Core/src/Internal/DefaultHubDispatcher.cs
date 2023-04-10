@@ -16,7 +16,6 @@ using Log = Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcherLog;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
     where THub : Hub
 {

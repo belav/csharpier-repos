@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// A context object for <see cref="IApplicationModelProvider"/>.
 /// </summary>

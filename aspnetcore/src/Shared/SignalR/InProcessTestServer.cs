@@ -19,7 +19,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 public abstract class InProcessTestServer : IAsyncDisposable
 {
     internal abstract event Action<LogRecord> ServerLogged;

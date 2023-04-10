@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.SpaServices.Extensions.Tests;
 
-
 public class ListLoggerFactory : ILoggerFactory
 {
     private readonly Func<string, bool> _shouldLogCategory;

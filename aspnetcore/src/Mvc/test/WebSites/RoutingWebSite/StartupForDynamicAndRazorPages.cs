@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace RoutingWebSite;
 
-
 // For by tests for a mix of dynamic routing + Razor Pages
 public class StartupForDynamicAndRazorPages
 {

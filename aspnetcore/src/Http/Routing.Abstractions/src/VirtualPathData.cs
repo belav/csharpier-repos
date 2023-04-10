@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Represents information about the route and virtual path that are the result of
 /// generating a URL with the ASP.NET routing middleware.

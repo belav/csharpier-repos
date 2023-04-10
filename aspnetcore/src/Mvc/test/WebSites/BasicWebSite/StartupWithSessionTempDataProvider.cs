@@ -3,7 +3,6 @@
 
 namespace BasicWebSite;
 
-
 public class StartupWithSessionTempDataProvider
 {
     public void ConfigureServices(IServiceCollection services)

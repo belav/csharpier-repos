@@ -9,7 +9,6 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.CommandLineUtils;
 
-
 internal sealed class ConsoleTable
 {
     private readonly List<string> _columns = new();

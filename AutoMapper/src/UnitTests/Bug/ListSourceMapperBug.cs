@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class ListSourceMapperBug
 {
     public class CustomCollection<T> : Collection<T>, IListSource

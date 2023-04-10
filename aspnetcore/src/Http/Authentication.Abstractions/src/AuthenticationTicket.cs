@@ -5,7 +5,6 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Contains user identity information as well as additional authentication state.
 /// </summary>

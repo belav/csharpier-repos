@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthSamples.ClaimsTransformer.Controllers;
 
-
 public class HomeController : Controller
 {
     public IActionResult Index()

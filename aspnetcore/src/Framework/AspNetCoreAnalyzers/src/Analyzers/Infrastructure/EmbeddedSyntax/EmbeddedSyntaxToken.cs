@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.EmbeddedSyntax;
 
-
 internal struct EmbeddedSyntaxToken<TSyntaxKind>
     where TSyntaxKind : struct
 {

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     <para>
 ///         Identifies where to find the design time services for a given database provider. This attribute should

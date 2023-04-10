@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
-
 public class FallbackOnTypeBasedMatchController : Controller
 {
     private readonly IOptions<MvcOptions> _mvcOptions;

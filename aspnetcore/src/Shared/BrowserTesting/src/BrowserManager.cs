@@ -13,7 +13,6 @@ using Microsoft.Playwright;
 
 namespace Microsoft.AspNetCore.BrowserTesting;
 
-
 public class BrowserManager
 {
     private readonly BrowserManagerConfiguration _browserManagerConfiguration;

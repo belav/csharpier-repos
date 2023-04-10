@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Describes the binding from a method on an EF internal dependency injection service, which may or may not
 ///     also have and associated <see cref="IServiceProperty" />, to a parameter in a constructor,

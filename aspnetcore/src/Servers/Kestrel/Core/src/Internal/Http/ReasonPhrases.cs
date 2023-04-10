@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-
 internal static class ReasonPhrases
 {
     private static readonly byte[] _bytesStatus100 = CreateStatusBytes(

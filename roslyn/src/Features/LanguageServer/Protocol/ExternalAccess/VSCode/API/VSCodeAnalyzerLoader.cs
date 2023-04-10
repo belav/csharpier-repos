@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.SolutionCrawler;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.ExternalAccess.VSCode.API;
 
-
 [Export(typeof(VSCodeAnalyzerLoader)), Shared]
 internal class VSCodeAnalyzerLoader
 {

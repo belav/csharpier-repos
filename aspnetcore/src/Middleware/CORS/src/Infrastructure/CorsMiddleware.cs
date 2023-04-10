@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
-
 /// <summary>
 /// A middleware for handling CORS.
 /// </summary>

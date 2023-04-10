@@ -21,7 +21,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 
-
 /// <summary>
 /// Provides programmatic configuration of Kestrel-specific features.
 /// </summary>

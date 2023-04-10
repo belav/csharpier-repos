@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-
 internal enum Http2FrameType : byte
 {
     DATA = 0x0,

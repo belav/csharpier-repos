@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
-
 public class TestAuthorizationService : IAuthorizationService
 {
     public AuthorizationResult NextResult { get; set; } = AuthorizationResult.Failed();

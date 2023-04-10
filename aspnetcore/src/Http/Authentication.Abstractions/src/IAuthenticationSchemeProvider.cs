@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Responsible for managing what authenticationSchemes are supported.
 /// </summary>

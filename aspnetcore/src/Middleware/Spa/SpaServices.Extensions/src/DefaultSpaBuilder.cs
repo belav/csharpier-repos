@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.SpaServices;
 
-
 internal sealed class DefaultSpaBuilder : ISpaBuilder
 {
     public IApplicationBuilder ApplicationBuilder { get; }

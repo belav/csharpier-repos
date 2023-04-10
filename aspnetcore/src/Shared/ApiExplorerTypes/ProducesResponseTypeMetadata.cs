@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Specifies the type of the value and status code returned by the action.
 /// </summary>

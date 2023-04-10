@@ -9,7 +9,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Security;
 
-
 public class ChunkingCookieManagerBenchmark
 {
     private ChunkingCookieManager _chunkingCookieManager;

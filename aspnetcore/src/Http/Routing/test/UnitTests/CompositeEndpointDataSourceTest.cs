@@ -12,7 +12,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class CompositeEndpointDataSourceTest
 {
     [Fact]

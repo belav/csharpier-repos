@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace JwtBearerSample;
 
-
 public class Startup
 {
     public Startup(IConfiguration config)

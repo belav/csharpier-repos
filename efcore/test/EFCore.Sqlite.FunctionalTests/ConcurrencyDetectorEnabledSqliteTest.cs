@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class ConcurrencyDetectorEnabledSqliteTest
     : ConcurrencyDetectorEnabledRelationalTestBase<ConcurrencyDetectorEnabledSqliteTest.ConcurrencyDetectorSqlServerFixture>
 {

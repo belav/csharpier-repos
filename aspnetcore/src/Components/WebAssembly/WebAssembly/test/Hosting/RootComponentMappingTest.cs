@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-
 public class RootComponentMappingTest
 {
     [Fact]

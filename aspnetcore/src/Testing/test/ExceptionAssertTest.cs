@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class ExceptionAssertTest
 {
     [Fact]

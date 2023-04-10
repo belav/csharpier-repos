@@ -5,7 +5,6 @@ using BlazorServerApp.Data;
 
 namespace BlazorServerApp;
 
-
 public class Startup
 {
     public Startup(IConfiguration configuration)

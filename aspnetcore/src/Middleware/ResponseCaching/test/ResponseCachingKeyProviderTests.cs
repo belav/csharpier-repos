@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.ResponseCaching.Tests;
 
-
 public class ResponseCachingKeyProviderTests
 {
     private static readonly char KeyDelimiter = '\x1e';

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI;
 
-
 internal sealed class AzureADSchemeOptions
 {
     public IDictionary<string, AzureADOpenIDSchemeMapping> OpenIDMappings { get; set; } =

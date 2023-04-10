@@ -13,7 +13,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Localization.Routing;
 
-
 public class RouteDataRequestCultureProviderTest
 {
     [Theory]

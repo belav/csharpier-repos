@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class MockLogger : ILogger
 {
     private readonly List<string> _messages = new List<string>();

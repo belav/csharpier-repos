@@ -6,7 +6,6 @@ using System.Transactions.Oletx;
 
 namespace System.Transactions.DtcProxyShim;
 
-
 internal sealed class TransactionShim
 {
     private DtcProxyShimFactory _shimFactory;

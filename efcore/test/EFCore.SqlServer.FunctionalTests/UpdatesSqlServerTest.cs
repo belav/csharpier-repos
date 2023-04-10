@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class UpdatesSqlServerTest
     : UpdatesSqlServerTestBase<UpdatesSqlServerTest.UpdatesSqlServerFixture>
 {

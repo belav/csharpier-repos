@@ -5,7 +5,6 @@ using System.Dynamic;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal sealed class DynamicViewData : DynamicObject
 {
     private readonly Func<ViewDataDictionary> _viewDataFunc;

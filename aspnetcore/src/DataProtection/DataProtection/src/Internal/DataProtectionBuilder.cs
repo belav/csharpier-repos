@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.DataProtection.Internal;
 
-
 /// <summary>
 /// Default implementation of <see cref="IDataProtectionBuilder"/>.
 /// </summary>

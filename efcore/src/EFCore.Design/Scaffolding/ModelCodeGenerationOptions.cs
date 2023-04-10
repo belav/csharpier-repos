@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
-
 /// <summary>
 ///     Represents the options to use while generating code for a model.
 /// </summary>

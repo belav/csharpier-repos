@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Microsoft.Extensions.StackTrace.Sources;
 
-
 internal sealed class ParameterDisplayInfo
 {
     public string? Name { get; set; }

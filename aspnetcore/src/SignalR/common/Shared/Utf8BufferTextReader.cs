@@ -9,7 +9,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal sealed class Utf8BufferTextReader : TextReader
 {
     private readonly Decoder _decoder;

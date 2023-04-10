@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 
-
 public interface ITestCondition
 {
     ValueTask<bool> IsMetAsync();

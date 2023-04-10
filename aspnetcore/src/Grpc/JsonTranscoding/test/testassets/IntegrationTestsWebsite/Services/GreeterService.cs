@@ -5,7 +5,6 @@ using Grpc.Core;
 
 namespace IntegrationTestsWebsite.Services;
 
-
 public class GreeterService : Greeter.GreeterBase
 {
     private readonly ILogger<GreeterService> _logger;

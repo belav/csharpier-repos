@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal static class ComNetOS
 {
     // Windows is assumed based on HttpApi.Supported which is checked in the HttpSysListener constructor.

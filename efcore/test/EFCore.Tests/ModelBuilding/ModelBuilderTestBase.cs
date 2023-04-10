@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
-
 public abstract partial class ModelBuilderTest
 {
     public abstract class ModelBuilderTestBase

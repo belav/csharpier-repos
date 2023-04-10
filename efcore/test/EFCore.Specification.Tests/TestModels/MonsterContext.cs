@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels;
 
-
 public abstract class MonsterContext : PoolableDbContext
 {
     protected MonsterContext(DbContextOptions options)

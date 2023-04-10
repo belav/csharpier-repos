@@ -4,7 +4,6 @@
 
 namespace Microsoft.CodeAnalysis;
 
-
 internal enum StateMachineState
 {
     /// <summary>

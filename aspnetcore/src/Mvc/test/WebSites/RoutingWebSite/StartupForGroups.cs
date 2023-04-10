@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace RoutingWebSite;
 
-
 public class StartupForGroups
 {
     // Set up application services

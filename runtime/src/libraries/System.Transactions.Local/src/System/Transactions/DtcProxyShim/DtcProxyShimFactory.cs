@@ -12,7 +12,6 @@ using System.Transactions.Oletx;
 
 namespace System.Transactions.DtcProxyShim;
 
-
 internal sealed class DtcProxyShimFactory
 {
     // Used to synchronize access to the proxy.  This is necessary in

@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Emit;
 
 namespace Microsoft.CodeAnalysis.CodeGen;
 
-
 internal readonly struct StateMachineStateDebugInfo
 {
     public readonly int SyntaxOffset;

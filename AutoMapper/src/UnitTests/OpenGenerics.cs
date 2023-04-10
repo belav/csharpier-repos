@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
 
-
 public class SealGenerics : AutoMapperSpecBase
 {
     public record SourceProperty<T>(T Value, SourceProperty<T> Recursive = null);

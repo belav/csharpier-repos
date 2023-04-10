@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-
 internal sealed class HttpUpgradeStream : Stream
 {
     private readonly Stream _requestStream;

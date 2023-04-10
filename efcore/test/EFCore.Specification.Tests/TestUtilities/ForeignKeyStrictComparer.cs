@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class ForeignKeyStrictComparer
     : IEqualityComparer<IReadOnlyForeignKey>,
         IComparer<IReadOnlyForeignKey>

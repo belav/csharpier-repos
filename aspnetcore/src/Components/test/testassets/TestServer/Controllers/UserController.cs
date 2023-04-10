@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Components.TestServer.Controllers;
 
-
 [Route("api/[controller]")]
 public class UserController : Controller
 {

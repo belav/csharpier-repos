@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 /// <summary>
 /// An <see cref="IModelBinder"/> for <see cref="KeyValuePair{TKey, TValue}"/>.
 /// </summary>

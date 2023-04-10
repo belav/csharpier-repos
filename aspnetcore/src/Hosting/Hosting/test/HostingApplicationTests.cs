@@ -14,7 +14,6 @@ using static Microsoft.AspNetCore.Hosting.HostingApplication;
 
 namespace Microsoft.AspNetCore.Hosting.Tests;
 
-
 public class HostingApplicationTests
 {
     [Fact]

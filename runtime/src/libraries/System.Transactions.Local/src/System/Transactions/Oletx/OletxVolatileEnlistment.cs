@@ -10,7 +10,6 @@ using System.Transactions.DtcProxyShim;
 
 namespace System.Transactions.Oletx;
 
-
 internal abstract class OletxVolatileEnlistmentContainer
 {
     protected OletxVolatileEnlistmentContainer(RealOletxTransaction realOletxTransaction)

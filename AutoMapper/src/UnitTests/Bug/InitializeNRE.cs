@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class InitializeNRE2 : AutoMapperSpecBase
 {
     public interface IRes : IValueResolver<Source, Destination, int> { }

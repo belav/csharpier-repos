@@ -11,7 +11,6 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.CodeAnalysis.Options;
 
-
 /// <summary>
 /// Aggregates services necessary to retrieve editor options.
 /// </summary>

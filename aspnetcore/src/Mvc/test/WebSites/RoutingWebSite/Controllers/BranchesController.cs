@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Mvc.RoutingWebSite.Controllers;
 
-
 public class BranchesController : Controller
 {
     private readonly TestResponseGenerator _generator;

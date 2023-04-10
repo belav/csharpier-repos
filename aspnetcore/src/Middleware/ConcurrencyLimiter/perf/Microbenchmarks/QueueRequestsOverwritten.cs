@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter.Microbenchmarks;
 
-
 public class QueueRequestsOverwritten
 {
     private const int _numRejects = 5000;

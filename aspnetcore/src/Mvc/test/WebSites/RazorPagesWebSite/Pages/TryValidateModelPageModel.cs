@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite.Pages;
 
-
 public class TryValidateModelPageModel : PageModel
 {
     [ModelBinder]

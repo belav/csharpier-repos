@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Represents a file sent with the HttpRequest.
 /// </summary>

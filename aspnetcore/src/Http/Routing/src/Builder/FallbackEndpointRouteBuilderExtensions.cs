@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Contains extension methods for <see cref="IEndpointRouteBuilder"/>.
 /// </summary>

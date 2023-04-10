@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Indicates how a delete operation is applied to dependent entities in a relationship when the
 ///     principal is deleted or the relationship is severed.

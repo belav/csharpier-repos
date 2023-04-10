@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
-
 // These tests are mirrored from component's TemplateParserTests.cs
 public partial class RoutePatternParserTests
 {

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VersioningWebSite;
 
-
 // This is the version 2 for an API. The version 1 is unconstrained
 [VersionRoute("Items/{id}", versionRange: "2")]
 public class ItemsV2Controller : Controller

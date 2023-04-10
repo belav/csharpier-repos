@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.ModRewrite;
 
-
 public class ModRewriteMiddlewareTest
 {
     [Fact]

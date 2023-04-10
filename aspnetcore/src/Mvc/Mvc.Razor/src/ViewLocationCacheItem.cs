@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// An item in <see cref="ViewLocationCacheResult"/>.
 /// </summary>

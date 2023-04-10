@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing.Matching;
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
-
 /// <summary>
 /// Constrains a route parameter to contain only a specified string.
 /// </summary>

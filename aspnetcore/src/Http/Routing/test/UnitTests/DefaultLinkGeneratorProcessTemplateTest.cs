@@ -9,7 +9,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 // Detailed coverage for how DefaultLinkGenerator processes templates
 public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
 {

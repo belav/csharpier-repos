@@ -6,7 +6,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel;
 
-
 public class GeoPointConverter : ValueConverter<GeoPoint, Point>
 {
     private static readonly GeometryFactory _geometryFactory =

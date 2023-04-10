@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.Google;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods to configure Google OAuth authentication.
 /// </summary>

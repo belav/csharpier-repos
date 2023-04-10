@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class UpdatesSqliteTest : UpdatesRelationalTestBase<UpdatesSqliteTest.UpdatesSqliteFixture>
 {
     public UpdatesSqliteTest(UpdatesSqliteFixture fixture)

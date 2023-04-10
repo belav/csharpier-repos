@@ -9,7 +9,6 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool;
 
-
 internal abstract class ProgramBase
 {
     private readonly IConsole _console;

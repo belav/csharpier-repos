@@ -15,7 +15,6 @@ using Xunit.Abstractions;
 
 namespace System.Net.Security.Kerberos;
 
-
 public class KerberosExecutor : IDisposable
 {
     private readonly ListenerOptions _options;

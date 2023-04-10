@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Indicates how changes to the value of a property will be handled by Entity Framework change tracking
 ///     which in turn will determine whether the value set is sent to the database or not.

@@ -9,7 +9,6 @@ using HostedBlazorWebassemblyApp.Shared;
 
 namespace HostedBlazorWebassemblyApp.Server.Data;
 
-
 public class WeatherForecastService : IWeatherForecastService
 {
     private static readonly string[] Summaries = new[]

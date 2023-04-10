@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Tools.Commands;
 
-
 // ReSharper disable once ArrangeTypeModifiers
 internal partial class DatabaseUpdateCommand
 {

@@ -9,7 +9,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-
 // Represents a binary blob (token) that contains random data.
 // Useful for binary data inside a serialized stream.
 [DebuggerDisplay("{DebuggerString}")]

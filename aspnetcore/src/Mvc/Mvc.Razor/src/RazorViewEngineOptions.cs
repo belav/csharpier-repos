@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// Provides programmatic configuration for the <see cref="RazorViewEngine"/>.
 /// </summary>

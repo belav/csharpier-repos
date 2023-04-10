@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing.Matching;
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
-
 /// <summary>
 /// Constrains a route parameter to represent only non-file-name values. Does not validate that
 /// the route value contains valid file system characters, or that the value represents

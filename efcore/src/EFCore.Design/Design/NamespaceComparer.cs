@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     A custom string comparer to sort using statements to have System prefixed namespaces first.
 /// </summary>

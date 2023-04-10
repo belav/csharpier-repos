@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.Recommendations;
 
-
 internal partial class CSharpRecommendationService
 {
     /// <summary>

@@ -3,7 +3,6 @@
 
 namespace HtmlGenerationWebSite.Models;
 
-
 public class StatusMessageModel
 {
     public string Message { get; set; }

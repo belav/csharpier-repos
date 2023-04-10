@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 public class ParameterDefaultValuesTest
 {
     [Theory]

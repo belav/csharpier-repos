@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 /// <summary>
 /// A middleware for handling exceptions in the application.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 internal abstract class ApplicationWrapper
 {
     internal abstract object CreateContext(IFeatureCollection features);

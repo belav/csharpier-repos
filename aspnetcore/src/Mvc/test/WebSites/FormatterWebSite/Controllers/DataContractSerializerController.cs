@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace FormatterWebSite;
 
-
 /// <summary>
 /// Summary description for DataContractSerializerController
 /// </summary>

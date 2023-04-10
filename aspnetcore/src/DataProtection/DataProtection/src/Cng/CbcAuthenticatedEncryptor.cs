@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.DataProtection.SP800_108;
 
 namespace Microsoft.AspNetCore.DataProtection.Cng;
 
-
 // An encryptor which does Encrypt(CBC) + HMAC using the Windows CNG (BCrypt*) APIs.
 // The payloads produced by this encryptor should be compatible with the payloads
 // produced by the managed Encrypt(CBC) + HMAC encryptor.

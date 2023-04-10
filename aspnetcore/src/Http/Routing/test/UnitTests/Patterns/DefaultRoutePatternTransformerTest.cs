@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
-
 public class DefaultRoutePatternTransformerTest
 {
     public DefaultRoutePatternTransformerTest()

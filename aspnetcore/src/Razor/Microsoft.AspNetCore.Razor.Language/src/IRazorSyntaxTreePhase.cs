@@ -3,6 +3,5 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 // Internal until we flesh out public RazorSyntaxTree API.
 internal interface IRazorSyntaxTreePhase : IRazorEnginePhase { }

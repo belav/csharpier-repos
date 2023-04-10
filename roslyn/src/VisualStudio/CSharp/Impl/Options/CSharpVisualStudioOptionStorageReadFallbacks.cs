@@ -16,7 +16,6 @@ using Microsoft.VisualStudio.LanguageServices.Options;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp;
 
-
 internal static class CSharpVisualStudioOptionStorageReadFallbacks
 {
     [ExportVisualStudioStorageReadFallback("csharp_space_between_parentheses"), Shared]

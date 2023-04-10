@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace Microsoft.AspNetCore.Authorization.Test;
 
-
 public class RolesAuthorizationRequirementTests
 {
     private RolesAuthorizationRequirement CreateRequirement(params string[] allowedRoles)

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class TimeSpanConvertersTest
 {
     private static readonly TimeSpanToStringConverter _timeSpanToString = new();

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class ComplexNavigationsQueryFixtureBase
     : SharedStoreFixtureBase<ComplexNavigationsContext>,
         IQueryFixtureBase

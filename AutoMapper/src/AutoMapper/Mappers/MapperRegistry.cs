@@ -1,6 +1,5 @@
 namespace AutoMapper.Internal.Mappers;
 
-
 internal static class MapperRegistry
 {
     public static List<IObjectMapper> Mappers() =>

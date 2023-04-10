@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace System.Net.Quic;
 
-
 /// <summary>
 /// Options to provide to the <see cref="QuicListener"/>.
 /// </summary>

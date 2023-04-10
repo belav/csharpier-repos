@@ -17,7 +17,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Interop.FunctionalTests.Http3;
 
-
 public static class Http3Helpers
 {
     public static HttpMessageInvoker CreateClient(

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 /// <summary>
 /// A protocol abstraction for communicating with SignalR hubs.
 /// </summary>

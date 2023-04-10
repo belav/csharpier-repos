@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal static class MvcViewFeaturesLoggerExtensions
 {
     private static readonly Action<ILogger, string, string[], Exception> _viewComponentExecuting;

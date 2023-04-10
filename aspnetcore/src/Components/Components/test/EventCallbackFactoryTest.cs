@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components;
 
-
 public class EventCallbackFactoryTest
 {
     [Fact]

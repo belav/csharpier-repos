@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 public class DeclaredApiResponseMetadataTest
 {
     private readonly IReturnOperation ReturnExpression = Mock.Of<IReturnOperation>();

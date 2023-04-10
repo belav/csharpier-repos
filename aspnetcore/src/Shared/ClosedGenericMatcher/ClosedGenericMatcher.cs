@@ -8,7 +8,6 @@ using System.Reflection;
 
 namespace Microsoft.Extensions.Internal;
 
-
 /// <summary>
 /// Helper related to generic interface definitions and implementing classes.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public interface IODataQueryTestFixture
 {
     public string BaseAddress { get; }

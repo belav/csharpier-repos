@@ -7,7 +7,6 @@ using NetTopologySuite.IO;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class SpatialQuerySqlServerGeographyTest
     : SpatialQueryRelationalTestBase<SpatialQuerySqlServerGeographyFixture>
 {

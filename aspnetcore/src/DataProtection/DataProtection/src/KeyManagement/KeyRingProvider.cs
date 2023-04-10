@@ -14,7 +14,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
-
 internal sealed class KeyRingProvider : ICacheableKeyRingProvider, IKeyRingProvider
 {
     private CacheableKeyRing? _cacheableKeyRing;

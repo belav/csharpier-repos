@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-
 public enum Country
 {
     Türkiye,

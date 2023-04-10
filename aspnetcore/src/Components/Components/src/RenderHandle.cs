@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Allows a component to interact with its renderer.
 /// </summary>

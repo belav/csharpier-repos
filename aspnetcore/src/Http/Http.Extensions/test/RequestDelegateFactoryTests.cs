@@ -34,7 +34,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing.Internal;
 
-
 public partial class RequestDelegateFactoryTests : LoggedTest
 {
     public static IEnumerable<object[]> NoResult

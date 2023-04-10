@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public abstract class RelationalTestStoreFactory : ITestStoreFactory
 {
     public abstract TestStore Create(string storeName);

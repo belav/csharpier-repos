@@ -11,7 +11,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components.WebView;
 
-
 /// <summary>
 /// Provides a mapping between file extensions and MIME types.
 /// </summary>

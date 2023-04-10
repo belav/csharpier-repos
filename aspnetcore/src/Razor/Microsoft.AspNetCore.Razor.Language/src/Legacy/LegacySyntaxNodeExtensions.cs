@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal static class LegacySyntaxNodeExtensions
 {
     private static readonly SyntaxKind[] TransitionSpanKinds = new SyntaxKind[]

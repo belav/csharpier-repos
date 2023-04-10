@@ -23,7 +23,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-
 public class WebAssemblyAuthenticationTests : ServerTestBase<AspNetSiteServerFixture>
 {
     private static readonly SqliteConnection _connection;

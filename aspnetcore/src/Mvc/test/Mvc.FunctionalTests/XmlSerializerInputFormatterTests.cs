@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class XmlSerializerInputFormatterTests
     : IClassFixture<MvcTestFixture<XmlFormattersWebSite.Startup>>
 {

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 public class ViewDataAttributePageApplicationModelProviderTest
 {
     [Fact]

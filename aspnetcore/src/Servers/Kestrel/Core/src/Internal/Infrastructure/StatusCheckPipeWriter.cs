@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 // Throws if the Http Status code is less than 300.
 // For use with CONNECT responses that can't have a response body for 2xx.
 internal sealed class StatusCheckPipeWriter : PipeWriter

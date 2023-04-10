@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
-
 public class SqlServerCodeGeneratorTest
 {
     [ConditionalFact]

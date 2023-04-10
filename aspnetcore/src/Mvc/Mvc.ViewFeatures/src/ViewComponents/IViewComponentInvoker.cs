@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 /// <summary>
 /// Specifies the contract for execution of a view component.
 /// </summary>

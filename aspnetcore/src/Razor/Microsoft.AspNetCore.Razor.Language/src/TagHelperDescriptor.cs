@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class TagHelperDescriptor : IEquatable<TagHelperDescriptor>
 {
     private IEnumerable<RazorDiagnostic> _allDiagnostics;

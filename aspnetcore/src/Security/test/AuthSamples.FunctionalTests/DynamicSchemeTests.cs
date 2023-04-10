@@ -10,7 +10,6 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
-
 public class DynamicSchemeTests : IClassFixture<WebApplicationFactory<DynamicSchemes.Startup>>
 {
     public DynamicSchemeTests(WebApplicationFactory<DynamicSchemes.Startup> fixture)

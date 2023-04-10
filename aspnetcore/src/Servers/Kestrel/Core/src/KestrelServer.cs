@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 
-
 /// <summary>
 /// Kestrel server.
 /// </summary>

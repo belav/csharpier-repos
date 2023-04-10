@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace CustomPolicyProvider;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

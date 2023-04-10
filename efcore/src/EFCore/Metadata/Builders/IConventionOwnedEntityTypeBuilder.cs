@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 /// <summary>
 ///     This interface is typically used by database providers (and other extensions). It is generally
 ///     not used in application code.

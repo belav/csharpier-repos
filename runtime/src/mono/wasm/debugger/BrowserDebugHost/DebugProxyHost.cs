@@ -16,7 +16,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
-
 public static class DebugProxyHost
 {
     public static async Task RunDebugProxyAsync(

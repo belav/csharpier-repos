@@ -9,7 +9,6 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.AspNetCore.DeveloperCertificates.Tools;
 
-
 internal sealed class ReporterEventListener : EventListener
 {
     private readonly IReporter _reporter;

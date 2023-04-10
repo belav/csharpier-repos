@@ -3,7 +3,6 @@
 
 namespace Microsoft.JSInterop.Infrastructure;
 
-
 /// <summary>
 /// Result of a .NET invocation that is returned to JavaScript.
 /// </summary>

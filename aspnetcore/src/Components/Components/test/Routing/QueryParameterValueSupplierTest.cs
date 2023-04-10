@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 public class QueryParameterValueSupplierTest
 {
     private class NoQueryParameters : ComponentBase { }

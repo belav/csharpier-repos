@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TextTemplating;
 
 namespace Microsoft.EntityFrameworkCore.TextTemplating;
 
-
 /// <summary>
 /// The text template transformation service.
 /// </summary>

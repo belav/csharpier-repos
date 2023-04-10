@@ -4,7 +4,6 @@
 #pragma warning disable RCS1102 // Make class static.
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class ProxyGraphUpdatesInMemoryTest
 {
     public abstract class ProxyGraphUpdatesInMemoryTestBase<TFixture>

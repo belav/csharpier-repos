@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.AddImport;
 
-
 internal static partial class AddImportPlacementOptionsProviders
 {
     internal static async ValueTask<AddImportPlacementOptions> GetAddImportPlacementOptionsAsync(

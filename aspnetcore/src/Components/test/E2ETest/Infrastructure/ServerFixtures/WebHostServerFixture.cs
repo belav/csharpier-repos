@@ -9,7 +9,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 
-
 public abstract class WebHostServerFixture : ServerFixture
 {
     protected override string StartAndGetRootUri()

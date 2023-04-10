@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IdentitySample.Models.AccountViewModels;
 
-
 public class RegisterViewModel
 {
     [Required]

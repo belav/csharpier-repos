@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures relationships between entity types based on the navigation properties
 ///     as long as there is no ambiguity as to which is the corresponding inverse navigation.

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Cryptography;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Wrappers around CryptProtectMemory / CryptUnprotectMemory.
 /// </summary>

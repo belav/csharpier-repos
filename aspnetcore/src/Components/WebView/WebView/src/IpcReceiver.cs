@@ -16,7 +16,6 @@ using Microsoft.JSInterop.Infrastructure;
 // of all the message pairs/completions across the IPC channel.
 namespace Microsoft.AspNetCore.Components.WebView;
 
-
 // These are all the messages .NET Host needs to know how to receive from JS
 
 // This class is a "Proxy" or "front-controller" for the incoming messages from the Browser via the transport channel.

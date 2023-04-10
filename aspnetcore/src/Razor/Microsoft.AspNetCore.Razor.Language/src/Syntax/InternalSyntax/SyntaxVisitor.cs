@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
-
 internal abstract partial class SyntaxVisitor<TResult>
 {
     public virtual TResult Visit(GreenNode node)

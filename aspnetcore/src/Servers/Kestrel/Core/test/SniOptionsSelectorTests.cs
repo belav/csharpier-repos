@@ -17,7 +17,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-
 public class SniOptionsSelectorTests
 {
     private static readonly X509Certificate2 _x509Certificate2 = TestResources.GetTestCertificate();

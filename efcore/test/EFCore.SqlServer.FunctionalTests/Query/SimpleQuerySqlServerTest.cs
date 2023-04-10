@@ -7,7 +7,6 @@ using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class SimpleQuerySqlServerTest : SimpleQueryRelationalTestBase
 {
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;

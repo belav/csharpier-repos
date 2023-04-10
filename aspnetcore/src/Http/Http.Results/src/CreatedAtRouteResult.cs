@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 internal sealed class CreatedAtRouteResult : ObjectResult
 {
     /// <summary>

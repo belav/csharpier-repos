@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 public class RateLimiterEndpointConventionBuilderExtensionsTests : LoggedTest
 {
     [Fact]

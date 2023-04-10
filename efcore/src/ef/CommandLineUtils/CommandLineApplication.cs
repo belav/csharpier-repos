@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.DotNet.Cli.CommandLine;
 
-
 internal class CommandLineApplication
 {
     private enum ParseOptionResult

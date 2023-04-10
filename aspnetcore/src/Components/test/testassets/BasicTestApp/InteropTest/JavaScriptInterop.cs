@@ -6,7 +6,6 @@ using Microsoft.JSInterop;
 
 namespace BasicTestApp.InteropTest;
 
-
 public class JavaScriptInterop
 {
     public static ConcurrentDictionary<string, object[]> Invocations =

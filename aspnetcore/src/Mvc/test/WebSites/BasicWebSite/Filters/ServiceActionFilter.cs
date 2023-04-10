@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BasicWebSite;
 
-
 public class ServiceActionFilter : IActionFilter
 {
     private readonly ILogger<ServiceActionFilter> _logger;

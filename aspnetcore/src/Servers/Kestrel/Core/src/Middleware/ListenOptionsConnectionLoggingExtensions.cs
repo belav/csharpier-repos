@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 /// <summary>
 /// Extensions for connection logging.
 /// </summary>

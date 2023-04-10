@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
-
 /// <summary>
 ///     <para>
 ///         Selects value generators to be used to generate values for properties of entities.

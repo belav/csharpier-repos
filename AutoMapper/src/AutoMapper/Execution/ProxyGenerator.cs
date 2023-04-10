@@ -2,7 +2,6 @@ using System.Reflection.Emit;
 
 namespace AutoMapper.Execution;
 
-
 public static class ProxyGenerator
 {
     private static readonly MethodInfo DelegateCombine = typeof(Delegate).GetMethod(

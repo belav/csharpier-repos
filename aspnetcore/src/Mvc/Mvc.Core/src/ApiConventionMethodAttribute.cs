@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Core;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// API conventions to be applied to a controller action.
 /// <para>

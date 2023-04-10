@@ -10,7 +10,6 @@ using Microsoft.Win32;
 
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
-
 public class RegistryXmlRepositoryTests
 {
     [ConditionalFact]

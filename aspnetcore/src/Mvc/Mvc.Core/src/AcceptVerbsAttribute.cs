@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Specifies what HTTP methods an action supports.
 /// </summary>

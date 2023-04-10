@@ -8,7 +8,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// An <see cref="IValueProvider"/> for jQuery formatted query string data.
 /// </summary>

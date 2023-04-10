@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Http.Extensions;
 
-
 internal static class ProblemDetailsDefaults
 {
     public static readonly Dictionary<int, (string Type, string Title)> Defaults =

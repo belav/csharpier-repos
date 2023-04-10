@@ -5,7 +5,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.Extensions.ObjectPool.Microbenchmarks;
 
-
 #pragma warning disable R9A038, S109
 
 [MemoryDiagnoser]

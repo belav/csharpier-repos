@@ -14,7 +14,6 @@ using Xunit.Sdk;
 
 namespace ServerComparison.FunctionalTests;
 
-
 public class HelloWorldTests : LoggedTest
 {
     private const string DebugEnvironmentVariable = "ASPNETCORE_MODULE_DEBUG";

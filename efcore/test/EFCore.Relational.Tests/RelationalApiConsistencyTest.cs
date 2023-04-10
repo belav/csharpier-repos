@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Migrations.Operations.Builders;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class RelationalApiConsistencyTest
     : ApiConsistencyTestBase<RelationalApiConsistencyTest.RelationalApiConsistencyFixture>
 {

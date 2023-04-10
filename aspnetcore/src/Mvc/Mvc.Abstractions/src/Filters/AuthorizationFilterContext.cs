@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// A context for authorization filters i.e. <see cref="IAuthorizationFilter"/> and
 /// <see cref="IAsyncAuthorizationFilter"/> implementations.

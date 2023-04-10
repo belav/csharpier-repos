@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
-
 public class Lilt : Drink, ISugary
 {
     public int SugarGrams { get; set; }

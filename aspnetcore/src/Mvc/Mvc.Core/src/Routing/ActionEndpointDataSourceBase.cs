@@ -12,7 +12,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 internal abstract class ActionEndpointDataSourceBase : EndpointDataSource, IDisposable
 {
     private readonly IActionDescriptorCollectionProvider _actions;

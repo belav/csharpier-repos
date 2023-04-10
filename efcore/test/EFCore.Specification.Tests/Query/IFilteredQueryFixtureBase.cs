@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public interface IFilteredQueryFixtureBase : IQueryFixtureBase
 {
     ISetSource GetFilteredExpectedData(DbContext context);

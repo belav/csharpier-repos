@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorProjectFileSystem : RazorProject
 {
     internal static readonly RazorProjectFileSystem Empty = new EmptyProjectFileSystem();

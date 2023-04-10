@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// A default <see cref="IModelValidatorProvider"/>.
 /// </summary>

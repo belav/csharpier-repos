@@ -5,7 +5,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class FlushPointTest : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>
 {
     public FlushPointTest(MvcTestFixture<RazorWebSite.Startup> fixture)

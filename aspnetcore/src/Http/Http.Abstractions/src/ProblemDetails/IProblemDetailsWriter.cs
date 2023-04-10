@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Defines a type that write a <see cref="Mvc.ProblemDetails"/>
 /// payload to the current <see cref="HttpContext.Response"/>.

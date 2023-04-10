@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 /// <summary>
 /// Skips a 64 bit test if the current OS is 32-bit.
 /// </summary>

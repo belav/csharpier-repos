@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 /// <summary>
 /// An <see cref="Exception"/> that is thrown when an <see cref="AuthorizationMessageHandler"/> instance
 /// is not able to provision an access token.

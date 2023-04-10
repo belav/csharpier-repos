@@ -7,7 +7,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 internal sealed class ElementalValueProvider : IValueProvider
 {
     public ElementalValueProvider(string key, string? value, CultureInfo culture)

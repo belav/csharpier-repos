@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
-
 public record Jwt(
     string Id,
     string Scheme,

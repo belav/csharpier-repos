@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Base class implementation of an <see cref="IRouter"/>.
 /// </summary>

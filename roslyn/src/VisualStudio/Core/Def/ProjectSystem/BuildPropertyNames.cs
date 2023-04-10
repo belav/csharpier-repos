@@ -6,7 +6,6 @@ using System.Collections.Immutable;
 
 namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem;
 
-
 /// <summary>
 /// A class that provides constants for common MSBuild property names.
 /// </summary>

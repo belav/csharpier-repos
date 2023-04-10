@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 internal sealed partial class ContentResult : IResult
 {
     private const string DefaultContentType = "text/plain; charset=utf-8";

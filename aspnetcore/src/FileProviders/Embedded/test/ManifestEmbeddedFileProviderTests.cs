@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.FileProviders;
 
-
 public class ManifestEmbeddedFileProviderTests
 {
     [Fact]

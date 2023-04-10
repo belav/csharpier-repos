@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Routing.TestObjects;
 
-
 public class DynamicEndpointDataSource : EndpointDataSource
 {
     private readonly List<Endpoint> _endpoints;

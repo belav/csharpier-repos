@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
-
 public sealed class UriHelpersTests
 {
     [Theory]

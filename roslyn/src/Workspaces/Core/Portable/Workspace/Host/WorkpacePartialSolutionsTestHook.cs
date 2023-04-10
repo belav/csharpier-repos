@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
-
 [ExportWorkspaceService(typeof(IWorkpacePartialSolutionsTestHook), ServiceLayer.Host), Shared]
 internal class WorkpacePartialSolutionsTestHook : IWorkpacePartialSolutionsTestHook
 {

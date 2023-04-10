@@ -10,7 +10,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
-
 internal sealed class JwtIssuer
 {
     private readonly SymmetricSecurityKey _signingKey;

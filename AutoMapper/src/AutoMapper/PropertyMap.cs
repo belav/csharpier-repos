@@ -1,6 +1,5 @@
 namespace AutoMapper;
 
-
 [DebuggerDisplay("{DestinationMember.Name}")]
 [EditorBrowsable(EditorBrowsableState.Never)]
 public class PropertyMap : MemberMap

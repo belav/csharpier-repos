@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 /// <summary>
 /// Provides access to built-in Razor features that require a reference to <c>Microsoft.CodeAnalysis.CSharp</c>.
 /// </summary>

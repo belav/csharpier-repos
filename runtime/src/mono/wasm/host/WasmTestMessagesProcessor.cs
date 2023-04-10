@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.AppHost;
 
-
 internal sealed class WasmTestMessagesProcessor
 {
     private readonly ILogger _logger;

@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.E2ETesting;
 
-
 public class E2ETestOptions
 {
     private const string TestingOptionsPrefix = "Microsoft.AspNetCore.E2ETesting";

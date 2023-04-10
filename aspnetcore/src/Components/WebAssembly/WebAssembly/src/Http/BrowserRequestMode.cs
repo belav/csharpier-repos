@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Http;
 
-
 /// <summary>
 /// The mode of the request. This is used to determine if cross-origin requests lead to valid responses
 /// </summary>

@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class RequestParsingBenchmark
 {
     private MemoryPool<byte> _memoryPool;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 internal class MockSystemDateTime : ISystemDateTime
 {
     public DateTime Now { get; set; }

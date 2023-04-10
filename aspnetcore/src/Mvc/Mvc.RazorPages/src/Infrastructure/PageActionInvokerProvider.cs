@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 internal sealed class PageActionInvokerProvider : IActionInvokerProvider
 {
     private readonly PageLoader _pageLoader;

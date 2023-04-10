@@ -15,7 +15,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Tests;
 
-
 public class KestrelConfigurationLoaderTests
 {
     private KestrelServerOptions CreateServerOptions()

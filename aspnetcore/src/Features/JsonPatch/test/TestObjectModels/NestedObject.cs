@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
-
 public class NestedObject
 {
     public string StringProperty { get; set; }

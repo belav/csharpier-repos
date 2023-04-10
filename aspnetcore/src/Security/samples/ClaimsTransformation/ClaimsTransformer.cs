@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace AuthSamples.ClaimsTransformer;
 
-
 public class ClaimsTransformer : IClaimsTransformation
 {
     public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)

@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue;
 
-
 [DataContract]
 internal readonly record struct DebuggingSessionId([property: DataMember] int Ordinal)
 {

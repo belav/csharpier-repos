@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// A base class for SignalR hubs that use <c>dynamic</c> to represent client invocations.
 /// </summary>

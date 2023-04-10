@@ -11,7 +11,6 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.ServerLifetime;
 
-
 [Method(Methods.ExitName)]
 internal class ExitHandler : ILspServiceNotificationHandler
 {

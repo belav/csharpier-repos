@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 public class ComponentFactoryTest
 {
     [Fact]

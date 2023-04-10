@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Localization.FunctionalTests;
 
-
 public class LocalizationSampleTest
 {
     [Fact]

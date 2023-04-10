@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     A unique identifier for the context instance and pool lease, if any.
 /// </summary>

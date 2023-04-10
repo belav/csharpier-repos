@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Metadata;
 
-
 /// <summary>
 /// Interface marking attributes that specify a parameter should be bound using route-data from the current request.
 /// </summary>

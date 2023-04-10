@@ -18,7 +18,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ReplaceConditionalWithStatements;
 
-
 internal abstract class AbstractReplaceConditionalWithStatementsCodeRefactoringProvider<
     TExpressionSyntax,
     TConditionalExpressionSyntax,

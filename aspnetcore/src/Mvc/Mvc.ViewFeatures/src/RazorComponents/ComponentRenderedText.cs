@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
-
 internal readonly struct ComponentRenderedText
 {
     public ComponentRenderedText(int componentId, IHtmlContent htmlContent)

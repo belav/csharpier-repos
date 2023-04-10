@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-
 public class Profile
 {
     public int Id { get; set; }

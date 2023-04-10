@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     <para>
 ///         A service to resolve a single <see cref="IInterceptor" /> from all those registered on

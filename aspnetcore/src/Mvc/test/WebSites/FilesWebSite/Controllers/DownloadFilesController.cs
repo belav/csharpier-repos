@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace FilesWebSite;
 
-
 public class DownloadFilesController : Controller
 {
     private readonly IWebHostEnvironment _hostingEnvironment;

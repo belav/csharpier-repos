@@ -21,7 +21,6 @@ using Grpc.Core;
 
 namespace Grpc.Shared.Server;
 
-
 /// <summary>
 /// Server method invoker base type.
 /// </summary>

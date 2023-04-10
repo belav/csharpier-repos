@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl;
 
-
 internal sealed class StreamInputFlowControl
 {
     private readonly InputFlowControl _connectionLevelFlowControl;

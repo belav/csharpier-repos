@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.StoredProcedureUpdateModel;
 
-
 public class TptMixedChild : TptMixedParent
 {
     public int ChildProperty { get; set; }

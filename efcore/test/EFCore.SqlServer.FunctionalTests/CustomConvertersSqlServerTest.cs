@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 [SqlServerCondition(SqlServerCondition.IsNotSqlAzure)]
 public class CustomConvertersSqlServerTest
     : CustomConvertersTestBase<CustomConvertersSqlServerTest.CustomConvertersSqlServerFixture>

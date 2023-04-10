@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
-
 internal static class NewtonsoftJsonLoggerExtensions
 {
     private static readonly Action<ILogger, Exception> _jsonInputFormatterException;

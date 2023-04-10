@@ -6,7 +6,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
-
 internal sealed class ConnectionLogScope : IReadOnlyList<KeyValuePair<string, object?>>
 {
     private string? _cachedToString;

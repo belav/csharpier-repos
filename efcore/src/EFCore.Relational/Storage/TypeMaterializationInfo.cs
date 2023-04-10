@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     Associates a <see cref="RelationalTypeMapping" /> with an optional <see cref="IProperty" />
 ///     and an index into the data reader for use when reading and converting values from the database.

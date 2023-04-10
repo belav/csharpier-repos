@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     Information/metadata for an <see cref="IDbContextOptionsExtension" />.
 /// </summary>

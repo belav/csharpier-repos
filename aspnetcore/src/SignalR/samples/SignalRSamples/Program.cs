@@ -7,7 +7,6 @@ using SignalRSamples.Hubs;
 
 namespace SignalRSamples;
 
-
 public class Program
 {
     public static Task Main(string[] args)

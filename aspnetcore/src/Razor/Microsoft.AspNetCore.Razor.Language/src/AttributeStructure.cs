@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 // This is the design time equivalent of Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.
 // They should be kept in sync.
 public enum AttributeStructure

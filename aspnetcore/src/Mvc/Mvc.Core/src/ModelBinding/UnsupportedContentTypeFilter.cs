@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// A filter that scans for <see cref="UnsupportedContentTypeException"/> in the
 /// <see cref="ActionContext.ModelState"/> and short-circuits the pipeline

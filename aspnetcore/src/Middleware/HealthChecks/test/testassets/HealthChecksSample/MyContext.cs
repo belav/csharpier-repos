@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthChecksSample;
 
-
 public class MyContext : DbContext
 {
     public MyContext(DbContextOptions options)

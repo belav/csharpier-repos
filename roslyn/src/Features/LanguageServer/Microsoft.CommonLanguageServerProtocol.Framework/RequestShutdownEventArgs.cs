@@ -6,7 +6,6 @@ using System;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
-
 public class RequestShutdownEventArgs : EventArgs
 {
     public string Message { get; }

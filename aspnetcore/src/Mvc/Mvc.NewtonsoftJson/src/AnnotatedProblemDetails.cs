@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
-
 internal class AnnotatedProblemDetails
 {
     /// <remarks>

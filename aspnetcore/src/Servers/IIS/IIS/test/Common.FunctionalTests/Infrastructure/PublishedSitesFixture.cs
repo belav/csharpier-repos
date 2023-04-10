@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 /// <summary>
 /// This type just maps collection names to available fixtures
 /// </summary>

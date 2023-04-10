@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public abstract class TempDataTestBase
 {
     protected abstract HttpClient Client { get; }

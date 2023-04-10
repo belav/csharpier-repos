@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 public class AddResponseTypeAttributeCodeFixProviderIntegrationTest
 {
     private MvcDiagnosticAnalyzerRunner AnalyzerRunner { get; } =

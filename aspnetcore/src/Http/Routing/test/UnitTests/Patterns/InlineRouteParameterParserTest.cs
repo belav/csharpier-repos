@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
-
 public class InlineRouteParameterParserTest
 {
     [Theory]

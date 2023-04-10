@@ -17,7 +17,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 [UnconditionalSuppressMessage(
     "Trimmer",
     "IL2060",

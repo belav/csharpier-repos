@@ -19,7 +19,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel;
 
-
 /// <summary>
 /// Configuration loader for Kestrel.
 /// </summary>

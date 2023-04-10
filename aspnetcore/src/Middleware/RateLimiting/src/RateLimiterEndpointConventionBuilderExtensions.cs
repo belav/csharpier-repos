@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.RateLimiting;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Rate limiter extension methods for <see cref="IEndpointConventionBuilder"/>.
 /// </summary>

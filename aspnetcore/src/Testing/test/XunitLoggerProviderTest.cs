@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Logging.Testing.Tests;
 
-
 public class XunitLoggerProviderTest
 {
     [Fact]

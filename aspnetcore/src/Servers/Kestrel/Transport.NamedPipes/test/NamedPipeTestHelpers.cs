@@ -14,7 +14,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Tests;
 
-
 internal static class NamedPipeTestHelpers
 {
     private static readonly byte[] TestData = Encoding.UTF8.GetBytes("Hello world");

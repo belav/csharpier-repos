@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 [DebuggerDisplay("{DebuggerToString(),nq}")]
 internal sealed class UriBuildingContext
 {

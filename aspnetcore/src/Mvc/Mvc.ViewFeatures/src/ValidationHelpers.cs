@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal static class ValidationHelpers
 {
     public static string GetModelErrorMessageOrDefault(ModelError modelError)

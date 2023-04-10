@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
-
 public abstract class ExtensionIntermediateNode : IntermediateNode
 {
     public abstract void WriteNode(CodeTarget target, CodeRenderingContext context);

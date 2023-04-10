@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class ToSqlQueryTestBase : NonSharedModelTestBase
 {
     protected override string StoreName => "ToSqlQueryTests";

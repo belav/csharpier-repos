@@ -7,7 +7,6 @@ using System.Diagnostics.Contracts;
 
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
-
 // This steam accepts writes from one side, buffers them internally, and returns the data via Reads
 // when requested on the other side.
 public class BufferStream : Stream

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 internal partial class MarkupTagHelperEndTagSyntax
 {
     // Copied directly from MarkupEndTagSyntax Children & GetLegacyChildren.

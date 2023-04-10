@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public interface IProxyRouteData
 {
     IReadOnlyList<object> Routers { get; }

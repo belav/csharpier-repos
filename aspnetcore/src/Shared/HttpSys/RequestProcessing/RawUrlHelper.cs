@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
-
 internal static class RawUrlHelper
 {
     /// <summary>

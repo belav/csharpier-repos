@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.JsonQuery;
 
-
 public class JsonOwnedLeaf
 {
     public string SomethingSomething { get; set; }

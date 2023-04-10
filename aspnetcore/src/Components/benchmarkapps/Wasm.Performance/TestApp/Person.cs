@@ -3,7 +3,6 @@
 
 namespace Wasm.Performance.TestApp;
 
-
 public class Person
 {
     static readonly string[] Clearances = new[] { "Alpha", "Beta", "Gamma", "Delta", "Epsilon" };

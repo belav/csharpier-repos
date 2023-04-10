@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace RoutingWebSite;
 
-
 public class RouteDataController : Controller
 {
     public object Conventional()

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 /// <summary>
 /// Used to manage <see cref="RazorDiagnostic"/>s encountered during the Razor parsing phase.
 /// </summary>

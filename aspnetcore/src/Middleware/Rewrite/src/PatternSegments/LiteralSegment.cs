@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
-
 internal sealed class LiteralSegment : PatternSegment
 {
     private readonly string _literal;

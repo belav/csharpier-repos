@@ -7,7 +7,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 internal static class PointerEventArgsReader
 {
     private static readonly JsonEncodedText PointerId = JsonEncodedText.Encode("pointerId");

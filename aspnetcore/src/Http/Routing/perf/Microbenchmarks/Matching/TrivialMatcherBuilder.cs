@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal sealed class TrivialMatcherBuilder : MatcherBuilder
 {
     private readonly List<RouteEndpoint> _endpoints = new List<RouteEndpoint>();

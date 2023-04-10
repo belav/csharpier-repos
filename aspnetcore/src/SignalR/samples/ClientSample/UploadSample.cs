@@ -11,7 +11,6 @@ using Microsoft.Extensions.CommandLineUtils;
 
 namespace ClientSample;
 
-
 internal class UploadSample
 {
     internal static void Register(CommandLineApplication app)

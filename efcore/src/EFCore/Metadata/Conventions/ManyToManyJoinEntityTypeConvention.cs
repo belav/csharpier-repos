@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention which looks for matching skip navigations and automatically creates
 ///     a many-to-many join entity with suitable foreign keys, sets the two

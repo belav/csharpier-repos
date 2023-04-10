@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 public class QueryStringEnumerableTest
 {
     [Fact]

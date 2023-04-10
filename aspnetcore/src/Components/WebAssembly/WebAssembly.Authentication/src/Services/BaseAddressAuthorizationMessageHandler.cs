@@ -5,7 +5,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 /// <summary>
 /// A <see cref="DelegatingHandler"/> that attaches access tokens to outgoing <see cref="HttpResponseMessage"/> instances.
 /// Access tokens will only be added when the request URI is within the application's base URI.

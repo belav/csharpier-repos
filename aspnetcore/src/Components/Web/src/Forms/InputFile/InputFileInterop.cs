@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 internal static class InputFileInterop
 {
     private const string JsFunctionsPrefix = "Blazor._internal.InputFile.";

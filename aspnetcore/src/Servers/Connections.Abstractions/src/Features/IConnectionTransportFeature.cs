@@ -5,7 +5,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// The transport for the connection.
 /// </summary>

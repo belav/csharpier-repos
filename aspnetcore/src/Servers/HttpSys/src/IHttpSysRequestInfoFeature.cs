@@ -5,7 +5,6 @@
 // Plan: Have Microsoft.AspNetCore.Server.IIS take a dependency on Microsoft.AspNetCore.Server.HttpSys and implement this interface.
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 /// <summary>
 /// This exposes the Http.Sys HTTP_REQUEST_INFO extensibility point as opaque data for the caller to interperate.
 /// <see href="https://docs.microsoft.com/en-us/windows/win32/api/http/ns-http-http_request_v2"/>,

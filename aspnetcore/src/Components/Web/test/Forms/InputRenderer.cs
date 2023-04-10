@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.Test.Helpers;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 internal static class InputRenderer
 {
     public static async Task<TComponent> RenderAndGetComponent<TValue, TComponent>(

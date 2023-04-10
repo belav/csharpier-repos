@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 // Tokenizer _loosely_ based on http://dev.w3.org/html5/spec/Overview.html#tokenization
 internal class HtmlTokenizer : Tokenizer
 {

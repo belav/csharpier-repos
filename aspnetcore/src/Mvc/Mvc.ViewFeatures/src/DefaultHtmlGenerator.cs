@@ -18,7 +18,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Default implementation of <see cref="IHtmlGenerator"/>.
 /// </summary>

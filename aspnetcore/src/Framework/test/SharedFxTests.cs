@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore;
 
-
 public class SharedFxTests
 {
     private readonly string _expectedTfm;

@@ -13,7 +13,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Tests.Internal;
 
-
 public class DefaultHubMessageSerializerTests
 {
     [Theory]

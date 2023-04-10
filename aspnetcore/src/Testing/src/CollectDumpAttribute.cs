@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// Capture the memory dump upon test failure.
 /// </summary>

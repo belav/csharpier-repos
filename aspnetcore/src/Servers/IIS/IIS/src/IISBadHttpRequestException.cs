@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Server.IIS;
 
-
 internal static class IISBadHttpRequestException
 {
     internal static void Throw(RequestRejectionReason reason)

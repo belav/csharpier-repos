@@ -14,7 +14,6 @@ using Microsoft.Extensions.FileSystemGlobbing.Internal;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 
-
 public class JsonTranscodingRouteAdapterTests
 {
     [Fact]

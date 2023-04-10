@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Sqlite.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class SqliteEventIdTest : EventIdTestBase
 {
     [ConditionalFact]

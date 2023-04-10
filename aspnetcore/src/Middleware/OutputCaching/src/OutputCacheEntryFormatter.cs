@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.OutputCaching.Serialization;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// Formats <see cref="OutputCacheEntry"/> instance to match structures supported by the <see cref="IOutputCacheStore"/> implementations.
 /// </summary>

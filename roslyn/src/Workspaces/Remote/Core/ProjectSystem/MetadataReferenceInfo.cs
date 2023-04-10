@@ -4,7 +4,6 @@
 
 namespace Microsoft.CodeAnalysis.Remote.ProjectSystem;
 
-
 internal readonly record struct MetadataReferenceInfo(
     string FilePath,
     string Aliases,

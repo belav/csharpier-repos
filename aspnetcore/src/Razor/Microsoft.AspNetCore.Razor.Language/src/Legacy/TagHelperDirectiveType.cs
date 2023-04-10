@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 /// <summary>
 /// The type of tag helper directive.
 /// </summary>

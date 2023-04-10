@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Extension methods for registering custom elements from an <see cref="IJSComponentConfiguration"/>.
 /// </summary>

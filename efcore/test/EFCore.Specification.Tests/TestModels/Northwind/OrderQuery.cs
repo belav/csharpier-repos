@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
-
 public class OrderQuery
 {
     public OrderQuery() { }

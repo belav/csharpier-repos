@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.RequestDecompression.Tests;
 
-
 public class RequestDecompressionServiceExtensionsTests
 {
     [Fact]

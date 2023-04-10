@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Use to dynamically control response compression for HTTPS requests.
 /// </summary>

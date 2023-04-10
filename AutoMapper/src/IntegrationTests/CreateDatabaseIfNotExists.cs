@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoMapper.IntegrationTests;
 
-
 public class CreateDatabaseIfNotExists<TContext> : DropCreateDatabaseAlways<TContext>
     where TContext : DbContext, new() { }
 

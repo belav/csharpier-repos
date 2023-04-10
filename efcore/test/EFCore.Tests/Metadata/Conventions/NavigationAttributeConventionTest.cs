@@ -14,7 +14,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 public class NavigationAttributeConventionTest
 {
     #region NotMappedAttribute

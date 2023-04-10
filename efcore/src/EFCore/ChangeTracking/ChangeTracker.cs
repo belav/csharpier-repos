@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 /// <summary>
 ///     Provides access to change tracking information and operations for entity instances the context is tracking.
 ///     Instances of this class are typically obtained from <see cref="DbContext.ChangeTracker" /> and it is not designed

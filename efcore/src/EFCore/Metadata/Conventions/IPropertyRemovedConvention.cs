@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     Represents an operation that should be performed when a property is removed from the entity type.
 /// </summary>

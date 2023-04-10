@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace Microsoft.AspNetCore.Authentication.Google;
 
-
 /// <summary>
 /// <see cref="AuthenticationProperties"/> for a Google OAuth challenge.
 /// </summary>

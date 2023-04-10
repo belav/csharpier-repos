@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
-
 internal static class SyntaxFormattingOptionsStorage
 {
     public static ValueTask<SyntaxFormattingOptions> GetSyntaxFormattingOptionsAsync(

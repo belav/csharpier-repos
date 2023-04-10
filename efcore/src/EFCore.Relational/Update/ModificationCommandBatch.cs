@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 /// <summary>
 ///     <para>
 ///         A base class for a collection of <see cref="ModificationCommand" />s that can be executed

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class DefaultRazorEngine : RazorEngine
 {
     public DefaultRazorEngine(IRazorEngineFeature[] features, IRazorEnginePhase[] phases)

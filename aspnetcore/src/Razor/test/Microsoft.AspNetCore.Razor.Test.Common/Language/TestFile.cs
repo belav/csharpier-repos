@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public class TestFile
 {
     private TestFile(string resourceName, Assembly assembly)

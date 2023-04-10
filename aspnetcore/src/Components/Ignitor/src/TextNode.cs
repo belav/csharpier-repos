@@ -3,7 +3,6 @@
 
 namespace Ignitor;
 
-
 public class TextNode : Node
 {
     public TextNode(string text)

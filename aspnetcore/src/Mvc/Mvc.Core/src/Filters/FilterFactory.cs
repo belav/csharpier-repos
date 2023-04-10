@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 internal static class FilterFactory
 {
     public static FilterFactoryResult GetAllFilters(

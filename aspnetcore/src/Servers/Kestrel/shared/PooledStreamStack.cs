@@ -8,7 +8,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Server.Kestrel;
 
-
 internal interface IPooledStream
 {
     long PoolExpirationTicks { get; }

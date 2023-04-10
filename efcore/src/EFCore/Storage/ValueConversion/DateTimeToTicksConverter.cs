@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-
 /// <summary>
 ///     Converts <see cref="DateTime" /> to and <see cref="DateTime.Ticks" />.
 /// </summary>

@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Extension methods for getting feature from <see cref="IFeatureCollection"/>
 /// </summary>

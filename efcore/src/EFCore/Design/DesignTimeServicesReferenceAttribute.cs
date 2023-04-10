@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     <para>
 ///         Identifies where to find additional design time services.

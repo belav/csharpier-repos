@@ -11,7 +11,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics;
 
-
 internal sealed class WorkspaceDocumentDiagnosticSource
     : AbstractDocumentDiagnosticSource<TextDocument>
 {

@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Localization;
 
-
 /// <summary>
 /// An <see cref="IStringLocalizer"/> that uses the <see cref="ResourceManager"/> and
 /// <see cref="ResourceReader"/> to provide localized strings.

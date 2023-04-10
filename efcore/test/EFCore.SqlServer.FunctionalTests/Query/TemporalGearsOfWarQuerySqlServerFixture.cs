@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class TemporalGearsOfWarQuerySqlServerFixture : GearsOfWarQuerySqlServerFixture
 {
     protected override string StoreName => "TemporalGearsOfWarQueryTest";

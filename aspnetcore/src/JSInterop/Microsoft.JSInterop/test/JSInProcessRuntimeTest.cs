@@ -5,7 +5,6 @@ using Microsoft.JSInterop.Infrastructure;
 
 namespace Microsoft.JSInterop;
 
-
 public class JSInProcessRuntimeBaseTest
 {
     [Fact]

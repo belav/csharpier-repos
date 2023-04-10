@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.DataProtection.Test.Shared;
 
-
 public class ConditionalRunTestOnlyOnWindows8OrLaterAttribute : Attribute, ITestCondition
 {
     public bool IsMet => OSVersionUtil.IsWindows8OrLater();

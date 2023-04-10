@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http.Headers;
 
-
 /// <summary>
 /// Strongly typed HTTP response headers.
 /// </summary>

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 /// <summary>
 /// Default implementation of <see cref="IViewComponentDescriptorProvider"/>.
 /// </summary>

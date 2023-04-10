@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Describes an <see cref="System.Linq.Expressions.Expression"/> passed to a tag helper.
 /// </summary>

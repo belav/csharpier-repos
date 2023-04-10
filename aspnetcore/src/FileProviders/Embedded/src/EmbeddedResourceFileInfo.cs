@@ -7,7 +7,6 @@ using System.Reflection;
 
 namespace Microsoft.Extensions.FileProviders.Embedded;
 
-
 /// <summary>
 /// Represents a file embedded in an assembly.
 /// </summary>

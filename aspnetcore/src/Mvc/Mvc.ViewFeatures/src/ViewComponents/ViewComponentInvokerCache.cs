@@ -8,7 +8,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 internal sealed class ViewComponentInvokerCache
 {
     private readonly IViewComponentDescriptorCollectionProvider _collectionProvider;

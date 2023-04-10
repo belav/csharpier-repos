@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class DefaultRazorDirectiveFeature
     : RazorEngineFeatureBase,
         IRazorDirectiveFeature,

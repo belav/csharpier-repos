@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
-
 public class Tea : Drink
 {
     public bool HasMilk { get; set; }

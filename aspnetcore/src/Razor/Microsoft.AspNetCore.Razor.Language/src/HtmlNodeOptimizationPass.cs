@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class HtmlNodeOptimizationPass : RazorEngineFeatureBase, IRazorSyntaxTreePass
 {
     public int Order => 100;

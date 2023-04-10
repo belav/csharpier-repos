@@ -5,7 +5,6 @@ using System.Threading.RateLimiting;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 internal class TestRateLimiter : RateLimiter
 {
     private readonly bool _alwaysAccept;

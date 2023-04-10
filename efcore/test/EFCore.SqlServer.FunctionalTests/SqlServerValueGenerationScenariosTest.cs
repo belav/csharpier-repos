@@ -10,7 +10,6 @@ using NetTopologySuite.Geometries;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class SqlServerValueGenerationScenariosTest
 {
     private const string DatabaseName = "SqlServerValueGenerationScenariosTest";

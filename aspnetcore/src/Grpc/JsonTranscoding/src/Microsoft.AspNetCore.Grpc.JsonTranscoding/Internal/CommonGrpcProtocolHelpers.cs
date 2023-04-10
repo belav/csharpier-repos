@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
-
 internal static class CommonGrpcProtocolHelpers
 {
     public static string ConvertToRpcExceptionMessage(Exception ex)

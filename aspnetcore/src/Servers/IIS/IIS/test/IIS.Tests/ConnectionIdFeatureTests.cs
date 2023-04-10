@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 [SkipIfHostableWebCoreNotAvailable]
 [MinimumOSVersion(
     OperatingSystems.Windows,

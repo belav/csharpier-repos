@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class SqlServerRetryingExecutionStrategyTests
 {
     [ConditionalFact]

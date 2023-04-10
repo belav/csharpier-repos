@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Connections;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client;
 
-
 /// <summary>
 /// Options used to configure a <see cref="HttpConnection"/> instance.
 /// </summary>

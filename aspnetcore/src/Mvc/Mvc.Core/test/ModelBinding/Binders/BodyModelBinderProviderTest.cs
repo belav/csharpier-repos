@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 public class BodyModelBinderProviderTest
 {
     public static TheoryData<BindingSource> NonBodyBindingSources

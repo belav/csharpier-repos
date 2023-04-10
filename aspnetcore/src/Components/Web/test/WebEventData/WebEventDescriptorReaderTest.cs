@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 public class WebEventDescriptorReaderTest
 {
     [Fact]

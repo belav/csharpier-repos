@@ -15,7 +15,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.SecretManager.Tools.Tests;
 
-
 public class InitCommandTests : IClassFixture<UserSecretsTestFixture>
 {
     private UserSecretsTestFixture _fixture;

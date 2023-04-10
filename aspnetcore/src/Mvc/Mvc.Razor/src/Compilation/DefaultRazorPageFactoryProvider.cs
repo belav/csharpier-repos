@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
-
 /// <summary>
 /// Represents a <see cref="IRazorPageFactoryProvider"/> that creates <see cref="RazorPage"/> instances
 /// from razor files in the file system.

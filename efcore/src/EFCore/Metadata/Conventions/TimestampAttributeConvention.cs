@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures the property as a concurrency token if a <see cref="TimestampAttribute" /> is applied to it.
 /// </summary>

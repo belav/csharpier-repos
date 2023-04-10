@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Default implementation for <see cref="IFeatureCollection"/>.
 /// </summary>

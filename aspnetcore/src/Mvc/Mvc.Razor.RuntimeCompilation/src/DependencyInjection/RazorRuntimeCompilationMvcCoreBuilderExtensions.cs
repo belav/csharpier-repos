@@ -17,7 +17,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Static class that adds razor runtime compilation extension methods.
 /// </summary>

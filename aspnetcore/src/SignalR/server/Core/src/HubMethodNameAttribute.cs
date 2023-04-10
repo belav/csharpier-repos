@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// Customizes the name of a hub method.
 /// </summary>

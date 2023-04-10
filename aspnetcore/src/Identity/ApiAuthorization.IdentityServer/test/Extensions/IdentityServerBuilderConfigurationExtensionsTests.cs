@@ -13,7 +13,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Extensions;
 
-
 public static class IdentityServerBuilderConfigurationExtensionsTests
 {
     [ConditionalFact]

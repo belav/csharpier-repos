@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 /// <summary>
 /// Represents a collection of formatters.
 /// </summary>

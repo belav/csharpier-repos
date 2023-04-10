@@ -8,7 +8,6 @@ using Xunit;
 
 namespace System.IO.Pipelines.Tests;
 
-
 public class BufferWriterTests : IDisposable
 {
     protected Pipe Pipe;

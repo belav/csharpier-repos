@@ -13,7 +13,6 @@ using Microsoft.WebAssembly.Diagnostics;
 
 namespace Microsoft.WebAssembly.AppHost;
 
-
 internal sealed class CommonConfiguration
 {
     public bool Debugging { get; set; }

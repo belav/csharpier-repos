@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Microsoft.AspNetCore.Routing.Tests;
 
-
 public class GuidRouteConstraintTests
 {
     [Theory]

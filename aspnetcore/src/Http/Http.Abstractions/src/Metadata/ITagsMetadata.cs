@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Metadata;
 
-
 /// <summary>
 /// Defines a contract used to specify a collection of tags in <see cref="Endpoint.Metadata"/>.
 /// </summary>

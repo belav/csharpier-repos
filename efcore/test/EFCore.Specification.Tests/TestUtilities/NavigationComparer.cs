@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class NavigationComparer
     : IEqualityComparer<IReadOnlyNavigation>,
         IComparer<IReadOnlyNavigation>

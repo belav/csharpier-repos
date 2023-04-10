@@ -10,7 +10,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HttpsPolicy;
 
-
 /// <summary>
 /// Enables HTTP Strict Transport Security (HSTS)
 /// See <see href="https://tools.ietf.org/html/rfc6797"/>.

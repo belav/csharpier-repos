@@ -11,7 +11,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Helper type for avoiding allocations while building arrays.
 /// </summary>

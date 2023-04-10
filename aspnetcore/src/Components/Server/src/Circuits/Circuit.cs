@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 /// <summary>
 /// Represents a link between a ASP.NET Core Component on the server and a client.
 /// </summary>

@@ -5,7 +5,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
-
 // Extensible directives only have codegen for design time, so we're only testing that.
 public class ExtensibleDirectiveTest : IntegrationTestBase
 {

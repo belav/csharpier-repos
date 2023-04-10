@@ -6,7 +6,6 @@ using AngleSharp.Dom.Html;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-
 public class HtmlPage<TApplicationContext>
 {
     public HtmlPage(HttpClient client, IHtmlDocument document, TApplicationContext context)

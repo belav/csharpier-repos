@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal static class ExpressionMetadataProvider
 {
     public static ModelExplorer FromLambdaExpression<TModel, TResult>(

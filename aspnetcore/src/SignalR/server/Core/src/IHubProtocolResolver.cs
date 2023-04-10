@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// A resolver abstraction for working with <see cref="IHubProtocol"/> instances.
 /// </summary>

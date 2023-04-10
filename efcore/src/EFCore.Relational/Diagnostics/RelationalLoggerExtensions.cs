@@ -10,7 +10,6 @@ using IsolationLevel = System.Data.IsolationLevel;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     <para>
 ///         This class contains static methods used by EF Core internals and relational database providers to

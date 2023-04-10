@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Http.Extensions.Tests;
 
-
 public class HttpResponseJsonExtensionsTests
 {
     [Fact]

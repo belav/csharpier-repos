@@ -10,7 +10,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

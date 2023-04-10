@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// A <see cref="Hub"/> activator abstraction.
 /// </summary>

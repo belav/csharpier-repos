@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
-
 /// <summary>
 /// A feature that contains view descriptors.
 /// </summary>

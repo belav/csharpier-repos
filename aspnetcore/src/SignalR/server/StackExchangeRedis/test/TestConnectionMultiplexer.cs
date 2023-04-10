@@ -14,7 +14,6 @@ using StackExchange.Redis.Profiling;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 public class TestConnectionMultiplexer : IConnectionMultiplexer
 {
     public string ClientName => throw new NotImplementedException();

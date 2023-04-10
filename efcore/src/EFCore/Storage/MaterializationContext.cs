@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     <para>
 ///         Parameter object containing context needed for materialization of an entity.

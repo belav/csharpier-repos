@@ -12,7 +12,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
-
 public class DictionaryAdapterTest
 {
     [Fact]

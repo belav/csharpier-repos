@@ -2,7 +2,6 @@
 
 namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-
 public static class Ext
 {
     public static void SqlShouldSelectColumn(this string sqlSelect, string columnName) =>

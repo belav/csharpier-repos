@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class SeedingSqliteTest : SeedingTestBase
 {
     protected override TestStore TestStore => SqliteTestStore.Create("SeedingTest");

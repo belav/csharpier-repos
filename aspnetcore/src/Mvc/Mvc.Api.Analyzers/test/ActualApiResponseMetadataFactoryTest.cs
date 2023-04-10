@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 public class ActualApiResponseMetadataFactoryTest
 {
     private static readonly string Namespace =

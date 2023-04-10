@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2;
 
 namespace Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
-
 /// <summary>
 /// Provides algorithms for performing key derivation.
 /// </summary>

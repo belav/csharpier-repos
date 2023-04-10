@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Binding info which represents metadata associated to an action parameter.
 /// </summary>

@@ -5,7 +5,6 @@ using Microsoft.Extensions.DiagnosticAdapter;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 public class TestDiagnosticListener
 {
     public class OnRequestEventData

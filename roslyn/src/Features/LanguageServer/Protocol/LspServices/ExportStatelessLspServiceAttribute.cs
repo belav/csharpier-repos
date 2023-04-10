@@ -9,7 +9,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-
 /// <summary>
 /// Defines an attribute to export an instance of <see cref="ILspService"/> that is re-used across
 /// all server instances in the same mef container.  Services using this export attribute should not

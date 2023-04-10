@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.DotNet.Cli.CommandLine;
 
-
 internal class CommandParsingException : Exception
 {
     public CommandParsingException(CommandLineApplication command, string message)

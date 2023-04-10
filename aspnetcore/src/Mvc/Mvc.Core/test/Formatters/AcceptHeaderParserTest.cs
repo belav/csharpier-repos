@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 public class AcceptHeaderParserTest
 {
     [Fact]

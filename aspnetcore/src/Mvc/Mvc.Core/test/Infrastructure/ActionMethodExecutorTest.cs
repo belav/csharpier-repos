@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 public class ActionMethodExecutorTest
 {
     [Theory]

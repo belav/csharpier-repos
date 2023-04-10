@@ -5,7 +5,6 @@ using Microsoft.JSInterop;
 
 namespace Wasm.Performance.TestApp;
 
-
 public static class BenchmarkEvent
 {
     public static void Send(IJSRuntime jsRuntime, string name)

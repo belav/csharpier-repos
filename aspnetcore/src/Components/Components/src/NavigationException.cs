@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Exception thrown when an <see cref="NavigationManager"/> is not able to navigate to a different url.
 /// </summary>

@@ -8,7 +8,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 internal static class Helpers
 {
     internal static IFileProvider ResolveFileProvider(IWebHostEnvironment hostingEnv)

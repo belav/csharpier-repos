@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner;
 
-
 public class Speaker : ConferenceDTO.Speaker
 {
     public virtual ICollection<SessionSpeaker> SessionSpeakers { get; set; } =

@@ -6,7 +6,6 @@ using Grpc.Core;
 
 namespace Server;
 
-
 public class JsonTranscodingGreeterService
     : Transcoding.JsonTranscodingGreeter.JsonTranscodingGreeterBase { }
 

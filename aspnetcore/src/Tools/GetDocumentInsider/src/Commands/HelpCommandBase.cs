@@ -6,7 +6,6 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
-
 internal class HelpCommandBase : CommandBase
 {
     public HelpCommandBase(IConsole console)

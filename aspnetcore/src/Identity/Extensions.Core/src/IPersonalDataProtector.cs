@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Provides an abstraction used for personal data encryption.
 /// </summary>

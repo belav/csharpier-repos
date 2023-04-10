@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.ExtractMethod;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
-
 /// <summary>
 /// Currently VB does not support required members, so it can't create instances of some of our option types.
 /// This class is a workaround until VB implements the feature.

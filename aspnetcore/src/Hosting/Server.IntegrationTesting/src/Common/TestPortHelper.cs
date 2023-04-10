@@ -6,7 +6,6 @@ using System.Net.Sockets;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.Common;
 
-
 public static class TestPortHelper
 {
     // Copied from https://github.com/aspnet/KestrelHttpServer/blob/47f1db20e063c2da75d9d89653fad4eafe24446c/test/Microsoft.AspNetCore.Server.Kestrel.FunctionalTests/AddressRegistrationTests.cs#L508

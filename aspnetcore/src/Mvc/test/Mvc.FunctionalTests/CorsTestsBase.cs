@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>>
     where TStartup : class
 {

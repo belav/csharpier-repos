@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.TestHost;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 public class RangeHeaderTests
 {
     // 14.27 If-Range

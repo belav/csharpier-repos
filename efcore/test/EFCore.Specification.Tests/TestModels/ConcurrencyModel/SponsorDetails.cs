@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
-
 public class SponsorDetails
 {
     public class SponsorDetailsProxy : SponsorDetails, IF1Proxy

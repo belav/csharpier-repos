@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
-
 // These tests were created by trying to enumerate all codepaths in the lexer/parser.
 public partial class RoutePatternParserTests
 {

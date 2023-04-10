@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace System.CommandLine.Utility;
 
-
 internal static class OptionBuilder
 {
     private static readonly ConstructorInfo _ctor;

@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 /// <summary>
 /// A comparer that can order <see cref="Endpoint"/> instances based on implementations of
 /// <see cref="IEndpointComparerPolicy" />. The implementation can be retrieved from the service

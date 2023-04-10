@@ -13,7 +13,6 @@ using RoutePatternToken = Microsoft.AspNetCore.Analyzers.Infrastructure.Embedded
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
-
 [ExportAspNetCoreEmbeddedLanguageBraceMatcher(name: "Route", language: LanguageNames.CSharp)]
 internal class RoutePatternBraceMatcher : IAspNetCoreEmbeddedLanguageBraceMatcher
 {

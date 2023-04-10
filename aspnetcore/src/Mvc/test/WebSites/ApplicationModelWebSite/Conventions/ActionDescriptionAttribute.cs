@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ApplicationModelWebSite;
 
-
 public class ActionDescriptionAttribute : Attribute, IActionModelConvention
 {
     private readonly object _value;

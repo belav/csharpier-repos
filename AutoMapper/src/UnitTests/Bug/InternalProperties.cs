@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class InternalProperties : AutoMapperSpecBase
 {
     public int SomeValue = 2354;

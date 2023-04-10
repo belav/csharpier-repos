@@ -3,7 +3,6 @@
 
 namespace Microsoft.JSInterop;
 
-
 /// <summary>
 /// Describes the type of result expected from a JS interop call.
 /// </summary>

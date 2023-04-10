@@ -5,7 +5,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore;
 
-
 public class AssertEx
 {
     public static void DirectoryExists(string path)

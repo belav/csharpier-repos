@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 /// <summary>
 /// Extension methods for <see cref="IHubProtocol"/>.
 /// </summary>

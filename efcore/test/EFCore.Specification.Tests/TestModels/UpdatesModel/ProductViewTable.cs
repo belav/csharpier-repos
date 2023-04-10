@@ -5,5 +5,4 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-
 public class ProductViewTable : Product { }

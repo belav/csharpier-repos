@@ -7,7 +7,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 public class IntializeTestFileAttribute : BeforeAfterTestAttribute
 {
     public override void Before(MethodInfo methodUnderTest)

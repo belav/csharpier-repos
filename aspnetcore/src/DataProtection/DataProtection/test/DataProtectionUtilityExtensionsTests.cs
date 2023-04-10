@@ -9,7 +9,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 public class DataProtectionUtilityExtensionsTests
 {
     [ConditionalTheory]

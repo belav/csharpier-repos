@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 // Use to sort and group Endpoints. RouteEndpoints are sorted before other implementations.
 //
 // NOTE:

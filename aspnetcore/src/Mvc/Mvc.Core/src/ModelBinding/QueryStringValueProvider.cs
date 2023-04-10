@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// An <see cref="IValueProvider"/> adapter for data stored in an <see cref="IQueryCollection"/>.
 /// </summary>

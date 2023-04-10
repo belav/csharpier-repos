@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorWebSite.Controllers;
 
-
 public class NestedViewImportsController : Controller
 {
     public ViewResult Index()

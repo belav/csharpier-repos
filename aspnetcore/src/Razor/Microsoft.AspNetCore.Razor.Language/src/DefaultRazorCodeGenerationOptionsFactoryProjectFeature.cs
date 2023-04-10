@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class DefaultRazorCodeGenerationOptionsFactoryProjectFeature
     : RazorProjectEngineFeatureBase,
         IRazorCodeGenerationOptionsFactoryProjectFeature

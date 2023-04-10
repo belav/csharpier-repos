@@ -6,7 +6,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Options for the <see cref="DeveloperExceptionPageMiddleware"/>.
 /// </summary>

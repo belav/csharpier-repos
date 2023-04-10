@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ResponseCompression.Benchmarks;
 
-
 public class ResponseCompressionProviderBenchmark
 {
     [GlobalSetup]

@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Ignitor;
 
-
 /// <summary>
 /// Represents a reference to a rendered element.
 /// </summary>

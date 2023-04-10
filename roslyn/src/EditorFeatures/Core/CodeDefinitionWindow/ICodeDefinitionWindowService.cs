@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.CodeDefinitionWindow;
 
-
 internal interface ICodeDefinitionWindowService
 {
     Task<bool> IsWindowOpenAsync(CancellationToken cancellationToken);

@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// Uniquely identifies a single field that can be edited. This may correspond to a property on a
 /// model object, or can be any other named value.

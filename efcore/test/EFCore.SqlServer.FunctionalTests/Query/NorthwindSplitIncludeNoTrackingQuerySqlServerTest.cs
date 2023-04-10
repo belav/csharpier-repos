@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class NorthwindSplitIncludeNoTrackingQuerySqlServerTest
     : NorthwindSplitIncludeNoTrackingQueryTestBase<
         NorthwindQuerySqlServerFixture<NoopModelCustomizer>

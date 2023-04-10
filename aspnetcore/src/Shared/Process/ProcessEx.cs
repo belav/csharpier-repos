@@ -15,7 +15,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal sealed class ProcessEx : IDisposable
 {
     private static readonly TimeSpan DefaultProcessTimeout = TimeSpan.FromMinutes(15);

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace HealthChecksSample;
 
-
 // Pass in `--scenario liveness` at the command line to run this sample.
 public class LivenessProbeStartup
 {

@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
-
 /// <summary>
 /// A read-only collection of <see cref="TagHelperAttribute"/>s.
 /// </summary>

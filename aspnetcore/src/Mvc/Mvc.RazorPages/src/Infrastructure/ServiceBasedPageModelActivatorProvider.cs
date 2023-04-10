@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 /// <summary>
 /// <see cref="IPageActivatorProvider"/> that uses type activation to create Razor Page instances.
 /// </summary>

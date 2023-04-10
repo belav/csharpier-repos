@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
-
 /// <summary>
 /// Defines a key/value metadata pair for the decorated Razor type.
 /// </summary>

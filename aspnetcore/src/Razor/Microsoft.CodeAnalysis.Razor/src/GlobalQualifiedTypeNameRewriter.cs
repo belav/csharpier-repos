@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 // Rewrites type names to use the 'global::' prefix for identifiers.
 //
 // This is useful when we're generating code in a different namespace than

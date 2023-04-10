@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
-
 public class Location
 {
     public class LocationProxy : Location, IF1Proxy

@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 internal sealed class AuthorizationApplicationModelProvider : IApplicationModelProvider
 {
     private readonly MvcOptions _mvcOptions;

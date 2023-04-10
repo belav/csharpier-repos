@@ -8,7 +8,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
-
 internal sealed record JwtAuthenticationSchemeSettings(
     string SchemeName,
     List<string> Audiences,

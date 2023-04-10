@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// This attribute can be used on action parameters and types, to indicate model level metadata.
 /// </summary>

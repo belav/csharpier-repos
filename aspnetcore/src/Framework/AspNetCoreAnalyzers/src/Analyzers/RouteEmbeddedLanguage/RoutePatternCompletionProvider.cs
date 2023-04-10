@@ -23,7 +23,6 @@ using RoutePatternToken = Microsoft.AspNetCore.Analyzers.Infrastructure.Embedded
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
-
 [ExportCompletionProvider(nameof(RoutePatternCompletionProvider), LanguageNames.CSharp)]
 [Shared]
 public class RoutePatternCompletionProvider : CompletionProvider

@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration;
 
-
 internal static class CodeGenerationOptionsStorage
 {
     public static ValueTask<CodeGenerationOptions> GetCodeGenerationOptionsAsync(

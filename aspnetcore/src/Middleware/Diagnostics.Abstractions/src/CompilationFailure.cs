@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 /// <summary>
 /// Describes a failure compiling a specific file.
 /// </summary>

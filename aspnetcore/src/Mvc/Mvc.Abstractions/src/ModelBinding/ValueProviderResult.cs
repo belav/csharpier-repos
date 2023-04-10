@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Result of an <see cref="IValueProvider.GetValue(string)"/> operation.
 /// </summary>

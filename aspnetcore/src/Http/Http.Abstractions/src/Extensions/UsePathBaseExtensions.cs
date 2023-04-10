@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Extension methods for <see cref="IApplicationBuilder"/>.
 /// </summary>

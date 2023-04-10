@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 public class BatchExecutorTest
 {
     [ConditionalTheory]

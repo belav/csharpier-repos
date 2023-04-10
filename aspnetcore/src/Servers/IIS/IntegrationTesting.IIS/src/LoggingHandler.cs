@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
-
 public class LoggingHandler : DelegatingHandler
 {
     private readonly int _maxBodyLogSize = 16 * 1024;

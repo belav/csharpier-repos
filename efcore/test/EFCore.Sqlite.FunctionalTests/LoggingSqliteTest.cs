@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class LoggingSqliteTest
     : LoggingRelationalTestBase<SqliteDbContextOptionsBuilder, SqliteOptionsExtension>
 {

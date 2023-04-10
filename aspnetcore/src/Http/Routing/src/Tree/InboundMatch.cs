@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Routing.Template;
 
 namespace Microsoft.AspNetCore.Routing.Tree;
 
-
 /// <summary>
 /// A candidate route to match incoming URLs in a <see cref="TreeRouter"/>.
 /// </summary>

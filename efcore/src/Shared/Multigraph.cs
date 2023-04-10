@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
-
 internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
     where TVertex : notnull
 {

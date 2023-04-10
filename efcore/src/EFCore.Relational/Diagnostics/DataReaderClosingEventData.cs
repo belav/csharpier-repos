@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     <see cref="DiagnosticSource" /> event payload for <see cref="RelationalEventId.DataReaderClosing" />.
 /// </summary>

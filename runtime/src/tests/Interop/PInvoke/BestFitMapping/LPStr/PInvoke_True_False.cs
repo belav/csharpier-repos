@@ -9,7 +9,6 @@ using static TestData;
 
 namespace LPStr;
 
-
 public class PInvoke_True_False
 {
     [StructLayout(LayoutKind.Sequential)]

@@ -15,7 +15,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class ResponseHeadersWritingBenchmark
 {
     private const int Iterations = 1000;

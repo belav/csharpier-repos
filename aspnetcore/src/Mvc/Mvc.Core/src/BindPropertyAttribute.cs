@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// An attribute that can specify a model name or type of <see cref="IModelBinder"/> to use for binding the
 /// associated property.

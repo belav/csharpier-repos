@@ -3,7 +3,6 @@
 
 namespace System.Net.Quic;
 
-
 /// <summary>
 /// Specifies direction of the <see cref="QuicStream"/> which is to be <see cref="QuicStream.Abort(QuicAbortDirection, long)">aborted</see>.
 /// </summary>

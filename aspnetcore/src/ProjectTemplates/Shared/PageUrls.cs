@@ -3,7 +3,6 @@
 
 namespace Templates.Test.Helpers;
 
-
 public static class PageUrls
 {
     public const string HomeUrl = "/";

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Localization;
 
 namespace TestServer;
 
-
 public class InternationalizationStartup
 {
     public InternationalizationStartup(IConfiguration configuration)

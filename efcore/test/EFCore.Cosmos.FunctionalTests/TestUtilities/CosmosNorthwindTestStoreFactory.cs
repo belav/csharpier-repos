@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class CosmosNorthwindTestStoreFactory : CosmosTestStoreFactory
 {
     private const string Name = "Northwind";

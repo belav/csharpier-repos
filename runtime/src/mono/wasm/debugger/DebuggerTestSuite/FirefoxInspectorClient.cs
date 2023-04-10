@@ -17,7 +17,6 @@ using System.Net;
 
 namespace DebuggerTests;
 
-
 class FirefoxInspectorClient : InspectorClient
 {
     internal string? BreakpointActorId { get; set; }

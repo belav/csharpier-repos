@@ -6,7 +6,6 @@ using RazorWebSite.Models;
 
 namespace RazorWebSite.Controllers;
 
-
 public class EnumController : Controller
 {
     public IActionResult Enum()

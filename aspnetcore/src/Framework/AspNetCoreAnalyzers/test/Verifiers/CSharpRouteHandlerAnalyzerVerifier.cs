@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Testing.Verifiers;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
-
 public static class CSharpRouteHandlerAnalyzerVerifier<TAnalyzer>
     where TAnalyzer : RouteHandlerAnalyzer, new()
 {

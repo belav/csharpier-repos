@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 internal abstract class TestContext<TEntity> : DbContext
     where TEntity : class
 {

@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 /// <summary>
 /// Deployer for Kestrel on Nginx.
 /// </summary>

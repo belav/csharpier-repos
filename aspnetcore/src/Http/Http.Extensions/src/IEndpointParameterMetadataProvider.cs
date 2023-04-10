@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Metadata;
 
-
 /// <summary>
 /// Indicates that a type provides a static method that provides <see cref="Endpoint"/> metadata when declared as the
 /// parameter type of an <see cref="Endpoint"/> route handler delegate.

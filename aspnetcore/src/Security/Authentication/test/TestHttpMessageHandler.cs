@@ -5,7 +5,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 public class TestHttpMessageHandler : HttpMessageHandler
 {
     public Func<HttpRequestMessage, HttpResponseMessage> Sender { get; set; }

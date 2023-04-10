@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// Methods for determining how an <see cref="ITagHelper"/> should run based on the attributes that were specified.
 /// </summary>

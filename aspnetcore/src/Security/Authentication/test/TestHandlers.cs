@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Tests;
 
-
 public class TestAuthHandler
     : AuthenticationHandler<AuthenticationSchemeOptions>,
         IAuthenticationSignInHandler

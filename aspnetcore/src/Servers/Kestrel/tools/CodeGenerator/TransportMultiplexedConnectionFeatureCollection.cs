@@ -3,7 +3,6 @@
 
 namespace CodeGenerator;
 
-
 public class TransportMultiplexedConnectionFeatureCollection
 {
     public static string GenerateFile()

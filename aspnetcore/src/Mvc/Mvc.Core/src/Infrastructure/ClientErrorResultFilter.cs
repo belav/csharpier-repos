@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed partial class ClientErrorResultFilter : IAlwaysRunResultFilter, IOrderedFilter
 {
     internal const int FilterOrder = -2000;

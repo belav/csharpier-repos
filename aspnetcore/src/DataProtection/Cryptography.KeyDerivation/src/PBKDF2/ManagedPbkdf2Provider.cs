@@ -8,7 +8,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2;
 
-
 /// <summary>
 /// A PBKDF2 provider which utilizes the managed hash algorithm classes as PRFs.
 /// This isn't the preferred provider since the implementation is slow, but it is provided as a fallback.

@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     An exception that is thrown when an error is encountered while saving to the database.
 /// </summary>

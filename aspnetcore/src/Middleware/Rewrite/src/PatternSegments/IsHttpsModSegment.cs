@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite.PatternSegments;
 
-
 internal sealed class IsHttpsModSegment : PatternSegment
 {
     // Note: Mod rewrite pattern matches on lower case "on" and "off"

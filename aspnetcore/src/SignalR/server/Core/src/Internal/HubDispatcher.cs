@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal abstract class HubDispatcher<THub>
     where THub : Hub
 {

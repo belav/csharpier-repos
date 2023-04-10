@@ -8,7 +8,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Server.IISIntegration;
 
-
 internal sealed class ForwardedTlsConnectionFeature : ITlsConnectionFeature
 {
     private StringValues _header;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 
-
 internal interface IRoutePatternNodeVisitor
 {
     void Visit(RoutePatternCompilationUnit node);

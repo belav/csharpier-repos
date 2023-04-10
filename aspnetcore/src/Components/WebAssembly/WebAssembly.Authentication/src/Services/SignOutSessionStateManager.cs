@@ -8,7 +8,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 /// <summary>
 /// Handles CSRF protection for the logout endpoint.
 /// </summary>

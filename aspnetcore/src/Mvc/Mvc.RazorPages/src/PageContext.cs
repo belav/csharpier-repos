@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 /// <summary>
 /// The context associated with the current request for a Razor page.
 /// </summary>

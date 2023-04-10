@@ -12,7 +12,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 internal abstract class GreenNode
 {
     private static readonly RazorDiagnostic[] EmptyDiagnostics = Array.Empty<RazorDiagnostic>();

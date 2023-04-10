@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     An implementation of <see cref="IExecutionStrategy" /> that does no retries.
 /// </summary>

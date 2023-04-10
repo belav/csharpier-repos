@@ -8,7 +8,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 public class FormReaderBenchmark
 {
     [Benchmark]

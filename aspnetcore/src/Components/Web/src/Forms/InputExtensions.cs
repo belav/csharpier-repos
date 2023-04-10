@@ -6,7 +6,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 internal static class InputExtensions
 {
     public static bool TryParseSelectableValueFromString<

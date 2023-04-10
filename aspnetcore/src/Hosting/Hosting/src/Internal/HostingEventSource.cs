@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal sealed class HostingEventSource : EventSource
 {
     public static readonly HostingEventSource Log = new HostingEventSource();

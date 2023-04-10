@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
-
 internal readonly struct RedisInvocation
 {
     /// <summary>

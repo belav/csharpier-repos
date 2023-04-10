@@ -6,7 +6,6 @@ using System.IO;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 /// <summary>
 /// A <see cref="RazorProjectItem"/> that does not exist.
 /// </summary>

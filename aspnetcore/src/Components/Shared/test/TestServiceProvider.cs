@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
-
 public class TestServiceProvider : IServiceProvider
 {
     private readonly Dictionary<Type, Func<object>> _factories =

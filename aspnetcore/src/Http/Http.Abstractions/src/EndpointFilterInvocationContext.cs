@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Provides an abstraction for wrapping the <see cref="HttpContext"/> and arguments
 /// provided to a route handler.

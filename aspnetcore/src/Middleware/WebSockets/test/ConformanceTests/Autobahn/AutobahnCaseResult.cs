@@ -5,7 +5,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn;
 
-
 public class AutobahnCaseResult
 {
     public string Name { get; }

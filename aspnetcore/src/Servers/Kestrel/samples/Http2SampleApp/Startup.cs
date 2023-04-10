@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Http2SampleApp;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services) { }

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal sealed class UserProxy<THub> : IClientProxy
     where THub : Hub
 {

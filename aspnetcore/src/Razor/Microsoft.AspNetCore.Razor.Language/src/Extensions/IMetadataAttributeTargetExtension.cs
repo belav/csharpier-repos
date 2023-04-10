@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-
 internal interface IMetadataAttributeTargetExtension : ICodeTargetExtension
 {
     void WriteRazorCompiledItemAttribute(

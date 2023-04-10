@@ -3,7 +3,6 @@
 
 namespace Grpc.Shared;
 
-
 internal sealed class HttpRoutePattern
 {
     public List<string> Segments { get; }

@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-
 public class SignalRClientTest
     : ServerTestBase<BlazorWasmTestAppFixture<BasicTestApp.Program>>,
         IClassFixture<BasicTestAppServerSiteFixture<CorsStartup>>

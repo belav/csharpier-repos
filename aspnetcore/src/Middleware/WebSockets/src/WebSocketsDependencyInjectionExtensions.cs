@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.WebSockets;
 
-
 /// <summary>
 /// Extension method for <see cref="IServiceCollection"/> to add WebSockets configuration.
 /// </summary>

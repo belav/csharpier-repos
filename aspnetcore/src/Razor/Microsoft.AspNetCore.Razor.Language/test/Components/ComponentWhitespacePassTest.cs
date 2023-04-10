@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 public class ComponentWhitespacePassTest
 {
     public ComponentWhitespacePassTest()

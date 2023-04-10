@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace ServerComparison.TestSites;
 
-
 public class StartupNtlmAuthentication
 {
     public void ConfigureServices(IServiceCollection services)

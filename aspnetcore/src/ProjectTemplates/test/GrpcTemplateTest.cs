@@ -13,7 +13,6 @@ using Xunit.Abstractions;
 
 namespace Templates.Test;
 
-
 public class GrpcTemplateTest : LoggedTest
 {
     public GrpcTemplateTest(ProjectFactoryFixture projectFactory)

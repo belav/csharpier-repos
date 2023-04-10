@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.Classification;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification;
 
-
 public static partial class FormattedClassifications
 {
     private static FormattedClassification New(string text, string typeName) =>

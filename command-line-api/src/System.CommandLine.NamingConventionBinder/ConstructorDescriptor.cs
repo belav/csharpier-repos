@@ -7,7 +7,6 @@ using System.Reflection;
 
 namespace System.CommandLine.NamingConventionBinder;
 
-
 /// <summary>
 /// Provides information for binding command line input to a constructor.
 /// </summary>

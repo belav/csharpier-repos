@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
-
 /// <summary>
 /// Extension methods for <see cref="IHubConnectionBuilder"/>.
 /// </summary>

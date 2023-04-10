@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// A contract for securing data.
 /// </summary>

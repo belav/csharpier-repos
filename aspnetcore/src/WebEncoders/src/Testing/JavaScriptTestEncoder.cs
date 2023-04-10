@@ -7,7 +7,6 @@ using System.Text.Encodings.Web;
 
 namespace Microsoft.Extensions.WebEncoders.Testing;
 
-
 /// <summary>
 /// <see cref="JavaScriptEncoder"/> used for unit testing. This encoder does not perform any encoding and should not be used in application code.
 /// </summary>

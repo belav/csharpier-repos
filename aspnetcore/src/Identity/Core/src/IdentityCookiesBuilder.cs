@@ -6,7 +6,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Used to configure identity cookie options.
 /// </summary>

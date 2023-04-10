@@ -8,7 +8,6 @@ using static Microsoft.EntityFrameworkCore.Tools.AnsiConstants;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal static class Reporter
 {
     public static bool IsVerbose { get; set; }

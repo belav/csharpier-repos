@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.RateLimiting;
 
 namespace RateLimitingSample;
 
-
 public class SampleRateLimiterPolicy : IRateLimiterPolicy<string>
 {
     private Func<OnRejectedContext, CancellationToken, ValueTask>? _onRejected;

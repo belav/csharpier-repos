@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// The default implementation of an <see cref="IAuthorizationService"/>.
 /// </summary>

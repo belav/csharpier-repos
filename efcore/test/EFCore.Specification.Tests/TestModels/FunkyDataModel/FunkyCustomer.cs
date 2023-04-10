@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.FunkyDataModel;
 
-
 public class FunkyCustomer
 {
     public int Id { get; set; }

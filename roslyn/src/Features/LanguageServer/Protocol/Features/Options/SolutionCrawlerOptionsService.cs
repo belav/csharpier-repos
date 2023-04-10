@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.SolutionCrawler;
 
-
 [ExportWorkspaceService(typeof(ISolutionCrawlerOptionsService)), Shared]
 internal sealed class SolutionCrawlerOptionsService : ISolutionCrawlerOptionsService
 {

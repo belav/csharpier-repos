@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 internal sealed class MultipartBoundary
 {
     private readonly int[] _skipTable = new int[256];

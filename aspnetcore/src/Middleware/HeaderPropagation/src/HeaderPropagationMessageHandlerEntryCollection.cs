@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 
 namespace Microsoft.AspNetCore.HeaderPropagation;
 
-
 /// <summary>
 /// A collection of <see cref="HeaderPropagationMessageHandlerEntry"/> items.
 /// </summary>

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Core;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 /// <summary>
 /// Provides a <see cref="ApplicationPartFactory"/> type.
 /// </summary>

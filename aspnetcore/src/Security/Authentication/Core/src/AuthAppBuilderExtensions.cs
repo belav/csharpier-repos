@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Extension methods to add authentication capabilities to an HTTP application pipeline.
 /// </summary>

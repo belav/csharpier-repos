@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 /// <summary>
 /// An optional interface for <see cref="NavigationManager" /> implementations that must be initialized
 /// by the host.

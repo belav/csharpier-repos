@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
-
 [Authorize]
 public class ModelWithAuthFilter : PageModel
 {

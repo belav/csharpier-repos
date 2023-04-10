@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite.Pages;
 
-
 public class TryUpdateModelPageModel : PageModel
 {
     public UserModel UserModel { get; set; }

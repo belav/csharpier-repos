@@ -8,7 +8,6 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.Handlers;
 
-
 [LanguageServerEndpoint("exit")]
 public class ExitHandler<TRequestContext> : INotificationHandler<TRequestContext>
 {

@@ -10,7 +10,6 @@ using System.Collections.Generic;
 
 namespace Wasm.Tests.Internal;
 
-
 internal static class BrowserLocator
 {
     public static string FindChrome(string artifactsBinDir, string envVarName) =>

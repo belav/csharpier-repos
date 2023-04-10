@@ -6,7 +6,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Analyzer.Testing;
 
-
 public class AnalyzerAssert
 {
     public static void DiagnosticLocation(DiagnosticLocation expected, Location actual)

@@ -8,7 +8,6 @@ using OpenQA.Selenium.Remote;
 
 namespace Wasm.Performance.Driver;
 
-
 internal sealed class Selenium
 {
     const int SeleniumPort = 4444;

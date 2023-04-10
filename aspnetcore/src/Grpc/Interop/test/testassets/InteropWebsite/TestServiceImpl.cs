@@ -22,7 +22,6 @@ using InteropTestsWebsite;
 
 namespace Grpc.Testing;
 
-
 // Implementation copied from https://github.com/grpc/grpc/blob/master/src/csharp/Grpc.IntegrationTesting/TestServiceImpl.cs
 public class TestServiceImpl : TestService.TestServiceBase
 {

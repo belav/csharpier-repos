@@ -6,7 +6,6 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.Extensions.Logging.Testing;
 
-
 public interface ITestSink
 {
     event Action<WriteContext> MessageLogged;

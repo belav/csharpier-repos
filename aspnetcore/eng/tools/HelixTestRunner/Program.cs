@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace HelixTestRunner;
 
-
 class Program
 {
     static async Task Main(string[] args)

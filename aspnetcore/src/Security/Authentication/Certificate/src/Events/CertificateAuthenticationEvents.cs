@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
-
 /// <summary>
 /// This default implementation of the IBasicAuthenticationEvents may be used if the
 /// application only needs to override a few of the interface methods.

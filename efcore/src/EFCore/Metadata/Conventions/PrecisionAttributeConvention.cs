@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures the Precision based on the <see cref="PrecisionAttribute" /> applied on the property.
 /// </summary>

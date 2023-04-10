@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.Extensions.Internal;
 
-
 internal sealed class InternalUsageAnalyzer
 {
     private readonly Func<ISymbol, bool> _isInternalNamespace;

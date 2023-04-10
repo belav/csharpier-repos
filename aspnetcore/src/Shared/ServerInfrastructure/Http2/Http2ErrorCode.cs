@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-
 internal enum Http2ErrorCode : uint
 {
     NO_ERROR = 0x0,

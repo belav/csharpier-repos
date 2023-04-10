@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 public abstract partial class MatcherConformanceTest
 {
     [Fact]

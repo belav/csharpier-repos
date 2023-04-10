@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Options;
 
-
 internal interface IOptionsReader
 {
     bool TryGetOption<T>(OptionKey2 optionKey, out T value);

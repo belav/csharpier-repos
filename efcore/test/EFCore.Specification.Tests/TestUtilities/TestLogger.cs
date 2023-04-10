@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestLogger : TestLoggerBase, IDiagnosticsLogger, ILogger
 {
     public TestLogger(LoggingDefinitions definitions)

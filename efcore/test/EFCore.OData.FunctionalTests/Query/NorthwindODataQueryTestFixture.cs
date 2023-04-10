@@ -11,7 +11,6 @@ using Microsoft.OData.ModelBuilder;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class NorthwindODataQueryTestFixture
     : NorthwindQuerySqlServerFixture<NoopModelCustomizer>,
         IODataQueryTestFixture

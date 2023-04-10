@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
-
 public class FakeRelationalDatabaseCreator : IRelationalDatabaseCreator
 {
     public bool EnsureDeleted() => throw new NotImplementedException();

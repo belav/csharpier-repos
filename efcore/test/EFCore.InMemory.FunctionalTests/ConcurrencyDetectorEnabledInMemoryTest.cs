@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class ConcurrencyDetectorEnabledInMemoryTest
     : ConcurrencyDetectorEnabledTestBase<ConcurrencyDetectorEnabledInMemoryTest.ConcurrencyDetectorInMemoryFixture>
 {

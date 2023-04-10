@@ -7,7 +7,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 public class PagedByteBufferTest
 {
     [Fact]

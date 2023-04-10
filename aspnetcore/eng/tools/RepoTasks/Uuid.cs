@@ -8,7 +8,6 @@ using System.Text;
 
 namespace RepoTasks;
 
-
 /// <summary>
 /// Implementation of RFC 4122 - A Universally Unique Identifier (UUID) URN Namespace.
 /// </summary>

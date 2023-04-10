@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     Abstract base class for <see cref="ISaveChangesInterceptor" /> for use when implementing a subset
 ///     of the interface methods.

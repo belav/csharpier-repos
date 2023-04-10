@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.IIS;
 
-
 /// <summary>
 /// Extensions to <see cref="HttpContext"/> that enable access to IIS features.
 /// </summary>

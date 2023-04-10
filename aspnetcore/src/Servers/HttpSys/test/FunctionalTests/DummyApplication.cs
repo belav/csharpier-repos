@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal class DummyApplication : IHttpApplication<HttpContext>
 {
     private readonly RequestDelegate _requestDelegate;

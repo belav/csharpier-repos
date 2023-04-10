@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorWebSite.Controllers;
 
-
 public class ViewNameSpecification_HomeController : Controller
 {
     public IActionResult LayoutSpecifiedWithPartialPathInViewStart()

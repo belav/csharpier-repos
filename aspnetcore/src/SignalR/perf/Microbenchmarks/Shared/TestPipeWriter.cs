@@ -5,7 +5,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks.Shared;
 
-
 public class TestPipeWriter : PipeWriter
 {
     // huge buffer that should be large enough for writing any content

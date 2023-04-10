@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 /// <summary>
 /// A <see cref="CircuitHandler"/> allows running code during specific lifetime events of a <see cref="Circuit"/>.
 /// <list type="bullet">

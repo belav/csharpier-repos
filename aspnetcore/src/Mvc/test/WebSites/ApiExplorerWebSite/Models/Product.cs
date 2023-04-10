@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ApiExplorerWebSite;
 
-
 public class Product
 {
     [BindRequired]

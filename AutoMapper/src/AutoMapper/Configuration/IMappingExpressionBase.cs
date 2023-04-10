@@ -2,7 +2,6 @@ using AutoMapper.Features;
 
 namespace AutoMapper;
 
-
 /// <summary>
 /// Common mapping configuration options between generic and non-generic mapping configuration
 /// </summary>

@@ -5,7 +5,6 @@ using System.Net;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 /// <summary>
 /// Defines an interface that represents a listener bound to a specific <see cref="EndPoint"/>.
 /// </summary>

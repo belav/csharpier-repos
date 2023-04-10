@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-
 public class DefaultModelMetadataBindingDetailsProviderTest
 {
     [Fact]

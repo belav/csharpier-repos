@@ -7,7 +7,6 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-
 internal static class HealthCheckResponseWriters
 {
     private static readonly byte[] DegradedBytes = Encoding.UTF8.GetBytes(

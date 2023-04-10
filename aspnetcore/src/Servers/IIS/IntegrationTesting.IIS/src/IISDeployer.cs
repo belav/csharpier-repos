@@ -13,7 +13,6 @@ using Microsoft.Web.Administration;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
-
 /// <summary>
 /// Deployer for IIS.
 /// </summary>

@@ -11,7 +11,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Contains extension methods to add authentication to Blazor WebAssembly applications using
 /// Azure Active Directory or Azure Active Directory B2C.

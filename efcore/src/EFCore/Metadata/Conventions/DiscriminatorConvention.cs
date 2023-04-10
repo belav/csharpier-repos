@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures the discriminator value for entity types in a hierarchy as the entity type name.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-
 internal sealed class EmptyServiceProvider : IServiceProvider
 {
     public static IServiceProvider Instance { get; } = new EmptyServiceProvider();

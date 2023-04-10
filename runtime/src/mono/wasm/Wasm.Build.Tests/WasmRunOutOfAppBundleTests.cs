@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Wasm.Build.Tests;
 
-
 public class WasmRunOutOfAppBundleTests : BuildTestBase
 {
     public WasmRunOutOfAppBundleTests(

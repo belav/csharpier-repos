@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.JsonPatch.Operations;
 
-
 public class Operation : OperationBase
 {
     [JsonProperty(nameof(value))]

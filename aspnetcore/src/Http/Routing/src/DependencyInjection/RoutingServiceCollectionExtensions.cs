@@ -15,7 +15,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Contains extension methods to <see cref="IServiceCollection"/>.
 /// </summary>

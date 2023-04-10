@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public static class RazorCodeDocumentExtensions
 {
     private static readonly char[] PathSeparators = new char[] { '/', '\\' };

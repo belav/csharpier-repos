@@ -14,7 +14,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 // ReSharper disable UnusedMember.Local
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
-
 public class CSharpMigrationsGeneratorTest
 {
     private static readonly string _nl = Environment.NewLine;

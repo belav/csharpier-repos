@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// A Stream that wraps another stream starting at a certain offset and reading for the given length.
 /// </summary>

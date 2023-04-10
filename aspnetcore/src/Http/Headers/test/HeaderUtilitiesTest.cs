@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
-
 public class HeaderUtilitiesTest
 {
     private const string Rfc1123Format = "r";

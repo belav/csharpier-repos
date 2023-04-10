@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract partial class LoadTestBase<TFixture>
 {
     [ConditionalTheory]

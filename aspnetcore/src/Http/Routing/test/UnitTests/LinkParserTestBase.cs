@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public abstract class LinkParserTestBase
 {
     protected ServiceCollection GetBasicServices()

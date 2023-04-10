@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.RequestDecompression;
 
-
 internal sealed class SizeLimitedStream : Stream
 {
     private readonly Stream _innerStream;

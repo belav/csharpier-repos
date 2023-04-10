@@ -16,7 +16,6 @@ using DependencyContextCompilationOptions = Microsoft.Extensions.DependencyModel
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 #pragma warning disable CA1852 // Seal internal types
 internal class CSharpCompiler
 #pragma warning restore CA1852 // Seal internal types

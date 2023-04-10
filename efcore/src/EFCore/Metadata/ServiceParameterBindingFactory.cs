@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     A <see cref="IParameterBindingFactory" /> for binding to dependency-injected services.
 /// </summary>

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing.Template;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 internal sealed class ApiParameterContext
 {
     public ApiParameterContext(

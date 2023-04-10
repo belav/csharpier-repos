@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 
-
 public partial class RedisCache
 {
     private static partial class Log

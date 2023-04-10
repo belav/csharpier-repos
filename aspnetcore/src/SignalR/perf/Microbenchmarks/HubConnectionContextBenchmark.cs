@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
-
 public class HubConnectionContextBenchmark
 {
     private HubConnectionContext _hubConnectionContext;

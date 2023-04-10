@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// Controls the value-rendering method For HTML5 input elements of types such as date, time, datetime and
 /// datetime-local.

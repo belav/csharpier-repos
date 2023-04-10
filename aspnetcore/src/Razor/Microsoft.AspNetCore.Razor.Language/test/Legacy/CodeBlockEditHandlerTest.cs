@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy;
 
-
 public class CodeBlockEditHandlerTest
 {
     [Fact]

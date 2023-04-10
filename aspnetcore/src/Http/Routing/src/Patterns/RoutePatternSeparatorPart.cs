@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
-
 /// <summary>
 /// Represents an optional separator part of a route pattern. Instances of <see cref="RoutePatternSeparatorPart"/>
 /// are immutable.

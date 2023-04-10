@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Cryptography;
 
-
 // The majority of these are from bcrypt.h
 internal static class Constants
 {

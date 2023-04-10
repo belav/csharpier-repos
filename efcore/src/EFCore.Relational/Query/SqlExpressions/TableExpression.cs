@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
-
 /// <summary>
 ///     An expression that represents a table or view in a SQL tree.
 /// </summary>

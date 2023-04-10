@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Provides a predicate which can determines which model properties or parameters should be bound by model binding.
 /// </summary>

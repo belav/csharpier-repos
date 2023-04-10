@@ -7,7 +7,6 @@ using PhotinoNET;
 
 namespace Microsoft.AspNetCore.Components.WebView.Photino;
 
-
 /// <summary>
 /// A window containing a Blazor web view.
 /// </summary>

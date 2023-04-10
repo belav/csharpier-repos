@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 // Note: there's no reason why developers strictly need to use this. It's equally valid to
 // put a @foreach(var message in context.GetValidationMessages()) { ... } inside a form.
 // This component is for convenience only, plus it implements a few small perf optimizations.

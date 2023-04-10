@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class MinimumOSVersionTest
 {
     [ConditionalFact]

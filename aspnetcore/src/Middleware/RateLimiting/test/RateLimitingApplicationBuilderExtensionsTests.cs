@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 public class RateLimitingApplicationBuilderExtensionsTests : LoggedTest
 {
     [Fact]

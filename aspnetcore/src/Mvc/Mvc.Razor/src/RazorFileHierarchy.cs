@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 internal static class RazorFileHierarchy
 {
     private const string ViewStartFileName = "_ViewStart.cshtml";

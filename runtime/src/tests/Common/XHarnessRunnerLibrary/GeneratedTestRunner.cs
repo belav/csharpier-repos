@@ -10,7 +10,6 @@ using XUnitWrapperLibrary;
 
 namespace XHarnessRunnerLibrary;
 
-
 public sealed class GeneratedTestRunner : TestRunner
 {
     string _assemblyName;

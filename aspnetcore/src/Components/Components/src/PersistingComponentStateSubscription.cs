@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Infrastructure;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Represents a subscription to the <c>OnPersisting</c> callback that <see cref="ComponentStatePersistenceManager"/> callback will trigger
 /// when the application is being persisted.

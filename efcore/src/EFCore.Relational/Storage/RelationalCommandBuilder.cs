@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <inheritdoc />
 public class RelationalCommandBuilder : IRelationalCommandBuilder
 {

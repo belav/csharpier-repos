@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace SecurityWebSite;
 
-
 public class StartupWithGlobalDenyAnonymousFilterWithUseMvc
 {
     public void ConfigureServices(IServiceCollection services)

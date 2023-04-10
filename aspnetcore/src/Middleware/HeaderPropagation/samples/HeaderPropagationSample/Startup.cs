@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace HeaderPropagationSample;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

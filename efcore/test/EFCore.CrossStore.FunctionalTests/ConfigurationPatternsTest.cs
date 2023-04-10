@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.TestModels;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 [SqlServerConfiguredCondition]
 public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisposable
 {

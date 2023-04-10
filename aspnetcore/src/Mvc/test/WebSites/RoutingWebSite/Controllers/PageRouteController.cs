@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
-
 public class PageRouteController
 {
     private readonly TestResponseGenerator _generator;

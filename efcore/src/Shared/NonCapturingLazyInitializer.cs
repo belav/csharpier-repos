@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.Internal;
 
-
 internal static class NonCapturingLazyInitializer
 {
     public static TValue EnsureInitialized<TParam, TValue>(

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 // Used for CONNECT responses that can't have a body for 2XX responses.
 internal sealed class StatusCheckWriteStream : WriteOnlyStream
 {

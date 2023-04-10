@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 internal static class MvcTagHelperLoggerExtensions
 {
     private static readonly Action<

@@ -3,7 +3,6 @@
 
 namespace Microsoft.Extensions.CommandLineUtils;
 
-
 internal enum CommandOptionType
 {
     MultipleValue,

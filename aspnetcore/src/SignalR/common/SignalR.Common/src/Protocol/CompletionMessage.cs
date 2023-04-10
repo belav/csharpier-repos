@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 /// <summary>
 /// Represents an invocation that has completed. If there is an error then the invocation didn't complete successfully.
 /// </summary>

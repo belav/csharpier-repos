@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Creates <see cref="IModelBinder"/> instances. Register <see cref="IModelBinderProvider"/>
 /// instances in <c>MvcOptions</c>.

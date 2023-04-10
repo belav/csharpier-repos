@@ -5,7 +5,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-
 public class ControllerViewDataAttributeFilterFactoryTest
 {
     [Fact]

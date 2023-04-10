@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 /// <summary>
 ///     <para>
 ///         Factory for creating <see cref="IUpdateAdapter" /> instances.

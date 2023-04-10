@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
-
 internal sealed class ResponseCachingStream : Stream
 {
     private readonly Stream _innerStream;

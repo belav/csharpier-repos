@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
-
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
 public class SkipIfDockerNotPresentAttribute : Attribute, ITestCondition
 {

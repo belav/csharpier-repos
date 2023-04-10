@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
-
 public class RoutingTestFixture<TStartup> : IDisposable
 {
     private readonly TestServer _server;

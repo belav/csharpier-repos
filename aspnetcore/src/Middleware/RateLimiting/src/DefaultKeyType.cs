@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 internal struct DefaultKeyType
 {
     public DefaultKeyType(string? policyName, object? key, object? factory = null)

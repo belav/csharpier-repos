@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
-
 /// <summary>
 /// Identifies a compiled item that can be identified and loaded.
 /// </summary>

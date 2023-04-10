@@ -9,7 +9,6 @@ using Microsoft.Build.Utilities;
 
 namespace Microsoft.Extensions.ApiDescription.Client;
 
-
 /// <summary>
 /// Adds or corrects ClassName, FirstForGenerator, Namespace, and OutputPath metadata in OpenApiReference items.
 /// Also stores final metadata as SerializedMetadata.

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components;
 
 namespace BasicTestApp;
 
-
 public class PreserveStateService : IDisposable
 {
     private readonly PersistentComponentState _componentApplicationState;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 internal static partial class SyntaxFactory
 {
     public static SyntaxToken Token(SyntaxKind kind, params RazorDiagnostic[] diagnostics)

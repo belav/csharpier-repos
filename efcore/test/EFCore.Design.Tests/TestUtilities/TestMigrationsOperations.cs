@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestMigrationsOperations : MigrationsOperations
 {
     public TestMigrationsOperations(

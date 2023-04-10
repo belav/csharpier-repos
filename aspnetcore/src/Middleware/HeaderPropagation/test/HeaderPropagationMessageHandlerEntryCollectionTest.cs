@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.HeaderPropagation.Tests;
 
-
 public class HeaderPropagationMessageHandlerEntryCollectionTest
 {
     [Fact]

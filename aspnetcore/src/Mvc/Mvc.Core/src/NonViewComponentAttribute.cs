@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Indicates that the type and any derived types that this attribute is applied to
 /// is not considered a view component by the default view component discovery mechanism.

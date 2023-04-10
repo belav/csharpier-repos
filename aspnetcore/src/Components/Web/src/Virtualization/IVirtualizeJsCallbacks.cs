@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Web.Virtualization;
 
-
 internal interface IVirtualizeJsCallbacks
 {
     void OnBeforeSpacerVisible(float spacerSize, float spacerSeparation, float containerSize);

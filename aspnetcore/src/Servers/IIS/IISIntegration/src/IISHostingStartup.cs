@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Server.IISIntegration;
 
-
 /// <summary>
 /// The <see cref="IHostingStartup"/> to add IISIntegration to apps.
 /// </summary>

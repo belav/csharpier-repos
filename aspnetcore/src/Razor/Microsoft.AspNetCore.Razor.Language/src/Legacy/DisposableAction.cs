@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal class DisposableAction : IDisposable
 {
     private readonly Action _action;

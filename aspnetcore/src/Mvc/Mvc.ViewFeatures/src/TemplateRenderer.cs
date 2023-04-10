@@ -13,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal sealed class TemplateRenderer
 {
     private const string DisplayTemplateViewPath = "DisplayTemplates";

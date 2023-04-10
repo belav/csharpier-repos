@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 /// <summary>
 /// A <see cref="MatcherPolicy"/> that implements filtering and selection by
 /// the host header of a request.

@@ -13,7 +13,6 @@ using Microsoft.Extensions.DependencyModel.Resolution;
 
 namespace Microsoft.AspNetCore.Analyzer.Testing;
 
-
 public class DiagnosticProject
 {
     /// <summary>

@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 #pragma warning disable RCS1102 // Make class static.
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 public class DbFunctionMetadataTests
 {
     protected class Foo

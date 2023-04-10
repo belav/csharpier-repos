@@ -8,7 +8,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-
 internal abstract class SaveTempDataPropertyFilterBase : ISaveTempDataCallback
 {
     protected readonly ITempDataDictionaryFactory _tempDataFactory;

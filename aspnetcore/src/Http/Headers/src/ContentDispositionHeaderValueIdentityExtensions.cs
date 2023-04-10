@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
-
 /// <summary>
 /// Various extension methods for <see cref="ContentDispositionHeaderValue"/> for identifying the type of the disposition header
 /// </summary>

@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class JsonPatchSampleTest : IClassFixture<MvcTestFixture<Startup>>
 {
     public JsonPatchSampleTest(MvcTestFixture<Startup> fixture)

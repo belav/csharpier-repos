@@ -3,7 +3,6 @@
 
 namespace ControllersFromServicesWebSite;
 
-
 public class ValueService
 {
     public int Value { get; } = 3;

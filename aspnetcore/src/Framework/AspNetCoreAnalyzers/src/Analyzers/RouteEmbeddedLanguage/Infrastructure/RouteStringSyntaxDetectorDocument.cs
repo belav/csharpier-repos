@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
-
 /// <summary>
 /// This type is seperate from <see cref="RouteStringSyntaxDetector"/> to avoid RS1022 warning in analyzer.
 /// It doesn't like analyzers referencing types that might use Document.

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore;
 
-
 internal sealed class HostFilteringStartupFilter : IStartupFilter
 {
     public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next)

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-
 internal class RazorExtensionsDiagnosticFactory
 {
     private const string DiagnosticPrefix = "RZ";

@@ -3,7 +3,6 @@
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for adding directory browser services.
 /// </summary>

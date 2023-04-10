@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
-
 internal sealed class RunLoop : IDisposable
 {
     public event EventHandler<RunLoopExitState>? RunLoopStopped;

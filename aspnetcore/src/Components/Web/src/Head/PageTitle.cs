@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.Sections;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Enables rendering an HTML <c>&lt;title&gt;</c> to a <see cref="HeadOutlet"/> component.
 /// </summary>

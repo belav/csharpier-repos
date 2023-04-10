@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.SpaServices;
 
-
 /// <summary>
 /// Defines a class that provides mechanisms for configuring the hosting
 /// of a Single Page Application (SPA) and attaching middleware.

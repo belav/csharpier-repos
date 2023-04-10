@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 internal sealed class MultipartReaderStream : Stream
 {
     private readonly MultipartBoundary _boundary;

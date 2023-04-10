@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace System.CommandLine.NamingConventionBinder;
 
-
 /// <summary>
 /// Provides information for binding command line input to a method.
 /// </summary>

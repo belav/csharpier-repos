@@ -13,7 +13,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
-
 /// <summary>
 /// Represents the value of a <c>Content-Disposition</c> header.
 /// </summary>

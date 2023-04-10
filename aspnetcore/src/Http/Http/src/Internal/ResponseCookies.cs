@@ -9,7 +9,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// A wrapper for the response Set-Cookie header.
 /// </summary>

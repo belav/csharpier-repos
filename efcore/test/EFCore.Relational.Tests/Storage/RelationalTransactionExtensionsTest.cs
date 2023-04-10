@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class RelationalTransactionExtensionsTest
 {
     [ConditionalFact]

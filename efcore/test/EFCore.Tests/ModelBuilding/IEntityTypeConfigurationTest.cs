@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
-
 public class IEntityTypeConfigurationTest
 {
     [ConditionalFact]

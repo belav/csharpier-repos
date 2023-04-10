@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal sealed class PrerenderingErrorBoundaryLogger : IErrorBoundaryLogger
 {
     private static readonly Action<ILogger, string, Exception> _exceptionCaughtByErrorBoundary =

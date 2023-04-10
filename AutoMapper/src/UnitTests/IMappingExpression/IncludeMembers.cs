@@ -2,7 +2,6 @@
 
 namespace AutoMapper.UnitTests;
 
-
 public class IncludeMembers : AutoMapperSpecBase
 {
     class Source

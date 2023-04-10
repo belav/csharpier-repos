@@ -7,7 +7,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public static class TestMethodExtensions
 {
     public static string EvaluateSkipConditions(this ITestMethod testMethod)

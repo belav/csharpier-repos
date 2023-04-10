@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class RelationalParameterBuilderTest
 {
     [ConditionalTheory]

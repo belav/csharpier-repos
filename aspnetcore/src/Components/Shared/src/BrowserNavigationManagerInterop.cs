@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 // Shared interop constants
 internal static class BrowserNavigationManagerInterop
 {

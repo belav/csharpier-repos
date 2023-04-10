@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Negotiate.Server.Controllers;
 
-
 [Route("auth")]
 [ApiController]
 public class AuthController : ControllerBase

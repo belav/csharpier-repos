@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
-
 public class TestRenderer : Renderer
 {
     public TestRenderer()

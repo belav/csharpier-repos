@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing.Template;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Contains methods for parsing processing constraints from a route definition.
 /// </summary>

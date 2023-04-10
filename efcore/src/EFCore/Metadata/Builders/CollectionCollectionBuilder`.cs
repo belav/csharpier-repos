@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 /// <summary>
 ///     Provides a simple API for configuring a many-to-many relationship.
 /// </summary>

@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.DocumentationComments;
 
-
 internal static class DocumentationCommentOptionsStorage
 {
     public static DocumentationCommentOptions GetDocumentationCommentOptions(

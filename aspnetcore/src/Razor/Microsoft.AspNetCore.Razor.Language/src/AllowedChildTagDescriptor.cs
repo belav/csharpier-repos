@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class AllowedChildTagDescriptor : IEquatable<AllowedChildTagDescriptor>
 {
     public string Name { get; protected set; }

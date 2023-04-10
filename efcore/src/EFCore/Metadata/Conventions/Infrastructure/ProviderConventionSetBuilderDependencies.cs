@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 
-
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="ProviderConventionSetBuilder" />

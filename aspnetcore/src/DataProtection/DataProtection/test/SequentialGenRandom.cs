@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.DataProtection.Managed;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 internal unsafe class SequentialGenRandom : IBCryptGenRandom, IManagedGenRandom
 {
     private byte _value;

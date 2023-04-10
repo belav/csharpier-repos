@@ -3,7 +3,6 @@
 
 namespace Ignitor;
 
-
 public class CapturedJSInteropCall
 {
     public CapturedJSInteropCall(

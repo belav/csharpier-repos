@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
-
 [DataContract]
 internal sealed record class DocumentFormattingOptions
 {

@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     An exception that is thrown when a concurrency violation is encountered while saving to the database. A concurrency violation
 ///     occurs when an unexpected number of rows are affected during save. This is usually because the data in the database has

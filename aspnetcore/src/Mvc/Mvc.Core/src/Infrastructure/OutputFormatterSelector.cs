@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 /// <summary>
 /// Selects an <see cref="IOutputFormatter"/> to write a response to the current request.
 /// </summary>

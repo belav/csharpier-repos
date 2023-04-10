@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 internal sealed partial class HealthCheckPublisherHostedService : IHostedService
 {
     private readonly HealthCheckService _healthCheckService;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
-
 public abstract class NorthwindRelationalContext : NorthwindContext
 {
     protected NorthwindRelationalContext(DbContextOptions options)

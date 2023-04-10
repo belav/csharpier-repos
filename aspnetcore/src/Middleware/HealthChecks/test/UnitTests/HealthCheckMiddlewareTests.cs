@@ -14,7 +14,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-
 public class HealthCheckMiddlewareTests
 {
     [Fact]

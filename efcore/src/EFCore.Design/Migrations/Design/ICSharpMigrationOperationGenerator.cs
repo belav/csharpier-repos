@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
-
 /// <summary>
 ///     Used to generate C# code for creating <see cref="MigrationOperation" /> objects.
 /// </summary>

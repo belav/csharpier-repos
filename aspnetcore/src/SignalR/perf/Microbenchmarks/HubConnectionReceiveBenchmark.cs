@@ -17,7 +17,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
-
 public class HubConnectionReceiveBenchmark
 {
     private const string MethodName = "TestMethodName";

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal abstract class WriteOnlyStream : Stream
 {
     public override bool CanRead => false;

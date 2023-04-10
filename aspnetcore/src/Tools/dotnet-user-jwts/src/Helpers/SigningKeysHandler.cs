@@ -10,7 +10,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
-
 // This class manages signing keys for JWT tokens stored in user secrets.
 // These signing keys are stored under the following configuration scheme:
 //

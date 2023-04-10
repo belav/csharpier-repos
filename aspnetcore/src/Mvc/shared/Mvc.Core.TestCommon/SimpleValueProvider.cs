@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 public sealed class SimpleValueProvider : Dictionary<string, object>, IValueProvider
 {
     private readonly CultureInfo _culture;

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 
-
 internal partial struct VirtualCharSequence
 {
     public struct Enumerator : IEnumerator<VirtualChar>

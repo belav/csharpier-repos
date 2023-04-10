@@ -5,7 +5,6 @@ using System.Net;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Information regarding the TCP/IP connection carrying the request.
 /// </summary>

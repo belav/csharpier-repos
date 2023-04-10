@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite;
 
-
 public class InputParserTests
 {
     [Fact]

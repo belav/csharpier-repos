@@ -8,7 +8,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public class FixupCompositeTest
 {
     private static readonly Guid Guid77 = new("{DE390D36-DAAC-4C8B-91F7-E9F5DAA7EF01}");

@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Wraps a callback delegate associated with an event.
 /// </summary>

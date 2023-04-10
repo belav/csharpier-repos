@@ -10,7 +10,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 internal static partial class HttpResultsHelper
 {
     internal const string DefaultContentType = "text/plain; charset=utf-8";

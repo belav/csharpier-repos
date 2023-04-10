@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 /// <summary>
 /// An <see cref="IModelBinder"/> for <see cref="DateTime"/> and nullable <see cref="DateTime"/> models.
 /// </summary>

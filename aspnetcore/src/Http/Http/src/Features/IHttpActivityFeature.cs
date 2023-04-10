@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Feature to access the <see cref="Activity"/> associated with a request.
 /// </summary>

@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 public class DataAnnotationsClientModelValidatorProviderTest
 {
     private readonly IModelMetadataProvider _metadataProvider =

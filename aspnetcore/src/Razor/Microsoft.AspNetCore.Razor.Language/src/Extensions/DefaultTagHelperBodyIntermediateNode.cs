@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Extensions;
 
-
 public sealed class DefaultTagHelperBodyIntermediateNode : ExtensionIntermediateNode
 {
     public DefaultTagHelperBodyIntermediateNode() { }

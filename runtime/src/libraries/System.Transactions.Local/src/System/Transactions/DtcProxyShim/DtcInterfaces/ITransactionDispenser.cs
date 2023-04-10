@@ -7,7 +7,6 @@ using System.Transactions.Oletx;
 
 namespace System.Transactions.DtcProxyShim.DtcInterfaces;
 
-
 // https://docs.microsoft.com/previous-versions/windows/desktop/ms687604(v=vs.85)
 [
     ComImport,

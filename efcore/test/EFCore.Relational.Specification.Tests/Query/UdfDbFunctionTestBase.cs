@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : SharedStoreFixtureBase<DbContext>, new()
 {

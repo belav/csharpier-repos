@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// An action result which formats the given object as JSON.
 /// </summary>

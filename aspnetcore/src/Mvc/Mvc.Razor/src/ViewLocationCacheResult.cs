@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// Result of view location cache lookup.
 /// </summary>

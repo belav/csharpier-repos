@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
-
 public class CustomerOrderHistory
 {
     public string ProductName { get; set; }

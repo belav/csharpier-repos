@@ -1,6 +1,5 @@
 namespace AutoMapper;
 
-
 /// <summary>
 /// The base class for member maps (property, constructor and path maps).
 /// </summary>

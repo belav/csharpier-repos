@@ -5,7 +5,6 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 /// <summary>
 /// HTTP extension methods for <see cref="Stream"/>.
 /// </summary>

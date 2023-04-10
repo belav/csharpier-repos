@@ -10,7 +10,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis;
 
-
 internal partial class SolutionState
 {
     private sealed class SkeletonReferenceSet

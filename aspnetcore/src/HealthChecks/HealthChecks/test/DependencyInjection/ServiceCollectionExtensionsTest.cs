@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 public class ServiceCollectionExtensionsTest
 {
     [Fact]

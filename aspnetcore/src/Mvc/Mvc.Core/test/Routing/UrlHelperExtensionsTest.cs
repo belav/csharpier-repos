@@ -9,7 +9,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 public class UrlHelperExtensionsTest
 {
     [Fact]

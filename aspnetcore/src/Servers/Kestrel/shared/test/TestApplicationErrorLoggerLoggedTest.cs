@@ -11,7 +11,6 @@ using static Microsoft.AspNetCore.Testing.TestApplicationErrorLogger;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class TestApplicationErrorLoggerLoggedTest : LoggedTest
 {
     private TestApplicationErrorLogger TestApplicationErrorLogger { get; set; }

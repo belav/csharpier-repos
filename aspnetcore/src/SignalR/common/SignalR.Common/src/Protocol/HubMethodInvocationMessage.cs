@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 /// <summary>
 /// A base class for hub messages representing an invocation.
 /// </summary>

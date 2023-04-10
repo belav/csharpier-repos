@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public static class TestTagMatchingRuleDescriptorBuilderExtensions
 {
     public static TagMatchingRuleDescriptorBuilder RequireTagName(

@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace RazorSyntaxGenerator;
 
-
 internal class SignatureWriter
 {
     private readonly TextWriter _writer;

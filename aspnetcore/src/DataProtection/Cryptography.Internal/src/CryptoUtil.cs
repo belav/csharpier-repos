@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Cryptography.Internal;
 
 namespace Microsoft.AspNetCore.Cryptography;
 
-
 internal static unsafe class CryptoUtil
 {
     // This isn't a typical Debug.Assert; the check is always performed, even in retail builds.

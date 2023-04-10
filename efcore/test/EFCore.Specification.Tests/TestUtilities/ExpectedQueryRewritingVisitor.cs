@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class ExpectedQueryRewritingVisitor : ExpressionVisitor
 {
     private static readonly MethodInfo _maybeDefaultIfEmpty = typeof(QueryTestExtensions).GetMethod(

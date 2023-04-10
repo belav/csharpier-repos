@@ -15,7 +15,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// An <see cref="IDataProtectionProvider"/> that is transient.
 /// </summary>

@@ -18,7 +18,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 public class RazorViewEngineTest
 {
     private static readonly Dictionary<string, object> _areaTestContext = new Dictionary<

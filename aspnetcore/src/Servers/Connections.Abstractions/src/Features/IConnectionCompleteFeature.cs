@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// Represents the completion action for a connection.
 /// </summary>

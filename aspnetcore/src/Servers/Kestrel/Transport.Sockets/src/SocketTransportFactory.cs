@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets;
 
-
 /// <summary>
 /// A factory for socket based connections.
 /// </summary>

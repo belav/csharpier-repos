@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// A <see cref="IDataSerializer{TModel}"/> for <see cref="AuthenticationProperties"/>.
 /// </summary>

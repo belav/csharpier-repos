@@ -19,7 +19,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Certificate.Test;
 
-
 public class ClientCertificateAuthenticationTests
 {
     [Fact]

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// A factory for <see cref="IMemoryCache"/>s configured using <see cref="CacheTagHelperOptions"/>.
 /// <see cref="CacheTagHelper"/> uses this factory to set its <see cref="CacheTagHelper.MemoryCache"/>.

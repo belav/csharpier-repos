@@ -7,7 +7,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace FilesWebSite;
 
-
 public class EmbeddedFilesController : Controller
 {
     public IActionResult DownloadFileWithFileName()

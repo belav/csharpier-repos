@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-
 /// <summary>
 ///     Defines conversions from an object of one type in a model to an object of the same or
 ///     different type in the store.

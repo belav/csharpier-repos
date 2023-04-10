@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 internal sealed class CreatedResult : ObjectResult
 {
     /// <summary>

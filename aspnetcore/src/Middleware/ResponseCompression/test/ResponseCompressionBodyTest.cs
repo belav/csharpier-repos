@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.ResponseCompression.Tests;
 
-
 public class ResponseCompressionBodyTest
 {
     [Theory]

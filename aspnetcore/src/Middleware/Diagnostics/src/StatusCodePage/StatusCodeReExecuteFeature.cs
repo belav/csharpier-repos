@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 /// <summary>Default implementation for <see cref="IStatusCodeReExecuteFeature" />.</summary>
 public class StatusCodeReExecuteFeature : IStatusCodeReExecuteFeature
 {

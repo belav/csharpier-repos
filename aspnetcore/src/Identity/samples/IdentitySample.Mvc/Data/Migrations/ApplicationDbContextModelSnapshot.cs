@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace IdentitySample.Data.Migrations;
 
-
 [DbContext(typeof(ApplicationDbContext))]
 partial class ApplicationDbContextModelSnapshot : ModelSnapshot
 {

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 
-
 /// <summary>
 /// Serializes and deserializes the contents of <see cref="ITempDataDictionary"/>.
 /// </summary>

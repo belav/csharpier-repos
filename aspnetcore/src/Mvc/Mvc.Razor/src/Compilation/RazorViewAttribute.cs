@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
-
 /// <summary>
 /// This class is replaced by RazorCompiledItem and will not be used by the runtime.
 /// </summary>

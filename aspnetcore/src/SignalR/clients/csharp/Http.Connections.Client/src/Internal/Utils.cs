@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
-
 internal static class Utils
 {
     public static Uri AppendPath(Uri url, string path)

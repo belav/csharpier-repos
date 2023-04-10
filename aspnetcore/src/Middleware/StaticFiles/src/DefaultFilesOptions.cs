@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.StaticFiles.Infrastructure;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Options for selecting default file names.
 /// </summary>

@@ -15,7 +15,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree;
 
-
 internal sealed partial class SymbolTreeInfoCacheServiceFactory
 {
     internal sealed partial class SymbolTreeInfoCacheService

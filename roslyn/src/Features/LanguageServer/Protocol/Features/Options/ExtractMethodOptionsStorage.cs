@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod;
 
-
 internal static class ExtractMethodOptionsStorage
 {
     public static ExtractMethodOptions GetExtractMethodOptions(

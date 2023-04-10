@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.Server.Kestrel;
 
-
 /// <summary>
 /// The configuration for an endpoint.
 /// </summary>

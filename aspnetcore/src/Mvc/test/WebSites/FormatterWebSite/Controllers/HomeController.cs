@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FormatterWebSite.Controllers;
 
-
 public class HomeController : Controller
 {
     [HttpPost]

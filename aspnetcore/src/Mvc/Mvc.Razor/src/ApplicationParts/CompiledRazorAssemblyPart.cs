@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 /// <summary>
 /// An <see cref="ApplicationPart"/> for compiled Razor assemblies.
 /// </summary>

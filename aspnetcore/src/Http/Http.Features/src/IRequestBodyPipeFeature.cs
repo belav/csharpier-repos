@@ -5,7 +5,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Represents the HTTP request body as a <see cref="PipeReader"/>.
 /// </summary>

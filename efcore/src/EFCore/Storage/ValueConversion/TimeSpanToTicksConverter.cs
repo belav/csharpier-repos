@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-
 /// <summary>
 ///     Converts <see cref="TimeSpan" /> to and <see cref="TimeSpan.Ticks" />.
 /// </summary>

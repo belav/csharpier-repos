@@ -5,7 +5,6 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 /// <summary>
 ///     <para>
 ///         Implementation of <see cref="IColumnModification" /> interface.

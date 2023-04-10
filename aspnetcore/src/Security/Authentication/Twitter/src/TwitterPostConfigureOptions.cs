@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
-
 /// <summary>
 /// Used to setup defaults for all <see cref="TwitterOptions"/>.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class InMemoryComplianceTest : ComplianceTestBase
 {
     protected override ICollection<Type> IgnoredTestBases { get; } =

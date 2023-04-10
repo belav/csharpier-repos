@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
-
 public class InheritanceRelationshipsData : ISetSource
 {
     public static readonly InheritanceRelationshipsData Instance = new();

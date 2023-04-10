@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Represents an <see cref="StatusCodeResult"/> that when
 /// executed will produce a Not Found (404) response.

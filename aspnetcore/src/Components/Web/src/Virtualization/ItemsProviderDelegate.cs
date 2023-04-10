@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Web.Virtualization;
 
-
 /// <summary>
 /// A function that provides items to a virtualized source.
 /// </summary>

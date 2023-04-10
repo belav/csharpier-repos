@@ -3,5 +3,4 @@
 
 namespace ApiExplorerWebSite;
 
-
 public class ReloadAttribute : Attribute { }

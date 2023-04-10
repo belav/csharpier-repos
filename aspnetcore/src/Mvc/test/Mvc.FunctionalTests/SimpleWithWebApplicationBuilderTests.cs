@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class SimpleWithWebApplicationBuilderTests
     : IClassFixture<MvcTestFixture<SimpleWebSiteWithWebApplicationBuilder.Program>>
 {

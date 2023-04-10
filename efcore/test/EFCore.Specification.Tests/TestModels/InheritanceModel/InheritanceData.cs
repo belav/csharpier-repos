@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
-
 public class InheritanceData : ISetSource
 {
     public static readonly InheritanceData Instance = new(useGeneratedKeys: false);

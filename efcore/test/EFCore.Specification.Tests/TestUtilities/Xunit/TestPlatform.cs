@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 
-
 [Flags]
 public enum TestPlatform
 {

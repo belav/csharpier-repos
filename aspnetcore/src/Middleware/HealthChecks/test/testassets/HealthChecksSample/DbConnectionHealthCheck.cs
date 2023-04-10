@@ -6,7 +6,6 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace HealthChecksSample;
 
-
 public abstract class DbConnectionHealthCheck : IHealthCheck
 {
     protected DbConnectionHealthCheck(string connectionString)

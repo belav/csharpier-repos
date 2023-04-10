@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// A component that provides a cascading value to all descendant components.
 /// </summary>

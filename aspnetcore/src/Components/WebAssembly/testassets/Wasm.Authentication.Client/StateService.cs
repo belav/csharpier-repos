@@ -3,7 +3,6 @@
 
 namespace Wasm.Authentication.Client;
 
-
 public class StateService
 {
     private string _state;

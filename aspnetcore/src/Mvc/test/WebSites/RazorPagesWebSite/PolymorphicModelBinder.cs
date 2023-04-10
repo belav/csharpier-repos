@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace RazorPagesWebSite;
 
-
 public class PolymorphicModelBinder : IModelBinder
 {
     public Task BindModelAsync(ModelBindingContext bindingContext)

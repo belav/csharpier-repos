@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public static class TestRazorCodeDocument
 {
     public static RazorCodeDocument CreateEmpty()

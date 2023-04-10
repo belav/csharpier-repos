@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 public partial class ParameterViewTest
 {
     [Fact]

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Middleware responsible for routing.
 /// </summary>

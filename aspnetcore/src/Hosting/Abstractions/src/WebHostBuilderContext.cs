@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 /// <summary>
 /// Context containing the common services on the <see cref="IWebHost" />. Some properties may be null until set by the <see cref="IWebHost" />.
 /// </summary>

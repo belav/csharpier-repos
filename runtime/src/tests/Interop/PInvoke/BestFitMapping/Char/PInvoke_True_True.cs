@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 
 namespace Char;
 
-
 public class PInvoke_True_True
 {
     [DllImport("Char_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]

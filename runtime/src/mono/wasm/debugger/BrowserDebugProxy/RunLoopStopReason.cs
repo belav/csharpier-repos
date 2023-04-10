@@ -3,7 +3,6 @@
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
-
 public enum RunLoopStopReason
 {
     Shutdown,

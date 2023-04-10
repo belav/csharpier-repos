@@ -6,7 +6,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
-
 public class MiddlewareAnalysisSampleTest
     : IClassFixture<TestFixture<MiddlewareAnaysisSample.Startup>>
 {

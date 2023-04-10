@@ -8,7 +8,6 @@ using Newtonsoft.Json.Linq;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that adds the 'id' property - a key required by Azure Cosmos.
 /// </summary>

@@ -7,7 +7,6 @@ using Microsoft.JSInterop.Implementation;
 
 namespace Microsoft.JSInterop.WebAssembly;
 
-
 internal sealed class WebAssemblyJSObjectReferenceJsonConverter : JsonConverter<IJSObjectReference>
 {
     private readonly WebAssemblyJSRuntime _jsRuntime;

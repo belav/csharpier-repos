@@ -5,7 +5,6 @@ using MockHostTypes;
 
 namespace CreateHostBuilderPatternTestSite;
 
-
 public class Program
 {
     public static void Main(string[] args)

@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests;
 
-
 public class NullSubstitute : IntegrationTest<NullSubstitute.DatabaseInitializer>
 {
     public class Customer

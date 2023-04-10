@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Polly;
 
-
 public class HttpRequestMessageExtensionsTest
 {
     [Fact]

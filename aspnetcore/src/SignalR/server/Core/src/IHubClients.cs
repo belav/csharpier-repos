@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.SignalR.Internal;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// An abstraction that provides access to client connections.
 /// </summary>

@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class SettersInBaseClasses : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>

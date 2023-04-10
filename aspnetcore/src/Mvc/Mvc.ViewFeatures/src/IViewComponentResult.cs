@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Result type of a <see cref="ViewComponent"/>.
 /// </summary>

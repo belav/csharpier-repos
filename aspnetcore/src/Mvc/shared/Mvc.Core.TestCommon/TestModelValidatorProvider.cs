@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 public class TestModelValidatorProvider : CompositeModelValidatorProvider
 {
     // Creates a provider with all the defaults - includes data annotations

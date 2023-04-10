@@ -3,7 +3,6 @@
 
 namespace RazorWebSite;
 
-
 public class TaskReturningService
 {
     public async Task<string> GetValueAsync()

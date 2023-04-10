@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// An input component used for selecting a value from a group of choices.
 /// </summary>

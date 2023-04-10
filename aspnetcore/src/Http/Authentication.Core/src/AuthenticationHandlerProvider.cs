@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Implementation of <see cref="IAuthenticationHandlerProvider"/>.
 /// </summary>

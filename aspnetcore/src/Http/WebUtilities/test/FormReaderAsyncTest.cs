@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 public class FormReaderAsyncTest : FormReaderTests
 {
     protected override async Task<Dictionary<string, StringValues>> ReadFormAsync(FormReader reader)

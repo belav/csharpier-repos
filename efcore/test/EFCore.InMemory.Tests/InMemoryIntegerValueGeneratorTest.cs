@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class InMemoryIntegerValueGeneratorTest
 {
     [ConditionalFact]

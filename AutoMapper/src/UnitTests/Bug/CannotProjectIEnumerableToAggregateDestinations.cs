@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class CannotProjectIEnumerableToAggregateDestinations
 {
     class DummySource

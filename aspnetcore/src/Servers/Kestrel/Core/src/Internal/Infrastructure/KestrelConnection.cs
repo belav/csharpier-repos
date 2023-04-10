@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal abstract class KestrelConnection
     : IConnectionHeartbeatFeature,
         IConnectionCompleteFeature,

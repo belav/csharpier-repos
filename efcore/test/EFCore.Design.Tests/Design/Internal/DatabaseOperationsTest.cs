@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Design.Internal;
 
-
 public class DatabaseOperationsTest
 {
     [ConditionalFact]

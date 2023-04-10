@@ -7,7 +7,6 @@ using System.Composition;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
-
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false), MetadataAttribute]
 internal class ExportCSharpVisualBasicStatelessLspServiceAttribute
     : ExportStatelessLspServiceAttribute

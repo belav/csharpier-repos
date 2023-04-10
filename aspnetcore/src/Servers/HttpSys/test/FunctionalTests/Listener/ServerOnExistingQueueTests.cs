@@ -12,7 +12,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.HttpSys.Listener;
 
-
 public class ServerOnExistingQueueTests
 {
     [ConditionalFact]

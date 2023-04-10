@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 
 namespace Microsoft.Net.Http.Headers;
 
-
 // List<T> allows 'null' values to be added. This is not what we want so we use a custom Collection<T> derived
 // type to throw if 'null' gets added. Collection<T> internally uses List<T> which comes at some cost. In addition
 // Collection<T>.Add() calls List<T>.InsertItem() which is an O(n) operation (compared to O(1) for List<T>.Add()).

@@ -11,7 +11,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure;
 
-
 /// <summary>
 /// Provides version hash for a specified file.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public interface ITestStoreFactory
 {
     TestStore Create(string storeName);

@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
-
 public class GuidUser : IdentityUser<Guid>
 {
     public GuidUser()

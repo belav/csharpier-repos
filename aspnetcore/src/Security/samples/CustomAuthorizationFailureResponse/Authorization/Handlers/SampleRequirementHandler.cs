@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CustomAuthorizationFailureResponse.Authorization.Handlers;
 
-
 public class SampleRequirementHandler : AuthorizationHandler<SampleRequirement>
 {
     protected override Task HandleRequirementAsync(

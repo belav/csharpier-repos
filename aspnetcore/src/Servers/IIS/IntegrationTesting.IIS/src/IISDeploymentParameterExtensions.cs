@@ -5,7 +5,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
-
 public static class IISDeploymentParameterExtensions
 {
     public static void AddDebugLogToWebConfig(

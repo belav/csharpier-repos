@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace SignalRSamples.Hubs;
 
-
 public class DynamicChat : DynamicHub
 {
     public override Task OnConnectedAsync()

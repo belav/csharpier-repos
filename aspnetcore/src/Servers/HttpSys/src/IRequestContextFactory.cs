@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal interface IRequestContextFactory
 {
     RequestContext CreateRequestContext(uint? bufferSize, ulong requestId);

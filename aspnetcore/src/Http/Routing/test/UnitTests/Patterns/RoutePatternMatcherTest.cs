@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class RoutePatternMatcherTest
 {
     [Fact]

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 /// <summary>
 /// Options for the test server.
 /// </summary>

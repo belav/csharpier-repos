@@ -13,7 +13,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace AuthSamples.DynamicSchemes;
 
-
 public class Startup
 {
     public Startup(IConfiguration configuration)

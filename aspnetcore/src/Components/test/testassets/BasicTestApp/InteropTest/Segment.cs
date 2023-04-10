@@ -3,7 +3,6 @@
 
 namespace BasicTestApp.InteropTest;
 
-
 public class Segment
 {
     public string Source { get; set; }

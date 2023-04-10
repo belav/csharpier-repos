@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 internal sealed class DefaultPageFactoryProvider : IPageFactoryProvider
 {
     private readonly IPageActivatorProvider _pageActivator;

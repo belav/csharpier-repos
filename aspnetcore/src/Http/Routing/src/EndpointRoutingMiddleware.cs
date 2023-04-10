@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 internal sealed partial class EndpointRoutingMiddleware
 {
     private const string DiagnosticsEndpointMatchedKey =

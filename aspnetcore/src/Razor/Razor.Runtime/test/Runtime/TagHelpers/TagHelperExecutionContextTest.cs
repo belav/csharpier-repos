@@ -8,7 +8,6 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 
-
 public class TagHelperExecutionContextTest
 {
     [Fact]

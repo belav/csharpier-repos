@@ -3,7 +3,6 @@
 
 namespace Microsoft.WebAssembly.AppHost;
 
-
 #nullable enable
 
 internal sealed class WasmLogMessage

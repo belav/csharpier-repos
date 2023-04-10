@@ -10,7 +10,6 @@ using System.Text;
 
 namespace System.CommandLine.ApiCompatibility.Tests;
 
-
 internal static class ApiContract
 {
     public static string GenerateContractForAssembly(Assembly assembly)

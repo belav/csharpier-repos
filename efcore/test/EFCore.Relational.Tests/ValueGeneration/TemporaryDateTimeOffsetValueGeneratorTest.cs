@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
-
 public class TemporaryDateTimeOffsetValueGeneratorTest
 {
     [ConditionalFact]

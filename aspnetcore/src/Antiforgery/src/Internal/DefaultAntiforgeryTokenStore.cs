@@ -8,7 +8,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-
 internal sealed class DefaultAntiforgeryTokenStore : IAntiforgeryTokenStore
 {
     private readonly AntiforgeryOptions _options;

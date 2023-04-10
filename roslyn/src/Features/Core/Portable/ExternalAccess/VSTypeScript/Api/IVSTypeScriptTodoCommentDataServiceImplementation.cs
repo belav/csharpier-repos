@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.TaskList;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
 
-
 internal readonly struct VSTypeScriptTaskListItem
 {
     public VSTypeScriptTaskListItem(

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 /// <summary>
 /// Describes a page action.
 /// </summary>

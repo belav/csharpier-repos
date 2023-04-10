@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Extensions.Tests;
 
-
 public class TestStream : Stream
 {
     public override bool CanRead { get; }

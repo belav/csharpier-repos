@@ -16,7 +16,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// A metadata representation of a model type, property or parameter.
 /// </summary>

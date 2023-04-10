@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
-
 public class InjectOrderByPropertyExpressionMutator : ExpressionMutator
 {
     private ExpressionFinder _expressionFinder;

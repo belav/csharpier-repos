@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 /// <summary>
 /// A possible format for the body of a request.
 /// </summary>

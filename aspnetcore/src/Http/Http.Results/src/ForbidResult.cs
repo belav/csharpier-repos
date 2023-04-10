@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 internal sealed partial class ForbidResult : IResult
 {
     /// <summary>

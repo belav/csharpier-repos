@@ -15,7 +15,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
-
 public class OpenIdConnectConfigurationTests
 {
     private void ConfigureDefaults(OpenIdConnectOptions o)

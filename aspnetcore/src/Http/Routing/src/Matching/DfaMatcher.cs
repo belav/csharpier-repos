@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal sealed partial class DfaMatcher : Matcher
 {
     private readonly ILogger _logger;

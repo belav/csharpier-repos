@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// An <see cref="ActionResult"/> that when executed will produce a response with content.
 /// </summary>

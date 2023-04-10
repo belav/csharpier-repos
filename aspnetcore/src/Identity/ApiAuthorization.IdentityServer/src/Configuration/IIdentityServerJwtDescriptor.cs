@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
-
 internal interface IIdentityServerJwtDescriptor
 {
     IDictionary<string, ResourceDefinition> GetResourceDefinitions();

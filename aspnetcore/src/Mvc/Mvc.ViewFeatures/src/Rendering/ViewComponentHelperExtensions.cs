@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// Extension methods for <see cref="IViewComponentHelper"/>.
 /// </summary>

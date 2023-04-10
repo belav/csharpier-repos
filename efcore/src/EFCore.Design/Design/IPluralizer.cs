@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     Converts identifiers to the plural and singular equivalents.
 /// </summary>

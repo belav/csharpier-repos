@@ -26,7 +26,6 @@ using Microsoft.Extensions.Logging;
 
 namespace InteropTestsWebsite;
 
-
 public class Program
 {
     public static void Main(string[] args)

@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 public class DefaultTagHelperDescriptorProviderTest
 {
     private static readonly Assembly _assembly = typeof(DefaultTagHelperDescriptorProviderTest)

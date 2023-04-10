@@ -3,7 +3,6 @@
 
 namespace CodeGenerator;
 
-
 public class HttpProtocolFeatureCollection
 {
     public static string GenerateFile()

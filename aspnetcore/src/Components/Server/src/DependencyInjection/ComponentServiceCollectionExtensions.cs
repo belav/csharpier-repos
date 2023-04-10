@@ -17,7 +17,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods to configure an <see cref="IServiceCollection"/> for components.
 /// </summary>

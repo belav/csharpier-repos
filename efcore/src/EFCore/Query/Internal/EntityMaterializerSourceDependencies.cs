@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
 
-
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="EntityMaterializerSource" />

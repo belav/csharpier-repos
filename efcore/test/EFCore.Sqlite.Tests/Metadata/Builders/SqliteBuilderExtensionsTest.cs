@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 public class SqliteBuilderExtensionsTest
 {
     [ConditionalFact]

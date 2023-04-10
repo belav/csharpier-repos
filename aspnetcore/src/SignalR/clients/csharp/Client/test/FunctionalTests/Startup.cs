@@ -18,7 +18,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
-
 public class Startup
 {
     private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(

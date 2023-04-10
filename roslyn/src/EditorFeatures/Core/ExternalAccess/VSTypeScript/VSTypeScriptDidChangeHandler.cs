@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.LanguageServer.Handler.DocumentChanges;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
-
 [
     ExportStatelessLspService(
         typeof(DidChangeHandler),

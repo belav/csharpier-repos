@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
-
 internal static class CompilationFeatureDetector
 {
     public static async Task<IImmutableSet<string>> DetectFeaturesAsync(

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 /// <summary>
 /// Understands directive nodes and performs the necessary modifications to the document.
 /// </summary>

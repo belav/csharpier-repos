@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
-
 /// <summary>
 /// Abstract class used to buffer content returned by <see cref="ITagHelper"/>s.
 /// </summary>

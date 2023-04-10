@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 public abstract class TokenizerTestBase
 {
     internal abstract object IgnoreRemaining { get; }

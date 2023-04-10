@@ -5,7 +5,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 public class FeatureCollectionTests
 {
     [Fact]

@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests;
 
-
 public class ProjectionAdvanced : IntegrationTest<ProjectionAdvanced.Initializer>
 {
     protected override MapperConfiguration CreateConfiguration() =>

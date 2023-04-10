@@ -7,7 +7,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
-
 public class JObjectAdapter : IAdapter
 {
     public virtual bool TryAdd(

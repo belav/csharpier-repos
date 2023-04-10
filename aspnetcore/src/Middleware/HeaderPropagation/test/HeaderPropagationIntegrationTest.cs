@@ -13,7 +13,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.HeaderPropagation.Tests;
 
-
 public class HeaderPropagationIntegrationTest
 {
     [Fact]

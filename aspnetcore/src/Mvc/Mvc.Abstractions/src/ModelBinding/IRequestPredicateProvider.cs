@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// An interface that allows a top-level model to be bound or not bound based on state associated
 /// with the current request.

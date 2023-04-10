@@ -12,7 +12,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-
 public class ConcurrentPipeWriterTests
 {
     [Fact]

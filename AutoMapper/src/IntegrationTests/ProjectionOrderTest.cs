@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests;
 
-
 public class ProjectionOrderTest : IntegrationTest<ProjectionOrderTest.DatabaseInitializer>
 {
     public class Destination

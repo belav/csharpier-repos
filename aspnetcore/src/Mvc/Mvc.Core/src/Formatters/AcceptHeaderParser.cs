@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 internal static class AcceptHeaderParser
 {
     public static IList<MediaTypeSegmentWithQuality> ParseAcceptHeader(IList<string> acceptHeaders)

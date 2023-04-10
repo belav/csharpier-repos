@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     A <see cref="DiagnosticSource" /> event payload class for events that indicate
 ///     a change of a tracked entity from one <see cref="EntityState" /> to another.

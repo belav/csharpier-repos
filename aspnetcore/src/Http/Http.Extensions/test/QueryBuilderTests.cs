@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http.Extensions;
 
-
 public class QueryBuilderTests
 {
     [Fact]

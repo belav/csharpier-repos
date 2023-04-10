@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class ComplianceTestBase
 {
     protected abstract Assembly TargetAssembly { get; }

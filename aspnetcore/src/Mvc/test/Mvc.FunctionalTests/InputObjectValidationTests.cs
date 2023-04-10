@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class InputObjectValidationTests : IClassFixture<MvcTestFixture<FormatterWebSite.Startup>>
 {
     public InputObjectValidationTests(MvcTestFixture<FormatterWebSite.Startup> fixture)

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
-
 public class InjectIncludeExpressionMutator : ExpressionMutator
 {
     public InjectIncludeExpressionMutator(DbContext context)

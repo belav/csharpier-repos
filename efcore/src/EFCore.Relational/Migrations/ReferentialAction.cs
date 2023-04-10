@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 /// <summary>
 ///     The action that a database may take when handling a foreign key constraint as
 ///     part of an update or delete.

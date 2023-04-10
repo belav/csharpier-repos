@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Extensions.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class SqlServerEventIdTest : EventIdTestBase
 {
     [ConditionalFact]

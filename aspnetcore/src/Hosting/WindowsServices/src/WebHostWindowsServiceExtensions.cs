@@ -5,7 +5,6 @@ using System.ServiceProcess;
 
 namespace Microsoft.AspNetCore.Hosting.WindowsServices;
 
-
 /// <summary>
 ///     Extensions to <see cref="IWebHost"/> for hosting inside a Windows service.
 /// </summary>

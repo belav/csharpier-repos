@@ -10,7 +10,6 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.WebAssembly.AppHost;
 
-
 internal sealed record RunArgumentsJson(
     string[] applicationArguments,
     string[]? runtimeArguments = null,

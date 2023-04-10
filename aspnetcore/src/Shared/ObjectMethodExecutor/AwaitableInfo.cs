@@ -9,7 +9,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.Extensions.Internal;
 
-
 internal readonly struct AwaitableInfo
 {
     private const BindingFlags Everything =

@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 public class HtmlDocumentTest : ParserTestBase
 {
     private static readonly TestFile Nested1000 = TestFile.Create(

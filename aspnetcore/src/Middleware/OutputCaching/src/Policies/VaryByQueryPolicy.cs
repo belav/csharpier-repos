@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// When applied, the cached content will be different for every value of the provided query string keys.
 /// It also disables the default behavior which is to vary on all query string keys.

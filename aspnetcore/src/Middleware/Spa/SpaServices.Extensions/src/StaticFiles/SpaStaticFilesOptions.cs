@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.SpaServices.StaticFiles;
 
-
 /// <summary>
 /// Represents options for serving static files for a Single Page Application (SPA).
 /// </summary>

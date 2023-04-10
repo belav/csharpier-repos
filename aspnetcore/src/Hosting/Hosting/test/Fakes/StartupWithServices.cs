@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
-
 public class StartupWithServices
 {
     private readonly IFakeStartupCallback _fakeStartupCallback;

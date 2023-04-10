@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Components.CompilerServices;
 
-
 /// <summary>
 /// Used by generated code produced by the Components code generator. Not intended or supported
 /// for use in application code.

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     The <see cref="DiagnosticSource" /> event payload for events correlated with a <see cref="DbCommand" />.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
     where TFloatingPoint : struct
 {

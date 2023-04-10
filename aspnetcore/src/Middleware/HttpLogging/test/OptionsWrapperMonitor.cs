@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 internal class OptionsWrapperMonitor<T> : IOptionsMonitor<T>
 {
     private event Action<T, string> _listener;

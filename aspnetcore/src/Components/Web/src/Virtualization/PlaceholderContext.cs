@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Web.Virtualization;
 
-
 /// <summary>
 /// Contains context for a placeholder in a virtualized list.
 /// </summary>

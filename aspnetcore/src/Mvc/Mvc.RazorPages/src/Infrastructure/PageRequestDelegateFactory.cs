@@ -15,7 +15,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 internal sealed class PageRequestDelegateFactory : IRequestDelegateFactory
 {
     private readonly PageActionInvokerCache _cache;

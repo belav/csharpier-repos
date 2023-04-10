@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Design.Internal;
 
-
 #nullable enable
 
 public class SqlServerAnnotationCodeGeneratorTest

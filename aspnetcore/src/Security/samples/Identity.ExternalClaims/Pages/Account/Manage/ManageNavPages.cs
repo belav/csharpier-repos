@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Identity.ExternalClaims.Pages.Account.Manage;
 
-
 public static class ManageNavPages
 {
     public static string Index => "Index";

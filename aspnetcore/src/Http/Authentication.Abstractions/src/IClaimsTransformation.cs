@@ -5,7 +5,6 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Used by the <see cref="IAuthenticationService"/> for claims transformation.
 /// </summary>

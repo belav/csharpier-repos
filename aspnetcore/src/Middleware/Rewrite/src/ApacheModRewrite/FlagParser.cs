@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
-
 internal sealed class FlagParser
 {
     private readonly IDictionary<string, FlagType> _ruleFlagLookup = new Dictionary<

@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     A factory for finding and creating <see cref="InstantiationBinding" /> instances for
 ///     a given CLR constructor.

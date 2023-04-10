@@ -25,7 +25,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public abstract class Http3ConnectionBenchmarkBase
 {
     private Http3InMemory _http3;

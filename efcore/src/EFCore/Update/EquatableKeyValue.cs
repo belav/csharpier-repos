@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 /// <summary>
 ///     Objects of this type contain a key value corresponding to a Metadata item and implement <see cref="Equals(object?)" />
 ///     that return <see langword="true" /> only for other objects corresponding to the same Metadata item.

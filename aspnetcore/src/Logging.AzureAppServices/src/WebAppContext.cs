@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
-
 /// <summary>
 /// Represents the default implementation of <see cref="IWebAppContext"/>.
 /// </summary>

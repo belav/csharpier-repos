@@ -19,7 +19,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.EditorFeatures.Intents;
 
-
 [IntentProvider(WellKnownIntents.DeleteParameter, LanguageNames.CSharp), Shared]
 internal sealed class DeleteParameterIntentProvider : IIntentProvider
 {

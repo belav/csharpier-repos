@@ -9,7 +9,6 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-
 // This converter should be temporary until System.Text.Json supports overriding contacts.
 // We want to eliminate this converter because System.Text.Json has to buffer content in converters.
 internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessage>

@@ -8,7 +8,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 /// <summary>
 /// A base class for <see cref="IActionDescriptorCollectionProvider"/> which also provides an <see cref="IChangeToken"/>
 /// for reactive notifications of <see cref="ActionDescriptor"/> changes.

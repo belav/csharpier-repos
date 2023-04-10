@@ -8,7 +8,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
-
 // Similar to design time code generation tests, but goes a character at a time.
 // Don't add many of these since they are slow - instead add features to existing
 // tests here, and use these as smoke tests, not for detailed regression testing.

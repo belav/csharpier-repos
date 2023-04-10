@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
-
 /// <summary>
 /// An <see cref="AuthenticationStateProvider"/> intended for use in server-side Blazor.
 /// </summary>

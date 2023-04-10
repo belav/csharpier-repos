@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
-
 /// <summary>
 /// A filter factory which creates a new instance of <see cref="CorsAuthorizationFilter"/>.
 /// </summary>

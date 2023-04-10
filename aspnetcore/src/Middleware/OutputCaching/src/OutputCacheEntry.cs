@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 internal sealed class OutputCacheEntry
 {
     /// <summary>

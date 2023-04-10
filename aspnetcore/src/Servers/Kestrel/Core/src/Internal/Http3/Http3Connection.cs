@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.WebTransport;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
-
 internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestProcessor
 {
     internal static readonly object StreamPersistentStateKey = new();

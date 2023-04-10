@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
-
 internal sealed class ComponentSymbols
 {
     public static bool TryCreate(Compilation compilation, out ComponentSymbols symbols)

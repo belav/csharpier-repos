@@ -10,7 +10,6 @@ using System.Reflection;
 
 namespace Microsoft.Extensions.Internal;
 
-
 internal sealed class ObjectMethodExecutor
 {
     private readonly object?[]? _parameterDefaultValues;

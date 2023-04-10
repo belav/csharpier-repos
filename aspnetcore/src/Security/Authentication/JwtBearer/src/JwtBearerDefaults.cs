@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
-
 /// <summary>
 /// Default values used by bearer authentication.
 /// </summary>

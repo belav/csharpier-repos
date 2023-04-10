@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// Specifies that the class or method that this attribute is applied to requires the specified authorization.
 /// </summary>

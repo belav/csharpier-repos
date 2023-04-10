@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FormatterWebSite.Controllers;
 
-
 public class PolymorphicBindingController : ControllerBase
 {
     public IActionResult ModelBound([ModelBinder(typeof(PolymorphicBinder))] BaseModel person)

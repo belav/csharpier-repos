@@ -12,7 +12,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 public abstract class UrlHelperTestBase
 {
     [Theory]

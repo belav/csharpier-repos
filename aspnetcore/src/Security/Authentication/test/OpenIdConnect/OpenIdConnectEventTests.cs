@@ -21,7 +21,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
-
 public class OpenIdConnectEventTests
 {
     private readonly RequestDelegate AppWritePath = context =>

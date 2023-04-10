@@ -5,7 +5,6 @@ using System.Net;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
-
 public abstract class Faction
 {
     public int Id { get; set; }

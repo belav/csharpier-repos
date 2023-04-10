@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
-
 /// <summary>
 /// Implements <see cref="IDistributedCacheTagHelperFormatter"/> by serializing the content
 /// in UTF8.

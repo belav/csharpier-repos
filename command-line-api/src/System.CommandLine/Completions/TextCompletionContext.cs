@@ -3,7 +3,6 @@
 
 namespace System.CommandLine.Completions;
 
-
 /// <summary>
 /// Provides details for calculating completions in the context of complete, unsplit command line text.
 /// </summary>

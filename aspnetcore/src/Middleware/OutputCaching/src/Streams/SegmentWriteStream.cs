@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 internal sealed class SegmentWriteStream : Stream
 {
     private readonly List<byte[]> _segments = new();

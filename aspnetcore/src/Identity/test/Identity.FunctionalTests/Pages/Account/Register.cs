@@ -6,7 +6,6 @@ using AngleSharp.Dom.Html;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 
-
 public class Register : DefaultUIPage
 {
     private IHtmlFormElement _registerForm;

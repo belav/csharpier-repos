@@ -12,7 +12,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class HttpOkObjectResultTest
 {
     public static TheoryData<object> ValuesData

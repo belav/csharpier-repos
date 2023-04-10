@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorProjectEngine
 {
     public abstract RazorConfiguration Configuration { get; }

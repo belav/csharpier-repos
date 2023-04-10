@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 internal class DatabaseTableRef : DatabaseTable
 {
     public DatabaseTableRef(string name, string schema = null)

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Server.Circuits;
 
 namespace ComponentsApp.Server;
 
-
 internal class LoggingCircuitHandler : CircuitHandler
 {
     private readonly ILogger<LoggingCircuitHandler> _logger;

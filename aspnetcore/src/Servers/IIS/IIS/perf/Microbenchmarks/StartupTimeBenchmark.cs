@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.IIS.Microbenchmarks;
 
-
 [AspNetCoreBenchmark(typeof(FirstRequestConfig))]
 public class StartupTimeBenchmark
 {

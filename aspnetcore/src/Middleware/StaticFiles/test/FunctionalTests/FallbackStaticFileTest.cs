@@ -15,7 +15,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 public class FallbackStaticFileTest : LoggedTest
 {
     [Fact]

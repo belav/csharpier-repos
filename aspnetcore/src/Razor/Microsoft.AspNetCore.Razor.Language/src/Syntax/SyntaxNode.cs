@@ -10,7 +10,6 @@ using System.Threading;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
 internal abstract partial class SyntaxNode
 {

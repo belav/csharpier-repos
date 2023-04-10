@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.TestHost;
 
 namespace RoutingWebSite;
 
-
 public class Program
 {
     public const string EndpointRoutingScenario = "endpointrouting";

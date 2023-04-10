@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 
 namespace MonoAPI.Tests.MonoMono.InstallEHCallback;
 
-
 public class MonoPInvokeCallbackAttribute : Attribute
 {
     public MonoPInvokeCallbackAttribute(Type delegateType) { }

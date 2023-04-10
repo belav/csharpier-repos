@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class ConstraintMatcherTest
 {
     private const string _name = "name";

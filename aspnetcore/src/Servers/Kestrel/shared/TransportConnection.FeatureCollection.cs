@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Connections.Features;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 internal partial class TransportConnection
 {
     // NOTE: When feature interfaces are added to or removed from this TransportConnection class implementation,

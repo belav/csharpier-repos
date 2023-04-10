@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Used for store specific options
 /// </summary>

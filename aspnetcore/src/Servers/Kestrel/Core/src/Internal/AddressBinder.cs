@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-
 internal sealed class AddressBinder
 {
     public static async Task BindAsync(

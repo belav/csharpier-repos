@@ -7,7 +7,6 @@ using System;
 
 namespace DebuggerTests;
 
-
 internal static class TestOptions
 {
     internal static readonly bool LogToConsole =

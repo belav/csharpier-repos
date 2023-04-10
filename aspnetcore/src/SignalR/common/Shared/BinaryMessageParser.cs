@@ -6,7 +6,6 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal static class BinaryMessageParser
 {
     private const int MaxLengthPrefixSize = 5;

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Provides an abstraction for a store which maps users to roles.
 /// </summary>

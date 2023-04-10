@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 // The ActionSelectionTable has different code paths for ActionDescriptor and
 // RouteEndpoint for creating a table. We're trying to test both code paths
 // for creation, but selection works the same for both cases.

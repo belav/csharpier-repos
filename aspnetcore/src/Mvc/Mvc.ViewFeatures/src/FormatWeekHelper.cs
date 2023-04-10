@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal static class FormatWeekHelper
 {
     public static string GetFormattedWeek(ModelExplorer modelExplorer)

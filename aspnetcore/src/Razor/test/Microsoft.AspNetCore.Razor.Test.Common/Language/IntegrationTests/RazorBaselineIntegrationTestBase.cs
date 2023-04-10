@@ -11,7 +11,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 
-
 [IntializeTestFile]
 public abstract class RazorBaselineIntegrationTestBase : RazorIntegrationTestBase
 {

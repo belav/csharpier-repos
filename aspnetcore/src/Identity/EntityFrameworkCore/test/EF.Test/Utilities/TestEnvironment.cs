@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test.Utilities;
 
-
 public static class TestEnvironment
 {
     public static IConfiguration Config { get; }

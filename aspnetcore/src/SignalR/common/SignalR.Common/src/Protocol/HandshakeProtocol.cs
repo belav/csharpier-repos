@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 /// <summary>
 /// A helper class for working with SignalR handshakes.
 /// </summary>

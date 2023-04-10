@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.SignalR.Internal;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// Methods to add <see cref="IHubFilter"/>'s to Hubs.
 /// </summary>

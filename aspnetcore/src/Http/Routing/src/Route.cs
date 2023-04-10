@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Represents an instance of a route.
 /// </summary>

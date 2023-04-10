@@ -15,7 +15,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 public class MigrationsSqlServerTest
     : MigrationsTestBase<MigrationsSqlServerTest.MigrationsSqlServerFixture>
 {

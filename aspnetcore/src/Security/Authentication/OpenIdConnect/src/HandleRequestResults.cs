@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
-
 internal static class HandleRequestResults
 {
     internal static HandleRequestResult UnexpectedParams = HandleRequestResult.Fail(

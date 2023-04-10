@@ -14,7 +14,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 public abstract class FileContentResultTestBase
 {
     protected abstract Task ExecuteAsync(

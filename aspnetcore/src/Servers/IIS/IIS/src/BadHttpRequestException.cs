@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.IIS;
 
-
 ///<inheritdoc/>
 [Obsolete(
     "Moved to Microsoft.AspNetCore.Http.BadHttpRequestException. See https://aka.ms/badhttprequestexception for details."

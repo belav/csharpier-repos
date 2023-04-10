@@ -8,7 +8,6 @@ using SignalRSamples.Hubs;
 
 namespace SignalRSamples;
 
-
 public class Startup
 {
     private readonly JsonWriterOptions _jsonWriterOptions = new JsonWriterOptions

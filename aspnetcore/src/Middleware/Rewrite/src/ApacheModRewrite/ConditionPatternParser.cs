@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
-
 /// <summary>
 /// Parses the "CondPattern" portion of the RewriteCond.
 /// RewriteCond TestString CondPattern

@@ -15,7 +15,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal static class DefaultEditorTemplates
 {
     private const string HtmlAttributeKey = "htmlAttributes";

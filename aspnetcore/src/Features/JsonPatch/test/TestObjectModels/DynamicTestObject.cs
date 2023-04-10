@@ -6,7 +6,6 @@ using System.Dynamic;
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
-
 public class DynamicTestObject : DynamicObject
 {
     private Dictionary<string, object> _dictionary = new Dictionary<string, object>();

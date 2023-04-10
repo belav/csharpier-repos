@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class SerializableErrorTests : IClassFixture<MvcTestFixture<XmlFormattersWebSite.Startup>>
 {
     public SerializableErrorTests(MvcTestFixture<XmlFormattersWebSite.Startup> fixture)

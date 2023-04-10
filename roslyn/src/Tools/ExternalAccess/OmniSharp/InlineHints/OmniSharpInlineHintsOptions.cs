@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.InlineHints;
 
-
 internal readonly record struct OmniSharpInlineHintsOptions(
     OmniSharpInlineParameterHintsOptions ParameterOptions,
     OmniSharpInlineTypeHintsOptions TypeOptions

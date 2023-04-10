@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 /// <summary>
 ///     An entity type that represents a row in the Migrations history table.
 /// </summary>

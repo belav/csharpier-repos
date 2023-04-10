@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Represents an activator that can be used to instantiate components.
 /// The activator is not responsible for dependency injection, since the framework

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-
 internal sealed class HttpResponseStream : WriteOnlyStreamInternal
 {
     private readonly IHttpBodyControlFeature _bodyControl;

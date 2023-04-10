@@ -14,7 +14,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class TempDataInCookiesTest
     : TempDataTestBase,
         IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>

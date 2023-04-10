@@ -5,7 +5,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 
-
 /// <summary>
 ///     Used dynamically from <see cref="ConditionalFactAttribute" />.
 ///     Make sure to update that class if you move this type.

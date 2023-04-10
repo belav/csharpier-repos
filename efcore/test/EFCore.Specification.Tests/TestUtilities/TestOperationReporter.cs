@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestOperationReporter : IOperationReporter
 {
     private readonly List<(LogLevel, string)> _messages = new();

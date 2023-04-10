@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     <para>
 ///         Indicates whether an element in the <see cref="IMutableModel" /> was specified explicitly

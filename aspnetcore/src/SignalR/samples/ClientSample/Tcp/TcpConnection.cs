@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace ClientSample;
 
-
 public class TcpConnection : ConnectionContext, IConnectionInherentKeepAliveFeature
 {
     private readonly Socket _socket;

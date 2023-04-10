@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Tests;
 
-
 public class ConstraintsTestHelper
 {
     public static bool TestConstraint(IRouteConstraint constraint, object value)

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FormatterWebSite.Controllers;
 
-
 public class InputFormatterController : Controller
 {
     public IActionResult ReturnInput([FromBody] string test)

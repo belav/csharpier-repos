@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Specifies an attribute route on a controller.
 /// </summary>

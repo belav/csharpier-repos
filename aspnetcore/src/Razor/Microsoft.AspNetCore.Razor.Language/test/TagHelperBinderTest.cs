@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public class TagHelperBinderTest
 {
     [Fact]

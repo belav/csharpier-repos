@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class RequestFormLimitsTest
     : IClassFixture<MvcTestFixture<BasicWebSite.StartupRequestLimitSize>>
 {

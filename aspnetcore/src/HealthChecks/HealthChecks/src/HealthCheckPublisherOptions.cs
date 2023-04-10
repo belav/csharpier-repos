@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 /// <summary>
 /// Options for the default service that executes <see cref="IHealthCheckPublisher"/> instances.
 /// </summary>

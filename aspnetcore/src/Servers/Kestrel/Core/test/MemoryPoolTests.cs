@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Internal.Test;
 
-
 public abstract class MemoryPoolTests
 {
     protected abstract MemoryPool<byte> CreatePool();

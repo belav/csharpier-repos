@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.TestModels;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class EndToEndTest : IDisposable
 {
     protected EndToEndTest(CrossStoreFixture fixture)

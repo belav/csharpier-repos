@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
-
 public class ContentNegotiationController : Controller
 {
     public IActionResult Index()

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class StoreGeneratedFixupRelationalTestBase<TFixture>
     : StoreGeneratedFixupTestBase<TFixture>
     where TFixture : StoreGeneratedFixupRelationalTestBase<TFixture>.StoreGeneratedFixupRelationalFixtureBase,

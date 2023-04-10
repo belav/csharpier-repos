@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Analyzer.Testing;
 
-
 public class TestSource
 {
     private const string MarkerStart = "/*MM";

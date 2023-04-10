@@ -6,7 +6,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 public class ModelAttributesTest
 {
     [Fact]

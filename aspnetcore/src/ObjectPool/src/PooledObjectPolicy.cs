@@ -3,7 +3,6 @@
 
 namespace Microsoft.Extensions.ObjectPool;
 
-
 /// <summary>
 /// A base type for <see cref="IPooledObjectPolicy{T}"/>.
 /// </summary>

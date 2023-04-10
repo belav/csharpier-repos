@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
-
 public class TypeNameHelperTest
 {
     [ConditionalTheory]

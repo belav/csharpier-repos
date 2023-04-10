@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Core;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// A filter implementation which delegates to the controller for result filter interfaces.
 /// </summary>

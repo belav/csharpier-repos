@@ -5,7 +5,6 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
-
 /// <summary>
 /// Options used to configure certificate authentication.
 /// </summary>

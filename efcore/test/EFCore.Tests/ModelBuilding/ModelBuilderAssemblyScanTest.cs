@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
-
 public class ModelBuilderAssemblyScanTest : ModelBuilderTest
 {
     private readonly Assembly _mockEntityTypeAssembly;

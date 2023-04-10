@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal sealed class WebHostLifetime : IDisposable
 {
     private readonly CancellationTokenSource _cts;

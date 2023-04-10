@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 #pragma warning disable CA1852 // Seal internal types
 internal class TypeForwardingActivator : SimpleActivator
 #pragma warning restore CA1852 // Seal internal types

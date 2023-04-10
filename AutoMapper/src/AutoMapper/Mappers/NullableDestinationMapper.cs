@@ -1,6 +1,5 @@
 namespace AutoMapper.Internal.Mappers;
 
-
 public class NullableDestinationMapper : IObjectMapper
 {
     public bool IsMatch(TypePair context) => context.DestinationType.IsNullableType();

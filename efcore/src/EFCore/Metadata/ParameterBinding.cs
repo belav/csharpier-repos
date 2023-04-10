@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Describes the binding from one or many EF model properties, dependency injection services, or metadata types to
 ///     a parameter in a constructor, factory method, or similar.

@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class IncompleteMappingInheritanceQuerySqlServerTest
     : InheritanceRelationalQueryTestBase<IncompleteMappingInheritanceQuerySqlServerFixture>
 {

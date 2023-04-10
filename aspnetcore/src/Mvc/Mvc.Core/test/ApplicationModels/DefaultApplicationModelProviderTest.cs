@@ -13,7 +13,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 public class DefaultApplicationModelProviderTest
 {
     private readonly TestApplicationModelProvider Provider = new TestApplicationModelProvider();

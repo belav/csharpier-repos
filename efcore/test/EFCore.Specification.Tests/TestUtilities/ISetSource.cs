@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public interface ISetSource
 {
     IQueryable<TEntity> Set<TEntity>()

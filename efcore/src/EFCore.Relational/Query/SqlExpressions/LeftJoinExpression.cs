@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
-
 /// <summary>
 ///     <para>
 ///         An expression that represents a LEFT JOIN in a SQL tree.

@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
-
 public abstract class AnalyzerTestBase
 {
     // Test files are copied to both the bin/ and publish/ folders. Use BaseDirectory on or off Helix.

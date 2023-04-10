@@ -8,7 +8,6 @@ using System.Transactions.DtcProxyShim;
 
 namespace System.Transactions.Oletx;
 
-
 internal sealed class DtcTransactionManager
 {
     private readonly string? _nodeName;

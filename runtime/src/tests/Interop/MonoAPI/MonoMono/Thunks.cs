@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 
 namespace MonoAPI.Tests.MonoMono.Thunks;
 
-
 public class Thunks
 {
     [DllImport(MonoAPISupport.TestLibName)]

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         An expression that represents creation of a collection in <see cref="ShapedQueryExpression.ShaperExpression" /> for relational

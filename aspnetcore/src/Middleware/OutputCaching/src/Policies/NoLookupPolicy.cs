@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// A policy that prevents the response from being served from cache.
 /// </summary>

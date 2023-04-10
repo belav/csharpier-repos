@@ -12,7 +12,6 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api;
 
-
 /// <summary>
 /// Request handler type exposed to typescript.
 /// </summary>

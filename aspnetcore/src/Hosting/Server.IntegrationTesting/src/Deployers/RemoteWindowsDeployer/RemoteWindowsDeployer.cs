@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 public class RemoteWindowsDeployer : ApplicationDeployer
 {
     /// <summary>

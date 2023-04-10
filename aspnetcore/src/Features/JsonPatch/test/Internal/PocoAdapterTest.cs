@@ -13,7 +13,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
-
 public class PocoAdapterTest
 {
     [Fact]

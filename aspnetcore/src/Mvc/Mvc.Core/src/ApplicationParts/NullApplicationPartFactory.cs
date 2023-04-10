@@ -6,7 +6,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 /// <summary>
 /// An <see cref="ApplicationPartFactory"/> that produces no parts.
 /// <para>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
-
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="MigrationsCodeGenerator" />

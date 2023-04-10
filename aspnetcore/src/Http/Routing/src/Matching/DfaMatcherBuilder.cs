@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal sealed class DfaMatcherBuilder : MatcherBuilder
 {
     private readonly List<RouteEndpoint> _endpoints = new List<RouteEndpoint>();

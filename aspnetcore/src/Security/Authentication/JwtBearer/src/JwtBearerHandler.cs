@@ -15,7 +15,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
-
 /// <summary>
 /// An <see cref="AuthenticationHandler{TOptions}"/> that can perform JWT-bearer based authentication.
 /// </summary>

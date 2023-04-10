@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Templates.Test;
 
-
 public class SpaTemplatesTest : LoggedTest
 {
     public SpaTemplatesTest(ProjectFactoryFixture projectFactory)

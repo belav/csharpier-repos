@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Http.Tests;
 
-
 public class HttpServiceCollectionExtensionsTests
 {
     [Fact]

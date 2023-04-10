@@ -15,7 +15,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 public class PageBinderFactoryTest
 {
     private static readonly MvcOptions _options = new MvcOptions();

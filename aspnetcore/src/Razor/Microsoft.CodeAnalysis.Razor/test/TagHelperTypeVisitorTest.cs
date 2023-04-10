@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Razor.Workspaces;
 
-
 public class TagHelperTypeVisitorTest
 {
     private static readonly Assembly _assembly = typeof(TagHelperTypeVisitorTest)

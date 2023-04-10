@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Https;
 
 namespace Certificate.Optional.Sample;
 
-
 public class Program
 {
     public const string HostWithoutCert = "127.0.0.1";

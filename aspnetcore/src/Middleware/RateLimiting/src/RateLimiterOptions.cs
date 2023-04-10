@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 /// <summary>
 /// Specifies options for the rate limiting middleware.
 /// </summary>

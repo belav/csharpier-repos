@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Cryptography.SafeHandles;
 
-
 internal sealed class BCryptKeyHandle : BCryptHandle
 {
     private BCryptAlgorithmHandle? _algProviderHandle;

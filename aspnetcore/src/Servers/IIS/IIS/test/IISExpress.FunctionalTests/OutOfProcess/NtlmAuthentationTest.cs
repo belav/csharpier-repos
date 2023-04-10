@@ -14,7 +14,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 
-
 [Collection(PublishedSitesCollection.Name)]
 public class NtlmAuthenticationTests : IISFunctionalTestBase
 {

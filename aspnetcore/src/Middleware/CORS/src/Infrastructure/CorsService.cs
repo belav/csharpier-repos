@@ -11,7 +11,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
-
 /// <summary>
 /// Default implementation of <see cref="ICorsService"/>.
 /// </summary>

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 
-
 /// <summary>
 /// Limits the number of concurrent requests allowed in the application.
 /// </summary>

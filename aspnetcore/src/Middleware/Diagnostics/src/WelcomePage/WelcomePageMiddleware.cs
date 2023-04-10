@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 /// <summary>
 /// This middleware provides a default web page for new applications.
 /// </summary>

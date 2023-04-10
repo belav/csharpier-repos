@@ -6,7 +6,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal static class MatcherAssert
 {
     public static void AssertRouteValuesEqual(

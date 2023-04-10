@@ -15,7 +15,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests;
 
-
 public class UnaryTests : IntegrationTestBase
 {
     public UnaryTests(GrpcTestFixture<Startup> fixture, ITestOutputHelper outputHelper)

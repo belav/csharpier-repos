@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Options for user validation.
 /// </summary>

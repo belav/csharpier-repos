@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
-
 public class ModelHandlerTestModel : PageModel
 {
     public string MethodName { get; set; }

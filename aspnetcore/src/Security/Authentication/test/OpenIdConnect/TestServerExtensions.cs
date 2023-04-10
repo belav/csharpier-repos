@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.TestHost;
 
 namespace Microsoft.AspNetCore.Authentication.Test.OpenIdConnect;
 
-
 internal static class TestServerExtensions
 {
     public static Task<TestTransaction> SendAsync(this TestServer server, string url)

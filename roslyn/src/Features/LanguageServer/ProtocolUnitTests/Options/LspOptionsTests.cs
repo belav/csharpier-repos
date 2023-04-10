@@ -20,7 +20,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.References;
 
-
 public class LspOptionsTests : AbstractLanguageServerProtocolTests
 {
     public LspOptionsTests(ITestOutputHelper? testOutputHelper)

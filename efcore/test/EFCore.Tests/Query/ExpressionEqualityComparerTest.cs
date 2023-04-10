@@ -7,7 +7,6 @@ using JetBrains.Annotations;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class ExpressionEqualityComparerTest
 {
     [ConditionalFact]

@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     Represents an exception whose stack trace should, by default, not be reported by the commands.
 /// </summary>

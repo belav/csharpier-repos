@@ -9,7 +9,6 @@ using System.Linq;
 // ReSharper disable once CheckNamespace
 namespace System.Reflection;
 
-
 [DebuggerStepThrough]
 internal static class PropertyInfoExtensions
 {

@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
-
 public class ParsedPathTests
 {
     [Theory]

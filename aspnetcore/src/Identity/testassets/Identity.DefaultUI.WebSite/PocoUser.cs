@@ -3,5 +3,4 @@
 
 namespace Identity.DefaultUI.WebSite;
 
-
 public class PocoUser { }

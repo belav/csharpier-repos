@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 /// <summary>
 /// Factory to produce <see cref="ProblemDetails" /> and <see cref="ValidationProblemDetails" />.
 /// </summary>

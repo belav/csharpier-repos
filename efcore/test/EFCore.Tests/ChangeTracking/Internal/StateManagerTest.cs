@@ -8,7 +8,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public class StateManagerTest
 {
     [ConditionalFact]

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 /// <summary>
 /// Defines a contract for specifying <see cref="ApiDescription"/> instances.
 /// </summary>

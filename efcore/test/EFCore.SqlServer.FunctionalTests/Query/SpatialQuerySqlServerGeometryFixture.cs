@@ -7,7 +7,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class SpatialQuerySqlServerGeometryFixture : SpatialQuerySqlServerFixture
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)

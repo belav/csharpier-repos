@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// A delegate that asynchronously returns a <see cref="ResourceExecutedContext"/> indicating model binding, the
 /// action, the action's result, result filters, and exception filters have executed.

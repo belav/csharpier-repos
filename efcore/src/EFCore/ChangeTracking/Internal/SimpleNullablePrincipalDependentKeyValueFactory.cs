@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 // The methods here box, but this is only used when the primary key is nullable, but the FK is non-nullable,
 // which is not common.
 /// <summary>

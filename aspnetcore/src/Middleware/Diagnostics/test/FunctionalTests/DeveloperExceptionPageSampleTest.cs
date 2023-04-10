@@ -9,7 +9,6 @@ using System.Net.Http.Json;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
-
 public class DeveloperExceptionPageSampleTest
     : IClassFixture<TestFixture<DeveloperExceptionPageSample.Startup>>
 {

@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class RouteCollectionTest
 {
     private static readonly RequestDelegate NullHandler = (c) => Task.CompletedTask;

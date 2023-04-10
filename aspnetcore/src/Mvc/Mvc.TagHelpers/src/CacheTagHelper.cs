@@ -13,7 +13,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// <see cref="TagHelper"/> implementation targeting &lt;cache&gt; elements.
 /// </summary>

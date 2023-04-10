@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
-
 // This includes tests that verify HubConnection conforms to the Hub Protocol, without setting up a full server (even TestServer).
 // We can also have more control over the messages we send to HubConnection in order to ensure that protocol errors and other quirks
 // don't cause problems.

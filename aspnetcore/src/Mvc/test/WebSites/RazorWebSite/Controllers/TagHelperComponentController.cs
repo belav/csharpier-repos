@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorWebSite;
 
-
 public class TagHelperComponentController : Controller
 {
     // GET: /<controller>/

@@ -9,7 +9,6 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.ApiDescription.Tool;
 
-
 internal static class Exe
 {
     public static int Run(

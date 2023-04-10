@@ -6,7 +6,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 /// <summary>
 /// A multipart section read by <see cref="MultipartReader"/>.
 /// </summary>

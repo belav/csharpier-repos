@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
-
 public class DefaultHubActivatorBenchmark
 {
     private DefaultHubActivator<MyHub> _activator;

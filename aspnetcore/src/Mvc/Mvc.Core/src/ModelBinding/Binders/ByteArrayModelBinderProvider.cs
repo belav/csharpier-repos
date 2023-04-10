@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 /// <summary>
 /// An <see cref="IModelBinderProvider"/> for binding base64 encoded byte arrays.
 /// </summary>

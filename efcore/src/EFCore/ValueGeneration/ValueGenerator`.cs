@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
-
 /// <summary>
 ///     Generates values for properties when an entity is added to a context.
 /// </summary>

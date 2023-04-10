@@ -21,7 +21,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
-
 public class ServerSentEventsTransportTests : VerifiableLoggedTest
 {
     [Fact]

@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
-
 internal class IntermediateNodeFormatterBase : IntermediateNodeFormatter
 {
     private string _content;

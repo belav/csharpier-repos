@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="RelationalConnection" />

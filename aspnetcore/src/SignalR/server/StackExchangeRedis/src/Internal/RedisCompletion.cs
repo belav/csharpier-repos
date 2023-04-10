@@ -5,7 +5,6 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
-
 internal readonly struct RedisCompletion
 {
     public ReadOnlySequence<byte> CompletionMessage { get; }

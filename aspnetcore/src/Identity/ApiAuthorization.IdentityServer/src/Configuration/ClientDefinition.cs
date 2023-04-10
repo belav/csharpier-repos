@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 internal sealed class ClientDefinition : ServiceDefinition
 {
     public string RedirectUri { get; set; }

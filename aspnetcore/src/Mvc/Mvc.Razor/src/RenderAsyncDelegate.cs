@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// A delegate for RenderAsync.
 /// </summary>

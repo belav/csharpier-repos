@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
-
 /// <summary>
 /// Options for Azure diagnostics file logging.
 /// </summary>

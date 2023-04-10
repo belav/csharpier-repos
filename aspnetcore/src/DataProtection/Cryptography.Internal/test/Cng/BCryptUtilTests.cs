@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Cryptography.Cng;
 
-
 public unsafe class BCryptUtilTests
 {
     [ConditionalFact]

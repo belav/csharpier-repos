@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp;
 
-
 internal struct FileIdentifier
 {
     private static readonly Encoding s_encoding = new UTF8Encoding(

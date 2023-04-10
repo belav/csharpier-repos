@@ -7,7 +7,6 @@ using System.Collections;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// An implementation of <see cref="IValidationStrategy"/> for a dictionary bound with 'short form' style keys.
 /// </summary>

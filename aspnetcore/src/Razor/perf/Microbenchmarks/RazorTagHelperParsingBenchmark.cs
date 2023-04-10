@@ -13,7 +13,6 @@ using static Microsoft.AspNetCore.Razor.Language.DefaultRazorTagHelperBinderPhas
 
 namespace Microsoft.AspNetCore.Razor.Microbenchmarks;
 
-
 public class RazorTagHelperParsingBenchmark
 {
     public RazorTagHelperParsingBenchmark()

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     A <see cref="ISingletonInterceptor" /> used to modify the <see cref="InstantiationBinding" /> used when creating
 ///     entity instances.

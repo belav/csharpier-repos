@@ -9,7 +9,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
-
 /// <summary>
 /// Represents the <c>Cache-Control</c> HTTP header.
 /// </summary>

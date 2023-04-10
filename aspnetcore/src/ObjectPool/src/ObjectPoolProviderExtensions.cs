@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Microsoft.Extensions.ObjectPool;
 
-
 /// <summary>
 /// Extension methods for <see cref="ObjectPoolProvider"/>.
 /// </summary>

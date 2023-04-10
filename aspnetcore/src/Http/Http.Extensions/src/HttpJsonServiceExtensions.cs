@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http.Json;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods to configure JSON serialization behavior.
 /// </summary>

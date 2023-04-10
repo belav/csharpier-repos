@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 /// <summary>
 /// A factory for producing client errors. This contract is used by controllers annotated
 /// with <see cref="ApiControllerAttribute"/> to transform <see cref="IClientErrorActionResult"/>.

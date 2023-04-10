@@ -6,7 +6,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 internal sealed class RemoteJSDataStream : Stream
 {
     private readonly RemoteJSRuntime _runtime;

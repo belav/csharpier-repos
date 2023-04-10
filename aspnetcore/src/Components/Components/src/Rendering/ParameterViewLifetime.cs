@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
-
 internal readonly struct ParameterViewLifetime
 {
     private readonly RenderBatchBuilder _owner;

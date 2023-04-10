@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 #pragma warning disable CS0618 // Type or member is obsolete
 public class RazorEngineBuilderExtensionsTest
 {

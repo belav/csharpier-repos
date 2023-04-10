@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Provides options for configuring Server-Side Blazor.
 /// </summary>

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-
 /// <summary>
 /// A key type which identifies a <see cref="ModelMetadata"/>.
 /// </summary>

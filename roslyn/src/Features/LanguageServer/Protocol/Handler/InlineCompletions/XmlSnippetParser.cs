@@ -13,7 +13,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlineCompletions;
 
-
 /// <summary>
 /// Server instance agnostic snippet parser and cache.
 /// This can be re-used across LSP servers as we're just storing an

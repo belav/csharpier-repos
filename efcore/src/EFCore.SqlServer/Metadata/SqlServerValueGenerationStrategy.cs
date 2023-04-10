@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Defines two strategies to use across the EF Core stack when generating key values
 ///     from SQL Server database columns.

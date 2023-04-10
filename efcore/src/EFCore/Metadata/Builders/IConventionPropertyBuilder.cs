@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 /// <summary>
 ///     <para>
 ///         Provides a simple API surface for configuring an <see cref="IConventionProperty" /> from conventions.

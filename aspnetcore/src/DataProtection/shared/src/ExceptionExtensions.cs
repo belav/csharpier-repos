@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 internal static class ExceptionExtensions
 {
     /// <summary>

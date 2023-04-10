@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 public static class StaticFilesTestServer
 {
     public static async Task<IHost> Create(

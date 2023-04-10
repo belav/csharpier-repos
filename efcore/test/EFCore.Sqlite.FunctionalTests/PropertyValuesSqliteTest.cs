@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class PropertyValuesSqliteTest
     : PropertyValuesTestBase<PropertyValuesSqliteTest.PropertyValuesSqliteFixture>
 {

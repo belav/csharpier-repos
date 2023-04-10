@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class NumberToBytesConverterTest
 {
     private static readonly NumberToBytesConverter<byte> _byteToBytesConverter = new();

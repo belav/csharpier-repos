@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Localization;
 
-
 public class StringLocalizerOfTTest
 {
     [Fact]

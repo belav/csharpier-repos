@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// Name-related extensions for <see cref="IHtmlHelper"/>.
 /// </summary>

@@ -10,7 +10,6 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
-
 public class PathSchemeSelectionTests
     : IClassFixture<WebApplicationFactory<PathSchemeSelection.Startup>>
 {

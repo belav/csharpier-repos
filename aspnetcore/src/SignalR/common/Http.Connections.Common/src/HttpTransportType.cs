@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
-
 /// <summary>
 /// Specifies transports that the client can use to send HTTP requests.
 /// </summary>

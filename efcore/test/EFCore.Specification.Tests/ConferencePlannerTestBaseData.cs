@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public partial class ConferencePlannerTestBase<TFixture>
 {
     public const string ConferenceData =

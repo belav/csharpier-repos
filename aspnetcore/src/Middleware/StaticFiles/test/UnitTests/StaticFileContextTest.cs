@@ -10,7 +10,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 public class StaticFileContextTest
 {
     [Fact]

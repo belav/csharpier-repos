@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class GenericTypeConverterWithTwoArguments : AutoMapperSpecBase
 {
     List<object> _destination;

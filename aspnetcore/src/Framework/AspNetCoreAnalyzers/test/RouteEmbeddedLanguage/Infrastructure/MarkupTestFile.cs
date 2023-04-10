@@ -17,7 +17,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
-
 /// <summary>
 /// To aid with testing, we define a special type of text file that can encode additional
 /// information in it.  This prevents a test writer from having to carry around multiple sources

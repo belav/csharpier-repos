@@ -3,7 +3,6 @@
 
 namespace CorsMiddlewareWebSite;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

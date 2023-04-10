@@ -7,7 +7,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
-
 // Simplified version of Roslyn's SyntaxNodeCache
 internal sealed class SyntaxTokenCache
 {

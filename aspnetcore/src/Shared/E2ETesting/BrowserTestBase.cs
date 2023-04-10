@@ -11,7 +11,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.E2ETesting;
 
-
 [CaptureSeleniumLogs]
 public class BrowserTestBase : IClassFixture<BrowserFixture>, IAsyncLifetime
 {

@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 public class InputFormatterTest
 {
     private class CatchAllFormatter : TestFormatter

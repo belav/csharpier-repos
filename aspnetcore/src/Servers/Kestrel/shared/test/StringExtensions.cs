@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public static class StringExtensions
 {
     public static string EscapeNonPrintable(this string s)

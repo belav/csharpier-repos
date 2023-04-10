@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
 
-
 internal abstract partial class AbstractVirtualCharService
 {
     /// <summary>

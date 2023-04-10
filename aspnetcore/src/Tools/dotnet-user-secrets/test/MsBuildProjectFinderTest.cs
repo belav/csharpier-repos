@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.SecretManager.Tools.Tests;
 
-
 public class MsBuildProjectFinderTest
 {
     [Theory]

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.TransportationModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class TableSplittingSqlServerTest : TableSplittingTestBase
 {
     public TableSplittingSqlServerTest(ITestOutputHelper testOutputHelper)

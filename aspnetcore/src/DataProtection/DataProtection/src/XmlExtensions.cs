@@ -5,7 +5,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Contains helpers to work with XElement objects.
 /// </summary>

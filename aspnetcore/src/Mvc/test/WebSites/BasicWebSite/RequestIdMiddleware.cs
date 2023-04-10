@@ -3,7 +3,6 @@
 
 namespace BasicWebSite;
 
-
 // Initializes a scoped-service with a request Id from a header
 public class RequestIdMiddleware
 {

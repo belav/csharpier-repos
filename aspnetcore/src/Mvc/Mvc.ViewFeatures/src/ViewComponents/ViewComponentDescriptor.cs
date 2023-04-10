@@ -6,7 +6,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 /// <summary>
 /// A descriptor for a view component.
 /// </summary>

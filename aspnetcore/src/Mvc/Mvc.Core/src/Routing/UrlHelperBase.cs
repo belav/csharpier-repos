@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 /// <summary>
 /// An abstraction for <see cref="IUrlHelper" />.
 /// </summary>

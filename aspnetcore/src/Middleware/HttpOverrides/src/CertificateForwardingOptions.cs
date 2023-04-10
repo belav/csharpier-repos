@@ -5,7 +5,6 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.HttpOverrides;
 
-
 /// <summary>
 /// Used to configure the <see cref="CertificateForwardingMiddleware"/>.
 /// </summary>

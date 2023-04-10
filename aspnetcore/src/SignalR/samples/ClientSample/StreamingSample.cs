@@ -8,7 +8,6 @@ using Microsoft.Extensions.CommandLineUtils;
 
 namespace ClientSample;
 
-
 internal class StreamingSample
 {
     internal static void Register(CommandLineApplication app)

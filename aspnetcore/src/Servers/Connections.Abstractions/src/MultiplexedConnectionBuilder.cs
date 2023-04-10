@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 /// <summary>
 /// A default implementation for <see cref="IMultiplexedConnectionBuilder"/>.
 /// </summary>

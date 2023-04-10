@@ -3,7 +3,6 @@
 
 namespace System.Transactions.DtcProxyShim;
 
-
 internal class NotificationShimBase
 {
     public object? EnlistmentIdentifier;

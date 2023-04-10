@@ -24,7 +24,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 
-
 /// <summary>
 /// In-memory TestServer
 /// </summary

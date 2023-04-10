@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Represents HTTP method metadata used during routing.
 /// </summary>

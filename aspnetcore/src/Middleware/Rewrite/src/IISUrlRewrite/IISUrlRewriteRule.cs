@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Rewrite.Logging;
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
-
 internal sealed class IISUrlRewriteRule : IRule
 {
     public string? Name { get; }

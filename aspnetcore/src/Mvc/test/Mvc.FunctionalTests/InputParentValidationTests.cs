@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 /// <summary>
 /// Functional tests for verifying the impact of using <see cref="MvcOptions.ValidateComplexTypesIfChildValidationFails"/>
 /// </summary>

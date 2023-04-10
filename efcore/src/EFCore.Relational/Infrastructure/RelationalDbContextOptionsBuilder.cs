@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     Allows relational database specific configuration to be performed on <see cref="DbContextOptions" />.
 /// </summary>

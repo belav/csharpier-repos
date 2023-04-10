@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing.Tree;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 // This is an adapter to use TreeRouter in the conformance tests
 internal class TreeRouterMatcher : Matcher
 {

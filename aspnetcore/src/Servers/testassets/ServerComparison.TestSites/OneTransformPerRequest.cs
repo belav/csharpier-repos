@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace ServerComparison.TestSites;
 
-
 public class OneTransformPerRequest : IClaimsTransformation
 {
     public OneTransformPerRequest(IHttpContextAccessor contextAccessor)

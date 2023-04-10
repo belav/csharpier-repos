@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Rewrite.UrlMatches;
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
-
 internal sealed class RuleBuilder
 {
     private IList<Condition>? _conditions;

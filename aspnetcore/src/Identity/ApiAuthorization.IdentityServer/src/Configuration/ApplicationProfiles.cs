@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 /// <summary>
 /// Constants for the different application profiles for applications in an authorization server.
 /// </summary>

@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal sealed class DictionaryJumpTable : JumpTable
 {
     private readonly int _defaultDestination;

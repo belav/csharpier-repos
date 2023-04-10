@@ -7,7 +7,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Default implementation for <see cref="IApplicationBuilder"/>.
 /// </summary>

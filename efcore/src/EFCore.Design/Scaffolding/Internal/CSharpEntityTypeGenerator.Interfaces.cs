@@ -3,5 +3,4 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
-
 partial class CSharpEntityTypeGenerator : ITextTransformation { }

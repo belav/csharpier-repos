@@ -5,7 +5,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 public class WheelEventArgsReaderTest
 {
     [Fact]

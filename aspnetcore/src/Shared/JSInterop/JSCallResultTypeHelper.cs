@@ -6,7 +6,6 @@ using Microsoft.JSInterop.Infrastructure;
 
 namespace Microsoft.JSInterop;
 
-
 internal static class JSCallResultTypeHelper
 {
     // We avoid using Assembly.GetExecutingAssembly() because this is shared code.

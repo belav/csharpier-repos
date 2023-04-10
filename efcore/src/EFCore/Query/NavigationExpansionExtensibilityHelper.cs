@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <inheritdoc />
 public class NavigationExpansionExtensibilityHelper : INavigationExpansionExtensibilityHelper
 {

@@ -15,7 +15,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal static class StringUtilities
 {
     private static readonly SpanAction<char, IntPtr> s_getAsciiOrUTF8StringNonNullCharacters =

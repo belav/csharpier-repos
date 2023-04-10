@@ -8,7 +8,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-
 public abstract class LoginTests<TStartup, TContext>
     : IClassFixture<ServerFactory<TStartup, TContext>>
     where TStartup : class

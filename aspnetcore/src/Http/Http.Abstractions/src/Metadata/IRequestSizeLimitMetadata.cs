@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Metadata;
 
-
 /// <summary>
 /// Interface marking attributes that specify the maximum allowed size of the request body.
 /// </summary>

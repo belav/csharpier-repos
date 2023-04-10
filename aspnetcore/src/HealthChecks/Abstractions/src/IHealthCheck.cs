@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 /// <summary>
 /// Represents a health check, which can be used to check the status of a component in the application, such as a backend service, database or some internal
 /// state.

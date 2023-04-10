@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Routing.DecisionTree;
 
-
 internal sealed class ItemDescriptor<TItem>
 {
     public IDictionary<string, DecisionCriterionValue> Criteria { get; set; }

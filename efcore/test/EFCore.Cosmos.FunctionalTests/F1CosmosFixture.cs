@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
-
 public class F1CosmosFixture<TRowVersion> : F1FixtureBase<TRowVersion>
 {
     protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;

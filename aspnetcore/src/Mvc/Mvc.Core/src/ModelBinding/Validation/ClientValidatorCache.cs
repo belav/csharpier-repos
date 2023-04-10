@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// Cache for <see cref="IClientModelValidator"/>s.
 /// </summary>

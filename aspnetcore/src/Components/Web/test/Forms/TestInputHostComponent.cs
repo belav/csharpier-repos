@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Components.Test.Helpers;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 internal class TestInputHostComponent<TValue, TComponent> : AutoRenderComponent
     where TComponent : InputBase<TValue>
 {

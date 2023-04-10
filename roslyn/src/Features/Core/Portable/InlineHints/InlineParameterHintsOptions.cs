@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 
 namespace Microsoft.CodeAnalysis.InlineHints;
 
-
 [DataContract]
 internal readonly record struct InlineParameterHintsOptions
 {

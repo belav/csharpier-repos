@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 internal readonly struct SyntaxListBuilder<TNode>
     where TNode : SyntaxNode
 {

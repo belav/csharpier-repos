@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
-
 internal static class StringBuilderExtensions
 {
     internal static StringBuilder AppendUpperInvariant(this StringBuilder builder, string? value)

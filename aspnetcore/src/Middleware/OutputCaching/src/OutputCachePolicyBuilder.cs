@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.OutputCaching.Policies;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// Provides helper methods to create custom policies.
 /// </summary>

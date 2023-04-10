@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 /// <summary>
 /// Represents a publisher of <see cref="HealthReport"/> information.
 /// </summary>

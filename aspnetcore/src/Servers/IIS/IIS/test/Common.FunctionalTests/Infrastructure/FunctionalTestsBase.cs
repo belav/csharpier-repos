@@ -8,7 +8,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 public class FunctionalTestsBase : LoggedTest
 {
     private const string DebugEnvironmentVariable = "ASPNETCORE_MODULE_DEBUG";

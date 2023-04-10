@@ -22,7 +22,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 /// <summary>
 /// Generic implementation of object pooling pattern with predefined pool size limit. The main
 /// purpose is that limited number of frequently used objects can be kept in the pool for

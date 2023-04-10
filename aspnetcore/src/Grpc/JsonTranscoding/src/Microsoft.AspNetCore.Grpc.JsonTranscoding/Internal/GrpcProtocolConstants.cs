@@ -5,7 +5,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
-
 internal static class GrpcProtocolConstants
 {
     internal const string TimeoutHeader = "grpc-timeout";

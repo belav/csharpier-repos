@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
-
 /// <summary>
 /// Constrains a route parameter to contain only lowercase or uppercase letters A through Z in the English alphabet.
 /// </summary>

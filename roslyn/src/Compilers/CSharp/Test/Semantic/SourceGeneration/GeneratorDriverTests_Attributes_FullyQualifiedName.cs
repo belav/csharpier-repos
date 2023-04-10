@@ -16,7 +16,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration;
 
-
 internal static class IncrementalGeneratorInitializationContextExtensions
 {
     public static IncrementalValuesProvider<T> ForAttributeWithSimpleName<T>(

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Http.Tests;
 
-
 public class CookieOptionsTests
 {
     [Fact]

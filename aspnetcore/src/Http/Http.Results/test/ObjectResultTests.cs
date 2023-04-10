@@ -12,7 +12,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 public class ObjectResultTests
 {
     [Fact]

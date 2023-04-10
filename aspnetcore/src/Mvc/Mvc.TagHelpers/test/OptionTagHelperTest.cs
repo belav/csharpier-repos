@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 public class OptionTagHelperTest
 {
     // Original content, selected attribute, value attribute, selected values (to place in TagHelperContext.Items)

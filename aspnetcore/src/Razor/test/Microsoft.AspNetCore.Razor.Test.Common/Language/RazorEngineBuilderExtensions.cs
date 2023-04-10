@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 [Obsolete("This class is obsolete and will be removed in a future version.")]
 public static class RazorEngineBuilderExtensions
 {

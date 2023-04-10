@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startup>
 {
     public RoutingEndpointRoutingTest(MvcTestFixture<RoutingWebSite.Startup> fixture)

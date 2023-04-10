@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods to configure Microsoft Account OAuth authentication.
 /// </summary>

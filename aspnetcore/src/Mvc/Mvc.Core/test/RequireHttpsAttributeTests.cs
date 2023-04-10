@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class RequireHttpsAttributeTests
 {
     [Fact]

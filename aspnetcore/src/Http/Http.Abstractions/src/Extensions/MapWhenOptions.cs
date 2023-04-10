@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Builder.Extensions;
 
-
 /// <summary>
 /// Options for the <see cref="MapWhenMiddleware"/>.
 /// </summary>

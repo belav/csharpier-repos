@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 /// <summary>
 /// A default implementation of <see cref="IClientModelValidatorProvider"/>.
 /// </summary>

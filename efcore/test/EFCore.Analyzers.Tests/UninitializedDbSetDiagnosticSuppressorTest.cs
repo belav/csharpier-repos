@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class UninitializedDbSetDiagnosticSuppressorTest : DiagnosticAnalyzerTestBase
 {
     [ConditionalFact]

@@ -12,7 +12,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic;
 
-
 // Not used anywhere. Remove?
 internal sealed class QuicConnectionFactory : IMultiplexedConnectionFactory
 {

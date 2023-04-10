@@ -5,7 +5,6 @@ using System;
 
 namespace AuthSamples.PathSchemeSelection.Models;
 
-
 public class ErrorViewModel
 {
     public string RequestId { get; set; }

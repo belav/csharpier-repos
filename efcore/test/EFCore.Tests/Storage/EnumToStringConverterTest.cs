@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class EnumToStringConverterTest
 {
     private static readonly ValueConverter<Beatles, string> _enumToString =

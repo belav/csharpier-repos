@@ -5,7 +5,6 @@ using Microsoft.Data.SqlClient;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public static class SqlExceptionFactory
 {
     public static SqlException CreateSqlException(int number, Guid? connectionId = null)

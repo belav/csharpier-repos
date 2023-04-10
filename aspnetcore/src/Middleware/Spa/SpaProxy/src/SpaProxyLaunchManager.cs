@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.SpaProxy;
 
-
 internal sealed class SpaProxyLaunchManager : IDisposable
 {
     private readonly SpaDevelopmentServerOptions _options;

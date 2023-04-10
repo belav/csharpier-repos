@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class CaseSensitivityBug : AutoMapperSpecBase
 {
     protected override MapperConfiguration CreateConfiguration() =>

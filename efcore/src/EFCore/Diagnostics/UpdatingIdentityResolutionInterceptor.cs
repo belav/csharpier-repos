@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     A <see cref="IIdentityResolutionInterceptor" /> that copies property values from the new entity instance into the
 ///     tracked entity instance.

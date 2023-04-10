@@ -6,7 +6,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Describes information determined during routing that specifies
 /// the page to be displayed.

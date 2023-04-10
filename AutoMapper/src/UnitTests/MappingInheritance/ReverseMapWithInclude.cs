@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.MappingInheritance;
 
-
 public class ReverseMapWithInclude : NonValidatingSpecBase
 {
     public class Duck : Animal { }

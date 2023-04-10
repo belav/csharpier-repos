@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.SignalR.Internal;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// A base class for a strongly typed SignalR hub.
 /// </summary>

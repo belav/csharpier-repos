@@ -8,7 +8,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// A <see cref="FileResult"/> on execution will write a file from disk to the response
 /// using mechanisms provided by the host.

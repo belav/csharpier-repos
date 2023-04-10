@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
-
 /// <summary>
 ///     The thread safe state used by <see cref="HiLoValueGenerator{TValue}" />.
 /// </summary>

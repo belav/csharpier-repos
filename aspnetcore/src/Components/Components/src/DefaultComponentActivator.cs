@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 internal sealed class DefaultComponentActivator : IComponentActivator
 {
     public static IComponentActivator Instance { get; } = new DefaultComponentActivator();

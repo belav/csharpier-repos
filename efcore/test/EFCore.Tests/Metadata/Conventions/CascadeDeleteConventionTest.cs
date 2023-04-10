@@ -9,7 +9,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 public class CascadeDeleteConventionTest
 {
     [ConditionalFact]

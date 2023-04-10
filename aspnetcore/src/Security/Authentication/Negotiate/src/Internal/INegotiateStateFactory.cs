@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 // For testing
 internal interface INegotiateStateFactory
 {

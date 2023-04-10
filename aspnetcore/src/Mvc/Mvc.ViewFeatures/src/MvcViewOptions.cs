@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Provides programmatic configuration for views in the MVC framework.
 /// </summary>

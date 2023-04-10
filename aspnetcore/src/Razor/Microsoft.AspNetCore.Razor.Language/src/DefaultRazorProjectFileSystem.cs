@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
 {
     public DefaultRazorProjectFileSystem(string root)

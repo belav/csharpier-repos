@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite.TempData;
 
-
 public class TempDataPageModel : PageModel
 {
     [TempData]

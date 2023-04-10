@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests.Inheritance;
 
-
 public class ProxyTests : IAsyncLifetime
 {
     [Fact]

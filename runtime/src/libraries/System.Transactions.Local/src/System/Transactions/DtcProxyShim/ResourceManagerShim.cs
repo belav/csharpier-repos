@@ -8,7 +8,6 @@ using System.Transactions.DtcProxyShim.DtcInterfaces;
 
 namespace System.Transactions.DtcProxyShim;
 
-
 internal sealed class ResourceManagerShim
 {
     private readonly DtcProxyShimFactory _shimFactory;

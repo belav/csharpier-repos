@@ -5,7 +5,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
-
 internal static class Http3Formatting
 {
     public static string ToFormattedType(Http3FrameType type)

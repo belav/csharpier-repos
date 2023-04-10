@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
-
 public class RequestHeaderLimitsTests : LoggedTest
 {
     [Theory]

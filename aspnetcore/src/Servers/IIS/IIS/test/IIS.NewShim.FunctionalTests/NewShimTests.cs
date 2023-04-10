@@ -9,7 +9,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
 
-
 [Collection(PublishedSitesCollection.Name)]
 public class NewShimTests : IISFunctionalTestBase
 {

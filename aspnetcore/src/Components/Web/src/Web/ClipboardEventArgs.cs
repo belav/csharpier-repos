@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Supplies information about an clipboard event that is being raised.
 /// </summary>

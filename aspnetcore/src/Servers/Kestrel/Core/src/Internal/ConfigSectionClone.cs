@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-
 internal sealed class ConfigSectionClone
 {
     public ConfigSectionClone(IConfigurationSection configSection)

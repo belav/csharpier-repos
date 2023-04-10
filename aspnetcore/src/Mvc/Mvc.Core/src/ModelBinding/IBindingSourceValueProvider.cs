@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// A value provider which can filter its contents based on <see cref="BindingSource"/>.
 /// </summary>

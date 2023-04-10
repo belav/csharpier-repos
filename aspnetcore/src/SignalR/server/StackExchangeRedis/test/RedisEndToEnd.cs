@@ -15,7 +15,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
-
 // Disable running server tests in parallel so server logs can accurately be captured per test
 [CollectionDefinition(Name, DisableParallelization = true)]
 public class RedisEndToEndTestsCollection : ICollectionFixture<RedisServerFixture<Startup>>

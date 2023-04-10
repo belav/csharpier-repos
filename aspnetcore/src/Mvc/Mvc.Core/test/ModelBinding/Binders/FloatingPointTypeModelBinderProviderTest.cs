@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 public class FloatingPointTypeModelBinderProviderTest
 {
     [Theory]

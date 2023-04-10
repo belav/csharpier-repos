@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
-
 public class RoutePatternPrecedenceTests : RoutePrecedenceTestsBase
 {
     protected override decimal ComputeMatched(string template)

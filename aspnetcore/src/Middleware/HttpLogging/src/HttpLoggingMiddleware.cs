@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 /// <summary>
 /// Middleware that logs HTTP requests and HTTP responses.
 /// </summary>

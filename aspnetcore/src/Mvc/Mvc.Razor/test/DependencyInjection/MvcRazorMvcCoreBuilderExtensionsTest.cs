@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Test.DependencyInjection;
 
-
 public class MvcRazorMvcCoreBuilderExtensionsTest
 {
     [Fact]

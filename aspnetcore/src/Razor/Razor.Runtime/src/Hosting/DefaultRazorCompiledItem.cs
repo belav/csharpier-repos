@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Hosting;
 
-
 internal sealed class DefaultRazorCompiledItem : RazorCompiledItem
 {
     private object[] _metadata;

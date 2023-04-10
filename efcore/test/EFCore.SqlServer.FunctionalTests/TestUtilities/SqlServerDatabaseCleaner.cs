@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class SqlServerDatabaseCleaner : RelationalDatabaseCleaner
 {
     protected override IDatabaseModelFactory CreateDatabaseModelFactory(

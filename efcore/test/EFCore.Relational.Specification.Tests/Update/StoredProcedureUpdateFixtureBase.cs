@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.StoredProcedureUpdateModel;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 #nullable enable
 
 public abstract class StoredProcedureUpdateFixtureBase

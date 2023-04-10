@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 // Consists of a secret (data protected payload) and a non-secret identifier
 // for use in logs and user code.
 //

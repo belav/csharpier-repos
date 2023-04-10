@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting.Tests;
 
-
 public class WebHostConfigurationTests
 {
     [Fact]

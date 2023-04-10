@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// A delegate that asynchronously returns a <see cref="PageHandlerExecutedContext"/> indicating the page or the next
 /// page filter has executed.

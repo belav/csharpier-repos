@@ -5,7 +5,6 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
-
 public class FakeDbTransaction : DbTransaction
 {
     public FakeDbTransaction(

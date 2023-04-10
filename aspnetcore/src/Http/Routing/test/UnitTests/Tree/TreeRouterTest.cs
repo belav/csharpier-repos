@@ -13,7 +13,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing.Tree;
 
-
 public class TreeRouterTest
 {
     private static readonly RequestDelegate NullHandler = (c) => Task.CompletedTask;

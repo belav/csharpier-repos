@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Design.Internal;
 
-
 /// <summary>
 ///     The parameter object for a <see cref="ICSharpRuntimeAnnotationCodeGenerator" />
 /// </summary>

@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     Allows interception of operations on <see cref="DbConnection" />.
 /// </summary>

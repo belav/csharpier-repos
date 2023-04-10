@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.Core;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// Builds a middleware pipeline after receiving the pipeline from a pipeline provider
 /// </summary>

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.RequestDecompression.Tests;
 
-
 public class RequestDecompressionBuilderExtensionsTests
 {
     [Fact]

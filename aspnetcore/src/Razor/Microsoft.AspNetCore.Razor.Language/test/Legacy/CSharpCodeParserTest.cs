@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy;
 
-
 public class CSharpCodeParserTest
 {
     public static TheoryData InvalidTagHelperPrefixData

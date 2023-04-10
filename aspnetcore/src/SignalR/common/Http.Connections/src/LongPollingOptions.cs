@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
-
 /// <summary>
 /// Options used to configure the long polling transport.
 /// </summary>

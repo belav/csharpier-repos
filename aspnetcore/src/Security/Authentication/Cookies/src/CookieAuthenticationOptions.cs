@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
-
 /// <summary>
 /// Configuration options for <see cref="CookieAuthenticationOptions"/>.
 /// </summary>

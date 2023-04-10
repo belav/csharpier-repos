@@ -5,7 +5,6 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     Base class for relation type mappings to NTS Geometry and derived types.
 /// </summary>

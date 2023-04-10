@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestModificationCommandBatch : SingularModificationCommandBatch
 {
     public TestModificationCommandBatch(

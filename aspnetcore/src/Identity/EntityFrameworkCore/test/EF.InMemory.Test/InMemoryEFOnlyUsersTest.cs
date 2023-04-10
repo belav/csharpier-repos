@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test;
 
-
 public class InMemoryEFOnlyUsersTest
     : UserManagerSpecificationTestBase<IdentityUser, string>,
         IClassFixture<InMemoryDatabaseFixture>

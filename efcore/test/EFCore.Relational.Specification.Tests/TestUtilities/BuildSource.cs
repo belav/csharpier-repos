@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class BuildSource
 {
     public ICollection<BuildReference> References { get; } =

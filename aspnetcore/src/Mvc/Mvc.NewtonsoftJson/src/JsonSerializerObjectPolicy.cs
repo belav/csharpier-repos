@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
-
 /// <summary>
 /// <see cref="IPooledObjectPolicy{T}"/> for <see cref="JsonSerializer"/>.
 /// </summary>

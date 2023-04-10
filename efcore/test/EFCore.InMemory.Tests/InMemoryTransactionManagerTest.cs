@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class InMemoryTransactionManagerTest
 {
     private class FakeTransactionManagerContext : DbContext

@@ -5,7 +5,6 @@ using System.Collections;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 public class SkipMemberEntryTest
 {
     [ConditionalFact]

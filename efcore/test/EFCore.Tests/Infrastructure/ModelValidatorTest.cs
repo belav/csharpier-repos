@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 public partial class ModelValidatorTest : ModelValidatorTestBase
 {
     [ConditionalFact]

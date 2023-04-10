@@ -3,5 +3,4 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
-
 public class FakeDbException : DbException { }

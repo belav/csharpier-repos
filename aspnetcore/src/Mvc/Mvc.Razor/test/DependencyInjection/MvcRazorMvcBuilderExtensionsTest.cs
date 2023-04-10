@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Test.DependencyInjection;
 
-
 public class MvcRazorMvcBuilderExtensionsTest
 {
     [Fact]

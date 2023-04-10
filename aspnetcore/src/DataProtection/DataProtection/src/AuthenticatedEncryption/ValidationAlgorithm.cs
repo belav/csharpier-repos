@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
-
 /// <summary>
 /// Specifies a message authentication algorithm to use for providing tamper-proofing
 /// to protected payloads.

@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IdentitySample.Controllers;
 
-
 [Authorize]
 public class AccountController : Controller
 {

@@ -3,7 +3,6 @@
 
 namespace Microsoft.Net.Http.Headers;
 
-
 public class RangeItemHeaderValueTest
 {
     [Fact]

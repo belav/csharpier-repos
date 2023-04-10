@@ -17,7 +17,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
-
 #pragma warning disable CA1852 // Seal internal types
 internal unsafe class NativeRequestContext : IDisposable
 #pragma warning restore CA1852 // Seal internal types

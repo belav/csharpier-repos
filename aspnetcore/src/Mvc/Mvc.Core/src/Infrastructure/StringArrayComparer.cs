@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal sealed class StringArrayComparer : IEqualityComparer<string[]>
 {
     public static readonly StringArrayComparer Ordinal = new StringArrayComparer(

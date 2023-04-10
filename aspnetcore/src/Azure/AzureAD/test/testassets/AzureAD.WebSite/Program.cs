@@ -5,7 +5,6 @@ using Microsoft.AspNetCore;
 
 namespace AzureAD.WebSite;
 
-
 public class Program
 {
     public static void Main(string[] args)

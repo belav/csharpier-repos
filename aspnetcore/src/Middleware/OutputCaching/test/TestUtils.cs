@@ -21,7 +21,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.OutputCaching.Tests;
 
-
 internal class TestUtils
 {
     static TestUtils()

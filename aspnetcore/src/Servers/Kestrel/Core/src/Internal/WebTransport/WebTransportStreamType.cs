@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.WebTransport;
 
-
 /// <summary>
 /// Represents the different types of WebTransport streams.
 /// </summary>

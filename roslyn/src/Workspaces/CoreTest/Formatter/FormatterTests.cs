@@ -23,7 +23,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Formating;
 
-
 [UseExportProvider]
 [Trait(Traits.Feature, Traits.Features.Formatting)]
 public class FormatterTests

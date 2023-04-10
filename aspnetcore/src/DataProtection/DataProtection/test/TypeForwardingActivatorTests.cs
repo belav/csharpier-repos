@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 public class TypeForwardingActivatorTests : MarshalByRefObject
 {
     [Fact]

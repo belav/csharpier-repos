@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Resolves components for an application.
 /// </summary>

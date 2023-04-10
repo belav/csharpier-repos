@@ -3,7 +3,6 @@
 
 namespace RoutingWebSite;
 
-
 public class MapFallbackStartup
 {
     public void ConfigureServices(IServiceCollection services)

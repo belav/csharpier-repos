@@ -6,7 +6,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
-
 /// <summary>
 /// The basic interface for deserializing an XML element into an <see cref="IAuthenticatedEncryptorDescriptor"/>.
 /// </summary>

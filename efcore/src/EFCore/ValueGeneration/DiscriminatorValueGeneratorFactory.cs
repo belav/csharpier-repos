@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 
-
 /// <summary>
 ///     A factory that creates value generators for the discriminator property that always outputs
 ///     the discriminator value for the given entity type.

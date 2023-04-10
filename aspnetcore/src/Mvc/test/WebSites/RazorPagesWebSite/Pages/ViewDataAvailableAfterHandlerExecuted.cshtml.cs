@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite.Pages;
 
-
 [TestPageFilter]
 public class ViewDataAvailableAfterHandlerExecutedModel : PageModel
 {

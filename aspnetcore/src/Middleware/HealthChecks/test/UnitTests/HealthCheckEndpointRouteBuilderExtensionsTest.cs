@@ -11,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-
 public class HealthCheckEndpointRouteBuilderExtensionsTest
 {
     [Fact]

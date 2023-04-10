@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     Defines method to execute queries asynchronously that are described by an IQueryable object.
 /// </summary>

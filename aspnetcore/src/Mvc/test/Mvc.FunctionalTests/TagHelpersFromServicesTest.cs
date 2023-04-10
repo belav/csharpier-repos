@@ -5,7 +5,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class TagHelpersFromServicesTest
     : IClassFixture<MvcTestFixture<ControllersFromServicesWebSite.Startup>>
 {

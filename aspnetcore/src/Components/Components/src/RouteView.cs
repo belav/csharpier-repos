@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Components.Routing;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Displays the specified page component, rendering it inside its layout
 /// and any further nested layouts.

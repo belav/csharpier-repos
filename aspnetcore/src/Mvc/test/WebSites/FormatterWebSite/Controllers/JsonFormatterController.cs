@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 
 namespace FormatterWebSite.Controllers;
 
-
 public class JsonFormatterController : Controller
 {
     private static readonly JsonSerializerSettings _indentedSettings;

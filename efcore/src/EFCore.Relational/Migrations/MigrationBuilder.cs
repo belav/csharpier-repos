@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Migrations.Operations.Builders;
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 /// <summary>
 ///     A builder providing a fluent-like API for building <see cref="MigrationOperation" />s.
 /// </summary>

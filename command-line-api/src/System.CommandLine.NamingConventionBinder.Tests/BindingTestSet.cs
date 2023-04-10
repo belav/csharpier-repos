@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace System.CommandLine.NamingConventionBinder.Tests;
 
-
 public class BindingTestSet : Dictionary<(Type type, string variationName), BindingTestCase>
 {
     public void Add(BindingTestCase testCase)

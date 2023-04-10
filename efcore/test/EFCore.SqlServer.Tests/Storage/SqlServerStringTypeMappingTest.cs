@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
-
 public class SqlServerStringTypeMappingTest
 {
     [ConditionalTheory]

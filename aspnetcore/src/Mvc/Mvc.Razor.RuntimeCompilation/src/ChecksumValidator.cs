@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
-
 internal static class ChecksumValidator
 {
     public static bool IsRecompilationSupported(RazorCompiledItem item)

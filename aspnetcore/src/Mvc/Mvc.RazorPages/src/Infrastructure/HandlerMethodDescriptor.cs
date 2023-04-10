@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 /// <summary>
 /// Represents a description of a handler method.
 /// </summary>

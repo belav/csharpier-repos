@@ -13,7 +13,6 @@ using Xunit.Abstractions;
 
 namespace Wasm.Build.NativeRebuild.Tests;
 
-
 public class OptimizationFlagChangeTests : NativeRebuildTestsBase
 {
     public OptimizationFlagChangeTests(

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Specifies that a controller property should be set with the current
 /// <see cref="ControllerContext"/> when creating the controller. The property must have a public

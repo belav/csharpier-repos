@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// Skip test if running on helix (or a particular helix queue).
 /// </summary>

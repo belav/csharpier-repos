@@ -7,7 +7,6 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Provides a simple API surface for configuring <see cref="DbContextOptions" />. Databases (and other extensions)
 ///     typically define extension methods on this object that allow you to configure the database connection (and other

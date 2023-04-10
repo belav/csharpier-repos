@@ -6,7 +6,6 @@ using Newtonsoft.Json.Converters;
 
 namespace SocialWeather;
 
-
 public enum Weather
 {
     Sunny,

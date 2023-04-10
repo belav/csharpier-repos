@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiExplorerWebSite.Controllers;
 
-
 public class ApiExplorerInboundOutBoundController : Controller
 {
     [HttpGet("ApiExplorerInboundOutbound/SuppressedForLinkGeneration")]

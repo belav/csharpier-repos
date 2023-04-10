@@ -16,7 +16,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
-
 internal sealed class JsonTranscodingServerCallContext
     : ServerCallContext,
         IServerCallContextFeature

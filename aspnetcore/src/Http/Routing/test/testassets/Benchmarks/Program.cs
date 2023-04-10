@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.TestHost;
 
 namespace Benchmarks;
 
-
 public class Program
 {
     public static Task Main(string[] args)

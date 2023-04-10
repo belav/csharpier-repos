@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Testing.Handlers;
 
-
 /// <summary>
 /// A <see cref="DelegatingHandler"/> that manages cookies associated with one or
 /// more pairs of <see cref="HttpRequestMessage"/> and <see cref="HttpResponseMessage"/>.

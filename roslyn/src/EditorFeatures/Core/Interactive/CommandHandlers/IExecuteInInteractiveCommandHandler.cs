@@ -7,7 +7,6 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Interactive;
 
-
 /// <summary>
 /// Interface for the ExecuteInInteractiveCommand handler.
 /// Ensures that the command handler can be exported via MEF

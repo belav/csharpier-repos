@@ -8,7 +8,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for Mvc.Newtonsoft.Json options.
 /// </summary>

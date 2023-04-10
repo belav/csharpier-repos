@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : MigrationsInfrastructureFixtureBase, new()
 {

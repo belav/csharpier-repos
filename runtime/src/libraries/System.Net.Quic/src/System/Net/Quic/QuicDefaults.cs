@@ -3,7 +3,6 @@
 
 namespace System.Net.Quic;
 
-
 /// <summary>
 /// Default values for <see cref="QuicListenerOptions" />, <see cref="QuicClientConnectionOptions" /> and <see cref="QuicServerConnectionOptions" />.
 /// </summary>

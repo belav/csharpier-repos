@@ -5,7 +5,6 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 /// <summary>
 ///     Allows interception of operations related to a <see cref="DbTransaction" />.
 /// </summary>

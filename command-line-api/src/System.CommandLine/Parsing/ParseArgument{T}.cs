@@ -3,7 +3,6 @@
 
 namespace System.CommandLine.Parsing;
 
-
 /// <summary>
 /// Performs custom parsing of an argument.
 /// </summary>

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace System.CommandLine.Parsing;
 
-
 /// <summary>
 /// Replaces a token with one or more other tokens prior to parsing.
 /// </summary>

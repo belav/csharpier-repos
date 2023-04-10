@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.CookiePolicy;
 
-
 internal sealed class ResponseCookiesWrapper : IResponseCookies, ITrackingConsentFeature
 {
     private readonly ILogger _logger;

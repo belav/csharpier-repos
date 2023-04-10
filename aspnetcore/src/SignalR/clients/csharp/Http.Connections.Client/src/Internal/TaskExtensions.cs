@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 
 namespace System.Threading.Tasks;
 
-
 internal static class TaskExtensions
 {
     public static async Task NoThrow(this Task task)

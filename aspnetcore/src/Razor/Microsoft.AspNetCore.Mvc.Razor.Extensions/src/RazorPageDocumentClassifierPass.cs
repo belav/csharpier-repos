@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-
 public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
 {
     private readonly bool _useConsolidatedMvcViews;

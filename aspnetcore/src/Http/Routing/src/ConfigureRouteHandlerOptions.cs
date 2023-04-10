@@ -6,7 +6,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 internal sealed class ConfigureRouteHandlerOptions : IConfigureOptions<RouteHandlerOptions>
 {
     private readonly IHostEnvironment? _environment;

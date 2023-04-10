@@ -8,7 +8,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class ConnectionInterceptionSqlServerTestBase : ConnectionInterceptionTestBase
 {
     protected ConnectionInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Used to send reset messages for protocols that support them such as HTTP/2 or HTTP/3.
 /// </summary>

@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class ReverseMapAndReplaceMemberName : AutoMapperSpecBase
 {
     const string SomeId = "someId";

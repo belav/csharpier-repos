@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
-
 public interface ITagHelper
 {
     int Order { get; }

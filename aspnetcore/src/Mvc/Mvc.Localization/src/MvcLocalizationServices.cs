@@ -8,7 +8,6 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
-
 internal static class MvcLocalizationServices
 {
     public static void AddLocalizationServices(

@@ -12,7 +12,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.HttpOverrides;
 
-
 public class CertificateForwardingTests
 {
     [Fact]

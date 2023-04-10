@@ -5,7 +5,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http.Extensions;
 
-
 /// <summary>
 /// Extension methods for working with multipart form requests.
 /// </summary>

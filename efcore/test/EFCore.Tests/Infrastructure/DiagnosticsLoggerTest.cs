@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 public class DiagnosticsLoggerTest
 {
     [ConditionalFact]

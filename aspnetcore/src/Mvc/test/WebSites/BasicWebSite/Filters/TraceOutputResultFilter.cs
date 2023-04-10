@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BasicWebSite;
 
-
 public class TraceResultOutputFilter : ResultFilterAttribute
 {
     public override void OnResultExecuting(ResultExecutingContext context)

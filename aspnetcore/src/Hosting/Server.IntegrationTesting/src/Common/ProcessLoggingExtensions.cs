@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 
 namespace System.Diagnostics;
 
-
 public static class ProcessLoggingExtensions
 {
     public static void StartAndCaptureOutAndErrToLogger(

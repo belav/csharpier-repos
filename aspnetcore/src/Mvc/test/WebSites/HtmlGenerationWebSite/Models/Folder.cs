@@ -3,7 +3,6 @@
 
 namespace HtmlGenerationWebSite.Models;
 
-
 public class Folder
 {
     public IFormFile InterfaceFile { get; set; }

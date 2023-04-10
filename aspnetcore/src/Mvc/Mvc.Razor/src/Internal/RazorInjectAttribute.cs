@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Internal;
 
-
 /// <summary>
 /// Specifies that the attributed property should be bound using request services.
 /// <para>

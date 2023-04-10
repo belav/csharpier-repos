@@ -7,7 +7,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class BinaryPrimitivesBenchmark
 {
     private const int Iterations = 100;

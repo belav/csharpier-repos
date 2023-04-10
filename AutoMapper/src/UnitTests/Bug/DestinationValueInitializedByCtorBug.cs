@@ -1,6 +1,5 @@
 namespace AutoMapper.UnitTests.Bug;
 
-
 public class DestinationValueInitializedByCtorBug : AutoMapperSpecBase
 {
     public class ItemToMapDto

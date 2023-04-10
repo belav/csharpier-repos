@@ -20,7 +20,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Authentication.Tests.MicrosoftAccount;
 
-
 public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountOptions>
 {
     protected override string DefaultScheme => MicrosoftAccountDefaults.AuthenticationScheme;

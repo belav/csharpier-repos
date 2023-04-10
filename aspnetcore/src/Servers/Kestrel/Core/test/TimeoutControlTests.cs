@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-
 public class TimeoutControlTests
 {
     private readonly Mock<ITimeoutHandler> _mockTimeoutHandler;

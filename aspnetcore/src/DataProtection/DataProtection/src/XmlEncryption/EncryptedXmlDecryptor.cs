@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
-
 /// <summary>
 /// An <see cref="IXmlDecryptor"/> that decrypts XML elements by using the <see cref="EncryptedXml"/> class.
 /// </summary>

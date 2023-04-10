@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers.ActionConstraints;
 
-
 [Consumes("application/json")]
 public class ConsumesAttribute_OverridesBaseController : Controller
 {

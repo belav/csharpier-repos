@@ -13,7 +13,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.HttpsPolicy.Tests;
 
-
 public class HttpsPolicyTests
 {
     [Theory]

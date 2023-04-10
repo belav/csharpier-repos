@@ -13,7 +13,6 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
-
 /// <summary>
 /// Supports processing and binding parameter values in a route template.
 /// </summary>

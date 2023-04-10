@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Http.Extensions.Tests;
 
-
 public class DefaultProblemDetailsWriterTest
 {
     [Fact]

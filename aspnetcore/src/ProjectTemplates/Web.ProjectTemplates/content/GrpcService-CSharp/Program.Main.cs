@@ -2,7 +2,6 @@ using GrpcService_CSharp.Services;
 
 namespace GrpcService_CSharp;
 
-
 public class Program
 {
     public static void Main(string[] args)

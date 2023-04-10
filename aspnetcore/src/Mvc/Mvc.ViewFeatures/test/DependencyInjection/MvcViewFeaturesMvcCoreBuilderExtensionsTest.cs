@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 public class MvcViewFeaturesMvcCoreBuilderExtensionsTest
 {
     [Fact]

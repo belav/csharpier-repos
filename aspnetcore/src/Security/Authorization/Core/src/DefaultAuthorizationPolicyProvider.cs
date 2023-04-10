@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// The default implementation of a policy provider,
 /// which provides a <see cref="AuthorizationPolicy"/> for a particular name.

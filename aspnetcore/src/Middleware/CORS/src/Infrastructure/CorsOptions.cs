@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
-
 /// <summary>
 /// Provides programmatic configuration for Cors.
 /// </summary>

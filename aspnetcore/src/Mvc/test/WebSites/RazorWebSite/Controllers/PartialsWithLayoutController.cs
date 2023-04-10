@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorWebSite.Controllers;
 
-
 public class PartialsWithLayoutController : Controller
 {
     public IActionResult PartialDoesNotExecuteViewStarts()

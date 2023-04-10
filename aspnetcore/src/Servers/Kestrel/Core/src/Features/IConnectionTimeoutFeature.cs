@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 
-
 /// <summary>
 /// Feature for efficiently handling connection timeouts.
 /// </summary>

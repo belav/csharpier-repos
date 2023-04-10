@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 /// <summary>
 /// Provides methods for creation and disposal of Razor Page models.
 /// </summary>

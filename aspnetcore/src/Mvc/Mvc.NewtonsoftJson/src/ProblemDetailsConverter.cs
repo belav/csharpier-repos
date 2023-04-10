@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
-
 /// <summary>
 /// A RFC 7807 compliant <see cref="JsonConverter"/> for <see cref="ProblemDetails"/>.
 /// </summary>

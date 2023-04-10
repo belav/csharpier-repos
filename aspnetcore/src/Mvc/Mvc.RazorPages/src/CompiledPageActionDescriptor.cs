@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 /// <summary>
 /// A <see cref="PageActionDescriptor"/> for a compiled Razor page.
 /// </summary>

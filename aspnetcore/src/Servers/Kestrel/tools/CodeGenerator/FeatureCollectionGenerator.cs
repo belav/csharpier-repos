@@ -3,7 +3,6 @@
 
 namespace CodeGenerator;
 
-
 public static class FeatureCollectionGenerator
 {
     public static string GenerateFile(

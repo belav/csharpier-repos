@@ -7,7 +7,6 @@ using System.Diagnostics;
 
 namespace Ignitor;
 
-
 [DebuggerDisplay("{SerializedValue}")]
 public abstract class Node
 {

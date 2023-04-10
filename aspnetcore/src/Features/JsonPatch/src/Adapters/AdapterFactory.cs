@@ -9,7 +9,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.AspNetCore.JsonPatch.Adapters;
 
-
 /// <summary>
 /// The default AdapterFactory to be used for resolving <see cref="IAdapter"/>.
 /// </summary>

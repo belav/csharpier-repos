@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-
 public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
     public FormsTest(

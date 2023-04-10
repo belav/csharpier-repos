@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 /// <summary>
 /// A <see cref="FileResult" /> that on execution writes the file specified using a virtual path to the response
 /// using mechanisms provided by the host.

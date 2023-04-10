@@ -22,7 +22,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 public class ActionSelectorTest
 {
     [Fact]

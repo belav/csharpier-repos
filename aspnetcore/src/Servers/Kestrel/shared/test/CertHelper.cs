@@ -10,7 +10,6 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 #nullable enable
 // Copied from https://github.com/dotnet/runtime/main/src/libraries/System.Net.Security/tests/FunctionalTests/TestHelper.cs
 public static class CertHelper

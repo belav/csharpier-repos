@@ -5,7 +5,6 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
-
 internal sealed class ArrayPoolBufferSource : ICharBufferSource
 {
     private readonly ArrayPool<char> _pool;

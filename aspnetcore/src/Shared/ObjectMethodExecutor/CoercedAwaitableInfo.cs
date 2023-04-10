@@ -8,7 +8,6 @@ using System.Linq.Expressions;
 
 namespace Microsoft.Extensions.Internal;
 
-
 internal readonly struct CoercedAwaitableInfo
 {
     public AwaitableInfo AwaitableInfo { get; }

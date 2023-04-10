@@ -5,7 +5,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 /// <summary>
 /// Creates an <see cref="EnumerableWrapperProvider"/> for interface types implementing the
 /// <see cref="IEnumerable{T}"/> type.

@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
-
 public class NormalController : Controller
 {
     private static readonly JsonSerializerSettings _indentedSettings;

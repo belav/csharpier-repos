@@ -11,7 +11,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 internal class TestCircuitHost : CircuitHost
 {
     private TestCircuitHost(

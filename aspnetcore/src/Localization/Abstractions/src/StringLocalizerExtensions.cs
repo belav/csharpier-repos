@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.Extensions.Localization;
 
-
 /// <summary>
 /// Extension methods for operating on <see cref="IStringLocalizer" /> instances.
 /// </summary>

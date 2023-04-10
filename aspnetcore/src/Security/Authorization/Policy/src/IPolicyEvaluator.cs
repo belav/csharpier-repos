@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authorization.Policy;
 
-
 /// <summary>
 /// Base class for authorization handlers that need to be called for a specific requirement type.
 /// </summary>

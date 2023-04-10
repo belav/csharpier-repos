@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 public class RemoteJSDataStreamTest
 {
     private static readonly TestRemoteJSRuntime _jsRuntime =

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public static class RazorProjectEngineBuilderExtensions
 {
     public static RazorProjectEngineBuilder AddTagHelpers(

@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 [Collection(PublishedSitesCollection.Name)]
 public class ShadowCopyTests : IISFunctionalTestBase
 {

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.FunkyDataModel;
 
-
 public class FunkyDataContext : PoolableDbContext
 {
     public FunkyDataContext(DbContextOptions options)

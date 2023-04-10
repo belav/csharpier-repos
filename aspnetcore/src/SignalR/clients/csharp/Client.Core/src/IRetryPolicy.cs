@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
 
-
 /// <summary>
 /// An abstraction that controls when the client attempts to reconnect and how many times it does so.
 /// </summary>

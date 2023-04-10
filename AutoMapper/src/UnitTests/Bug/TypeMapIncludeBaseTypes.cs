@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public abstract class TypeMapIncludeBaseTypes
 {
     public abstract class Source

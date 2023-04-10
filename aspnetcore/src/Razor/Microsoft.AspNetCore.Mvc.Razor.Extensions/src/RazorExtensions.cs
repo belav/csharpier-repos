@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Razor;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 
-
 public static class RazorExtensions
 {
     public static void Register(RazorProjectEngineBuilder builder)

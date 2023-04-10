@@ -13,7 +13,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Default implementation of <see cref="IHtmlHelper"/>.
 /// </summary>

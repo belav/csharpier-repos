@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 public class SymbolApiResponseMetadataProviderTest
 {
     private static readonly string Namespace =

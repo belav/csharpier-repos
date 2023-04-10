@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.NullSemanticsModel;
 
-
 public class NullSemanticsData : ISetSource
 {
     public static readonly NullSemanticsData Instance = new();

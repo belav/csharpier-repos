@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Metadata used during link generation to find the associated endpoint using route name.
 /// </summary>

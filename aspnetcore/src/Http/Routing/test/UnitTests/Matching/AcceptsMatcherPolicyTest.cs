@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 // There are some unit tests here for the IEndpointSelectorPolicy implementation.
 // The INodeBuilderPolicy implementation is well-tested by functional tests.
 public class AcceptsMatcherPolicyTest

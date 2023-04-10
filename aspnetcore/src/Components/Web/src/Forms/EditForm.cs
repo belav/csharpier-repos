@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// Renders a form element that cascades an <see cref="EditContext"/> to descendants.
 /// </summary>

@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 internal partial class FileLoggerProcessor : IAsyncDisposable
 {
     private const int _maxQueuedMessages = 1024;

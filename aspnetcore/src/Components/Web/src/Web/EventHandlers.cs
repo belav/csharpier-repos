@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Holds <see cref="EventHandler"/> attributes to configure the mappings between event names and
 /// event argument types.

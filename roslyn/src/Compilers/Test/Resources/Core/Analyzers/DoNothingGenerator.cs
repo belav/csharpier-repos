@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 
 namespace TestResources.Analyzers;
 
-
 [Generator(LanguageNames.CSharp, LanguageNames.VisualBasic)]
 public sealed class DoNothingGenerator : IIncrementalGenerator
 {

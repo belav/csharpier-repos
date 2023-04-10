@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.HttpSys.Internal;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContext>, IDisposable
 {
     private static readonly IOCompletionCallback IOCallback = IOWaitCallback;

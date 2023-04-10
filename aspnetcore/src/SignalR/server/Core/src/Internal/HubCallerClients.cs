@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal sealed class HubCallerClients : IHubCallerClients
 {
     private readonly string _connectionId;

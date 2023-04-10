@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures model function mappings based on public static methods on the context marked with
 ///     <see cref="DbFunctionAttribute" />.

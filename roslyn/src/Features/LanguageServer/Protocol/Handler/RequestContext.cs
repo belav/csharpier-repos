@@ -14,7 +14,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
-
 /// <summary>
 /// Context for requests handled by <see cref="IMethodHandler"/>
 /// </summary>

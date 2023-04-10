@@ -8,7 +8,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Http.Metadata;
 
-
 /// <summary>
 /// Metadata that specifies the supported request content types.
 /// </summary>

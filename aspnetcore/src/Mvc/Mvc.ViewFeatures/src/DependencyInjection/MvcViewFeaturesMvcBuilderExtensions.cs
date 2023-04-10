@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extensions methods for configuring MVC via an <see cref="IMvcBuilder"/>.
 /// </summary>

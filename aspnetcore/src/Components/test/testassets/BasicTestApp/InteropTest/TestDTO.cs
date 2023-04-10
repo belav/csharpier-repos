@@ -3,7 +3,6 @@
 
 namespace BasicTestApp.InteropTest;
 
-
 public class TestDTO
 {
     // JSON serialization won't include this in its output, nor will the JSON

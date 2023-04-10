@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Antiforgery.Internal;
 
-
 public class BinaryBlobTest
 {
     [Fact]

@@ -7,7 +7,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Static class for helpers dealing with model names.
 /// </summary>

@@ -19,7 +19,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.RequestDecompression.Tests;
 
-
 public class RequestDecompressionMiddlewareTests
 {
     private const string TestRequestBodyData = "Test Request Body Data";

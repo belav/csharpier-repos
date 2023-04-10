@@ -9,7 +9,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
-
 internal static class ManagedAlgorithmHelpers
 {
     private static readonly List<Type> KnownAlgorithmTypes = new List<Type>

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
-
 [AllowAnonymous]
 public class AnonymousModel : PageModel
 {

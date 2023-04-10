@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     Represents an operation that should be performed when the dependent requiredness for a foreign key is changed.
 /// </summary>

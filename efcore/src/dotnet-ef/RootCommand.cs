@@ -11,7 +11,6 @@ using EFCommand = Microsoft.EntityFrameworkCore.Tools.Commands.RootCommand;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal class RootCommand : CommandBase
 {
     private CommandLineApplication? _command;

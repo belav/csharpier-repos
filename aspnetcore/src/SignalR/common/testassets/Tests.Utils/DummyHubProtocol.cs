@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 public class DummyHubProtocol : IHubProtocol
 {
     private readonly Action _onWrite;

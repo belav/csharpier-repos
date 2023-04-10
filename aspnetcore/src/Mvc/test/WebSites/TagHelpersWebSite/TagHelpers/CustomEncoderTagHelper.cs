@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace TagHelpersWebSite.TagHelpers;
 
-
 [HtmlTargetElement("pre")]
 public class CustomEncoderTagHelper : TagHelper
 {

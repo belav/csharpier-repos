@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public interface ITestCondition
 {
     bool IsMet { get; }

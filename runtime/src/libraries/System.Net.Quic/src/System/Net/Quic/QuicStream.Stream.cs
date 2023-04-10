@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace System.Net.Quic;
 
-
 // Boilerplate implementation of Stream methods.
 public partial class QuicStream : Stream
 {

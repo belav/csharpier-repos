@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 public class TestValueProvider : RouteValueProvider
 {
     public static readonly BindingSource TestBindingSource = new BindingSource(

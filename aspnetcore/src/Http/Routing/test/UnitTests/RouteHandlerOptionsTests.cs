@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class RouteHandlerOptionsTests
 {
     [Theory]

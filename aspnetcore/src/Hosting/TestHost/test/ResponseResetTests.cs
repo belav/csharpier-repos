@@ -12,7 +12,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 public class ResponseResetTests
 {
     [Fact]

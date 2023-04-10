@@ -6,7 +6,6 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json;
 
-
 [Flags]
 internal enum JsonOptions
 {

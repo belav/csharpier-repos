@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 public interface IRazorPage
 {
     ViewContext ViewContext { get; set; }

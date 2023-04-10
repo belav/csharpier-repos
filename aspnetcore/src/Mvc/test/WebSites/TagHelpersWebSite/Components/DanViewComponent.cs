@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TagHelpersWebSite;
 
-
 public class DanViewComponent : ViewComponent
 {
     public IViewComponentResult Invoke(JacketColor jacketColor)

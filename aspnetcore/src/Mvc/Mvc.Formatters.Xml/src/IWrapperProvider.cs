@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 /// <summary>
 /// Defines an interface for wrapping objects for serialization or deserialization into xml.
 /// </summary>

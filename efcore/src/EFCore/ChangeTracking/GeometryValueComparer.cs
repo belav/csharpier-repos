@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 /// <summary>
 ///     Value snapshotting and comparison logic for NetTopologySuite.Geometries.Geometry instances.
 /// </summary>

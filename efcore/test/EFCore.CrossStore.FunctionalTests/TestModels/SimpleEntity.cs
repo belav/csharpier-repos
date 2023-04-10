@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels;
 
-
 public class SimpleEntity
 {
     public static string ShadowPropertyName = "ShadowStringProperty";

@@ -11,7 +11,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class ProducesAttributeTests
 {
     [Fact]

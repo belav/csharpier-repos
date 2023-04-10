@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 /// <summary>
 /// Represents an edge in a matcher policy graph.
 /// </summary>

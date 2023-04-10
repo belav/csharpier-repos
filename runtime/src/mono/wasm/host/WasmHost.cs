@@ -3,7 +3,6 @@
 
 namespace Microsoft.WebAssembly.AppHost;
 
-
 internal enum WasmHost
 {
     /// <summary>

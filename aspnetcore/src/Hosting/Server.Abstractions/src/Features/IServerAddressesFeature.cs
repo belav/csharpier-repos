@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Hosting.Server.Features;
 
-
 /// <summary>
 /// Specifies the address used by the server.
 /// </summary>

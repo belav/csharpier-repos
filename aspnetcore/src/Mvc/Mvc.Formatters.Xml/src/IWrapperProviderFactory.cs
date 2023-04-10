@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 /// <summary>
 /// Create a <see cref="IWrapperProvider"/> given a <see cref="WrapperProviderContext"/>.
 /// </summary>

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
-
 public sealed class IntermediateNodeCollection : IList<IntermediateNode>
 {
     public static readonly IntermediateNodeCollection ReadOnly = new IntermediateNodeCollection(

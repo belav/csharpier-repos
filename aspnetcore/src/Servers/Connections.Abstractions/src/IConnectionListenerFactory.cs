@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 /// <summary>
 /// Defines an interface that provides the mechanisms for binding to various types of <see cref="EndPoint"/>s.
 /// </summary>

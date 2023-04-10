@@ -11,7 +11,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 internal static class ExpressionHelper
 {
     public static string GetUncachedExpressionText(LambdaExpression expression) =>

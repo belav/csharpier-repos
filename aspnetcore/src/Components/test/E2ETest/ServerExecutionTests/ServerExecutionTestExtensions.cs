@@ -6,7 +6,6 @@ using TestServer;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-
 internal static class ServerExecutionTestExtensions
 {
     public static ToggleExecutionModeServerFixture<T> WithServerExecution<T>(

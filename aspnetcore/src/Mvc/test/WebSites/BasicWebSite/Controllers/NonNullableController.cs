@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
-
 public class NonNullableController : Controller
 {
     public ActionResult Index()

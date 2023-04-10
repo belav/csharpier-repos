@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 /// <summary>
 /// A metadata description of routing information for an <see cref="ApiParameterDescription"/>.
 /// </summary>

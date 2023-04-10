@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class ManyToManyFieldsLoadInMemoryTest
     : ManyToManyFieldsLoadTestBase<ManyToManyFieldsLoadInMemoryTest.ManyToManyFieldsLoadInMemoryFixture>
 {

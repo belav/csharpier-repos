@@ -10,7 +10,6 @@ using System.Threading;
 
 namespace XUnitWrapperLibrary;
 
-
 public sealed class TestOutputRecorder : TextWriter
 {
     private TextWriter _inner;

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
-
 /// <summary>
 /// This provides an abstract storage mechanic to preserve identity information on the server
 /// while only sending a simple identifier key to the client. This is most commonly used to mitigate

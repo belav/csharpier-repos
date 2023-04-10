@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 /// <summary>
 /// Contains information used by the handler of the <see cref="StatusCodePagesMiddleware"/>.
 /// </summary>

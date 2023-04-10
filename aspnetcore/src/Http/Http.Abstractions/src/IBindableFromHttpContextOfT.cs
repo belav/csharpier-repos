@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Defines a mechanism for creating an instance of a type from an <see cref="HttpContext"/> when binding parameters for an endpoint
 /// route handler delegate.

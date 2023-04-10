@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures store value generation as <see cref="ValueGenerated.OnAdd" /> on properties that are
 ///     part of the primary key and not part of any foreign keys.

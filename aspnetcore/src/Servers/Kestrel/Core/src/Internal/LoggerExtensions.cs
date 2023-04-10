@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-
 internal static partial class LoggerExtensions
 {
     private const string BadDeveloperCertificateStateMessage =

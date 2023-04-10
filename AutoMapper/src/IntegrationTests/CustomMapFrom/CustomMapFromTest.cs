@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests.CustomMapFrom;
 
-
 public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseInitializer>
 {
     protected override MapperConfiguration CreateConfiguration() =>

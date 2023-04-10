@@ -11,7 +11,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class RouterMiddlewareTest
 {
     [Fact]

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class TagHelperDescriptorBuilder
 {
     public static TagHelperDescriptorBuilder Create(string name, string assemblyName)

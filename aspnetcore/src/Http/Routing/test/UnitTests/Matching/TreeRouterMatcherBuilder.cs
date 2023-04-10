@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal class TreeRouterMatcherBuilder : MatcherBuilder
 {
     private readonly List<RouteEndpoint> _endpoints;

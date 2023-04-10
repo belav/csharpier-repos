@@ -9,7 +9,6 @@ using Transcoding;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.TestObjects;
 
-
 public class HttpBodyService : Transcoding.HttpBodyService.HttpBodyServiceBase
 {
     public override Task<HttpBody> HelloWorld(HelloWorldRequest request, ServerCallContext context)

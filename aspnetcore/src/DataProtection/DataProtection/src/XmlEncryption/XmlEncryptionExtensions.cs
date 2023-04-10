@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.DataProtection.Internal;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
-
 internal static unsafe class XmlEncryptionExtensions
 {
     public static XElement DecryptElement(this XElement element, IActivator activator)

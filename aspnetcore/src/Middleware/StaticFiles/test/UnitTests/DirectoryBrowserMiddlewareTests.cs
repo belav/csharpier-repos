@@ -11,7 +11,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 public class DirectoryBrowserMiddlewareTests
 {
     [Fact]

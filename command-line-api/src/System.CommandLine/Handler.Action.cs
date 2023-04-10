@@ -6,7 +6,6 @@ using System.CommandLine.Invocation;
 
 namespace System.CommandLine;
 
-
 /// <summary>
 /// Provides methods for creating and working with command handlers.
 /// </summary>

@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.AspNetCore.SpaProxy;
 
-
 internal sealed class SpaHostingStartup : IHostingStartup
 {
     public void Configure(IWebHostBuilder builder)

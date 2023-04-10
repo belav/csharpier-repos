@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     <para>
 ///         A thin wrapper over <see cref="StringBuilder" /> that adds indentation to each line built.

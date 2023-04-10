@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
-
 internal sealed class WellKnownTypes
 {
     public static bool TryCreate(

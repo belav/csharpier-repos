@@ -12,7 +12,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
-
 /// <summary>
 /// Implementation for the cookie-based authentication handler.
 /// </summary>

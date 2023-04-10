@@ -8,7 +8,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.DotNet.OpenApi.Add.Tests;
 
-
 public class OpenApiAddFileTests : OpenApiTestBase
 {
     public OpenApiAddFileTests(ITestOutputHelper output)

@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class OneSourceWithMultipleDestinationsWithoutPR : AutoMapperSpecBase
 {
     ClientModel _destination;

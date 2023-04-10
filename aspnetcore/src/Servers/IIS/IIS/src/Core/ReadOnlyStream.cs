@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-
 internal abstract class ReadOnlyStream : Stream
 {
     public override bool CanRead => true;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 public class InputFileChangeEventArgsTest
 {
     [Fact]

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Internal;
 
-
 internal sealed class GrpcModelMetadata : ModelMetadata
 {
     public GrpcModelMetadata(ModelMetadataIdentity identity)

@@ -20,7 +20,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.E2ETesting;
 
-
 public class BrowserFixture : IAsyncLifetime
 {
     private readonly ConcurrentDictionary<string, Task<(IWebDriver browser, ILogs log)>> _browsers =

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
-
 /// <summary>
 ///     <para>
 ///         An interface that gives access to <see cref="ITableBase" /> associated with given table source.

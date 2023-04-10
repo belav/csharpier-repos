@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Helpful extension methods on <see cref="Type"/>.
 /// </summary>

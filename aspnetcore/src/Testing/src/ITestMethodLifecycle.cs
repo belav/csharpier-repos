@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// Defines a lifecycle for attributes or classes that want to know about tests starting
 /// or ending. Implement this on a test class, or attribute at the method/class/assembly level.

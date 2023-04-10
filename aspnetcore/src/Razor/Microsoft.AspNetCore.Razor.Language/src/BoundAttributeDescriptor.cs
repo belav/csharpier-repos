@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 /// <summary>
 /// A metadata class describing a tag helper attribute.
 /// </summary>

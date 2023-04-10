@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Core;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 /// <summary>
 /// Specifies a assembly to load as part of MVC's assembly discovery mechanism.
 /// </summary>

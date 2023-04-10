@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.Extensions.Caching.SqlServer;
 
-
 public class CacheItemInfo
 {
     public string Id { get; set; }

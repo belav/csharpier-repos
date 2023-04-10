@@ -8,7 +8,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class BoundAttributeParameterDescriptorComparer
     : IEqualityComparer<BoundAttributeParameterDescriptor>
 {

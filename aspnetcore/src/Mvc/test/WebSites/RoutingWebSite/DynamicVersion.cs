@@ -3,7 +3,6 @@
 
 namespace RoutingWebSite;
 
-
 public class DynamicVersion
 {
     public string Version { get; set; }

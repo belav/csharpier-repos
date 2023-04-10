@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
-
 public class TestBinder : IInvocationBinder
 {
     private readonly Type[] _paramTypes;

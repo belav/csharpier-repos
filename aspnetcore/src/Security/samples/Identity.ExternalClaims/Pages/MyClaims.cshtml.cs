@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Identity.ExternalClaims.Pages;
 
-
 public class MyClaimsModel : PageModel
 {
     public string Message { get; set; }

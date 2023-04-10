@@ -3,7 +3,6 @@
 
 namespace Microsoft.JSInterop;
 
-
 /// <summary>
 /// Represents the reference to a .NET stream sent to JavaScript.
 /// </summary>

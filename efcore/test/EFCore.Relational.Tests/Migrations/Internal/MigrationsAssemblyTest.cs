@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Internal;
 
-
 public class MigrationsAssemblyTest
 {
     [ConditionalFact]

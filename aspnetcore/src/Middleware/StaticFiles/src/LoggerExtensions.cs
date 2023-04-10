@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 /// <summary>
 /// Defines *all* the logger messages produced by static files
 /// </summary>

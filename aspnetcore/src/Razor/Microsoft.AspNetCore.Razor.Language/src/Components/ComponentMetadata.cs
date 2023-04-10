@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 // Metadata used for Components interactions with the tag helper system
 internal static class ComponentMetadata
 {

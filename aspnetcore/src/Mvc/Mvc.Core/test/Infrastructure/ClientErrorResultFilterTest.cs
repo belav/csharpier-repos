@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 public class ClientErrorResultFilterTest
 {
     private static readonly IActionResult Result = new EmptyResult();

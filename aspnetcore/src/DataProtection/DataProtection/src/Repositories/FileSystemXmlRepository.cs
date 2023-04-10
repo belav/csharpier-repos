@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
-
 /// <summary>
 /// An XML repository backed by a file system.
 /// </summary>

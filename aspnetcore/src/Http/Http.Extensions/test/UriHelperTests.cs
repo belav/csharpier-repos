@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Extensions;
 
-
 public class UriHelperTests
 {
     [Fact]

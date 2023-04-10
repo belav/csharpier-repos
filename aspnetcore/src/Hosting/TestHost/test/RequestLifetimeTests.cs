@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 public class RequestLifetimeTests
 {
     [Fact]

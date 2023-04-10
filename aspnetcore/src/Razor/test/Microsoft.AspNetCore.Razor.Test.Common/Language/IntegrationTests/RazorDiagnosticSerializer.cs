@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public class RazorDiagnosticSerializer
 {
     public static string Serialize(RazorDiagnostic diagnostic)

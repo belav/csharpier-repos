@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// A filter that creates another filter of type <see cref="ImplementationType"/>, retrieving missing constructor
 /// arguments from dependency injection if available there.

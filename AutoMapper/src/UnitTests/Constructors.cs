@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Constructors;
 
-
 public class RecordConstructorValidation : AutoMapperSpecBase
 {
     class Source { }

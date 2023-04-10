@@ -7,7 +7,6 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions;
 
-
 /// <summary>Instructs the System.Text.RegularExpressions source generator to generate an implementation of the specified regular expression.</summary>
 /// <remarks>
 /// <para>

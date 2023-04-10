@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
-
 internal static class CookieHeaderParserShared
 {
     public static bool TryParseValues(

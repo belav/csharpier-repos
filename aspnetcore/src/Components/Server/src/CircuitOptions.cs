@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Server;
 
-
 /// <summary>
 /// Options to configure circuit handler for server-side Blazor
 /// </summary>

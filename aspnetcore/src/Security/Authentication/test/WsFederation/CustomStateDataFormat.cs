@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Authentication.WsFederation;
 
-
 public class CustomStateDataFormat : ISecureDataFormat<AuthenticationProperties>
 {
     public const string ValidStateData = "ValidStateData";

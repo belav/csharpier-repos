@@ -16,7 +16,6 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Diagnostics;
 
-
 internal static class DiagnosticTaggingOptions
 {
     public static readonly Option2<bool> PullDiagnosticTagging =

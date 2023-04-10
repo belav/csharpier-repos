@@ -3,7 +3,6 @@
 
 namespace Identity.DefaultUI.WebSite;
 
-
 public class Program
 {
     public static void Main(string[] args)

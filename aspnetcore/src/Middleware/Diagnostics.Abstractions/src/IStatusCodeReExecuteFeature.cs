@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 /// <summary>
 /// Represents a feature containing the path details of the original request. This feature is provided by the
 /// StatusCodePagesMiddleware when it re-execute the request pipeline with an alternative path to generate the

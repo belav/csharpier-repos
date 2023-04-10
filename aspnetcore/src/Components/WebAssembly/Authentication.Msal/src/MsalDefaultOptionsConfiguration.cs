@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Authentication.WebAssembly.Msal;
 
-
 internal sealed class MsalDefaultOptionsConfiguration
     : IPostConfigureOptions<RemoteAuthenticationOptions<MsalProviderOptions>>
 {

@@ -1,6 +1,5 @@
 namespace AutoMapper.UnitTests.ConditionalMapping;
 
-
 public class When_adding_a_condition_for_all_members : AutoMapperSpecBase
 {
     Source _source = new Source { Value = 3 };

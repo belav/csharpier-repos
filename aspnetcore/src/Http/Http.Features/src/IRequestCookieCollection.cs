@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Represents the HttpRequest cookie collection
 /// </summary>

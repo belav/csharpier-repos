@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
-
 /// <summary>
 /// Constants related to HTTP transports.
 /// </summary>

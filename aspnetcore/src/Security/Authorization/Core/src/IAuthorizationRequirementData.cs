@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// Interface that can produce authorization requirements.
 /// </summary>

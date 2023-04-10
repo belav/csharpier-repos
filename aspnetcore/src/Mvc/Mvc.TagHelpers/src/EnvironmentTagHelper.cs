@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 /// <summary>
 /// <see cref="ITagHelper"/> implementation targeting &lt;environment&gt; elements that conditionally renders
 /// content based on the current value of <see cref="IHostingEnvironment.EnvironmentName"/>.

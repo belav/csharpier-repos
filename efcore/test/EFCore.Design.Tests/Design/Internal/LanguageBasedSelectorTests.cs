@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Design.Internal;
 
-
 public class LanguageBasedSelectorTests
 {
     [ConditionalFact]

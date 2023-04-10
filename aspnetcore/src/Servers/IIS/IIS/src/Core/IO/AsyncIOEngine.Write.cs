@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.HttpSys.Internal;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core.IO;
 
-
 internal partial class AsyncIOEngine
 {
     private sealed class AsyncWriteOperation : AsyncWriteOperationBase

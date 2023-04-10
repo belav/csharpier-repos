@@ -10,7 +10,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Tests;
 
-
 public class WebHostFunctionalTests : LoggedTest
 {
     [Fact]

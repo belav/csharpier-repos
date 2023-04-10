@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
-
 public class RenderTreeBuilderTest
 {
     [Fact]

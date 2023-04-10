@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestKeyComparer : IEqualityComparer<IReadOnlyKey>, IComparer<IReadOnlyKey>
 {
     private readonly bool _compareAnnotations;

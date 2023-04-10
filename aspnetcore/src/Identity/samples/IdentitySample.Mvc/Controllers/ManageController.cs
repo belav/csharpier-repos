@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentitySamples.Controllers;
 
-
 [Authorize]
 public class ManageController : Controller
 {

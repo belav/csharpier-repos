@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class FakeDatabaseModelFactory : IDatabaseModelFactory
 {
     public virtual DatabaseModel Create(

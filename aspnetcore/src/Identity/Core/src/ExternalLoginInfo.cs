@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Represents login information, source and externally source principal for a user record
 /// </summary>

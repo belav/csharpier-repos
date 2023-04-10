@@ -3,7 +3,6 @@
 
 namespace TagHelpersWebSite;
 
-
 public enum JacketColor
 {
     Red,

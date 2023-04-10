@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 internal abstract partial class FileResult
 {
     private string? _fileDownloadName;

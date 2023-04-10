@@ -8,7 +8,6 @@ using static Microsoft.CodeAnalysis.Razor.RazorProjectEngineBuilderExtensions;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 public class RazorProjectEngineBuilderExtensionsTest
 {
     [Fact]

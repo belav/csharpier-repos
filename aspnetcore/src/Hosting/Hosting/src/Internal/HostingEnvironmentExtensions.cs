@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal static class HostingEnvironmentExtensions
 {
 #pragma warning disable CS0618 // Type or member is obsolete

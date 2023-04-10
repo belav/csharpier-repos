@@ -3,7 +3,6 @@
 
 namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 
-
 /// <summary>
 /// Health check context. Provides health check registrations to <see cref="IHealthCheck.CheckHealthAsync(HealthCheckContext, System.Threading.CancellationToken)"/>.
 /// </summary>

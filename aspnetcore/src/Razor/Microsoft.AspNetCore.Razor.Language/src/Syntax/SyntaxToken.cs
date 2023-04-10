@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 internal class SyntaxToken : RazorSyntaxNode
 {
     internal SyntaxToken(GreenNode green, SyntaxNode parent, int position)

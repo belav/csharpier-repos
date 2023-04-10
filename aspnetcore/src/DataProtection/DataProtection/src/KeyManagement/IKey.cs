@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationM
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
-
 /// <summary>
 /// The basic interface for representing an authenticated encryption key.
 /// </summary>

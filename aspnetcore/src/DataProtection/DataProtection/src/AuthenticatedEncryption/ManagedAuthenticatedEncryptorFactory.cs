@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
-
 /// <summary>
 /// An <see cref="IAuthenticatedEncryptorFactory"/> for <see cref="ManagedAuthenticatedEncryptor"/>.
 /// </summary>

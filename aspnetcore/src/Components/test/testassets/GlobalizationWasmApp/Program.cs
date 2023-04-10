@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace GlobalizationWasmApp;
 
-
 public class Program
 {
     public static async Task Main(string[] args)

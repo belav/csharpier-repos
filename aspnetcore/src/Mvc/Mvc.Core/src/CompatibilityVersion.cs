@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Specifies the version compatibility of runtime behaviors configured by <see cref="MvcOptions"/>.
 /// </summary>

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 [AttributeUsage(
     AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly,
     AllowMultiple = true

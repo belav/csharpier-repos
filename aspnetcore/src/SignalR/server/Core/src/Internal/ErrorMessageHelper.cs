@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal static class ErrorMessageHelper
 {
     internal static string BuildErrorMessage(

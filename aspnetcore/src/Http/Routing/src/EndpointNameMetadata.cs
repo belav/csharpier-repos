@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Specifies an endpoint name in <see cref="Endpoint.Metadata"/>.
 /// </summary>

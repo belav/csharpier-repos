@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Connections;
 
 namespace BasicWebSite;
 
-
 public class StartupWhereReadingRequestBodyThrows
 {
     // Set up application services

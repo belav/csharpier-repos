@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 internal class DefaultRazorTargetExtensionFeature
     : RazorEngineFeatureBase,
         IRazorTargetExtensionFeature

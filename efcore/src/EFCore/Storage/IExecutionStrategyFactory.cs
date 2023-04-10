@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     Factory for <see cref="IExecutionStrategy" /> instances.
 /// </summary>

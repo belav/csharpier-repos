@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class DataBindingInMemoryTest : DataBindingTestBase<F1InMemoryFixture>
 {
     public DataBindingInMemoryTest(F1InMemoryFixture fixture)

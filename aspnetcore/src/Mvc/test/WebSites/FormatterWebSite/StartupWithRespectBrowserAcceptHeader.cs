@@ -3,7 +3,6 @@
 
 namespace FormatterWebSite;
 
-
 public class StartupWithRespectBrowserAcceptHeader
 {
     public void ConfigureServices(IServiceCollection services)

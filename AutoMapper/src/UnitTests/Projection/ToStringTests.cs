@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
 
-
 public class ToStringTests : AutoMapperSpecBase
 {
     private Dest[] _dests;

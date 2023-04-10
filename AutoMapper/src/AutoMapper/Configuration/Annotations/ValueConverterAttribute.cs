@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.Configuration.Annotations;
 
-
 /// <summary>
 /// Specify a value converter type to convert from the matching source member to the destination member
 /// Use with <see cref="SourceMemberAttribute" /> to specify a separate source member to supply to the value converter

@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 internal static class SourceSpanExtensions
 {
     public static TextSpan AsTextSpan(this SourceSpan sourceSpan)

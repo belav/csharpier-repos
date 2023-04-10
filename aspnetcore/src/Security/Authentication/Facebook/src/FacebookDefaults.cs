@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.Facebook;
 
-
 /// <summary>
 /// Default values for the Facebook authentication handler.
 /// </summary>

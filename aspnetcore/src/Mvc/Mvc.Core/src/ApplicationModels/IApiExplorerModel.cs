@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// An interface that allows access to an ApiExplorerModel.
 /// </summary>

@@ -6,7 +6,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
-
 public class SqlServerGeometryTypeMappingTests
 {
     [ConditionalFact]

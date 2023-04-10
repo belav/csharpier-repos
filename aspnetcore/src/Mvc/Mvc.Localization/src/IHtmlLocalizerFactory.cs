@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Localization;
 
-
 /// <summary>
 /// A factory that creates <see cref="IHtmlLocalizer"/> instances.
 /// </summary>

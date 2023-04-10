@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
-
 public class ViewBufferTextWriterTest
 {
     [Fact]

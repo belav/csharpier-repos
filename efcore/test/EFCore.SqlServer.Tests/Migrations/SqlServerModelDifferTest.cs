@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 public class SqlServerModelDifferTest : MigrationsModelDifferTestBase
 {
     [ConditionalFact]

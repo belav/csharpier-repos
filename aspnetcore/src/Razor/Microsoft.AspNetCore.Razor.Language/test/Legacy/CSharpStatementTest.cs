@@ -5,7 +5,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 // Basic Tests for C# Statements:
 //  * Basic case for each statement
 //  * Basic case for ALL clauses

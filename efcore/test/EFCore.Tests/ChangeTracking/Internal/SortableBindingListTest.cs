@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public class SortableBindingListTest
 {
     private void SortTest(string property, ListSortDirection direction)

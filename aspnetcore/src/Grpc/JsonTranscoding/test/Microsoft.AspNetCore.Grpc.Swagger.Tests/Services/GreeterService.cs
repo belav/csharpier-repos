@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.Services;
 
-
 public class GreeterService : Greeter.GreeterBase
 {
     private readonly ILogger _logger;

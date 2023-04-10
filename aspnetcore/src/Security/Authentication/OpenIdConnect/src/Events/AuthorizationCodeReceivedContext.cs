@@ -8,7 +8,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
-
 /// <summary>
 /// This Context can be used to be informed when an 'AuthorizationCode' is received over the OpenIdConnect protocol.
 /// </summary>

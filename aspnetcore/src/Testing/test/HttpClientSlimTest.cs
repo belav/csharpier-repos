@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class HttpClientSlimTest
 {
     private static readonly byte[] _defaultResponse = Encoding.ASCII.GetBytes("test");

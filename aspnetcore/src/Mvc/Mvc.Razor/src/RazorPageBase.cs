@@ -19,7 +19,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// Represents properties and methods that are needed in order to render a view that uses Razor syntax.
 /// </summary>

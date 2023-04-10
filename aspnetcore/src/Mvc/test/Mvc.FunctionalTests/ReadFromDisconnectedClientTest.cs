@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 // These tests verify the behavior of MVC when responding to a client that simulates a disconnect.
 // See https://github.com/dotnet/aspnetcore/issues/13333
 public class ReadFromDisconnectedClientTest

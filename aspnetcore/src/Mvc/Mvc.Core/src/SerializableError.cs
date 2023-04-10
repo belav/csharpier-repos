@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Defines a serializable container for storing ModelState information.
 /// This information is stored as key/value pairs.

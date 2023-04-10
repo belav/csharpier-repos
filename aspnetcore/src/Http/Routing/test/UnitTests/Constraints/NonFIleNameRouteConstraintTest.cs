@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
-
 public class NonFileNameRouteConstraintTest
 {
     [Theory]

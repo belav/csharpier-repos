@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 /// <summary>
 /// Implements support for MessagePackHubProtocol. This code is shared between SignalR and Blazor.
 /// </summary>

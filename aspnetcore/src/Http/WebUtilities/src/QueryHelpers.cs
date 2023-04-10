@@ -8,7 +8,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.WebUtilities;
 
-
 /// <summary>
 /// Provides methods for parsing and manipulating query strings.
 /// </summary>

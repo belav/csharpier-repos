@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// A filter that skips antiforgery token validation.
 /// </summary>

@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Http.Metadata;
 
 namespace Microsoft.AspNetCore.Http.Extensions.Tests;
 
-
 public class EndpointMetadataContextTests
 {
     [Fact]

@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal static class LinkerFlags
 {
     /// <summary>

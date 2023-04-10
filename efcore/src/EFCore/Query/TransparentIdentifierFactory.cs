@@ -6,7 +6,6 @@ using JetBrains.Annotations;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         A factory to create transparent identifier to create during query processing.

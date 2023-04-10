@@ -7,7 +7,6 @@ using System.Net.Sockets;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// Summary description for TestConnection
 /// </summary>

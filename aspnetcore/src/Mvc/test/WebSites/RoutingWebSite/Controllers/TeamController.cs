@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
-
 [Route("/Teams", Order = 1)]
 public class TeamController : Controller
 {

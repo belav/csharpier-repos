@@ -5,7 +5,6 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal static class TextMessageFormatter
 {
     // This record separator is supposed to be used only for JSON payloads where 0x1e character

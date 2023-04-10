@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 /// <summary>
 /// Used to look up MIME types given a file path
 /// </summary>

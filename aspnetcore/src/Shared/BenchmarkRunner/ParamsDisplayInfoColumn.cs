@@ -7,7 +7,6 @@ using BenchmarkDotNet.Running;
 
 namespace BenchmarkDotNet.Attributes;
 
-
 public class ParamsSummaryColumn : IColumn
 {
     public string Id => nameof(ParamsSummaryColumn);

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
-
 public partial class DisallowReturningActionResultsFromMapMethodsTest
 {
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new RouteHandlerAnalyzer());

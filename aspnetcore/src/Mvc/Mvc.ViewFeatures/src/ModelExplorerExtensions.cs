@@ -6,7 +6,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Extension methods for <see cref="ModelExplorer"/>.
 /// </summary>

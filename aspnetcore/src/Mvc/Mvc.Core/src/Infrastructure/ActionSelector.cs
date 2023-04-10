@@ -12,7 +12,6 @@ using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 /// <summary>
 /// A default <see cref="IActionSelector"/> implementation.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 /// <summary>
 ///     <para>
 ///         A <see cref="ReaderModificationCommandBatch" /> for providers which return values to find out how many rows were affected.

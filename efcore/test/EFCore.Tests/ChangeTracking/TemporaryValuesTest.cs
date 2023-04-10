@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 public class TemporaryValuesTest
 {
     [ConditionalFact]

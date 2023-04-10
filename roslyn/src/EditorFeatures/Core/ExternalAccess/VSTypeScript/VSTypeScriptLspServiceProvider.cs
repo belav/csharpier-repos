@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.LanguageServer;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
-
 [Export(typeof(VSTypeScriptLspServiceProvider)), Shared]
 internal class VSTypeScriptLspServiceProvider : AbstractLspServiceProvider
 {

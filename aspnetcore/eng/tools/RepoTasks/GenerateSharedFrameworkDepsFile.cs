@@ -14,7 +14,6 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace RepoTasks;
 
-
 public class GenerateSharedFrameworkDepsFile : Microsoft.Build.Utilities.Task
 {
     [Required]

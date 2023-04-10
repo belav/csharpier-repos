@@ -5,7 +5,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Localization.Test;
 
-
 public class HtmlLocalizerOfTTest
 {
     [Fact]

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 
-
 /// <summary>
 ///     A <see cref="MigrationOperation" /> for operations on columns.
 ///     See also <see cref="AddColumnOperation" /> and <see cref="AlterColumnOperation" />.

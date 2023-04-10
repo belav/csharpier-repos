@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
-
 internal abstract class WasmDebuggerConnection : IDisposable
 {
     public string Id { get; init; }

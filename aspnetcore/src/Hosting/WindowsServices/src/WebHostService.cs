@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting.WindowsServices;
 
-
 /// <summary>
 ///     Provides an implementation of a Windows service that hosts ASP.NET Core.
 /// </summary>

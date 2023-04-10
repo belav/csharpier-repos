@@ -20,7 +20,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class InMemoryTransportBenchmark
 {
     private const string _plaintextExpectedResponse =

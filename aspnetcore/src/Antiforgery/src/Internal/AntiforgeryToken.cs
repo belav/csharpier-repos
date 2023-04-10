@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-
 internal sealed class AntiforgeryToken
 {
     internal const int SecurityTokenBitLength = 128;

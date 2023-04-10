@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiAuthSample.Controllers;
 
-
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]

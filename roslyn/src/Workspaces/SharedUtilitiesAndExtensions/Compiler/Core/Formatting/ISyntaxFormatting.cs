@@ -12,7 +12,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
-
 internal interface ISyntaxFormatting
 {
     SyntaxFormattingOptions DefaultOptions { get; }

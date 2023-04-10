@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// Indicates that the associated property should have a value injected from the
 /// service provider during initialization.

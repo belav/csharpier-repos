@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic;
 
-
 /// <summary>
 /// A factory for QUIC based connections.
 /// </summary>

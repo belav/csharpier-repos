@@ -16,7 +16,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration;
 
-
 public class GeneratorDriverTests_Attributes_SimpleName : CSharpTestBase
 {
     #region Non-Incremental tests

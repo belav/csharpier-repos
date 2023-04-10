@@ -2,7 +2,6 @@
 
 namespace AutoMapper.UnitTests.Mappers.Dynamic;
 
-
 class Destination
 {
     public string Foo { get; set; }

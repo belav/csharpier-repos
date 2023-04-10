@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RazorPagesWebSite.Controllers;
 
-
 [Route("[controller]/[action]")]
 [Authorize]
 public class AuthorizedActionController : Controller

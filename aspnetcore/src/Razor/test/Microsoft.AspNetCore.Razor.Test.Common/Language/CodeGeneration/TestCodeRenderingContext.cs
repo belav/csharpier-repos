@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-
 public static class TestCodeRenderingContext
 {
     public static CodeRenderingContext CreateDesignTime(

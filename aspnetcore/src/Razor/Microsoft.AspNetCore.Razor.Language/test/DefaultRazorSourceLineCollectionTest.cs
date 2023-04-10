@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Test;
 
-
 public class DefaultRazorSourceLineCollectionTest
 {
     [Fact]

@@ -5,7 +5,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 public class FastPathTokenizerLargeBenchmark : FastPathTokenizerBenchmarkBase
 {
     private static readonly int MaxCount = 32;

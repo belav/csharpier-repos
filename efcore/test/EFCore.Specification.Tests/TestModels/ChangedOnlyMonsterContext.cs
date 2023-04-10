@@ -11,7 +11,6 @@ using System.Runtime.CompilerServices;
 // ReSharper disable ConvertToAutoProperty
 namespace Microsoft.EntityFrameworkCore.TestModels;
 
-
 public class ChangedOnlyMonsterContext
     : MonsterContext<
         ChangedOnlyMonsterContext.Customer,

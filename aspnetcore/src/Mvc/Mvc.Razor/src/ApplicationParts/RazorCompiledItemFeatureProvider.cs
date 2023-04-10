@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Razor.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 internal sealed class RazorCompiledItemFeatureProvider : IApplicationFeatureProvider<ViewsFeature>
 {
     private Dictionary<string, Type>? _hotReloadedViews;

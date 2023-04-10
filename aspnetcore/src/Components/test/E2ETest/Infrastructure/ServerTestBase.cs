@@ -8,7 +8,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure;
 
-
 public abstract class ServerTestBase<TServerFixture>
     : BrowserTestBase,
         IClassFixture<TServerFixture>

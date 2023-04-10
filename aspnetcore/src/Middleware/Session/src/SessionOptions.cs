@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Session;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Represents the session state options for the application.
 /// </summary>

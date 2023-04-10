@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class SeedingTestBase
 {
     [ConditionalTheory]

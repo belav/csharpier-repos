@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
-
 /// <summary>
 /// Implements a provider of <see cref="ApiDescription"/> to change parameters of
 /// type <see cref="IJsonPatchDocument"/> to an array of <see cref="Operation"/>.

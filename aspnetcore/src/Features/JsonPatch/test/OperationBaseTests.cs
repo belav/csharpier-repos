@@ -5,7 +5,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch.Operations;
 
-
 public class OperationBaseTests
 {
     [Theory]

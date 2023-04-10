@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-
 public class ExpandCollections : IntegrationTest<ExpandCollections.DatabaseInitializer>
 {
     TrainingCourseDto _course;

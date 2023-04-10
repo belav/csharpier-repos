@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// A policy that changes the locking behavior.
 /// </summary>

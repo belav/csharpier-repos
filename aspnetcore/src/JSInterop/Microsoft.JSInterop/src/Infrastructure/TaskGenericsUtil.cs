@@ -6,7 +6,6 @@ using System.Globalization;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
-
 internal static class TaskGenericsUtil
 {
     private static readonly ConcurrentDictionary<Type, ITaskResultGetter> _cachedResultGetters =

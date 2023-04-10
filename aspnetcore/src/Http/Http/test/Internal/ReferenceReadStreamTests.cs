@@ -5,7 +5,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 public class ReferenceReadStreamTests
 {
     [Fact]

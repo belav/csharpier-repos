@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.Extensions.Hosting;
 
-
 /// <summary>
 /// Extension methods for configuring the <see cref="IHostBuilder" />.
 /// </summary>

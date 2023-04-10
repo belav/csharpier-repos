@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class MappingInheritance : AutoMapperSpecBase
 {
     private Entity testEntity;

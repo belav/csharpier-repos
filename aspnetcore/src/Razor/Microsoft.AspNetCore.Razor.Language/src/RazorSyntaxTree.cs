@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorSyntaxTree
 {
     internal static RazorSyntaxTree Create(

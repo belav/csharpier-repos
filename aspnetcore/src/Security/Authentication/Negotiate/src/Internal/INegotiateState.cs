@@ -5,7 +5,6 @@ using System.Security.Principal;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 // For testing
 internal interface INegotiateState : IDisposable
 {

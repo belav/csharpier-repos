@@ -2,7 +2,6 @@
 
 namespace AutoMapper.IntegrationTests.Inheritance;
 
-
 public class ProjectToAbstractType : IntegrationTest<ProjectToAbstractType.DatabaseInitializer>
 {
     ITypeA[] _destinations;

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer.Tools;
 
-
 internal sealed class PrintCommand
 {
     public static void Register(ProjectCommandLineApplication app)

@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 /// <summary>
 /// A <see cref="IModelBinderProvider"/> for types deriving from <see cref="Enum"/>.
 /// </summary>

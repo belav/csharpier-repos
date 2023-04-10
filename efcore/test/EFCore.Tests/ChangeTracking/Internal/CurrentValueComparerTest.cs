@@ -5,7 +5,6 @@ using System.Collections;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public class CurrentValueComparerTest
 {
     [ConditionalTheory]

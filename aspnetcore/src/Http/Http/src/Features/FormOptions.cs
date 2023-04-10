@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Options to configure reading the request body as a HTTP form.
 /// </summary>

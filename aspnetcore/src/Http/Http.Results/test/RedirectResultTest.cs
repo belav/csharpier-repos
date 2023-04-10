@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 public class RedirectResultTest : RedirectResultTestBase
 {
     [Fact]

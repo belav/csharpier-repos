@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
-
 public class StartupBase
 {
     public void ConfigureBaseClassServices(IServiceCollection services)

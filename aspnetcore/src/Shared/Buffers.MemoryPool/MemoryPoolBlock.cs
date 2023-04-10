@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace System.Buffers;
 
-
 /// <summary>
 /// Wraps an array allocated in the pinned object heap in a reusable block of managed memory
 /// </summary>

@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree;
 
-
 [ExportWorkspaceServiceFactory(typeof(ISymbolTreeInfoCacheService)), Shared]
 internal sealed partial class SymbolTreeInfoCacheServiceFactory : IWorkspaceServiceFactory
 {

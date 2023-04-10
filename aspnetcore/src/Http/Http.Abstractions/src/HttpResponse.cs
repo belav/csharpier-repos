@@ -6,7 +6,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Represents the outgoing side of an individual HTTP request.
 /// </summary>

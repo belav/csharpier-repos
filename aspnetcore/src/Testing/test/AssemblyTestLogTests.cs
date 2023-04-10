@@ -12,7 +12,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class AssemblyTestLogTests : LoggedTest
 {
     [Fact]

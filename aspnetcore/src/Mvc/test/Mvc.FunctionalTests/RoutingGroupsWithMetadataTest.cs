@@ -10,7 +10,6 @@ using RoutingWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class RoutingGroupsWithMetadataTests
     : IClassFixture<MvcTestFixture<StartupForRouteGroupsWithMetadata>>
 {

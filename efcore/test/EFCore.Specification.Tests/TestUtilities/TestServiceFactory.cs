@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestServiceFactory
 {
     public static readonly TestServiceFactory Instance = new();

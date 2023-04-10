@@ -10,7 +10,6 @@ using static DisabledRuntimeMarshallingNative;
 
 namespace DisabledRuntimeMarshalling;
 
-
 public unsafe class Generics
 {
     [Fact]

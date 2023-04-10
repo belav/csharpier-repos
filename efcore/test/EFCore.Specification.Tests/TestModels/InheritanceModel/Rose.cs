@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
-
 public class Rose : Flower
 {
     public bool HasThorns { get; set; }

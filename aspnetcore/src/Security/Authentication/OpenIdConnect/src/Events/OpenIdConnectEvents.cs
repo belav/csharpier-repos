@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
-
 /// <summary>
 /// Specifies events which the <see cref="OpenIdConnectHandler" /> invokes to enable developer control over the authentication process.
 /// </summary>

@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Options for configuring user lockout.
 /// </summary>

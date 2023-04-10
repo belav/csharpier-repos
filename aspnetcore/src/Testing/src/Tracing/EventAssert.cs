@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Testing.Tracing;
 
-
 public class EventAssert
 {
     private readonly int _expectedId;

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 public class CosmosModelValidatorTest : ModelValidatorTestBase
 {
     [ConditionalFact]

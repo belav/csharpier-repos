@@ -7,7 +7,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace StaticFilesAuth;
 
-
 public class Startup
 {
     public Startup(IConfiguration configuration, IWebHostEnvironment hostingEnvironment)

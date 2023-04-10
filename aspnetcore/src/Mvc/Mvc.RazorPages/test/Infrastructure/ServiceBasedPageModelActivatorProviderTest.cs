@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
-
 public class ServiceBasedPageModelActivatorProviderTest
 {
     [Fact]

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal class EditResult
 {
     public EditResult(PartialParseResultInternal result, SyntaxNode editedNode)

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 internal static class BitHelpers
 {
     /// <summary>

@@ -12,7 +12,6 @@ using Microsoft.DotNet.OpenApi.Commands;
 
 namespace Microsoft.DotNet.Openapi.Tools;
 
-
 public class HttpClientWrapper : IHttpClientWrapper
 {
     private readonly HttpClient _client;

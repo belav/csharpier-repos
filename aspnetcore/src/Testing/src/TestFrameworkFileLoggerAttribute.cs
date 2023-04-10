@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
 public class TestFrameworkFileLoggerAttribute : TestOutputDirectoryAttribute
 {

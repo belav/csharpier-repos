@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Test.Helpers;
 
-
 public abstract class AutoRenderComponent : IComponent
 {
     private RenderHandle _renderHandle;

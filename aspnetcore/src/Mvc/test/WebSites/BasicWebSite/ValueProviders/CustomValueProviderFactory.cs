@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace BasicWebSite.ValueProviders;
 
-
 public class CustomValueProviderFactory : IValueProviderFactory
 {
     public Task CreateValueProviderAsync(ValueProviderFactoryContext context)

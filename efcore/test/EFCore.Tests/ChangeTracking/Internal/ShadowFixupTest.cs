@@ -11,7 +11,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public class ShadowFixupTest
 {
     [ConditionalTheory]

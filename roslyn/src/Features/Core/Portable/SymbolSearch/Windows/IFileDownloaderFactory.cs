@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.SymbolSearch;
 
-
 /// <summary>
 /// Used so we can mock out the remote control service in unit tests.
 /// </summary>

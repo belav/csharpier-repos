@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Connections;
 
-
 internal abstract partial class TransportConnection : ConnectionContext
 {
     private IDictionary<object, object?>? _items;

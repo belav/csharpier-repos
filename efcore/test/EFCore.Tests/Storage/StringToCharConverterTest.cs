@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class StringToCharConverterTest
 {
     private static readonly StringToCharConverter _stringToChar = new();

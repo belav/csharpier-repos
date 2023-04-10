@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 /// <summary>
 /// Keeps track of the nesting of elements/containers while writing out the C# source code
 /// for a component. This allows us to detect mismatched start/end tags, as well as inject

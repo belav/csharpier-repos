@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 /// <summary>
 /// A default implementation of <see cref="IUrlHelperFactory"/>.
 /// </summary>

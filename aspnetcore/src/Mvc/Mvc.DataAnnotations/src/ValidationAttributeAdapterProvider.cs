@@ -6,7 +6,6 @@ using Microsoft.Extensions.Localization;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 /// <summary>
 /// Creates an <see cref="IAttributeAdapter"/> for the given attribute.
 /// </summary>

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components;
 
-
 internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
 {
     // This pass runs earlier than our other passes that 'lower' specific kinds of attributes.

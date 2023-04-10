@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     Base class to be used by database providers when implementing an <see cref="IAnnotationCodeGenerator" />
 /// </summary>

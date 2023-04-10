@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase<FormatterWebSite.Startup>
 {
     public NewtonsoftJsonInputFormatterTest(MvcTestFixture<FormatterWebSite.Startup> fixture)

@@ -13,7 +13,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.SpaServices.AngularCli;
 
-
 /// <summary>
 /// Provides an implementation of <see cref="ISpaPrerendererBuilder"/> that can build
 /// an Angular application by invoking the Angular CLI.

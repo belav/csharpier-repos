@@ -6,7 +6,6 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Represents a claim that a user possesses.
 /// </summary>

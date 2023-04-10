@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public static class TestPocoLoadingExtensions
 {
     public static TRelated Load<TRelated>(

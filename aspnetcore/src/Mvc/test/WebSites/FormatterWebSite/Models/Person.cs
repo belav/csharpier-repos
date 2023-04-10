@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace FormatterWebSite;
 
-
 [DataContract]
 public class Person
 {

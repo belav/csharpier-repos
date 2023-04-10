@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.CallHandlers;
 
-
 internal sealed class ServerStreamingServerCallHandler<TService, TRequest, TResponse>
     : ServerCallHandlerBase<TService, TRequest, TResponse>
     where TService : class

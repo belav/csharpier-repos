@@ -7,7 +7,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 internal sealed class ConfigurationProviderSource : IConfigurationSource
 {
     private readonly IConfigurationProvider _configurationProvider;

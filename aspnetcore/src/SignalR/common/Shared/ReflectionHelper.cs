@@ -8,7 +8,6 @@ using System.Threading.Channels;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 internal static class ReflectionHelper
 {
     // mustBeDirectType - Hub methods must use the base 'stream' type and not be a derived class that just implements the 'stream' type

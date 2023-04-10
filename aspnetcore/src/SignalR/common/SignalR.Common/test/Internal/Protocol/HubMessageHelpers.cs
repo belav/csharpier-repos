@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 
-
 internal static class HubMessageHelpers
 {
     // This lets you add headers to a hub message and return it, in a single expression.

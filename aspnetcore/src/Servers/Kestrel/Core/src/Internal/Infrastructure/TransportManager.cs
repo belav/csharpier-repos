@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Https.Internal;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal sealed class TransportManager
 {
     private readonly List<ActiveTransport> _transports = new List<ActiveTransport>();

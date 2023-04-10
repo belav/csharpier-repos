@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 public class PublishedApplicationPublisher : ApplicationPublisher
 {
     private readonly string _applicationName;

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
 namespace Microsoft.AspNetCore.Rewrite.Test;
 
-
 public class CookieActionFactoryTest
 {
     [Fact]

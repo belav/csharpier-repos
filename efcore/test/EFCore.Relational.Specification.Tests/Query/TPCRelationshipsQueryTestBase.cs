@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class TPCRelationshipsQueryTestBase<TFixture>
     : InheritanceRelationshipsQueryRelationalTestBase<TFixture>
     where TFixture : TPCRelationshipsQueryRelationalFixture, new()

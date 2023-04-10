@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MvcSandbox;
 
-
 public class PagesHome : PageModel
 {
     public string Name { get; private set; } = "World";

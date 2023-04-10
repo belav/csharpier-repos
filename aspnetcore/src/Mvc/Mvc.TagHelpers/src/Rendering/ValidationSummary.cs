@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// Acceptable validation summary rendering modes.
 /// </summary>

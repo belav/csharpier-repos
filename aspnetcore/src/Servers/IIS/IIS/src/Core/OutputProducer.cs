@@ -7,7 +7,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-
 internal sealed class OutputProducer
 {
     // This locks access to _completed and _aborted.

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.SignalR.Test.Internal;
 
 namespace FunctionalTests;
 
-
 public class Program
 {
     public static Task Main(string[] args)

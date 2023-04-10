@@ -6,7 +6,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 
-
 /// <summary>
 /// Immutable abstract representation of a span of text.  For example, in an error diagnostic that reports a
 /// location, it could come from a parsed string, text from a tool editor buffer, etc.

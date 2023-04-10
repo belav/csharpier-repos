@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// Options for configuring the <see cref="OutputCacheMiddleware"/>.
 /// </summary>

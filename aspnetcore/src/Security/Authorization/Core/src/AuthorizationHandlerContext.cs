@@ -8,7 +8,6 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// Contains authorization information used by <see cref="IAuthorizationHandler"/>.
 /// </summary>

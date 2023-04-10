@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 internal static class DataAnnotationsLocalizationServices
 {
     public static void AddDataAnnotationsLocalizationServices(

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
-
 public enum TokenKind
 {
     Unknown,

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
-
 /// <summary>
 ///     Selects an <see cref="IModelCodeGenerator" /> service for a given programming language.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     A placeholder for lazily-generated debug strings that can be expanded in the debugger to
 ///     to generate and display them.

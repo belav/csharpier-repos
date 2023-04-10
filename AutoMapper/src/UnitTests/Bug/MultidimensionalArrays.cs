@@ -2,7 +2,6 @@
 
 namespace AutoMapper.UnitTests.Bug;
 
-
 public class MultidimensionalArrays : AutoMapperSpecBase
 {
     const int SomeValue = 154;

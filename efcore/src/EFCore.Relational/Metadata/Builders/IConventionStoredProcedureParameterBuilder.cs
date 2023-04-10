@@ -5,7 +5,6 @@ using System.Data;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 /// <summary>
 ///     Provides a simple API for configuring a <see cref="IConventionStoredProcedureParameter" />.
 /// </summary>

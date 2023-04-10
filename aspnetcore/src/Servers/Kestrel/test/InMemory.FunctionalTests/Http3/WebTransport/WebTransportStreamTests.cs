@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.WebTransport;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-
 public class WebTransportStreamTests : Http3TestBase
 {
     private static readonly byte[] RandomBytes = new byte[5] { 0x61, 0x62, 0x63, 0x64, 0x65 };

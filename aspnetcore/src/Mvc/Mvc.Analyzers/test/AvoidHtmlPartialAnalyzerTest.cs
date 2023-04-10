@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.Testing.Verifiers;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
-
 public class AvoidHtmlPartialAnalyzerTest
 {
     private static readonly DiagnosticDescriptor DiagnosticDescriptor =

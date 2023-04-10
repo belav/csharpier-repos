@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestSqlLoggerFactory : ListLoggerFactory
 {
     private readonly bool _proceduralQueryGeneration = false;

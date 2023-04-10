@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// An entry in a <see cref="ModelStateDictionary"/>.
 /// </summary>

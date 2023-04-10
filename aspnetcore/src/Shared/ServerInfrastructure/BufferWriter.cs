@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace System.Buffers;
 
-
 /// <summary>
 /// A fast access struct that wraps <see cref="IBufferWriter{T}"/>.
 /// </summary>

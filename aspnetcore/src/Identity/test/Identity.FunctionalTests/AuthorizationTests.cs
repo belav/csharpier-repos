@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-
 public abstract class AuthorizationTests<TStartup, TContext>
     : IClassFixture<ServerFactory<TStartup, TContext>>
     where TStartup : class

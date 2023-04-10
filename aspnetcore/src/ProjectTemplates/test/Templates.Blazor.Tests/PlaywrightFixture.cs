@@ -16,7 +16,6 @@ using Xunit.Sdk;
 
 namespace ProjectTemplates.Tests.Infrastructure;
 
-
 public class PlaywrightFixture<TTestAssemblyType> : IAsyncLifetime
 {
     private static readonly bool _isCIEnvironment =

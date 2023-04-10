@@ -3,7 +3,6 @@
 
 namespace Microsoft.JSInterop.Implementation;
 
-
 /// <summary>
 /// Implements functionality for <see cref="IJSStreamReference"/>.
 /// </summary>

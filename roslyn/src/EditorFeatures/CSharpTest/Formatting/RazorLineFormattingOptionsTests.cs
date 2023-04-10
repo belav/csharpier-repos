@@ -17,7 +17,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting;
 
-
 [UseExportProvider]
 public class RazorLineFormattingOptionsTests
 {

@@ -14,7 +14,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class HPackHeaderWriterBenchmark
 {
     private Http2HeadersEnumerator _http2HeadersEnumerator;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
 {
     protected JsonQueryAdHocTestBase(ITestOutputHelper testOutputHelper)

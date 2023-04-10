@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace BasicWebSite;
 
-
 public class StartupWithoutEndpointRouting
 {
     // Set up application services

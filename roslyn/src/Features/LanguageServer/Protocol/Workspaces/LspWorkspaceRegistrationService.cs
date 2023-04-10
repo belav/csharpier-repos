@@ -9,7 +9,6 @@ using Logger = Microsoft.CodeAnalysis.Internal.Log.Logger;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-
 internal abstract class LspWorkspaceRegistrationService : IDisposable
 {
     private readonly object _gate = new();

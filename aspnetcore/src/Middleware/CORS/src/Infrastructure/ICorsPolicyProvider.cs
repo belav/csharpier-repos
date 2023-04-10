@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Cors.Infrastructure;
 
-
 /// <summary>
 /// A type which can provide a <see cref="CorsPolicy"/> for a particular <see cref="HttpContext"/>.
 /// </summary>

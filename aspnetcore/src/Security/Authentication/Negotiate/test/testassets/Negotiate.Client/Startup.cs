@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Negotiate.Client;
 
-
 public class Startup
 {
     public Startup(IConfiguration configuration)

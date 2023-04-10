@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <inheritdoc />
 public class RelationalQueryFilterRewritingConvention : QueryFilterRewritingConvention
 {

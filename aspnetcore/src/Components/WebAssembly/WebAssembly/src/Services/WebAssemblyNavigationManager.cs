@@ -9,7 +9,6 @@ using Interop = Microsoft.AspNetCore.Components.Web.BrowserNavigationManagerInte
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
-
 /// <summary>
 /// Default client-side implementation of <see cref="NavigationManager"/>.
 /// </summary>

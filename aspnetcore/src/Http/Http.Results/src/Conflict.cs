@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-
 /// <summary>
 /// An <see cref="IResult"/> that on execution will write an object to the response
 /// with Conflict (409) status code.

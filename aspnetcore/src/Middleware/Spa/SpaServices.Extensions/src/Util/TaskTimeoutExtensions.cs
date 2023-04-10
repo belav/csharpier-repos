@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SpaServices.Extensions.Util;
 
-
 internal static class TaskTimeoutExtensions
 {
     public static async Task WithTimeout(this Task task, TimeSpan timeoutDelay, string message)

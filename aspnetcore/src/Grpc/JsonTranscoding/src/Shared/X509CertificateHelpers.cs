@@ -23,7 +23,6 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Grpc.Shared;
 
-
 internal static class X509CertificateHelpers
 {
     internal const string X509SubjectAlternativeNameId = "2.5.29.17";

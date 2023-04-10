@@ -6,7 +6,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public class AssemblyExtension : RazorExtension
 {
     public AssemblyExtension(string extensionName, Assembly assembly)

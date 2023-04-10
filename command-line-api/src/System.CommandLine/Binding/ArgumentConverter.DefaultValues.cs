@@ -9,7 +9,6 @@ using System.Runtime.Serialization;
 
 namespace System.CommandLine.Binding;
 
-
 internal static partial class ArgumentConverter
 {
 #if NET6_0_OR_GREATER

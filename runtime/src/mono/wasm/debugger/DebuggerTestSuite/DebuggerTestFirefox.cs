@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace DebuggerTests;
 
-
 public class DebuggerTestFirefox : DebuggerTestBase
 {
     private new TimeSpan TestTimeout => base.TestTimeout * 5;

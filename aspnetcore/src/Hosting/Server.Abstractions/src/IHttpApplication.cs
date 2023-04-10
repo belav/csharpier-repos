@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Hosting.Server;
 
-
 /// <summary>
 /// Represents an application.
 /// </summary>

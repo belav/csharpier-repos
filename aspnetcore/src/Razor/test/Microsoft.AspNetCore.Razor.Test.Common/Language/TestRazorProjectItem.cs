@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public class TestRazorProjectItem : RazorProjectItem
 {
     private readonly string _fileKind;

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace HostedBlazorWebassemblyApp.Shared;
 
-
 public interface IWeatherForecastService
 {
     Task<WeatherForecast[]> GetForecastAsync(DateTime startDate);

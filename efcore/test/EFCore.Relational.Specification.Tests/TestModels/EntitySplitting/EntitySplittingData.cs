@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.EntitySplitting;
 
-
 public class EntitySplittingData : ISetSource
 {
     public static readonly EntitySplittingData Instance = new();

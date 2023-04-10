@@ -11,7 +11,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Represents the state of an attempt to bind values from an HTTP Request to an action method, which includes
 /// validation information.

@@ -12,7 +12,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 
-
 /// <summary>
 /// Database abstraction for a combined <see cref="DbContext"/> using ASP.NET Identity and Identity Server.
 /// </summary>

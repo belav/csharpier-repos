@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// Represents the type of HTML input to be rendered by a <see cref="InputDate{TValue}"/> component.
 /// </summary>

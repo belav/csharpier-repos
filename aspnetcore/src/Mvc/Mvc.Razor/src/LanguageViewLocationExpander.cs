@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// A <see cref="IViewLocationExpander"/> that adds the language as an extension prefix to view names. Language
 /// that is getting added as extension prefix comes from <see cref="Microsoft.AspNetCore.Http.HttpContext"/>.

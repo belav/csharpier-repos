@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 
-
 /// <summary>
 /// Specifies options for the <see cref="ConcurrencyLimiterMiddleware"/>.
 /// </summary>

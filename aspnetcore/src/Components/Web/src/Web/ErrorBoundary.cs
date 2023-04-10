@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Captures errors thrown from its child content.
 /// </summary>

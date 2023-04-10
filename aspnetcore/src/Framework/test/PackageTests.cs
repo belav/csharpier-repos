@@ -15,7 +15,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore;
 
-
 public class PackageTests
 {
     private readonly string _packageLayoutRoot;

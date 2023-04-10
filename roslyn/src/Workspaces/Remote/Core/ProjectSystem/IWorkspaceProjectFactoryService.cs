@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.Remote.ProjectSystem;
 
-
 internal interface IWorkspaceProjectFactoryService
 {
     Task<IWorkspaceProject> CreateAndAddProjectAsync(

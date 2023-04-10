@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-
 public class CreatedResultTests
 {
     [Fact]

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 /// <summary>
 /// A component that renders an anchor tag, automatically toggling its 'active'
 /// class based on whether its 'href' matches the current URI.

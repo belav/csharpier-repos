@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 ///     Cosmos-specific extension methods for <see cref="IServiceCollection" />.
 /// </summary>

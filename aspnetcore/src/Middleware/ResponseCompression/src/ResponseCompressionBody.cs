@@ -9,7 +9,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.ResponseCompression;
 
-
 /// <summary>
 /// Stream wrapper that create specific compression stream only if necessary.
 /// </summary>

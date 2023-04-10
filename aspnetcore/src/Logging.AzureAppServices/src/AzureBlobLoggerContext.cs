@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
-
 /// <summary>
 /// The context containing details for formatting the file name for the azure blob logger.
 /// </summary>

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class UpdatesFixtureBase : SharedStoreFixtureBase<UpdatesContext>
 {
     protected override string StoreName { get; } = "UpdateTest";

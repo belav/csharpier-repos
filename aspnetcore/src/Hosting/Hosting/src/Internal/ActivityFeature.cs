@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 /// <summary>
 /// Default implementation for <see cref="IHttpActivityFeature"/>.
 /// </summary>

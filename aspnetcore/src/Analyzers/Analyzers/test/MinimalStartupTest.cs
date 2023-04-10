@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.Testing;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
-
 public class MinimalStartupTest
 {
     private const string TopLevelMainName = "<Main>$";

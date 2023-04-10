@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal sealed class HubConnectionBinder<THub> : IInvocationBinder
     where THub : Hub
 {

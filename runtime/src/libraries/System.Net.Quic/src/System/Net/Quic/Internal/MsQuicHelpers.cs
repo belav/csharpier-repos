@@ -10,7 +10,6 @@ using static Microsoft.Quic.MsQuic;
 
 namespace System.Net.Quic;
 
-
 internal static class MsQuicHelpers
 {
     internal static bool TryParse(

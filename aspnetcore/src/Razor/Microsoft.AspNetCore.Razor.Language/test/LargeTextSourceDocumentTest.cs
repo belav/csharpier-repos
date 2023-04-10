@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language.Test;
 
-
 public class LargeTextSourceDocumentTest
 {
     private const int ChunkTestLength = 10;

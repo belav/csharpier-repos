@@ -6,7 +6,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
-
 public class WelcomePageSampleTest : IClassFixture<TestFixture<WelcomePageSample.Startup>>
 {
     public WelcomePageSampleTest(TestFixture<WelcomePageSample.Startup> fixture)

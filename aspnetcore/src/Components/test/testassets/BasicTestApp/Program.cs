@@ -15,7 +15,6 @@ using Microsoft.JSInterop;
 
 namespace BasicTestApp;
 
-
 public class Program
 {
     public static async Task Main(string[] args)

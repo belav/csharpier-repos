@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Session;
 
-
 internal interface IDistributedSessionStore : IEnumerable<KeyValuePair<EncodedKey, byte[]>>
 {
     int Count { get; }

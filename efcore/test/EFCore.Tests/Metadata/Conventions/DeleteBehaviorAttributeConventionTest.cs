@@ -12,7 +12,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 public class DeleteBehaviorAttributeConventionTest
 {
     [ConditionalFact]

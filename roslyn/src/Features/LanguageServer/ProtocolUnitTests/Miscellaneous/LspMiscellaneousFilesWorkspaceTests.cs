@@ -17,7 +17,6 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Miscellaneous;
 
-
 public class LspMiscellaneousFilesWorkspaceTests : AbstractLanguageServerProtocolTests
 {
     public LspMiscellaneousFilesWorkspaceTests(ITestOutputHelper testOutputHelper)

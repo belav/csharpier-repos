@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 /// <summary>
 /// Abstract class for grouping attributes of type <see cref="ValidationAttribute"/> into
 /// one <see cref="Attribute"/>

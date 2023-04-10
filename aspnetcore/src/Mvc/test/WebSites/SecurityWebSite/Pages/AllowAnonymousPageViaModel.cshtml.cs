@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SecurityWebSite;
 
-
 [AllowAnonymous]
 public class AllowAnonymousPageViaModel : PageModel
 {

@@ -3,7 +3,6 @@
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 internal static class TagHelperTypes
 {
     public const string ITagHelper = "Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper";

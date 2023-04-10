@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Specifies options for use when enabling JS component support.
 /// This type is not normally used directly from application code. In most cases, applications should

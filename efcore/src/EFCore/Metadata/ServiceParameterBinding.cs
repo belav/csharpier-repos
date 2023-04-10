@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     Describes the binding from an EF dependency injection service, or metadata type, which may or
 ///     may not also have and associated <see cref="IServiceProperty" />, to a parameter in

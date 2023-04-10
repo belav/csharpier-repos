@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace Grpc.Shared;
 
-
 // HTTP Template Grammar:
 //
 // Template = "/" | "/" Segments [ Verb ] ;

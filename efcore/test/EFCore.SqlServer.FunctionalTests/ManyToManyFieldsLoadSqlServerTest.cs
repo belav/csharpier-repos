@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class ManyToManyFieldsLoadSqlServerTest
     : ManyToManyFieldsLoadTestBase<ManyToManyFieldsLoadSqlServerTest.ManyToManyFieldsLoadSqlServerFixture>
 {

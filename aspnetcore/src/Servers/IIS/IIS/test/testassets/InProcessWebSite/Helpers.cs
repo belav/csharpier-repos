@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace TestSite;
 
-
 public static class Helpers
 {
     internal static bool? CanHaveBody(this HttpRequest request)

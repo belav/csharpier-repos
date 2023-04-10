@@ -11,7 +11,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal sealed class Utf8BufferTextWriter : TextWriter
 {
     private static readonly UTF8Encoding _utf8NoBom = new UTF8Encoding(

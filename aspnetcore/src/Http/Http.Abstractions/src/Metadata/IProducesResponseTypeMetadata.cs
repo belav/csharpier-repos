@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Metadata;
 
-
 /// <summary>
 /// Defines a contract for outline the response type returned from an endpoint.
 /// </summary>

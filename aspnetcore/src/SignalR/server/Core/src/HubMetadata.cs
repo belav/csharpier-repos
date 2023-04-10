@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// Metadata that describes the <see cref="Hub"/> information associated with a specific endpoint.
 /// </summary>

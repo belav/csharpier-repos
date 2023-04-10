@@ -3,7 +3,6 @@
 
 namespace ResponseCompressionSample;
 
-
 internal static class LoremIpsum
 {
     internal const string Text =

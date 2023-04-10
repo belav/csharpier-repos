@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Cosmos;
 
-
 public class QueryExpressionInterceptionWithDiagnosticsCosmosTest
     : QueryExpressionInterceptionTestBase,
         IClassFixture<QueryExpressionInterceptionWithDiagnosticsCosmosTest.InterceptionCosmosFixture>

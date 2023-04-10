@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 public class ExeTest
 {
     [Fact]

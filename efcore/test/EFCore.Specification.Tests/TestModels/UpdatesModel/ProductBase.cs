@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-
 public abstract class ProductBase
 {
     public Guid Id { get; set; }

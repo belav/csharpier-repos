@@ -7,7 +7,6 @@ using Resources = Microsoft.AspNetCore.Mvc.RazorPages.Resources;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extensions methods for configuring Razor Pages via an <see cref="IMvcBuilder"/>.
 /// </summary>

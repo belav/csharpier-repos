@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
-
 internal static class ComponentFacts
 {
     public static bool IsAnyParameter(ComponentSymbols symbols, IPropertySymbol property)

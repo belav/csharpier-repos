@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class InheritanceQueryCosmosFixture : InheritanceQueryFixtureBase
 {
     protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;

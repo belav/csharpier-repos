@@ -10,7 +10,6 @@ using Newtonsoft.Json.Linq;
 
 namespace TestTasks;
 
-
 public class InjectRequestHandler
 {
     private const string aspnetcoreV2Name = "aspnetcorev2_inprocess.dll";

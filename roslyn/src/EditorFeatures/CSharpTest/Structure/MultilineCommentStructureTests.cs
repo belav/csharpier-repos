@@ -17,7 +17,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
-
 [Trait(Traits.Feature, Traits.Features.Outlining)]
 public class MultilineCommentStructureTests : AbstractCSharpSyntaxTriviaStructureTests
 {

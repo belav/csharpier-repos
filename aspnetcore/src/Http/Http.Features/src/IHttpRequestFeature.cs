@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Contains the details of a given request. These properties should all be mutable.
 /// None of these properties should ever be set to null.

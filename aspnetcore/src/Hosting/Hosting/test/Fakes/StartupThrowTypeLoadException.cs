@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
-
 public class StartupThrowTypeLoadException
 {
     public StartupThrowTypeLoadException()

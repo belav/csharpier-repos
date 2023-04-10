@@ -9,7 +9,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal sealed class TimerAwaitable : IDisposable, ICriticalNotifyCompletion
 {
     private Timer? _timer;

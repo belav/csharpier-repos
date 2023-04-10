@@ -13,7 +13,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.AzureAD.FunctionalTests;
 
-
 public class ApiAuthenticationTests : IClassFixture<WebApplicationFactory<Startup>>
 {
     public ApiAuthenticationTests(WebApplicationFactory<Startup> fixture)

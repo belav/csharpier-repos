@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 [AttributeUsage(AttributeTargets.Method)]
 public class X509StoreIsAvailableAttribute : Attribute, ITestCondition
 {

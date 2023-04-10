@@ -7,7 +7,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Contains extension methods on <see cref="DbFunctions" /> for the Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite library.
 /// </summary>

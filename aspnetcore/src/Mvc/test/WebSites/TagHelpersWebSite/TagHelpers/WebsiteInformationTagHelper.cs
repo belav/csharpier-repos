@@ -7,7 +7,6 @@ using TagHelpersWebSite.Models;
 
 namespace TagHelpersWebSite.TagHelpers;
 
-
 public class WebsiteInformationTagHelper : TagHelper
 {
     public WebsiteContext Info { get; set; }

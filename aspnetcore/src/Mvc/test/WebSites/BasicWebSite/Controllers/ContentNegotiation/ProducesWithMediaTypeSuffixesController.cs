@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers.ContentNegotiation;
 
-
 [Route("ProducesWithMediaTypeSuffixesController/[action]")]
 public class ProducesWithMediaTypeSuffixesController : Controller
 {

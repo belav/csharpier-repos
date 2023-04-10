@@ -6,7 +6,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Web.Virtualization;
 
-
 internal sealed class VirtualizeJsInterop : IAsyncDisposable
 {
     private const string JsFunctionsPrefix = "Blazor._internal.Virtualize";

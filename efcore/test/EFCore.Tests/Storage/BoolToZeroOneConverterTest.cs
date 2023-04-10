@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class BoolToZeroOneConverterTest
 {
     private static readonly BoolToZeroOneConverter<decimal> _boolToZeroOne = new();

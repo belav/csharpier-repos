@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
 namespace Microsoft.AspNetCore.App.Analyzers.Infrastructure;
 
-
 internal sealed class RouteUsageModel
 {
     public RoutePatternTree RoutePattern { get; init; } = default!;

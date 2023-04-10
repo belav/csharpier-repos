@@ -5,7 +5,6 @@ using System.Dynamic;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal sealed class DynamicClientProxy : DynamicObject
 {
     private readonly IClientProxy _clientProxy;

@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 public class CachedExpressionCompilerTest
 {
     [Fact]

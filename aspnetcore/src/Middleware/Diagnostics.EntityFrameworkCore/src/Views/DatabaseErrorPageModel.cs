@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Views;
 
-
 internal sealed class DatabaseErrorPageModel
 {
     public DatabaseErrorPageModel(

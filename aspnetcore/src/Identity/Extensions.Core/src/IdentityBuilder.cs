@@ -9,7 +9,6 @@ using Microsoft.Extensions.Identity.Core;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Helper functions for configuring identity services.
 /// </summary>

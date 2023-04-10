@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.SpatialModel;
 
-
 public struct GeoPoint
 {
     public GeoPoint(double lat, double lon)

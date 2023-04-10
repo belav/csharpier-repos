@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Diagnostics;
 
 namespace ExceptionHandlerSample;
 
-
 public class Startup
 {
     public void Configure(IApplicationBuilder app)

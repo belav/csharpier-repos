@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
-
 /// <summary>
 /// Constrains the HTTP method of request or a route.
 /// </summary>

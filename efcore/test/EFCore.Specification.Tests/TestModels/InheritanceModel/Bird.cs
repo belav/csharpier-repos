@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
-
 public abstract class Bird : Animal
 {
     public bool IsFlightless { get; set; }

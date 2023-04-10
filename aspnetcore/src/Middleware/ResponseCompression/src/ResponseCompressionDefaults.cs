@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ResponseCompression;
 
-
 /// <summary>
 /// Defaults for the ResponseCompressionMiddleware
 /// </summary>

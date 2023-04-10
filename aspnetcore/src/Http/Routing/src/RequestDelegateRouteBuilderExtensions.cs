@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Provides extension methods for adding new handlers to a <see cref="IRouteBuilder"/>.
 /// </summary>

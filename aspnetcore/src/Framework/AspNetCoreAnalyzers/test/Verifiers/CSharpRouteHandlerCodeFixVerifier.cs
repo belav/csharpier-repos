@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.Testing.Verifiers;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
-
 public static class CSharpRouteHandlerCodeFixVerifier<TAnalyzer, TCodeFix>
     where TAnalyzer : RouteHandlerAnalyzer, new()
     where TCodeFix : DetectMismatchedParameterOptionalityFixer, new()

@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 
-
 /// <summary>
 /// This simulates our default command line compilation experience where the <see cref="MetadataReferenceResolver"/>
 /// throws on equality checks via <see cref="CommonCompiler.LoggingMetadataFileReferenceResolver" />

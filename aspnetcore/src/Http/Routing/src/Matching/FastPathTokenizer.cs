@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 // Low level implementation of our path tokenization algorithm. Alternative
 // to PathTokenizer.
 internal static class FastPathTokenizer

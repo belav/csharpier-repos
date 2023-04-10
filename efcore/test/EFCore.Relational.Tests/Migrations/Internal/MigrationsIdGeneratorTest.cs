@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Internal;
 
-
 public class MigrationsIdGeneratorTest
 {
     [ConditionalFact]

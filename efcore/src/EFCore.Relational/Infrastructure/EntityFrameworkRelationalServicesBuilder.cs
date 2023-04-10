@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Update.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     A builder API designed for relational database providers to use when registering services.
 /// </summary>

@@ -5,7 +5,6 @@ using Google.Protobuf.Reflection;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-
 internal sealed class JsonContext
 {
     public JsonContext(

@@ -3,7 +3,6 @@
 
 namespace RazorWebSite;
 
-
 public class FrameworkSpecificHelper
 {
     public string ExecuteOperation()

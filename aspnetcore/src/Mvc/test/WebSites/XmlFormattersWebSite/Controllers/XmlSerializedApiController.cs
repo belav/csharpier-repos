@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace XmlFormattersWebSite;
 
-
 [SetupOutputFormatters]
 public class XmlSerializerApiController : XmlApiControllerBase
 {

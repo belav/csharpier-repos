@@ -1,6 +1,5 @@
 namespace AutoMapper.UnitTests.BeforeAfterMapping;
 
-
 public class When_configuring_before_and_after_methods
 {
     public class Source { }

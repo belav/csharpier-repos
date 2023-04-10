@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Allows configuration for an entity type to be factored into a separate class,
 ///     rather than in-line in <see cref="DbContext.OnModelCreating(ModelBuilder)" />.

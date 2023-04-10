@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.Core.Test;
 
-
 public class SkipStatusCodePagesAttributeTest
 {
     [Fact]

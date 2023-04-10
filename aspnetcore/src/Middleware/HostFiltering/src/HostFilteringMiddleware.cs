@@ -12,7 +12,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HostFiltering;
 
-
 /// <summary>
 /// A middleware used to filter requests by their Host header.
 /// </summary>

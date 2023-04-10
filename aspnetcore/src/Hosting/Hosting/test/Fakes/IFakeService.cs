@@ -3,5 +3,4 @@
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
-
 public interface IFakeService { }

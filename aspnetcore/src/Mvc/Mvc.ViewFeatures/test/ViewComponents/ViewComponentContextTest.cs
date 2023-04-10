@@ -12,7 +12,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 public class ViewComponentContextTest
 {
     [Fact]

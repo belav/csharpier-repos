@@ -6,7 +6,6 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics;
 
-
 internal static class PullDiagnosticConstants
 {
     public const string TaskItemCustomTag = nameof(TaskItemCustomTag);

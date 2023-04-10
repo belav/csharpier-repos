@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel;
 
-
 public class CompositeVehicle : PoweredVehicle
 {
     public Vehicle AttachedVehicle { get; set; }

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class ComplexNavigationsODataContext : PoolableDbContext
 {
     public ComplexNavigationsODataContext(DbContextOptions options)

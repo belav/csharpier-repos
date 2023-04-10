@@ -9,7 +9,6 @@ using StackExchange.Redis;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Contains Redis-specific extension methods for modifying a <see cref="IDataProtectionBuilder"/>.
 /// </summary>

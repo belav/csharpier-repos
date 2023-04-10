@@ -9,7 +9,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 public class FormFileValueProviderFactoryTest
 {
     [Fact]

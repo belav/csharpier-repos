@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 /// <summary>
 /// An <see cref="ApplicationPart"/> backed by an <see cref="System.Reflection.Assembly"/>.
 /// </summary>

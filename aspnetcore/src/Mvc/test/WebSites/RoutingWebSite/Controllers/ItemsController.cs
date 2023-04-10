@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
-
 [Route("Items/[action]")]
 public class ItemsController : Controller
 {

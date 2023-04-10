@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Analyzer.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-
 public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzerIntegrationTest
 {
     private MvcDiagnosticAnalyzerRunner AnalyzerRunner { get; } =

@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
-
 /// <summary>
 /// Represents a path segment in a route pattern. Instances of <see cref="RoutePatternPathSegment"/> are
 /// immutable.

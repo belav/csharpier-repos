@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace Wasm.Performance.TestApp;
 
-
 public class Program
 {
     public static async Task Main(string[] args)

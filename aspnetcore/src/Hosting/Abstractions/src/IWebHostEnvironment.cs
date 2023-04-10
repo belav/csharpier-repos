@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 /// <summary>
 /// Provides information about the web hosting environment an application is running in.
 /// </summary>

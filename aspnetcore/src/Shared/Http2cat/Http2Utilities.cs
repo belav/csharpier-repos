@@ -26,7 +26,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http2Cat;
 
-
 internal sealed class Http2Utilities : IHttpStreamHeadersHandler
 {
     public static ReadOnlySpan<byte> ClientPreface => "PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n"u8;

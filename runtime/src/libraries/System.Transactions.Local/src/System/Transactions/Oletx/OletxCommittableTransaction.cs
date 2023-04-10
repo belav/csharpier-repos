@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace System.Transactions.Oletx;
 
-
 /// <summary>
 /// A Transaction object represents a single transaction.  It is created by TransactionManager
 /// objects through CreateTransaction or UnmarshalTransaction.  Alternatively, the static Create

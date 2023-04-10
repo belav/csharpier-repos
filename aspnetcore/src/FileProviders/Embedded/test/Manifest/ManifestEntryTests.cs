@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
-
 public class ManifestEntryTests
 {
     [Fact]

@@ -6,7 +6,6 @@ using Xunit.Sdk;
 
 namespace Xunit;
 
-
 public static class AssertExtensions
 {
     public static void Equal(byte[] expected, Span<byte> actual)

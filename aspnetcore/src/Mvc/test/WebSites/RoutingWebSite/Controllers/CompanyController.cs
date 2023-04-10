@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
-
 // A controller can define a route for all of the actions
 // in it and give it a name for link generation purposes.
 [Route("api/Company/{id}", Name = "Company")]

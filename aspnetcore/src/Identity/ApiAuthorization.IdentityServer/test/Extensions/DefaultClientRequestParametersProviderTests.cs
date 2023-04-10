@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Extensions;
 
-
 public class DefaultClientRequestParametersProviderTests
 {
     class NameService : IIssuerNameService

@@ -7,7 +7,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class SingletonInterceptorsTestBase
 {
     protected SingletonInterceptorsTestBase(SingletonInterceptorsFixtureBase fixture)

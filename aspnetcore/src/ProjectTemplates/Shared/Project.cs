@@ -21,7 +21,6 @@ using static Templates.Test.Helpers.ProcessLock;
 
 namespace Templates.Test.Helpers;
 
-
 [DebuggerDisplay("{ToString(),nq}")]
 public class Project : IDisposable
 {

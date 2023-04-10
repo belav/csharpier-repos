@@ -5,7 +5,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 
-
 public class DefaultViewComponentFactoryTest
 {
     [Fact]

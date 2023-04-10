@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Rewrite.UrlActions;
 
-
 internal sealed class ChangeCookieAction : UrlAction
 {
     private readonly Func<DateTimeOffset> _timeSource;

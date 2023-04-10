@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
-
 /// <summary>
 /// <see cref="IControllerActivator"/> that uses type activation to create controllers.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
-
 /// <summary>
 /// Interface that exposes a list of http methods that are supported by an provider.
 /// </summary>

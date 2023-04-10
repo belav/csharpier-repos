@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 #nullable enable
 
 public class StoreGeneratedSqlServerTest

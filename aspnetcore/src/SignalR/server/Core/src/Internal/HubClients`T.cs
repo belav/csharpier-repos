@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-
 internal sealed class HubClients<THub, T> : IHubClients<T>
     where THub : Hub
 {

@@ -7,7 +7,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class SqlServerTypeAliasTest : IClassFixture<SqlServerFixture>
 {
     private const string DatabaseName = "SqlServerTypeAliasTest";

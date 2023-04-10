@@ -8,7 +8,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public sealed class SourceChange : IEquatable<SourceChange>
 {
     public SourceChange(int absoluteIndex, int length, string newText)

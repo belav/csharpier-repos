@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// An <see cref="ObjectResult"/> that when executed will produce a Unprocessable Entity (422) response.
 /// </summary>

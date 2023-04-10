@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// Extension method class for configuring instances of <see cref="EntityFrameworkCoreXmlRepository{TContext}"/>
 /// </summary>

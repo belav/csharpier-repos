@@ -4,7 +4,6 @@
 
 namespace Microsoft.CodeAnalysis.EditAndContinue;
 
-
 /// <summary>
 /// Indicates the state of a manage module update.
 /// </summary>

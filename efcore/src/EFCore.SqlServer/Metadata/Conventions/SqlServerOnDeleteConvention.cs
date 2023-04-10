@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures the OnDelete behavior for foreign keys on the join entity type for
 ///     self-referencing skip navigations

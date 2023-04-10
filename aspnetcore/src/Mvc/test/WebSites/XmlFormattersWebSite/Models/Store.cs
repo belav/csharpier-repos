@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace XmlFormattersWebSite;
 
-
 public class Store
 {
     [Required]

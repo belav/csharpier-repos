@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 
-
 /// <summary>
 /// A class used to run <see cref="ITagHelper"/>s.
 /// </summary>

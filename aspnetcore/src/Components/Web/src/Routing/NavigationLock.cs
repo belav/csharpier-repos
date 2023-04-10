@@ -6,7 +6,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 /// <summary>
 /// A component that can be used to intercept navigation events.
 /// </summary>

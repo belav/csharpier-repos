@@ -11,7 +11,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-
 public class SaveTempDataFilterTest
 {
     public static TheoryData<IActionResult> ActionResultsData

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.DataProtection.Cng;
 
-
 internal unsafe interface IBCryptGenRandom
 {
     void GenRandom(byte* pbBuffer, uint cbBuffer);

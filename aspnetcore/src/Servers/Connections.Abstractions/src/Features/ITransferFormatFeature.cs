@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// Gets the transfer format of the protocol.
 /// </summary>

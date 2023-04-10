@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// Controls the rendering of hidden input fields when using CheckBox tag helpers or html helpers.
 /// </summary>

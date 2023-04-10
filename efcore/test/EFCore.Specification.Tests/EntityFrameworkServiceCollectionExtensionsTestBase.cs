@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class EntityFrameworkServiceCollectionExtensionsTestBase
 {
     private readonly TestHelpers _testHelpers;

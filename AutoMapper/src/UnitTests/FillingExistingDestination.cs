@@ -1,6 +1,5 @@
 namespace AutoMapper.UnitTests;
 
-
 public class When_a_source_child_object_is_null : AutoMapperSpecBase
 {
     public class Source

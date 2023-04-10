@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 /// <summary>
 /// Represents an exception handler with the original path of the request.
 /// </summary>

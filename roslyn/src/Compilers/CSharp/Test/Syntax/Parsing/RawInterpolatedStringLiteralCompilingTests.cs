@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing;
 
-
 public class RawInterpolatedStringLiteralCompilingTests : CompilingTestBase
 {
     private static string Render(string markup, string? normalizedNewLine)

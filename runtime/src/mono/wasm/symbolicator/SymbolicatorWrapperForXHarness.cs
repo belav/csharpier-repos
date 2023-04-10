@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.Internal;
 
-
 public class SymbolicatorWrapperForXHarness : WasmSymbolicatorBase
 {
     private WasmSymbolicator? _symbolicator;

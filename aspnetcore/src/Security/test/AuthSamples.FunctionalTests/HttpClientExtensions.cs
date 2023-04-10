@@ -10,7 +10,6 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
-
 public static class HttpClientExtensions
 {
     // Copied from Identity functionals

@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.ColorSchemes;
 
-
 internal sealed class ColorSchemeOptions
 {
     internal const string ColorSchemeSettingKey = "TextEditor.Roslyn.ColorSchemeName";

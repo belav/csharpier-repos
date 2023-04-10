@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Microsoft.AspNetCore.Cors;
 
-
 /// <inheritdoc />
 [AttributeUsage(
     AttributeTargets.Class | AttributeTargets.Method,

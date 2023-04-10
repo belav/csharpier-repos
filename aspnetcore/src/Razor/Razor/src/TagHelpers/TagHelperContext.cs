@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
-
 /// <summary>
 /// Contains information related to the execution of <see cref="ITagHelper"/>s.
 /// </summary>

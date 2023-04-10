@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers.LinkGeneration;
 
-
 public class ProductsController : Controller
 {
     public IActionResult Index()

@@ -5,7 +5,6 @@ using System.IO.Compression;
 
 namespace Microsoft.AspNetCore.RequestDecompression;
 
-
 /// <summary>
 /// DEFLATE decompression provider.
 /// </summary>

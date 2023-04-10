@@ -16,7 +16,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 internal sealed partial class DefaultLinkGenerator : LinkGenerator, IDisposable
 {
     private readonly TemplateBinderFactory _binderFactory;

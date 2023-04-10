@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
-
 public class ComplexNavigationLanguage
 {
     public string Name { get; set; }

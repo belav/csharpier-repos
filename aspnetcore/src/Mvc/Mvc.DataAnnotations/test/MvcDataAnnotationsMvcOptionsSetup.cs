@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations.Test;
 
-
 public class MvcDataAnnotationsMvcOptionsSetupTests
 {
     [Fact]

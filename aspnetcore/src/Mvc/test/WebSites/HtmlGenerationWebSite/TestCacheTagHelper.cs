@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace HtmlGenerationWebSite;
 
-
 // This TagHelper enables us to investigate potential flakiness in the test that uses this tracked by https://github.com/aspnet/Mvc/issues/8281
 public class TestCacheTagHelper : CacheTagHelper
 {

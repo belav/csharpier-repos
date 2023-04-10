@@ -7,7 +7,6 @@ using static Microsoft.AspNetCore.Routing.Patterns.RoutePatternFactory;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
-
 public class RoutePatternParameterParserTest
 {
     [Fact]

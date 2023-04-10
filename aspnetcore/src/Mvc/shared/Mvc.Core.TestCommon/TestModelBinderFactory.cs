@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 public class TestModelBinderFactory : ModelBinderFactory
 {
     public static TestModelBinderFactory Create(IServiceProvider serviceProvider)

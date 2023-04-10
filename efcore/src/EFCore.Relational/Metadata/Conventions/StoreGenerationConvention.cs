@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that ensures that properties aren't configured to have a default value and as computed column at the same time.
 /// </summary>

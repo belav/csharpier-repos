@@ -5,7 +5,6 @@ using System.Net;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// A feature that represents a connection endpoints.
 /// </summary>

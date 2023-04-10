@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite;
 
-
 internal abstract class UrlMatch
 {
     protected bool Negate { get; set; }

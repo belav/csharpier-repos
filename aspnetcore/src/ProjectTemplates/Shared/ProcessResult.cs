@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Templates.Test.Helpers;
 
-
 internal sealed class ProcessResult
 {
     public ProcessResult(ProcessEx process)

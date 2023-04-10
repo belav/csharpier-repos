@@ -5,7 +5,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.WebSockets.Microbenchmarks;
 
-
 public class HandshakeBenchmark
 {
     private readonly string[] _requestKeys =

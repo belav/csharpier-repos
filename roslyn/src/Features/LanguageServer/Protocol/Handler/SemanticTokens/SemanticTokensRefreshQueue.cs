@@ -16,7 +16,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens;
 
-
 /// <summary>
 /// Batches requests to refresh the semantic tokens to optomize user experience.
 /// </summary>

@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-
 public class UpdatesContext : PoolableDbContext
 {
     public DbSet<Category> Categories { get; set; } = null!;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 internal static class QueryStringHelper
 {
     public static string GetParameter(string queryString, string key)

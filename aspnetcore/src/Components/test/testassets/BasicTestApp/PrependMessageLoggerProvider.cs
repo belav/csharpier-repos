@@ -6,7 +6,6 @@ using Microsoft.JSInterop;
 
 namespace BasicTestApp;
 
-
 [ProviderAlias("PrependMessage")]
 internal class PrependMessageLoggerProvider : ILoggerProvider
 {

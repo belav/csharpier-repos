@@ -6,7 +6,6 @@ using System.Globalization;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     <para>
 ///         Represents the mapping between a .NET <see cref="double" /> type and a database type.

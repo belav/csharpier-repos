@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.EntityFrameworkCore.Design;
 
-
 /// <summary>
 ///     Used to handle reported design-time activity.
 /// </summary>

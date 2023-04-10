@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// Supplies CSS class names for form fields to represent their validation state or other
 /// state information from an <see cref="EditContext"/>.

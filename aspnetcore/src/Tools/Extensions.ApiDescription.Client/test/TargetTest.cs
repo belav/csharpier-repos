@@ -11,7 +11,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.ApiDescription.Client;
 
-
 public class TargetTest : IDisposable
 {
     private static Assembly _assembly = typeof(TargetTest).Assembly;

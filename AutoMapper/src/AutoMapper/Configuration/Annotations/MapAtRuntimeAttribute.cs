@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.Configuration.Annotations;
 
-
 /// <summary>
 /// Do not precompute the execution plan for this member, just map it at runtime.
 /// Simplifies the execution plan by not inlining.

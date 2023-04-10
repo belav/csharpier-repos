@@ -5,7 +5,6 @@
 
 namespace System.Diagnostics.CodeAnalysis;
 
-
 // Attributes added in netstandard2.1
 #if !NETSTANDARD2_1_OR_GREATER
 /// <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>

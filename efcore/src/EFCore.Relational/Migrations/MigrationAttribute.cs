@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 /// <summary>
 ///     Indicates that a class is a <see cref="Migration" /> and provides its identifier.
 /// </summary>

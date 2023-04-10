@@ -6,7 +6,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Components.WebView;
 
-
 internal sealed class StaticContentProvider
 {
     private readonly IFileProvider _fileProvider;

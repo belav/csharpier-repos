@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Microsoft.AspNetCore.Mvc.Core;
 
-
 /// <summary>
 /// Test the TextArea extensions in <see cref="HtmlHelperInputExtensions" /> class.
 /// </summary>

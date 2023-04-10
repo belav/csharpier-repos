@@ -10,7 +10,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis;
 
-
 /// <summary>
 /// This value source keeps a strong reference to a value.
 /// </summary>

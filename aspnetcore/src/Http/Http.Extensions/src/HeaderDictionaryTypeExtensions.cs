@@ -11,7 +11,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Extension methods for accessing strongly typed HTTP request and response
 /// headers.

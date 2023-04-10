@@ -3,5 +3,4 @@
 
 namespace System.CommandLine.Binding;
 
-
 internal static class ServiceProviderExtensions { }

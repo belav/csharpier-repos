@@ -6,7 +6,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 public class ApiConventionMatcherTest
 {
     [Theory]

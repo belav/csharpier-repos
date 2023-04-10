@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestRelationalConventionSetBuilder : RelationalConventionSetBuilder
 {
     public TestRelationalConventionSetBuilder(

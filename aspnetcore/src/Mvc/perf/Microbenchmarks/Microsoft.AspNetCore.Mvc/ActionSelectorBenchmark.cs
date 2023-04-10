@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
-
 public class ActionSelectorBenchmark
 {
     private const int Seed = 1000;

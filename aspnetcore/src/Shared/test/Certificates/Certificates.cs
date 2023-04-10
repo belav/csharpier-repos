@@ -6,7 +6,6 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
-
 public static class Certificates
 {
     private static string ServerEku = "1.3.6.1.5.5.7.3.1";

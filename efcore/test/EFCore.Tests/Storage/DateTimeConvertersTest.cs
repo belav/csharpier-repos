@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class DateTimeConvertersTest
 {
     private static readonly DateTimeToTicksConverter _dateTimeToTicks = new();

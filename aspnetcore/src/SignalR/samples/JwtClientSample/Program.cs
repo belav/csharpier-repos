@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace JwtClientSample;
 
-
 class Program
 {
     static async Task Main(string[] args)

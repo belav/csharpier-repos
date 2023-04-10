@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 public abstract class JsonInputFormatterTestBase : LoggedTest
 {
     [Theory]

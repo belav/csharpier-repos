@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 /// <summary>
 /// A <see cref="PhysicalFileResult"/> on execution will write a file from disk to the response
 /// using mechanisms provided by the host.

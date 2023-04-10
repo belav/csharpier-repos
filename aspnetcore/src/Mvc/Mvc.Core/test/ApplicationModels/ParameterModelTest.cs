@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 public class ParameterModelTest
 {
     [Fact]

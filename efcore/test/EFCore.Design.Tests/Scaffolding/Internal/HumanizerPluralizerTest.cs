@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Design.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class HumanizerPluralizerTest
 {
     [ConditionalTheory]

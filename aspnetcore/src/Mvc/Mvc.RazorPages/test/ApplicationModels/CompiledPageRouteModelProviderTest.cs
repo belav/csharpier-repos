@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 public class CompiledPageRouteModelProviderTest
 {
     [Fact]

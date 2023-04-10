@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 public class LanguageViewLocationExpanderTest
 {
     public static IEnumerable<object[]> ViewLocationExpanderTestDataWithExpectedValues

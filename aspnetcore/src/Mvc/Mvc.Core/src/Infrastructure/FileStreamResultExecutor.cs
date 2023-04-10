@@ -8,7 +8,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 /// <summary>
 /// An <see cref="IActionResultExecutor{FileStreamResult}"/> for a file stream result.
 /// </summary>

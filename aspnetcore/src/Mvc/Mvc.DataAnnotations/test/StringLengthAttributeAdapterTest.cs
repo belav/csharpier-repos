@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 public class StringLengthAttributeAdapterTest
 {
     [Fact]

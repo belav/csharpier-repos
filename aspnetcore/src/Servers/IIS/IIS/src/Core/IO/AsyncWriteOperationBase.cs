@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.HttpSys.Internal;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core.IO;
 
-
 internal abstract class AsyncWriteOperationBase : AsyncIOOperation
 {
     private const int HttpDataChunkStackLimit = 128; // 16 bytes per HTTP_DATA_CHUNK

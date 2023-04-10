@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion;
 
-
 [ExportCSharpVisualBasicLspServiceFactory(typeof(CompletionListCache)), Shared]
 internal class CompletionListCacheFactory : ILspServiceFactory
 {

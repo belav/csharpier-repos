@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.DataProtection.KeyManagement;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
-
 /// <summary>
 /// A factory to produce <see cref="IAuthenticatedEncryptor"/> instances.
 /// </summary>

@@ -12,7 +12,6 @@ using DevHostServerProgram = Microsoft.AspNetCore.Components.WebAssembly.DevServ
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 
-
 public class BlazorWasmTestAppFixture<TProgram> : WebHostServerFixture
 {
     public readonly bool TestTrimmedApps =

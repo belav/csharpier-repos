@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = true)]
 public class TestOutputDirectoryAttribute : Attribute
 {

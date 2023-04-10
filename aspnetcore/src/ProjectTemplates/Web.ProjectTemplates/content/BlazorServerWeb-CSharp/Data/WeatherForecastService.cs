@@ -1,6 +1,5 @@
 namespace BlazorServerWeb_CSharp.Data;
 
-
 public class WeatherForecastService
 {
     private static readonly string[] Summaries = new[]

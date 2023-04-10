@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 internal abstract partial class ResourceInvoker
 {
     protected readonly DiagnosticListener _diagnosticListener;

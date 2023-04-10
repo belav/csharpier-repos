@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.ModelBuilding;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
-
 public class ExpressionExtensionsTest
 {
     [ConditionalFact]

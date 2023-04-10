@@ -16,7 +16,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-
 internal class WebTransportTestUtilities
 {
     private static int streamCounter;

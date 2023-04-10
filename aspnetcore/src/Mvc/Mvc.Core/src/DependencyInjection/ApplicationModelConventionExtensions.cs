@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Contains the extension methods for <see cref="AspNetCore.Mvc.MvcOptions.Conventions"/>.
 /// </summary>

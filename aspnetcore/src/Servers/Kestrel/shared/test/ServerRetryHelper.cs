@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public static class ServerRetryHelper
 {
     private const int RetryCount = 20;

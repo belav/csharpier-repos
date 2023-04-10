@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-
 internal class FirstDirectiveHtmlLanguageCharacteristics : HtmlLanguageCharacteristics
 {
     private static readonly FirstDirectiveHtmlLanguageCharacteristics _instance =

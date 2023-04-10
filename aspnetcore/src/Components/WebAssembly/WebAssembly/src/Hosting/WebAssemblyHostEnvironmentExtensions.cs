@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-
 /// <summary>
 /// Static class that adds extension methods to <see cref="IWebAssemblyHostEnvironment"/>.
 /// </summary>

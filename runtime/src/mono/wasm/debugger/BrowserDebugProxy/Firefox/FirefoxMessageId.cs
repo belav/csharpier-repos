@@ -5,7 +5,6 @@
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
-
 public class FirefoxMessageId : MessageId
 {
     public readonly string toId;

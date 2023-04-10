@@ -3,7 +3,6 @@
 
 namespace IdentitySample.Models.ManageViewModels;
 
-
 public class RemoveLoginViewModel
 {
     public string LoginProvider { get; set; }

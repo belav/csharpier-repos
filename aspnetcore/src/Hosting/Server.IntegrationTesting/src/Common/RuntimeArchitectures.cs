@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 public class RuntimeArchitectures
 {
     public static RuntimeArchitecture Current

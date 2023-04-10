@@ -14,7 +14,6 @@ using System.Threading;
 
 namespace Microsoft.WebAssembly.AppHost;
 
-
 internal sealed class JSEngineHost
 {
     private readonly JSEngineArguments _args;

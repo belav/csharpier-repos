@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.OutputCaching;
 
-
 /// <summary>
 /// Provides access to the normal system clock.
 /// </summary>

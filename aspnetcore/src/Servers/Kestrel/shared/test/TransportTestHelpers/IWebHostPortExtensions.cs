@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 public static class IWebHostPortExtensions
 {
     public static int GetPort(this IWebHost host)

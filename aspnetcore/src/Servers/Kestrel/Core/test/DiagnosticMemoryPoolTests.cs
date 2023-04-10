@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Internal.Test;
 
-
 public class DiagnosticMemoryPoolTests : MemoryPoolTests
 {
     protected override MemoryPool<byte> CreatePool() =>

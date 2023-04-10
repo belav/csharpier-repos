@@ -7,7 +7,6 @@ using Xmldoc;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.Services;
 
-
 public class XmlDocService : XmlDoc.XmlDocBase
 {
     private readonly ILogger _logger;

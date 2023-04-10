@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// A cookie builder that sets <see cref="CookieOptions.Path"/> to the request path base.
 /// </summary>

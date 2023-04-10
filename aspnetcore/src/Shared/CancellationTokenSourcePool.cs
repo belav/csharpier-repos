@@ -5,7 +5,6 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal sealed class CancellationTokenSourcePool
 {
     private const int MaxQueueSize = 1024;

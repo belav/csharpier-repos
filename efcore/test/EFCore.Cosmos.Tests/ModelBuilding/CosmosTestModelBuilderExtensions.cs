@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ModelBuilding;
 
-
 public static class CosmosTestModelBuilderExtensions
 {
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> HasPartitionKey<

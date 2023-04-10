@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
-
 internal static class RenderTreeBuilderExtensions
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

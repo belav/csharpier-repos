@@ -5,7 +5,6 @@ using Xunit.Sdk;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 
-
 public sealed class ConditionalFactTestCase : XunitTestCase
 {
     [Obsolete(

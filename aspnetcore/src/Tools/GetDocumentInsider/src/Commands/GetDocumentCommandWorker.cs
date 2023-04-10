@@ -19,7 +19,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.Extensions.ApiDescription.Tool.Commands;
 
-
 internal sealed class GetDocumentCommandWorker
 {
     private const string DefaultDocumentName = "v1";

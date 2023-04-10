@@ -13,7 +13,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 internal struct StaticFileContext
 {
     private readonly HttpContext _context;

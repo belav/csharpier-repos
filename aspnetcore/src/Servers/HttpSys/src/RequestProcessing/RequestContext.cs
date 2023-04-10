@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkItem
 {
     private static readonly Action<object?> AbortDelegate = Abort;

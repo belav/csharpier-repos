@@ -3,7 +3,6 @@
 
 namespace System.Transactions.DtcProxyShim;
 
-
 internal enum TransactionOutcome
 {
     NotKnownYet = 0,

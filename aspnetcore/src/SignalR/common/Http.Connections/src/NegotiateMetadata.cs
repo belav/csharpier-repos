@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
-
 /// <summary>
 /// Metadata to identify the /negotiate endpoint for HTTP connections
 /// </summary>

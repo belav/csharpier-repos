@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
-
 /// <summary>
 /// Represents a feature containing the error of the original request to be examined by an exception handler.
 /// </summary>

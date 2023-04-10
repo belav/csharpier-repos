@@ -5,7 +5,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Options used to create a new cookie.
 /// </summary>

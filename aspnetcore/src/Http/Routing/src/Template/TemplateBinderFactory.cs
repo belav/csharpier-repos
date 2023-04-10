@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Routing.Patterns;
 
 namespace Microsoft.AspNetCore.Routing.Template;
 
-
 /// <summary>
 /// A factory used to create <see cref="TemplateBinder"/> instances.
 /// </summary>

@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
-
 #nullable enable
 
 public class SqlServerDatabaseModelFactoryTest

@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class ActivityReplacer : IDisposable
 {
     private readonly Activity _activity;

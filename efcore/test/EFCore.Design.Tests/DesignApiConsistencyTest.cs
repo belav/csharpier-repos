@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class DesignApiConsistencyTest
     : ApiConsistencyTestBase<DesignApiConsistencyTest.DesignApiConsistencyFixture>
 {

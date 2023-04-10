@@ -5,7 +5,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 // We include a collection and assembly fixture to verify that they both still work.
 [Collection("MyCollection")]
 [TestCaseOrderer(

@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Cryptography.SafeHandles;
 
-
 /// <summary>
 /// Represents a handle returned by LocalAlloc.
 /// The memory will be zeroed out before it's freed.

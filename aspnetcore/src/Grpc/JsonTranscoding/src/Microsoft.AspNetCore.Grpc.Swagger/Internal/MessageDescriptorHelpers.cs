@@ -5,7 +5,6 @@ using Google.Protobuf.Reflection;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Internal;
 
-
 internal static class MessageDescriptorHelpers
 {
     public static Type ResolveFieldType(FieldDescriptor field)

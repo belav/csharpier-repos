@@ -21,7 +21,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
-
 public class LongPollingTransportTests : VerifiableLoggedTest
 {
     private static readonly Uri TestUri = new Uri("http://example.com/?id=1234");

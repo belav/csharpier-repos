@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.ConcurrencyLimiter;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Contains methods for specifying which queue the middleware should use.
 /// </summary>

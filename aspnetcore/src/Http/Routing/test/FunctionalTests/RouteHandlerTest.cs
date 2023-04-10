@@ -16,7 +16,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
-
 public class RouteHandlerTest
 {
     [Fact]

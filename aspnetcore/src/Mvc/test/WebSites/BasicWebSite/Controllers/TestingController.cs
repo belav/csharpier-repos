@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers;
 
-
 public class TestingController : Controller
 {
     public TestingController(TestService service)

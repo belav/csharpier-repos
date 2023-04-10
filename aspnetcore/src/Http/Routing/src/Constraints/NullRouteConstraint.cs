@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Constraints;
 
-
 internal sealed class NullRouteConstraint : IRouteConstraint
 {
     public static readonly NullRouteConstraint Instance = new NullRouteConstraint();

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// An <see cref="IActionModelConvention"/> that adds a <see cref="IFilterMetadata"/>
 /// to <see cref="ActionModel"/> that transforms <see cref="IClientErrorActionResult"/>.

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.AzureAD.UI;
 
-
 /// <summary>
 /// Constants for different Azure Active Directory authentication components.
 /// </summary>

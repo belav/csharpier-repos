@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public class CultureReplacer : IDisposable
 {
     private const string _defaultCultureName = "en-GB";

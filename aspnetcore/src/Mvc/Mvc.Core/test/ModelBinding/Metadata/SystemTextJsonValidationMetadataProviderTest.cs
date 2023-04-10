@@ -6,7 +6,6 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-
 public class SystemTextJsonValidationMetadataProviderTest
 {
     [Fact]

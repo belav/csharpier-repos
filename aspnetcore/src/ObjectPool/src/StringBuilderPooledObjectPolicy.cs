@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Microsoft.Extensions.ObjectPool;
 
-
 /// <summary>
 /// A policy for pooling <see cref="StringBuilder"/> instances.
 /// </summary>

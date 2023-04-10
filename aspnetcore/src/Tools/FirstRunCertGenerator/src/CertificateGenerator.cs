@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Certificates.Generation;
 
 namespace Microsoft.AspNetCore.DeveloperCertificates.XPlat;
 
-
 public static class CertificateGenerator
 {
     public static void GenerateAspNetHttpsCertificate()

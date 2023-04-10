@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class AuthMiddlewareAndFilterTest
     : AuthMiddlewareAndFilterTestBase<SecurityWebSite.StartupWithGlobalAuthFilter>
 {

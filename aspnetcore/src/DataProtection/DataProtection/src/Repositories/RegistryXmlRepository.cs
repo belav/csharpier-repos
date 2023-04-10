@@ -13,7 +13,6 @@ using Microsoft.Win32;
 
 namespace Microsoft.AspNetCore.DataProtection.Repositories;
 
-
 /// <summary>
 /// An XML repository backed by the Windows registry.
 /// </summary>

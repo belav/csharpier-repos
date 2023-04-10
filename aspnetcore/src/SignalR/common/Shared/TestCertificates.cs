@@ -7,7 +7,6 @@ using Microsoft.Win32;
 
 namespace Microsoft.AspNetCore.SignalR.Test.Internal;
 
-
 internal static class TestCertificateHelper
 {
     internal static X509Certificate2 GetTestCert()

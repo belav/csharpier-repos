@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// AuthenticationSchemes assign a name to a specific <see cref="IAuthenticationHandler"/>
 /// handlerType.

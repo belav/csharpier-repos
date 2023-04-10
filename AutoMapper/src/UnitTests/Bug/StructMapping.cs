@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
 
-
 public class StructMapping : AutoMapperSpecBase
 {
     private Destination _destination;

@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace AuthSamples.DynamicSchemes;
 
-
 public class SimpleOptions : AuthenticationSchemeOptions
 {
     public string DisplayMessage { get; set; }

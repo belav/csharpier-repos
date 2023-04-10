@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     <para>
 ///         Represents operations backed by compiled delegates that allow manipulation of collections

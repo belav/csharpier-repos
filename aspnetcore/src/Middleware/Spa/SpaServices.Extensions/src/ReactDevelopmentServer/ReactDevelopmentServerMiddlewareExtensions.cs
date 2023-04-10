@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
-
 /// <summary>
 /// Extension methods for enabling React development server middleware support.
 /// </summary>

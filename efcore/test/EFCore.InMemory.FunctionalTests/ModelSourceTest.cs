@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class ModelSourceTest
 {
     [ConditionalFact] // Issue #2992

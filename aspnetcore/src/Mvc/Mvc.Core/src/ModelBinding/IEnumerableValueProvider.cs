@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Interface representing an enumerable <see cref="IValueProvider"/>.
 /// </summary>

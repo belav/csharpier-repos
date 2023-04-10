@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 [DebuggerDisplay("{" + nameof(DebuggerToString) + "(),nq}")]
 public sealed class RazorDiagnosticDescriptor : IEquatable<RazorDiagnosticDescriptor>
 {

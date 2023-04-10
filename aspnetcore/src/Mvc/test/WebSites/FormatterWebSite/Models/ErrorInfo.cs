@@ -3,7 +3,6 @@
 
 namespace FormatterWebSite;
 
-
 public class ErrorInfo
 {
     public string Source { get; set; }

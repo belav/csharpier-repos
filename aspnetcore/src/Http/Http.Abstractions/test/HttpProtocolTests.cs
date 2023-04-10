@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Abstractions;
 
-
 public class HttpProtocolTests
 {
     [Fact]

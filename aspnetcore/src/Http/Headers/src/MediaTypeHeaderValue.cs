@@ -10,7 +10,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Net.Http.Headers;
 
-
 /// <summary>
 /// Representation of the media type header. See <see href="https://tools.ietf.org/html/rfc6838"/>.
 /// </summary>

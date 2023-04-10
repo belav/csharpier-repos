@@ -16,7 +16,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 public class Startup
 {
     private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(

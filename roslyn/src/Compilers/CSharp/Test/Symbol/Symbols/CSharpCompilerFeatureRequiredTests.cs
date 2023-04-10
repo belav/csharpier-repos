@@ -13,7 +13,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols;
 
-
 public class CSharpCompilerFeatureRequiredTests
     : BaseCompilerFeatureRequiredTests<CSharpCompilation, CSharpTestSource>
 {

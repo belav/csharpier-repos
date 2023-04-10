@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-
 // The OS's being tested are on other machines, don't duplicate the tests across runs.
 [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
 [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10)]

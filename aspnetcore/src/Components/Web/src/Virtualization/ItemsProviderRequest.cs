@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Web.Virtualization;
 
-
 /// <summary>
 /// Represents a request to an <see cref="ItemsProviderDelegate{TItem}"/>.
 /// </summary>

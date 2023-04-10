@@ -13,7 +13,6 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.CodeStyle;
 
-
 internal abstract class IdeCodeStyleOptions
 {
     protected static readonly CodeStyleOption2<bool> s_trueWithSuggestionEnforcement =

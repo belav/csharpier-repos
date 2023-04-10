@@ -8,7 +8,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.JSInterop;
 
-
 /// <summary>
 /// Wraps a JS interop argument, indicating that the value should not be serialized as JSON
 /// but instead should be passed as a reference.

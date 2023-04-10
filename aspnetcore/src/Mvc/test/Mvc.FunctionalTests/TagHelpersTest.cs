@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class TagHelpersTest
     : IClassFixture<MvcTestFixture<TagHelpersWebSite.Startup>>,
         IClassFixture<MvcEncodedTestFixture<TagHelpersWebSite.Startup>>

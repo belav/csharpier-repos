@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-
 /// <summary>
 /// A context for an <see cref="IValidationMetadataProvider"/>.
 /// </summary>

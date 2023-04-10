@@ -6,7 +6,6 @@ using System.Net;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 public class TryParseModelBinderProviderTest
 {
     [Fact]

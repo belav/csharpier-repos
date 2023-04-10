@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal static class ErrorPageBuilder
 {
     public static RequestDelegate BuildErrorPageApplication(

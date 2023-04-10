@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.OutputCaching.Policies;
 
-
 /// <summary>
 /// A policy that adds a requirement to another policy.
 /// </summary>

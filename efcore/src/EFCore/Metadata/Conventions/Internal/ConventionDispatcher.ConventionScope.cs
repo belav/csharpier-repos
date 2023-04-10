@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal;
 
-
 public partial class ConventionDispatcher
 {
     private abstract class ConventionScope : ConventionNode

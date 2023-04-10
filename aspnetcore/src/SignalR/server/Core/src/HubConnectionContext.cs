@@ -17,7 +17,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// Encapsulates all information about an individual connection to a SignalR Hub.
 /// </summary>

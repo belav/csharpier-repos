@@ -7,7 +7,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-
 /// <summary>
 /// Represents an <see cref="IResult"/> that when executed will
 /// write a file from the writer callback to the response.

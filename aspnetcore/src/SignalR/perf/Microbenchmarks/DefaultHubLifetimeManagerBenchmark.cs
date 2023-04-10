@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.SignalR.Microbenchmarks;
 
-
 public class DefaultHubLifetimeManagerBenchmark
 {
     private DefaultHubLifetimeManager<Hub> _hubLifetimeManager;

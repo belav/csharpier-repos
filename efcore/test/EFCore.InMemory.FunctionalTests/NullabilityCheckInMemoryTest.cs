@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.InMemory.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
 {
     public NullabilityCheckInMemoryTest(InMemoryFixture fixture)

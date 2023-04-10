@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
-
 /// <summary>
 ///     A <see cref="IReadOnlyPropertyBase" /> in the Entity Framework model that represents an
 ///     injected service from the <see cref="DbContext" />.

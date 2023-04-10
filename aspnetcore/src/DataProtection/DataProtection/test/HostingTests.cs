@@ -14,7 +14,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.DataProtection.Test;
 
-
 public class HostingTests
 {
     [Fact]

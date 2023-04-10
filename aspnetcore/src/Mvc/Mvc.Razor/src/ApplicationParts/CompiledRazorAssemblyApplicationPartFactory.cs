@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 /// <summary>
 /// Configures an assembly as a <see cref="CompiledRazorAssemblyPart"/>.
 /// </summary>

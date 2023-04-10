@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Connections;
 
-
 /// <summary>
 /// Options used by the WebSockets transport to modify the transports behavior.
 /// </summary>

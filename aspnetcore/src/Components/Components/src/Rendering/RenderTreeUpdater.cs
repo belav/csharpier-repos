@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
-
 internal sealed class RenderTreeUpdater
 {
     public static void UpdateToMatchClientState(

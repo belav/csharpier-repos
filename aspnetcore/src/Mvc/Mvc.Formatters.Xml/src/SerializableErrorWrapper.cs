@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 /// <summary>
 /// Wrapper class for <see cref="SerializableError"/> to enable it to be serialized by the xml formatters.
 /// </summary>

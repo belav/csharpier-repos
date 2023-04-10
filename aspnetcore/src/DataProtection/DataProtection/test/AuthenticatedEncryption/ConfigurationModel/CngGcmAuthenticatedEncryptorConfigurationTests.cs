@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
-
 public class CngGcmAuthenticatedEncryptorConfigurationTests
 {
     [Fact]

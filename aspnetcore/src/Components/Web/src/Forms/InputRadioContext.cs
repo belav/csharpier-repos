@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// Describes context for an <see cref="InputRadio{TValue}"/> component.
 /// </summary>

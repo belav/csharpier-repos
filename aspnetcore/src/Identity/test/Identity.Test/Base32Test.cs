@@ -5,7 +5,6 @@ using System.Security.Cryptography;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
-
 public class Base32Test
 {
     [Fact]

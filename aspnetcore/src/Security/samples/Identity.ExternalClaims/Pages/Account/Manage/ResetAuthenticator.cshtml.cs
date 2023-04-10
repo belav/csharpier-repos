@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity.ExternalClaims.Pages.Account.Manage;
 
-
 public class ResetAuthenticatorModel : PageModel
 {
     UserManager<ApplicationUser> _userManager;

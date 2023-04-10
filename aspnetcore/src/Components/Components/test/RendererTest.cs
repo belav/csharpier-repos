@@ -15,7 +15,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.Test;
 
-
 public class RendererTest
 {
     // Nothing should exceed the timeout in a successful run of the the tests, this is just here to catch

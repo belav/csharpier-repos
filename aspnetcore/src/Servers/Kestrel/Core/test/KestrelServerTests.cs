@@ -23,7 +23,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-
 public class KestrelServerTests
 {
     private KestrelServerOptions CreateServerOptions()

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Microsoft.AspNetCore.Mvc.Abstractions;
 
-
 /// <summary>
 /// Describes a parameter in an action.
 /// </summary>

@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure;
 
-
 public partial class WellKnownTypesTests
 {
     private TestDiagnosticAnalyzerRunner Runner { get; } = new(new TestAnalyzer());

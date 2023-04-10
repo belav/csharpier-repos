@@ -6,7 +6,6 @@ using Params;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.Services;
 
-
 public class ParametersService : Params.Parameters.ParametersBase
 {
     public override Task<ParamResponse> DemoParametersOne(

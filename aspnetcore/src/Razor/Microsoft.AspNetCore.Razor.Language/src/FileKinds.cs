@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language.Components;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public static class FileKinds
 {
     public static readonly string Component = "component";

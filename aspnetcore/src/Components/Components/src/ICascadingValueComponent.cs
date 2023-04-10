@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 internal interface ICascadingValueComponent
 {
     // This interface exists only so that CascadingParameterState has a way

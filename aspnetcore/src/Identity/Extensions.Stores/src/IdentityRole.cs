@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// The default implementation of <see cref="IdentityRole{TKey}"/> which uses a string as the primary key.
 /// </summary>

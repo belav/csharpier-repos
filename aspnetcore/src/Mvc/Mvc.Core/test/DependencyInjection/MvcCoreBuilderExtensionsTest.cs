@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.DependencyInjection;
 
-
 public class MvcCoreBuilderExtensionsTest
 {
     [Fact]

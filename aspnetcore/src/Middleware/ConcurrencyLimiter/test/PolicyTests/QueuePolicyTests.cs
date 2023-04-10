@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests.PolicyTests;
 
-
 public class QueuePolicyTests
 {
     [Fact]

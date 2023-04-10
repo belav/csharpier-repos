@@ -10,7 +10,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-
 public class JsonSerializationTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
     public JsonSerializationTest(

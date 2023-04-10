@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-
 /// <summary>
 /// The default authentication handler with IIS In-Process
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 /// <summary>
 /// Provides information about the current asynchronous navigation event
 /// including the target path and the cancellation token.

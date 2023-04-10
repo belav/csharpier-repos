@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Contains the options used by the <see cref="AuthenticationHandler{T}"/>.
 /// </summary>

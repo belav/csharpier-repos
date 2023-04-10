@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
-
 internal sealed class CachedVaryByRules : IResponseCacheEntry
 {
     public string VaryByKeyPrefix { get; set; } = default!;

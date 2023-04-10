@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Microsoft.AspNetCore.Components.Server.Tests.Circuits;
 
-
 public class ServerAuthenticationStateProviderTest
 {
     [Fact]

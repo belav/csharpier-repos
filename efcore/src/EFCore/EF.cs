@@ -5,7 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Static methods that are useful in application code where there is not an EF type for the method to be accessed from. For example,
 ///     referencing a shadow state property in a LINQ query.

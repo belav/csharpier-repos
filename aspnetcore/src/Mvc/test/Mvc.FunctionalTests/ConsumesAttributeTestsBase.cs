@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public abstract class ConsumesAttributeTestsBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>>
     where TStartup : class
 {

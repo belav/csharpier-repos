@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-
 /// <inheritdoc />
 public class ApiDescriptionGroupCollectionProvider : IApiDescriptionGroupCollectionProvider
 {

@@ -5,7 +5,6 @@ using System.Transactions;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 /// <summary>
 ///     <para>
 ///         Manages the current <see cref="Transaction" />.

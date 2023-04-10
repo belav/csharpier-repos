@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.JsonPatch.Operations;
 
 namespace Microsoft.AspNetCore.JsonPatch.Adapters;
 
-
 /// <summary>
 /// Defines the operations that can be performed on a JSON patch document, including "test".
 /// </summary>

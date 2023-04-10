@@ -3,7 +3,6 @@
 
 namespace FormatterWebSite;
 
-
 public class StartupWithComplexParentValidation
 {
     public void ConfigureServices(IServiceCollection services)

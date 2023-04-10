@@ -15,7 +15,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Internal;
 
-
 // Tests to verify that script, link and image tag helper use the size limited instance of MemoryCache.
 public class DefaultTagHelperActivatorTest
 {

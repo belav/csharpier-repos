@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 /// <summary>
 /// Skip test if running on CI
 /// </summary>

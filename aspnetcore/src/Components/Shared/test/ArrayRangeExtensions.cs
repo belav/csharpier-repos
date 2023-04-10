@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 internal static class ArrayRangeExtensions
 {
     public static IEnumerable<T> AsEnumerable<T>(this ArrayRange<T> source)

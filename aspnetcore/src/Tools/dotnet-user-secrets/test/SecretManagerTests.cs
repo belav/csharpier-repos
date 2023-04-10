@@ -15,7 +15,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.Extensions.SecretManager.Tools.Tests;
 
-
 public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
 {
     private readonly TestConsole _console;

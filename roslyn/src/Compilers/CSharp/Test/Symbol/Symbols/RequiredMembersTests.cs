@@ -15,7 +15,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols;
 
-
 [CompilerTrait(CompilerFeature.RequiredMembers)]
 public class RequiredMembersTests : CSharpTestBase
 {

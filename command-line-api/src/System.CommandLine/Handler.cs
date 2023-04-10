@@ -6,7 +6,6 @@ using System.CommandLine.Invocation;
 
 namespace System.CommandLine;
 
-
 public static partial class Handler
 {
     private static T? GetValueForHandlerParameter<T>(

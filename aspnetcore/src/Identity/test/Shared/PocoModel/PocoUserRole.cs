@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
-
 /// <summary>
 ///     EntityType that represents a user belonging to a role
 /// </summary>

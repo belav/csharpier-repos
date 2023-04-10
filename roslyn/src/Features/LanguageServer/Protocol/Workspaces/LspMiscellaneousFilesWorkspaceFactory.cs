@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.LanguageServer.Handler;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-
 [
     ExportCSharpVisualBasicLspServiceFactory(
         typeof(LspMiscellaneousFilesWorkspace),

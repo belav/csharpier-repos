@@ -14,7 +14,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-
 public abstract class ComponentRenderingTestBase
     : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {

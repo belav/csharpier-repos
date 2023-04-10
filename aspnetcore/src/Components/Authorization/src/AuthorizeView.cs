@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
-
 /// <summary>
 /// Displays differing content depending on the user's authorization status.
 /// </summary>

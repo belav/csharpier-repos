@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 public class CompositeValueProviderTest : EnumerableValueProviderTest
 {
     [Fact]

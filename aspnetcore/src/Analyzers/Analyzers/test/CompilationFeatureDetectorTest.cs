@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
-
 public class CompilationFeatureDetectorTest
 {
     [Fact]

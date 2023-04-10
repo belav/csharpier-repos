@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-
 public abstract class BulkUpdatesTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : class, IBulkUpdatesFixtureBase, new()
 {

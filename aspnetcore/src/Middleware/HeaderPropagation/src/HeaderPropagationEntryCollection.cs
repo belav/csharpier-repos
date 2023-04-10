@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.HeaderPropagation;
 
-
 /// <summary>
 /// A collection of <see cref="HeaderPropagationEntry"/> items.
 /// </summary>

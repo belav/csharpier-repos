@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class ManyToManyHeterogeneousQueryTestBase : NonSharedModelTestBase
 {
     protected override string StoreName => "ManyToManyHeterogeneousQueryTests";

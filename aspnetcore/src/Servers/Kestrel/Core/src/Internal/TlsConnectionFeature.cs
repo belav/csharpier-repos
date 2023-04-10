@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-
 internal sealed class TlsConnectionFeature
     : ITlsConnectionFeature,
         ITlsApplicationProtocolFeature,

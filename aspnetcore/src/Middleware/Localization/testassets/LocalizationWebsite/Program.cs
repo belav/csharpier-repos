@@ -3,7 +3,6 @@
 
 namespace LocalizationWebsite;
 
-
 public static class Program
 {
     public static Task Main(string[] args)

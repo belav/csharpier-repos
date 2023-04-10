@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
-
 /// <summary>
 /// An HTML tag helper attribute.
 /// </summary>

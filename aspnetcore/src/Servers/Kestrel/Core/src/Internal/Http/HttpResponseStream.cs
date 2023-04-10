@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
-
 internal sealed class HttpResponseStream : Stream
 {
     private readonly HttpResponsePipeWriter _pipeWriter;

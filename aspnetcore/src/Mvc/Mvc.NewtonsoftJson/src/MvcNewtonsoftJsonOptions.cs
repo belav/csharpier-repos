@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Provides programmatic configuration for JSON formatters using Newtonsoft.JSON.
 /// </summary>

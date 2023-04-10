@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
-
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class TopLevelParameterNameAnalyzer : DiagnosticAnalyzer
 {

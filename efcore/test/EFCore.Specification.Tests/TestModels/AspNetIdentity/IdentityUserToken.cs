@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
-
 public class IdentityUserToken<TKey>
     where TKey : IEquatable<TKey>
 {

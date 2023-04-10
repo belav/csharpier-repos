@@ -5,7 +5,6 @@ using System.Collections;
 
 namespace Microsoft.Extensions.FileProviders;
 
-
 public class TestDirectoryContent : IDirectoryContents, IFileInfo
 {
     private readonly IEnumerable<IFileInfo> _files;

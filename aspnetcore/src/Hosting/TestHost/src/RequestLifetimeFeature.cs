@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 internal sealed class RequestLifetimeFeature : IHttpRequestLifetimeFeature
 {
     private readonly CancellationTokenSource _cancellationTokenSource =

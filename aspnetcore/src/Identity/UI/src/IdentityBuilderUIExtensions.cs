@@ -13,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Default UI extensions to <see cref="IdentityBuilder"/>.
 /// </summary>

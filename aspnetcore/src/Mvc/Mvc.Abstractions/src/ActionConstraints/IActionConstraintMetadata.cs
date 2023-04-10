@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ActionConstraints;
 
-
 /// <summary>
 /// A marker interface that identifies a type as metadata for an <see cref="IActionConstraint"/>.
 /// </summary>

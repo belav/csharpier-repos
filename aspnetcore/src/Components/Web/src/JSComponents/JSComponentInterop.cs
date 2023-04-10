@@ -13,7 +13,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Web.Infrastructure;
 
-
 /// <summary>
 /// Provides JavaScript-callable interop methods that can add, update, or remove dynamic
 /// root components. This is intended for framework use only and should not be called

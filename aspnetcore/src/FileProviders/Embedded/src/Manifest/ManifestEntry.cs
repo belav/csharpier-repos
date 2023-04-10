@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
-
 internal abstract class ManifestEntry
 {
     public ManifestEntry(string name)

@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 public class ValidationAttributeAdapterProviderTest
 {
     private readonly IValidationAttributeAdapterProvider _validationAttributeAdapterProvider =

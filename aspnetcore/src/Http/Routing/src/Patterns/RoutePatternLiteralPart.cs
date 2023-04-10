@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
-
 /// <summary>
 /// Resprents a literal text part of a route pattern. Instances of <see cref="RoutePatternLiteralPart"/>
 /// are immutable.

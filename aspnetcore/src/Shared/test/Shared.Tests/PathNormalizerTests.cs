@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.HttpSys.Internal;
 
-
 public class PathNormalizerTests
 {
     [Theory]

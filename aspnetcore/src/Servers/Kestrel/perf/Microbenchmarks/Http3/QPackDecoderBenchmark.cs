@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class QPackDecoderBenchmark
 {
     private static readonly byte[] _headerFieldLine_LargeLiteralValue;

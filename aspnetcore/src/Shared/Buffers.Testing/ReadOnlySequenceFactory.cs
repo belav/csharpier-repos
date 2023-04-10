@@ -8,7 +8,6 @@ using System.Text;
 
 namespace System.Buffers;
 
-
 internal abstract class ReadOnlySequenceFactory
 {
     public static ReadOnlySequenceFactory ArrayFactory { get; } = new ArrayTestSequenceFactory();

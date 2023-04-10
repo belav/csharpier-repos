@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Extension methods for <see cref="IAuthenticationConfigurationProvider"/>
 /// </summary>

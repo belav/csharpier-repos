@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 
-
 /// <summary>
 /// Exposes one or more reference paths from an <see cref="ApplicationPart"/>.
 /// </summary>

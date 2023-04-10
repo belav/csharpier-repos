@@ -9,7 +9,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Net.Quic;
 
-
 internal static class ThrowHelper
 {
     internal static QuicException GetConnectionAbortedException(long errorCode)

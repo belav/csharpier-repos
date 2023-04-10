@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.RoutePattern;
 
-
 internal enum RoutePatternKind
 {
     None = 0,

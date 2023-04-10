@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 internal static class RouteValueDictionaryTrimmerWarning
 {
     public const string Warning =

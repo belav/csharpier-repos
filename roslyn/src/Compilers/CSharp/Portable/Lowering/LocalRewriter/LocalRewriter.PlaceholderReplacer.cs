@@ -7,7 +7,6 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp;
 
-
 internal sealed partial class LocalRewriter
 {
     private sealed class PlaceholderReplacer

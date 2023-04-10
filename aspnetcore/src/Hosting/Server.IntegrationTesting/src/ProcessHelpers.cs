@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 internal sealed class ProcessHelpers
 {
     public static void AddEnvironmentVariablesToProcess(

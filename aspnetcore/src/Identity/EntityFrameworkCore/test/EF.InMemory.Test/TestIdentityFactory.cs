@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test;
 
-
 public static class TestIdentityFactory
 {
     private static InMemoryContext CreateContext(SqliteConnection connection) =>

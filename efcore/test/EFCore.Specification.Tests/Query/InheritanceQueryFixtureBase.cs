@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class InheritanceQueryFixtureBase
     : SharedStoreFixtureBase<InheritanceContext>,
         IFilteredQueryFixtureBase

@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-
 public class ServerComponentDeserializerTest
 {
     private readonly IDataProtectionProvider _ephemeralDataProtectionProvider;

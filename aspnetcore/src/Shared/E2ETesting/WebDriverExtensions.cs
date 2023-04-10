@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace OpenQA.Selenium;
 
-
 public static class WebDriverExtensions
 {
     public static IReadOnlyList<LogEntry> GetBrowserLogs(this IWebDriver driver, LogLevel level)

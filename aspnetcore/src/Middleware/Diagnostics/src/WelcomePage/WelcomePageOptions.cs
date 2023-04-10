@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Options for the WelcomePageMiddleware.
 /// </summary>

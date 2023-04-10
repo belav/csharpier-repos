@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
-
 public class ModelCodeGeneratorTestFixture : IDisposable
 {
     public ModelCodeGeneratorTestFixture()

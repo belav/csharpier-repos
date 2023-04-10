@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Migrations.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
-
 /// <summary>
 ///     Used to scaffold new migrations.
 /// </summary>

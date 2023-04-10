@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// Indicates that a property should be excluded from model binding. When applied to a property, the model binding
 /// system excludes that property. When applied to a type, the model binding system excludes all properties that

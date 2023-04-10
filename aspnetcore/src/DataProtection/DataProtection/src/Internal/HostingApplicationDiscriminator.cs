@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.DataProtection.Internal;
 
-
 internal sealed class HostingApplicationDiscriminator : IApplicationDiscriminator
 {
     private readonly IHostEnvironment? _hosting;

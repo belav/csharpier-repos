@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Defines the contract that a class must implement to transform route values while building
 /// a URI.

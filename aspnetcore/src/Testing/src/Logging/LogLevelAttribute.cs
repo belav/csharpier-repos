@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.Extensions.Logging.Testing;
 
-
 [AttributeUsage(
     AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly,
     AllowMultiple = false

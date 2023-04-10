@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Connections.Features;
 
 namespace Microsoft.AspNetCore.SignalR;
 
-
 /// <summary>
 /// Extension methods for accessing <see cref="HttpContext"/> from a hub context.
 /// </summary>

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 internal sealed class ResponseBodyWriterStream : Stream
 {
     private readonly ResponseBodyPipeWriter _responseWriter;

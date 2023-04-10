@@ -4,7 +4,6 @@
 #pragma warning disable RCS1102 // Make class static.
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class ProxyGraphUpdatesSqliteTest
 {
     public abstract class ProxyGraphUpdatesSqliteTestBase<TFixture>

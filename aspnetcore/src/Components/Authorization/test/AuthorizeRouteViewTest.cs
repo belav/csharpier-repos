@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
-
 public class AuthorizeRouteViewTest
 {
     private static readonly IReadOnlyDictionary<string, object> EmptyParametersDictionary =

@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
 namespace Microsoft.AspNetCore.Grpc.Microbenchmarks.Json;
 
-
 public class JsonReading
 {
     private string _requestJson = default!;

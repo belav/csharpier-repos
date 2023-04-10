@@ -6,7 +6,6 @@
 #nullable enable
 namespace System.Runtime.Versioning;
 
-
 /// <summary>
 /// Base type for all platform-specific API attributes.
 /// </summary>

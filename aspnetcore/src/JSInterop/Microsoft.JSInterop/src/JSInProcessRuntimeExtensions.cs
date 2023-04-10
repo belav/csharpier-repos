@@ -6,7 +6,6 @@ using Microsoft.JSInterop.Infrastructure;
 
 namespace Microsoft.JSInterop;
 
-
 /// <summary>
 /// Extensions for <see cref="IJSInProcessRuntime"/>.
 /// </summary>

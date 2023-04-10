@@ -7,7 +7,6 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// Extension methods for the ResponseCaching middleware.
 /// </summary>

@@ -6,7 +6,6 @@ using System;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue;
 
-
 /// <summary>
 /// Retrieves the <see cref="Solution"/> snapshot that corresponds to the current state of the debuggee.
 /// This snapshot contains changes successfully applied during EnC/Hot Reload.

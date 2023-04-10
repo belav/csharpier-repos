@@ -24,7 +24,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.WebAssembly.AppHost;
 
-
 internal sealed class WebServerStartup
 {
     private readonly IWebHostEnvironment _hostingEnvironment;

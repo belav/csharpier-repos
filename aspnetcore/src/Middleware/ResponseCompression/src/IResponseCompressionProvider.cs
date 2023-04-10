@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.ResponseCompression;
 
-
 /// <summary>
 /// Used to examine requests and responses to see if compression should be enabled.
 /// </summary>

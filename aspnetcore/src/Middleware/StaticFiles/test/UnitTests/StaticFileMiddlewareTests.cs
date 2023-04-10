@@ -17,7 +17,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 public class StaticFileMiddlewareTests : LoggedTest
 {
     [Fact]

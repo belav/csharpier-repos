@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// An <see cref="IActionModelConvention"/> that discovers
 /// <list type="bullet">

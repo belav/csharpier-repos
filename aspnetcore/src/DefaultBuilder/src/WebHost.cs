@@ -17,7 +17,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore;
 
-
 /// <summary>
 /// Provides convenience methods for creating instances of <see cref="IWebHost"/> and <see cref="IWebHostBuilder"/> with pre-configured defaults.
 /// </summary>

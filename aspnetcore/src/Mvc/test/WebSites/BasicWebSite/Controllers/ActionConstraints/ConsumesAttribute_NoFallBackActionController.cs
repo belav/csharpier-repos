@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicWebSite.Controllers.ActionConstraints;
 
-
 [Route("ConsumesAttribute_AmbiguousActions/[action]")]
 public class ConsumesAttribute_NoFallBackActionController : Controller
 {

@@ -6,7 +6,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// A model type for reading and manipulation properties and parameters representing a Page Parameter.
 /// </summary>

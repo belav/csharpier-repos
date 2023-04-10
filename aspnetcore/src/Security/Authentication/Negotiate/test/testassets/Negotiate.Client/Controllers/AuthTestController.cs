@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Negotiate.Client.Controllers;
 
-
 [Route("authtest")]
 [ApiController]
 public class AuthTestController : ControllerBase

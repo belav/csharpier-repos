@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.E2ETesting;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 
-
 public abstract class ServerFixture : IDisposable
 {
     private static readonly Lazy<Dictionary<string, string>> _projects = new Lazy<

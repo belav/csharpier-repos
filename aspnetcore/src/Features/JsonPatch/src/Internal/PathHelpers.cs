@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.JsonPatch.Exceptions;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
-
 internal static class PathHelpers
 {
     internal static string ValidateAndNormalizePath(string path)

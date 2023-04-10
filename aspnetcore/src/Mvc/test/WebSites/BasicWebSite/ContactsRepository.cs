@@ -5,7 +5,6 @@ using BasicWebSite.Models;
 
 namespace BasicWebSite;
 
-
 public class ContactsRepository
 {
     private readonly List<Contact> _contacts = new List<Contact>();

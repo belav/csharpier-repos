@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.EntityFrameworkCore.Storage;
 
-
 public class NamedConnectionStringResolverTest
 {
     [ConditionalFact]

@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
-
 public class AcceptedAtRouteResultTests
 {
     public static TheoryData<object> AcceptedAtRouteData

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// Classes implementing this interface are able to make a decision if authorization is allowed.
 /// </summary>

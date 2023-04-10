@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Cryptography.SafeHandles;
 
 namespace Microsoft.AspNetCore.DataProtection.SP800_108;
 
-
 internal sealed unsafe class Win8SP800_108_CTR_HMACSHA512Provider
     : ISP800_108_CTR_HMACSHA512Provider
 {

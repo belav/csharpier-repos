@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class ExpectedInclude<TEntity> : IExpectedInclude
 {
     public MemberInfo IncludeMember { get; }

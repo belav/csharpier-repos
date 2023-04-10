@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal class ProjectOptions
 {
     public CommandOption? Project { get; private set; }

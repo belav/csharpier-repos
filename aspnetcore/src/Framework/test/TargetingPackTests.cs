@@ -13,7 +13,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore;
 
-
 public class TargetingPackTests
 {
     private readonly string _expectedRid;

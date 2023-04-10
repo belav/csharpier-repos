@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Routing;
 
-
 public class RouteConstraintTest
 {
     [Fact]

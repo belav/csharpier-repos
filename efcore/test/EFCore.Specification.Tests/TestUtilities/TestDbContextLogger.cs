@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestDbContextLogger : IDbContextLogger
 {
     public LogLevel? LoggedAt { get; set; }

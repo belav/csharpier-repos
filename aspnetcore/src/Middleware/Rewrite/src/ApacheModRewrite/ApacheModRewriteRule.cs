@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Rewrite.Logging;
 
 namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite;
 
-
 internal sealed class ApacheModRewriteRule : IRule
 {
     public UrlMatch InitialMatch { get; }

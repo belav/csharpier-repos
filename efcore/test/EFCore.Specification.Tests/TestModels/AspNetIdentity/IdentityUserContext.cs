@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
-
 public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken>
     : DbContext
     where TUser : IdentityUser<TKey>

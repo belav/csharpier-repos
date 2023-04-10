@@ -17,7 +17,6 @@ using Xunit.Abstractions;
 
 namespace Templates.Test;
 
-
 public abstract class BlazorTemplateTest : LoggedTest
 {
     public BlazorTemplateTest(ProjectFactoryFixture projectFactory)

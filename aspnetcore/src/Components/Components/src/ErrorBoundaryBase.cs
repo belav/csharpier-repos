@@ -5,7 +5,6 @@ using System.Runtime.ExceptionServices;
 
 namespace Microsoft.AspNetCore.Components;
 
-
 /// <summary>
 /// A base class for error boundary components.
 /// </summary>

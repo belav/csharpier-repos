@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// An <see cref="IValidationMetadataProvider"/> which configures <see cref="ModelMetadata.ValidateChildren"/> to
 /// <c>false</c> for matching types.

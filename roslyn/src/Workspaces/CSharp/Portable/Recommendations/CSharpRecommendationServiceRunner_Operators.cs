@@ -9,7 +9,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Recommendations;
 
-
 internal partial class CSharpRecommendationService
 {
     /// <summary>

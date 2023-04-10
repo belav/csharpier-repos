@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
-
 public class Blog
 {
     public int BlogId { get; set; }

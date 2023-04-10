@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RoutingWebSite;
 
-
 [Area("Admin")]
 [Route("[area]/[controller]/[action]/{id?}")]
 public class LG3Controller : Controller

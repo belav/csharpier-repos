@@ -10,7 +10,6 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-
 [
     ExportCSharpVisualBasicStatelessLspService(
         typeof(IRequestExecutionQueueProvider<RequestContext>)

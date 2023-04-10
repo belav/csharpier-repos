@@ -21,7 +21,6 @@ using NuGet.Versioning;
 
 namespace PackageBaselineGenerator;
 
-
 /// <summary>
 /// This generates Baseline.props with information about the last RTM release.
 /// </summary>

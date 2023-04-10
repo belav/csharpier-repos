@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
-
 /// <summary>
 ///     Used to create an <see cref="IModel" /> from a <see cref="DatabaseModel" />.
 /// </summary>

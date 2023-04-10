@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RazorPagesWebSite;
 
-
 public class ModelAsFilter : PageModel, IResultFilter
 {
     public string Message { get; set; }

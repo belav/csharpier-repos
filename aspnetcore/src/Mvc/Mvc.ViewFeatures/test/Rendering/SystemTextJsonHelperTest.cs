@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 public class SystemTextJsonHelperTest : JsonHelperTestBase
 {
     protected override IJsonHelper GetJsonHelper() => GetJsonHelper(new JsonOptions());

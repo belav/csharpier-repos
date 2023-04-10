@@ -11,7 +11,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 public class DefaultDisplayTemplatesTest
 {
     // Input value; HTML encode; expected value.

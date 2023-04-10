@@ -8,7 +8,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Represents an <see cref="ActionResult"/> that when executed will
 /// write a binary file to the response.

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// Contains helper methods for <see cref="IBrowserFile"/>.
 /// </summary>

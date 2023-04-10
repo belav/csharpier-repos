@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Roslyn.Test.Utilities.TestGenerators;
 
-
 internal class TestSourceGenerator : ISourceGenerator
 {
     public Action<GeneratorInitializationContext>? InitializeImpl;

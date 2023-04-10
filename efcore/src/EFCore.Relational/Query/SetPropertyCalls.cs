@@ -5,7 +5,6 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         Supports specifying property and value to be set in ExecuteUpdate method with chaining multiple calls for updating

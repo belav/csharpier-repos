@@ -5,7 +5,6 @@ using System.Net;
 
 namespace AutobahnTestApp;
 
-
 public class Program
 {
     public static Task Main(string[] args)

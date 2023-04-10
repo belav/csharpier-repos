@@ -9,7 +9,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Controllers;
 
-
 public class ControllerActivatorProviderTest
 {
     [Fact]

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite;
 
-
 /// <summary>
 /// Represents a rule.
 /// </summary>

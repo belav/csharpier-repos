@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Migrations.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations.Design;
 
-
 /// <summary>
 ///     <para>
 ///         Service dependencies parameter class for <see cref="MigrationsScaffolder" />

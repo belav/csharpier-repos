@@ -5,7 +5,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 public class DelegatingEnumeratorTest
 {
     [Fact]

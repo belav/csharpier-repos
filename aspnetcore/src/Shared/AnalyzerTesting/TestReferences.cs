@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyModel.Resolution;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
-
 public static class TestReferences
 {
     public static readonly ReferenceAssemblies EmptyReferenceAssemblies = new("some-tfm");

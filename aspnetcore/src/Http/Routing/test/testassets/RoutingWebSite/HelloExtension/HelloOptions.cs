@@ -3,7 +3,6 @@
 
 namespace RoutingWebSite.HelloExtension;
 
-
 public class HelloOptions
 {
     public string Greeter { get; set; }

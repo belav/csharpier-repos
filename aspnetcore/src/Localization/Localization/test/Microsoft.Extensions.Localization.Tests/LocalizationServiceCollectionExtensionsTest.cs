@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 public class LocalizationServiceCollectionExtensionsTest
 {
     [Fact]

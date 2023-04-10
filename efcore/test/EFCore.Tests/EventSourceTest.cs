@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 // The tests interact with global state and should never be run in parallel
 [Collection("EventSourceTest")]
 public class EventSourceTest

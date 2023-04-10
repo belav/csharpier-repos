@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 /// <summary>
 /// Builds or modifies an <see cref="ApplicationModel"/> for action discovery.
 /// </summary>

@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
-
 internal sealed class OpenIdConnectConfigureOptions : IConfigureNamedOptions<OpenIdConnectOptions>
 {
     private readonly IAuthenticationConfigurationProvider _authenticationConfigurationProvider;

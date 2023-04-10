@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// A <see cref="IValueProviderFactory"/> for creating <see cref="RouteValueProvider"/> instances.
 /// </summary>

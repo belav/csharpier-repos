@@ -13,7 +13,6 @@ using Xunit;
 
 namespace Microsoft.Extensions.Internal;
 
-
 public class ObjectMethodExecutorTest
 {
     private TestObject _targetObject = new TestObject();

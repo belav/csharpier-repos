@@ -13,7 +13,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public abstract class JsonOutputFormatterTestBase<TStartup>
     : IClassFixture<MvcTestFixture<TStartup>>
     where TStartup : class

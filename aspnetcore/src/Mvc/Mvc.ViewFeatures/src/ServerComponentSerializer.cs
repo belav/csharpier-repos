@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Html;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 // See the details of the component serialization protocol in ServerComponentDeserializer.cs on the Components solution.
 internal sealed class ServerComponentSerializer
 {

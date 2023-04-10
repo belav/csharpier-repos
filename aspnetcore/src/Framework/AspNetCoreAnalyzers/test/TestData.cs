@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
-
 public static class TestData
 {
     public static string GetMicrosoftNETCoreAppRefPackageVersion() =>

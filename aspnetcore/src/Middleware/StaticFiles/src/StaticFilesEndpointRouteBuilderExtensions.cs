@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.StaticFiles;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Contains extension methods for using static files with endpoint routing.
 /// </summary>

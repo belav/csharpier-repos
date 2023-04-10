@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
-
 /// <summary>
 /// An implementation of <see cref="IClientModelValidator"/> that provides the rule for validating
 /// numeric types.

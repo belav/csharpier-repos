@@ -20,7 +20,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseNameofInAttribute;
 
-
 /// <summary>
 /// Analyzer that looks for things like `NotNullIfNotNull("param")` and offers to use `NotNullIfNotNull(nameof(param))` instead.
 /// </summary>

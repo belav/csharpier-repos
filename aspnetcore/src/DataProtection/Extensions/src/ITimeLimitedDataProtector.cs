@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 /// <summary>
 /// An interface that can provide data protection services where payloads have
 /// a finite lifetime.

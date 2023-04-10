@@ -22,7 +22,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Tests;
 
-
 public class WebHostTests : LoggedTest
 {
     [Fact]

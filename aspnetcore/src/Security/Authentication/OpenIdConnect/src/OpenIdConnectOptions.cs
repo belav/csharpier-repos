@@ -10,7 +10,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
-
 /// <summary>
 /// Configuration options for <see cref="OpenIdConnectHandler"/>
 /// </summary>

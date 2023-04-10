@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace RazorWebSite;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

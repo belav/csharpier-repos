@@ -7,7 +7,6 @@ using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-
 internal sealed class DefaultRemoteApplicationPathsProvider<
     [DynamicallyAccessedMembers(JsonSerialized)] TProviderOptions
 > : IRemoteAuthenticationPathsProvider

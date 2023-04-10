@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.InMemory.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class ComplexNavigationsCollectionsQueryInMemoryTest
     : ComplexNavigationsCollectionsQueryTestBase<ComplexNavigationsQueryInMemoryFixture>
 {

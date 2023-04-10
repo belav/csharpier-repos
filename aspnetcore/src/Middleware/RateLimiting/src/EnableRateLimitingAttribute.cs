@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.RateLimiting;
 
-
 /// <summary>
 /// Metadata that provides endpoint-specific request rate limiting.
 /// </summary>

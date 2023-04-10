@@ -1,6 +1,5 @@
 namespace AutoMapper.UnitTests;
 
-
 public class When_implementing_multiple_IValueResolver_interfaces : AutoMapperSpecBase
 {
     public class Source1 { }

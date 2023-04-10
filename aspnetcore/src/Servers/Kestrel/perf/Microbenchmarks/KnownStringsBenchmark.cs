@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
-
 public class KnownStringsBenchmark
 {
     static readonly byte[] _methodConnect = Encoding.ASCII.GetBytes("CONNECT ");

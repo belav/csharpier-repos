@@ -3,7 +3,6 @@
 
 namespace BasicTestApp.AuthTest;
 
-
 // DTO shared between server and client
 public class ClientSideAuthenticationStateData
 {

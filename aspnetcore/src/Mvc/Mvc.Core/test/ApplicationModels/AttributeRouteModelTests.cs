@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 public class AttributeRouteModelTests
 {
     [Fact]

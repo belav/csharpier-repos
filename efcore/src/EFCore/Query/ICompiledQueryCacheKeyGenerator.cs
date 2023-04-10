@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     <para>
 ///         Creates keys that uniquely identifies a query. This is used to store and lookup compiled versions of a query in a cache.

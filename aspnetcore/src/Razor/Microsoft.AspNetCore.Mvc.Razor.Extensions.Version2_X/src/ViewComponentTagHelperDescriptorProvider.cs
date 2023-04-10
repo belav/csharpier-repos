@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Razor;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X;
 
-
 public sealed class ViewComponentTagHelperDescriptorProvider
     : RazorEngineFeatureBase,
         ITagHelperDescriptorProvider

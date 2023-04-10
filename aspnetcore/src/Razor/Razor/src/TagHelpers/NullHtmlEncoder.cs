@@ -6,7 +6,6 @@ using System.Text.Encodings.Web;
 
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
-
 /// <summary>
 /// A <see cref="HtmlEncoder"/> that does not encode. Should not be used when writing directly to a response
 /// expected to contain valid HTML.

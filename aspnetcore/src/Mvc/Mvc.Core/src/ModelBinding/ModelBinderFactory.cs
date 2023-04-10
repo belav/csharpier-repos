@@ -16,7 +16,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// A factory for <see cref="IModelBinder"/> instances.
 /// </summary>

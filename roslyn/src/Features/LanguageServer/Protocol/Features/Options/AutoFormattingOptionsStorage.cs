@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Formatting;
 
-
 internal static class AutoFormattingOptionsStorage
 {
     public static AutoFormattingOptions GetAutoFormattingOptions(

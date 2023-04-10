@@ -9,7 +9,6 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal class AnsiTextWriter
 {
     private readonly TextWriter _writer;

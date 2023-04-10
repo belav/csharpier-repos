@@ -3,7 +3,6 @@
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 /// <summary>
 /// A builder that can be used to configure Server-Side Blazor.
 /// </summary>

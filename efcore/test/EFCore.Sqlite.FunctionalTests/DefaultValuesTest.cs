@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class DefaultValuesTest : SharedStoreFixtureBase<DbContext>
 {
     [ConditionalFact]

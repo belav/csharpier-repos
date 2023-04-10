@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 /// <summary>
 /// Represents an <see cref="FileResult"/> that when executed will
 /// write a file from a stream to the response.

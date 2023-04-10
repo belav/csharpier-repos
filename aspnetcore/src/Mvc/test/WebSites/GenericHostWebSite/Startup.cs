@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace GenericHostWebSite;
 
-
 public class Startup
 {
     // Set up application services

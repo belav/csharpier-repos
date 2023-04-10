@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing.Matching;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// A metadata interface that can be used to specify that the associated <see cref="Endpoint" />
 /// will be dynamically replaced during matching.

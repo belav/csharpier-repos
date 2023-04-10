@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
-
 /// <summary>
 ///     Selects an <see cref="ICompiledModelCodeGenerator" /> service for given generation options.
 /// </summary>

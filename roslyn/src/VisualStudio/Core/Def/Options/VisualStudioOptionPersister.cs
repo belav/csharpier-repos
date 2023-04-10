@@ -22,7 +22,6 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Options;
 
-
 internal sealed class VisualStudioOptionPersister : IOptionPersister
 {
     private readonly VisualStudioSettingsOptionPersister _visualStudioSettingsOptionPersister;

@@ -3,7 +3,6 @@
 
 namespace TagHelpersWebSite.Models;
 
-
 public class WebsiteContext
 {
     public Version Version { get; set; }

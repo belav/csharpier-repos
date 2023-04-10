@@ -8,7 +8,6 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 
-
 internal sealed class MsBuildProjectFinder
 {
     private readonly string _directory;

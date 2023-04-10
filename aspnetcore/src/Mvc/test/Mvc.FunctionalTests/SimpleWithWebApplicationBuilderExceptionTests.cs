@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class SimpleWithWebApplicationBuilderExceptionTests
     : IClassFixture<MvcTestFixture<SimpleWebSiteWithWebApplicationBuilderException.Program>>
 {

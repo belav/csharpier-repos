@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
 
-
 public class When_using_a_member_name_replacer : NonValidatingSpecBase
 {
     public class Source

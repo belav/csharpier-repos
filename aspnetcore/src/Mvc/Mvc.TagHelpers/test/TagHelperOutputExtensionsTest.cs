@@ -10,7 +10,6 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
-
 public class TagHelperOutputExtensionsTest
 {
     public static TheoryData CopyHtmlAttributeData_MaintainsOrder

@@ -7,7 +7,6 @@
 #pragma warning disable RCS1102 // Make class static.
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class SqlServerConfigPatternsTest
 {
     public class ImplicitServicesAndConfig

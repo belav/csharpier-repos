@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// Represents the identifier for the stream.
 /// </summary>

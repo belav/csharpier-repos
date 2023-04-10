@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 /// <summary>
 /// Tests the <see cref="HtmlHelper"/>'s link generation methods.
 /// </summary>

@@ -7,7 +7,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 /// <summary>
 /// An <see cref="IValueProviderFactory"/> for <see cref="JQueryQueryStringValueProvider"/>.
 /// </summary>

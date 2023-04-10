@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
-
 internal sealed class DefaultRoutePatternTransformer : RoutePatternTransformer
 {
     private readonly ParameterPolicyFactory _policyFactory;

@@ -6,7 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Microsoft.EntityFrameworkCore.SqlAzure.Model;
 
-
 [Table("Customer", Schema = "SalesLT")]
 public class Customer
 {

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Provides access to the <see cref="ISession"/> for the current request.
 /// </summary>

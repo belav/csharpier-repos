@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-
 /// <summary>
 /// Provides <see cref="DisplayMetadata"/> for a <see cref="DefaultModelMetadata"/>.
 /// </summary>

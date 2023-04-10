@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public sealed partial class InternalEntityEntry
 {
     private readonly struct SidecarValues

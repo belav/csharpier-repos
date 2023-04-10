@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 
-
 public class GeneratedKeysRight
 {
     public virtual int Id { get; set; }

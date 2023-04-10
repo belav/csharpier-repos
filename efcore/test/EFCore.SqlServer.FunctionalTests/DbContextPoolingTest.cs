@@ -18,7 +18,6 @@ using Microsoft.EntityFrameworkCore.Internal;
 // ReSharper disable VirtualMemberCallInConstructor
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class DbContextPoolingTest
     : IClassFixture<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {

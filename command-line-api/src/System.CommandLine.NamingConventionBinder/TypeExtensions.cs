@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 
 namespace System.CommandLine.NamingConventionBinder;
 
-
 /// <summary>
 /// Provides extensions to <see cref="Type"/>.
 /// </summary>

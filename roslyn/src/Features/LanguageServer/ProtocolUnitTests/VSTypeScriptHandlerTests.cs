@@ -27,7 +27,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests;
 
-
 public class VSTypeScriptHandlerTests : AbstractLanguageServerProtocolTests
 {
     public VSTypeScriptHandlerTests(ITestOutputHelper testOutputHelper)

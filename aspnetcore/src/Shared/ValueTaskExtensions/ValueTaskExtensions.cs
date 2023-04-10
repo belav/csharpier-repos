@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal static class ValueTaskExtensions
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

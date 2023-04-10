@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
-
 /// <summary>
 /// Common functionality tests that all verifies user manager functionality regardless of store implementation
 /// </summary>

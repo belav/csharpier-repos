@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-
 internal sealed class AutoValidateAntiforgeryTokenAuthorizationFilter
     : ValidateAntiforgeryTokenAuthorizationFilter
 {

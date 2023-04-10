@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests.MaxDepth;
 
-
 public class NavigationPropertySO : IntegrationTest<NavigationPropertySO.DatabaseInitializer>
 {
     CustomerDTO _destination;

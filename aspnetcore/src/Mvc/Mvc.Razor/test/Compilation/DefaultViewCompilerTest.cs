@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
-
 public class DefaultViewCompilerTest
 {
     [Fact]

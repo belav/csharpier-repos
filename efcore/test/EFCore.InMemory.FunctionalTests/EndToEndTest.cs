@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class EndToEndInMemoryTest : IClassFixture<InMemoryFixture>
 {
     public EndToEndInMemoryTest(InMemoryFixture fixture)

@@ -7,7 +7,6 @@ using System.Globalization;
 
 namespace Swaggatherer;
 
-
 internal static class Template
 {
     public static string Execute(IReadOnlyList<RouteEntry> entries)

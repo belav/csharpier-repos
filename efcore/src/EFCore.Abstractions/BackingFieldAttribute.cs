@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     Names the backing field associated with this property or navigation property.
 /// </summary>

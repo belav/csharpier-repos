@@ -20,7 +20,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 #nullable enable
 namespace Ignitor;
 
-
 public class BlazorClient : IAsyncDisposable
 {
     private const string MarkerPattern = ".*?<!--Blazor:(.*?)-->.*?";

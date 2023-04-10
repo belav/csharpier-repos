@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.WebSockets.Test;
 
-
 public class SendReceiveTests
 {
     [Fact]

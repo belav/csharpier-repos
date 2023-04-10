@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// An implementation of <see cref="IHttpResponseBodyFeature"/> that aproximates all of the APIs over the given Stream.
 /// </summary>

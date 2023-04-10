@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Defines middleware that can be added to the application's request pipeline.
 /// </summary>

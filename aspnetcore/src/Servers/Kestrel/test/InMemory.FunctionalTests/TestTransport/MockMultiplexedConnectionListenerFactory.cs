@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 
-
 internal class MockMultiplexedConnectionListenerFactory : IMultiplexedConnectionListenerFactory
 {
     public Action<EndPoint, IFeatureCollection> OnBindAsync { get; set; }

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Represents an <see cref="ActionResult"/> that when executed will
 /// produce an HTTP response with the given response status code.

@@ -15,7 +15,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 
-
 /// <summary>
 /// Authentication handler for Microsoft Account based authentication.
 /// </summary>

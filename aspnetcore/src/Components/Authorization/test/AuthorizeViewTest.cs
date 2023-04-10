@@ -13,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
-
 public class AuthorizeViewTest
 {
     // Nothing should exceed the timeout in a successful run of the the tests, this is just here to catch

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 public class BarebonesMatcherConformanceTest : MatcherConformanceTest
 {
     // Route values not supported

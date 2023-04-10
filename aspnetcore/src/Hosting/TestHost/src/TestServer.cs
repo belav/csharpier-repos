@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 /// <summary>
 /// An <see cref="IServer"/> implementation for executing tests.
 /// </summary>

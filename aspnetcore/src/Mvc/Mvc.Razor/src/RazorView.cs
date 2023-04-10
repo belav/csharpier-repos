@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// Default implementation for <see cref="IView"/> that executes one or more <see cref="IRazorPage"/>
 /// as parts of its execution.

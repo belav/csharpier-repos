@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.RequestDecompression.Benchmarks;
 
-
 public class RequestDecompressionMiddlewareBenchmark
 {
     private RequestDecompressionMiddleware _middleware;

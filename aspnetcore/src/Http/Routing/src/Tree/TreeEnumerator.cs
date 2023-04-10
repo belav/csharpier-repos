@@ -8,7 +8,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Routing.Tree;
 
-
 internal struct TreeEnumerator : IEnumerator<UrlMatchingNode>
 {
     private readonly Stack<UrlMatchingNode> _stack;

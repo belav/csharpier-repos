@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 /// <summary>
 /// Metadata that defines data tokens for an <see cref="Endpoint"/>. This metadata
 /// type provides data tokens value for <see cref="RouteData.DataTokens"/> associated

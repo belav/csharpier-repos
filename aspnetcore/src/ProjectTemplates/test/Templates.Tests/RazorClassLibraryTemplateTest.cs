@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Templates.Test;
 
-
 public class RazorClassLibraryTemplateTest : LoggedTest
 {
     public RazorClassLibraryTemplateTest(ProjectFactoryFixture projectFactory)

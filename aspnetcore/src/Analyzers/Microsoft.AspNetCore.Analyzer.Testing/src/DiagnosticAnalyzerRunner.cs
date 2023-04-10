@@ -11,7 +11,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Analyzer.Testing;
 
-
 /// <summary>
 /// Base type for executing a <see cref="DiagnosticAnalyzer" />. Derived types implemented in the test assembly will
 /// correctly resolve reference assemblies required for compilaiton.

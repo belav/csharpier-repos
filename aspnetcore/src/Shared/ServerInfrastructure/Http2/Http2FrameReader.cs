@@ -9,7 +9,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-
 internal static class Http2FrameReader
 {
     /* https://tools.ietf.org/html/rfc7540#section-4.1

@@ -8,7 +8,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.JsonPatch.Internal;
 
-
 public class ObjectVisitorTest
 {
     private class Class1

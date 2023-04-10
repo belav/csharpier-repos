@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.HttpSys.Listener;
 
-
 public class AuthenticationOnExistingQueueTests_Attach : AuthenticationOnExistingQueueTests
 {
     protected override string ConfigureServer(HttpSysOptions options, string baseServerAddress)

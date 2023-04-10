@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests.MaxDepth;
 
-
 public class NestedDtos : IntegrationTest<NestedDtos.DatabaseInitializer>
 {
     ArtDto _destination;

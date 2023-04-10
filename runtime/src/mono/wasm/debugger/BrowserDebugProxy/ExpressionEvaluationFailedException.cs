@@ -7,7 +7,6 @@ using System;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
-
 public class ExpressionEvaluationFailedException : Exception
 {
     public ExpressionEvaluationFailedException(string message)

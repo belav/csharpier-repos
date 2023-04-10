@@ -6,7 +6,6 @@ using Microsoft.Extensions.DiagnosticAdapter;
 
 namespace MiddlewareAnaysisSample;
 
-
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

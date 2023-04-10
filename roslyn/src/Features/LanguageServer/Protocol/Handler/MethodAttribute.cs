@@ -7,7 +7,6 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
-
 [MetadataAttribute]
 internal class MethodAttribute : LanguageServerEndpointAttribute
 {

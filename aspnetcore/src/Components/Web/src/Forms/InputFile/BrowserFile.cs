@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 internal sealed class BrowserFile : IBrowserFile
 {
     private long _size;

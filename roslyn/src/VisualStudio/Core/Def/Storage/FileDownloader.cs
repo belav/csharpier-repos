@@ -9,7 +9,6 @@ using Microsoft.VisualStudio.RemoteControl;
 
 namespace Microsoft.VisualStudio.LanguageServices.Storage;
 
-
 internal sealed class FileDownloader : IFileDownloader
 {
     public sealed class Factory : IFileDownloaderFactory

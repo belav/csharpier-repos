@@ -7,7 +7,6 @@ using BenchmarkDotNet.Attributes;
 
 namespace Microsoft.AspNetCore.WebUtilities.Microbenchmarks;
 
-
 /// <summary>
 /// Test internal parsing speed of FormPipeReader without pipe
 /// </summary>

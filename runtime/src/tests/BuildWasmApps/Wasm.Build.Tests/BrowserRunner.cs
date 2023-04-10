@@ -13,7 +13,6 @@ using Wasm.Tests.Internal;
 
 namespace Wasm.Build.Tests;
 
-
 internal class BrowserRunner : IAsyncDisposable
 {
     private static Regex s_blazorUrlRegex = new Regex("Now listening on: (?<url>https?://.*$)");

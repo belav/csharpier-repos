@@ -6,7 +6,6 @@ using Microsoft.JSInterop.Implementation;
 
 namespace Microsoft.JSInterop.Infrastructure;
 
-
 public class JSObjectReferenceJsonConverterTest
 {
     private readonly JSRuntime JSRuntime = new TestJSRuntime();

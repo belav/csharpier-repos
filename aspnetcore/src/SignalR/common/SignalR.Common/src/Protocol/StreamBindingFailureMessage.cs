@@ -8,7 +8,6 @@ using System.Text;
 
 namespace Microsoft.AspNetCore.SignalR.Protocol;
 
-
 /// <summary>
 /// Represents a failure to bind arguments for a StreamDataMessage. This does not represent an actual
 /// message that is sent on the wire, it is returned by <see cref="IHubProtocol.TryParseMessage"/>

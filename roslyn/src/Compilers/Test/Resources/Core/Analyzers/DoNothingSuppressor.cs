@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace TestResources.Analyzers;
 
-
 [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
 public sealed class DoNothingSuppressor : DiagnosticSuppressor
 {

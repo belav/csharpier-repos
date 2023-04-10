@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.JsonPatch.Operations;
 
 namespace Microsoft.AspNetCore.JsonPatch.Exceptions;
 
-
 public class JsonPatchException : Exception
 {
     public Operation FailedOperation { get; private set; }

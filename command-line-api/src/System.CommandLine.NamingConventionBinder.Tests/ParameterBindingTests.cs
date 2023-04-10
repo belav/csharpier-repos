@@ -13,7 +13,6 @@ using Xunit;
 
 namespace System.CommandLine.NamingConventionBinder.Tests;
 
-
 public class ParameterBindingTests
 {
     private readonly TestConsole _console = new();

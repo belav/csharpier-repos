@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     NetTopologySuite specific extension methods for <see cref="SqlServerDbContextOptionsBuilder" />.
 /// </summary>

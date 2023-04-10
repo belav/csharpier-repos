@@ -21,7 +21,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.HttpSys.FunctionalTests;
 
-
 public class Http2Tests : LoggedTest
 {
     private const string VersionForReset = "10.0.19529";

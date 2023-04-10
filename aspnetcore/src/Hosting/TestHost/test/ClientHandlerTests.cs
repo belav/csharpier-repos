@@ -16,7 +16,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 public class ClientHandlerTests
 {
     [Fact]

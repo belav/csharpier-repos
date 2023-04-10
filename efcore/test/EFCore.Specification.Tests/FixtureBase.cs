@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class FixtureBase
 {
     protected virtual IServiceCollection AddServices(IServiceCollection serviceCollection) =>

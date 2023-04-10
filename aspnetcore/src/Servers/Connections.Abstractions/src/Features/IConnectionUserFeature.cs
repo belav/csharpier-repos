@@ -5,7 +5,6 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// The user associated with the connection.
 /// </summary>

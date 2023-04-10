@@ -7,7 +7,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.SpaServices.StaticFiles;
 
-
 /// <summary>
 /// Provides an implementation of <see cref="ISpaStaticFileProvider"/> that supplies
 /// physical files at a location configured using <see cref="SpaStaticFilesOptions"/>.

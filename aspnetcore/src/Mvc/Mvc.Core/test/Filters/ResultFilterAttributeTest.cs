@@ -5,7 +5,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 // These tests share code with the ActionFilterAttribute tests because the IAsyncResultFilter
 // implementations need to behave the same way.
 public class ResultFilterAttributeTest

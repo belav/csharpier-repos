@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
-
 /// <summary>
 /// A context for containing information for <see cref="IViewLocationExpander"/>.
 /// </summary>

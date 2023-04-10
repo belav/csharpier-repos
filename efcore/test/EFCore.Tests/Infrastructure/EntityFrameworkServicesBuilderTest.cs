@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 public class EntityFrameworkServicesBuilderTest
 {
     [ConditionalFact]

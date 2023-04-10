@@ -12,7 +12,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
-
 public class WebHostBuilderExtensionsTest
 {
     public static TheoryData<Action<IRouteBuilder>, HttpRequestMessage, string> MatchesRequest

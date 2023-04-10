@@ -7,7 +7,6 @@ using System.ComponentModel;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 /// <summary>
 ///     A hash set that implements the interfaces required for Entity Framework to use notification based change tracking
 ///     for a collection navigation property.

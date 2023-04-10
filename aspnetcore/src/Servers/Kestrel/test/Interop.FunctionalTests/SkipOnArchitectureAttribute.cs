@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Interop.FunctionalTests;
 
-
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false)]
 public class SkipOnArchitectureAttribute : Attribute, ITestCondition
 {

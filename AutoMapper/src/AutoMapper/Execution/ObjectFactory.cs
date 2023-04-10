@@ -2,7 +2,6 @@ using System.Collections.ObjectModel;
 
 namespace AutoMapper.Execution;
 
-
 [EditorBrowsable(EditorBrowsableState.Never)]
 public static class ObjectFactory
 {

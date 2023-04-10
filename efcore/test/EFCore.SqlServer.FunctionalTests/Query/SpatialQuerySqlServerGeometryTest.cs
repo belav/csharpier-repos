@@ -6,7 +6,6 @@ using NetTopologySuite.Geometries;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class SpatialQuerySqlServerGeometryTest
     : SpatialQueryRelationalTestBase<SpatialQuerySqlServerGeometryFixture>
 {

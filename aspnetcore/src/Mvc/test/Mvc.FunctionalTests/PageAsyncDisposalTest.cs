@@ -10,7 +10,6 @@ using RazorPagesWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class PageAsyncDisposalTest
     : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithoutEndpointRouting>>
 {

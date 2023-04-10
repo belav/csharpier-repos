@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Internal;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter.Tests;
 
-
 public class ConcurrencyLimiterEventSourceTests
 {
     [Fact]

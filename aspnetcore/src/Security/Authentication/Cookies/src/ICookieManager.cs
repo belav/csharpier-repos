@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Cookies;
 
-
 /// <summary>
 /// This is used by the CookieAuthenticationMiddleware to process request and response cookies.
 /// It is abstracted from the normal cookie APIs to allow for complex operations like chunking.

@@ -7,7 +7,6 @@ using System;
 
 namespace DebuggerTests;
 
-
 internal static class EnvironmentVariables
 {
     public static readonly string? DebuggerTestPath = Environment.GetEnvironmentVariable(

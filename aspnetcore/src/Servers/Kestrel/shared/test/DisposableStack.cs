@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Tests;
 
-
 public class DisposableStack<T> : Stack<T>, IDisposable
     where T : IDisposable
 {

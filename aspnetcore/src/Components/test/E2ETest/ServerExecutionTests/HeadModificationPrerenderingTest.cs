@@ -10,7 +10,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-
 public class HeadModificationPrerenderingTest
     : ServerTestBase<BasicTestAppServerSiteFixture<DeferredComponentContentStartup>>
 {

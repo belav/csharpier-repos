@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-
 // See https://github.com/aspnet/IISIntegration/issues/426
 internal sealed class DuplexStream : Stream
 {

@@ -6,7 +6,6 @@ using AngleSharp.Dom.Html;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage;
 
-
 public class Email : DefaultUIPage
 {
     private readonly IHtmlElement _emailInput;

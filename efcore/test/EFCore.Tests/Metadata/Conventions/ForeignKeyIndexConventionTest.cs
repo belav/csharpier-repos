@@ -7,7 +7,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 public class ForeignKeyIndexConventionTest
 {
     [ConditionalFact]

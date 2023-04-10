@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 public class JQueryQueryStringValueProviderTest : EnumerableValueProviderTest
 {
     protected override IEnumerableValueProvider GetEnumerableValueProvider(

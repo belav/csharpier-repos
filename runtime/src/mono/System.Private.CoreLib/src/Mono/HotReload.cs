@@ -10,7 +10,6 @@ using System.Runtime.InteropServices;
 
 namespace Mono.HotReload;
 
-
 internal sealed class InstanceFieldTable
 {
     // Q: Does CoreCLR EnC allow adding fields to a valuetype?

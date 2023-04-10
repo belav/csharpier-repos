@@ -6,7 +6,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 public class RequestCookieCollectionBenchmarks
 {
     private StringValues _cookie;

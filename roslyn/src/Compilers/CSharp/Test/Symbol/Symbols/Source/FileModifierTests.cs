@@ -16,7 +16,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests;
 
-
 public class FileModifierTests : CSharpTestBase
 {
     [Fact]

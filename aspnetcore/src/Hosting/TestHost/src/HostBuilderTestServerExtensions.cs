@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.TestHost;
 
-
 /// <summary>
 /// Contains extensions for retrieving properties from <see cref="IHost"/>.
 /// </summary>

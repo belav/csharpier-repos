@@ -11,7 +11,6 @@ using Microsoft.Extensions.Tools.Internal;
 
 namespace Microsoft.DotNet.OpenApi.Commands;
 
-
 internal sealed class AddFileCommand : BaseCommand
 {
     private const string CommandName = "file";

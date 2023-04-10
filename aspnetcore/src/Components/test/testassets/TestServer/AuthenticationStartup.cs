@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace TestServer;
 
-
 public class AuthenticationStartupBase
 {
     private readonly Action<IEndpointRouteBuilder> _configureMode;

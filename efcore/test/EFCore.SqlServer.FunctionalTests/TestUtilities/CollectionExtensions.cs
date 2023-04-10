@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public static class CollectionExtensions
 {
     public static Queue<T> Enqueue<T>(this Queue<T> queue, IEnumerable<T> items)

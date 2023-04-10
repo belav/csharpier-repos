@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 internal static class MethodInfoExtensions
 {
     // This version of MethodInfo.Invoke removes TargetInvocationExceptions

@@ -17,7 +17,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-
 public class ControllerActionDescriptorProviderTests
 {
     [Fact]

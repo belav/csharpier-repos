@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// A builder for web applications and services.
 /// </summary>

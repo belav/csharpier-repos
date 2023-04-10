@@ -5,7 +5,6 @@ using System.Net.WebSockets;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// A context for negotiating a websocket upgrade.
 /// </summary>

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing.Tests;
 
-
 public class RouteOptionsTests
 {
     [Fact]

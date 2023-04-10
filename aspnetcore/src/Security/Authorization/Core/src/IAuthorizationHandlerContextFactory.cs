@@ -6,7 +6,6 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// A type used to provide a <see cref="AuthorizationHandlerContext"/> used for authorization.
 /// </summary>

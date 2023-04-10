@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 /// <summary>
 ///     Provides a simple API for configuring a <see cref="IConventionRelationalPropertyOverrides" />.
 /// </summary>

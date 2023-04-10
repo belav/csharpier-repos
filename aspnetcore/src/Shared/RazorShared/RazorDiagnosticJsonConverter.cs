@@ -9,7 +9,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.CodeAnalysis.Razor.Serialization;
 
-
 internal sealed class RazorDiagnosticJsonConverter : JsonConverter
 {
     public static readonly RazorDiagnosticJsonConverter Instance =

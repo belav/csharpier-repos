@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.ResponseCaching;
 
-
 internal static class StreamUtilities
 {
     /// <summary>

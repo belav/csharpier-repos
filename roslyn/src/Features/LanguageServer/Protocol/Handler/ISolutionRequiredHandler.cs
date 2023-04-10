@@ -4,7 +4,6 @@
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
-
 internal interface ISolutionRequiredHandler
 {
     bool RequiresLSPSolution { get; }

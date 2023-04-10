@@ -6,7 +6,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public class DirectiveDescriptorTest
 {
     [Fact]

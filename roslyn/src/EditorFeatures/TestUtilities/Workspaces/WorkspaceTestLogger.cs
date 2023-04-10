@@ -14,7 +14,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Host;
 
-
 [
     ExportWorkspaceService(typeof(IWorkspaceTestLogger), ServiceLayer.Host),
     Shared,

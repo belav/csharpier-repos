@@ -13,7 +13,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 public class AcceptedResultTests
 {
     public static TheoryData<object> ValuesData

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Authorization;
 
-
 /// <summary>
 /// An interface implemented by <see cref="AuthenticationStateProvider"/> classes that can receive authentication
 /// state information from the host environment.

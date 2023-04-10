@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.KeyManagement;
 
-
 internal sealed unsafe class KeyRingBasedDataProtectionProvider : IDataProtectionProvider
 {
     private readonly IKeyRingProvider _keyRingProvider;

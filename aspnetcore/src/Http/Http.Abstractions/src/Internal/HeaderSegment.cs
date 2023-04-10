@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http;
 
-
 internal readonly struct HeaderSegment : IEquatable<HeaderSegment>
 {
     private readonly StringSegment _formatting;

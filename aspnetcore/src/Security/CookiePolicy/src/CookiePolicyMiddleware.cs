@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.CookiePolicy;
 
-
 /// <summary>
 /// Initializes a new instance of <see cref="CookiePolicyMiddleware"/>.
 /// </summary>

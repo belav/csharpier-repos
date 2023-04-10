@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that adds entity types based on the <see cref="DbSet{TEntity}" /> properties defined on the
 ///     derived <see cref="DbContext" /> class.

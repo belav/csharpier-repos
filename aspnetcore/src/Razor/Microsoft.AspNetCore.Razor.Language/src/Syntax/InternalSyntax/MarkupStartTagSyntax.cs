@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
-
 internal sealed partial class MarkupStartTagSyntax
 {
     private const string MarkupTransitionKey = "MarkupTransition";

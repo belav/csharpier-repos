@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.ActionConstraints;
 
-
 /// <summary>
 /// Base class for attributes which can implement conditional logic to enable or disable an action
 /// for a given request. See <see cref="IActionConstraint"/>.

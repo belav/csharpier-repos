@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
-
 /// <summary>
 ///     Allows SQL Server specific configuration to be performed on <see cref="DbContextOptions" />.
 /// </summary>

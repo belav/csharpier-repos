@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.SignalR.Protocol;
 
 namespace Microsoft.AspNetCore.SignalR.Tests;
 
-
 public static class HubProtocolHelpers
 {
     private static readonly IHubProtocol NewtonsoftJsonHubProtocol =

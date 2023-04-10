@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 public class PublishedApplication : IDisposable
 {
     private readonly ILogger _logger;

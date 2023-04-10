@@ -5,7 +5,6 @@ using System.Transactions;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class DatabaseFacadeTest
 {
     [ConditionalTheory]

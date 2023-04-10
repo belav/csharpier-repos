@@ -8,7 +8,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
-
 /// <summary>
 /// A class that can deserialize an <see cref="XElement"/> that represents the serialized version
 /// of an <see cref="CngGcmAuthenticatedEncryptorDescriptor"/>.

@@ -5,7 +5,6 @@ using System.IO.Pipelines;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Default implementation for <see cref="IRequestBodyPipeFeature"/>.
 /// </summary>

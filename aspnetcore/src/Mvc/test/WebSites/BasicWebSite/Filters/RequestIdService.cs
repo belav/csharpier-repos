@@ -3,7 +3,6 @@
 
 namespace BasicWebSite;
 
-
 public class RequestIdService
 {
     // This service can only be instantiated by a request-scoped container

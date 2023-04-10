@@ -11,7 +11,6 @@ using ContainerProperties = Microsoft.Azure.Cosmos.ContainerProperties;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class CosmosTestStore : TestStore
 {
     private readonly TestStoreContext _storeContext;

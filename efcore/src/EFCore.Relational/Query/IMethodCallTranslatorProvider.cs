@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 /// <summary>
 ///     Provides translations for LINQ <see cref="MethodCallExpression" /> expressions which represents scalar methods.
 /// </summary>

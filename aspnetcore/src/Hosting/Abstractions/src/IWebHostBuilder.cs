@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Hosting;
 
-
 /// <summary>
 /// A builder for <see cref="IWebHost"/>.
 /// </summary>

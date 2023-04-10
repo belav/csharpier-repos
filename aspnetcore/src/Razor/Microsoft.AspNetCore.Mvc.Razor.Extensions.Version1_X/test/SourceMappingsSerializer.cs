@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Razor.Language;
 
 namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version1_X;
 
-
 public static class SourceMappingsSerializer
 {
     public static string Serialize(

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 /// <summary>
 /// A <see cref="IFilterMetadata"/> that indicates that a type and all derived types are used to serve HTTP API responses.
 /// <para>

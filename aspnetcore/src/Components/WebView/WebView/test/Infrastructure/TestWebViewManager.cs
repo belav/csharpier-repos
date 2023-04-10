@@ -5,7 +5,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.Components.WebView;
 
-
 public class TestWebViewManager : WebViewManager
 {
     private static readonly Uri AppBaseUri = new Uri("app://testhost/");

@@ -19,7 +19,6 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests;
 
-
 public class EditAndContinueDelegateCacheTests : EditAndContinueTestBase
 {
     [Fact]

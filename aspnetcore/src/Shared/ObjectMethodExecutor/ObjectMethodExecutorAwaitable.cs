@@ -8,7 +8,6 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.Extensions.Internal;
 
-
 /// <summary>
 /// Provides a common awaitable structure that <see cref="ObjectMethodExecutor.ExecuteAsync"/> can
 /// return, regardless of whether the underlying value is a System.Task, an FSharpAsync, or an

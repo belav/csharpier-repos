@@ -3,7 +3,6 @@
 
 namespace Templates.Test;
 
-
 internal static class ArgConstants
 {
     public const string UseProgramMain = "--use-program-main";

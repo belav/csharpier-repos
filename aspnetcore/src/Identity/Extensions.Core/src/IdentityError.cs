@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Identity;
 
-
 /// <summary>
 /// Encapsulates an error from the identity subsystem.
 /// </summary>

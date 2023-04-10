@@ -13,7 +13,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 
-
 public class XmlSerializerInputFormatterTest
 {
     public class DummyClass

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 // Intermediate data structure used to build the DFA. Not used at runtime.
 [DebuggerDisplay("{DebuggerToString(),nq}")]
 internal sealed class DfaNode

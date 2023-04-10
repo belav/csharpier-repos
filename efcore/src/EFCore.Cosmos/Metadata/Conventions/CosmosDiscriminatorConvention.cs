@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that configures the discriminator value for entity types as the entity type name.
 /// </summary>

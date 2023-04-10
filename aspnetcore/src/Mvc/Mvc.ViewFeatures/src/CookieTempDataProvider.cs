@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-
 /// <summary>
 /// Provides data from cookie to the current <see cref="ITempDataDictionary"/> object.
 /// </summary>

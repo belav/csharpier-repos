@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.TransportationModel;
 
-
 public class LicensedOperator : Operator
 {
     public string LicenseType { get; set; }

@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-
 public class TestInMemoryTransactionManager : InMemoryTransactionManager
 {
     private IDbContextTransaction _currentTransaction;

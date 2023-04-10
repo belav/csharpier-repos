@@ -6,7 +6,6 @@ using Microsoft.Extensions.Options;
 
 namespace RoutingSample.Web.HelloExtension;
 
-
 public class HelloMiddleware
 {
     private readonly RequestDelegate _next;

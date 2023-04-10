@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
-
 /// <summary>
 /// The parsed representation of a policy in a <see cref="RoutePattern"/> parameter. Instances
 /// of <see cref="RoutePatternParameterPolicyReference"/> are immutable.

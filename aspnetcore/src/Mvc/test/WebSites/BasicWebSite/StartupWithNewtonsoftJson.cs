@@ -3,7 +3,6 @@
 
 namespace BasicWebSite;
 
-
 public class StartupWithNewtonsoftJson
 {
     public void ConfigureServices(IServiceCollection services)

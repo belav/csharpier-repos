@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 // ReSharper disable MemberCanBePrivate.Local
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class SqlServerDatabaseCreatorTest
 {
     [ConditionalFact]

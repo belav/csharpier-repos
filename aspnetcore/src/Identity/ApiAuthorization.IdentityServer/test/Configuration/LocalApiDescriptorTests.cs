@@ -6,7 +6,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration;
 
-
 public class LocalApiDescriptorTests
 {
     [Fact]

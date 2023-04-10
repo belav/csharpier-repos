@@ -4,7 +4,6 @@
 // ReSharper disable MethodHasAsyncOverload
 namespace Microsoft.EntityFrameworkCore.Update;
 
-
 #nullable enable
 
 public abstract class NonSharedModelUpdatesTestBase : NonSharedModelTestBase

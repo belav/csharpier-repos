@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Web;
 
-
 /// <summary>
 /// Provides extension methods for <see cref="EventCallbackFactory"/> and <see cref="EventArgs"/> types.
 /// </summary>

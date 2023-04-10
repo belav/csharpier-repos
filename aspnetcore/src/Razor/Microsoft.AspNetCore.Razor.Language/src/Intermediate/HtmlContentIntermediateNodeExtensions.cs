@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
-
 internal static class HtmlContentIntermediateNodeExtensions
 {
     private const string HasEncodedContent = "HasEncodedContent";

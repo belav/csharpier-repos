@@ -7,7 +7,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// A component that wraps the HTML file input element and supplies a <see cref="Stream"/> for each file's contents.
 /// </summary>

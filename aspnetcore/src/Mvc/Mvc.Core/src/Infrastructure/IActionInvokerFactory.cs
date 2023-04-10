@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-
 /// <summary>
 /// Defines an interface for creating an <see cref="IActionInvoker"/> for the current request.
 /// </summary>

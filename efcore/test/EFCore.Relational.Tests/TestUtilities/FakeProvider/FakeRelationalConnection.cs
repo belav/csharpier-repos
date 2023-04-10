@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities.FakeProvider;
 
-
 public class FakeRelationalConnection : RelationalConnection
 {
     private DbConnection _connection;

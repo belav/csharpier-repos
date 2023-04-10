@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace GenericWebHost;
 
-
 public class Program
 {
     public static async Task Main(string[] args)

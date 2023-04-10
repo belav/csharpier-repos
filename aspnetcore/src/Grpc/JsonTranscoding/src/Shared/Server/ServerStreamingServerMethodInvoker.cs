@@ -23,7 +23,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Grpc.Shared.Server;
 
-
 /// <summary>
 /// Server streaming server method invoker.
 /// </summary>

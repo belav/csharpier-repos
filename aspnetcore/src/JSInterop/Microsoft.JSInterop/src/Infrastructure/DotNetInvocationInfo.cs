@@ -3,7 +3,6 @@
 
 namespace Microsoft.JSInterop.Infrastructure;
 
-
 /// <summary>
 /// Information about a JSInterop call from JavaScript to .NET.
 /// </summary>

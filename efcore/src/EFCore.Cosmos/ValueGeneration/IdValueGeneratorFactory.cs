@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration;
 
-
 /// <summary>
 ///     A factory that creates value generators for the 'id' property that combines the primary key values.
 /// </summary>

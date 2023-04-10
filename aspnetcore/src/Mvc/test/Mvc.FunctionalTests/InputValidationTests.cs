@@ -8,7 +8,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public class InputValidationTests : IClassFixture<MvcTestFixture<FormatterWebSite.Startup>>
 {
     public InputValidationTests(MvcTestFixture<FormatterWebSite.Startup> fixture)

@@ -8,7 +8,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-
 /// <summary>
 /// WebAssemblyHostConfiguration is a class that implements the interface of an IConfiguration,
 /// IConfigurationRoot, and IConfigurationBuilder. It can be used to simulatneously build

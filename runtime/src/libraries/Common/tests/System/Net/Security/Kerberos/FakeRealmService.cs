@@ -6,7 +6,6 @@ using Kerberos.NET.Server;
 
 namespace System.Net.Security.Kerberos;
 
-
 class FakeRealmService : IRealmService
 {
     private readonly IPrincipalService _principalService;

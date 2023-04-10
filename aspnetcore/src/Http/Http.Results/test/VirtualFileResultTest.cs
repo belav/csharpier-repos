@@ -8,7 +8,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 public class VirtualFileResultTest : VirtualFileResultTestBase
 {
     protected override Task ExecuteAsync(

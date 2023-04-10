@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorProjectEngineBuilder
 {
     public abstract RazorConfiguration Configuration { get; }

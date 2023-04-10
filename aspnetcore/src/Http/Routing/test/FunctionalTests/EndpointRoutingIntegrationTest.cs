@@ -13,7 +13,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
-
 public class EndpointRoutingIntegrationTest
 {
     private static readonly RequestDelegate TestDelegate = async context => await Task.Yield();

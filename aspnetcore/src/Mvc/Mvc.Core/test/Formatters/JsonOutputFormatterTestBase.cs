@@ -11,7 +11,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Formatters;
 
-
 public abstract class JsonOutputFormatterTestBase
 {
     [Theory]

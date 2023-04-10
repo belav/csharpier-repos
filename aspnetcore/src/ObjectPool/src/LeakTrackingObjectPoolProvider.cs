@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.Extensions.ObjectPool;
 
-
 /// <summary>
 /// An <see cref="ObjectPoolProvider"/> that produces instances of
 /// <see cref="LeakTrackingObjectPool{T}"/>.

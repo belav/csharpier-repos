@@ -24,7 +24,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 [MsQuicSupported]
 [HttpSysHttp3Supported]
 [Collection(IISHttpsTestSiteCollection.Name)]

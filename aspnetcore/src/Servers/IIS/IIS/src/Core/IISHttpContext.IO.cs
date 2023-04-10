@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-
 internal partial class IISHttpContext
 {
     private long _consumedBytes;

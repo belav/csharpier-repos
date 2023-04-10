@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Microsoft.AspNetCore.DataProtection.Test;
 
-
 public class ContainerUtilsTests
 {
     // example of content from /proc/self/mounts

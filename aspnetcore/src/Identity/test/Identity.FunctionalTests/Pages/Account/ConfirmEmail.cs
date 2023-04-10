@@ -6,7 +6,6 @@ using AngleSharp.Dom.Html;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 
-
 public class ConfirmEmail : DefaultUIPage
 {
     public ConfirmEmail(HttpClient client, IHtmlDocument document, DefaultUIContext context)

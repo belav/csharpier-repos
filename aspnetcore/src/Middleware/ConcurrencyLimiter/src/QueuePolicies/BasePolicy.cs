@@ -9,7 +9,6 @@ using LimiterOptions = System.Threading.RateLimiting.ConcurrencyLimiterOptions;
 
 namespace Microsoft.AspNetCore.ConcurrencyLimiter;
 
-
 internal class BasePolicy : IQueuePolicy, IDisposable
 {
     private readonly Limiter _limiter;

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http.Metadata;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-
 internal sealed class AcceptsMatcherPolicy
     : MatcherPolicy,
         IEndpointComparerPolicy,

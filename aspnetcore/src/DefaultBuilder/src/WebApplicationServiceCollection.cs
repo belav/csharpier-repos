@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore;
 
-
 internal sealed class WebApplicationServiceCollection : IServiceCollection
 {
     private IServiceCollection _services = new ServiceCollection();

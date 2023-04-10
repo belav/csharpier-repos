@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting.Internal;
 
 namespace Microsoft.AspNetCore.Hosting.Infrastructure;
 
-
 /// <summary>
 /// An interface implemented by IWebHostBuilders that handle <see cref="WebHostBuilderExtensions.Configure(IWebHostBuilder, Action{IApplicationBuilder})"/>,
 /// <see cref="WebHostBuilderExtensions.UseStartup(IWebHostBuilder, Type)"/> and <see cref="WebHostBuilderExtensions.UseStartup{TStartup}(IWebHostBuilder, Func{WebHostBuilderContext, TStartup})"/>

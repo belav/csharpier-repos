@@ -9,7 +9,6 @@ using Microsoft.Extensions.Options;
 
 namespace AuthSamples.DynamicSchemes.Controllers;
 
-
 public class AuthController : Controller
 {
     private readonly IAuthenticationSchemeProvider _schemeProvider;

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Testing;
 
-
 public static class TestApp
 {
     public static async Task EchoApp(HttpContext httpContext)

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Authentication.Twitter;
 
-
 /// <summary>
 /// Options for the Twitter authentication handler.
 /// </summary>

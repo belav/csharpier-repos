@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
-
 public class ApplicationModelConventionExtensionsTest
 {
     [Fact]

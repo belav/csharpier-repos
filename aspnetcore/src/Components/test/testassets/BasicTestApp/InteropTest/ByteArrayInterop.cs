@@ -5,7 +5,6 @@ using Microsoft.JSInterop;
 
 namespace BasicTestApp.InteropTest;
 
-
 public class ByteArrayInterop
 {
     [JSInvokable]

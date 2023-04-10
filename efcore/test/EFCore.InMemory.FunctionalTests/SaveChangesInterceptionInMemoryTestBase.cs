@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class SaveChangesInterceptionInMemoryTestBase : SaveChangesInterceptionTestBase
 {
     protected SaveChangesInterceptionInMemoryTestBase(InterceptionInMemoryFixtureBase fixture)

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Cosmos.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 /// <summary>
 ///     A convention that creates a join entity type for a many-to-many relationship
 ///     and adds a partition key to it if the related types share one.

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Identifies an action that supports the HTTP HEAD method.
 /// </summary>

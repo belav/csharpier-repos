@@ -5,7 +5,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
-
 public class ProductCategory
 {
     public Category Category { get; set; } = null!;

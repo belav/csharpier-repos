@@ -10,7 +10,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 internal class DefaultTypeNameFeature : TypeNameFeature
 {
     public override IReadOnlyList<string> ParseTypeParameters(string typeName)

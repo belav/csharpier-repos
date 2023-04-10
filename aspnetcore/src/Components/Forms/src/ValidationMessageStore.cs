@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// Holds validation messages for an <see cref="EditContext"/>.
 /// </summary>

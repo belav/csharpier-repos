@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public class InMemoryOptionsExtensionTest
 {
     private static readonly MethodInfo _applyServices = typeof(InMemoryOptionsExtension)

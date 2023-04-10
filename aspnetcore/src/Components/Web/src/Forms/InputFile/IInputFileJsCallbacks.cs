@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 internal interface IInputFileJsCallbacks
 {
     Task NotifyChange(BrowserFile[] files);

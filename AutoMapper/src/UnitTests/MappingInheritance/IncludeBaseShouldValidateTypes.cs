@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
 
-
 public class IncludeBaseShouldValidateTypes
 {
     [Fact]

@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-
 [SqlServerCondition(SqlServerCondition.IsNotSqlAzure)]
 public class EverythingIsBytesSqlServerTest
     : BuiltInDataTypesTestBase<EverythingIsBytesSqlServerTest.EverythingIsBytesSqlServerFixture>

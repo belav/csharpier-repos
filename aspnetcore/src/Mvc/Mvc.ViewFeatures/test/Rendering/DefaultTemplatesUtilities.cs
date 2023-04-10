@@ -21,7 +21,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 public class DefaultTemplatesUtilities
 {
     public class ObjectTemplateModel

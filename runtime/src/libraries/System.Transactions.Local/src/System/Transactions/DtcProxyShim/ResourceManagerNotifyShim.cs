@@ -6,7 +6,6 @@ using System.Transactions.DtcProxyShim.DtcInterfaces;
 
 namespace System.Transactions.DtcProxyShim;
 
-
 internal sealed class ResourceManagerNotifyShim : NotificationShimBase, IResourceManagerSink
 {
     internal ResourceManagerNotifyShim(DtcProxyShimFactory shimFactory, object enlistmentIdentifier)

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite.UrlMatches;
 
-
 internal enum IntegerOperationType
 {
     Equal,

@@ -3,7 +3,6 @@
 
 namespace Microsoft.Net.Http.Headers;
 
-
 /// <summary>
 /// Indicates if the client should include a cookie on "same-site" or "cross-site" requests.
 /// RFC Draft: <see href="https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03#section-4.1.1"/>

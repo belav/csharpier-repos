@@ -21,7 +21,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Http2Cat;
 
-
 internal sealed class Http2CatHostedService : IHostedService
 {
     private readonly IConnectionFactory _connectionFactory;

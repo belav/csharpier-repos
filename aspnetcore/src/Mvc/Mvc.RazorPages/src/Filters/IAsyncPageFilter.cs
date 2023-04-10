@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// A filter that asynchronously surrounds execution of a page handler method. This filter is executed only when
 /// decorated on a handler's type and not on individual handler methods.

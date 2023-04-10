@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 
-
 /// <summary>
 /// A class that can encrypt XML elements using Windows DPAPI:NG.
 /// </summary>

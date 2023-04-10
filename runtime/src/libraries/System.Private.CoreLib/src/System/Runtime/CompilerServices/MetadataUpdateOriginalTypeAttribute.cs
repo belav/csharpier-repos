@@ -3,7 +3,6 @@
 
 namespace System.Runtime.CompilerServices;
 
-
 [AttributeUsage(
     System.AttributeTargets.Class | System.AttributeTargets.Struct,
     AllowMultiple = false,

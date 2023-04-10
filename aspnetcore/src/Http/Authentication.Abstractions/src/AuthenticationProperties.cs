@@ -6,7 +6,6 @@ using System.Text.Json.Serialization;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-
 /// <summary>
 /// Dictionary used to store state values about the authentication session.
 /// </summary>

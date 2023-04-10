@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.SpaServices;
 
-
 /// <summary>
 /// Describes options for hosting a Single Page Application (SPA).
 /// </summary>

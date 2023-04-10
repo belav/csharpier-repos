@@ -6,7 +6,6 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-
 public class HtmlStringTest
 {
     [Fact]

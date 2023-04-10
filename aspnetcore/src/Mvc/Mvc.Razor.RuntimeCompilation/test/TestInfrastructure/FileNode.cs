@@ -5,7 +5,6 @@ using System.Diagnostics;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 // Internal for testing
 [DebuggerDisplay("{Path}")]
 internal class FileNode

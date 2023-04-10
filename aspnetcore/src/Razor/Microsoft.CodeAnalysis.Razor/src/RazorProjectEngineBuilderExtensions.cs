@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.CodeAnalysis.Razor;
 
-
 /// <summary>
 /// Roslyn specific <see cref="RazorProjectEngineBuilder"/> extensions.
 /// </summary>

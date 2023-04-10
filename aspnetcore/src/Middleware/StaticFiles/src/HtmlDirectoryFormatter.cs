@@ -10,7 +10,6 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Microsoft.AspNetCore.StaticFiles;
 
-
 /// <summary>
 /// Generates an HTML view for a directory.
 /// </summary>

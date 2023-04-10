@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-
 /// <summary>
 /// Exception thrown by HttpSys when an error occurs
 /// </summary>

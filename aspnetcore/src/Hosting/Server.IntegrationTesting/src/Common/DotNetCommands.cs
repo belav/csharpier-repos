@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-
 public static class DotNetCommands
 {
     private const string _dotnetFolderName = ".dotnet";

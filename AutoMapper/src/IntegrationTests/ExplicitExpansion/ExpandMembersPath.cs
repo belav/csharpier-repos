@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-
 public class ExpandMembersPath : IntegrationTest<ExpandMembersPath.DatabaseInitializer>
 {
     protected override MapperConfiguration CreateConfiguration() =>

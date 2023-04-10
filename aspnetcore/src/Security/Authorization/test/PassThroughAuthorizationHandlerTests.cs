@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authorization.Test;
 
-
 public class PassThroughAuthorizationHandlerTests
 {
     private IAuthorizationService BuildAuthorizationService(

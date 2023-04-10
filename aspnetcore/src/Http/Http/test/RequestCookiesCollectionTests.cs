@@ -5,7 +5,6 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http.Tests;
 
-
 public class RequestCookiesCollectionTests
 {
     [Theory]

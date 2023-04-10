@@ -6,7 +6,6 @@ using System.Text.Json;
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal static class SystemTextJsonExtensions
 {
     public static bool CheckRead(this ref Utf8JsonReader reader)

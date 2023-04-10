@@ -9,7 +9,6 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.AspNetCore.Analyzers;
 
-
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public partial class StartupAnalyzer : DiagnosticAnalyzer
 {

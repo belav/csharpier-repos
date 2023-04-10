@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
 
-
 public class NullSubstitutes : AutoMapperSpecBase
 {
     private List<Dest> _dests;

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.Abstractions;
 
-
 /// <summary>
 /// Defines an interface for invoking an MVC action.
 /// </summary>

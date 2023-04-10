@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace TestStartupAssembly1;
 
-
 public class TestHostingStartup1 : IHostingStartup
 {
     public void Configure(IWebHostBuilder builder)

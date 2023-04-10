@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
-
 /// <summary>
 /// Flags used to control which parts of the
 /// request and response are logged.

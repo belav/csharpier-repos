@@ -3,7 +3,6 @@
 
 namespace Ignitor;
 
-
 #nullable enable
 public class ComponentState
 {

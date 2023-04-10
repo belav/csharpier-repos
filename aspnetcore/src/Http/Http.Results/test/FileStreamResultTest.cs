@@ -10,7 +10,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Http.Result;
 
-
 public class FileStreamResultTest : FileStreamResultTestBase
 {
     protected override Task ExecuteAsync(

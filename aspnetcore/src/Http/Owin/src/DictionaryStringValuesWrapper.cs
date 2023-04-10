@@ -9,7 +9,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Owin;
 
-
 internal sealed class DictionaryStringValuesWrapper : IHeaderDictionary
 {
     public DictionaryStringValuesWrapper(IDictionary<string, string[]> inner)

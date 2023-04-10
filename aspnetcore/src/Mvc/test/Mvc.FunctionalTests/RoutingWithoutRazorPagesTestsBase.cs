@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-
 public abstract class RoutingWithoutRazorPagesTestsBase<TStartup>
     : IClassFixture<MvcTestFixture<TStartup>>
     where TStartup : class

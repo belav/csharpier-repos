@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace BasicTestApp.InteropTest;
 
-
 [StructLayout(LayoutKind.Explicit)]
 public struct InteropStruct
 {

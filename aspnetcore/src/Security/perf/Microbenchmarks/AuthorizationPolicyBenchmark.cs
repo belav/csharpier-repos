@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Security;
 
-
 public class AuthorizationPolicyBenchmark
 {
     private DefaultAuthorizationPolicyProvider _policyProvider;

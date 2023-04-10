@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Testing;
 
 namespace Interop.FunctionalTests;
 
-
 internal static class Utilities
 {
     internal static bool CurrentPlatformSupportsHTTP2OverTls()

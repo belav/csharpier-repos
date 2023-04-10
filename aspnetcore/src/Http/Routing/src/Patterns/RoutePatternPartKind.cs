@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
-
 /// <summary>
 /// Defines the kinds of <see cref="RoutePatternPart"/> instances.
 /// </summary>

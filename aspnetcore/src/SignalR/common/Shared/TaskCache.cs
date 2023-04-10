@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Internal;
 
-
 internal static class TaskCache
 {
     public static readonly Task<bool> True = Task.FromResult(true);

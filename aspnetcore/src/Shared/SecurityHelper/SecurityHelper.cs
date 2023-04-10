@@ -8,7 +8,6 @@ using System.Security.Claims;
 
 namespace Microsoft.Extensions.Internal;
 
-
 /// <summary>
 /// Helper code used when implementing authentication middleware
 /// </summary>

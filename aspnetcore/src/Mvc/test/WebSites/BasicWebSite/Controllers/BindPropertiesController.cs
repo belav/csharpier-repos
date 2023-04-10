@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace BasicWebSite;
 
-
 [BindProperties]
 public class BindPropertiesController : Controller
 {

@@ -15,7 +15,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
-
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class RoutePatternAnalyzer : DiagnosticAnalyzer
 {

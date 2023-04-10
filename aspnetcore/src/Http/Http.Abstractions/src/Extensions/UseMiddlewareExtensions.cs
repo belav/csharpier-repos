@@ -10,7 +10,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Extension methods for adding typed middleware.
 /// </summary>

@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 // ReSharper disable ClassNeverInstantiated.Local
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
-
 public class PropertyAttributeConventionTest
 {
     #region ConcurrencyCheckAttribute

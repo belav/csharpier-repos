@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
-
 public class FakeOptions
 {
     public bool Configured { get; set; }

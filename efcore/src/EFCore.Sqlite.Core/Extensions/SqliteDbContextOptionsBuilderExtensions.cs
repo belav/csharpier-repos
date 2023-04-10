@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Sqlite.Infrastructure.Internal;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.EntityFrameworkCore;
 
-
 /// <summary>
 ///     SQLite specific extension methods for <see cref="DbContextOptionsBuilder" />.
 /// </summary>

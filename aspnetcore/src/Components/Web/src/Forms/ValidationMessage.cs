@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 /// <summary>
 /// Displays a list of validation messages for a specified field within a cascaded <see cref="EditContext"/>.
 /// </summary>

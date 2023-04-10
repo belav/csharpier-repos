@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Scaffolding;
 
-
 /// <summary>
 ///     Implemented by plugins to generate code fragments for reverse engineering.
 /// </summary>

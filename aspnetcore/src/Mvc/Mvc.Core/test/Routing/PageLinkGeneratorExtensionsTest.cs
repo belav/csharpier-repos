@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.AspNetCore.Routing;
 
-
 public class PageLinkGeneratorExtensionsTest
 {
     [Fact]

@@ -11,7 +11,6 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.HotReload;
 
-
 /// <summary>
 /// Contains methods called by interop. Intended for framework use only, not supported for use in application
 /// code.

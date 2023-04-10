@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-
 /// <summary>
 /// Used to associate validators with <see cref="ValidatorMetadata"/> instances
 /// as part of <see cref="ModelValidatorProviderContext"/>. An <see cref="IModelValidator"/> should

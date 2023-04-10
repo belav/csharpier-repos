@@ -5,7 +5,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
-
 public class IISDeploymentParameters : DeploymentParameters
 {
     public IISDeploymentParameters()

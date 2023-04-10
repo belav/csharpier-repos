@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 
-
 internal enum LogicalGrouping
 {
     MatchAll,

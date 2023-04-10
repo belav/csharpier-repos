@@ -12,7 +12,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests;
 
-
 public class TestOutputLspLogger : ILspServiceLogger
 {
     private readonly ITestOutputHelper _testOutputHelper;

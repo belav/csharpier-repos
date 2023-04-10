@@ -11,7 +11,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
-
 public class VersionedJsonHubProtocol : IHubProtocol
 {
     private readonly int _version;

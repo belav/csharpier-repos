@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Razor.Language.Extensions;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorEngine
 {
 #pragma warning disable CS0618 // Type or member is obsolete

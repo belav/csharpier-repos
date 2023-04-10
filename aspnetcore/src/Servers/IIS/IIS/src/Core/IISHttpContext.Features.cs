@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Server.IIS.Core;
 
-
 internal partial class IISHttpContext
 {
     private static readonly Type IHttpRequestFeatureType =

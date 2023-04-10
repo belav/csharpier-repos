@@ -5,7 +5,6 @@ using System;
 
 namespace ReproMAUI6811;
 
-
 public static class Program
 {
     public static int Main()

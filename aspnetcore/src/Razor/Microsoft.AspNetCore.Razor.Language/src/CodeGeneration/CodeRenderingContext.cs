@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
-
 public abstract class CodeRenderingContext
 {
     internal static readonly object NewLineString = "NewLineString";

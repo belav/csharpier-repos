@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorCSharpDocument
 {
     public abstract string GeneratedCode { get; }

@@ -9,7 +9,6 @@ using System.Reflection;
 
 namespace System.CommandLine.NamingConventionBinder;
 
-
 /// <summary>
 /// Provides information for binding command line input to instances of a specific <see cref="ModelType"/>.
 /// </summary>

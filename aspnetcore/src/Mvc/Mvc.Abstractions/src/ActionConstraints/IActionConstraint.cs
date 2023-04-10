@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ActionConstraints;
 
-
 /// <summary>
 /// Supports conditional logic to determine whether or not an associated action is valid to be selected
 /// for the given request.

@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class CommandInterceptionSqlServerTestBase : CommandInterceptionTestBase
 {
     protected CommandInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)

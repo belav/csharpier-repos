@@ -14,7 +14,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace CodeGenerator;
 
-
 public class KnownHeaders
 {
     public static readonly KnownHeader[] RequestHeaders;

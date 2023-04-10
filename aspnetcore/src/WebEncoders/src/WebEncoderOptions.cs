@@ -5,7 +5,6 @@ using System.Text.Encodings.Web;
 
 namespace Microsoft.Extensions.WebEncoders;
 
-
 /// <summary>
 /// Specifies options common to all three encoders (HtmlEncode, JavaScriptEncode, UrlEncode).
 /// </summary>

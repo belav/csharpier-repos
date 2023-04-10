@@ -2,7 +2,6 @@
 
 namespace AutoMapper.UnitTests.Bug;
 
-
 public class MapOverloadsWithDynamic : AutoMapperSpecBase
 {
     Settings _settings;

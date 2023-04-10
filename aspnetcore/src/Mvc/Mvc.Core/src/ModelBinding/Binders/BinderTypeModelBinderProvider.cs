@@ -5,7 +5,6 @@
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
-
 /// <summary>
 /// An <see cref="IModelBinderProvider"/> for models which specify an <see cref="IModelBinder"/>
 /// using <see cref="BindingInfo.BinderType"/>.

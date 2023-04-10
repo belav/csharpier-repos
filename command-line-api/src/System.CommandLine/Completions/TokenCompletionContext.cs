@@ -3,7 +3,6 @@
 
 namespace System.CommandLine.Completions;
 
-
 /// <summary>
 /// Provides details for getting completions when the complete text of the original command line is not available.
 /// </summary>

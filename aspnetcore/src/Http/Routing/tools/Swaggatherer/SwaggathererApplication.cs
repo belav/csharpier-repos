@@ -12,7 +12,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Swaggatherer;
 
-
 internal sealed class SwaggathererApplication : CommandLineApplication
 {
     public SwaggathererApplication()

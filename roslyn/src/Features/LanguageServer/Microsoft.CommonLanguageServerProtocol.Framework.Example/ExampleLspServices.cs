@@ -9,7 +9,6 @@ using System;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.Example;
 
-
 internal class ExampleLspServices : ILspServices
 {
     private readonly IServiceProvider _serviceProvider;

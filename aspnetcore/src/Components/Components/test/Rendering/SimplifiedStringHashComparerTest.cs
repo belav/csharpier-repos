@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
-
 public class SimplifiedStringHashComparerTest
 {
     [Fact]

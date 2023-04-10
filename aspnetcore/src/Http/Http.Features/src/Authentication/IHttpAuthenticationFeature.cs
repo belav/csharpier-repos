@@ -5,7 +5,6 @@ using System.Security.Claims;
 
 namespace Microsoft.AspNetCore.Http.Features.Authentication;
 
-
 /// <summary>
 /// The HTTP authentication feature.
 /// </summary>

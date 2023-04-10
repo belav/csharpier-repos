@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Cryptography.Cng;
 
 namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2;
 
-
 /// <summary>
 /// Internal base class used for abstracting away the PBKDF2 implementation since the implementation is OS-specific.
 /// </summary>

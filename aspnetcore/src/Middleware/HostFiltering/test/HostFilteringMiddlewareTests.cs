@@ -13,7 +13,6 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.HostFiltering;
 
-
 public class HostFilteringMiddlewareTests
 {
     [Fact]

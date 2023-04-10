@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
-
 public sealed partial class InternalEntityEntry
 {
     private readonly struct OriginalValues

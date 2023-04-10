@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace XmlFormattersWebSite;
 
-
 public class ValidationController : Controller
 {
     public IActionResult CreateStore([FromBody] Store store)

@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc;
 
-
 /// <summary>
 /// Options used to configure behavior for types annotated with <see cref="ApiControllerAttribute"/>.
 /// </summary>

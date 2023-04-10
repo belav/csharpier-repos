@@ -14,7 +14,6 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.Formatting;
 
-
 internal static class CSharpSyntaxFormattingOptionsStorage
 {
     [ExportLanguageService(typeof(ISyntaxFormattingOptionsStorage), LanguageNames.CSharp), Shared]

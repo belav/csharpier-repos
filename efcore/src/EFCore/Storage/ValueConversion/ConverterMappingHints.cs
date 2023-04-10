@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-
 /// <summary>
 ///     Specifies hints used by the type mapper when mapping using a <see cref="ValueConverter" />.
 /// </summary>

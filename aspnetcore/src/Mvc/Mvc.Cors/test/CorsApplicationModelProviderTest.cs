@@ -15,7 +15,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.Cors;
 
-
 public class CorsApplicationModelProviderTest
 {
     private readonly IOptions<MvcOptions> OptionsWithoutEndpointRouting = Options.Create(

@@ -5,7 +5,6 @@ using System.Runtime.ExceptionServices;
 
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
-
 /// <summary>
 /// A context for exception filters i.e. <see cref="IExceptionFilter"/> and
 /// <see cref="IAsyncExceptionFilter"/> implementations.

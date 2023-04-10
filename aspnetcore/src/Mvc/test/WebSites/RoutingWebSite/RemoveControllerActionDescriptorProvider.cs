@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace RoutingWebSite;
 
-
 public class RemoveControllerActionDescriptorProvider : IActionDescriptorProvider
 {
     private readonly ControllerToRemove[] _controllerTypes;

@@ -3,7 +3,6 @@
 
 namespace Wasm.Performance.Driver;
 
-
 internal sealed class BenchmarkMetadata
 {
     public string Source { get; set; }

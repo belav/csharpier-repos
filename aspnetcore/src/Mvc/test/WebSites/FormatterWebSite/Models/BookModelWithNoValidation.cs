@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 
 namespace FormatterWebSite.Models;
 
-
 public class BookModelWithNoValidation
 {
     public Guid Id { get; set; }

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 
-
 /// <summary>
 /// Routes on HTTP rule are similar to ASP.NET Core routes but add and remove some features.
 /// <list type="bullet">

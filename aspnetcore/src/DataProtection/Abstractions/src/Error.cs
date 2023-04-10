@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.DataProtection.Abstractions;
 
 namespace Microsoft.AspNetCore.DataProtection;
 
-
 internal static class Error
 {
     public static CryptographicException CryptCommon_GenericError(Exception? inner = null)

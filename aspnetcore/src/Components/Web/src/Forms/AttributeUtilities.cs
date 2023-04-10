@@ -5,7 +5,6 @@ using System.Globalization;
 
 namespace Microsoft.AspNetCore.Components.Forms;
 
-
 internal static class AttributeUtilities
 {
     public static string? CombineClassNames(

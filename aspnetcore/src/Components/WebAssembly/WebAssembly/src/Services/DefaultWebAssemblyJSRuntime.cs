@@ -11,7 +11,6 @@ using Microsoft.JSInterop.WebAssembly;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
-
 internal sealed class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
 {
     internal static readonly DefaultWebAssemblyJSRuntime Instance = new();

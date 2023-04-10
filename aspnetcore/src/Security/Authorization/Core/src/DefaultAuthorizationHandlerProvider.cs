@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Authorization;
 
-
 /// <summary>
 /// The default implementation of a handler provider,
 /// which provides the <see cref="IAuthorizationHandler"/>s for an authorization request.

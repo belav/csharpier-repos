@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
-
 internal sealed partial class KestrelTrace : ILogger
 {
     public void Http2ConnectionError(string connectionId, Http2ConnectionErrorException ex)

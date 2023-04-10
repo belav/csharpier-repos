@@ -6,7 +6,6 @@ using System.Threading;
 
 namespace System.Transactions.DtcProxyShim;
 
-
 internal static class OletxHelper
 {
     private const int RetryInterval = 50; // in milliseconds

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Builder;
 
-
 /// <summary>
 /// Provides programmatic configuration for the <see cref="CookiePolicyMiddleware"/>.
 /// </summary>

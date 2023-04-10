@@ -8,7 +8,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
-
 public class FixtureLoggedTest : LoggedTest
 {
     protected IISTestSiteFixture Fixture { get; set; }

@@ -5,7 +5,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 public abstract class RazorProjectEngineFeatureBase : IRazorProjectEngineFeature
 {
     private RazorProjectEngine _projectEngine;

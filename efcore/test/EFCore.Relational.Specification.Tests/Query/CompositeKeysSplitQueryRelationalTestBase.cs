@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public abstract class CompositeKeysSplitQueryRelationalTestBase<TFixture>
     : CompositeKeysQueryTestBase<TFixture>
     where TFixture : CompositeKeysQueryFixtureBase, new()

@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification;
 
-
 internal sealed class CSharpSimplification : AbstractSimplification
 {
     public static readonly CSharpSimplification Instance = new();

@@ -3,7 +3,6 @@
 
 namespace Identity.DefaultUI.WebSite;
 
-
 public class IdentityEmail
 {
     public IdentityEmail(string to, string subject, string body)

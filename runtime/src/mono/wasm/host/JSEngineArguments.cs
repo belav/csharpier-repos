@@ -9,7 +9,6 @@ using System.Text.Json;
 
 namespace Microsoft.WebAssembly.AppHost;
 
-
 internal sealed class JSEngineArguments
 {
     public string? JSPath { get; set; }

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Authentication.JwtBearer;
 
-
 /// <summary>
 /// Specifies events which the <see cref="JwtBearerHandler"/> invokes to enable developer control over the authentication process.
 /// </summary>

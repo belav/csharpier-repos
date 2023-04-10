@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.Rendering;
 
-
 public class HtmlRendererTest
 {
     protected readonly HtmlEncoder _encoder = HtmlEncoder.Default;

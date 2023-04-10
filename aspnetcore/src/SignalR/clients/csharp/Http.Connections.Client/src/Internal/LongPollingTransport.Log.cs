@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
-
 internal partial class LongPollingTransport
 {
     // EventIds 100 - 106 used in SendUtils

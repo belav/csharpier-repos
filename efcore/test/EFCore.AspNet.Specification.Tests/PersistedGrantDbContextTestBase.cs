@@ -11,7 +11,6 @@ using IdentityServer4.Stores.Serialization;
 
 namespace Microsoft.EntityFrameworkCore;
 
-
 public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<TFixture>
     where TFixture : PersistedGrantDbContextTestBase<TFixture>.PersistedGrantDbContextFixtureBase
 {

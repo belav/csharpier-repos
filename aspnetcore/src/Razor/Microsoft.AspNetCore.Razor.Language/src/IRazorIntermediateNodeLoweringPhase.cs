@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-
 /// <summary>
 /// Generates the intermediate node document from <see cref="RazorSyntaxTree"/>.
 /// </summary>

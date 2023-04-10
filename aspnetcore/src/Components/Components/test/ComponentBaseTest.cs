@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Components.Test.Helpers;
 
 namespace Microsoft.AspNetCore.Components.Test;
 
-
 public class ComponentBaseTest
 {
     // Nothing should exceed the timeout in a successful run of the the tests, this is just here to catch

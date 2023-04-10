@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-
 public class TemporalPointInTimeQueryRewriter : ExpressionVisitor
 {
     private static readonly MethodInfo _setMethodInfo = typeof(ISetSource).GetMethod(

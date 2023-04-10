@@ -11,7 +11,6 @@ using System.Xml.Linq;
 
 namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
-
 internal static class ManifestParser
 {
     private const string DefaultManifestName =

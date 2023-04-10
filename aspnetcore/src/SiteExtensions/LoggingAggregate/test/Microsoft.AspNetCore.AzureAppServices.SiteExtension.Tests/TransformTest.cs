@@ -9,7 +9,6 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.AzureAppServices.SiteExtension;
 
-
 public class TransformTest
 {
     private static readonly string XdtExtensionPath = AppDomain.CurrentDomain.BaseDirectory;

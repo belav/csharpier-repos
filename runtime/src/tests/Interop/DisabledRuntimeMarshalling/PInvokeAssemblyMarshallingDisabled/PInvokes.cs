@@ -9,7 +9,6 @@ using static DisabledRuntimeMarshallingNative;
 
 namespace DisabledRuntimeMarshalling.PInvokeAssemblyMarshallingDisabled;
 
-
 public class PInvokes
 {
     [Fact]

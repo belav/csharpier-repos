@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore.Tools.Properties;
 
 namespace Microsoft.EntityFrameworkCore.Tools;
 
-
 internal abstract class OperationExecutorBase : IOperationExecutor
 {
     public const string DesignAssemblyName = "Microsoft.EntityFrameworkCore.Design";

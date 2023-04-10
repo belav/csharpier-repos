@@ -18,7 +18,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
-
 public class MigrationsEndPointMiddlewareTest
 {
     [Fact]

@@ -5,7 +5,6 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Http;
 
-
 /// <summary>
 /// Extension methods for configuring an instance of <see cref="HttpRequestMessage"/> with browser-specific options.
 /// </summary>

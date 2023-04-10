@@ -5,7 +5,6 @@ using System.Net.WebSockets;
 
 namespace Microsoft.AspNetCore.Http.Features;
 
-
 /// <summary>
 /// Provides access to server websocket features.
 /// </summary>

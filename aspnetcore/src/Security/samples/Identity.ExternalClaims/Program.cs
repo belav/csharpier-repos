@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Identity.ExternalClaims;
 
-
 public class Program
 {
     public static void Main(string[] args)

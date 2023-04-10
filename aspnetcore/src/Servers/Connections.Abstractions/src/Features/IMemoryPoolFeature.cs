@@ -5,7 +5,6 @@ using System.Buffers;
 
 namespace Microsoft.AspNetCore.Connections.Features;
 
-
 /// <summary>
 /// The <see cref="MemoryPool{T}"/> used by the connection.
 /// </summary>

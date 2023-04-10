@@ -7,7 +7,6 @@ using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 
-
 /// <summary>
 /// Class that manages <see cref="TagHelperExecutionContext"/> scopes.
 /// </summary>

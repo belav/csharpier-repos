@@ -15,7 +15,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Microsoft.WebAssembly.Diagnostics;
 
-
 internal sealed class FirefoxMonoProxy : MonoProxy
 {
     public FirefoxMonoProxy(ILogger logger, string loggerId = null, ProxyOptions options = null)

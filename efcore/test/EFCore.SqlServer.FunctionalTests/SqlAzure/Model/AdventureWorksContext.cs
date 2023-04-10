@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.SqlAzure.Model;
 
-
 public class AdventureWorksContext : PoolableDbContext
 {
     public AdventureWorksContext(DbContextOptions options)

@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.IntegrationTests.Inheritance;
 
-
 public class QueryableInterfaceInheritanceIssue
     : IntegrationTest<QueryableInterfaceInheritanceIssue.DatabaseInitializer>
 {

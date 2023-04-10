@@ -9,7 +9,6 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.XmlComments;
 
-
 public class XmlDocumentationIntegrationTests
 {
     private readonly ITestOutputHelper _testOutputHelper;

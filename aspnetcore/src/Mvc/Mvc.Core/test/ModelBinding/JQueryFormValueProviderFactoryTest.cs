@@ -10,7 +10,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test;
 
-
 public class JQueryFormValueProviderFactoryTest
 {
     private static readonly Dictionary<string, StringValues> _backingStore = new Dictionary<

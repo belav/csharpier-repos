@@ -11,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
-
 public class RouterBenchmarkTest : IDisposable
 {
     private readonly HttpClient _client;

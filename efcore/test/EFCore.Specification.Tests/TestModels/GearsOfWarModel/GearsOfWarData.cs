@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
-
 public class GearsOfWarData : ISetSource
 {
     public static readonly GearsOfWarData Instance = new();

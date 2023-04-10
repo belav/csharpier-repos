@@ -1,6 +1,5 @@
 ﻿namespace AutoMapper.UnitTests;
 
-
 public class SomeSource
 {
     public int IgnoreMe { get; set; }

@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Components;
 
-
 // Used to understand boxed generic EventCallbacks
 internal interface IEventCallback
 {

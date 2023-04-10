@@ -3,7 +3,6 @@
 
 namespace RoutingSandbox.Framework;
 
-
 public static class FrameworkEndpointRouteBuilderExtensions
 {
     public static IEndpointConventionBuilder MapFramework(

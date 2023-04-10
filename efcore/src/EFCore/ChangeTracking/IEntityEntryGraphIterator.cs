@@ -3,7 +3,6 @@
 
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
-
 /// <summary>
 ///     A service to traverse a graph of entities and perform some action on at each node.
 /// </summary>

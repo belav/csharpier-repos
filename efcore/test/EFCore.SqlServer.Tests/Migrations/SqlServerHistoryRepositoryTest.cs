@@ -6,7 +6,6 @@ using Microsoft.Data.SqlClient;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-
 public class SqlServerHistoryRepositoryTest
 {
     private static string EOL => Environment.NewLine;

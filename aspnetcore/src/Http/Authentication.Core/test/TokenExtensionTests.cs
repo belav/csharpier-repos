@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Authentication.Core.Test;
 
-
 public class TokenExtensionTests
 {
     [Fact]

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 namespace Microsoft.AspNetCore.Mvc.IntegrationTests;
 
-
 public class ComplexTypeModelBinderIntegrationTest : ComplexTypeIntegrationTestBase
 {
 #pragma warning disable CS0618 // Type or member is obsolete

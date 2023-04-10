@@ -3,7 +3,6 @@
 
 namespace TestServer;
 
-
 public class TransportsServerStartup : ServerStartup
 {
     public TransportsServerStartup(IConfiguration configuration)

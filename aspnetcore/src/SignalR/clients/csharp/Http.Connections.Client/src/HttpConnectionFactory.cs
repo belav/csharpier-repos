@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Http.Connections.Client;
 
-
 /// <summary>
 /// A factory for creating <see cref="HttpConnection"/> instances.
 /// </summary>

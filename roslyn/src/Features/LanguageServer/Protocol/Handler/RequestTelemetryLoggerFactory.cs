@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
-
 [ExportCSharpVisualBasicLspServiceFactory(typeof(RequestTelemetryLogger)), Shared]
 internal class RequestTelemetryLoggerFactory : ILspServiceFactory
 {

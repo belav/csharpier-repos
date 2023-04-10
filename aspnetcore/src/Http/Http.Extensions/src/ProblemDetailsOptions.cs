@@ -3,7 +3,6 @@
 
 namespace Microsoft.AspNetCore.Http;
 
-
 /// <summary>
 /// Options for controlling the behavior of <see cref="IProblemDetailsService.WriteAsync(ProblemDetailsContext)"/>
 /// and similar methods.

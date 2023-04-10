@@ -8,7 +8,6 @@ using Moq;
 
 namespace Microsoft.AspNetCore.Routing.Tests;
 
-
 public class RegexInlineRouteConstraintTests
 {
     [Theory]

@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.AspNetCore.Session;
 
-
 internal sealed class DefaultDistributedSessionStore : IDistributedSessionStore
 {
     private readonly Dictionary<EncodedKey, byte[]> _store = new Dictionary<EncodedKey, byte[]>();

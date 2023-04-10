@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.WebView.Services;
 
-
 internal sealed partial class WebViewNavigationManager : NavigationManager
 {
     private readonly ILogger _logger;
