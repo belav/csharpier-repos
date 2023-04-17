@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <CLRTestPriority>1</CLRTestPriority>
-    <GCStressIncompatible>true</GCStressIncompatible>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="objmonhelper.cs" />
-
-    <CLRTestEnvironmentVariable Include="DOTNET_FastGCStress" Value="1" />
-  </ItemGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <CLRTestPriority>1</CLRTestPriority>
+        <GCStressIncompatible>true</GCStressIncompatible>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="objmonhelper.cs" />
+        <CLRTestEnvironmentVariable Include="DOTNET_FastGCStress" Value="1" />
+    </ItemGroup>
 </Project>

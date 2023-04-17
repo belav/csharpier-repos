@@ -1,12 +1,12 @@
 <Project>
-  <PropertyGroup>
-    <TargetArchitecture>wasm</TargetArchitecture>
-    <TargetOS>Browser</TargetOS>
-    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
-    <UseMonoRuntime>true</UseMonoRuntime>
-    <TrimMode Condition="'$(TrimMode)' == ''">partial</TrimMode>
-
-    <_WasmBuildCoreDependsOn>
+    <PropertyGroup>
+        <TargetArchitecture>wasm</TargetArchitecture>
+        <TargetOS>Browser</TargetOS>
+        <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+        <UseMonoRuntime>true</UseMonoRuntime>
+        <TrimMode Condition="'$(TrimMode)' == ''">partial</TrimMode>
+        <_WasmBuildCoreDependsOn
+        >
         _InitializeCommonProperties;
         _BeforeWasmBuildApp;
         _WasmResolveReferences;
@@ -16,15 +16,15 @@
         _WasmGenerateAppBundle;
         _AfterWasmBuildApp
     </_WasmBuildCoreDependsOn>
-
-    <WasmBuildAppDependsOn>
+        <WasmBuildAppDependsOn
+        >
       _PrepareForAfterBuild;
       $(_WasmBuildCoreDependsOn)
     </WasmBuildAppDependsOn>
-
-    <WasmNestedPublishAppDependsOn>
+        <WasmNestedPublishAppDependsOn
+        >
       _PrepareForNestedPublish;
       $(_WasmBuildCoreDependsOn)
     </WasmNestedPublishAppDependsOn>
-  </PropertyGroup>
+    </PropertyGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿<Project>
-  <Import Project="..\Directory.Build.props" />
-  <PropertyGroup>
-    <IncludePlatformAttributes>true</IncludePlatformAttributes>
-    <UnsupportedOSPlatforms>browser;android;ios;tvos</UnsupportedOSPlatforms>
-  </PropertyGroup>
+    <Import Project="..\Directory.Build.props" />
+    <PropertyGroup>
+        <IncludePlatformAttributes>true</IncludePlatformAttributes>
+        <UnsupportedOSPlatforms>browser;android;ios;tvos</UnsupportedOSPlatforms>
+    </PropertyGroup>
 </Project>

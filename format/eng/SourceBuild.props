@@ -1,8 +1,6 @@
 <Project>
-
-  <PropertyGroup>
-    <GitHubRepositoryName>format</GitHubRepositoryName>
-    <SourceBuildManagedOnly>true</SourceBuildManagedOnly>
-  </PropertyGroup>
-
+    <PropertyGroup>
+        <GitHubRepositoryName>format</GitHubRepositoryName>
+        <SourceBuildManagedOnly>true</SourceBuildManagedOnly>
+    </PropertyGroup>
 </Project>

@@ -1,7 +1,6 @@
 <Project>
-  <Import Project="..\Directory.Build.props" />
-
-  <PropertyGroup>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <Import Project="..\Directory.Build.props" />
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 </Project>

@@ -1,8 +1,8 @@
 ﻿<Project>
-  <Import Project="..\Directory.Build.props" />
-  <PropertyGroup>
-    <StrongNameKeyId>Microsoft</StrongNameKeyId>
-    <IncludePlatformAttributes>true</IncludePlatformAttributes>
-    <UnsupportedOSPlatforms>windows;browser;android;ios;tvos</UnsupportedOSPlatforms>
-  </PropertyGroup>
+    <Import Project="..\Directory.Build.props" />
+    <PropertyGroup>
+        <StrongNameKeyId>Microsoft</StrongNameKeyId>
+        <IncludePlatformAttributes>true</IncludePlatformAttributes>
+        <UnsupportedOSPlatforms>windows;browser;android;ios;tvos</UnsupportedOSPlatforms>
+    </PropertyGroup>
 </Project>

@@ -1,10 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="System.IO.Ports.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'" />
-    <Compile Include="System.IO.Ports.netframework.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFrameworks
+        >$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile
+            Include="System.IO.Ports.cs"
+            Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'"
+        />
+        <Compile
+            Include="System.IO.Ports.netframework.cs"
+            Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"
+        />
+    </ItemGroup>
 </Project>

@@ -1,13 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
-    <OutputType>Exe</OutputType>
-    <ServerGarbageCollection>true</ServerGarbageCollection>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Server.HttpSys" />
-    <Reference Include="Microsoft.Extensions.Logging.Console" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <ServerGarbageCollection>true</ServerGarbageCollection>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Microsoft.AspNetCore.Server.HttpSys" />
+        <Reference Include="Microsoft.Extensions.Logging.Console" />
+    </ItemGroup>
 </Project>

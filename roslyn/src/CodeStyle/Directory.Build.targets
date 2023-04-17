@@ -1,7 +1,6 @@
 <Project>
-  <Import Project="..\..\Directory.Build.targets"/>
-
-  <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)\BannedSymbols.txt" />
-  </ItemGroup>
+    <Import Project="..\..\Directory.Build.targets" />
+    <ItemGroup>
+        <AdditionalFiles Include="$(MSBuildThisFileDirectory)\BannedSymbols.txt" />
+    </ItemGroup>
 </Project>

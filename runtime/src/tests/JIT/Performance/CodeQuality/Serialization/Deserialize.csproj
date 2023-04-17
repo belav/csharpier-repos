@@ -1,15 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Deserialize.cs" />
-  </ItemGroup>
-  <PropertyGroup>
-    <ProjectAssetsFile>$(JitPackagesConfigFileDirectory)benchmark+serialize\obj\project.assets.json</ProjectAssetsFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+    <PropertyGroup>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Deserialize.cs" />
+    </ItemGroup>
+    <PropertyGroup>
+        <ProjectAssetsFile
+        >$(JitPackagesConfigFileDirectory)benchmark+serialize\obj\project.assets.json</ProjectAssetsFile>
+    </PropertyGroup>
 </Project>

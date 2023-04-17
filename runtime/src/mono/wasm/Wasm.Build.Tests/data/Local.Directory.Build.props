@@ -1,5 +1,5 @@
 <Project>
-  <PropertyGroup>
-    <PublishTrimmed>true</PublishTrimmed>
-  </PropertyGroup>
+    <PropertyGroup>
+        <PublishTrimmed>true</PublishTrimmed>
+    </PropertyGroup>
 </Project>

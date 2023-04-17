@@ -1,7 +1,8 @@
 <Project>
-  <PropertyGroup>
-    <_BlazorDevServerDll>$(MSBuildThisFileDirectory)../tools/blazor-devserver.dll</_BlazorDevServerDll>
-    <RunCommand>dotnet</RunCommand>
-    <RunArguments>&quot;$(_BlazorDevServerDll)&quot; --applicationpath &quot;$(TargetPath)&quot;</RunArguments>
-  </PropertyGroup>
+    <PropertyGroup>
+        <_BlazorDevServerDll
+        >$(MSBuildThisFileDirectory)../tools/blazor-devserver.dll</_BlazorDevServerDll>
+        <RunCommand>dotnet</RunCommand>
+        <RunArguments>"$(_BlazorDevServerDll)" --applicationpath "$(TargetPath)"</RunArguments>
+    </PropertyGroup>
 </Project>
