@@ -16,7 +16,6 @@ using System.Diagnostics;
 
 namespace System.Data.Objects
 {
-
     internal sealed class ObjectStateEntryDbDataRecord : DbDataRecord, IExtendedDataRecord
     {
         private readonly StateManagerTypeMetadata _metadata;
@@ -24,12 +23,19 @@ namespace System.Data.Objects
         private readonly object _userObject;
         private DataRecordInfo _recordInfo;
 
-        internal ObjectStateEntryDbDataRecord(EntityEntry cacheEntry, StateManagerTypeMetadata metadata, object userObject)
+        internal ObjectStateEntryDbDataRecord(
+            EntityEntry cacheEntry,
+            StateManagerTypeMetadata metadata,
+            object userObject
+        )
         {
             EntityUtil.CheckArgumentNull(cacheEntry, "cacheEntry");
             EntityUtil.CheckArgumentNull(userObject, "userObject");
             EntityUtil.CheckArgumentNull(metadata, "metadata");
-            Debug.Assert(!cacheEntry.IsKeyEntry, "Cannot create an ObjectStateEntryDbDataRecord for a key entry");
+            Debug.Assert(
+                !cacheEntry.IsKeyEntry,
+                "Cannot create an ObjectStateEntryDbDataRecord for a key entry"
+            );
             switch (cacheEntry.State)
             {
                 case EntityState.Unchanged:
@@ -40,14 +46,21 @@ namespace System.Data.Objects
                     _metadata = metadata;
                     break;
                 default:
-                    Debug.Assert(false, "A DbDataRecord cannot be created for an entity object that is in an added or detached state.");
+                    Debug.Assert(
+                        false,
+                        "A DbDataRecord cannot be created for an entity object that is in an added or detached state."
+                    );
                     break;
             }
         }
+
         internal ObjectStateEntryDbDataRecord(RelationshipEntry cacheEntry)
         {
             EntityUtil.CheckArgumentNull(cacheEntry, "cacheEntry");
-            Debug.Assert(!cacheEntry.IsKeyEntry, "Cannot create an ObjectStateEntryDbDataRecord for a key entry");
+            Debug.Assert(
+                !cacheEntry.IsKeyEntry,
+                "Cannot create an ObjectStateEntryDbDataRecord for a key entry"
+            );
             switch (cacheEntry.State)
             {
                 case EntityState.Unchanged:
@@ -56,10 +69,14 @@ namespace System.Data.Objects
                     _cacheEntry = cacheEntry;
                     break;
                 default:
-                    Debug.Assert(false, "A DbDataRecord cannot be created for an entity object that is in an added or detached state.");
+                    Debug.Assert(
+                        false,
+                        "A DbDataRecord cannot be created for an entity object that is in an added or detached state."
+                    );
                     break;
             }
         }
+
         override public int FieldCount
         {
             get
@@ -70,27 +87,30 @@ namespace System.Data.Objects
         }
         override public object this[int ordinal]
         {
-            get
-            {
-                return GetValue(ordinal);
-            }
+            get { return GetValue(ordinal); }
         }
         override public object this[string name]
         {
-            get
-            {
-                return GetValue(GetOrdinal(name));
-            }
+            get { return GetValue(GetOrdinal(name)); }
         }
+
         override public bool GetBoolean(int ordinal)
         {
             return (bool)GetValue(ordinal);
         }
+
         override public byte GetByte(int ordinal)
         {
             return (byte)GetValue(ordinal);
         }
-        override public long GetBytes(int ordinal, long dataIndex, byte[] buffer, int bufferIndex, int length)
+
+        override public long GetBytes(
+            int ordinal,
+            long dataIndex,
+            byte[] buffer,
+            int bufferIndex,
+            int length
+        )
         {
             byte[] tempBuffer;
             tempBuffer = (byte[])GetValue(ordinal);
@@ -107,7 +127,11 @@ namespace System.Data.Objects
             }
             else if ((bufferIndex < 0) || (bufferIndex > 0 && bufferIndex >= buffer.Length))
             {
-                throw EntityUtil.InvalidDestinationBufferIndex(buffer.Length, bufferIndex, "bufferIndex");
+                throw EntityUtil.InvalidDestinationBufferIndex(
+                    buffer.Length,
+                    bufferIndex,
+                    "bufferIndex"
+                );
             }
 
             if (0 < byteCount)
@@ -124,11 +148,19 @@ namespace System.Data.Objects
             }
             return byteCount;
         }
+
         override public char GetChar(int ordinal)
         {
             return (char)GetValue(ordinal);
         }
-        override public long GetChars(int ordinal, long dataIndex, char[] buffer, int bufferIndex, int length)
+
+        override public long GetChars(
+            int ordinal,
+            long dataIndex,
+            char[] buffer,
+            int bufferIndex,
+            int length
+        )
         {
             char[] tempBuffer;
             tempBuffer = (char[])GetValue(ordinal);
@@ -142,11 +174,19 @@ namespace System.Data.Objects
             int charCount = Math.Min(tempBuffer.Length - srcIndex, length);
             if (srcIndex < 0)
             {
-                throw EntityUtil.InvalidSourceBufferIndex(buffer.Length, bufferIndex, "bufferIndex");
+                throw EntityUtil.InvalidSourceBufferIndex(
+                    buffer.Length,
+                    bufferIndex,
+                    "bufferIndex"
+                );
             }
             else if ((bufferIndex < 0) || (bufferIndex > 0 && bufferIndex >= buffer.Length))
             {
-                throw EntityUtil.InvalidDestinationBufferIndex(buffer.Length, bufferIndex, "bufferIndex");
+                throw EntityUtil.InvalidDestinationBufferIndex(
+                    buffer.Length,
+                    bufferIndex,
+                    "bufferIndex"
+                );
             }
 
             if (0 < charCount)
@@ -163,54 +203,67 @@ namespace System.Data.Objects
             }
             return charCount;
         }
+
         override protected DbDataReader GetDbDataReader(int ordinal)
         {
             throw EntityUtil.NotSupported();
         }
+
         override public string GetDataTypeName(int ordinal)
         {
             return (GetFieldType(ordinal)).Name;
         }
+
         override public DateTime GetDateTime(int ordinal)
         {
             return (DateTime)GetValue(ordinal);
         }
+
         override public Decimal GetDecimal(int ordinal)
         {
             return (Decimal)GetValue(ordinal);
         }
+
         override public double GetDouble(int ordinal)
         {
             return (Double)GetValue(ordinal);
         }
+
         public override Type GetFieldType(int ordinal)
         {
             return _cacheEntry.GetFieldType(ordinal, _metadata);
         }
+
         override public float GetFloat(int ordinal)
         {
             return (float)GetValue(ordinal);
         }
+
         override public Guid GetGuid(int ordinal)
         {
             return (Guid)GetValue(ordinal);
         }
+
         override public Int16 GetInt16(int ordinal)
         {
             return (Int16)GetValue(ordinal);
         }
+
         override public Int32 GetInt32(int ordinal)
         {
             return (Int32)GetValue(ordinal);
         }
+
         override public Int64 GetInt64(int ordinal)
         {
             return (Int64)GetValue(ordinal);
         }
+
         override public string GetName(int ordinal)
         {
             return _cacheEntry.GetCLayerName(ordinal, _metadata);
         }
+
         override public int GetOrdinal(string name)
         {
             int ordinal = _cacheEntry.GetOrdinalforCLayerName(name, _metadata);
@@ -218,12 +271,14 @@ namespace System.Data.Objects
             {
                 throw EntityUtil.ArgumentOutOfRange("name");
             }
-            return  ordinal;
+            return ordinal;
         }
+
         override public string GetString(int ordinal)
         {
             return (string)GetValue(ordinal);
         }
+
         override public object GetValue(int ordinal)
         {
             if (_cacheEntry.IsRelationship)
@@ -232,9 +287,15 @@ namespace System.Data.Objects
             }
             else
             {
-                return (_cacheEntry as EntityEntry).GetOriginalEntityValue(_metadata, ordinal, _userObject, ObjectStateValueRecord.OriginalReadonly);
+                return (_cacheEntry as EntityEntry).GetOriginalEntityValue(
+                    _metadata,
+                    ordinal,
+                    _userObject,
+                    ObjectStateValueRecord.OriginalReadonly
+                );
             }
         }
+
         override public int GetValues(object[] values)
         {
             if (values == null)
@@ -248,6 +309,7 @@ namespace System.Data.Objects
             }
             return minValue;
         }
+
         override public bool IsDBNull(int ordinal)
         {
             return (GetValue(ordinal) == DBNull.Value);
@@ -265,10 +327,12 @@ namespace System.Data.Objects
                 return _recordInfo;
             }
         }
+
         public DbDataRecord GetDataRecord(int ordinal)
         {
             return (DbDataRecord)GetValue(ordinal);
         }
+
         public DbDataReader GetDataReader(int i)
         {
             return this.GetDbDataReader(i);

@@ -28,10 +28,11 @@ namespace Internal.Cryptography.Pal.Windows
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo(
-                        delegate (CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
                         {
                             return recipient->dwVersion;
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -43,11 +44,13 @@ namespace Internal.Cryptography.Pal.Windows
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo(
-                        delegate (CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
                         {
-                            SubjectIdentifier subjectIdentifier = recipient->RecipientId.ToSubjectIdentifier();
+                            SubjectIdentifier subjectIdentifier =
+                                recipient->RecipientId.ToSubjectIdentifier();
                             return subjectIdentifier;
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -59,11 +62,13 @@ namespace Internal.Cryptography.Pal.Windows
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo(
-                        delegate (CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
                         {
-                            AlgorithmIdentifier algorithmIdentifier = recipient->KeyEncryptionAlgorithm.ToAlgorithmIdentifier();
+                            AlgorithmIdentifier algorithmIdentifier =
+                                recipient->KeyEncryptionAlgorithm.ToAlgorithmIdentifier();
                             return algorithmIdentifier;
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -75,10 +80,11 @@ namespace Internal.Cryptography.Pal.Windows
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo(
-                        delegate (CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_TRANS_RECIPIENT_INFO* recipient)
                         {
                             return recipient->EncryptedKey.ToByteArray();
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -91,7 +97,9 @@ namespace Internal.Cryptography.Pal.Windows
         {
             unsafe
             {
-                CMSG_CMS_RECIPIENT_INFO* pRecipientInfo = (CMSG_CMS_RECIPIENT_INFO*)(_pCmsgCmsRecipientInfoMemory.DangerousGetHandle());
+                CMSG_CMS_RECIPIENT_INFO* pRecipientInfo = (CMSG_CMS_RECIPIENT_INFO*)(
+                    _pCmsgCmsRecipientInfoMemory.DangerousGetHandle()
+                );
                 CMSG_KEY_TRANS_RECIPIENT_INFO* pKeyTrans = pRecipientInfo->KeyTrans;
                 T value = receiver(pKeyTrans);
                 GC.KeepAlive(_pCmsgCmsRecipientInfoMemory);

@@ -6,7 +6,11 @@ using System.Security.Cryptography;
 
 namespace Internal.Cryptography
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "We are providing the implementation for TripleDES, not consuming it.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Security",
+        "CA5350",
+        Justification = "We are providing the implementation for TripleDES, not consuming it."
+    )]
     internal sealed partial class TripleDesImplementation : TripleDES
     {
         private const int BitsPerByte = 8;
@@ -89,14 +93,16 @@ namespace Internal.Cryptography
                 BlockSize / BitsPerByte,
                 this.GetPaddingSize(Mode, FeedbackSize),
                 FeedbackSize / BitsPerByte,
-                encrypting);
+                encrypting
+            );
         }
 
         protected override bool TryDecryptEcbCore(
             ReadOnlySpan<byte> ciphertext,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ILiteSymmetricCipher cipher = CreateLiteCipher(
                 CipherMode.ECB,
@@ -106,11 +112,18 @@ namespace Internal.Cryptography
                 blockSize: BlockSize / BitsPerByte,
                 paddingSize: BlockSize / BitsPerByte,
                 0, /*feedback size */
-                encrypting: false);
+                encrypting: false
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotDecrypt(cipher, paddingMode, ciphertext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotDecrypt(
+                    cipher,
+                    paddingMode,
+                    ciphertext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -118,7 +131,8 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ILiteSymmetricCipher cipher = CreateLiteCipher(
                 CipherMode.ECB,
@@ -128,11 +142,18 @@ namespace Internal.Cryptography
                 blockSize: BlockSize / BitsPerByte,
                 paddingSize: BlockSize / BitsPerByte,
                 0, /*feedback size */
-                encrypting: true);
+                encrypting: true
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotEncrypt(cipher, paddingMode, plaintext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotEncrypt(
+                    cipher,
+                    paddingMode,
+                    plaintext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -141,7 +162,8 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ILiteSymmetricCipher cipher = CreateLiteCipher(
                 CipherMode.CBC,
@@ -151,11 +173,18 @@ namespace Internal.Cryptography
                 blockSize: BlockSize / BitsPerByte,
                 paddingSize: BlockSize / BitsPerByte,
                 0, /*feedback size */
-                encrypting: true);
+                encrypting: true
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotEncrypt(cipher, paddingMode, plaintext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotEncrypt(
+                    cipher,
+                    paddingMode,
+                    plaintext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -164,7 +193,8 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> iv,
             Span<byte> destination,
             PaddingMode paddingMode,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ILiteSymmetricCipher cipher = CreateLiteCipher(
                 CipherMode.CBC,
@@ -174,11 +204,18 @@ namespace Internal.Cryptography
                 blockSize: BlockSize / BitsPerByte,
                 paddingSize: BlockSize / BitsPerByte,
                 0, /*feedback size */
-                encrypting: false);
+                encrypting: false
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotDecrypt(cipher, paddingMode, ciphertext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotDecrypt(
+                    cipher,
+                    paddingMode,
+                    ciphertext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -188,7 +225,8 @@ namespace Internal.Cryptography
             Span<byte> destination,
             PaddingMode paddingMode,
             int feedbackSizeInBits,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ValidateCFBFeedbackSize(feedbackSizeInBits);
 
@@ -200,11 +238,18 @@ namespace Internal.Cryptography
                 blockSize: BlockSize / BitsPerByte,
                 paddingSize: feedbackSizeInBits / BitsPerByte,
                 feedbackSizeInBits / BitsPerByte,
-                encrypting: false);
+                encrypting: false
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotDecrypt(cipher, paddingMode, ciphertext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotDecrypt(
+                    cipher,
+                    paddingMode,
+                    ciphertext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -214,7 +259,8 @@ namespace Internal.Cryptography
             Span<byte> destination,
             PaddingMode paddingMode,
             int feedbackSizeInBits,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ValidateCFBFeedbackSize(feedbackSizeInBits);
 
@@ -226,11 +272,18 @@ namespace Internal.Cryptography
                 blockSize: BlockSize / BitsPerByte,
                 paddingSize: feedbackSizeInBits / BitsPerByte,
                 feedbackSizeInBits / BitsPerByte,
-                encrypting: true);
+                encrypting: true
+            );
 
             using (cipher)
             {
-                return UniversalCryptoOneShot.OneShotEncrypt(cipher, paddingMode, plaintext, destination, out bytesWritten);
+                return UniversalCryptoOneShot.OneShotEncrypt(
+                    cipher,
+                    paddingMode,
+                    plaintext,
+                    destination,
+                    out bytesWritten
+                );
             }
         }
 
@@ -239,7 +292,13 @@ namespace Internal.Cryptography
             // only 8bits/64bits feedback would be valid.
             if (feedback != 8 && feedback != 64)
             {
-                throw new CryptographicException(string.Format(SR.Cryptography_CipherModeFeedbackNotSupported, feedback, CipherMode.CFB));
+                throw new CryptographicException(
+                    string.Format(
+                        SR.Cryptography_CipherModeFeedbackNotSupported,
+                        feedback,
+                        CipherMode.CFB
+                    )
+                );
             }
         }
     }

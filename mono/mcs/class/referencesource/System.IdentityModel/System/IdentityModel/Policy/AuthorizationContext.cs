@@ -16,7 +16,9 @@ namespace System.IdentityModel.Policy
         public abstract DateTime ExpirationTime { get; }
         public abstract IDictionary<string, object> Properties { get; }
 
-        public static AuthorizationContext CreateDefaultAuthorizationContext(IList<IAuthorizationPolicy> authorizationPolicies)
+        public static AuthorizationContext CreateDefaultAuthorizationContext(
+            IList<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             return SecurityUtils.CreateDefaultAuthorizationContext(authorizationPolicies);
         }

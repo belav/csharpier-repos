@@ -16,7 +16,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return InvokeOnUIThread(cancellationToken =>
             {
                 var uiShell = GetGlobalService<SVsUIShell, IVsUIShell>();
-                if (ErrorHandler.Failed(uiShell.FindToolWindow((uint)__VSFINDTOOLWIN.FTW_fFrameOnly, new Guid(ToolWindowGuids.ObjectBrowser), out var frame)))
+                if (
+                    ErrorHandler.Failed(
+                        uiShell.FindToolWindow(
+                            (uint)__VSFINDTOOLWIN.FTW_fFrameOnly,
+                            new Guid(ToolWindowGuids.ObjectBrowser),
+                            out var frame
+                        )
+                    )
+                )
                 {
                     return false;
                 }

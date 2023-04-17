@@ -12,10 +12,11 @@ namespace Wasm.Build.Tests
 {
     public class NativeLibraryTests : BuildTestBase
     {
-        public NativeLibraryTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-            : base(output, buildContext)
-        {
-        }
+        public NativeLibraryTests(
+            ITestOutputHelper output,
+            SharedBuildPerTestClassFixture buildContext
+        )
+            : base(output, buildContext) { }
 
         [Theory]
         [BuildAndRun(aot: false)]
@@ -24,7 +25,10 @@ namespace Wasm.Build.Tests
         {
             string projectName = $"AppUsingNativeLib-a";
             buildArgs = buildArgs with { ProjectName = projectName };
-            buildArgs = ExpandBuildArgs(buildArgs, extraItems: "<NativeFileReference Include=\"native-lib.o\" />");
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                extraItems: "<NativeFileReference Include=\"native-lib.o\" />"
+            );
 
             if (!_buildContext.TryGetBuildFor(buildArgs, out BuildProduct? _))
             {
@@ -32,17 +36,30 @@ namespace Wasm.Build.Tests
                 if (Directory.Exists(_projectDir))
                     Directory.Delete(_projectDir, recursive: true);
 
-                Utils.DirectoryCopy(Path.Combine(BuildEnvironment.TestAssetsPath, "AppUsingNativeLib"), _projectDir);
-                File.Copy(Path.Combine(BuildEnvironment.TestAssetsPath, "native-libs", "native-lib.o"), Path.Combine(_projectDir, "native-lib.o"));
+                Utils.DirectoryCopy(
+                    Path.Combine(BuildEnvironment.TestAssetsPath, "AppUsingNativeLib"),
+                    _projectDir
+                );
+                File.Copy(
+                    Path.Combine(BuildEnvironment.TestAssetsPath, "native-libs", "native-lib.o"),
+                    Path.Combine(_projectDir, "native-lib.o")
+                );
             }
 
-            BuildProject(buildArgs,
-                            id: id,
-                            new BuildProjectOptions(DotnetWasmFromRuntimePack: false));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(DotnetWasmFromRuntimePack: false)
+            );
 
-            string output = RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 0,
-                                test: output => {},
-                                host: host, id: id);
+            string output = RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 0,
+                test: output => { },
+                host: host,
+                id: id
+            );
 
             Assert.Contains("print_line: 100", output);
             Assert.Contains("from pinvoke: 142", output);
@@ -55,15 +72,18 @@ namespace Wasm.Build.Tests
         {
             string projectName = $"AppUsingSkiaSharp";
             buildArgs = buildArgs with { ProjectName = projectName };
-            buildArgs = ExpandBuildArgs(buildArgs,
-                            // FIXME: temporary, till `main` is either completely on 3.1.7, or 3.1.12
-                            extraProperties: "<EmccExtraLDFlags>-s ERROR_ON_UNDEFINED_SYMBOLS=0</EmccExtraLDFlags>",
-                            extraItems: @$"
+            buildArgs = ExpandBuildArgs(
+                buildArgs,
+                // FIXME: temporary, till `main` is either completely on 3.1.7, or 3.1.12
+                extraProperties: "<EmccExtraLDFlags>-s ERROR_ON_UNDEFINED_SYMBOLS=0</EmccExtraLDFlags>",
+                extraItems: @$"
                                 {GetSkiaSharpReferenceItems()}
                                 <WasmFilesToIncludeInFileSystem Include=""{Path.Combine(BuildEnvironment.TestAssetsPath, "mono.png")}"" />
-                            ");
+                            "
+            );
 
-            string programText = @"
+            string programText =
+                @"
 using System;
 using SkiaSharp;
 
@@ -79,16 +99,25 @@ public class Test
     }
 }";
 
-            BuildProject(buildArgs,
-                            id: id,
-                            new BuildProjectOptions(
-                                InitProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
-                                DotnetWasmFromRuntimePack: false));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    InitProject: () =>
+                        File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
+                    DotnetWasmFromRuntimePack: false
+                )
+            );
 
-            string output = RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 0,
-                                test: output => {},
-                                host: host, id: id,
-                                args: "mono.png");
+            string output = RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 0,
+                test: output => { },
+                host: host,
+                id: id,
+                args: "mono.png"
+            );
 
             Assert.Contains("Size: 26462 Height: 599, Width: 499", output);
         }
@@ -102,7 +131,8 @@ public class Test
             buildArgs = buildArgs with { ProjectName = projectName };
             buildArgs = ExpandBuildArgs(buildArgs);
 
-            string programText = @"
+            string programText =
+                @"
 using System;
 using System.Security.Cryptography;
 
@@ -121,19 +151,29 @@ public class Test
     }
 }";
 
-            BuildProject(buildArgs,
-                            id: id,
-                            new BuildProjectOptions(
-                                InitProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
-                                DotnetWasmFromRuntimePack: !buildArgs.AOT && buildArgs.Config != "Release"));
+            BuildProject(
+                buildArgs,
+                id: id,
+                new BuildProjectOptions(
+                    InitProject: () =>
+                        File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
+                    DotnetWasmFromRuntimePack: !buildArgs.AOT && buildArgs.Config != "Release"
+                )
+            );
 
-            string output = RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 0,
-                                test: output => {},
-                                host: host, id: id);
+            string output = RunAndTestWasmApp(
+                buildArgs,
+                buildDir: _projectDir,
+                expectedExitCode: 0,
+                test: output => { },
+                host: host,
+                id: id
+            );
 
             Assert.Contains(
                 "Hashed: 24 95 141 179 34 113 254 37 245 97 166 252 147 139 46 38 67 6 236 48 78 218 81 128 7 209 118 72 38 56 25 105",
-                output);
+                output
+            );
 
             string cryptoInitMsg = "MONO_WASM: Initializing Crypto WebWorker";
             Assert.DoesNotContain(cryptoInitMsg, output);

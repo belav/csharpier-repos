@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
         [Fact]
         public void ExitCodeIsOneWithCheckAndAnyFilesFormatted()
         {
-            var formatResult = new WorkspaceFormatResult(filesFormatted: 1, fileCount: 0, exitCode: 0);
+            var formatResult = new WorkspaceFormatResult(
+                filesFormatted: 1,
+                fileCount: 0,
+                exitCode: 0
+            );
             var exitCode = FormatCommandCommon.GetExitCode(formatResult, check: true);
 
             Assert.Equal(FormatCommandCommon.CheckFailedExitCode, exitCode);
@@ -22,7 +26,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
         [Fact]
         public void ExitCodeIsZeroWithCheckAndNoFilesFormatted()
         {
-            var formatResult = new WorkspaceFormatResult(filesFormatted: 0, fileCount: 0, exitCode: 42);
+            var formatResult = new WorkspaceFormatResult(
+                filesFormatted: 0,
+                fileCount: 0,
+                exitCode: 42
+            );
             var exitCode = FormatCommandCommon.GetExitCode(formatResult, check: true);
 
             Assert.Equal(0, exitCode);
@@ -31,7 +39,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
         [Fact]
         public void ExitCodeIsSameWithoutCheck()
         {
-            var formatResult = new WorkspaceFormatResult(filesFormatted: 0, fileCount: 0, exitCode: 42);
+            var formatResult = new WorkspaceFormatResult(
+                filesFormatted: 0,
+                fileCount: 0,
+                exitCode: 42
+            );
             var exitCode = FormatCommandCommon.GetExitCode(formatResult, check: false);
 
             Assert.Equal(formatResult.ExitCode, exitCode);
@@ -44,27 +56,42 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
             var sut = RootFormatCommand.GetCommand();
 
             // Act
-            var result = sut.Parse(new[] {
-                "--no-restore",
-                "--include", "include1", "include2",
-                "--exclude", "exclude1", "exclude2",
-                "--verify-no-changes",
-                "--binarylog", "binary-log-path",
-                "--report", "report",
-                "--verbosity", "detailed",
-                "--include-generated"});
+            var result = sut.Parse(
+                new[]
+                {
+                    "--no-restore",
+                    "--include",
+                    "include1",
+                    "include2",
+                    "--exclude",
+                    "exclude1",
+                    "exclude2",
+                    "--verify-no-changes",
+                    "--binarylog",
+                    "binary-log-path",
+                    "--report",
+                    "report",
+                    "--verbosity",
+                    "detailed",
+                    "--include-generated"
+                }
+            );
 
             // Assert
             Assert.Equal(0, result.Errors.Count);
             Assert.Equal(0, result.UnmatchedTokens.Count);
             Assert.Equal(0, result.UnmatchedTokens.Count);
             result.GetValueForOption<bool>("--no-restore");
-            Assert.Collection(result.GetValueForOption<IEnumerable<string>>("--include"),
+            Assert.Collection(
+                result.GetValueForOption<IEnumerable<string>>("--include"),
                 i0 => Assert.Equal("include1", i0),
-                i1 => Assert.Equal("include2", i1));
-            Assert.Collection(result.GetValueForOption<IEnumerable<string>>("--exclude"),
+                i1 => Assert.Equal("include2", i1)
+            );
+            Assert.Collection(
+                result.GetValueForOption<IEnumerable<string>>("--exclude"),
                 i0 => Assert.Equal("exclude1", i0),
-                i1 => Assert.Equal("exclude2", i1));
+                i1 => Assert.Equal("exclude2", i1)
+            );
             Assert.True(result.GetValueForOption<bool>("--verify-no-changes"));
             Assert.Equal("binary-log-path", result.GetValueForOption<string>("--binarylog"));
             Assert.Equal("report", result.GetValueForOption<string>("--report"));
@@ -83,7 +110,10 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
 
             // Assert
             Assert.Equal(0, result.Errors.Count);
-            Assert.Equal("workspaceValue", result.GetValueForArgument<string>(FormatCommandCommon.SlnOrProjectArgument));
+            Assert.Equal(
+                "workspaceValue",
+                result.GetValueForArgument<string>(FormatCommandCommon.SlnOrProjectArgument)
+            );
         }
 
         [Fact]
@@ -97,7 +127,10 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
 
             // Assert
             Assert.Equal(0, result.Errors.Count);
-            Assert.Equal("workspaceValue", result.GetValueForArgument<string>(FormatCommandCommon.SlnOrProjectArgument));
+            Assert.Equal(
+                "workspaceValue",
+                result.GetValueForArgument<string>(FormatCommandCommon.SlnOrProjectArgument)
+            );
             Assert.Equal("detailed", result.GetValueForOption<string>("--verbosity"));
         }
 
@@ -112,7 +145,10 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
 
             // Assert
             Assert.Equal(0, result.Errors.Count);
-            Assert.Equal("workspaceValue", result.GetValueForArgument<string>(FormatCommandCommon.SlnOrProjectArgument));
+            Assert.Equal(
+                "workspaceValue",
+                result.GetValueForArgument<string>(FormatCommandCommon.SlnOrProjectArgument)
+            );
             Assert.Equal("detailed", result.GetValueForOption<string>("--verbosity"));
         }
 

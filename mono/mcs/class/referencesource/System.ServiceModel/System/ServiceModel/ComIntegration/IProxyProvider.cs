@@ -10,16 +10,22 @@ namespace System.ServiceModel.ComIntegration
     using System.Collections.Generic;
     using System.Threading;
 
-    [System.Security.SuppressUnmanagedCodeSecurity,
-     ComImport,
-     Guid("11281BB7-1253-45ef-B98F-D551F79499FD"),
-     InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        System.Security.SuppressUnmanagedCodeSecurity,
+        ComImport,
+        Guid("11281BB7-1253-45ef-B98F-D551F79499FD"),
+        InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     interface IProxyProvider
     {
         [PreserveSig]
-        int CreateOuterProxyInstance(IProxyManager proxyManager, [In()] ref Guid riid, out IntPtr ppv);
+        int CreateOuterProxyInstance(
+            IProxyManager proxyManager,
+            [In()] ref Guid riid,
+            out IntPtr ppv
+        );
+
         [PreserveSig]
         int CreateDispatchProxyInstance(IntPtr outer, IPseudoDispatch proxy, out IntPtr ppvInner);
     }
-
 }

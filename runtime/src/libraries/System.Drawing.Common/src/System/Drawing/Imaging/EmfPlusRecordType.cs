@@ -180,8 +180,8 @@ namespace System.Drawing.Imaging
         EmfExtCreatePen = 95,
         EmfPolyTextOutA = 96,
         EmfPolyTextOutW = 97,
-        EmfSetIcmMode = 98,  // EMR_SETICMMODE,
-        EmfCreateColorSpace = 99,  // EMR_CREATECOLORSPACE,
+        EmfSetIcmMode = 98, // EMR_SETICMMODE,
+        EmfCreateColorSpace = 99, // EMR_CREATECOLORSPACE,
         EmfSetColorSpace = 100, // EMR_SETCOLORSPACE,
         EmfDeleteColorSpace = 101, // EMR_DELETECOLORSPACE,
         EmfGlsRecord = 102, // EMR_GLSRECORD,
@@ -221,7 +221,7 @@ namespace System.Drawing.Imaging
 
         Comment,
 
-        GetDC,    // the application grabbed the metafile dc
+        GetDC, // the application grabbed the metafile dc
 
         MultiFormatStart,
         MultiFormatSection,
@@ -229,6 +229,7 @@ namespace System.Drawing.Imaging
 
         // For all Persistent Objects
         Object,
+
         // Drawing Records
         Clear,
         FillRects,

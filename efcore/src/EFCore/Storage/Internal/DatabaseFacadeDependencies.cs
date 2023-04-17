@@ -26,7 +26,8 @@ public record DatabaseFacadeDependencies : IDatabaseFacadeDependencies
         IDiagnosticsLogger<DbLoggerCategory.Database.Command> commandLogger,
         IConcurrencyDetector concurrencyDetector,
         ICoreSingletonOptions coreOptions,
-        IAsyncQueryProvider queryProvider)
+        IAsyncQueryProvider queryProvider
+    )
     {
         TransactionManager = transactionManager;
         DatabaseCreator = databaseCreator;

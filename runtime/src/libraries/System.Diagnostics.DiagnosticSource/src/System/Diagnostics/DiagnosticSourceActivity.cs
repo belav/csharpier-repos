@@ -36,8 +36,9 @@ namespace System.Diagnostics
         /// <inheritdoc cref="StartActivity"/>
         /// <typeparam name="T">The type of the value being passed as a payload for the event.</typeparam>
         [RequiresUnreferencedCode(WriteOfTRequiresUnreferencedCode)]
-        public Activity StartActivity<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(Activity activity, T args)
-            => StartActivity(activity, (object?)args);
+        public Activity StartActivity<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
+        >(Activity activity, T args) => StartActivity(activity, (object?)args);
 
         /// <summary>
         /// Stops given Activity: maintains global Current Activity and notifies consumers
@@ -57,14 +58,15 @@ namespace System.Diagnostics
             if (activity.Duration == TimeSpan.Zero)
                 activity.SetEndTime(Activity.GetUtcNow());
             Write(activity.OperationName + ".Stop", args);
-            activity.Stop();    // Resets Activity.Current (we want this after the Write)
+            activity.Stop(); // Resets Activity.Current (we want this after the Write)
         }
 
         /// <inheritdoc cref="StartActivity"/>
         /// <typeparam name="T">The type of the value being passed as a payload for the event.</typeparam>
         [RequiresUnreferencedCode(WriteOfTRequiresUnreferencedCode)]
-        public void StopActivity<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T>(Activity activity, T args)
-            => StopActivity(activity, (object?)args);
+        public void StopActivity<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
+        >(Activity activity, T args) => StopActivity(activity, (object?)args);
 
         /// <summary>
         /// Optional: If an instrumentation site creating an new activity that was caused
@@ -123,13 +125,21 @@ namespace System.Diagnostics
     {
         public override void OnActivityImport(Activity activity, object? payload)
         {
-            for (DiagnosticSubscription? curSubscription = _subscriptions; curSubscription != null; curSubscription = curSubscription.Next)
+            for (
+                DiagnosticSubscription? curSubscription = _subscriptions;
+                curSubscription != null;
+                curSubscription = curSubscription.Next
+            )
                 curSubscription.OnActivityImport?.Invoke(activity, payload);
         }
 
         public override void OnActivityExport(Activity activity, object? payload)
         {
-            for (DiagnosticSubscription? curSubscription = _subscriptions; curSubscription != null; curSubscription = curSubscription.Next)
+            for (
+                DiagnosticSubscription? curSubscription = _subscriptions;
+                curSubscription != null;
+                curSubscription = curSubscription.Next
+            )
                 curSubscription.OnActivityExport?.Invoke(activity, payload);
         }
 
@@ -140,12 +150,22 @@ namespace System.Diagnostics
         /// process (e.g. from Http Requests).   These are called right after importing (exporting) the activity and
         /// can be used to modify the activity (or outgoing request) to add policy.
         /// </summary>
-        public virtual IDisposable Subscribe(IObserver<KeyValuePair<string, object?>> observer, Func<string, object?, object?, bool>? isEnabled,
-            Action<Activity, object?>? onActivityImport = null, Action<Activity, object?>? onActivityExport = null)
+        public virtual IDisposable Subscribe(
+            IObserver<KeyValuePair<string, object?>> observer,
+            Func<string, object?, object?, bool>? isEnabled,
+            Action<Activity, object?>? onActivityImport = null,
+            Action<Activity, object?>? onActivityExport = null
+        )
         {
-            return isEnabled == null ?
-             SubscribeInternal(observer, null, null, onActivityImport, onActivityExport) :
-             SubscribeInternal(observer, name => IsEnabled(name, null, null), isEnabled, onActivityImport, onActivityExport);
+            return isEnabled == null
+                ? SubscribeInternal(observer, null, null, onActivityImport, onActivityExport)
+                : SubscribeInternal(
+                    observer,
+                    name => IsEnabled(name, null, null),
+                    isEnabled,
+                    onActivityImport,
+                    onActivityExport
+                );
         }
     }
 }

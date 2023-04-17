@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,17 +32,15 @@ using System.Runtime.InteropServices;
 
 namespace System.Data.SqlClient
 {
-	[ComVisible (true)]
-	[GuidAttribute ("afef65ad-4577-447a-a148-83acadd3d4b9")]
-	[ClassInterface (ClassInterfaceType.None)]
-	public
-	sealed
-	class SQLDebugging
-	{
-		[MonoTODO]
-		public SQLDebugging ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    [ComVisible(true)]
+    [GuidAttribute("afef65ad-4577-447a-a148-83acadd3d4b9")]
+    [ClassInterface(ClassInterfaceType.None)]
+    public sealed class SQLDebugging
+    {
+        [MonoTODO]
+        public SQLDebugging()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

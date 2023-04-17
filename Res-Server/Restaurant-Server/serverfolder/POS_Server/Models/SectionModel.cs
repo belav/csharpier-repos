@@ -19,10 +19,8 @@ namespace POS_Server.Models
         public byte isFreeZone { get; set; }
         public string type { get; set; }
 
-      
         public string branchName { get; set; }
-      
+
         public Boolean canDelete { get; set; }
-   
     }
 }

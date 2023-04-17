@@ -8,38 +8,51 @@ using System.Text;
 namespace System.Security
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class HostProtectionException : SystemException
     {
         private const string ProtectedResourcesName = "ProtectedResources";
         private const string DemandedResourcesName = "DemandedResources";
         private const int E_HostProtection = -2146232768;
 
-        public HostProtectionException() : base()
+        public HostProtectionException()
+            : base()
         {
             HResult = E_HostProtection;
             ProtectedResources = HostProtectionResource.None;
             DemandedResources = HostProtectionResource.None;
         }
 
-        public HostProtectionException(string message) : base(message)
+        public HostProtectionException(string message)
+            : base(message)
         {
             HResult = E_HostProtection;
             ProtectedResources = HostProtectionResource.None;
             DemandedResources = HostProtectionResource.None;
         }
 
-        public HostProtectionException(string message, Exception e) : base(message, e)
+        public HostProtectionException(string message, Exception e)
+            : base(message, e)
         {
             HResult = E_HostProtection;
             ProtectedResources = HostProtectionResource.None;
             DemandedResources = HostProtectionResource.None;
         }
 
-        public HostProtectionException(string message, HostProtectionResource protectedResources, HostProtectionResource demandedResources)
+        public HostProtectionException(
+            string message,
+            HostProtectionResource protectedResources,
+            HostProtectionResource demandedResources
+        )
             : base(message)
         {
             HResult = E_HostProtection;
@@ -50,15 +63,21 @@ namespace System.Security
         protected HostProtectionException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            ProtectedResources = (HostProtectionResource)info.GetValue(ProtectedResourcesName, typeof(HostProtectionResource));
-            DemandedResources = (HostProtectionResource)info.GetValue(DemandedResourcesName, typeof(HostProtectionResource));
+            ProtectedResources = (HostProtectionResource)
+                info.GetValue(ProtectedResourcesName, typeof(HostProtectionResource));
+            DemandedResources = (HostProtectionResource)
+                info.GetValue(DemandedResourcesName, typeof(HostProtectionResource));
         }
 
         public HostProtectionResource DemandedResources { get; }
 
         public HostProtectionResource ProtectedResources { get; }
 
-        private static void AppendResourceString(string resourceString, object attr, StringBuilder sb)
+        private static void AppendResourceString(
+            string resourceString,
+            object attr,
+            StringBuilder sb
+        )
         {
             if (attr == null)
                 return;
@@ -83,7 +102,11 @@ namespace System.Security
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue(ProtectedResourcesName, ProtectedResources, typeof(HostProtectionResource));
+            info.AddValue(
+                ProtectedResourcesName,
+                ProtectedResources,
+                typeof(HostProtectionResource)
+            );
             info.AddValue(DemandedResourcesName, DemandedResources, typeof(HostProtectionResource));
         }
     }

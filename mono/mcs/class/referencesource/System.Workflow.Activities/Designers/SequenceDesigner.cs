@@ -14,9 +14,7 @@ namespace System.Workflow.Activities
 
     #region Class SequenceDesigner
     [ActivityDesignerTheme(typeof(SequenceDesignerTheme))]
-    internal class SequenceDesigner : SequentialActivityDesigner
-    {
-    }
+    internal class SequenceDesigner : SequentialActivityDesigner { }
     #endregion
 
     #region SequenceDesignerTheme

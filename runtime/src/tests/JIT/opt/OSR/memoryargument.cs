@@ -24,5 +24,5 @@ class MemoryArgument
         int final = 1_000_000;
         int result = F(0, 0, 0, 0, 0, final);
         return result == 1783293664 ? 100 : -1;
-    }  
+    }
 }

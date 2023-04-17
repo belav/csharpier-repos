@@ -11,26 +11,26 @@ namespace ConsoleApplication3
     {
         static int Main()
         {
-	    try{
-	            Repro<Program>(null);
-	    }
-	    catch (Exception e)
-	    {
-		Console.WriteLine(e.Message);
-		Console.WriteLine("FAIL");
-		return 99;
-	    }
-	    Console.WriteLine("PASS");
-	    return 100;
+            try
+            {
+                Repro<Program>(null);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("FAIL");
+                return 99;
+            }
+            Console.WriteLine("PASS");
+            return 100;
         }
 
         static void Repro<T>(B<T> b)
-            where T : Program
-        {
-        }
-
+            where T : Program { }
     }
 
     class A<T> { }
-    class B<T> where T : class { }
+
+    class B<T>
+        where T : class { }
 }

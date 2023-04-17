@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
-namespace System.Reflection 
+namespace System.Reflection
 {
     using System;
     using System.Runtime.Remoting;
@@ -16,8 +16,8 @@ namespace System.Reflection
 
     // This is not serializable because it is a reflection command.
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class Missing: ISerializable
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class Missing : ISerializable
     {
         public static readonly Missing Value = new Missing();
 
@@ -27,7 +27,7 @@ namespace System.Reflection
 
 #if FEATURE_SERIALIZATION
         #region ISerializable
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)

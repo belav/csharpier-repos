@@ -11,7 +11,10 @@ namespace System.Text.Json.Reflection
     {
         private readonly MetadataLoadContextInternal _metadataLoadContext;
 
-        public AssemblyWrapper(IAssemblySymbol assembly, MetadataLoadContextInternal metadataLoadContext)
+        public AssemblyWrapper(
+            IAssemblySymbol assembly,
+            MetadataLoadContextInternal metadataLoadContext
+        )
         {
             Symbol = assembly;
             _metadataLoadContext = metadataLoadContext;

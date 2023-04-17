@@ -39,6 +39,9 @@ public sealed class ClassDeclarationIntermediateNode : MemberDeclarationIntermed
         formatter.WriteProperty(nameof(ClassName), ClassName);
         formatter.WriteProperty(nameof(Interfaces), string.Join(", ", Interfaces));
         formatter.WriteProperty(nameof(Modifiers), string.Join(", ", Modifiers));
-        formatter.WriteProperty(nameof(TypeParameters), string.Join(", ", TypeParameters.Select(t => t.ParameterName)));
+        formatter.WriteProperty(
+            nameof(TypeParameters),
+            string.Join(", ", TypeParameters.Select(t => t.ParameterName))
+        );
     }
 }

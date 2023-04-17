@@ -20,9 +20,7 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Allow derived classes to construct empty whitespace rule.
         /// </summary>
-        protected WhitespaceRule()
-        {
-        }
+        protected WhitespaceRule() { }
 
         /// <summary>
         /// Construct new whitespace rule.
@@ -74,7 +72,10 @@ namespace System.Xml.Xsl.Qil
         /// </summary>
         public void GetObjectData(XmlQueryDataWriter writer)
         {
-            Debug.Assert(this.GetType() == typeof(WhitespaceRule), "Serialization of WhitespaceRule subclasses is not implemented");
+            Debug.Assert(
+                this.GetType() == typeof(WhitespaceRule),
+                "Serialization of WhitespaceRule subclasses is not implemented"
+            );
             // string localName;
             writer.WriteStringQ(_localName);
             // string namespaceName;

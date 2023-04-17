@@ -9,8 +9,7 @@ namespace System.CommandLine.Parsing
     {
         internal static ArgumentConversionResult ConvertIfNeeded(
             this OptionResult optionResult,
-            Type type) =>
-            optionResult.ArgumentConversionResult
-                .ConvertIfNeeded(optionResult, type);
+            Type type
+        ) => optionResult.ArgumentConversionResult.ConvertIfNeeded(optionResult, type);
     }
 }

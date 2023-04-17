@@ -23,8 +23,7 @@ public class CSharpRazorCommentsTest : ParserTestBase
     [Fact]
     public void RazorCommentInImplicitExpressionMethodCall()
     {
-        ParseDocumentTest("@foo(" + Environment.NewLine
-                        + "@**@" + Environment.NewLine);
+        ParseDocumentTest("@foo(" + Environment.NewLine + "@**@" + Environment.NewLine);
     }
 
     [Fact]
@@ -36,22 +35,29 @@ public class CSharpRazorCommentsTest : ParserTestBase
     [Fact]
     public void RazorMultilineCommentInBlock()
     {
-        ParseDocumentTest(@"
+        ParseDocumentTest(
+            @"
 @{
     @*
 This is a comment
     *@
 }
-");
+"
+        );
     }
 
     [Fact]
     public void RazorCommentInVerbatimBlock()
     {
-        ParseDocumentTest("@{" + Environment.NewLine
-                        + "    <text" + Environment.NewLine
-                        + "    @**@" + Environment.NewLine
-                        + "}");
+        ParseDocumentTest(
+            "@{"
+                + Environment.NewLine
+                + "    <text"
+                + Environment.NewLine
+                + "    @**@"
+                + Environment.NewLine
+                + "}"
+        );
     }
 
     [Fact]
@@ -75,47 +81,52 @@ This is a comment
     [Fact]
     public void RazorCommentInMarkup()
     {
-        ParseDocumentTest(
-            "<p>" + Environment.NewLine
-            + "@**@" + Environment.NewLine
-            + "</p>");
+        ParseDocumentTest("<p>" + Environment.NewLine + "@**@" + Environment.NewLine + "</p>");
     }
 
     [Fact]
     public void MultipleRazorCommentInMarkup()
     {
         ParseDocumentTest(
-            "<p>" + Environment.NewLine
-            + "  @**@  " + Environment.NewLine
-            + "@**@" + Environment.NewLine
-            + "</p>");
+            "<p>"
+                + Environment.NewLine
+                + "  @**@  "
+                + Environment.NewLine
+                + "@**@"
+                + Environment.NewLine
+                + "</p>"
+        );
     }
 
     [Fact]
     public void MultipleRazorCommentsInSameLineInMarkup()
     {
         ParseDocumentTest(
-            "<p>" + Environment.NewLine
-            + "@**@  @**@" + Environment.NewLine
-            + "</p>");
+            "<p>" + Environment.NewLine + "@**@  @**@" + Environment.NewLine + "</p>"
+        );
     }
 
     [Fact]
     public void RazorCommentsSurroundingMarkup()
     {
         ParseDocumentTest(
-            "<p>" + Environment.NewLine
-            + "@* hello *@ content @* world *@" + Environment.NewLine
-            + "</p>");
+            "<p>"
+                + Environment.NewLine
+                + "@* hello *@ content @* world *@"
+                + Environment.NewLine
+                + "</p>"
+        );
     }
 
     [Fact]
     public void RazorCommentBetweenCodeBlockAndMarkup()
     {
         ParseDocumentTest(
-            "@{ }" + Environment.NewLine +
-            "@* Hello World *@" + Environment.NewLine +
-            "<div>Foo</div>"
+            "@{ }"
+                + Environment.NewLine
+                + "@* Hello World *@"
+                + Environment.NewLine
+                + "<div>Foo</div>"
         );
     }
 
@@ -123,11 +134,19 @@ This is a comment
     public void RazorCommentWithExtraNewLineInMarkup()
     {
         ParseDocumentTest(
-            "<p>" + Environment.NewLine + Environment.NewLine
-            + "@* content *@" + Environment.NewLine
-            + "@*" + Environment.NewLine
-            + "content" + Environment.NewLine
-            + "*@" + Environment.NewLine + Environment.NewLine
-            + "</p>");
+            "<p>"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "@* content *@"
+                + Environment.NewLine
+                + "@*"
+                + Environment.NewLine
+                + "content"
+                + Environment.NewLine
+                + "*@"
+                + Environment.NewLine
+                + Environment.NewLine
+                + "</p>"
+        );
     }
 }

@@ -22,13 +22,17 @@ namespace System.CommandLine.Suggest
                     PrintToConsoleFrom(console, "dotnet-suggest-shim.zsh");
                     break;
                 default:
-                    throw new SuggestionShellScriptException($"Shell '{shellType}' is not supported.");
+                    throw new SuggestionShellScriptException(
+                        $"Shell '{shellType}' is not supported."
+                    );
             }
         }
 
         private static void PrintToConsoleFrom(IConsole console, string scriptName)
         {
-            var assemblyLocation = Assembly.GetAssembly(typeof(SuggestionShellScriptHandler)).Location;
+            var assemblyLocation = Assembly
+                .GetAssembly(typeof(SuggestionShellScriptHandler))
+                .Location;
             var directory = Path.GetDirectoryName(assemblyLocation);
             console.Out.Write(File.ReadAllText(Path.Combine(directory, scriptName)));
         }

@@ -16,24 +16,15 @@ namespace System.IdentityModel.Selectors
     public class PolicyValidationException : System.Exception
     {
         public PolicyValidationException()
-        : base()
-        {
-        }
+            : base() { }
 
-        public PolicyValidationException( string message )
-        : base( message )
-        {
-        }
+        public PolicyValidationException(string message)
+            : base(message) { }
 
-        public PolicyValidationException( string message, Exception innerException )
-        : base( message, innerException )
-        {
-        }
+        public PolicyValidationException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        protected PolicyValidationException( SerializationInfo info, StreamingContext context )
-        : base( info, context )
-        {
-        }
+        protected PolicyValidationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
-
 }

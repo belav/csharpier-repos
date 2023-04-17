@@ -26,13 +26,18 @@ namespace System.Xml.Xsl.XsltOld
             {
                 do
                 {
-                    if (input.NamespaceURI.Length != 0) continue;
+                    if (input.NamespaceURI.Length != 0)
+                        continue;
 
                     try
                     {
                         if (CompileAttribute(compiler) == false)
                         {
-                            throw XsltException.Create(SR.Xslt_InvalidAttribute, input.LocalName, element);
+                            throw XsltException.Create(
+                                SR.Xslt_InvalidAttribute,
+                                input.LocalName,
+                                element
+                            );
                         }
                     }
                     catch
@@ -47,8 +52,7 @@ namespace System.Xml.Xsl.XsltOld
                             // If it's mandatory attribute we'll notice it absence later.
                         }
                     }
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
         }
@@ -77,15 +81,14 @@ namespace System.Xml.Xsl.XsltOld
                     // Note: <![CDATA[ ]]> will be reported as XPathNodeType.Text
                     XPathNodeType nodeType = compiler.Input.NodeType;
                     if (
-                        nodeType != XPathNodeType.Whitespace &&
-                        nodeType != XPathNodeType.Comment &&
-                        nodeType != XPathNodeType.ProcessingInstruction
+                        nodeType != XPathNodeType.Whitespace
+                        && nodeType != XPathNodeType.Comment
+                        && nodeType != XPathNodeType.ProcessingInstruction
                     )
                     {
                         throw XsltException.Create(SR.Xslt_NotEmptyContents, elementName);
                     }
-                }
-                while (compiler.Advance());
+                } while (compiler.Advance());
                 compiler.ToParent();
             }
         }

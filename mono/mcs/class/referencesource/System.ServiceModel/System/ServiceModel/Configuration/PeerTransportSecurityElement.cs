@@ -15,11 +15,18 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class PeerTransportSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.PeerTransportCredentialType, DefaultValue = PeerTransportSecuritySettings.DefaultCredentialType)]
+        [ConfigurationProperty(
+            ConfigurationStrings.PeerTransportCredentialType,
+            DefaultValue = PeerTransportSecuritySettings.DefaultCredentialType
+        )]
         [ServiceModelEnumValidator(typeof(PeerTransportCredentialTypeHelper))]
         public PeerTransportCredentialType CredentialType
         {
-            get { return (PeerTransportCredentialType)base[ConfigurationStrings.PeerTransportCredentialType]; }
+            get
+            {
+                return (PeerTransportCredentialType)
+                    base[ConfigurationStrings.PeerTransportCredentialType];
+            }
             set { base[ConfigurationStrings.PeerTransportCredentialType] = value; }
         }
 
@@ -38,8 +45,12 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("security");
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.PeerTransportCredentialType, security.CredentialType);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.PeerTransportCredentialType,
+                security.CredentialType
+            );
         }
+
         internal void CopyFrom(PeerTransportSecurityElement security)
         {
             if (security == null)
@@ -48,7 +59,5 @@ namespace System.ServiceModel.Configuration
             }
             this.CredentialType = security.CredentialType;
         }
-        
     }
 }
-

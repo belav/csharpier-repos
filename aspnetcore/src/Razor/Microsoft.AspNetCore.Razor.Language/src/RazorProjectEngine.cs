@@ -35,7 +35,12 @@ public abstract class RazorProjectEngine
         return codeDocument;
     }
 
-    public virtual RazorCodeDocument Process(RazorSourceDocument source, string fileKind, IReadOnlyList<RazorSourceDocument> importSources, IReadOnlyList<TagHelperDescriptor> tagHelpers)
+    public virtual RazorCodeDocument Process(
+        RazorSourceDocument source,
+        string fileKind,
+        IReadOnlyList<RazorSourceDocument> importSources,
+        IReadOnlyList<TagHelperDescriptor> tagHelpers
+    )
     {
         throw new NotImplementedException();
     }
@@ -45,12 +50,22 @@ public abstract class RazorProjectEngine
         throw new NotImplementedException();
     }
 
-    public virtual RazorCodeDocument ProcessDeclarationOnly(RazorSourceDocument source, string fileKind, IReadOnlyList<RazorSourceDocument> importSources, IReadOnlyList<TagHelperDescriptor> tagHelpers)
+    public virtual RazorCodeDocument ProcessDeclarationOnly(
+        RazorSourceDocument source,
+        string fileKind,
+        IReadOnlyList<RazorSourceDocument> importSources,
+        IReadOnlyList<TagHelperDescriptor> tagHelpers
+    )
     {
         throw new NotImplementedException();
     }
 
-    public virtual RazorCodeDocument ProcessDesignTime(RazorSourceDocument source, string fileKind, IReadOnlyList<RazorSourceDocument> importSources, IReadOnlyList<TagHelperDescriptor> tagHelpers)
+    public virtual RazorCodeDocument ProcessDesignTime(
+        RazorSourceDocument source,
+        string fileKind,
+        IReadOnlyList<RazorSourceDocument> importSources,
+        IReadOnlyList<TagHelperDescriptor> tagHelpers
+    )
     {
         throw new NotImplementedException();
     }
@@ -69,27 +84,39 @@ public abstract class RazorProjectEngine
 
     protected abstract RazorCodeDocument CreateCodeDocumentCore(RazorProjectItem projectItem);
 
-    protected abstract RazorCodeDocument CreateCodeDocumentDesignTimeCore(RazorProjectItem projectItem);
+    protected abstract RazorCodeDocument CreateCodeDocumentDesignTimeCore(
+        RazorProjectItem projectItem
+    );
 
     protected abstract void ProcessCore(RazorCodeDocument codeDocument);
 
-    internal static RazorProjectEngine CreateEmpty(Action<RazorProjectEngineBuilder> configure = null)
+    internal static RazorProjectEngine CreateEmpty(
+        Action<RazorProjectEngineBuilder> configure = null
+    )
     {
-        var builder = new DefaultRazorProjectEngineBuilder(RazorConfiguration.Default, RazorProjectFileSystem.Empty);
+        var builder = new DefaultRazorProjectEngineBuilder(
+            RazorConfiguration.Default,
+            RazorProjectFileSystem.Empty
+        );
 
         configure?.Invoke(builder);
 
         return builder.Build();
     }
 
-    internal static RazorProjectEngine Create(Action<RazorProjectEngineBuilder> configure) => Create(RazorConfiguration.Default, RazorProjectFileSystem.Empty, configure);
+    internal static RazorProjectEngine Create(Action<RazorProjectEngineBuilder> configure) =>
+        Create(RazorConfiguration.Default, RazorProjectFileSystem.Empty, configure);
 
-    public static RazorProjectEngine Create(RazorConfiguration configuration, RazorProjectFileSystem fileSystem) => Create(configuration, fileSystem, configure: null);
+    public static RazorProjectEngine Create(
+        RazorConfiguration configuration,
+        RazorProjectFileSystem fileSystem
+    ) => Create(configuration, fileSystem, configure: null);
 
     public static RazorProjectEngine Create(
         RazorConfiguration configuration,
         RazorProjectFileSystem fileSystem,
-        Action<RazorProjectEngineBuilder> configure)
+        Action<RazorProjectEngineBuilder> configure
+    )
     {
         if (fileSystem == null)
         {
@@ -162,7 +189,13 @@ public abstract class RazorProjectEngine
         // Legacy options features
         //
         // These features are obsolete as of 2.1. Our code will resolve this but not invoke them.
-        features.Add(new DefaultRazorParserOptionsFeature(designTime: false, version: RazorLanguageVersion.Version_2_0, fileKind: null));
+        features.Add(
+            new DefaultRazorParserOptionsFeature(
+                designTime: false,
+                version: RazorLanguageVersion.Version_2_0,
+                fileKind: null
+            )
+        );
         features.Add(new DefaultRazorCodeGenerationOptionsFeature(designTime: false));
 
         // Syntax Tree passes
@@ -189,29 +222,38 @@ public abstract class RazorProjectEngine
         // Default configuration
         var configurationFeature = new DefaultDocumentClassifierPassFeature();
         features.Add(configurationFeature);
-        configurationFeature.ConfigureClass.Add((document, @class) =>
-        {
-            @class.ClassName = "Template";
-            @class.Modifiers.Add("public");
-        });
+        configurationFeature.ConfigureClass.Add(
+            (document, @class) =>
+            {
+                @class.ClassName = "Template";
+                @class.Modifiers.Add("public");
+            }
+        );
 
-        configurationFeature.ConfigureNamespace.Add((document, @namespace) =>
-        {
-            @namespace.Content = "Razor";
-        });
+        configurationFeature.ConfigureNamespace.Add(
+            (document, @namespace) =>
+            {
+                @namespace.Content = "Razor";
+            }
+        );
 
-        configurationFeature.ConfigureMethod.Add((document, method) =>
-        {
-            method.MethodName = "ExecuteAsync";
-            method.ReturnType = $"global::{typeof(Task).FullName}";
+        configurationFeature.ConfigureMethod.Add(
+            (document, method) =>
+            {
+                method.MethodName = "ExecuteAsync";
+                method.ReturnType = $"global::{typeof(Task).FullName}";
 
-            method.Modifiers.Add("public");
-            method.Modifiers.Add("async");
-            method.Modifiers.Add("override");
-        });
+                method.Modifiers.Add("public");
+                method.Modifiers.Add("async");
+                method.Modifiers.Add("override");
+            }
+        );
     }
 
-    private static void AddComponentFeatures(RazorProjectEngineBuilder builder, RazorLanguageVersion razorLanguageVersion)
+    private static void AddComponentFeatures(
+        RazorProjectEngineBuilder builder,
+        RazorLanguageVersion razorLanguageVersion
+    )
     {
         // Project Engine Features
         builder.Features.Add(new ComponentImportProjectFeature());
@@ -221,8 +263,6 @@ public abstract class RazorProjectEngine
         ComponentInjectDirective.Register(builder);
         ComponentLayoutDirective.Register(builder);
         ComponentPageDirective.Register(builder);
-
-
 
         if (razorLanguageVersion.CompareTo(RazorLanguageVersion.Version_6_0) >= 0)
         {
@@ -262,7 +302,10 @@ public abstract class RazorProjectEngine
         builder.Features.Add(new ComponentMarkupEncodingPass());
     }
 
-    private static void LoadExtensions(RazorProjectEngineBuilder builder, IReadOnlyList<RazorExtension> extensions)
+    private static void LoadExtensions(
+        RazorProjectEngineBuilder builder,
+        IReadOnlyList<RazorExtension> extensions
+    )
     {
         for (var i = 0; i < extensions.Count; i++)
         {

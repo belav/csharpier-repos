@@ -20,8 +20,10 @@ namespace Internal.Cryptography.Pal
         // {thumbprint}.1.pfx to {thumbprint}.9.pfx
         private const int MaxSaveAttempts = 9;
         private const string PfxExtension = ".pfx";
+
         // *.pfx ({thumbprint}.pfx or {thumbprint}.{ordinal}.pfx)
         private const string PfxWildcard = "*" + PfxExtension;
+
         // .*.pfx ({thumbprint}.{ordinal}.pfx)
         private const string PfxOrdinalWildcard = "." + PfxWildcard;
 
@@ -36,7 +38,8 @@ namespace Internal.Cryptography.Pal
         {
             Debug.Assert(
                 0 == OpenFlags.ReadOnly,
-                "OpenFlags.ReadOnly is not zero, read-only detection will not work");
+                "OpenFlags.ReadOnly is not zero, read-only detection will not work"
+            );
         }
 #endif
 
@@ -47,7 +50,9 @@ namespace Internal.Cryptography.Pal
                 throw new CryptographicException(SR.Arg_EmptyOrNullString);
             }
 
-            Debug.Assert(!X509Store.DisallowedStoreName.Equals(storeName, StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                !X509Store.DisallowedStoreName.Equals(storeName, StringComparison.OrdinalIgnoreCase)
+            );
 
             _storePath = GetStorePath(storeName);
 
@@ -69,9 +74,7 @@ namespace Internal.Cryptography.Pal
             }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public void CloneTo(X509Certificate2Collection collection)
         {
@@ -235,11 +238,20 @@ namespace Internal.Cryptography.Pal
             get { return null; }
         }
 
-        private static string? FindExistingFilename(X509Certificate2 cert, string storePath, out bool hadCandidates)
+        private static string? FindExistingFilename(
+            X509Certificate2 cert,
+            string storePath,
+            out bool hadCandidates
+        )
         {
             hadCandidates = false;
 
-            foreach (string maybeMatch in Directory.EnumerateFiles(storePath, cert.Thumbprint + PfxWildcard))
+            foreach (
+                string maybeMatch in Directory.EnumerateFiles(
+                    storePath,
+                    cert.Thumbprint + PfxWildcard
+                )
+            )
             {
                 hadCandidates = true;
 
@@ -269,7 +281,9 @@ namespace Internal.Cryptography.Pal
             // We need space for {thumbprint} (thumbprint.Length)
             // And ".0.pfx" (6)
             // If MaxSaveAttempts is big enough to use more than one digit, we need that space, too (MaxSaveAttempts / 10)
-            StringBuilder pathBuilder = new StringBuilder(thumbprint.Length + PfxOrdinalWildcard.Length + (MaxSaveAttempts / 10));
+            StringBuilder pathBuilder = new StringBuilder(
+                thumbprint.Length + PfxOrdinalWildcard.Length + (MaxSaveAttempts / 10)
+            );
 
             pathBuilder.Append(thumbprint);
             pathBuilder.Append('.');
@@ -304,7 +318,8 @@ namespace Internal.Cryptography.Pal
                 // exception.
                 s_userStoreRoot = PersistedFiles.GetUserFeatureDirectory(
                     X509Persistence.CryptographyFeatureName,
-                    X509Persistence.X509StoresSubFeatureName);
+                    X509Persistence.X509StoresSubFeatureName
+                );
             }
 
             return Path.Combine(s_userStoreRoot, directoryName);
@@ -320,7 +335,9 @@ namespace Internal.Cryptography.Pal
 
                 if (!StringComparer.Ordinal.Equals(storeName, fileName))
                 {
-                    throw new CryptographicException(SR.Format(SR.Security_InvalidValue, nameof(storeName)));
+                    throw new CryptographicException(
+                        SR.Format(SR.Security_InvalidValue, nameof(storeName))
+                    );
                 }
             }
             catch (IOException e)
@@ -348,17 +365,25 @@ namespace Internal.Cryptography.Pal
                 Interop.ErrorInfo error = Interop.Sys.GetLastErrorInfo();
                 throw new CryptographicException(
                     SR.Cryptography_FileStatusError,
-                    new IOException(error.GetErrorMessage(), error.RawErrno));
+                    new IOException(error.GetErrorMessage(), error.RawErrno)
+                );
             }
 
             if (dirStat.Uid != userId)
             {
-                throw new CryptographicException(SR.Format(SR.Cryptography_OwnerNotCurrentUser, path));
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_OwnerNotCurrentUser, path)
+                );
             }
 
-            if ((dirStat.Mode & (int)Interop.Sys.Permissions.S_IRWXU) != (int)Interop.Sys.Permissions.S_IRWXU)
+            if (
+                (dirStat.Mode & (int)Interop.Sys.Permissions.S_IRWXU)
+                != (int)Interop.Sys.Permissions.S_IRWXU
+            )
             {
-                throw new CryptographicException(SR.Format(SR.Cryptography_InvalidDirectoryPermissions, path));
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_InvalidDirectoryPermissions, path)
+                );
             }
         }
 
@@ -378,8 +403,10 @@ namespace Internal.Cryptography.Pal
                 Interop.Sys.Permissions.S_IRUSR | Interop.Sys.Permissions.S_IWUSR;
 
             const Interop.Sys.Permissions forbiddenPermissions =
-                Interop.Sys.Permissions.S_IRGRP | Interop.Sys.Permissions.S_IWGRP |
-                Interop.Sys.Permissions.S_IROTH | Interop.Sys.Permissions.S_IWOTH;
+                Interop.Sys.Permissions.S_IRGRP
+                | Interop.Sys.Permissions.S_IWGRP
+                | Interop.Sys.Permissions.S_IROTH
+                | Interop.Sys.Permissions.S_IWOTH;
 
             Interop.Sys.FileStatus stat;
             if (Interop.Sys.FStat(stream.SafeFileHandle, out stat) != 0)
@@ -387,23 +414,29 @@ namespace Internal.Cryptography.Pal
                 Interop.ErrorInfo error = Interop.Sys.GetLastErrorInfo();
                 throw new CryptographicException(
                     SR.Cryptography_FileStatusError,
-                    new IOException(error.GetErrorMessage(), error.RawErrno));
+                    new IOException(error.GetErrorMessage(), error.RawErrno)
+                );
             }
 
             if (stat.Uid != userId)
             {
-                throw new CryptographicException(SR.Format(SR.Cryptography_OwnerNotCurrentUser, stream.Name));
+                throw new CryptographicException(
+                    SR.Format(SR.Cryptography_OwnerNotCurrentUser, stream.Name)
+                );
             }
 
-            if ((stat.Mode & (int)requiredPermissions) != (int)requiredPermissions ||
-                (stat.Mode & (int)forbiddenPermissions) != 0)
+            if (
+                (stat.Mode & (int)requiredPermissions) != (int)requiredPermissions
+                || (stat.Mode & (int)forbiddenPermissions) != 0
+            )
             {
                 if (Interop.Sys.FChMod(stream.SafeFileHandle, (int)requiredPermissions) < 0)
                 {
                     Interop.ErrorInfo error = Interop.Sys.GetLastErrorInfo();
                     throw new CryptographicException(
                         SR.Format(SR.Cryptography_InvalidFilePermissions, stream.Name),
-                        new IOException(error.GetErrorMessage(), error.RawErrno));
+                        new IOException(error.GetErrorMessage(), error.RawErrno)
+                    );
                 }
 
                 // Verify the chmod applied.
@@ -412,13 +445,18 @@ namespace Internal.Cryptography.Pal
                     Interop.ErrorInfo error = Interop.Sys.GetLastErrorInfo();
                     throw new CryptographicException(
                         SR.Cryptography_FileStatusError,
-                        new IOException(error.GetErrorMessage(), error.RawErrno));
+                        new IOException(error.GetErrorMessage(), error.RawErrno)
+                    );
                 }
 
-                if ((stat.Mode & (int)requiredPermissions) != (int)requiredPermissions ||
-                    (stat.Mode & (int)forbiddenPermissions) != 0)
+                if (
+                    (stat.Mode & (int)requiredPermissions) != (int)requiredPermissions
+                    || (stat.Mode & (int)forbiddenPermissions) != 0
+                )
                 {
-                    throw new CryptographicException(SR.Format(SR.Cryptography_InvalidFilePermissions, stream.Name));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_InvalidFilePermissions, stream.Name)
+                    );
                 }
             }
         }
@@ -433,8 +471,14 @@ namespace Internal.Cryptography.Pal
                     // If it has no files, leave it alone.
                     foreach (string filePath in Directory.EnumerateFiles(storePath))
                     {
-                        string msg = SR.Format(SR.Cryptography_Unix_X509_DisallowedStoreNotEmpty, storePath);
-                        throw new CryptographicException(msg, new PlatformNotSupportedException(msg));
+                        string msg = SR.Format(
+                            SR.Cryptography_Unix_X509_DisallowedStoreNotEmpty,
+                            storePath
+                        );
+                        throw new CryptographicException(
+                            msg,
+                            new PlatformNotSupportedException(msg)
+                        );
                     }
                 }
             }

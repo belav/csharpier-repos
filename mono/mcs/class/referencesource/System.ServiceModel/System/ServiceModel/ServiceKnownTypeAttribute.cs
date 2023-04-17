@@ -4,7 +4,12 @@
 
 namespace System.ServiceModel
 {
-    [AttributeUsage(ServiceModelAttributeTargets.ServiceContract | ServiceModelAttributeTargets.OperationContract, Inherited = true, AllowMultiple = true)]
+    [AttributeUsage(
+        ServiceModelAttributeTargets.ServiceContract
+            | ServiceModelAttributeTargets.OperationContract,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public sealed class ServiceKnownTypeAttribute : Attribute
     {
         Type declaringType;
@@ -48,4 +53,3 @@ namespace System.ServiceModel
         }
     }
 }
-

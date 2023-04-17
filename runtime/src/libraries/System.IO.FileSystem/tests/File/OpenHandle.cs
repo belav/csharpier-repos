@@ -12,9 +12,17 @@ namespace System.IO.Tests
         protected override string GetExpectedParamName(string paramName) => paramName;
 
         protected override FileStream CreateFileStream(string path, FileMode mode) =>
-            CreateFileStream(path, mode, mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite);
+            CreateFileStream(
+                path,
+                mode,
+                mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite
+            );
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access)
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access
+        )
         {
             SafeFileHandle handle = File.OpenHandle(path, mode, access);
             try
@@ -28,12 +36,24 @@ namespace System.IO.Tests
             }
         }
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options)
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options
+        )
         {
             SafeFileHandle handle = File.OpenHandle(path, mode, access, share, options);
             try
             {
-                return new FileStream(handle, access, bufferSize, (options & FileOptions.Asynchronous) != 0);
+                return new FileStream(
+                    handle,
+                    access,
+                    bufferSize,
+                    (options & FileOptions.Asynchronous) != 0
+                );
             }
             catch
             {
@@ -42,12 +62,32 @@ namespace System.IO.Tests
             }
         }
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options, long preallocationSize)
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options,
+            long preallocationSize
+        )
         {
-            SafeFileHandle handle = File.OpenHandle(path, mode, access, share, options, preallocationSize);
+            SafeFileHandle handle = File.OpenHandle(
+                path,
+                mode,
+                access,
+                share,
+                options,
+                preallocationSize
+            );
             try
             {
-                return new FileStream(handle, access, bufferSize, (options & FileOptions.Asynchronous) != 0);
+                return new FileStream(
+                    handle,
+                    access,
+                    bufferSize,
+                    (options & FileOptions.Asynchronous) != 0
+                );
             }
             catch
             {
@@ -68,7 +108,14 @@ namespace System.IO.Tests
         [InlineData(FileOptions.Asynchronous)]
         public void SafeFileHandle_IsAsync_ReturnsCorrectInformation(FileOptions options)
         {
-            using (var handle = File.OpenHandle(GetTestFilePath(), FileMode.Create, FileAccess.Write, options: options))
+            using (
+                var handle = File.OpenHandle(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.Write,
+                    options: options
+                )
+            )
             {
                 Assert.Equal((options & FileOptions.Asynchronous) != 0, handle.IsAsync);
 
@@ -76,8 +123,14 @@ namespace System.IO.Tests
                 // and instead we ask the OS about it
                 if (OperatingSystem.IsWindows()) // async file handles are a Windows concept
                 {
-                    SafeFileHandle createdFromIntPtr = new SafeFileHandle(handle.DangerousGetHandle(), ownsHandle: false);
-                    Assert.Equal((options & FileOptions.Asynchronous) != 0, createdFromIntPtr.IsAsync);
+                    SafeFileHandle createdFromIntPtr = new SafeFileHandle(
+                        handle.DangerousGetHandle(),
+                        ownsHandle: false
+                    );
+                    Assert.Equal(
+                        (options & FileOptions.Asynchronous) != 0,
+                        createdFromIntPtr.IsAsync
+                    );
                 }
             }
         }
@@ -89,7 +142,15 @@ namespace System.IO.Tests
         {
             string path = GetTestFilePath();
             Assert.False(File.Exists(path));
-            using (SafeFileHandle sfh = File.OpenHandle(path, FileMode.Create, FileAccess.ReadWrite, FileShare.None, options))
+            using (
+                SafeFileHandle sfh = File.OpenHandle(
+                    path,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.None,
+                    options
+                )
+            )
             {
                 Assert.True(File.Exists(path));
             }

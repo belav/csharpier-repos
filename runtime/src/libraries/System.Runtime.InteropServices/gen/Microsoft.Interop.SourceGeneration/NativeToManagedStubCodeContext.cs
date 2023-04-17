@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+
 namespace Microsoft.Interop
 {
     public sealed record NativeToManagedStubCodeContext : StubCodeContext
@@ -23,7 +24,8 @@ namespace Microsoft.Interop
             TargetFramework targetFramework,
             Version targetFrameworkVersion,
             string returnIdentifier,
-            string nativeReturnIdentifier)
+            string nativeReturnIdentifier
+        )
         {
             _framework = targetFramework;
             _frameworkVersion = targetFrameworkVersion;
@@ -32,8 +34,8 @@ namespace Microsoft.Interop
             Direction = MarshalDirection.UnmanagedToManaged;
         }
 
-        public override (TargetFramework framework, Version version) GetTargetFramework()
-            =>  (_framework, _frameworkVersion);
+        public override (TargetFramework framework, Version version) GetTargetFramework() =>
+            (_framework, _frameworkVersion);
 
         public override (string managed, string native) GetIdentifiers(TypePositionInfo info)
         {

@@ -15,17 +15,19 @@ namespace System.Net.Mail
     public class SmtpException : Exception, ISerializable
     {
         SmtpStatusCode statusCode = SmtpStatusCode.GeneralFailure;
-        
+
         static string GetMessageForStatus(SmtpStatusCode statusCode, string serverResponse)
         {
-            return GetMessageForStatus(statusCode)+" "+SR.GetString(SR.MailServerResponse,serverResponse);
+            return GetMessageForStatus(statusCode)
+                + " "
+                + SR.GetString(SR.MailServerResponse, serverResponse);
         }
-        
+
         static string GetMessageForStatus(SmtpStatusCode statusCode)
         {
             switch (statusCode)
             {
-                default :
+                default:
                 case SmtpStatusCode.CommandUnrecognized:
                     return SR.GetString(SR.SmtpCommandUnrecognized);
                 case SmtpStatusCode.SyntaxError:
@@ -72,72 +74,89 @@ namespace System.Net.Mail
                     return SR.GetString(SR.SmtpClientNotPermitted);
                 case SmtpStatusCode.MustIssueStartTlsFirst:
                     return SR.GetString(SR.SmtpMustIssueStartTlsFirst);
-
             }
         }
 
-        public SmtpException(SmtpStatusCode statusCode) : base(GetMessageForStatus(statusCode))
+        public SmtpException(SmtpStatusCode statusCode)
+            : base(GetMessageForStatus(statusCode))
         {
             this.statusCode = statusCode;
         }
 
-        public SmtpException(SmtpStatusCode statusCode, string message) : base(message)
+        public SmtpException(SmtpStatusCode statusCode, string message)
+            : base(message)
         {
             this.statusCode = statusCode;
         }
 
-        public SmtpException() : this(SmtpStatusCode.GeneralFailure)
-        {
-        }
+        public SmtpException()
+            : this(SmtpStatusCode.GeneralFailure) { }
 
-        public SmtpException(string message) : base(message)
-        {
-        }
-        
-        public SmtpException(string message, Exception innerException) : base(message, innerException) 
-        {
-        }
+        public SmtpException(string message)
+            : base(message) { }
 
-        protected SmtpException(SerializationInfo serializationInfo, StreamingContext streamingContext) : base (serializationInfo, streamingContext) 
+        public SmtpException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        protected SmtpException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext)
         {
             statusCode = (SmtpStatusCode)serializationInfo.GetInt32("Status");
         }
 
-
-        internal SmtpException(SmtpStatusCode statusCode, string serverMessage, bool serverResponse) : base(GetMessageForStatus(statusCode,serverMessage))
+        internal SmtpException(SmtpStatusCode statusCode, string serverMessage, bool serverResponse)
+            : base(GetMessageForStatus(statusCode, serverMessage))
         {
             this.statusCode = statusCode;
         }
 
-        internal SmtpException(string message, string serverResponse) : base(message+" "+SR.GetString(SR.MailServerResponse,serverResponse))
-        {
-        }
-
+        internal SmtpException(string message, string serverResponse)
+            : base(message + " " + SR.GetString(SR.MailServerResponse, serverResponse)) { }
 
         /// <internalonly/>
 
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.dll is still using pre-v4 security model and needs this demand")]
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter)]
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.dll is still using pre-v4 security model and needs this demand"
+        )]
+        [SecurityPermissionAttribute(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
             GetObjectData(serializationInfo, streamingContext);
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.dll is still using pre-v4 security model and needs this demand")]
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter)] 		
-        public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext){
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.dll is still using pre-v4 security model and needs this demand"
+        )]
+        [SecurityPermissionAttribute(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
             base.GetObjectData(serializationInfo, streamingContext);
             serializationInfo.AddValue("Status", (int)statusCode, typeof(int));
         }
 
         public SmtpStatusCode StatusCode
         {
-            get {
-                return this.statusCode;
-            }
-            set {
-                statusCode = value;
-            }
+            get { return this.statusCode; }
+            set { statusCode = value; }
         }
     }
-
 }

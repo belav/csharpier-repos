@@ -17,12 +17,10 @@ public class CreatedResult : ObjectResult
     private string? _location;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CreatedResult"/> class 
-    /// </summary>  
+    /// Initializes a new instance of the <see cref="CreatedResult"/> class
+    /// </summary>
     public CreatedResult()
-        : base(null)
-    {
-    }
+        : base(null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CreatedResult"/> class with the values
@@ -58,7 +56,10 @@ public class CreatedResult : ObjectResult
             }
             else
             {
-                Location = location.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+                Location = location.GetComponents(
+                    UriComponents.SerializationInfoString,
+                    UriFormat.UriEscaped
+                );
             }
         }
 

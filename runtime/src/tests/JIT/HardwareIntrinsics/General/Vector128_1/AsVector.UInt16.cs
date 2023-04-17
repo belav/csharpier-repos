@@ -40,9 +40,11 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int VectorElementCount = Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
+        private static readonly int VectorElementCount =
+            Unsafe.SizeOf<Vector128<UInt16>>() / sizeof(UInt16);
 
-        private static readonly int NumericsElementCount = Unsafe.SizeOf<Vector<UInt16>>() / sizeof(UInt16);
+        private static readonly int NumericsElementCount =
+            Unsafe.SizeOf<Vector<UInt16>>() / sizeof(UInt16);
 
         public bool Succeeded { get; set; } = true;
 
@@ -66,30 +68,42 @@ namespace JIT.HardwareIntrinsics.General
 
             value = Vector128.Create((ushort)TestLibrary.Generator.GetUInt16());
             object Result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.AsVector))
-                                .MakeGenericMethod(typeof(UInt16))
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.AsVector))
+                .MakeGenericMethod(typeof(UInt16))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector<UInt16>)(Result), value);
 
-            value = (Vector128<UInt16>)typeof(Vector128)
-                                .GetMethods()
-                                .Where((methodInfo) => {
-                                    if (methodInfo.Name == nameof(Vector128.AsVector128))
-                                    {
-                                        var parameters = methodInfo.GetParameters();
-                                        return (parameters.Length == 1) &&
-                                               (parameters[0].ParameterType.IsGenericType) &&
-                                               (parameters[0].ParameterType.GetGenericTypeDefinition() == typeof(Vector<>));
-                                    }
-                                    return false;
-                                })
-                                .Single()
-                                .MakeGenericMethod(typeof(UInt16))
-                                .Invoke(null, new object[] { Result });
+            value =
+                (Vector128<UInt16>)
+                    typeof(Vector128)
+                        .GetMethods()
+                        .Where(
+                            (methodInfo) =>
+                            {
+                                if (methodInfo.Name == nameof(Vector128.AsVector128))
+                                {
+                                    var parameters = methodInfo.GetParameters();
+                                    return (parameters.Length == 1)
+                                        && (parameters[0].ParameterType.IsGenericType)
+                                        && (
+                                            parameters[0].ParameterType.GetGenericTypeDefinition()
+                                            == typeof(Vector<>)
+                                        );
+                                }
+                                return false;
+                            }
+                        )
+                        .Single()
+                        .MakeGenericMethod(typeof(UInt16))
+                        .Invoke(null, new object[] { Result });
             ValidateResult(value, (Vector<UInt16>)(Result));
         }
 
-        private void ValidateResult(Vector<UInt16> result, Vector128<UInt16> value, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector<UInt16> result,
+            Vector128<UInt16> value,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt16[] resultElements = new UInt16[NumericsElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref resultElements[0]), result);
@@ -100,7 +114,11 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, valueElements, method);
         }
 
-        private void ValidateResult(Vector128<UInt16> result, Vector<UInt16> value, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<UInt16> result,
+            Vector<UInt16> value,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt16[] resultElements = new UInt16[VectorElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref resultElements[0]), result);
@@ -111,7 +129,11 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, valueElements, method);
         }
 
-        private void ValidateResult(UInt16[] resultElements, UInt16[] valueElements, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt16[] resultElements,
+            UInt16[] valueElements,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -149,9 +171,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<UInt16>.AsVector: {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", valueElements)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<UInt16>.AsVector: {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", valueElements)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

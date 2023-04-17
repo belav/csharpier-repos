@@ -4,6 +4,12 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.Architecture))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.OSPlatform))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Runtime.InteropServices.RuntimeInformation))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.Architecture)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.OSPlatform)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Runtime.InteropServices.RuntimeInformation)
+)]

@@ -47,8 +47,14 @@ namespace System.MemoryTests
         public static void AsMemory_Slice_MatchesSubstring(string input, int offset, int count)
         {
             ReadOnlyMemory<char> m = input.AsMemory();
-            Assert.Equal(input.Substring(offset, count), new string(m.Slice(offset, count).ToArray()));
-            Assert.Equal(input.Substring(offset, count), new string(m.Slice(offset, count).Span.ToArray()));
+            Assert.Equal(
+                input.Substring(offset, count),
+                new string(m.Slice(offset, count).ToArray())
+            );
+            Assert.Equal(
+                input.Substring(offset, count),
+                new string(m.Slice(offset, count).Span.ToArray())
+            );
             Assert.Equal(input.Substring(offset), new string(m.Slice(offset).ToArray()));
         }
 
@@ -143,17 +149,29 @@ namespace System.MemoryTests
         }
 
         [Theory]
-        [MemberData(nameof(TestHelpers.StringSlice2ArgTestOutOfRangeData), MemberType = typeof(TestHelpers))]
+        [MemberData(
+            nameof(TestHelpers.StringSlice2ArgTestOutOfRangeData),
+            MemberType = typeof(TestHelpers)
+        )]
         public static unsafe void AsMemory_2Arg_OutOfRange(string text, int start)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("start", () => text.AsMemory(start));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "start",
+                () => text.AsMemory(start)
+            );
         }
 
         [Theory]
-        [MemberData(nameof(TestHelpers.StringSlice3ArgTestOutOfRangeData), MemberType = typeof(TestHelpers))]
+        [MemberData(
+            nameof(TestHelpers.StringSlice3ArgTestOutOfRangeData),
+            MemberType = typeof(TestHelpers)
+        )]
         public static unsafe void AsMemory_3Arg_OutOfRange(string text, int start, int length)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("start", () => text.AsMemory(start, length));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "start",
+                () => text.AsMemory(start, length)
+            );
         }
 
         [Fact]

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         [Fact, WorkItem(740443, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/740443")]
         public void Method_Delete_Leaf1()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -34,7 +35,8 @@ class C
         <AS:0>Console.WriteLine(a);</AS:0>
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 <AS:0>class C</AS:0>
 {
     static void Main(string[] args)
@@ -53,14 +55,24 @@ class C
                 {
                     DocumentResults(
                         active,
-                        diagnostics: new[] { Diagnostic(RudeEditKind.Delete, "class C", DeletedSymbolDisplay(FeaturesResources.method, "Goo(int a)")) })
-                });
+                        diagnostics: new[]
+                        {
+                            Diagnostic(
+                                RudeEditKind.Delete,
+                                "class C",
+                                DeletedSymbolDisplay(FeaturesResources.method, "Goo(int a)")
+                            )
+                        }
+                    )
+                }
+            );
         }
 
         [Fact]
         public void Method_Rename_Leaf1()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     static void Goo(int a)
@@ -68,7 +80,8 @@ class C
         <AS:0>Console.WriteLine(a);</AS:0>
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class C
 {
     static void Boo(int a)
@@ -87,8 +100,17 @@ class C
                 {
                     DocumentResults(
                         active,
-                        diagnostics: new[] {Diagnostic(RudeEditKind.UpdateAroundActiveStatement, "static void Boo(int a)", FeaturesResources.method) })
-                });
+                        diagnostics: new[]
+                        {
+                            Diagnostic(
+                                RudeEditKind.UpdateAroundActiveStatement,
+                                "static void Boo(int a)",
+                                FeaturesResources.method
+                            )
+                        }
+                    )
+                }
+            );
         }
 
         [Fact]
@@ -100,8 +122,10 @@ class C
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.ModifiersUpdate, "extern int M()", FeaturesResources.method));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.ModifiersUpdate, "extern int M()", FeaturesResources.method)
+            );
         }
 
         [Fact]
@@ -113,8 +137,10 @@ class C
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.ModifiersUpdate, "extern int M()", FeaturesResources.method));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.ModifiersUpdate, "extern int M()", FeaturesResources.method)
+            );
         }
 
         [Fact]
@@ -145,7 +171,8 @@ class C
         [Fact]
         public void Update_Inner_GenericMethod()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -161,7 +188,8 @@ class C
         <AS:0>Console.WriteLine(""hello"");</AS:0>
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -184,14 +212,17 @@ class C
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.ActiveStatementUpdate, "c.Swap(ref b, ref a);"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.ActiveStatementUpdate, "c.Swap(ref b, ref a);")
+            );
         }
 
         [Fact]
         public void Update_Inner_ParameterType_GenericMethod()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -204,7 +235,8 @@ class C
         <AS:0>Console.WriteLine(""hello"");</AS:0>
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -224,14 +256,17 @@ class C
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.ActiveStatementUpdate, "Swap(null, null);"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.ActiveStatementUpdate, "Swap(null, null);")
+            );
         }
 
         [Fact]
         public void Update_Leaf_GenericMethod()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -244,7 +279,8 @@ class C
         <AS:0>Console.WriteLine(""hello"");</AS:0>
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -264,15 +300,18 @@ class C
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.GenericMethodUpdate, "static void Swap<T>(T lhs, T rhs)"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.GenericMethodUpdate, "static void Swap<T>(T lhs, T rhs)")
+            );
         }
 
         // Async
         [Fact, WorkItem(749458, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/749458")]
         public void Update_Leaf_AsyncMethod()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -287,7 +326,8 @@ class Test
         return ""Done"";
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -311,7 +351,8 @@ class Test
         [Fact, WorkItem(749440, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/749440")]
         public void Update_Inner_AsyncMethod()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -326,7 +367,8 @@ class Test
         return ""Done"";
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -344,14 +386,20 @@ class Test
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.ActiveStatementUpdate, "string result = f.WaitAsync(6).Result;"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(
+                    RudeEditKind.ActiveStatementUpdate,
+                    "string result = f.WaitAsync(6).Result;"
+                )
+            );
         }
 
         [Fact, WorkItem(749440, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/749440")]
         public void Update_Initializer_MultipleVariables1()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -369,7 +417,8 @@ class Test
         return 2;
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -390,14 +439,17 @@ class Test
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.ActiveStatementUpdate, "int a = G()"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.ActiveStatementUpdate, "int a = G()")
+            );
         }
 
         [Fact, WorkItem(749440, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/749440")]
         public void Update_Initializer_MultipleVariables2()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -415,7 +467,8 @@ class Test
         return 2;
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -436,14 +489,17 @@ class Test
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.ActiveStatementUpdate, "b = F()"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.ActiveStatementUpdate, "b = F()")
+            );
         }
 
         [Fact]
         public void MethodUpdateWithLocalVariables()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -454,7 +510,8 @@ class C
     }
 }
 ";
-            var src2 = @"
+            var src2 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -470,7 +527,11 @@ class C
 
             edits.VerifySemantics(
                 active,
-                new[] { SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Main"), syntaxMap[0]) });
+                new[]
+                {
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Main"), syntaxMap[0])
+                }
+            );
         }
 
         #endregion
@@ -552,7 +613,8 @@ class C
 
             edits.VerifySemanticDiagnostics(
                 active,
-                capabilities: EditAndContinueCapabilities.AddMethodToExistingType);
+                capabilities: EditAndContinueCapabilities.AddMethodToExistingType
+            );
         }
 
         [Fact]
@@ -566,20 +628,23 @@ class C
 
             edits.VerifySemanticDiagnostics(
                 active,
-                capabilities: EditAndContinueCapabilities.AddMethodToExistingType);
+                capabilities: EditAndContinueCapabilities.AddMethodToExistingType
+            );
         }
 
         [Fact]
         public void Property_ExpressionBodyToBlockBody_NonLeaf()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C 
 { 
     int P => <AS:1>M()</AS:1>; 
     int M() { <AS:0>return 1;</AS:0> } 
 }
 ";
-            var src2 = @"
+            var src2 =
+                @"
 class C 
 { 
     int P { get <AS:1>{</AS:1> return M(); } } 
@@ -589,21 +654,25 @@ class C
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.DeleteActiveStatement, "get", FeaturesResources.code));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.DeleteActiveStatement, "get", FeaturesResources.code)
+            );
         }
 
         [Fact]
         public void Property_ExpressionBody_NonLeaf()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C 
 { 
     int P => <AS:1>M()</AS:1>; 
     int M() { <AS:0>return 1;</AS:0> } 
 }
 ";
-            var src2 = @"
+            var src2 =
+                @"
 class C 
 { 
     int P => <AS:1>M()</AS:1>; 
@@ -641,22 +710,29 @@ class C
                 new[]
                 {
                     SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.get_P")),
-                    SemanticEdit(SemanticEditKind.Delete, c => c.GetMember("C.set_P"), deletedSymbolContainerProvider: c => c.GetMember("C")),
+                    SemanticEdit(
+                        SemanticEditKind.Delete,
+                        c => c.GetMember("C.set_P"),
+                        deletedSymbolContainerProvider: c => c.GetMember("C")
+                    ),
                 },
-                capabilities: EditAndContinueCapabilities.Baseline);
+                capabilities: EditAndContinueCapabilities.Baseline
+            );
         }
 
         [Fact]
         public void Property_BlockBodyToExpressionBody_NonLeaf()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C 
 { 
     int P { get { <AS:1>return M();</AS:1> } } 
     int M() { <AS:0>return 1;</AS:0> } 
 }
 ";
-            var src2 = @"
+            var src2 =
+                @"
 class C 
 { 
     int P => <AS:1>M()</AS:1>; 
@@ -668,8 +744,10 @@ class C
             var active = GetActiveStatements(src1, src2);
 
             // Can be improved with https://github.com/dotnet/roslyn/issues/22696
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.DeleteActiveStatement, "int P", FeaturesResources.code));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.DeleteActiveStatement, "int P", FeaturesResources.code)
+            );
         }
 
         #endregion
@@ -699,7 +777,8 @@ class C
 
             edits.VerifySemanticDiagnostics(
                 active,
-                capabilities: EditAndContinueCapabilities.AddMethodToExistingType);
+                capabilities: EditAndContinueCapabilities.AddMethodToExistingType
+            );
         }
 
         [Fact]
@@ -727,22 +806,29 @@ class C
                 new[]
                 {
                     SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.get_Item")),
-                    SemanticEdit(SemanticEditKind.Delete, c => c.GetMember("C.set_Item"), deletedSymbolContainerProvider: c => c.GetMember("C")),
+                    SemanticEdit(
+                        SemanticEditKind.Delete,
+                        c => c.GetMember("C.set_Item"),
+                        deletedSymbolContainerProvider: c => c.GetMember("C")
+                    ),
                 },
-                capabilities: EditAndContinueCapabilities.Baseline);
+                capabilities: EditAndContinueCapabilities.Baseline
+            );
         }
 
         [Fact]
         public void Indexer_ExpressionBody_NonLeaf()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C 
 { 
     int this[int index] => <AS:1>M()</AS:1>; 
     int M() { <AS:0>return 1;</AS:0> } 
 }
 ";
-            var src2 = @"
+            var src2 =
+                @"
 class C 
 { 
     int this[int index] => <AS:1>M()</AS:1>; 
@@ -758,7 +844,8 @@ class C
         [Fact]
         public void Update_Leaf_Indexers1()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -778,7 +865,8 @@ class SampleCollection<T>
         set { <AS:0>arr[i] = value;</AS:0> }
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -801,14 +889,17 @@ class SampleCollection<T>
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.GenericTypeUpdate, "set"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.GenericTypeUpdate, "set")
+            );
         }
 
         [Fact, WorkItem(750244, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/750244")]
         public void Update_Inner_Indexers1()
         {
-            var src1 = @"
+            var src1 =
+                @"
 using System;
 class Test
 {
@@ -829,7 +920,8 @@ class SampleCollection<T>
         set { <AS:0>arr[i] = value;</AS:0> }
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 using System;
 class Test
 {
@@ -854,15 +946,18 @@ class SampleCollection<T>
             var active = GetActiveStatements(src1, src2);
 
             // Rude edits of active statements (AS:1) are not reported if the top-level edits are rude.
-            edits.VerifySemanticDiagnostics(active,
+            edits.VerifySemanticDiagnostics(
+                active,
                 Diagnostic(RudeEditKind.GenericTypeUpdate, "set"),
-                Diagnostic(RudeEditKind.ActiveStatementUpdate, "stringCollection[1] = \"hello\";"));
+                Diagnostic(RudeEditKind.ActiveStatementUpdate, "stringCollection[1] = \"hello\";")
+            );
         }
 
         [Fact]
         public void Update_Leaf_Indexers2()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -882,7 +977,8 @@ class SampleCollection<T>
         set { arr[i] = value; }
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -905,14 +1001,17 @@ class SampleCollection<T>
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.GenericTypeUpdate, "get"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.GenericTypeUpdate, "get")
+            );
         }
 
         [Fact, WorkItem(750244, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/750244")]
         public void Update_Inner_Indexers2()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -932,7 +1031,8 @@ class SampleCollection<T>
         set { arr[i] = value; }
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -956,15 +1056,21 @@ class SampleCollection<T>
             var active = GetActiveStatements(src1, src2);
 
             // Rude edits of active statements (AS:1) are not reported if the top-level edits are rude.
-            edits.VerifySemanticDiagnostics(active,
+            edits.VerifySemanticDiagnostics(
+                active,
                 Diagnostic(RudeEditKind.GenericTypeUpdate, "get"),
-                Diagnostic(RudeEditKind.ActiveStatementUpdate, "Console.WriteLine(stringCollection[1]);"));
+                Diagnostic(
+                    RudeEditKind.ActiveStatementUpdate,
+                    "Console.WriteLine(stringCollection[1]);"
+                )
+            );
         }
 
         [Fact]
         public void Deleted_Leaf_Indexers1()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -984,7 +1090,8 @@ class SampleCollection<T>
         set { <AS:0>arr[i] = value;</AS:0> }
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1007,14 +1114,17 @@ class SampleCollection<T>
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.GenericTypeUpdate, "set"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.GenericTypeUpdate, "set")
+            );
         }
 
         [Fact]
         public void Deleted_Inner_Indexers1()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1034,7 +1144,8 @@ class SampleCollection<T>
         set { <AS:0>arr[i] = value;</AS:0> }
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1056,14 +1167,17 @@ class SampleCollection<T>
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.DeleteActiveStatement, "{", FeaturesResources.code));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.DeleteActiveStatement, "{", FeaturesResources.code)
+            );
         }
 
         [Fact]
         public void Deleted_Leaf_Indexers2()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1083,7 +1197,8 @@ class SampleCollection<T>
         set { arr[i] = value; }
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1106,14 +1221,17 @@ class SampleCollection<T>
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.GenericTypeUpdate, "get"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.GenericTypeUpdate, "get")
+            );
         }
 
         [Fact]
         public void Deleted_Inner_Indexers2()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1133,7 +1251,8 @@ class SampleCollection<T>
         set { arr[i] = value; }
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1155,8 +1274,10 @@ class SampleCollection<T>
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.DeleteActiveStatement, "{", FeaturesResources.code));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.DeleteActiveStatement, "{", FeaturesResources.code)
+            );
         }
 
         #endregion
@@ -1167,7 +1288,8 @@ class SampleCollection<T>
         public void Operator_ExpressionBodyToBlockBody1()
         {
             var src1 = "class C { public static C operator +(C t1, C t2) => <AS:0>null</AS:0>; }";
-            var src2 = "class C { public static C operator +(C t1, C t2) <AS:0>{</AS:0> return null; } }";
+            var src2 =
+                "class C { public static C operator +(C t1, C t2) <AS:0>{</AS:0> return null; } }";
 
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
@@ -1179,7 +1301,8 @@ class SampleCollection<T>
         public void Operator_ExpressionBodyToBlockBody2()
         {
             var src1 = "class C { public static explicit operator D(C t) => <AS:0>null</AS:0>; }";
-            var src2 = "class C { public static explicit operator D(C t) <AS:0>{</AS:0> return null; } }";
+            var src2 =
+                "class C { public static explicit operator D(C t) <AS:0>{</AS:0> return null; } }";
 
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
@@ -1190,7 +1313,8 @@ class SampleCollection<T>
         [Fact]
         public void Operator_BlockBodyToExpressionBody1()
         {
-            var src1 = "class C { public static C operator +(C t1, C t2) { <AS:0>return null;</AS:0> } }";
+            var src1 =
+                "class C { public static C operator +(C t1, C t2) { <AS:0>return null;</AS:0> } }";
             var src2 = "class C { public static C operator +(C t1, C t2) => <AS:0>null</AS:0>; }";
 
             var edits = GetTopEdits(src1, src2);
@@ -1202,7 +1326,8 @@ class SampleCollection<T>
         [Fact]
         public void Operator_BlockBodyToExpressionBody2()
         {
-            var src1 = "class C { public static explicit operator D(C t) { <AS:0>return null;</AS:0> } }";
+            var src1 =
+                "class C { public static explicit operator D(C t) { <AS:0>return null;</AS:0> } }";
             var src2 = "class C { public static explicit operator D(C t) => <AS:0>null</AS:0>; }";
 
             var edits = GetTopEdits(src1, src2);
@@ -1214,7 +1339,8 @@ class SampleCollection<T>
         [Fact, WorkItem(754274, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/754274")]
         public void Update_Leaf_OverloadedOperator()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1228,7 +1354,8 @@ class Test
         <AS:0>return new Test(t1.a + t2.a);</AS:0>
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1251,7 +1378,8 @@ class Test
         [Fact, WorkItem(754274, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/754274")]
         public void Update_Inner_OverloadedOperator()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1269,7 +1397,8 @@ class Test
         return new Test(t1.a * t2.a);
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class Test
 {
     static void Main(string[] args)
@@ -1290,8 +1419,10 @@ class Test
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
 
-            edits.VerifySemanticDiagnostics(active,
-                Diagnostic(RudeEditKind.ActiveStatementUpdate, "Test t3 = t1 * t2;"));
+            edits.VerifySemanticDiagnostics(
+                active,
+                Diagnostic(RudeEditKind.ActiveStatementUpdate, "Test t3 = t1 * t2;")
+            );
         }
 
         #endregion

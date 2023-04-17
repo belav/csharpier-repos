@@ -3,18 +3,20 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class TPCFiltersInheritanceBulkUpdatesSqlServerTest : TPCFiltersInheritanceBulkUpdatesTestBase<
-    TPCFiltersInheritanceBulkUpdatesSqlServerFixture>
+public class TPCFiltersInheritanceBulkUpdatesSqlServerTest
+    : TPCFiltersInheritanceBulkUpdatesTestBase<TPCFiltersInheritanceBulkUpdatesSqlServerFixture>
 {
-    public TPCFiltersInheritanceBulkUpdatesSqlServerTest(TPCFiltersInheritanceBulkUpdatesSqlServerFixture fixture)
+    public TPCFiltersInheritanceBulkUpdatesSqlServerTest(
+        TPCFiltersInheritanceBulkUpdatesSqlServerFixture fixture
+    )
         : base(fixture)
     {
         ClearLog();
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_where_hierarchy(bool async)
     {
@@ -28,11 +30,12 @@ public class TPCFiltersInheritanceBulkUpdatesSqlServerTest : TPCFiltersInheritan
         await base.Delete_where_hierarchy_derived(async);
 
         AssertSql(
-"""
+            """
 DELETE FROM [k]
 FROM [Kiwi] AS [k]
 WHERE [k].[CountryId] = 1 AND [k].[Name] = N'Great spotted kiwi'
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_using_hierarchy(bool async)
@@ -40,7 +43,7 @@ WHERE [k].[CountryId] = 1 AND [k].[Name] = N'Great spotted kiwi'
         await base.Delete_where_using_hierarchy(async);
 
         AssertSql(
-"""
+            """
 DELETE FROM [c]
 FROM [Countries] AS [c]
 WHERE (
@@ -53,7 +56,8 @@ WHERE (
         FROM [Kiwi] AS [k]
     ) AS [t]
     WHERE [t].[CountryId] = 1 AND [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_using_hierarchy_derived(bool async)
@@ -61,7 +65,7 @@ WHERE (
         await base.Delete_where_using_hierarchy_derived(async);
 
         AssertSql(
-"""
+            """
 DELETE FROM [c]
 FROM [Countries] AS [c]
 WHERE (
@@ -71,7 +75,8 @@ WHERE (
         FROM [Kiwi] AS [k]
     ) AS [t]
     WHERE [t].[CountryId] = 1 AND [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -128,12 +133,13 @@ WHERE (
         await base.Update_where_hierarchy_derived(async);
 
         AssertExecuteUpdateSql(
-"""
+            """
 UPDATE [k]
 SET [k].[Name] = N'Kiwi'
 FROM [Kiwi] AS [k]
 WHERE [k].[CountryId] = 1 AND [k].[Name] = N'Great spotted kiwi'
-""");
+"""
+        );
     }
 
     public override async Task Update_where_using_hierarchy(bool async)
@@ -141,7 +147,7 @@ WHERE [k].[CountryId] = 1 AND [k].[Name] = N'Great spotted kiwi'
         await base.Update_where_using_hierarchy(async);
 
         AssertExecuteUpdateSql(
-"""
+            """
 UPDATE [c]
 SET [c].[Name] = N'Monovia'
 FROM [Countries] AS [c]
@@ -155,7 +161,8 @@ WHERE (
         FROM [Kiwi] AS [k]
     ) AS [t]
     WHERE [t].[CountryId] = 1 AND [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_where_using_hierarchy_derived(bool async)
@@ -163,7 +170,7 @@ WHERE (
         await base.Update_where_using_hierarchy_derived(async);
 
         AssertExecuteUpdateSql(
-"""
+            """
 UPDATE [c]
 SET [c].[Name] = N'Monovia'
 FROM [Countries] AS [c]
@@ -174,7 +181,8 @@ WHERE (
         FROM [Kiwi] AS [k]
     ) AS [t]
     WHERE [t].[CountryId] = 1 AND [c].[Id] = [t].[CountryId] AND [t].[CountryId] > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -184,12 +192,11 @@ WHERE (
         AssertExecuteUpdateSql();
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

@@ -11,52 +11,48 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     where TFixture : ProxyGraphUpdatesTestBase<TFixture>.ProxyGraphUpdatesFixtureBase, new()
 {
     [ConditionalFact]
-    public virtual void Optional_one_to_one_relationships_are_one_to_one()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var root = context.Set<Root>().Single(IsTheRoot);
+    public virtual void Optional_one_to_one_relationships_are_one_to_one() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var root = context.Set<Root>().Single(IsTheRoot);
 
-                root.OptionalSingle = context.CreateProxy<OptionalSingle1>();
+            root.OptionalSingle = context.CreateProxy<OptionalSingle1>();
 
-                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-            });
-
-    [ConditionalFact]
-    public virtual void Required_one_to_one_relationships_are_one_to_one()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var root = context.Set<Root>().Single(IsTheRoot);
-
-                root.RequiredSingle = context.CreateProxy<RequiredSingle1>();
-
-                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-            });
+            Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+        });
 
     [ConditionalFact]
-    public virtual void Optional_one_to_one_with_AK_relationships_are_one_to_one()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var root = context.Set<Root>().Single(IsTheRoot);
+    public virtual void Required_one_to_one_relationships_are_one_to_one() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var root = context.Set<Root>().Single(IsTheRoot);
 
-                root.OptionalSingleAk = context.CreateProxy<OptionalSingleAk1>();
+            root.RequiredSingle = context.CreateProxy<RequiredSingle1>();
 
-                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-            });
+            Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+        });
 
     [ConditionalFact]
-    public virtual void Required_one_to_one_with_AK_relationships_are_one_to_one()
-        => ExecuteWithStrategyInTransaction(
-            context =>
-            {
-                var root = context.Set<Root>().Single(IsTheRoot);
+    public virtual void Optional_one_to_one_with_AK_relationships_are_one_to_one() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var root = context.Set<Root>().Single(IsTheRoot);
 
-                root.RequiredSingleAk = context.CreateProxy<RequiredSingleAk1>();
+            root.OptionalSingleAk = context.CreateProxy<OptionalSingleAk1>();
 
-                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-            });
+            Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+        });
+
+    [ConditionalFact]
+    public virtual void Required_one_to_one_with_AK_relationships_are_one_to_one() =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var root = context.Set<Root>().Single(IsTheRoot);
+
+            root.RequiredSingleAk = context.CreateProxy<RequiredSingleAk1>();
+
+            Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+        });
 
     [ConditionalTheory]
     [InlineData((int)ChangeMechanism.Dependent, false)]
@@ -71,9 +67,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-    public virtual void Save_changed_optional_one_to_one(ChangeMechanism changeMechanism, bool useExistingEntities)
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true
+    )]
+    public virtual void Save_changed_optional_one_to_one(
+        ChangeMechanism changeMechanism,
+        bool useExistingEntities
+    )
     {
         OptionalSingle2 new2 = null;
         OptionalSingle2Derived new2d = null;
@@ -133,11 +138,15 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 if (useExistingEntities)
                 {
                     new1 = context.Set<OptionalSingle1>().Single(e => e.Id == new1.Id);
-                    new1d = (OptionalSingle1Derived)context.Set<OptionalSingle1>().Single(e => e.Id == new1d.Id);
-                    new1dd = (OptionalSingle1MoreDerived)context.Set<OptionalSingle1>().Single(e => e.Id == new1dd.Id);
+                    new1d = (OptionalSingle1Derived)
+                        context.Set<OptionalSingle1>().Single(e => e.Id == new1d.Id);
+                    new1dd = (OptionalSingle1MoreDerived)
+                        context.Set<OptionalSingle1>().Single(e => e.Id == new1dd.Id);
                     new2 = context.Set<OptionalSingle2>().Single(e => e.Id == new2.Id);
-                    new2d = (OptionalSingle2Derived)context.Set<OptionalSingle2>().Single(e => e.Id == new2d.Id);
-                    new2dd = (OptionalSingle2MoreDerived)context.Set<OptionalSingle2>().Single(e => e.Id == new2dd.Id);
+                    new2d = (OptionalSingle2Derived)
+                        context.Set<OptionalSingle2>().Single(e => e.Id == new2d.Id);
+                    new2dd = (OptionalSingle2MoreDerived)
+                        context.Set<OptionalSingle2>().Single(e => e.Id == new2dd.Id);
                 }
                 else
                 {
@@ -220,7 +229,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.Equal(loaded1.Id, loaded2.BackId);
                 Assert.Equal(loaded1d.Id, loaded2d.BackId);
                 Assert.Equal(loaded1dd.Id, loaded2dd.BackId);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -231,80 +241,80 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk))]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent))]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk))]
-    public virtual void Save_required_one_to_one_changed_by_reference(ChangeMechanism changeMechanism)
+    public virtual void Save_required_one_to_one_changed_by_reference(
+        ChangeMechanism changeMechanism
+    )
     {
         RequiredSingle1 old1 = null;
         RequiredSingle2 old2 = null;
         Root oldRoot;
         RequiredSingle2 new2 = null;
         RequiredSingle1 new1 = null;
-        ExecuteWithStrategyInTransaction(
-            context =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            oldRoot = LoadRoot(context);
+
+            if (!DoesLazyLoading)
             {
-                oldRoot = LoadRoot(context);
+                context.Entry(oldRoot).Reference(e => e.RequiredSingle).Load();
+            }
 
-                if (!DoesLazyLoading)
-                {
-                    context.Entry(oldRoot).Reference(e => e.RequiredSingle).Load();
-                }
+            old1 = oldRoot.RequiredSingle;
 
-                old1 = oldRoot.RequiredSingle;
-
-                if (!DoesLazyLoading)
-                {
-                    context.Entry(old1).Reference(e => e.Single).Load();
-                }
-
-                old2 = oldRoot.RequiredSingle.Single;
-
-                context.Entry(oldRoot).State = EntityState.Detached;
-                context.Entry(old1).State = EntityState.Detached;
-                context.Entry(old2).State = EntityState.Detached;
-
-                new2 = context.CreateProxy<RequiredSingle2>();
-                new1 = context.CreateProxy<RequiredSingle1>(e => e.Single = new2);
-            });
-
-        ExecuteWithStrategyInTransaction(
-            context =>
+            if (!DoesLazyLoading)
             {
-                var root = context.Set<Root>().Include(e => e.RequiredSingle.Single).Single(IsTheRoot);
+                context.Entry(old1).Reference(e => e.Single).Load();
+            }
 
-                context.Entry(root.RequiredSingle.Single).State = EntityState.Deleted;
-                context.Entry(root.RequiredSingle).State = EntityState.Deleted;
+            old2 = oldRoot.RequiredSingle.Single;
 
-                if ((changeMechanism & ChangeMechanism.Principal) != 0)
-                {
-                    root.RequiredSingle = new1;
-                }
+            context.Entry(oldRoot).State = EntityState.Detached;
+            context.Entry(old1).State = EntityState.Detached;
+            context.Entry(old2).State = EntityState.Detached;
 
-                if ((changeMechanism & ChangeMechanism.Dependent) != 0)
-                {
-                    context.Add(new1);
-                    new1.Root = root;
-                }
+            new2 = context.CreateProxy<RequiredSingle2>();
+            new1 = context.CreateProxy<RequiredSingle1>(e => e.Single = new2);
+        });
 
-                if ((changeMechanism & ChangeMechanism.Fk) != 0)
-                {
-                    context.Add(new1);
-                    new1.Id = root.Id;
-                }
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            var root = context.Set<Root>().Include(e => e.RequiredSingle.Single).Single(IsTheRoot);
 
-                Assert.True(context.ChangeTracker.HasChanges());
+            context.Entry(root.RequiredSingle.Single).State = EntityState.Deleted;
+            context.Entry(root.RequiredSingle).State = EntityState.Deleted;
 
-                context.SaveChanges();
+            if ((changeMechanism & ChangeMechanism.Principal) != 0)
+            {
+                root.RequiredSingle = new1;
+            }
 
-                Assert.False(context.ChangeTracker.HasChanges());
+            if ((changeMechanism & ChangeMechanism.Dependent) != 0)
+            {
+                context.Add(new1);
+                new1.Root = root;
+            }
 
-                Assert.Equal(root.Id, new1.Id);
-                Assert.Equal(new1.Id, new2.Id);
-                Assert.Same(root, new1.Root);
-                Assert.Same(new1, new2.Back);
+            if ((changeMechanism & ChangeMechanism.Fk) != 0)
+            {
+                context.Add(new1);
+                new1.Id = root.Id;
+            }
 
-                Assert.NotNull(old1.Root);
-                Assert.Same(old1, old2.Back);
-                Assert.Equal(old1.Id, old2.Id);
-            });
+            Assert.True(context.ChangeTracker.HasChanges());
+
+            context.SaveChanges();
+
+            Assert.False(context.ChangeTracker.HasChanges());
+
+            Assert.Equal(root.Id, new1.Id);
+            Assert.Equal(new1.Id, new2.Id);
+            Assert.Same(root, new1.Root);
+            Assert.Same(new1, new2.Back);
+
+            Assert.NotNull(old1.Root);
+            Assert.Same(old1, old2.Back);
+            Assert.Equal(old1.Id, old2.Id);
+        });
     }
 
     [ConditionalTheory]
@@ -320,9 +330,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-    public virtual void Save_required_non_PK_one_to_one_changed_by_reference(ChangeMechanism changeMechanism, bool useExistingEntities)
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true
+    )]
+    public virtual void Save_required_non_PK_one_to_one_changed_by_reference(
+        ChangeMechanism changeMechanism,
+        bool useExistingEntities
+    )
     {
         RequiredNonPkSingle2 new2 = null;
         RequiredNonPkSingle2Derived new2d = null;
@@ -345,26 +364,23 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 new2d = context.CreateProxy<RequiredNonPkSingle2Derived>();
                 new2dd = context.CreateProxy<RequiredNonPkSingle2MoreDerived>();
                 new1 = context.CreateProxy<RequiredNonPkSingle1>(e => e.Single = new2);
-                new1d = context.CreateProxy<RequiredNonPkSingle1Derived>(
-                    e =>
-                    {
-                        e.Single = new2d;
-                        e.Root = context.CreateProxy<Root>();
-                    });
-                new1dd = context.CreateProxy<RequiredNonPkSingle1MoreDerived>(
-                    e =>
-                    {
-                        e.Single = new2dd;
-                        e.Root = context.CreateProxy<Root>();
-                        e.DerivedRoot = context.CreateProxy<Root>();
-                    });
-                newRoot = context.CreateProxy<Root>(
-                    e =>
-                    {
-                        e.RequiredNonPkSingle = new1;
-                        e.RequiredNonPkSingleDerived = new1d;
-                        e.RequiredNonPkSingleMoreDerived = new1dd;
-                    });
+                new1d = context.CreateProxy<RequiredNonPkSingle1Derived>(e =>
+                {
+                    e.Single = new2d;
+                    e.Root = context.CreateProxy<Root>();
+                });
+                new1dd = context.CreateProxy<RequiredNonPkSingle1MoreDerived>(e =>
+                {
+                    e.Single = new2dd;
+                    e.Root = context.CreateProxy<Root>();
+                    e.DerivedRoot = context.CreateProxy<Root>();
+                });
+                newRoot = context.CreateProxy<Root>(e =>
+                {
+                    e.RequiredNonPkSingle = new1;
+                    e.RequiredNonPkSingleDerived = new1d;
+                    e.RequiredNonPkSingleMoreDerived = new1dd;
+                });
 
                 if (useExistingEntities)
                 {
@@ -399,7 +415,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 old2 = root.RequiredNonPkSingle.Single;
                 old2d = (RequiredNonPkSingle2Derived)root.RequiredNonPkSingleDerived.Single;
-                old2dd = (RequiredNonPkSingle2MoreDerived)root.RequiredNonPkSingleMoreDerived.Single;
+                old2dd = (RequiredNonPkSingle2MoreDerived)
+                    root.RequiredNonPkSingleMoreDerived.Single;
 
                 context.Set<RequiredNonPkSingle1>().Remove(old1d);
                 context.Set<RequiredNonPkSingle1>().Remove(old1dd);
@@ -407,11 +424,15 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 if (useExistingEntities)
                 {
                     new1 = context.Set<RequiredNonPkSingle1>().Single(e => e.Id == new1.Id);
-                    new1d = (RequiredNonPkSingle1Derived)context.Set<RequiredNonPkSingle1>().Single(e => e.Id == new1d.Id);
-                    new1dd = (RequiredNonPkSingle1MoreDerived)context.Set<RequiredNonPkSingle1>().Single(e => e.Id == new1dd.Id);
+                    new1d = (RequiredNonPkSingle1Derived)
+                        context.Set<RequiredNonPkSingle1>().Single(e => e.Id == new1d.Id);
+                    new1dd = (RequiredNonPkSingle1MoreDerived)
+                        context.Set<RequiredNonPkSingle1>().Single(e => e.Id == new1dd.Id);
                     new2 = context.Set<RequiredNonPkSingle2>().Single(e => e.Id == new2.Id);
-                    new2d = (RequiredNonPkSingle2Derived)context.Set<RequiredNonPkSingle2>().Single(e => e.Id == new2d.Id);
-                    new2dd = (RequiredNonPkSingle2MoreDerived)context.Set<RequiredNonPkSingle2>().Single(e => e.Id == new2dd.Id);
+                    new2d = (RequiredNonPkSingle2Derived)
+                        context.Set<RequiredNonPkSingle2>().Single(e => e.Id == new2d.Id);
+                    new2dd = (RequiredNonPkSingle2MoreDerived)
+                        context.Set<RequiredNonPkSingle2>().Single(e => e.Id == new2dd.Id);
 
                     new1d.RootId = old1d.RootId;
                     new1dd.RootId = old1dd.RootId;
@@ -485,7 +506,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.False(context.Set<RequiredNonPkSingle2>().Any(e => e.Id == old2.Id));
                 Assert.False(context.Set<RequiredNonPkSingle2>().Any(e => e.Id == old2d.Id));
                 Assert.False(context.Set<RequiredNonPkSingle2>().Any(e => e.Id == old2dd.Id));
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -562,7 +584,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Null(loaded1.RootId);
                     Assert.Equal(loaded1.Id, loaded2.BackId);
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -626,7 +649,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.False(context.Set<RequiredSingle1>().Any(e => e.Id == old1.Id));
                 Assert.False(context.Set<RequiredSingle2>().Any(e => e.Id == old2.Id));
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -690,7 +714,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.False(context.Set<RequiredNonPkSingle1>().Any(e => e.Id == old1.Id));
                 Assert.False(context.Set<RequiredNonPkSingle2>().Any(e => e.Id == old2.Id));
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -706,9 +731,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-    public virtual void Reparent_optional_one_to_one(ChangeMechanism changeMechanism, bool useExistingRoot)
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true
+    )]
+    public virtual void Reparent_optional_one_to_one(
+        ChangeMechanism changeMechanism,
+        bool useExistingRoot
+    )
     {
         Root newRoot = null;
         Root root;
@@ -730,7 +764,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
             {
                 root = LoadRoot(context);
 
-                context.Entry(newRoot).State = useExistingRoot ? EntityState.Unchanged : EntityState.Added;
+                context.Entry(newRoot).State = useExistingRoot
+                    ? EntityState.Unchanged
+                    : EntityState.Added;
 
                 if (!DoesLazyLoading)
                 {
@@ -786,7 +822,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.Same(loaded1, loaded2.Back);
                 Assert.Equal(newRoot.Id, loaded1.RootId);
                 Assert.Equal(loaded1.Id, loaded2.BackId);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -802,9 +839,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-    public virtual void Reparent_required_one_to_one(ChangeMechanism changeMechanism, bool useExistingRoot)
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true
+    )]
+    public virtual void Reparent_required_one_to_one(
+        ChangeMechanism changeMechanism,
+        bool useExistingRoot
+    )
     {
         Root newRoot = null;
 
@@ -828,12 +874,14 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     context.Entry(root).Reference(e => e.RequiredSingle).Load();
                 }
 
-                context.Entry(newRoot).State = useExistingRoot ? EntityState.Unchanged : EntityState.Added;
+                context.Entry(newRoot).State = useExistingRoot
+                    ? EntityState.Unchanged
+                    : EntityState.Added;
 
                 Assert.Equal(
                     CoreStrings.KeyReadOnly("Id", typeof(RequiredSingle1).Name),
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
+                    Assert
+                        .Throws<InvalidOperationException>(() =>
                         {
                             if ((changeMechanism & ChangeMechanism.Principal) != 0)
                             {
@@ -853,8 +901,11 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                             newRoot.RequiredSingle = root.RequiredSingle;
 
                             context.SaveChanges();
-                        }).Message);
-            });
+                        })
+                        .Message
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -870,9 +921,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-    public virtual void Reparent_required_non_PK_one_to_one(ChangeMechanism changeMechanism, bool useExistingRoot)
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true
+    )]
+    public virtual void Reparent_required_non_PK_one_to_one(
+        ChangeMechanism changeMechanism,
+        bool useExistingRoot
+    )
     {
         Root newRoot = null;
         Root root;
@@ -894,7 +954,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
             {
                 root = LoadRoot(context);
 
-                context.Entry(newRoot).State = useExistingRoot ? EntityState.Unchanged : EntityState.Added;
+                context.Entry(newRoot).State = useExistingRoot
+                    ? EntityState.Unchanged
+                    : EntityState.Added;
 
                 if (!DoesLazyLoading)
                 {
@@ -950,7 +1012,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.Same(loaded1, loaded2.Back);
                 Assert.Equal(newRoot.Id, loaded1.RootId);
                 Assert.Equal(loaded1.Id, loaded2.BackId);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -965,7 +1028,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Optional_one_to_one_are_orphaned(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1021,7 +1085,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Empty(context.Set<OptionalSingle1>().Where(e => e.Id == removedId));
                 Assert.Equal(1, context.Set<OptionalSingle2>().Count(e => e.Id == orphanedId));
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1036,7 +1101,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_one_to_one_are_cascade_deleted(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1107,7 +1173,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Empty(context.Set<RequiredSingle1>().Where(e => e.Id == removedId));
                     Assert.Empty(context.Set<RequiredSingle2>().Where(e => e.Id == orphanedId));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1122,7 +1189,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_non_PK_one_to_one_are_cascade_deleted(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1171,7 +1239,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
 
                     Assert.Same(root, removed.Root);
                     Assert.Same(orphaned, removed.Single);
@@ -1191,9 +1261,12 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1208,7 +1281,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_one_to_one_are_cascade_deleted_in_store(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1295,7 +1369,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Empty(context.Set<RequiredSingle1>().Where(e => e.Id == removedId));
                     Assert.Empty(context.Set<RequiredSingle2>().Where(e => e.Id == orphanedId));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1310,7 +1385,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_non_PK_one_to_one_are_cascade_deleted_in_store(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1340,7 +1416,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming;
                 context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
 
-                var root = context.Set<Root>().Include(e => e.RequiredNonPkSingle).Single(IsTheRoot);
+                var root = context
+                    .Set<Root>()
+                    .Include(e => e.RequiredNonPkSingle)
+                    .Single(IsTheRoot);
 
                 var removed = root.RequiredNonPkSingle;
 
@@ -1375,7 +1454,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
 
                     Assert.Same(root, removed.Root);
                     Assert.Same(orphaned, removed.Single);
@@ -1395,9 +1476,12 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1412,7 +1496,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Optional_one_to_one_are_orphaned_in_store(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1484,7 +1569,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Empty(context.Set<OptionalSingle1>().Where(e => e.Id == removedId));
                 Assert.Null(context.Set<OptionalSingle2>().Single(e => e.Id == orphanedId).BackId);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1499,7 +1585,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Optional_one_to_one_are_orphaned_starting_detached(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1538,9 +1625,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                    ? EntityState.Modified
-                    : EntityState.Unchanged;
+                var expectedState =
+                    cascadeDeleteTiming == CascadeTiming.Immediate
+                        ? EntityState.Modified
+                        : EntityState.Unchanged;
 
                 Assert.Equal(expectedState, context.Entry(orphaned).State);
 
@@ -1569,7 +1657,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Empty(context.Set<OptionalSingle1>().Where(e => e.Id == removedId));
                 Assert.Equal(1, context.Set<OptionalSingle2>().Count(e => e.Id == orphanedId));
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1584,7 +1673,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_one_to_one_are_cascade_deleted_starting_detached(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1623,9 +1713,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                    ? EntityState.Deleted
-                    : EntityState.Unchanged;
+                var expectedState =
+                    cascadeDeleteTiming == CascadeTiming.Immediate
+                        ? EntityState.Deleted
+                        : EntityState.Unchanged;
 
                 Assert.Equal(expectedState, context.Entry(orphaned).State);
 
@@ -1664,7 +1755,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Empty(context.Set<RequiredSingle1>().Where(e => e.Id == removedId));
                     Assert.Empty(context.Set<RequiredSingle2>().Where(e => e.Id == orphanedId));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1679,7 +1771,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_non_PK_one_to_one_are_cascade_deleted_starting_detached(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1718,9 +1811,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                    ? EntityState.Deleted
-                    : EntityState.Unchanged;
+                var expectedState =
+                    cascadeDeleteTiming == CascadeTiming.Immediate
+                        ? EntityState.Deleted
+                        : EntityState.Unchanged;
 
                 Assert.Equal(expectedState, context.Entry(orphaned).State);
 
@@ -1757,9 +1851,12 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1774,7 +1871,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_one_to_one_are_cascade_detached_when_Added(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1812,9 +1910,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                    ? EntityState.Detached
-                    : EntityState.Added;
+                var expectedState =
+                    cascadeDeleteTiming == CascadeTiming.Immediate
+                        ? EntityState.Detached
+                        : EntityState.Added;
 
                 Assert.Equal(expectedState, context.Entry(orphaned).State);
 
@@ -1853,7 +1952,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Empty(context.Set<RequiredSingle1>().Where(e => e.Id == removedId));
                     Assert.Empty(context.Set<RequiredSingle2>().Where(e => e.Id == orphanedId));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1868,7 +1968,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_non_PK_one_to_one_are_cascade_detached_when_Added(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         var orphanedId = 0;
@@ -1906,9 +2007,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                    ? EntityState.Detached
-                    : EntityState.Added;
+                var expectedState =
+                    cascadeDeleteTiming == CascadeTiming.Immediate
+                        ? EntityState.Detached
+                        : EntityState.Added;
 
                 Assert.Equal(expectedState, context.Entry(orphaned).State);
 
@@ -1945,8 +2047,11 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Null(root.RequiredNonPkSingle);
 
                     Assert.Empty(context.Set<RequiredNonPkSingle1>().Where(e => e.Id == removedId));
-                    Assert.Empty(context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId));
+                    Assert.Empty(
+                        context.Set<RequiredNonPkSingle2>().Where(e => e.Id == orphanedId)
+                    );
                 }
-            });
+            }
+        );
     }
 }

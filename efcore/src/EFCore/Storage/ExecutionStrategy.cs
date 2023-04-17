@@ -61,16 +61,9 @@ public abstract class ExecutionStrategy : IExecutionStrategy
     /// <param name="context">The context on which the operations will be invoked.</param>
     /// <param name="maxRetryCount">The maximum number of retry attempts.</param>
     /// <param name="maxRetryDelay">The maximum delay between retries.</param>
-    protected ExecutionStrategy(
-        DbContext context,
-        int maxRetryCount,
-        TimeSpan maxRetryDelay)
-        : this(
-            context.GetService<ExecutionStrategyDependencies>(),
-            maxRetryCount,
-            maxRetryDelay)
-    {
-    }
+    protected ExecutionStrategy(DbContext context, int maxRetryCount, TimeSpan maxRetryDelay)
+        : this(context.GetService<ExecutionStrategyDependencies>(), maxRetryCount, maxRetryDelay)
+    { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="ExecutionStrategy" />.
@@ -85,7 +78,8 @@ public abstract class ExecutionStrategy : IExecutionStrategy
     protected ExecutionStrategy(
         ExecutionStrategyDependencies dependencies,
         int maxRetryCount,
-        TimeSpan maxRetryDelay)
+        TimeSpan maxRetryDelay
+    )
     {
         if (maxRetryCount < 0)
         {
@@ -191,7 +185,8 @@ public abstract class ExecutionStrategy : IExecutionStrategy
     public virtual TResult Execute<TState, TResult>(
         TState state,
         Func<DbContext, TState, TResult> operation,
-        Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded)
+        Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded
+    )
     {
         Check.NotNull(operation, nameof(operation));
 
@@ -206,13 +201,15 @@ public abstract class ExecutionStrategy : IExecutionStrategy
         return ExecuteImplementation(
             (context, state) => new ExecutionResult<TResult>(true, operation(context, state)),
             verifySucceeded,
-            state).Result;
+            state
+        ).Result;
     }
 
     private ExecutionResult<TResult> ExecuteImplementation<TState, TResult>(
         Func<DbContext, TState, ExecutionResult<TResult>> operation,
         Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded,
-        TState state)
+        TState state
+    )
     {
         while (true)
         {
@@ -231,8 +228,7 @@ public abstract class ExecutionStrategy : IExecutionStrategy
 
                 EntityFrameworkEventSource.Log.ExecutionStrategyOperationFailure();
 
-                if (verifySucceeded != null
-                    && CallOnWrappedException(ex, ShouldVerifySuccessOn))
+                if (verifySucceeded != null && CallOnWrappedException(ex, ShouldVerifySuccessOn))
                 {
                     var result = ExecuteImplementation(verifySucceeded, null, state);
                     if (result.IsSuccessful)
@@ -251,10 +247,17 @@ public abstract class ExecutionStrategy : IExecutionStrategy
                 var delay = GetNextDelay(ex);
                 if (delay == null)
                 {
-                    throw new RetryLimitExceededException(CoreStrings.RetryLimitExceeded(MaxRetryCount, GetType().Name), ex);
+                    throw new RetryLimitExceededException(
+                        CoreStrings.RetryLimitExceeded(MaxRetryCount, GetType().Name),
+                        ex
+                    );
                 }
 
-                Dependencies.Logger.ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
+                Dependencies.Logger.ExecutionStrategyRetrying(
+                    ExceptionsEncountered,
+                    delay.Value,
+                    async: true
+                );
 
                 OnRetry();
 
@@ -295,24 +298,31 @@ public abstract class ExecutionStrategy : IExecutionStrategy
         TState state,
         Func<DbContext, TState, CancellationToken, Task<TResult>> operation,
         Func<DbContext, TState, CancellationToken, Task<ExecutionResult<TResult>>>? verifySucceeded,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         Check.NotNull(operation, nameof(operation));
 
         if (Current != null)
         {
-            return await operation(Dependencies.CurrentContext.Context, state, cancellationToken).ConfigureAwait(false);
+            return await operation(Dependencies.CurrentContext.Context, state, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         OnFirstExecution();
 
         // In order to avoid infinite recursive generics, wrap operation with ExecutionResult
         var result = await ExecuteImplementationAsync(
-            async (context, state, cancellationToken) => new ExecutionResult<TResult>(
-                true, await operation(context, state, cancellationToken).ConfigureAwait(false)),
-            verifySucceeded,
-            state,
-            cancellationToken).ConfigureAwait(false);
+                async (context, state, cancellationToken) =>
+                    new ExecutionResult<TResult>(
+                        true,
+                        await operation(context, state, cancellationToken).ConfigureAwait(false)
+                    ),
+                verifySucceeded,
+                state,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
         return result.Result;
     }
 
@@ -320,7 +330,8 @@ public abstract class ExecutionStrategy : IExecutionStrategy
         Func<DbContext, TState, CancellationToken, Task<ExecutionResult<TResult>>> operation,
         Func<DbContext, TState, CancellationToken, Task<ExecutionResult<TResult>>>? verifySucceeded,
         TState state,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         while (true)
         {
@@ -331,7 +342,11 @@ public abstract class ExecutionStrategy : IExecutionStrategy
                 Check.DebugAssert(Current == null, "Current != null");
 
                 Current = this;
-                var result = await operation(Dependencies.CurrentContext.Context, state, cancellationToken)
+                var result = await operation(
+                        Dependencies.CurrentContext.Context,
+                        state,
+                        cancellationToken
+                    )
                     .ConfigureAwait(true);
                 Current = null;
                 return result;
@@ -342,10 +357,14 @@ public abstract class ExecutionStrategy : IExecutionStrategy
 
                 EntityFrameworkEventSource.Log.ExecutionStrategyOperationFailure();
 
-                if (verifySucceeded != null
-                    && CallOnWrappedException(ex, ShouldVerifySuccessOn))
+                if (verifySucceeded != null && CallOnWrappedException(ex, ShouldVerifySuccessOn))
                 {
-                    var result = await ExecuteImplementationAsync(verifySucceeded, null, state, cancellationToken)
+                    var result = await ExecuteImplementationAsync(
+                            verifySucceeded,
+                            null,
+                            state,
+                            cancellationToken
+                        )
                         .ConfigureAwait(true);
                     if (result.IsSuccessful)
                     {
@@ -363,10 +382,17 @@ public abstract class ExecutionStrategy : IExecutionStrategy
                 var delay = GetNextDelay(ex);
                 if (delay == null)
                 {
-                    throw new RetryLimitExceededException(CoreStrings.RetryLimitExceeded(MaxRetryCount, GetType().Name), ex);
+                    throw new RetryLimitExceededException(
+                        CoreStrings.RetryLimitExceeded(MaxRetryCount, GetType().Name),
+                        ex
+                    );
                 }
 
-                Dependencies.Logger.ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
+                Dependencies.Logger.ExecutionStrategyRetrying(
+                    ExceptionsEncountered,
+                    delay.Value,
+                    async: true
+                );
 
                 OnRetry();
 
@@ -384,22 +410,34 @@ public abstract class ExecutionStrategy : IExecutionStrategy
     /// </remarks>
     protected virtual void OnFirstExecution()
     {
-        if (RetriesOnFailure
-            && (Dependencies.CurrentContext.Context.Database.CurrentTransaction is not null
+        if (
+            RetriesOnFailure
+            && (
+                Dependencies.CurrentContext.Context.Database.CurrentTransaction is not null
                 || Dependencies.CurrentContext.Context.Database.GetEnlistedTransaction() is not null
-                || (((IDatabaseFacadeDependenciesAccessor)Dependencies.CurrentContext.Context.Database).Dependencies
-                    .TransactionManager as
-                    ITransactionEnlistmentManager)?.CurrentAmbientTransaction is not null))
+                || (
+                    (
+                        (IDatabaseFacadeDependenciesAccessor)
+                            Dependencies.CurrentContext.Context.Database
+                    )
+                        .Dependencies
+                        .TransactionManager as ITransactionEnlistmentManager
+                )?.CurrentAmbientTransaction
+                    is not null
+            )
+        )
         {
             throw new InvalidOperationException(
                 CoreStrings.ExecutionStrategyExistingTransaction(
                     GetType().Name,
                     nameof(DbContext)
-                    + "."
-                    + nameof(DbContext.Database)
-                    + "."
-                    + nameof(DatabaseFacade.CreateExecutionStrategy)
-                    + "()"));
+                        + "."
+                        + nameof(DbContext.Database)
+                        + "."
+                        + nameof(DatabaseFacade.CreateExecutionStrategy)
+                        + "()"
+                )
+            );
         }
 
         ExceptionsEncountered.Clear();
@@ -412,9 +450,7 @@ public abstract class ExecutionStrategy : IExecutionStrategy
     ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
     ///     for more information and examples.
     /// </remarks>
-    protected virtual void OnRetry()
-    {
-    }
+    protected virtual void OnRetry() { }
 
     /// <summary>
     ///     Determines whether the operation should be retried and the delay before the next attempt.
@@ -433,12 +469,14 @@ public abstract class ExecutionStrategy : IExecutionStrategy
         var currentRetryCount = ExceptionsEncountered.Count - 1;
         if (currentRetryCount < MaxRetryCount)
         {
-            var delta = (Math.Pow(DefaultExponentialBase, currentRetryCount) - 1.0)
+            var delta =
+                (Math.Pow(DefaultExponentialBase, currentRetryCount) - 1.0)
                 * (1.0 + Random.NextDouble() * (DefaultRandomFactor - 1.0));
 
             var delay = Math.Min(
                 DefaultCoefficient.TotalMilliseconds * delta,
-                MaxRetryDelay.TotalMilliseconds);
+                MaxRetryDelay.TotalMilliseconds
+            );
 
             return TimeSpan.FromMilliseconds(delay);
         }
@@ -457,8 +495,8 @@ public abstract class ExecutionStrategy : IExecutionStrategy
     /// <returns>
     ///     <see langword="true" /> if the specified exception could be thrown after a successful execution, otherwise <see langword="false" />.
     /// </returns>
-    protected internal virtual bool ShouldVerifySuccessOn(Exception exception)
-        => ShouldRetryOn(exception);
+    protected internal virtual bool ShouldVerifySuccessOn(Exception exception) =>
+        ShouldRetryOn(exception);
 
     /// <summary>
     ///     Determines whether the specified exception represents a transient failure that can be compensated by a retry.
@@ -489,12 +527,15 @@ public abstract class ExecutionStrategy : IExecutionStrategy
     /// </returns>
     public static TResult CallOnWrappedException<TResult>(
         Exception exception,
-        Func<Exception, TResult> exceptionHandler)
+        Func<Exception, TResult> exceptionHandler
+    )
     {
         while (true)
         {
-            if (exception is DbUpdateException dbUpdateException
-                && dbUpdateException.InnerException != null)
+            if (
+                exception is DbUpdateException dbUpdateException
+                && dbUpdateException.InnerException != null
+            )
             {
                 exception = dbUpdateException.InnerException;
                 continue;

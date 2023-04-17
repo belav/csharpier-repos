@@ -29,23 +29,43 @@ namespace System.ServiceModel.Security.Tokens
             this.InclusionMode = SecurityTokenInclusionMode.Never;
         }
 
-        internal protected override bool HasAsymmetricKey { get { return true; } }
+        internal protected override bool HasAsymmetricKey
+        {
+            get { return true; }
+        }
 
-        internal protected override bool SupportsClientAuthentication { get { return true; } }
-        internal protected override bool SupportsServerAuthentication { get { return true; } }
-        internal protected override bool SupportsClientWindowsIdentity { get { return false; } }
+        internal protected override bool SupportsClientAuthentication
+        {
+            get { return true; }
+        }
+        internal protected override bool SupportsServerAuthentication
+        {
+            get { return true; }
+        }
+        internal protected override bool SupportsClientWindowsIdentity
+        {
+            get { return false; }
+        }
 
         protected override SecurityTokenParameters CloneCore()
         {
             return new RsaSecurityTokenParameters(this);
         }
 
-        internal protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
+        internal protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+            SecurityToken token,
+            SecurityTokenReferenceStyle referenceStyle
+        )
         {
-            return this.CreateKeyIdentifierClause<RsaKeyIdentifierClause, RsaKeyIdentifierClause>(token, referenceStyle);
+            return this.CreateKeyIdentifierClause<RsaKeyIdentifierClause, RsaKeyIdentifierClause>(
+                token,
+                referenceStyle
+            );
         }
 
-        protected internal override void InitializeSecurityTokenRequirement(SecurityTokenRequirement requirement)
+        protected internal override void InitializeSecurityTokenRequirement(
+            SecurityTokenRequirement requirement
+        )
         {
             requirement.TokenType = SecurityTokenTypes.Rsa;
             requirement.RequireCryptographicToken = true;

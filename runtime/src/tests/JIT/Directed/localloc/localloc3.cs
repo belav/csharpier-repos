@@ -73,7 +73,7 @@ internal unsafe class test1
             pass = false;
         }
 
-    output:
+        output:
         if (pass)
         {
             Console.WriteLine("PASSED");

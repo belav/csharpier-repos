@@ -5,16 +5,18 @@ namespace Microsoft.AspNetCore.Builder;
 
 public static class EndpointRouteBuilderExtensions
 {
-    public static IEndpointConventionBuilder MapHello(this IEndpointRouteBuilder endpoints, string pattern, string greeter)
+    public static IEndpointConventionBuilder MapHello(
+        this IEndpointRouteBuilder endpoints,
+        string pattern,
+        string greeter
+    )
     {
         if (endpoints == null)
         {
             throw new ArgumentNullException(nameof(endpoints));
         }
 
-        var pipeline = endpoints.CreateApplicationBuilder()
-           .UseHello(greeter)
-           .Build();
+        var pipeline = endpoints.CreateApplicationBuilder().UseHello(greeter).Build();
 
         return endpoints.Map(pattern, pipeline);
     }

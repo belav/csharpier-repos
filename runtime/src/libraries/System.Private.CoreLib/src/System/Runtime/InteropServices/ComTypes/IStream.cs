@@ -29,8 +29,16 @@ namespace System.Runtime.InteropServices.ComTypes
     public interface IStream
     {
         // ISequentialStream portion
-        void Read([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] pv, int cb, IntPtr pcbRead);
-        void Write([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] pv, int cb, IntPtr pcbWritten);
+        void Read(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] pv,
+            int cb,
+            IntPtr pcbRead
+        );
+        void Write(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] pv,
+            int cb,
+            IntPtr pcbWritten
+        );
 
         // IStream portion
         void Seek(long dlibMove, int dwOrigin, IntPtr plibNewPosition);

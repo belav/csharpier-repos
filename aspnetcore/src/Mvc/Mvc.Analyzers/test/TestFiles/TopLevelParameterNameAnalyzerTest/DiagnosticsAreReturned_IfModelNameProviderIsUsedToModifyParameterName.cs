@@ -3,7 +3,11 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers.TopLevelParameterNameAnalyzerTestFi
     public class DiagnosticsAreReturned_IfModelNameProviderIsUsedToModifyParameterName : Controller
     {
         [HttpPost]
-        public IActionResult Edit([ModelBinder(Name = "model")] DiagnosticsAreReturned_IfModelNameProviderIsUsedToModifyParameterNameModel /*MM*/parameter) => null;
+        public IActionResult Edit(
+            [ModelBinder(Name = "model")]
+                DiagnosticsAreReturned_IfModelNameProviderIsUsedToModifyParameterNameModel /*MM*/
+            parameter
+        ) => null;
     }
 
     public class DiagnosticsAreReturned_IfModelNameProviderIsUsedToModifyParameterNameModel

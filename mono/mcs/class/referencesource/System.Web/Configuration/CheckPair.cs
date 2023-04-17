@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -17,11 +18,14 @@ namespace System.Web.Configuration {
     using System.Xml;
     using System.Globalization;
 
-    internal class CheckPair {
+    internal class CheckPair
+    {
         private string _header;
         private string _match;
         private bool _nonMatch;
-        internal CheckPair(string header, string match, bool nonMatch) {
+
+        internal CheckPair(string header, string match, bool nonMatch)
+        {
             _header = header;
             _match = match;
             _nonMatch = nonMatch;
@@ -29,29 +33,27 @@ namespace System.Web.Configuration {
             Regex regex = new Regex(match);
         }
 
-        internal CheckPair(string header, string match) {
+        internal CheckPair(string header, string match)
+        {
             _header = header;
             _match = match;
             _nonMatch = false;
             Regex regex = new Regex(match);
         }
 
-        public string Header {
-            get {
-                return _header;
-            }
+        public string Header
+        {
+            get { return _header; }
         }
 
-        public string MatchString {
-            get {
-                return _match;
-            }
+        public string MatchString
+        {
+            get { return _match; }
         }
 
-        public bool NonMatch {
-            get {
-                return _nonMatch;
-            }
+        public bool NonMatch
+        {
+            get { return _nonMatch; }
         }
     }
 }

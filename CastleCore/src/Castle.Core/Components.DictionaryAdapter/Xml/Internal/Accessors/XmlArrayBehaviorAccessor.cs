@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -18,14 +18,18 @@ namespace Castle.Components.DictionaryAdapter.Xml
     using System.Collections.Generic;
     using System.Xml.Serialization;
 
-    public class XmlArrayBehaviorAccessor : XmlNodeAccessor,
-        IConfigurable<XmlArrayAttribute>,
-        IConfigurable<XmlArrayItemAttribute>
+    public class XmlArrayBehaviorAccessor
+        : XmlNodeAccessor,
+            IConfigurable<XmlArrayAttribute>,
+            IConfigurable<XmlArrayItemAttribute>
     {
         private readonly ItemAccessor itemAccessor;
 
-        internal static readonly XmlAccessorFactory<XmlArrayBehaviorAccessor>
-            Factory = (name, type, context) => new XmlArrayBehaviorAccessor(name, type, context);
+        internal static readonly XmlAccessorFactory<XmlArrayBehaviorAccessor> Factory = (
+            name,
+            type,
+            context
+        ) => new XmlArrayBehaviorAccessor(name, type, context);
 
         public XmlArrayBehaviorAccessor(string name, Type type, IXmlContext context)
             : base(name, type, context)
@@ -38,9 +42,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public void Configure(XmlArrayAttribute attribute)
         {
-            ConfigureLocalName   (attribute.ElementName);
-            ConfigureNamespaceUri(attribute.Namespace  );
-            ConfigureNillable    (attribute.IsNullable );
+            ConfigureLocalName(attribute.ElementName);
+            ConfigureNamespaceUri(attribute.Namespace);
+            ConfigureNillable(attribute.IsNullable);
         }
 
         public void Configure(XmlArrayItemAttribute attribute)
@@ -64,9 +68,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return node.SelectChildren(this, Context, PropertyFlags.MutableIf(mutable));
         }
 
-        private class ItemAccessor : XmlNodeAccessor,
-            IConfigurable<XmlArrayItemAttribute>,
-            IXmlBehaviorSemantics <XmlArrayItemAttribute>
+        private class ItemAccessor
+            : XmlNodeAccessor,
+                IConfigurable<XmlArrayItemAttribute>,
+                IXmlBehaviorSemantics<XmlArrayItemAttribute>
         {
             private List<XmlArrayItemAttribute> attributes;
 
@@ -81,9 +86,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
             {
                 if (attribute.Type == null)
                 {
-                    ConfigureLocalName   (attribute.ElementName);
-                    ConfigureNamespaceUri(attribute.Namespace  );
-                    ConfigureNillable    (attribute.IsNullable );
+                    ConfigureLocalName(attribute.ElementName);
+                    ConfigureNamespaceUri(attribute.Namespace);
+                    ConfigureNillable(attribute.IsNullable);
                 }
                 else
                 {
@@ -105,7 +110,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             public override IXmlCursor SelectCollectionItems(IXmlNode node, bool mutable)
             {
-                return node.SelectChildren(KnownTypes, Context, CollectionItemFlags.MutableIf(mutable));
+                return node.SelectChildren(
+                    KnownTypes,
+                    Context,
+                    CollectionItemFlags.MutableIf(mutable)
+                );
             }
 
             public string GetLocalName(XmlArrayItemAttribute attribute)
@@ -124,8 +133,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             }
         }
 
-        private const CursorFlags
-            PropertyFlags       = CursorFlags.Elements,
+        private const CursorFlags PropertyFlags = CursorFlags.Elements,
             CollectionItemFlags = CursorFlags.Elements | CursorFlags.Multiple;
     }
 }

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -41,13 +41,13 @@ namespace Castle.DynamicProxy.Tests
 
             var interceptor = new KeepDataInterceptor();
             var proxy = (IInterfaceWithGenericMethodWithDependentConstraint)
-                        generator.CreateInterfaceProxyWithoutTarget(type, new Type[] { }, interceptor);
+                generator.CreateInterfaceProxyWithoutTarget(type, new Type[] { }, interceptor);
 
             proxy.RegisterType<object, string>();
 
-            var expectedMethod =
-                typeof(IInterfaceWithGenericMethodWithDependentConstraint).GetMethod("RegisterType").MakeGenericMethod(
-                    typeof(object), typeof(string));
+            var expectedMethod = typeof(IInterfaceWithGenericMethodWithDependentConstraint)
+                .GetMethod("RegisterType")
+                .MakeGenericMethod(typeof(object), typeof(string));
 
             Assert.AreEqual(expectedMethod, interceptor.Invocation.Method);
         }
@@ -58,14 +58,16 @@ namespace Castle.DynamicProxy.Tests
             var type = typeof(IGenericInterfaceWithGenericMethodWithDependentConstraint<object>);
 
             var interceptor = new KeepDataInterceptor();
-            var proxy = (IGenericInterfaceWithGenericMethodWithDependentConstraint<object>)
-                        generator.CreateInterfaceProxyWithoutTarget(type, new Type[] { }, interceptor);
+            var proxy =
+                (IGenericInterfaceWithGenericMethodWithDependentConstraint<object>)
+                    generator.CreateInterfaceProxyWithoutTarget(type, new Type[] { }, interceptor);
 
             proxy.RegisterType<string>();
 
             var expectedMethod =
-                typeof(IGenericInterfaceWithGenericMethodWithDependentConstraint<object>).GetMethod("RegisterType").
-                    MakeGenericMethod(typeof(string));
+                typeof(IGenericInterfaceWithGenericMethodWithDependentConstraint<object>)
+                    .GetMethod("RegisterType")
+                    .MakeGenericMethod(typeof(string));
 
             Assert.AreEqual(expectedMethod, interceptor.Invocation.Method);
         }
@@ -80,9 +82,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ProxyAdditionalInterfaceWithGenericMethods()
         {
-            var proxy = (IService)generator.CreateInterfaceProxyWithoutTarget(
-                typeof(IService), new[] { typeof(OnlyGenMethodsInterface) },
-                new StandardInterceptor());
+            var proxy = (IService)
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(IService),
+                    new[] { typeof(OnlyGenMethodsInterface) },
+                    new StandardInterceptor()
+                );
 
             Assert.IsNotNull(proxy);
         }
@@ -108,16 +113,12 @@ namespace Castle.DynamicProxy.Tests
 
         public class Test : ITest
         {
-            public void Hi<U>()
-            {
-            }
+            public void Hi<U>() { }
         }
 
         public class TestVirtual : ITest
         {
-            public virtual void Hi<U>()
-            {
-            }
+            public virtual void Hi<U>() { }
         }
     }
 }

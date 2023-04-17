@@ -30,7 +30,10 @@ namespace IntelHardwareIntrinsicTest.SSE2
 
                     for (var i = 0; i < 2; i++)
                     {
-                        if (BitConverter.DoubleToInt64Bits(inArray[i]) != BitConverter.DoubleToInt64Bits(outArray[i]))
+                        if (
+                            BitConverter.DoubleToInt64Bits(inArray[i])
+                            != BitConverter.DoubleToInt64Bits(outArray[i])
+                        )
                         {
                             Console.WriteLine("Sse2 StoreAlignedNonTemporal failed on double:");
                             for (var n = 0; n < 2; n++)
@@ -250,4 +253,3 @@ namespace IntelHardwareIntrinsicTest.SSE2
         }
     }
 }
-

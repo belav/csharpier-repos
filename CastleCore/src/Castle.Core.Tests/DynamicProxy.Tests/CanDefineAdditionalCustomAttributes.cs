@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -50,7 +50,10 @@ namespace Castle.DynamicProxy.Tests
             var options = new ProxyGenerationOptions();
             options.AdditionalAttributes.Add(AttributeUtil.CreateInfo<__Protect>());
 
-            var proxy = generator.CreateClassProxy(typeof(CanDefineAdditionalCustomAttributes), options);
+            var proxy = generator.CreateClassProxy(
+                typeof(CanDefineAdditionalCustomAttributes),
+                options
+            );
 
             Assert.IsTrue(proxy.GetType().IsDefined(typeof(__Protect), false));
         }
@@ -61,7 +64,11 @@ namespace Castle.DynamicProxy.Tests
             var options = new ProxyGenerationOptions();
             options.AdditionalAttributes.Add(AttributeUtil.CreateInfo<__Protect>());
 
-            var proxy = generator.CreateInterfaceProxyWithoutTarget(typeof(IDisposable), new Type[0], options);
+            var proxy = generator.CreateInterfaceProxyWithoutTarget(
+                typeof(IDisposable),
+                new Type[0],
+                options
+            );
 
             Assert.IsTrue(proxy.GetType().IsDefined(typeof(__Protect), false));
         }
@@ -70,9 +77,7 @@ namespace Castle.DynamicProxy.Tests
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public sealed class AttributeWithTypeArrayArgument : Attribute
     {
-        public AttributeWithTypeArrayArgument(params Type[] attributeTypes)
-        {
-        }
+        public AttributeWithTypeArrayArgument(params Type[] attributeTypes) { }
     }
 
     public enum SomeByteEnumForAttributeWithEnumArrayArgument : byte
@@ -126,44 +131,47 @@ namespace Castle.DynamicProxy.Tests
     [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     public sealed class AttributeWithEnumArrayArgument : Attribute
     {
-        public AttributeWithEnumArrayArgument(params SomeByteEnumForAttributeWithEnumArrayArgument[] attributeEnums)
-        {
-        }
-        public AttributeWithEnumArrayArgument(params SomeSbyteEnumForAttributeWithEnumArrayArgument[] attributeEnums)
-        {
-        }
-        public AttributeWithEnumArrayArgument(params SomeShortEnumForAttributeWithEnumArrayArgument[] attributeEnums)
-        {
-        }
-        public AttributeWithEnumArrayArgument(params SomeUshortEnumForAttributeWithEnumArrayArgument[] attributeEnums)
-        {
-        }
-        public AttributeWithEnumArrayArgument(params SomeIntEnumForAttributeWithEnumArrayArgument[] attributeEnums)
-        {
-        }
-        public AttributeWithEnumArrayArgument(params SomeUintEnumForAttributeWithEnumArrayArgument[] attributeEnums)
-        {
-        }
-        public AttributeWithEnumArrayArgument(params SomeLongEnumForAttributeWithEnumArrayArgument[] attributeEnums)
-        {
-        }
-        public AttributeWithEnumArrayArgument(params SomeUlongEnumForAttributeWithEnumArrayArgument[] attributeEnums)
-        {
-        }
+        public AttributeWithEnumArrayArgument(
+            params SomeByteEnumForAttributeWithEnumArrayArgument[] attributeEnums
+        ) { }
+
+        public AttributeWithEnumArrayArgument(
+            params SomeSbyteEnumForAttributeWithEnumArrayArgument[] attributeEnums
+        ) { }
+
+        public AttributeWithEnumArrayArgument(
+            params SomeShortEnumForAttributeWithEnumArrayArgument[] attributeEnums
+        ) { }
+
+        public AttributeWithEnumArrayArgument(
+            params SomeUshortEnumForAttributeWithEnumArrayArgument[] attributeEnums
+        ) { }
+
+        public AttributeWithEnumArrayArgument(
+            params SomeIntEnumForAttributeWithEnumArrayArgument[] attributeEnums
+        ) { }
+
+        public AttributeWithEnumArrayArgument(
+            params SomeUintEnumForAttributeWithEnumArrayArgument[] attributeEnums
+        ) { }
+
+        public AttributeWithEnumArrayArgument(
+            params SomeLongEnumForAttributeWithEnumArrayArgument[] attributeEnums
+        ) { }
+
+        public AttributeWithEnumArrayArgument(
+            params SomeUlongEnumForAttributeWithEnumArrayArgument[] attributeEnums
+        ) { }
     }
 
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
     public sealed class AttributeWithIntArrayArgument : Attribute
     {
-        public AttributeWithIntArrayArgument(params int[] ints)
-        {
-        }
+        public AttributeWithIntArrayArgument(params int[] ints) { }
     }
 
     [AttributeWithTypeArrayArgument(typeof(string))]
-    public interface IHasAttributeWithTypeArray
-    {
-    }
+    public interface IHasAttributeWithTypeArray { }
 
     [AttributeWithEnumArrayArgument(SomeByteEnumForAttributeWithEnumArrayArgument.Special)]
     [AttributeWithEnumArrayArgument(SomeSbyteEnumForAttributeWithEnumArrayArgument.Special)]
@@ -173,16 +181,10 @@ namespace Castle.DynamicProxy.Tests
     [AttributeWithEnumArrayArgument(SomeUintEnumForAttributeWithEnumArrayArgument.Special)]
     [AttributeWithEnumArrayArgument(SomeLongEnumForAttributeWithEnumArrayArgument.Special)]
     [AttributeWithEnumArrayArgument(SomeUlongEnumForAttributeWithEnumArrayArgument.Special)]
-    public interface IHasAttributeWithEnumArray
-    {
-    }
+    public interface IHasAttributeWithEnumArray { }
 
     [AttributeWithIntArrayArgument(1, 2, 3)]
-    public interface IHasAttributeWithIntArray
-    {
-    }
+    public interface IHasAttributeWithIntArray { }
 
-    public class __Protect : Attribute
-    {
-    }
+    public class __Protect : Attribute { }
 }

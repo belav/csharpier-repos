@@ -37,7 +37,7 @@ namespace System.ServiceModel.Channels
         public const string WS2_32 = "ws2_32.dll";
 #endif
 
-        // 
+        //
 
         public const int ERROR_SUCCESS = 0;
         public const int ERROR_FILE_NOT_FOUND = 2;
@@ -116,7 +116,6 @@ namespace System.ServiceModel.Channels
 
         public const int FILE_MAP_WRITE = 2;
         public const int FILE_MAP_READ = 4;
-
 
         public const int SDDL_REVISION_1 = 1;
 
@@ -276,7 +275,9 @@ namespace System.ServiceModel.Channels
         public const int MQ_ERROR_MESSAGE_NOT_FOUND = unchecked((int)0xC00E0088);
         public const int MQ_ERROR_CANT_RESOLVE_SITES = unchecked((int)0xC00E0089);
         public const int MQ_ERROR_NOT_SUPPORTED_BY_DEPENDENT_CLIENTS = unchecked((int)0xC00E008A);
-        public const int MQ_ERROR_OPERATION_NOT_SUPPORTED_BY_REMOTE_COMPUTER = unchecked((int)0xC00E008B);
+        public const int MQ_ERROR_OPERATION_NOT_SUPPORTED_BY_REMOTE_COMPUTER = unchecked(
+            (int)0xC00E008B
+        );
         public const int MQ_ERROR_NOT_A_CORRECT_OBJECT_CLASS = unchecked((int)0xC00E008C);
         public const int MQ_ERROR_MULTI_SORT_KEYS = unchecked((int)0xC00E008D);
         public const int MQ_ERROR_GC_NEEDED = unchecked((int)0xC00E008E);
@@ -325,102 +326,102 @@ namespace System.ServiceModel.Channels
         public const int MQMSG_SEND_ROUTE_TO_REPORT_QUEUE = 1;
 
         public const int PROPID_M_BASE = 0;
-        public const int PROPID_M_CLASS = (PROPID_M_BASE + 1);                  /* VT_UI2           */
-        public const int PROPID_M_MSGID = (PROPID_M_BASE + 2);                  /* VT_UI1|VT_VECTOR */
-        public const int PROPID_M_CORRELATIONID = (PROPID_M_BASE + 3);          /* VT_UI1|VT_VECTOR */
-        public const int PROPID_M_PRIORITY = (PROPID_M_BASE + 4);               /* VT_UI1           */
-        public const int PROPID_M_DELIVERY = (PROPID_M_BASE + 5);               /* VT_UI1           */
-        public const int PROPID_M_ACKNOWLEDGE = (PROPID_M_BASE + 6);            /* VT_UI1           */
-        public const int PROPID_M_JOURNAL = (PROPID_M_BASE + 7);                /* VT_UI1           */
-        public const int PROPID_M_APPSPECIFIC = (PROPID_M_BASE + 8);            /* VT_UI4           */
-        public const int PROPID_M_BODY = (PROPID_M_BASE + 9);                   /* VT_UI1|VT_VECTOR */
-        public const int PROPID_M_BODY_SIZE = (PROPID_M_BASE + 10);             /* VT_UI4           */
-        public const int PROPID_M_LABEL = (PROPID_M_BASE + 11);                 /* VT_LPWSTR        */
-        public const int PROPID_M_LABEL_LEN = (PROPID_M_BASE + 12);             /* VT_UI4           */
-        public const int PROPID_M_TIME_TO_REACH_QUEUE = (PROPID_M_BASE + 13);   /* VT_UI4           */
-        public const int PROPID_M_TIME_TO_BE_RECEIVED = (PROPID_M_BASE + 14);   /* VT_UI4           */
-        public const int PROPID_M_RESP_QUEUE = (PROPID_M_BASE + 15);            /* VT_LPWSTR        */
-        public const int PROPID_M_RESP_QUEUE_LEN = (PROPID_M_BASE + 16);        /* VT_UI4           */
-        public const int PROPID_M_ADMIN_QUEUE = (PROPID_M_BASE + 17);           /* VT_LPWSTR        */
-        public const int PROPID_M_ADMIN_QUEUE_LEN = (PROPID_M_BASE + 18);       /* VT_UI4           */
-        public const int PROPID_M_VERSION = (PROPID_M_BASE + 19);               /* VT_UI4           */
-        public const int PROPID_M_SENDERID = (PROPID_M_BASE + 20);              /* VT_UI1|VT_VECTOR */
-        public const int PROPID_M_SENDERID_LEN = (PROPID_M_BASE + 21);          /* VT_UI4           */
-        public const int PROPID_M_SENDERID_TYPE = (PROPID_M_BASE + 22);         /* VT_UI4           */
-        public const int PROPID_M_PRIV_LEVEL = (PROPID_M_BASE + 23);            /* VT_UI4           */
-        public const int PROPID_M_AUTH_LEVEL = (PROPID_M_BASE + 24);            /* VT_UI4           */
-        public const int PROPID_M_AUTHENTICATED = (PROPID_M_BASE + 25);         /* VT_UI1           */
-        public const int PROPID_M_HASH_ALG = (PROPID_M_BASE + 26);              /* VT_UI4           */
-        public const int PROPID_M_ENCRYPTION_ALG = (PROPID_M_BASE + 27);        /* VT_UI4           */
-        public const int PROPID_M_SENDER_CERT = (PROPID_M_BASE + 28);           /* VT_UI1|VT_VECTOR */
-        public const int PROPID_M_SENDER_CERT_LEN = (PROPID_M_BASE + 29);       /* VT_UI4           */
-        public const int PROPID_M_SRC_MACHINE_ID = (PROPID_M_BASE + 30);        /* VT_CLSID         */
-        public const int PROPID_M_SENTTIME = (PROPID_M_BASE + 31);              /* VT_UI4           */
-        public const int PROPID_M_ARRIVEDTIME = (PROPID_M_BASE + 32);           /* VT_UI4           */
-        public const int PROPID_M_DEST_QUEUE = (PROPID_M_BASE + 33);            /* VT_LPWSTR        */
-        public const int PROPID_M_DEST_QUEUE_LEN = (PROPID_M_BASE + 34);        /* VT_UI4           */
-        public const int PROPID_M_EXTENSION = (PROPID_M_BASE + 35);             /* VT_UI1|VT_VECTOR */
-        public const int PROPID_M_EXTENSION_LEN = (PROPID_M_BASE + 36);         /* VT_UI4           */
-        public const int PROPID_M_SECURITY_CONTEXT = (PROPID_M_BASE + 37);      /* VT_UI4           */
-        public const int PROPID_M_CONNECTOR_TYPE = (PROPID_M_BASE + 38);        /* VT_CLSID         */
-        public const int PROPID_M_XACT_STATUS_QUEUE = (PROPID_M_BASE + 39);     /* VT_LPWSTR        */
+        public const int PROPID_M_CLASS = (PROPID_M_BASE + 1); /* VT_UI2           */
+        public const int PROPID_M_MSGID = (PROPID_M_BASE + 2); /* VT_UI1|VT_VECTOR */
+        public const int PROPID_M_CORRELATIONID = (PROPID_M_BASE + 3); /* VT_UI1|VT_VECTOR */
+        public const int PROPID_M_PRIORITY = (PROPID_M_BASE + 4); /* VT_UI1           */
+        public const int PROPID_M_DELIVERY = (PROPID_M_BASE + 5); /* VT_UI1           */
+        public const int PROPID_M_ACKNOWLEDGE = (PROPID_M_BASE + 6); /* VT_UI1           */
+        public const int PROPID_M_JOURNAL = (PROPID_M_BASE + 7); /* VT_UI1           */
+        public const int PROPID_M_APPSPECIFIC = (PROPID_M_BASE + 8); /* VT_UI4           */
+        public const int PROPID_M_BODY = (PROPID_M_BASE + 9); /* VT_UI1|VT_VECTOR */
+        public const int PROPID_M_BODY_SIZE = (PROPID_M_BASE + 10); /* VT_UI4           */
+        public const int PROPID_M_LABEL = (PROPID_M_BASE + 11); /* VT_LPWSTR        */
+        public const int PROPID_M_LABEL_LEN = (PROPID_M_BASE + 12); /* VT_UI4           */
+        public const int PROPID_M_TIME_TO_REACH_QUEUE = (PROPID_M_BASE + 13); /* VT_UI4           */
+        public const int PROPID_M_TIME_TO_BE_RECEIVED = (PROPID_M_BASE + 14); /* VT_UI4           */
+        public const int PROPID_M_RESP_QUEUE = (PROPID_M_BASE + 15); /* VT_LPWSTR        */
+        public const int PROPID_M_RESP_QUEUE_LEN = (PROPID_M_BASE + 16); /* VT_UI4           */
+        public const int PROPID_M_ADMIN_QUEUE = (PROPID_M_BASE + 17); /* VT_LPWSTR        */
+        public const int PROPID_M_ADMIN_QUEUE_LEN = (PROPID_M_BASE + 18); /* VT_UI4           */
+        public const int PROPID_M_VERSION = (PROPID_M_BASE + 19); /* VT_UI4           */
+        public const int PROPID_M_SENDERID = (PROPID_M_BASE + 20); /* VT_UI1|VT_VECTOR */
+        public const int PROPID_M_SENDERID_LEN = (PROPID_M_BASE + 21); /* VT_UI4           */
+        public const int PROPID_M_SENDERID_TYPE = (PROPID_M_BASE + 22); /* VT_UI4           */
+        public const int PROPID_M_PRIV_LEVEL = (PROPID_M_BASE + 23); /* VT_UI4           */
+        public const int PROPID_M_AUTH_LEVEL = (PROPID_M_BASE + 24); /* VT_UI4           */
+        public const int PROPID_M_AUTHENTICATED = (PROPID_M_BASE + 25); /* VT_UI1           */
+        public const int PROPID_M_HASH_ALG = (PROPID_M_BASE + 26); /* VT_UI4           */
+        public const int PROPID_M_ENCRYPTION_ALG = (PROPID_M_BASE + 27); /* VT_UI4           */
+        public const int PROPID_M_SENDER_CERT = (PROPID_M_BASE + 28); /* VT_UI1|VT_VECTOR */
+        public const int PROPID_M_SENDER_CERT_LEN = (PROPID_M_BASE + 29); /* VT_UI4           */
+        public const int PROPID_M_SRC_MACHINE_ID = (PROPID_M_BASE + 30); /* VT_CLSID         */
+        public const int PROPID_M_SENTTIME = (PROPID_M_BASE + 31); /* VT_UI4           */
+        public const int PROPID_M_ARRIVEDTIME = (PROPID_M_BASE + 32); /* VT_UI4           */
+        public const int PROPID_M_DEST_QUEUE = (PROPID_M_BASE + 33); /* VT_LPWSTR        */
+        public const int PROPID_M_DEST_QUEUE_LEN = (PROPID_M_BASE + 34); /* VT_UI4           */
+        public const int PROPID_M_EXTENSION = (PROPID_M_BASE + 35); /* VT_UI1|VT_VECTOR */
+        public const int PROPID_M_EXTENSION_LEN = (PROPID_M_BASE + 36); /* VT_UI4           */
+        public const int PROPID_M_SECURITY_CONTEXT = (PROPID_M_BASE + 37); /* VT_UI4           */
+        public const int PROPID_M_CONNECTOR_TYPE = (PROPID_M_BASE + 38); /* VT_CLSID         */
+        public const int PROPID_M_XACT_STATUS_QUEUE = (PROPID_M_BASE + 39); /* VT_LPWSTR        */
         public const int PROPID_M_XACT_STATUS_QUEUE_LEN = (PROPID_M_BASE + 40); /* VT_UI4           */
-        public const int PROPID_M_TRACE = (PROPID_M_BASE + 41);                 /* VT_UI1           */
-        public const int PROPID_M_BODY_TYPE = (PROPID_M_BASE + 42);             /* VT_UI4           */
-        public const int PROPID_M_DEST_SYMM_KEY = (PROPID_M_BASE + 43);         /* VT_UI1|VT_VECTOR */
-        public const int PROPID_M_DEST_SYMM_KEY_LEN = (PROPID_M_BASE + 44);     /* VT_UI4           */
-        public const int PROPID_M_SIGNATURE = (PROPID_M_BASE + 45);             /* VT_UI1|VT_VECTOR */
-        public const int PROPID_M_SIGNATURE_LEN = (PROPID_M_BASE + 46);         /* VT_UI4           */
-        public const int PROPID_M_PROV_TYPE = (PROPID_M_BASE + 47);             /* VT_UI4           */
-        public const int PROPID_M_PROV_NAME = (PROPID_M_BASE + 48);             /* VT_LPWSTR        */
-        public const int PROPID_M_PROV_NAME_LEN = (PROPID_M_BASE + 49);         /* VT_UI4           */
-        public const int PROPID_M_FIRST_IN_XACT = (PROPID_M_BASE + 50);         /* VT_UI1           */
-        public const int PROPID_M_LAST_IN_XACT = (PROPID_M_BASE + 51);          /* VT_UI1           */
-        public const int PROPID_M_XACTID = (PROPID_M_BASE + 52);                /* VT_UI1|VT_VECTOR */
-        public const int PROPID_M_AUTHENTICATED_EX = (PROPID_M_BASE + 53);      /* VT_UI1           */
+        public const int PROPID_M_TRACE = (PROPID_M_BASE + 41); /* VT_UI1           */
+        public const int PROPID_M_BODY_TYPE = (PROPID_M_BASE + 42); /* VT_UI4           */
+        public const int PROPID_M_DEST_SYMM_KEY = (PROPID_M_BASE + 43); /* VT_UI1|VT_VECTOR */
+        public const int PROPID_M_DEST_SYMM_KEY_LEN = (PROPID_M_BASE + 44); /* VT_UI4           */
+        public const int PROPID_M_SIGNATURE = (PROPID_M_BASE + 45); /* VT_UI1|VT_VECTOR */
+        public const int PROPID_M_SIGNATURE_LEN = (PROPID_M_BASE + 46); /* VT_UI4           */
+        public const int PROPID_M_PROV_TYPE = (PROPID_M_BASE + 47); /* VT_UI4           */
+        public const int PROPID_M_PROV_NAME = (PROPID_M_BASE + 48); /* VT_LPWSTR        */
+        public const int PROPID_M_PROV_NAME_LEN = (PROPID_M_BASE + 49); /* VT_UI4           */
+        public const int PROPID_M_FIRST_IN_XACT = (PROPID_M_BASE + 50); /* VT_UI1           */
+        public const int PROPID_M_LAST_IN_XACT = (PROPID_M_BASE + 51); /* VT_UI1           */
+        public const int PROPID_M_XACTID = (PROPID_M_BASE + 52); /* VT_UI1|VT_VECTOR */
+        public const int PROPID_M_AUTHENTICATED_EX = (PROPID_M_BASE + 53); /* VT_UI1           */
 
-        public const int PROPID_M_RESP_FORMAT_NAME = (PROPID_M_BASE + 54);      /* VT_LPWSTR        */
-        public const int PROPID_M_RESP_FORMAT_NAME_LEN = (PROPID_M_BASE + 55);  /* VT_UI4           */
-        public const int PROPID_M_DEST_FORMAT_NAME = (PROPID_M_BASE + 58);      /* VT_LPWSTR        */
-        public const int PROPID_M_DEST_FORMAT_NAME_LEN = (PROPID_M_BASE + 59);  /* VT_UI4           */
-        public const int PROPID_M_LOOKUPID = (PROPID_M_BASE + 60);              /* VT_UI8           */
-        public const int PROPID_M_SOAP_ENVELOPE = (PROPID_M_BASE + 61);         /* VT_LPWSTR        */
-        public const int PROPID_M_SOAP_ENVELOPE_LEN = (PROPID_M_BASE + 62);     /* VT_UI4           */
-        public const int PROPID_M_COMPOUND_MESSAGE = (PROPID_M_BASE + 63);      /* VT_UI1|VT_VECTOR */
+        public const int PROPID_M_RESP_FORMAT_NAME = (PROPID_M_BASE + 54); /* VT_LPWSTR        */
+        public const int PROPID_M_RESP_FORMAT_NAME_LEN = (PROPID_M_BASE + 55); /* VT_UI4           */
+        public const int PROPID_M_DEST_FORMAT_NAME = (PROPID_M_BASE + 58); /* VT_LPWSTR        */
+        public const int PROPID_M_DEST_FORMAT_NAME_LEN = (PROPID_M_BASE + 59); /* VT_UI4           */
+        public const int PROPID_M_LOOKUPID = (PROPID_M_BASE + 60); /* VT_UI8           */
+        public const int PROPID_M_SOAP_ENVELOPE = (PROPID_M_BASE + 61); /* VT_LPWSTR        */
+        public const int PROPID_M_SOAP_ENVELOPE_LEN = (PROPID_M_BASE + 62); /* VT_UI4           */
+        public const int PROPID_M_COMPOUND_MESSAGE = (PROPID_M_BASE + 63); /* VT_UI1|VT_VECTOR */
         public const int PROPID_M_COMPOUND_MESSAGE_SIZE = (PROPID_M_BASE + 64); /* VT_UI4           */
-        public const int PROPID_M_SOAP_HEADER = (PROPID_M_BASE + 65);           /* VT_LPWSTR        */
-        public const int PROPID_M_SOAP_BODY = (PROPID_M_BASE + 66);             /* VT_LPWSTR        */
-        public const int PROPID_M_DEADLETTER_QUEUE = (PROPID_M_BASE + 67);      /* VT_LPWSTR        */
-        public const int PROPID_M_DEADLETTER_QUEUE_LEN = (PROPID_M_BASE + 68);  /* VT_UI4           */
-        public const int PROPID_M_ABORT_COUNT = (PROPID_M_BASE + 69);           /* VT_UI4           */
-        public const int PROPID_M_MOVE_COUNT = (PROPID_M_BASE + 70);            /* VT_UI4           */
-        public const int PROPID_M_GROUP_ID = (PROPID_M_BASE + 71);              /* VT_LPWSTR        */
-        public const int PROPID_M_GROUP_ID_LEN = (PROPID_M_BASE + 72);          /* VT_UI4           */
-        public const int PROPID_M_FIRST_IN_GROUP = (PROPID_M_BASE + 73);        /* VT_UI1           */
-        public const int PROPID_M_LAST_IN_GROUP = (PROPID_M_BASE + 74);         /* VT_UI1           */
-        public const int PROPID_M_LAST_MOVE_TIME = (PROPID_M_BASE + 75);        /* VT_UI4           */
+        public const int PROPID_M_SOAP_HEADER = (PROPID_M_BASE + 65); /* VT_LPWSTR        */
+        public const int PROPID_M_SOAP_BODY = (PROPID_M_BASE + 66); /* VT_LPWSTR        */
+        public const int PROPID_M_DEADLETTER_QUEUE = (PROPID_M_BASE + 67); /* VT_LPWSTR        */
+        public const int PROPID_M_DEADLETTER_QUEUE_LEN = (PROPID_M_BASE + 68); /* VT_UI4           */
+        public const int PROPID_M_ABORT_COUNT = (PROPID_M_BASE + 69); /* VT_UI4           */
+        public const int PROPID_M_MOVE_COUNT = (PROPID_M_BASE + 70); /* VT_UI4           */
+        public const int PROPID_M_GROUP_ID = (PROPID_M_BASE + 71); /* VT_LPWSTR        */
+        public const int PROPID_M_GROUP_ID_LEN = (PROPID_M_BASE + 72); /* VT_UI4           */
+        public const int PROPID_M_FIRST_IN_GROUP = (PROPID_M_BASE + 73); /* VT_UI1           */
+        public const int PROPID_M_LAST_IN_GROUP = (PROPID_M_BASE + 74); /* VT_UI1           */
+        public const int PROPID_M_LAST_MOVE_TIME = (PROPID_M_BASE + 75); /* VT_UI4           */
 
         public const int PROPID_Q_BASE = 100;
-        public const int PROPID_Q_INSTANCE = (PROPID_Q_BASE + 1);              /* VT_CLSID         */
-        public const int PROPID_Q_TYPE = (PROPID_Q_BASE + 2);                  /* VT_CLSID         */
-        public const int PROPID_Q_PATHNAME = (PROPID_Q_BASE + 3);              /* VT_LPWSTR        */
-        public const int PROPID_Q_JOURNAL = (PROPID_Q_BASE + 4);               /* VT_UI1           */
-        public const int PROPID_Q_QUOTA = (PROPID_Q_BASE + 5);                 /* VT_UI4           */
-        public const int PROPID_Q_BASEPRIORITY = (PROPID_Q_BASE + 6);          /* VT_I2            */
-        public const int PROPID_Q_JOURNAL_QUOTA = (PROPID_Q_BASE + 7);         /* VT_UI4           */
-        public const int PROPID_Q_LABEL = (PROPID_Q_BASE + 8);                 /* VT_LPWSTR        */
-        public const int PROPID_Q_CREATE_TIME = (PROPID_Q_BASE + 9);           /* VT_I4            */
-        public const int PROPID_Q_MODIFY_TIME = (PROPID_Q_BASE + 10);           /* VT_I4            */
-        public const int PROPID_Q_AUTHENTICATE = (PROPID_Q_BASE + 11);          /* VT_UI1           */
-        public const int PROPID_Q_PRIV_LEVEL = (PROPID_Q_BASE + 12);            /* VT_UI4           */
-        public const int PROPID_Q_TRANSACTION = (PROPID_Q_BASE + 13);           /* VT_UI1           */
-        public const int PROPID_Q_PATHNAME_DNS = (PROPID_Q_BASE + 24);          /* VT_LPWSTR        */
-        public const int PROPID_Q_MULTICAST_ADDRESS = (PROPID_Q_BASE + 25);     /* VT_LPWSTR        */
-        public const int PROPID_Q_ADS_PATH = (PROPID_Q_BASE + 26);              /* VT_LPWSTR        */
+        public const int PROPID_Q_INSTANCE = (PROPID_Q_BASE + 1); /* VT_CLSID         */
+        public const int PROPID_Q_TYPE = (PROPID_Q_BASE + 2); /* VT_CLSID         */
+        public const int PROPID_Q_PATHNAME = (PROPID_Q_BASE + 3); /* VT_LPWSTR        */
+        public const int PROPID_Q_JOURNAL = (PROPID_Q_BASE + 4); /* VT_UI1           */
+        public const int PROPID_Q_QUOTA = (PROPID_Q_BASE + 5); /* VT_UI4           */
+        public const int PROPID_Q_BASEPRIORITY = (PROPID_Q_BASE + 6); /* VT_I2            */
+        public const int PROPID_Q_JOURNAL_QUOTA = (PROPID_Q_BASE + 7); /* VT_UI4           */
+        public const int PROPID_Q_LABEL = (PROPID_Q_BASE + 8); /* VT_LPWSTR        */
+        public const int PROPID_Q_CREATE_TIME = (PROPID_Q_BASE + 9); /* VT_I4            */
+        public const int PROPID_Q_MODIFY_TIME = (PROPID_Q_BASE + 10); /* VT_I4            */
+        public const int PROPID_Q_AUTHENTICATE = (PROPID_Q_BASE + 11); /* VT_UI1           */
+        public const int PROPID_Q_PRIV_LEVEL = (PROPID_Q_BASE + 12); /* VT_UI4           */
+        public const int PROPID_Q_TRANSACTION = (PROPID_Q_BASE + 13); /* VT_UI1           */
+        public const int PROPID_Q_PATHNAME_DNS = (PROPID_Q_BASE + 24); /* VT_LPWSTR        */
+        public const int PROPID_Q_MULTICAST_ADDRESS = (PROPID_Q_BASE + 25); /* VT_LPWSTR        */
+        public const int PROPID_Q_ADS_PATH = (PROPID_Q_BASE + 26); /* VT_LPWSTR        */
 
         public const int PROPID_PC_BASE = 5800;
-        public const int PROPID_PC_VERSION = (PROPID_PC_BASE + 1);              /* VT_UI4           */
-        public const int PROPID_PC_DS_ENABLED = (PROPID_PC_BASE + 2);           /* VT_BOOL          */
+        public const int PROPID_PC_VERSION = (PROPID_PC_BASE + 1); /* VT_UI4           */
+        public const int PROPID_PC_DS_ENABLED = (PROPID_PC_BASE + 2); /* VT_BOOL          */
 
         public const int PROPID_MGMT_QUEUE_BASE = 0;
         public const int PROPID_MGMT_QUEUE_SUBQUEUE_NAMES = (PROPID_MGMT_QUEUE_BASE + 27); /* VT_LPWSTR|VT_VECTOR */
@@ -452,7 +453,8 @@ namespace System.ServiceModel.Channels
         public const int CALG_AES = ALG_CLASS_DATA_ENCRYPT | ALG_TYPE_BLOCK | ALG_SID_AES;
 
         public const int PROV_RSA_AES = 24;
-        public const string MS_ENH_RSA_AES_PROV = "Microsoft Enhanced RSA and AES Cryptographic Provider";
+        public const string MS_ENH_RSA_AES_PROV =
+            "Microsoft Enhanced RSA and AES Cryptographic Provider";
 
         public const ushort VT_NULL = 1;
         public const ushort VT_BOOL = 11;
@@ -476,42 +478,42 @@ namespace System.ServiceModel.Channels
             internal bool bInheritHandle = false;
         }
 
-        public unsafe delegate void MQReceiveCallback(int error, IntPtr handle, int timeout,
-            int action, IntPtr props, NativeOverlapped* nativeOverlapped, IntPtr cursor);
+        public unsafe delegate void MQReceiveCallback(
+            int error,
+            IntPtr handle,
+            int timeout,
+            int action,
+            IntPtr props,
+            NativeOverlapped* nativeOverlapped,
+            IntPtr cursor
+        );
 
         [DllImport(KERNEL32), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int CloseHandle
-        (
-            IntPtr handle
-        );
+        internal static extern int CloseHandle(IntPtr handle);
 
         [DllImport(SECUR32), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int SspiFreeAuthIdentity(
-               [In] IntPtr ppAuthIdentity
-          );
+        internal static extern int SspiFreeAuthIdentity([In] IntPtr ppAuthIdentity);
 
         [DllImport(SECUR32), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern uint SspiExcludePackage(
-        [In] IntPtr AuthIdentity,
-        [MarshalAs(UnmanagedType.LPWStr)]
-        [In] string pszPackageName,
-        [Out] out IntPtr ppNewAuthIdentity);
+            [In] IntPtr AuthIdentity,
+            [MarshalAs(UnmanagedType.LPWStr)] [In] string pszPackageName,
+            [Out] out IntPtr ppNewAuthIdentity
+        );
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern int ConnectNamedPipe
-        (
+        internal unsafe static extern int ConnectNamedPipe(
             PipeHandle handle,
             NativeOverlapped* lpOverlapped
         );
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal static extern PipeHandle CreateFile
-        (
+        internal static extern PipeHandle CreateFile(
             string lpFileName,
             int dwDesiredAccess,
             int dwShareMode,
@@ -534,8 +536,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal unsafe static extern PipeHandle CreateNamedPipe
-        (
+        internal unsafe static extern PipeHandle CreateNamedPipe(
             string name,
             int openMode,
             int pipeMode,
@@ -548,10 +549,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe static extern int DisconnectNamedPipe
-        (
-            PipeHandle handle
-        );
+        internal unsafe static extern int DisconnectNamedPipe(PipeHandle handle);
 
         [DllImport(KERNEL32, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -567,8 +565,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int FormatMessage
-        (
+        internal static extern int FormatMessage(
             int dwFlags,
             IntPtr lpSource,
             int dwMessageId,
@@ -580,8 +577,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int FormatMessage
-        (
+        internal static extern int FormatMessage(
             int dwFlags,
             SafeLibraryHandle lpSource,
             int dwMessageId,
@@ -593,8 +589,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int GetOverlappedResult
-        (
+        unsafe internal static extern int GetOverlappedResult(
             PipeHandle handle,
             NativeOverlapped* overlapped,
             out int bytesTransferred,
@@ -604,8 +599,7 @@ namespace System.ServiceModel.Channels
         // This p/invoke is for perf-sensitive codepaths which can guarantee a valid handle via custom locking.
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int GetOverlappedResult
-        (
+        unsafe internal static extern int GetOverlappedResult(
             IntPtr handle,
             NativeOverlapped* overlapped,
             out int bytesTransferred,
@@ -614,16 +608,14 @@ namespace System.ServiceModel.Channels
 
         // NOTE: a macro in win32
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        internal unsafe static bool HasOverlappedIoCompleted(
-            NativeOverlapped* overlapped)
+        internal unsafe static bool HasOverlappedIoCompleted(NativeOverlapped* overlapped)
         {
             return overlapped->InternalLow != (IntPtr)STATUS_PENDING;
         }
 
         [DllImport(KERNEL32, SetLastError = true, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal static extern SafeFileMappingHandle OpenFileMapping
-        (
+        internal static extern SafeFileMappingHandle OpenFileMapping(
             int access,
             bool inheritHandle,
             string name
@@ -631,8 +623,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern SafeViewOfFileHandle MapViewOfFile
-        (
+        internal static extern SafeViewOfFileHandle MapViewOfFile(
             SafeFileMappingHandle handle,
             int dwDesiredAccess,
             int dwFileOffsetHigh,
@@ -648,8 +639,7 @@ namespace System.ServiceModel.Channels
         // This p/invoke is for perf-sensitive codepaths which can guarantee a valid handle via custom locking.
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        unsafe internal static extern int ReadFile
-        (
+        unsafe internal static extern int ReadFile(
             IntPtr handle,
             byte* bytes,
             int numBytesToRead,
@@ -659,8 +649,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern int SetNamedPipeHandleState
-        (
+        internal static extern int SetNamedPipeHandleState(
             PipeHandle handle,
             ref int mode,
             IntPtr collectionCount,
@@ -670,8 +659,7 @@ namespace System.ServiceModel.Channels
         // This p/invoke is for perf-sensitive codepaths which can guarantee a valid handle via custom locking.
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern int WriteFile
-        (
+        internal static unsafe extern int WriteFile(
             IntPtr handle,
             byte* bytes,
             int numBytesToWrite,
@@ -681,34 +669,52 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern bool GetNamedPipeClientProcessId(PipeHandle handle, out int id);
+        internal static unsafe extern bool GetNamedPipeClientProcessId(
+            PipeHandle handle,
+            out int id
+        );
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern bool GetNamedPipeServerProcessId(PipeHandle handle, out int id);
-
-        [DllImport(KERNEL32, ExactSpelling = true),
-        ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        [ResourceExposure(ResourceScope.None)]
-        internal static extern int UnmapViewOfFile
-        (
-            IntPtr lpBaseAddress
+        internal static unsafe extern bool GetNamedPipeServerProcessId(
+            PipeHandle handle,
+            out int id
         );
+
+        [
+            DllImport(KERNEL32, ExactSpelling = true),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
+        [ResourceExposure(ResourceScope.None)]
+        internal static extern int UnmapViewOfFile(IntPtr lpBaseAddress);
 
         [DllImport(KERNEL32, ExactSpelling = true)]
         [ResourceExposure(ResourceScope.None)]
-        public static extern bool SetWaitableTimer(SafeWaitHandle handle, ref long dueTime, int period, IntPtr mustBeZero, IntPtr mustBeZeroAlso, bool resume);
+        public static extern bool SetWaitableTimer(
+            SafeWaitHandle handle,
+            ref long dueTime,
+            int period,
+            IntPtr mustBeZero,
+            IntPtr mustBeZeroAlso,
+            bool resume
+        );
 
         [DllImport(KERNEL32, BestFitMapping = false, CharSet = CharSet.Auto)]
         [ResourceExposure(ResourceScope.Machine)]
-        public static extern SafeWaitHandle CreateWaitableTimer(IntPtr mustBeZero, bool manualReset, string timerName);
+        public static extern SafeWaitHandle CreateWaitableTimer(
+            IntPtr mustBeZero,
+            bool manualReset,
+            string timerName
+        );
 
 #if WSARECV
         [DllImport(WS2_32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static unsafe extern int WSARecv
-        (
-            IntPtr handle, WSABuffer* buffers, int bufferCount, out int bytesTransferred,
+        internal static unsafe extern int WSARecv(
+            IntPtr handle,
+            WSABuffer* buffers,
+            int bufferCount,
+            out int bytesTransferred,
             ref int socketFlags,
             NativeOverlapped* nativeOverlapped,
             IntPtr completionRoutine
@@ -717,12 +723,12 @@ namespace System.ServiceModel.Channels
         [DllImport(WS2_32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         internal static unsafe extern bool WSAGetOverlappedResult(
-                                                 IntPtr socketHandle,
-                                                 NativeOverlapped* overlapped,
-                                                 out int bytesTransferred,
-                                                 bool wait,
-                                                 out uint flags
-                                                 );
+            IntPtr socketHandle,
+            NativeOverlapped* overlapped,
+            out int bytesTransferred,
+            bool wait,
+            out uint flags
+        );
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct WSABuffer
@@ -737,33 +743,26 @@ namespace System.ServiceModel.Channels
             return System.Runtime.Interop.UnsafeNativeMethods.GetComputerName(nameType);
         }
 
-
         [DllImport(USERENV, SetLastError = true)]
-        internal static extern int DeriveAppContainerSidFromAppContainerName
-        (
+        internal static extern int DeriveAppContainerSidFromAppContainerName(
             [In, MarshalAs(UnmanagedType.LPWStr)] string appContainerName,
             out IntPtr appContainerSid
         );
 
         [DllImport(ADVAPI32, SetLastError = true)]
-        internal static extern IntPtr FreeSid
-        (
-            IntPtr pSid
-        );
+        internal static extern IntPtr FreeSid(IntPtr pSid);
 
-        // If the function succeeds, the return value is ERROR_SUCCESS and 'packageFamilyNameLength' contains the size of the data copied 
+        // If the function succeeds, the return value is ERROR_SUCCESS and 'packageFamilyNameLength' contains the size of the data copied
         // to 'packageFamilyName' (in WCHARs, including the null-terminator). If the function fails, the return value is a Win32 error code.
         [DllImport(KERNEL32)]
-        internal static extern int PackageFamilyNameFromFullName
-        (
+        internal static extern int PackageFamilyNameFromFullName(
             [In, MarshalAs(UnmanagedType.LPWStr)] string packageFullName,
             ref uint packageFamilyNameLength,
             [In, Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder packageFamilyName
         );
 
         [DllImport(KERNEL32, SetLastError = true)]
-        internal static extern bool GetAppContainerNamedObjectPath
-        (
+        internal static extern bool GetAppContainerNamedObjectPath(
             IntPtr token,
             IntPtr appContainerSid,
             uint objectPathLength,
@@ -776,8 +775,7 @@ namespace System.ServiceModel.Channels
 
         [DllImport(ADVAPI32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool OpenProcessToken
-        (
+        internal static extern bool OpenProcessToken(
             IntPtr ProcessHandle,
             TokenAccessLevels DesiredAccess,
             out SafeCloseHandle TokenHandle
@@ -785,8 +783,7 @@ namespace System.ServiceModel.Channels
 
         // Token marshalled as byte[]
         [DllImport(ADVAPI32, SetLastError = true)]
-        static extern unsafe bool GetTokenInformation
-        (
+        static extern unsafe bool GetTokenInformation(
             SafeCloseHandle tokenHandle,
             TOKEN_INFORMATION_CLASS tokenInformationClass,
             byte[] tokenInformation,
@@ -796,8 +793,7 @@ namespace System.ServiceModel.Channels
 
         // Token marshalled as uint
         [DllImport(ADVAPI32, SetLastError = true)]
-        static extern bool GetTokenInformation
-        (
+        static extern bool GetTokenInformation(
             SafeCloseHandle tokenHandle,
             TOKEN_INFORMATION_CLASS tokenInformationClass,
             out uint tokenInformation,
@@ -809,18 +805,22 @@ namespace System.ServiceModel.Channels
         {
             // Get length of buffer needed for sid.
             uint returnLength = UnsafeNativeMethods.GetTokenInformationLength(
-                                                        tokenHandle,
-                                                        TOKEN_INFORMATION_CLASS.TokenAppContainerSid);
+                tokenHandle,
+                TOKEN_INFORMATION_CLASS.TokenAppContainerSid
+            );
 
             byte[] tokenInformation = new byte[returnLength];
             fixed (byte* pTokenInformation = tokenInformation)
             {
-                if (!UnsafeNativeMethods.GetTokenInformation(
-                                                tokenHandle,
-                                                TOKEN_INFORMATION_CLASS.TokenAppContainerSid,
-                                                tokenInformation,
-                                                returnLength,
-                                                out returnLength))
+                if (
+                    !UnsafeNativeMethods.GetTokenInformation(
+                        tokenHandle,
+                        TOKEN_INFORMATION_CLASS.TokenAppContainerSid,
+                        tokenInformation,
+                        returnLength,
+                        out returnLength
+                    )
+                )
                 {
                     int errorCode = Marshal.GetLastWin32Error();
                     throw FxTrace.Exception.AsError(new Win32Exception(errorCode));
@@ -837,16 +837,24 @@ namespace System.ServiceModel.Channels
             public IntPtr psid;
         }
 
-        static uint GetTokenInformationLength(SafeCloseHandle token, TOKEN_INFORMATION_CLASS tokenInformationClass)
+        static uint GetTokenInformationLength(
+            SafeCloseHandle token,
+            TOKEN_INFORMATION_CLASS tokenInformationClass
+        )
         {
             uint lengthNeeded;
             bool success;
-            if (!(success = GetTokenInformation(
-                                       token,
-                                       tokenInformationClass,
-                                       null,
-                                       0,
-                                       out lengthNeeded)))
+            if (
+                !(
+                    success = GetTokenInformation(
+                        token,
+                        tokenInformationClass,
+                        null,
+                        0,
+                        out lengthNeeded
+                    )
+                )
+            )
             {
                 int error = Marshal.GetLastWin32Error();
                 if (error != UnsafeNativeMethods.ERROR_INSUFFICIENT_BUFFER)
@@ -865,12 +873,15 @@ namespace System.ServiceModel.Channels
             uint sessionId;
             uint returnLength;
 
-            if (!UnsafeNativeMethods.GetTokenInformation(
-                                            tokenHandle,
-                                            TOKEN_INFORMATION_CLASS.TokenSessionId,
-                                            out sessionId,
-                                            sizeof(uint),
-                                            out returnLength))
+            if (
+                !UnsafeNativeMethods.GetTokenInformation(
+                    tokenHandle,
+                    TOKEN_INFORMATION_CLASS.TokenSessionId,
+                    out sessionId,
+                    sizeof(uint),
+                    out returnLength
+                )
+            )
             {
                 int errorCode = Marshal.GetLastWin32Error();
                 throw FxTrace.Exception.AsError(new Win32Exception(errorCode));
@@ -883,12 +894,15 @@ namespace System.ServiceModel.Channels
         {
             uint runningInAppContainer;
             uint returnLength;
-            if (!UnsafeNativeMethods.GetTokenInformation(
-                                        tokenHandle,
-                                        TOKEN_INFORMATION_CLASS.TokenIsAppContainer,
-                                        out runningInAppContainer,
-                                        sizeof(uint),
-                                        out returnLength))
+            if (
+                !UnsafeNativeMethods.GetTokenInformation(
+                    tokenHandle,
+                    TOKEN_INFORMATION_CLASS.TokenIsAppContainer,
+                    out runningInAppContainer,
+                    sizeof(uint),
+                    out returnLength
+                )
+            )
             {
                 int errorCode = Marshal.GetLastWin32Error();
                 throw FxTrace.Exception.AsError(new Win32Exception(errorCode));
@@ -911,24 +925,34 @@ namespace System.ServiceModel.Channels
         {
             [FieldOffset(0)]
             public ushort vt;
+
             [FieldOffset(2)]
             public ushort reserved1;
+
             [FieldOffset(4)]
             public ushort reserved2;
+
             [FieldOffset(6)]
             public ushort reserved3;
+
             [FieldOffset(8)]
             public byte byteValue;
+
             [FieldOffset(8)]
             public short shortValue;
+
             [FieldOffset(8)]
             public int intValue;
+
             [FieldOffset(8)]
             public long longValue;
+
             [FieldOffset(8)]
             public IntPtr intPtr;
+
             [FieldOffset(8)]
             public CAUI1 byteArrayValue;
+
             [FieldOffset(8)]
             public CALPWSTR stringArraysValue;
 
@@ -949,7 +973,12 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.Machine)]
-        public static extern int MQOpenQueue(string formatName, int access, int shareMode, out MsmqQueueHandle handle);
+        public static extern int MQOpenQueue(
+            string formatName,
+            int access,
+            int shareMode,
+            out MsmqQueueHandle handle
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
@@ -962,78 +991,165 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public static extern int MQSendMessage(MsmqQueueHandle handle, IntPtr properties, IntPtr transaction);
+        public static extern int MQSendMessage(
+            MsmqQueueHandle handle,
+            IntPtr properties,
+            IntPtr transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public static extern int MQSendMessage(MsmqQueueHandle handle, IntPtr properties, IDtcTransaction transaction);
+        public static extern int MQSendMessage(
+            MsmqQueueHandle handle,
+            IntPtr properties,
+            IDtcTransaction transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(MsmqQueueHandle handle, int timeout, int action, IntPtr properties,
-            NativeOverlapped* nativeOverlapped, IntPtr receiveCallback, IntPtr cursorHandle, IntPtr transaction);
+        public unsafe static extern int MQReceiveMessage(
+            MsmqQueueHandle handle,
+            int timeout,
+            int action,
+            IntPtr properties,
+            NativeOverlapped* nativeOverlapped,
+            IntPtr receiveCallback,
+            IntPtr cursorHandle,
+            IntPtr transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(IntPtr handle, int timeout, int action, IntPtr properties,
-            NativeOverlapped* nativeOverlapped, IntPtr receiveCallback, IntPtr cursorHandle, IntPtr transaction);
+        public unsafe static extern int MQReceiveMessage(
+            IntPtr handle,
+            int timeout,
+            int action,
+            IntPtr properties,
+            NativeOverlapped* nativeOverlapped,
+            IntPtr receiveCallback,
+            IntPtr cursorHandle,
+            IntPtr transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(MsmqQueueHandle handle, int timeout, int action, IntPtr properties,
-            NativeOverlapped* nativeOverlapped, IntPtr receiveCallback, IntPtr cursorHandle, IDtcTransaction transaction);
+        public unsafe static extern int MQReceiveMessage(
+            MsmqQueueHandle handle,
+            int timeout,
+            int action,
+            IntPtr properties,
+            NativeOverlapped* nativeOverlapped,
+            IntPtr receiveCallback,
+            IntPtr cursorHandle,
+            IDtcTransaction transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(IntPtr handle, int timeout, int action, IntPtr properties,
-            NativeOverlapped* nativeOverlapped, IntPtr receiveCallback, IntPtr cursorHandle, IDtcTransaction transaction);
+        public unsafe static extern int MQReceiveMessage(
+            IntPtr handle,
+            int timeout,
+            int action,
+            IntPtr properties,
+            NativeOverlapped* nativeOverlapped,
+            IntPtr receiveCallback,
+            IntPtr cursorHandle,
+            IDtcTransaction transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(MsmqQueueHandle handle, int timeout, int action, IntPtr properties,
-            NativeOverlapped* nativeOverlapped, MQReceiveCallback receiveCallback, IntPtr cursorHandle, IntPtr transaction);
+        public unsafe static extern int MQReceiveMessage(
+            MsmqQueueHandle handle,
+            int timeout,
+            int action,
+            IntPtr properties,
+            NativeOverlapped* nativeOverlapped,
+            MQReceiveCallback receiveCallback,
+            IntPtr cursorHandle,
+            IntPtr transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessage(IntPtr handle, int timeout, int action, IntPtr properties,
-            NativeOverlapped* nativeOverlapped, IntPtr receiveCallback, IntPtr cursorHandle, ITransaction transaction);
+        public unsafe static extern int MQReceiveMessage(
+            IntPtr handle,
+            int timeout,
+            int action,
+            IntPtr properties,
+            NativeOverlapped* nativeOverlapped,
+            IntPtr receiveCallback,
+            IntPtr cursorHandle,
+            ITransaction transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessageByLookupId(MsmqQueueHandle handle, long lookupId, int action,
-            IntPtr properties, NativeOverlapped* nativeOverlapped, IntPtr receiveCallback, IDtcTransaction transaction);
+        public unsafe static extern int MQReceiveMessageByLookupId(
+            MsmqQueueHandle handle,
+            long lookupId,
+            int action,
+            IntPtr properties,
+            NativeOverlapped* nativeOverlapped,
+            IntPtr receiveCallback,
+            IDtcTransaction transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessageByLookupId(MsmqQueueHandle handle, long lookupId, int action,
-            IntPtr properties, NativeOverlapped* nativeOverlapped, IntPtr receiveCallback, IntPtr transaction);
+        public unsafe static extern int MQReceiveMessageByLookupId(
+            MsmqQueueHandle handle,
+            long lookupId,
+            int action,
+            IntPtr properties,
+            NativeOverlapped* nativeOverlapped,
+            IntPtr receiveCallback,
+            IntPtr transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQReceiveMessageByLookupId(MsmqQueueHandle handle, long lookupId, int action,
-            IntPtr properties, NativeOverlapped* nativeOverlapped, IntPtr receiveCallback, ITransaction transaction);
+        public unsafe static extern int MQReceiveMessageByLookupId(
+            MsmqQueueHandle handle,
+            long lookupId,
+            int action,
+            IntPtr properties,
+            NativeOverlapped* nativeOverlapped,
+            IntPtr receiveCallback,
+            ITransaction transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQGetPrivateComputerInformation(string computerName, IntPtr properties);
+        public unsafe static extern int MQGetPrivateComputerInformation(
+            string computerName,
+            IntPtr properties
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQMarkMessageRejected(MsmqQueueHandle handle, long lookupId);
+        public unsafe static extern int MQMarkMessageRejected(
+            MsmqQueueHandle handle,
+            long lookupId
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public static extern int MQMoveMessage(MsmqQueueHandle sourceQueueHandle,
-                                               MsmqQueueHandle destinationQueueHandle,
-                                               long lookupId,
-                                               IntPtr transaction);
+        public static extern int MQMoveMessage(
+            MsmqQueueHandle sourceQueueHandle,
+            MsmqQueueHandle destinationQueueHandle,
+            long lookupId,
+            IntPtr transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public static extern int MQMoveMessage(MsmqQueueHandle sourceQueueHandle,
-                                               MsmqQueueHandle destinationQueueHandle,
-                                               long lookupId,
-                                               IDtcTransaction transaction);
+        public static extern int MQMoveMessage(
+            MsmqQueueHandle sourceQueueHandle,
+            MsmqQueueHandle destinationQueueHandle,
+            long lookupId,
+            IDtcTransaction transaction
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
@@ -1045,11 +1161,19 @@ namespace System.ServiceModel.Channels
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQPathNameToFormatName(string pathName, StringBuilder formatName, ref int count);
+        public unsafe static extern int MQPathNameToFormatName(
+            string pathName,
+            StringBuilder formatName,
+            ref int count
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
-        public unsafe static extern int MQMgmtGetInfo(string computerName, string objectName, IntPtr properties);
+        public unsafe static extern int MQMgmtGetInfo(
+            string computerName,
+            string objectName,
+            IntPtr properties
+        );
 
         [DllImport(MQRT, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
@@ -1080,7 +1204,12 @@ namespace System.ServiceModel.Channels
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport(KERNEL32, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern IntPtr VirtualAlloc(IntPtr lpAddress, UIntPtr dwSize, uint flAllocationType, uint flProtect);
+        internal static extern IntPtr VirtualAlloc(
+            IntPtr lpAddress,
+            UIntPtr dwSize,
+            uint flAllocationType,
+            uint flProtect
+        );
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport(KERNEL32, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
@@ -1089,7 +1218,10 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, CharSet = CharSet.Auto)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern IntPtr GetProcAddress(SafeLibraryHandle hModule, [In, MarshalAs(UnmanagedType.LPStr)]string lpProcName);
+        internal static extern IntPtr GetProcAddress(
+            SafeLibraryHandle hModule,
+            [In, MarshalAs(UnmanagedType.LPStr)] string lpProcName
+        );
 
         [DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
@@ -1097,17 +1229,24 @@ namespace System.ServiceModel.Channels
 
         [DllImport(KERNEL32, CharSet = CharSet.Auto, SetLastError = true)]
         [ResourceExposure(ResourceScope.Process)]
-        internal static extern SafeLibraryHandle LoadLibraryEx(string lpModuleName, IntPtr hFile, uint dwFlags);
+        internal static extern SafeLibraryHandle LoadLibraryEx(
+            string lpModuleName,
+            IntPtr hFile,
+            uint dwFlags
+        );
 
         // On Vista and higher, check the value of the machine FIPS policy
         [DllImport(BCRYPT, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern int BCryptGetFipsAlgorithmMode(
             [MarshalAs(UnmanagedType.U1), Out] out bool pfEnabled
-            );
+        );
 
 #if !FEATURE_CORECLR
-        private static IntPtr GetCurrentProcessToken() { return new IntPtr(-4); }
+        private static IntPtr GetCurrentProcessToken()
+        {
+            return new IntPtr(-4);
+        }
 
         enum AppPolicyClrCompat
         {
@@ -1120,7 +1259,10 @@ namespace System.ServiceModel.Channels
         [DllImport(KERNEL32, CharSet = CharSet.None, EntryPoint = "AppPolicyGetClrCompat")]
         [System.Security.SecuritySafeCritical]
         [return: MarshalAs(UnmanagedType.I4)]
-        private static extern Int32 _AppPolicyGetClrCompat(IntPtr processToken, out AppPolicyClrCompat appPolicyClrCompat);
+        private static extern Int32 _AppPolicyGetClrCompat(
+            IntPtr processToken,
+            out AppPolicyClrCompat appPolicyClrCompat
+        );
 
         // AppModel.h functions (Win8+)
         [DllImport(KERNEL32, CharSet = CharSet.None, EntryPoint = "GetCurrentPackageId")]
@@ -1128,53 +1270,74 @@ namespace System.ServiceModel.Channels
         [return: MarshalAs(UnmanagedType.I4)]
         private static extern Int32 _GetCurrentPackageId(ref Int32 pBufferLength, Byte[] pBuffer);
 
-        [DllImport(KERNEL32, CharSet=System.Runtime.InteropServices.CharSet.Auto, BestFitMapping=false)]
+        [DllImport(
+            KERNEL32,
+            CharSet = System.Runtime.InteropServices.CharSet.Auto,
+            BestFitMapping = false
+        )]
         [ResourceExposure(ResourceScope.Machine)]
         private static extern IntPtr GetModuleHandle(string modName);
 
         // Copied from Win32Native.cs
         // Note - do NOT use this to call methods.  Use P/Invoke, which will
-        // do much better things w.r.t. marshaling, pinning memory, security 
+        // do much better things w.r.t. marshaling, pinning memory, security
         // stuff, better interactions with thread aborts, etc.  This is used
         // solely by DoesWin32MethodExist for avoiding try/catch EntryPointNotFoundException
         // in scenarios where an OS Version check is insufficient
-        [DllImport(KERNEL32, CharSet=CharSet.Ansi, BestFitMapping=false, SetLastError=true, ExactSpelling=true)]
+        [DllImport(
+            KERNEL32,
+            CharSet = CharSet.Ansi,
+            BestFitMapping = false,
+            SetLastError = true,
+            ExactSpelling = true
+        )]
         [ResourceExposure(ResourceScope.None)]
         private static extern IntPtr GetProcAddress(IntPtr hModule, String methodName);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static bool DoesWin32MethodExist(String moduleName, String methodName)
         {
             // GetModuleHandle does not increment the module's ref count, so we don't need to call FreeLibrary.
             IntPtr hModule = GetModuleHandle(moduleName);
-            if (hModule == IntPtr.Zero) {
-                System.Diagnostics.Debug.Assert(hModule != IntPtr.Zero, "GetModuleHandle failed.  Dll isn't loaded?");
+            if (hModule == IntPtr.Zero)
+            {
+                System.Diagnostics.Debug.Assert(
+                    hModule != IntPtr.Zero,
+                    "GetModuleHandle failed.  Dll isn't loaded?"
+                );
                 return false;
             }
             IntPtr functionPointer = GetProcAddress(hModule, methodName);
-            return (functionPointer != IntPtr.Zero);       
+            return (functionPointer != IntPtr.Zero);
         }
-        
+
         // On CoreCLR this is not the way to determine if a process is a tailored application (which means APPX).
         // On CoreCLR AppX is determined by a flag past to the host which is exposed by AppDomain.IsAppXProcess in mscorlib.
-        // The reason for this if-def is to ensure nobody takes a dependency on this on CoreCLR.        
+        // The reason for this if-def is to ensure nobody takes a dependency on this on CoreCLR.
         [System.Security.SecuritySafeCritical]
         private static bool _IsTailoredApplication()
         {
             Version windows8Version = new Version(6, 2, 0, 0);
             OperatingSystem os = Environment.OSVersion;
-            bool osSupportsPackagedProcesses = os.Platform == PlatformID.Win32NT && os.Version >= windows8Version;
+            bool osSupportsPackagedProcesses =
+                os.Platform == PlatformID.Win32NT && os.Version >= windows8Version;
 
-            if (osSupportsPackagedProcesses && DoesWin32MethodExist(KERNEL32, "AppPolicyGetClrCompat"))
+            if (
+                osSupportsPackagedProcesses
+                && DoesWin32MethodExist(KERNEL32, "AppPolicyGetClrCompat")
+            )
             {
                 // Use AppPolicyGetClrCompat if it is available. Return true if and only if this is a UWA which means if
-                // this is packaged desktop app this method will return false. This may cause some confusion however 
+                // this is packaged desktop app this method will return false. This may cause some confusion however
                 // this is necessary to make the behavior of packaged desktop apps identical to desktop apps.
                 AppPolicyClrCompat appPolicyClrCompat;
-                return _AppPolicyGetClrCompat(GetCurrentProcessToken(), out appPolicyClrCompat) == ERROR_SUCCESS && 
-                    appPolicyClrCompat == AppPolicyClrCompat.AppPolicyClrCompat_Universal;
+                return _AppPolicyGetClrCompat(GetCurrentProcessToken(), out appPolicyClrCompat)
+                        == ERROR_SUCCESS
+                    && appPolicyClrCompat == AppPolicyClrCompat.AppPolicyClrCompat_Universal;
             }
-            else if(osSupportsPackagedProcesses && DoesWin32MethodExist(KERNEL32, "GetCurrentPackageId"))
+            else if (
+                osSupportsPackagedProcesses && DoesWin32MethodExist(KERNEL32, "GetCurrentPackageId")
+            )
             {
                 Int32 bufLen = 0;
                 // Will return ERROR_INSUFFICIENT_BUFFER when running within a packaged application,
@@ -1182,7 +1345,7 @@ namespace System.ServiceModel.Channels
                 return _GetCurrentPackageId(ref bufLen, null) == ERROR_INSUFFICIENT_BUFFER;
             }
             else
-            {   // We must be running on a downlevel OS.
+            { // We must be running on a downlevel OS.
                 return false;
             }
         }
@@ -1190,14 +1353,17 @@ namespace System.ServiceModel.Channels
         /// <summary>
         /// Indicates weather the running application is an immersive (or modern) Windows 8 (or later) application.
         /// </summary>
-        internal static Lazy<bool> IsTailoredApplication = new Lazy<bool>(() => _IsTailoredApplication());
+        internal static Lazy<bool> IsTailoredApplication = new Lazy<bool>(
+            () => _IsTailoredApplication()
+        );
 #endif //!FEATURE_CORECLR
     }
 
     [SuppressUnmanagedCodeSecurity]
     class PipeHandle : SafeHandleMinusOneIsInvalid
     {
-        internal PipeHandle() : base(true) { }
+        internal PipeHandle()
+            : base(true) { }
 
         // This is unsafe, but is useful for a duplicated handle, which is inherently unsafe already.
         internal PipeHandle(IntPtr handle)
@@ -1228,9 +1394,7 @@ namespace System.ServiceModel.Channels
     sealed class SafeFileMappingHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         internal SafeFileMappingHandle()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         override protected bool ReleaseHandle()
         {
@@ -1274,9 +1438,7 @@ namespace System.ServiceModel.Channels
     sealed class SafeViewOfFileHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         internal SafeViewOfFileHandle()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         override protected bool ReleaseHandle()
         {
@@ -1292,7 +1454,8 @@ namespace System.ServiceModel.Channels
     [SuppressUnmanagedCodeSecurity]
     sealed class MsmqQueueHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        internal MsmqQueueHandle() : base(true) { }
+        internal MsmqQueueHandle()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {

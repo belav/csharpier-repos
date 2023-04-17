@@ -20,16 +20,34 @@ internal static partial class Interop
         internal static partial int EvpDigestReset(SafeEvpMdCtxHandle ctx, IntPtr type);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestUpdate")]
-        internal static partial int EvpDigestUpdate(SafeEvpMdCtxHandle ctx, ReadOnlySpan<byte> d, int cnt);
+        internal static partial int EvpDigestUpdate(
+            SafeEvpMdCtxHandle ctx,
+            ReadOnlySpan<byte> d,
+            int cnt
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestFinalEx")]
-        internal static partial int EvpDigestFinalEx(SafeEvpMdCtxHandle ctx, ref byte md, ref uint s);
+        internal static partial int EvpDigestFinalEx(
+            SafeEvpMdCtxHandle ctx,
+            ref byte md,
+            ref uint s
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestCurrent")]
-        internal static partial int EvpDigestCurrent(SafeEvpMdCtxHandle ctx, ref byte md, ref uint s);
+        internal static partial int EvpDigestCurrent(
+            SafeEvpMdCtxHandle ctx,
+            ref byte md,
+            ref uint s
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpDigestOneShot")]
-        internal static unsafe partial int EvpDigestOneShot(IntPtr type, byte* source, int sourceSize, byte* md, uint* mdSize);
+        internal static unsafe partial int EvpDigestOneShot(
+            IntPtr type,
+            byte* source,
+            int sourceSize,
+            byte* md,
+            uint* mdSize
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EvpMdSize")]
         internal static partial int EvpMdSize(IntPtr md);
@@ -46,14 +64,16 @@ internal static partial class Interop
             int iterations,
             IntPtr digestEvp,
             byte* pDestination,
-            int destinationLength);
+            int destinationLength
+        );
 
         internal static unsafe int Pbkdf2(
             ReadOnlySpan<byte> password,
             ReadOnlySpan<byte> salt,
             int iterations,
             IntPtr digestEvp,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             fixed (byte* pPassword = password)
             fixed (byte* pSalt = salt)
@@ -67,7 +87,8 @@ internal static partial class Interop
                     iterations,
                     digestEvp,
                     pDestination,
-                    destination.Length);
+                    destination.Length
+                );
             }
         }
 

@@ -42,7 +42,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             public readonly bool IsTelemetryCollectionAllowed;
 
-            public Data(AnalyzerTelemetryInfo analyzerTelemetryInfo, bool isTelemetryCollectionAllowed)
+            public Data(
+                AnalyzerTelemetryInfo analyzerTelemetryInfo,
+                bool isTelemetryCollectionAllowed
+            )
             {
                 CodeBlockActionsCount = analyzerTelemetryInfo.CodeBlockActionsCount;
                 CodeBlockEndActionsCount = analyzerTelemetryInfo.CodeBlockEndActionsCount;
@@ -58,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 OperationActionsCount = analyzerTelemetryInfo.OperationActionsCount;
                 OperationBlockActionsCount = analyzerTelemetryInfo.OperationBlockActionsCount;
                 OperationBlockEndActionsCount = analyzerTelemetryInfo.OperationBlockEndActionsCount;
-                OperationBlockStartActionsCount = analyzerTelemetryInfo.OperationBlockStartActionsCount;
+                OperationBlockStartActionsCount =
+                    analyzerTelemetryInfo.OperationBlockStartActionsCount;
                 SymbolStartActionsCount = analyzerTelemetryInfo.SymbolStartActionsCount;
                 SymbolEndActionsCount = analyzerTelemetryInfo.SymbolEndActionsCount;
                 SuppressionActionsCount = analyzerTelemetryInfo.SuppressionActionsCount;
@@ -70,14 +74,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly object _guard = new();
         private ImmutableDictionary<Type, Data> _analyzerInfoMap;
 
-        public DiagnosticAnalyzerTelemetry()
-            => _analyzerInfoMap = ImmutableDictionary<Type, Data>.Empty;
+        public DiagnosticAnalyzerTelemetry() =>
+            _analyzerInfoMap = ImmutableDictionary<Type, Data>.Empty;
 
-        public void UpdateAnalyzerActionsTelemetry(DiagnosticAnalyzer analyzer, AnalyzerTelemetryInfo analyzerTelemetryInfo, bool isTelemetryCollectionAllowed)
+        public void UpdateAnalyzerActionsTelemetry(
+            DiagnosticAnalyzer analyzer,
+            AnalyzerTelemetryInfo analyzerTelemetryInfo,
+            bool isTelemetryCollectionAllowed
+        )
         {
             lock (_guard)
             {
-                _analyzerInfoMap = _analyzerInfoMap.SetItem(analyzer.GetType(), new Data(analyzerTelemetryInfo, isTelemetryCollectionAllowed));
+                _analyzerInfoMap = _analyzerInfoMap.SetItem(
+                    analyzer.GetType(),
+                    new Data(analyzerTelemetryInfo, isTelemetryCollectionAllowed)
+                );
             }
         }
 
@@ -92,42 +103,49 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             foreach (var (analyzerType, analyzerInfo) in map)
             {
-                Logger.Log(FunctionId.DiagnosticAnalyzerDriver_AnalyzerTypeCount, KeyValueLogMessage.Create(m =>
-                {
-                    m["Id"] = correlationId;
-
-                    var analyzerName = analyzerType.FullName;
-
-                    if (analyzerInfo.IsTelemetryCollectionAllowed)
+                Logger.Log(
+                    FunctionId.DiagnosticAnalyzerDriver_AnalyzerTypeCount,
+                    KeyValueLogMessage.Create(m =>
                     {
-                        // log analyzer name and exception as is:
-                        m["Analyzer.Name"] = analyzerName;
-                    }
-                    else
-                    {
-                        // annonymize analyzer and exception names:
-                        m["Analyzer.NameHashCode"] = AnalyzerNameForTelemetry.ComputeSha256Hash(analyzerName);
-                    }
+                        m["Id"] = correlationId;
 
-                    m["Analyzer.CodeBlock"] = analyzerInfo.CodeBlockActionsCount;
-                    m["Analyzer.CodeBlockStart"] = analyzerInfo.CodeBlockStartActionsCount;
-                    m["Analyzer.CodeBlockEnd"] = analyzerInfo.CodeBlockEndActionsCount;
-                    m["Analyzer.Compilation"] = analyzerInfo.CompilationActionsCount;
-                    m["Analyzer.CompilationStart"] = analyzerInfo.CompilationStartActionsCount;
-                    m["Analyzer.CompilationEnd"] = analyzerInfo.CompilationEndActionsCount;
-                    m["Analyzer.SemanticModel"] = analyzerInfo.SemanticModelActionsCount;
-                    m["Analyzer.SyntaxNode"] = analyzerInfo.SyntaxNodeActionsCount;
-                    m["Analyzer.SyntaxTree"] = analyzerInfo.SyntaxTreeActionsCount;
-                    m["Analyzer.AdditionalFile"] = analyzerInfo.AdditionalFileActionsCount;
-                    m["Analyzer.Operation"] = analyzerInfo.OperationActionsCount;
-                    m["Analyzer.OperationBlock"] = analyzerInfo.OperationBlockActionsCount;
-                    m["Analyzer.OperationBlockStart"] = analyzerInfo.OperationBlockStartActionsCount;
-                    m["Analyzer.OperationBlockEnd"] = analyzerInfo.OperationBlockEndActionsCount;
-                    m["Analyzer.Symbol"] = analyzerInfo.SymbolActionsCount;
-                    m["Analyzer.SymbolStart"] = analyzerInfo.SymbolStartActionsCount;
-                    m["Analyzer.SymbolEnd"] = analyzerInfo.SymbolEndActionsCount;
-                    m["Analyzer.Suppression"] = analyzerInfo.SuppressionActionsCount;
-                }));
+                        var analyzerName = analyzerType.FullName;
+
+                        if (analyzerInfo.IsTelemetryCollectionAllowed)
+                        {
+                            // log analyzer name and exception as is:
+                            m["Analyzer.Name"] = analyzerName;
+                        }
+                        else
+                        {
+                            // annonymize analyzer and exception names:
+                            m["Analyzer.NameHashCode"] = AnalyzerNameForTelemetry.ComputeSha256Hash(
+                                analyzerName
+                            );
+                        }
+
+                        m["Analyzer.CodeBlock"] = analyzerInfo.CodeBlockActionsCount;
+                        m["Analyzer.CodeBlockStart"] = analyzerInfo.CodeBlockStartActionsCount;
+                        m["Analyzer.CodeBlockEnd"] = analyzerInfo.CodeBlockEndActionsCount;
+                        m["Analyzer.Compilation"] = analyzerInfo.CompilationActionsCount;
+                        m["Analyzer.CompilationStart"] = analyzerInfo.CompilationStartActionsCount;
+                        m["Analyzer.CompilationEnd"] = analyzerInfo.CompilationEndActionsCount;
+                        m["Analyzer.SemanticModel"] = analyzerInfo.SemanticModelActionsCount;
+                        m["Analyzer.SyntaxNode"] = analyzerInfo.SyntaxNodeActionsCount;
+                        m["Analyzer.SyntaxTree"] = analyzerInfo.SyntaxTreeActionsCount;
+                        m["Analyzer.AdditionalFile"] = analyzerInfo.AdditionalFileActionsCount;
+                        m["Analyzer.Operation"] = analyzerInfo.OperationActionsCount;
+                        m["Analyzer.OperationBlock"] = analyzerInfo.OperationBlockActionsCount;
+                        m["Analyzer.OperationBlockStart"] =
+                            analyzerInfo.OperationBlockStartActionsCount;
+                        m["Analyzer.OperationBlockEnd"] =
+                            analyzerInfo.OperationBlockEndActionsCount;
+                        m["Analyzer.Symbol"] = analyzerInfo.SymbolActionsCount;
+                        m["Analyzer.SymbolStart"] = analyzerInfo.SymbolStartActionsCount;
+                        m["Analyzer.SymbolEnd"] = analyzerInfo.SymbolEndActionsCount;
+                        m["Analyzer.Suppression"] = analyzerInfo.SuppressionActionsCount;
+                    })
+                );
             }
         }
     }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,25 +39,25 @@ using System.Security;
 // General Information about the System.Web.Extensions.Design assembly
 // v3.5 Assembly
 
-[assembly: AssemblyTitle ("System.Web.Extensions.Design.dll")]
-[assembly: AssemblyDescription ("System.Web.Extensions.Design.dll")]
-[assembly: AssemblyDefaultAlias ("System.Web.Extensions.Design.dll")]
+[assembly: AssemblyTitle("System.Web.Extensions.Design.dll")]
+[assembly: AssemblyDescription("System.Web.Extensions.Design.dll")]
+[assembly: AssemblyDefaultAlias("System.Web.Extensions.Design.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-	[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
 #if !(TARGET_DOTNET)
-	[assembly: CLSCompliant (true)]
-	[assembly: AssemblyDelaySign (true)]
+[assembly: CLSCompliant(true)]
+[assembly: AssemblyDelaySign(true)]
 #endif
 
-[assembly: ComVisible (false)]
+[assembly: ComVisible(false)]
 
-[assembly: CompilationRelaxations (CompilationRelaxations.NoStringInterning)]
+[assembly: CompilationRelaxations(CompilationRelaxations.NoStringInterning)]

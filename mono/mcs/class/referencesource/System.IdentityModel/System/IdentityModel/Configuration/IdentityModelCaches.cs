@@ -14,18 +14,15 @@ namespace System.IdentityModel.Configuration
     public sealed class IdentityModelCaches
     {
         private TokenReplayCache tokenReplayCache = new DefaultTokenReplayCache();
-        private SessionSecurityTokenCache sessionSecurityTokenCache = new MruSessionSecurityTokenCache();
+        private SessionSecurityTokenCache sessionSecurityTokenCache =
+            new MruSessionSecurityTokenCache();
 
         /// <summary>
         /// Gets or sets the TokenReplayCache that is used to determine replayed token.
         /// </summary>
         public TokenReplayCache TokenReplayCache
         {
-            get
-            {
-                return this.tokenReplayCache;
-            }
-
+            get { return this.tokenReplayCache; }
             set
             {
                 if (value == null)
@@ -42,11 +39,7 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         public SessionSecurityTokenCache SessionSecurityTokenCache
         {
-            get
-            {
-                return this.sessionSecurityTokenCache;
-            }
-
+            get { return this.sessionSecurityTokenCache; }
             set
             {
                 if (value == null)

@@ -13,8 +13,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         public static readonly Result<T> Empty = new(true, default);
 
         public Result(T? value)
-            : this(true, value)
-        { }
+            : this(true, value) { }
 
         private Result(bool success, T? value)
         {

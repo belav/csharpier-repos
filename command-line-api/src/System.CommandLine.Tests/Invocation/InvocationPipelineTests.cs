@@ -22,10 +22,9 @@ namespace System.CommandLine.Tests.Invocation
         {
             var wasCalled = false;
 
-            var parser =
-                new CommandLineBuilder(new RootCommand { new Command("command") })
-                    .AddMiddleware(_ => wasCalled = true)
-                    .Build();
+            var parser = new CommandLineBuilder(new RootCommand { new Command("command") })
+                .AddMiddleware(_ => wasCalled = true)
+                .Build();
 
             await parser.InvokeAsync("command", _console);
 
@@ -44,12 +43,7 @@ namespace System.CommandLine.Tests.Invocation
             var second = new Command("second");
             second.SetHandler(() => secondWasCalled = true);
 
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             first,
-                             second
-                         })
-                         .Build();
+            var parser = new CommandLineBuilder(new RootCommand { first, second }).Build();
 
             await parser.InvokeAsync("first", _console);
 
@@ -69,12 +63,7 @@ namespace System.CommandLine.Tests.Invocation
             var second = new Command("second");
             second.SetHandler(() => secondWasCalled = true);
 
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             first,
-                             second
-                         })
-                .Build();
+            var parser = new CommandLineBuilder(new RootCommand { first, second }).Build();
 
             parser.Invoke("first", _console);
 
@@ -85,35 +74,25 @@ namespace System.CommandLine.Tests.Invocation
         [Fact]
         public void When_middleware_throws_then_InvokeAsync_does_not_handle_the_exception()
         {
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             new Command("the-command")
-                         })
-                         .AddMiddleware(_ => throw new Exception("oops!"))
-                         .Build();
+            var parser = new CommandLineBuilder(new RootCommand { new Command("the-command") })
+                .AddMiddleware(_ => throw new Exception("oops!"))
+                .Build();
 
             Func<Task> invoke = async () => await parser.InvokeAsync("the-command", _console);
 
-            invoke.Should()
-                  .Throw<Exception>()
-                  .WithMessage("oops!");
+            invoke.Should().Throw<Exception>().WithMessage("oops!");
         }
 
         [Fact]
         public void When_middleware_throws_then_Invoke_does_not_handle_the_exception()
         {
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             new Command("the-command")
-                         })
-                         .AddMiddleware(_ => throw new Exception("oops!"))
-                         .Build();
+            var parser = new CommandLineBuilder(new RootCommand { new Command("the-command") })
+                .AddMiddleware(_ => throw new Exception("oops!"))
+                .Build();
 
             Func<int> invoke = () => parser.Invoke("the-command", _console);
 
-            invoke.Should()
-                .Throw<Exception>()
-                .WithMessage("oops!");
+            invoke.Should().Throw<Exception>().WithMessage("oops!");
         }
 
         [Fact]
@@ -121,28 +100,19 @@ namespace System.CommandLine.Tests.Invocation
         {
             var command = new Command("the-command");
             command.SetHandler(() =>
-                {
-                    throw new Exception("oops!");
-                    // Help the compiler pick a CommandHandler.Create overload.
+            {
+                throw new Exception("oops!");
+                // Help the compiler pick a CommandHandler.Create overload.
 #pragma warning disable CS0162 // Unreachable code detected
-                    return Task.FromResult(0);
+                return Task.FromResult(0);
 #pragma warning restore CS0162
-                });
+            });
 
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             command
-                         })
-                         .Build();
+            var parser = new CommandLineBuilder(new RootCommand { command }).Build();
 
             Func<Task> invoke = async () => await parser.InvokeAsync("the-command", _console);
 
-            invoke.Should()
-                  .Throw<Exception>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("oops!");
+            invoke.Should().Throw<Exception>().Which.Message.Should().Be("oops!");
         }
 
         [Fact]
@@ -158,20 +128,11 @@ namespace System.CommandLine.Tests.Invocation
 #pragma warning restore CS0162
             });
 
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             command
-                         })
-                .Build();
+            var parser = new CommandLineBuilder(new RootCommand { command }).Build();
 
             Func<int> invoke = () => parser.Invoke("the-command", _console);
 
-            invoke.Should()
-                .Throw<Exception>()
-                .Which
-                .Message
-                .Should()
-                .Be("oops!");
+            invoke.Should().Throw<Exception>().Which.Message.Should().Be("oops!");
         }
 
         [Fact]
@@ -188,22 +149,20 @@ namespace System.CommandLine.Tests.Invocation
                 return Task.FromResult(0);
             });
 
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                            command
-                         })
-                         .AddMiddleware(async (context, next) =>
-                         {
-                             var tokens = context.ParseResult
-                                                 .Tokens
-                                                 .Select(t => t.Value)
-                                                 .Concat(new[] { "implicit-inner-command" })
-                                                 .ToArray();
+            var parser = new CommandLineBuilder(new RootCommand { command })
+                .AddMiddleware(
+                    async (context, next) =>
+                    {
+                        var tokens = context.ParseResult.Tokens
+                            .Select(t => t.Value)
+                            .Concat(new[] { "implicit-inner-command" })
+                            .ToArray();
 
-                             context.ParseResult = context.Parser.Parse(tokens);
-                             await next(context);
-                         })
-                         .Build();
+                        context.ParseResult = context.Parser.Parse(tokens);
+                        await next(context);
+                    }
+                )
+                .Build();
 
             await parser.InvokeAsync("the-command", new TestConsole());
 
@@ -224,16 +183,15 @@ namespace System.CommandLine.Tests.Invocation
                 return Task.FromResult(0);
             });
 
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             command
-                         })
-                         .AddMiddleware(async (_, _) =>
-                         {
-                             middlewareWasCalled = true;
-                             await Task.Yield();
-                         })
-                         .Build();
+            var parser = new CommandLineBuilder(new RootCommand { command })
+                .AddMiddleware(
+                    async (_, _) =>
+                    {
+                        middlewareWasCalled = true;
+                        await Task.Yield();
+                    }
+                )
+                .Build();
 
             await parser.InvokeAsync("the-command", new TestConsole());
 
@@ -255,16 +213,15 @@ namespace System.CommandLine.Tests.Invocation
                 return Task.FromResult(0);
             });
 
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             command
-                         })
-                         .AddMiddleware(async (context, next) =>
-                         {
-                             middlewareWasCalled = true;
-                             await Task.Yield();
-                         })
-                         .Build();
+            var parser = new CommandLineBuilder(new RootCommand { command })
+                .AddMiddleware(
+                    async (context, next) =>
+                    {
+                        middlewareWasCalled = true;
+                        await Task.Yield();
+                    }
+                )
+                .Build();
 
             parser.Invoke("the-command", new TestConsole());
 
@@ -285,11 +242,7 @@ namespace System.CommandLine.Tests.Invocation
                 return Task.FromResult(0);
             });
 
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             command
-                         })
-                         .Build();
+            var parser = new CommandLineBuilder(new RootCommand { command }).Build();
 
             await parser.InvokeAsync("help-command", new TestConsole());
 
@@ -313,16 +266,15 @@ namespace System.CommandLine.Tests.Invocation
                 return Task.FromResult(0);
             });
 
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             command
-                         })
-                         .UseHelpBuilder(context =>
-                         {
-                             factoryWasCalled = true;
-                             return createdHelpBuilder = new HelpBuilder(context.ParseResult.Parser.Configuration.LocalizationResources);
-                         })
-                         .Build();
+            var parser = new CommandLineBuilder(new RootCommand { command })
+                .UseHelpBuilder(context =>
+                {
+                    factoryWasCalled = true;
+                    return createdHelpBuilder = new HelpBuilder(
+                        context.ParseResult.Parser.Configuration.LocalizationResources
+                    );
+                })
+                .Build();
 
             await parser.InvokeAsync("help-command", new TestConsole());
 
@@ -337,26 +289,26 @@ namespace System.CommandLine.Tests.Invocation
             var isCancelRequested = false;
 
             var command = new Command("the-command");
-            command.SetHandler((InvocationContext context) =>
-            {
-                handlerWasCalled = true;
-                isCancelRequested = context.GetCancellationToken().IsCancellationRequested;
-                return Task.FromResult(0);
-            });
-
+            command.SetHandler(
+                (InvocationContext context) =>
+                {
+                    handlerWasCalled = true;
+                    isCancelRequested = context.GetCancellationToken().IsCancellationRequested;
+                    return Task.FromResult(0);
+                }
+            );
 
             using CancellationTokenSource cts = new();
-            var parser = new CommandLineBuilder(new RootCommand
-                         {
-                             command
-                         })
-                         .AddMiddleware(async (context, next) =>
-                         {
-                             context.LinkToken(cts.Token);
-                             cts.Cancel();
-                             await next(context);
-                         })
-                         .Build();
+            var parser = new CommandLineBuilder(new RootCommand { command })
+                .AddMiddleware(
+                    async (context, next) =>
+                    {
+                        context.LinkToken(cts.Token);
+                        cts.Cancel();
+                        await next(context);
+                    }
+                )
+                .Build();
 
             await parser.InvokeAsync("the-command");
 

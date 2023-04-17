@@ -18,7 +18,8 @@ public interface IHttpRequestLineHandler
     void OnStartLine(
         HttpVersionAndMethod versionAndMethod,
         TargetOffsetPathLength targetPath,
-        Span<byte> startLine);
+        Span<byte> startLine
+    );
 }
 
 /// <summary>
@@ -91,10 +92,7 @@ public readonly struct TargetOffsetPathLength
     public int Offset
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get
-        {
-            return (int)(_targetOffsetPathLength >> 32);
-        }
+        get { return (int)(_targetOffsetPathLength >> 32); }
     }
 
     /// <summary>
@@ -123,9 +121,6 @@ public readonly struct TargetOffsetPathLength
     public bool IsEncoded
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get
-        {
-            return (int)_targetOffsetPathLength < 0 ? true : false;
-        }
+        get { return (int)_targetOffsetPathLength < 0 ? true : false; }
     }
 }

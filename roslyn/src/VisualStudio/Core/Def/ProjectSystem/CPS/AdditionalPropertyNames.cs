@@ -18,7 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         public const string MaxSupportedLangVersion = nameof(MaxSupportedLangVersion);
         public const string RunAnalyzers = nameof(RunAnalyzers);
         public const string RunAnalyzersDuringLiveAnalysis = nameof(RunAnalyzersDuringLiveAnalysis);
-        public const string TemporaryDependencyNodeTargetIdentifier = nameof(TemporaryDependencyNodeTargetIdentifier);
+        public const string TemporaryDependencyNodeTargetIdentifier = nameof(
+            TemporaryDependencyNodeTargetIdentifier
+        );
         public const string TargetRefPath = nameof(TargetRefPath);
     }
 }

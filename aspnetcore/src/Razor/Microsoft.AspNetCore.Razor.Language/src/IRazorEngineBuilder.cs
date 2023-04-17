@@ -6,7 +6,11 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Razor.Language;
 
-[Obsolete("This class is obsolete and will be removed in a future version. The recommended alternative is " + nameof(RazorProjectEngineBuilder) + ".")]
+[Obsolete(
+    "This class is obsolete and will be removed in a future version. The recommended alternative is "
+        + nameof(RazorProjectEngineBuilder)
+        + "."
+)]
 public interface IRazorEngineBuilder
 {
     ICollection<IRazorEngineFeature> Features { get; }

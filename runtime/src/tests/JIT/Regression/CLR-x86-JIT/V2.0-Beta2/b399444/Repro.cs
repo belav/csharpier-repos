@@ -11,8 +11,7 @@ namespace Tests
     {
         public static int Main()
         {
-            if ((TestManyFields() == 100)
-                && (TestManyFieldsPlusOne() == 100))
+            if ((TestManyFields() == 100) && (TestManyFieldsPlusOne() == 100))
             {
                 return 100;
             }
@@ -47,9 +46,7 @@ namespace Tests
             {
                 return 100;
             }
-            catch
-            {
-            }
+            catch { }
             return 1;
         }
 

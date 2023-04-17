@@ -17,8 +17,10 @@ internal unsafe struct MsQuicBuffers : IDisposable
 {
     // Handles to pinned memory blocks from the user.
     private MemoryHandle[] _handles;
+
     // Native memory block which holds the pinned memory pointers from _handles and can be passed to MsQuic as QUIC_BUFFER*.
     private QUIC_BUFFER* _buffers;
+
     // Number of QUIC_BUFFER instance currently allocated in _buffers, so that we can reuse the memory instead of reallocating.
     private int _count;
 

@@ -30,7 +30,8 @@ public class EventDefinition<TParam1, TParam2> : EventDefinitionBase
         EventId eventId,
         LogLevel level,
         string eventIdCode,
-        Func<LogLevel, Action<ILogger, TParam1, TParam2, Exception?>> logActionFunc)
+        Func<LogLevel, Action<ILogger, TParam1, TParam2, Exception?>> logActionFunc
+    )
         : base(loggingOptions, eventId, level, eventIdCode)
     {
         _logAction = logActionFunc(Level);
@@ -43,9 +44,7 @@ public class EventDefinition<TParam1, TParam2> : EventDefinitionBase
     /// <param name="arg1">The first message argument.</param>
     /// <param name="arg2">The second message argument.</param>
     /// <returns>The message string.</returns>
-    public virtual string GenerateMessage(
-        TParam1 arg1,
-        TParam2 arg2)
+    public virtual string GenerateMessage(TParam1 arg1, TParam2 arg2)
     {
         var extractor = new MessageExtractingLogger();
         _logAction(extractor, arg1, arg2, null);
@@ -62,7 +61,8 @@ public class EventDefinition<TParam1, TParam2> : EventDefinitionBase
     public virtual void Log<TLoggerCategory>(
         IDiagnosticsLogger<TLoggerCategory> logger,
         TParam1 arg1,
-        TParam2 arg2)
+        TParam2 arg2
+    )
         where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)

@@ -28,4 +28,3 @@ namespace System.IdentityModel.Selectors
         public IntPtr cryptoParameters;
     }
 }
-

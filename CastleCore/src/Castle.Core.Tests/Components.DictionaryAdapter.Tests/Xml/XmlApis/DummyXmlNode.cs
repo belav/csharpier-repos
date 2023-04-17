@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -49,10 +49,13 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             get { throw new NotImplementedException(); }
         }
 
-        public bool IsNil   { get; set; }
+        public bool IsNil { get; set; }
         public string Value { get; set; }
 
-        public bool IsReal { get { return true; } }
+        public bool IsReal
+        {
+            get { return true; }
+        }
 
         public bool IsElement
         {
@@ -109,7 +112,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             throw new NotImplementedException();
         }
 
-        public IXmlCursor SelectChildren(IXmlKnownTypeMap knownTypes, IXmlNamespaceSource namespaces, CursorFlags flags)
+        public IXmlCursor SelectChildren(
+            IXmlKnownTypeMap knownTypes,
+            IXmlNamespaceSource namespaces,
+            CursorFlags flags
+        )
         {
             throw new NotImplementedException();
         }
@@ -119,7 +126,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             throw new NotImplementedException();
         }
 
-        public IXmlCursor Select(CompiledXPath path, IXmlIncludedTypeMap includedTypes, IXmlNamespaceSource namespaces, CursorFlags flags)
+        public IXmlCursor Select(
+            CompiledXPath path,
+            IXmlIncludedTypeMap includedTypes,
+            IXmlNamespaceSource namespaces,
+            CursorFlags flags
+        )
         {
             throw new NotImplementedException();
         }
@@ -136,7 +148,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         public event EventHandler Realized
         {
-            add    { }
+            add { }
             remove { }
         }
 
@@ -160,7 +172,6 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             throw new NotImplementedException();
         }
 
-
         public void SetAttribute(XmlName name, string value)
         {
             throw new NotImplementedException();
@@ -170,7 +181,6 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             return null; // Not realizable
         }
-
 
         public IXmlNode Parent
         {

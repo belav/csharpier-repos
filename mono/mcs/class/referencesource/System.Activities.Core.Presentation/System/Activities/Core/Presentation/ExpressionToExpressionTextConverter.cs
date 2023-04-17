@@ -14,23 +14,33 @@ namespace System.Activities.Core.Presentation
 
     class ExpressionToExpressionTextConverter : IValueConverter
     {
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture
+        )
         {
             string convertedValue = null;
             ModelItem valueMI = value as ModelItem;
             if (valueMI != null)
             {
-                convertedValue = ExpressionHelper.GetExpressionString(valueMI.GetCurrentValue() as Activity, valueMI.Parent);
+                convertedValue = ExpressionHelper.GetExpressionString(
+                    valueMI.GetCurrentValue() as Activity,
+                    valueMI.Parent
+                );
             }
             return convertedValue;
         }
 
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotSupportedException());
         }
-
     }
 }

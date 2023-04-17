@@ -2,7 +2,8 @@ namespace System.IO.Compression
 {
     using System.Diagnostics;
 
-    internal enum CompressionTracingSwitchLevel {
+    internal enum CompressionTracingSwitchLevel
+    {
         Off = 0,
         Informational = 1,
         Verbose = 2
@@ -21,11 +22,12 @@ namespace System.IO.Compression
 #if !FEATURE_NETCORE
             : base(displayName, description)
 #endif // !FEATURE_NETCORE
-        {
-        }
+        { }
 
-        public static bool Verbose {
-            get {
+        public static bool Verbose
+        {
+            get
+            {
 #if FEATURE_NETCORE
                 return false;
 #else
@@ -34,25 +36,31 @@ namespace System.IO.Compression
             }
         }
 
-        public static bool Informational {
-            get {
+        public static bool Informational
+        {
+            get
+            {
 #if FEATURE_NETCORE
                 return false;
 #else
-                return tracingSwitch.SwitchSetting >= (int)CompressionTracingSwitchLevel.Informational;
+                return tracingSwitch.SwitchSetting
+                    >= (int)CompressionTracingSwitchLevel.Informational;
 #endif
             }
         }
 
 #if ENABLE_TRACING
-        public void SetSwitchSetting(CompressionTracingSwitchLevel level) {
-            if (level < CompressionTracingSwitchLevel.Off || level > CompressionTracingSwitchLevel.Verbose) {
+        public void SetSwitchSetting(CompressionTracingSwitchLevel level)
+        {
+            if (
+                level < CompressionTracingSwitchLevel.Off
+                || level > CompressionTracingSwitchLevel.Verbose
+            )
+            {
                 throw new ArgumentOutOfRangeException("level");
             }
             this.SwitchSetting = (int)level;
         }
 #endif
-
-    }    
+    }
 }
-

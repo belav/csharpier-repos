@@ -27,24 +27,37 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         protected JoinableTaskFactory JoinableTaskFactory => TestServices.JoinableTaskFactory;
 
-        protected async Task<TInterface> GetRequiredGlobalServiceAsync<TService, TInterface>(CancellationToken cancellationToken)
+        protected async Task<TInterface> GetRequiredGlobalServiceAsync<TService, TInterface>(
+            CancellationToken cancellationToken
+        )
             where TService : class
             where TInterface : class
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var serviceProvider = (IAsyncServiceProvider2?)await AsyncServiceProvider.GlobalProvider.GetServiceAsync(typeof(SAsyncServiceProvider)).WithCancellation(cancellationToken);
+            var serviceProvider = (IAsyncServiceProvider2?)
+                await AsyncServiceProvider.GlobalProvider
+                    .GetServiceAsync(typeof(SAsyncServiceProvider))
+                    .WithCancellation(cancellationToken);
             Assumes.Present(serviceProvider);
 
-            var @interface = (TInterface?)await serviceProvider.GetServiceAsync(typeof(TService)).WithCancellation(cancellationToken);
+            var @interface = (TInterface?)
+                await serviceProvider
+                    .GetServiceAsync(typeof(TService))
+                    .WithCancellation(cancellationToken);
             Assumes.Present(@interface);
             return @interface;
         }
 
-        protected async Task<TService> GetComponentModelServiceAsync<TService>(CancellationToken cancellationToken)
+        protected async Task<TService> GetComponentModelServiceAsync<TService>(
+            CancellationToken cancellationToken
+        )
             where TService : class
         {
-            var componentModel = await GetRequiredGlobalServiceAsync<SComponentModel, IComponentModel>(cancellationToken);
+            var componentModel = await GetRequiredGlobalServiceAsync<
+                SComponentModel,
+                IComponentModel
+            >(cancellationToken);
             return componentModel.GetService<TService>();
         }
 
@@ -55,13 +68,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         protected static async Task WaitForApplicationIdleAsync(CancellationToken cancellationToken)
         {
-            var synchronizationContext = new DispatcherSynchronizationContext(Application.Current.Dispatcher, DispatcherPriority.ApplicationIdle);
+            var synchronizationContext = new DispatcherSynchronizationContext(
+                Application.Current.Dispatcher,
+                DispatcherPriority.ApplicationIdle
+            );
             var taskScheduler = new SynchronizationContextTaskScheduler(synchronizationContext);
             await Task.Factory.StartNew(
                 () => { },
                 cancellationToken,
                 TaskCreationOptions.None,
-                taskScheduler);
+                taskScheduler
+            );
         }
     }
 }

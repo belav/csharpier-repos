@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ListGeneralPage.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -23,7 +23,7 @@ namespace System.Web.UI.Design.MobileControls
 
     using System.Web.UI.Design.MobileControls.Util;
 
-    using DataBinding = System.Web.UI.DataBinding;    
+    using DataBinding = System.Web.UI.DataBinding;
     using DataList = System.Web.UI.WebControls.DataList;
 
     using TextBox = System.Windows.Forms.TextBox;
@@ -37,12 +37,14 @@ namespace System.Web.UI.Design.MobileControls
     ///   The General page for the DataList control.
     /// </summary>
     /// <internalonly/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class ListGeneralPage : MobileComponentEditorPage 
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class ListGeneralPage : MobileComponentEditorPage
     {
         private const int IDX_DECORATION_NONE = 0;
         private const int IDX_DECORATION_BULLETED = 1;
@@ -62,9 +64,9 @@ namespace System.Web.UI.Design.MobileControls
 
         private bool _isBaseControlList;
 
-        protected override String HelpKeyword 
+        protected override String HelpKeyword
         {
-            get 
+            get
             {
                 if (_isBaseControlList)
                 {
@@ -80,10 +82,10 @@ namespace System.Web.UI.Design.MobileControls
         /// <summary>
         ///   Initializes the UI of the form.
         /// </summary>
-        private void InitForm() 
+        private void InitForm()
         {
             Debug.Assert(GetBaseControl() != null);
-            _isBaseControlList = (GetBaseControl() is List);   // SelectionList otherwise.
+            _isBaseControlList = (GetBaseControl() is List); // SelectionList otherwise.
 
             GroupLabel appearanceGroup = new GroupLabel();
             GroupLabel pagingGroup = null;
@@ -115,7 +117,7 @@ namespace System.Web.UI.Design.MobileControls
             appearanceGroup.Text = SR.GetString(SR.ListGeneralPage_AppearanceGroupLabel);
             appearanceGroup.TabIndex = 0;
             appearanceGroup.TabStop = false;
-            
+
             if (_isBaseControlList)
             {
                 decorationLabel.SetBounds(8, 24, 200, 16);
@@ -126,18 +128,21 @@ namespace System.Web.UI.Design.MobileControls
                 _decorationCombo.SetBounds(8, 40, 161, 21);
                 _decorationCombo.DropDownStyle = ComboBoxStyle.DropDownList;
                 _decorationCombo.SelectedIndexChanged += new EventHandler(this.OnSetPageDirty);
-                _decorationCombo.Items.AddRange(new object[] {
-                                                               SR.GetString(SR.ListGeneralPage_DecorationNone),
-                                                               SR.GetString(SR.ListGeneralPage_DecorationBulleted),
-                                                               SR.GetString(SR.ListGeneralPage_DecorationNumbered)
-                                                             });
+                _decorationCombo.Items.AddRange(
+                    new object[]
+                    {
+                        SR.GetString(SR.ListGeneralPage_DecorationNone),
+                        SR.GetString(SR.ListGeneralPage_DecorationBulleted),
+                        SR.GetString(SR.ListGeneralPage_DecorationNumbered)
+                    }
+                );
                 _decorationCombo.TabIndex = 2;
 
                 pagingGroup.SetBounds(4, 77, 372, 16);
                 pagingGroup.Text = SR.GetString(SR.ListGeneralPage_PagingGroupLabel);
                 pagingGroup.TabIndex = 3;
                 pagingGroup.TabStop = false;
-            
+
                 itemCountLabel.SetBounds(8, 97, 161, 16);
                 itemCountLabel.Text = SR.GetString(SR.ListGeneralPage_ItemCountCaption);
                 itemCountLabel.TabStop = false;
@@ -145,9 +150,11 @@ namespace System.Web.UI.Design.MobileControls
 
                 _itemCountTextBox.SetBounds(8, 113, 161, 20);
                 _itemCountTextBox.TextChanged += new EventHandler(this.OnSetPageDirty);
-                _itemCountTextBox.KeyPress += new KeyPressEventHandler(this.OnKeyPressNumberTextBox);
+                _itemCountTextBox.KeyPress += new KeyPressEventHandler(
+                    this.OnKeyPressNumberTextBox
+                );
                 _itemCountTextBox.TabIndex = 5;
-            
+
                 itemsPerPageLabel.SetBounds(211, 97, 161, 16);
                 itemsPerPageLabel.Text = SR.GetString(SR.ListGeneralPage_ItemsPerPageCaption);
                 itemsPerPageLabel.TabStop = false;
@@ -155,7 +162,9 @@ namespace System.Web.UI.Design.MobileControls
 
                 _itemsPerPageTextBox.SetBounds(211, 113, 161, 20);
                 _itemsPerPageTextBox.TextChanged += new EventHandler(this.OnSetPageDirty);
-                _itemsPerPageTextBox.KeyPress += new KeyPressEventHandler(this.OnKeyPressNumberTextBox);
+                _itemsPerPageTextBox.KeyPress += new KeyPressEventHandler(
+                    this.OnKeyPressNumberTextBox
+                );
                 _itemsPerPageTextBox.TabIndex = 7;
             }
             else
@@ -168,13 +177,16 @@ namespace System.Web.UI.Design.MobileControls
                 _selectTypeCombo.SetBounds(8, 40, 161, 21);
                 _selectTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
                 _selectTypeCombo.SelectedIndexChanged += new EventHandler(this.OnSetPageDirty);
-                _selectTypeCombo.Items.AddRange(new object[] {
-                                                                SR.GetString(SR.ListGeneralPage_SelectTypeDropDown),
-                                                                SR.GetString(SR.ListGeneralPage_SelectTypeListBox),
-                                                                SR.GetString(SR.ListGeneralPage_SelectTypeRadio),
-                                                                SR.GetString(SR.ListGeneralPage_SelectTypeMultiSelectListBox),
-                                                                SR.GetString(SR.ListGeneralPage_SelectTypeCheckBox)
-                                                             });
+                _selectTypeCombo.Items.AddRange(
+                    new object[]
+                    {
+                        SR.GetString(SR.ListGeneralPage_SelectTypeDropDown),
+                        SR.GetString(SR.ListGeneralPage_SelectTypeListBox),
+                        SR.GetString(SR.ListGeneralPage_SelectTypeRadio),
+                        SR.GetString(SR.ListGeneralPage_SelectTypeMultiSelectListBox),
+                        SR.GetString(SR.ListGeneralPage_SelectTypeCheckBox)
+                    }
+                );
                 _selectTypeCombo.TabIndex = 2;
 
                 rowsLabel.SetBounds(211, 24, 161, 16);
@@ -196,37 +208,32 @@ namespace System.Web.UI.Design.MobileControls
                 "General.ico"
             );
 
-            this.Controls.AddRange(new Control[] 
-                           {
-                               appearanceGroup
-                           });
+            this.Controls.AddRange(new Control[] { appearanceGroup });
 
             if (_isBaseControlList)
             {
-                this.Controls.AddRange(new Control[] 
-                           {
-                               _itemsPerPageTextBox,
-                               itemsPerPageLabel,
-                               _itemCountTextBox,
-                               itemCountLabel,
-                               pagingGroup,
-                               decorationLabel,
-                               _decorationCombo
-                           });
+                this.Controls.AddRange(
+                    new Control[]
+                    {
+                        _itemsPerPageTextBox,
+                        itemsPerPageLabel,
+                        _itemCountTextBox,
+                        itemCountLabel,
+                        pagingGroup,
+                        decorationLabel,
+                        _decorationCombo
+                    }
+                );
             }
             else
             {
-                this.Controls.AddRange(new Control[] 
-                           {
-                               _rowsTextBox,
-                               rowsLabel,
-                               selectTypeLabel,
-                               _selectTypeCombo
-                           });
+                this.Controls.AddRange(
+                    new Control[] { _rowsTextBox, rowsLabel, selectTypeLabel, _selectTypeCombo }
+                );
             }
         }
 
-        protected override void LoadComponent() 
+        protected override void LoadComponent()
         {
             IListDesigner listDesigner = (IListDesigner)GetBaseDesigner();
 
@@ -234,9 +241,11 @@ namespace System.Web.UI.Design.MobileControls
             {
                 List list = (List)GetBaseControl();
                 _itemCountTextBox.Text = list.ItemCount.ToString(CultureInfo.InvariantCulture);
-                _itemsPerPageTextBox.Text = list.ItemsPerPage.ToString(CultureInfo.InvariantCulture);
+                _itemsPerPageTextBox.Text = list.ItemsPerPage.ToString(
+                    CultureInfo.InvariantCulture
+                );
 
-                switch (list.Decoration) 
+                switch (list.Decoration)
                 {
                     case ListDecoration.None:
                         _decorationCombo.SelectedIndex = IDX_DECORATION_NONE;
@@ -253,7 +262,7 @@ namespace System.Web.UI.Design.MobileControls
             {
                 SelectionList selectionList = (SelectionList)GetBaseControl();
 
-                switch (selectionList.SelectType) 
+                switch (selectionList.SelectType)
                 {
                     case ListSelectType.DropDown:
                         _selectTypeCombo.SelectedIndex = IDX_SELECTTYPE_DROPDOWN;
@@ -276,7 +285,7 @@ namespace System.Web.UI.Design.MobileControls
             }
         }
 
-        private void OnSetPageDirty(Object source, EventArgs e) 
+        private void OnSetPageDirty(Object source, EventArgs e)
         {
             if (IsLoading())
             {
@@ -287,8 +296,7 @@ namespace System.Web.UI.Design.MobileControls
 
         private void OnKeyPressNumberTextBox(Object source, KeyPressEventArgs e)
         {
-            if (!((e.KeyChar >='0' && e.KeyChar <= '9') ||
-                  e.KeyChar == 8))
+            if (!((e.KeyChar >= '0' && e.KeyChar <= '9') || e.KeyChar == 8))
             {
                 e.Handled = true;
                 SafeNativeMethods.MessageBeep(unchecked((int)0xFFFFFFFF));
@@ -299,7 +307,7 @@ namespace System.Web.UI.Design.MobileControls
         ///   Saves the component loaded into the page.
         /// </summary>
         /// <seealso cref="System.Windows.Forms.Design.ComponentEditorPage"/>
-        protected override void SaveComponent() 
+        protected override void SaveComponent()
         {
             IListDesigner listDesigner = (IListDesigner)GetBaseDesigner();
 
@@ -307,7 +315,7 @@ namespace System.Web.UI.Design.MobileControls
             {
                 List list = (List)GetBaseControl();
 
-                switch (_decorationCombo.SelectedIndex) 
+                switch (_decorationCombo.SelectedIndex)
                 {
                     case IDX_DECORATION_NONE:
                         list.Decoration = ListDecoration.None;
@@ -326,7 +334,10 @@ namespace System.Web.UI.Design.MobileControls
 
                     if (_itemCountTextBox.Text.Length != 0)
                     {
-                        itemCount = Int32.Parse(_itemCountTextBox.Text, CultureInfo.InvariantCulture);
+                        itemCount = Int32.Parse(
+                            _itemCountTextBox.Text,
+                            CultureInfo.InvariantCulture
+                        );
                     }
                     list.ItemCount = itemCount;
                 }
@@ -341,23 +352,28 @@ namespace System.Web.UI.Design.MobileControls
 
                     if (_itemsPerPageTextBox.Text.Length != 0)
                     {
-                        itemsPerPage = Int32.Parse(_itemsPerPageTextBox.Text, CultureInfo.InvariantCulture);
+                        itemsPerPage = Int32.Parse(
+                            _itemsPerPageTextBox.Text,
+                            CultureInfo.InvariantCulture
+                        );
                     }
                     list.ItemsPerPage = itemsPerPage;
                 }
                 catch (Exception)
                 {
-                    _itemsPerPageTextBox.Text = list.ItemsPerPage.ToString(CultureInfo.InvariantCulture);
+                    _itemsPerPageTextBox.Text = list.ItemsPerPage.ToString(
+                        CultureInfo.InvariantCulture
+                    );
                 }
 
                 TypeDescriptor.Refresh(list);
             }
             else
             {
-                // 
+                //
                 SelectionList selectionList = (SelectionList)GetBaseControl();
 
-                switch (_selectTypeCombo.SelectedIndex) 
+                switch (_selectTypeCombo.SelectedIndex)
                 {
                     case IDX_SELECTTYPE_DROPDOWN:
                         selectionList.SelectType = ListSelectType.DropDown;
@@ -399,7 +415,7 @@ namespace System.Web.UI.Design.MobileControls
         ///   Sets the component that is to be edited in the page.
         /// </summary>
         /// <seealso cref="System.Windows.Forms.Design.ComponentEditorPage"/>
-        public override void SetComponent(IComponent component) 
+        public override void SetComponent(IComponent component)
         {
             base.SetComponent(component);
             InitForm();

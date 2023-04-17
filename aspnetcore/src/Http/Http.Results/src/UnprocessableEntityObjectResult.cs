@@ -6,7 +6,5 @@ namespace Microsoft.AspNetCore.Http.Result;
 internal sealed class UnprocessableEntityObjectResult : ObjectResult
 {
     public UnprocessableEntityObjectResult(object? error)
-        : base(error, StatusCodes.Status422UnprocessableEntity)
-    {
-    }
+        : base(error, StatusCodes.Status422UnprocessableEntity) { }
 }

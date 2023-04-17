@@ -35,7 +35,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         public WorkspaceInProcess Workspace { get; }
 
-        internal static async Task<TestServices> CreateAsync(JoinableTaskFactory joinableTaskFactory)
+        internal static async Task<TestServices> CreateAsync(
+            JoinableTaskFactory joinableTaskFactory
+        )
         {
             var services = new TestServices(joinableTaskFactory);
             await services.InitializeAsync();

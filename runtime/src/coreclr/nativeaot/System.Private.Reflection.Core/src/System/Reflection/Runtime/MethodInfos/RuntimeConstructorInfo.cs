@@ -28,10 +28,7 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override bool ContainsGenericParameters
         {
-            get
-            {
-                return DeclaringType.ContainsGenericParameters;
-            }
+            get { return DeclaringType.ContainsGenericParameters; }
         }
 
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
@@ -44,7 +41,9 @@ namespace System.Reflection.Runtime.MethodInfos
             throw new NotSupportedException();
         }
 
-        [RequiresUnreferencedCode("Trimming may change method bodies. For example it can change some instructions, remove branches or local variables.")]
+        [RequiresUnreferencedCode(
+            "Trimming may change method bodies. For example it can change some instructions, remove branches or local variables."
+        )]
         public sealed override MethodBody GetMethodBody()
         {
             throw new PlatformNotSupportedException();
@@ -73,10 +72,21 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public abstract override bool HasSameMetadataDefinitionAs(MemberInfo other);
 
-        public abstract override object Invoke(BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture);
+        public abstract override object Invoke(
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        );
 
         [DebuggerGuidedStepThrough]
-        public sealed override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public sealed override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
 #if ENABLE_REFLECTION_TRACE
             if (ReflectionTrace.Enabled)
@@ -116,41 +126,26 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public abstract override MethodBase MetadataDefinitionMethod { get; }
 
-        public abstract override int MetadataToken
-        {
-            get;
-        }
+        public abstract override int MetadataToken { get; }
 
         public sealed override Module Module
         {
-            get
-            {
-                return DeclaringType.Module;
-            }
+            get { return DeclaringType.Module; }
         }
 
         public sealed override bool IsConstructedGenericMethod
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool IsGenericMethod
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool IsGenericMethodDefinition
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public abstract override MethodImplAttributes MethodImplementationFlags { get; }

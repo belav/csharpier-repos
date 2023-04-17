@@ -36,7 +36,4 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         IntPtr iPtr;
         DBNull dbNull;
     }
-
 }
-
-

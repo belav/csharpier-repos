@@ -18,16 +18,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpErrorListNetCore : CSharpErrorListCommon
     {
         public CSharpErrorListNetCore(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.CSharpNetCoreClassLibrary)
-        {
-        }
+            : base(instanceFactory, WellKnownProjectTemplates.CSharpNetCoreClassLibrary) { }
 
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync().ConfigureAwait(false);
 
             // The CSharpNetCoreClassLibrary template does not open a file automatically.
-            VisualStudio.SolutionExplorer.OpenFile(new Project(ProjectName), WellKnownProjectTemplates.CSharpNetCoreClassLibraryClassFileName);
+            VisualStudio.SolutionExplorer.OpenFile(
+                new Project(ProjectName),
+                WellKnownProjectTemplates.CSharpNetCoreClassLibraryClassFileName
+            );
         }
 
         [WpfFact]

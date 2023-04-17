@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -11,15 +11,15 @@
 //
 // Date: Oct 2010
 //
-namespace System.Runtime {
-
+namespace System.Runtime
+{
     using System;
-    
+
     using System.Reflection;
 
     using System.Security;
     using System.Security.Permissions;
-    
+
     using System.Runtime;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
@@ -35,7 +35,10 @@ namespace System.Runtime {
             // ignore
         }
 
-        internal static void InternalStartProfile(string profile, IntPtr ptrNativeAssemblyLoadContext)
+        internal static void InternalStartProfile(
+            string profile,
+            IntPtr ptrNativeAssemblyLoadContext
+        )
         {
             // ignore
         }
@@ -68,4 +71,3 @@ namespace System.Runtime {
 
 #endif
 }
-

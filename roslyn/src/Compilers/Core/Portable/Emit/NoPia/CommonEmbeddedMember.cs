@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
         TEmbeddedEvent,
         TEmbeddedProperty,
         TEmbeddedParameter,
-        TEmbeddedTypeParameter>
+        TEmbeddedTypeParameter
+    >
     {
         internal abstract class CommonEmbeddedMember
         {
@@ -50,14 +51,24 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 this.UnderlyingSymbol = underlyingSymbol;
             }
 
-            protected abstract IEnumerable<TAttributeData> GetCustomAttributesToEmit(TPEModuleBuilder moduleBuilder);
+            protected abstract IEnumerable<TAttributeData> GetCustomAttributesToEmit(
+                TPEModuleBuilder moduleBuilder
+            );
 
-            protected virtual TAttributeData PortAttributeIfNeedTo(TAttributeData attrData, TSyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics)
+            protected virtual TAttributeData PortAttributeIfNeedTo(
+                TAttributeData attrData,
+                TSyntaxNode syntaxNodeOpt,
+                DiagnosticBag diagnostics
+            )
             {
                 return null;
             }
 
-            private ImmutableArray<TAttributeData> GetAttributes(TPEModuleBuilder moduleBuilder, TSyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics)
+            private ImmutableArray<TAttributeData> GetAttributes(
+                TPEModuleBuilder moduleBuilder,
+                TSyntaxNode syntaxNodeOpt,
+                DiagnosticBag diagnostics
+            )
             {
                 var builder = ArrayBuilder<TAttributeData>.GetInstance();
 
@@ -69,16 +80,31 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
                 foreach (var attrData in GetCustomAttributesToEmit(moduleBuilder))
                 {
-                    if (TypeManager.IsTargetAttribute(UnderlyingSymbol, attrData, AttributeDescription.DispIdAttribute))
+                    if (
+                        TypeManager.IsTargetAttribute(
+                            UnderlyingSymbol,
+                            attrData,
+                            AttributeDescription.DispIdAttribute
+                        )
+                    )
                     {
                         if (attrData.CommonConstructorArguments.Length == 1)
                         {
-                            builder.AddOptional(TypeManager.CreateSynthesizedAttribute(WellKnownMember.System_Runtime_InteropServices_DispIdAttribute__ctor, attrData, syntaxNodeOpt, diagnostics));
+                            builder.AddOptional(
+                                TypeManager.CreateSynthesizedAttribute(
+                                    WellKnownMember.System_Runtime_InteropServices_DispIdAttribute__ctor,
+                                    attrData,
+                                    syntaxNodeOpt,
+                                    diagnostics
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        builder.AddOptional(PortAttributeIfNeedTo(attrData, syntaxNodeOpt, diagnostics));
+                        builder.AddOptional(
+                            PortAttributeIfNeedTo(attrData, syntaxNodeOpt, diagnostics)
+                        );
                     }
                 }
 
@@ -90,7 +116,11 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 if (_lazyAttributes.IsDefault)
                 {
                     var diagnostics = DiagnosticBag.GetInstance();
-                    var attributes = GetAttributes((TPEModuleBuilder)context.Module, (TSyntaxNode)context.SyntaxNode, diagnostics);
+                    var attributes = GetAttributes(
+                        (TPEModuleBuilder)context.Module,
+                        (TSyntaxNode)context.SyntaxNode,
+                        diagnostics
+                    );
 
                     if (ImmutableInterlocked.InterlockedInitialize(ref _lazyAttributes, attributes))
                     {

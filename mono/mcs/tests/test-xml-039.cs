@@ -5,15 +5,16 @@ using System;
 /// <see cref="ITest.Start" />
 /// <see cref="ITest.Foo" />
 /// </summary>
-public interface ITest {
-        /// <summary>whatever</summary>
-        event EventHandler Start;
-	/// <summary>hogehoge</summary>
-	int Foo { get; }
+public interface ITest
+{
+    /// <summary>whatever</summary>
+    event EventHandler Start;
+
+    /// <summary>hogehoge</summary>
+    int Foo { get; }
 }
 
 class Test
 {
-	public static void Main () {}
+    public static void Main() { }
 }
-

@@ -17,14 +17,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
     [Trait(Traits.Feature, Traits.Features.CodeActionsMoveDeclarationNearReference)]
     public class MoveDeclarationNearReferenceTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpMoveDeclarationNearReferenceCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpMoveDeclarationNearReferenceCodeRefactoringProvider();
 
         [Fact]
         public async Task TestMove1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -34,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -43,20 +45,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveDeclarationNearRefe
             Console.WriteLine(x);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMove1_TopLevelStatement()
         {
             await TestAsync(
-@"
+                @"
 int [||]x;
 {
     Console.WriteLine(x);
 }
 ",
-@"
+                @"
 
 {
 
@@ -64,14 +67,15 @@ int [||]x;
     Console.WriteLine(x);
 }
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
         public async Task TestMove2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -80,7 +84,7 @@ int [||]x;
         Console.WriteLine(x);
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -88,33 +92,35 @@ int [||]x;
         int x;
         Console.WriteLine(x);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMove2_TopLevelStatement()
         {
             await TestAsync(
-@"
+                @"
 int [||]x;
 Console.WriteLine();
 Console.WriteLine(x);
 ",
-@"
+                @"
 
 Console.WriteLine();
 
 int x;
 Console.WriteLine(x);
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
         public async Task TestMove3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -128,7 +134,7 @@ Console.WriteLine(x);
             Console.WriteLine(x);
         }
     }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -141,14 +147,15 @@ Console.WriteLine(x);
         {
             Console.WriteLine(x);
         }
-    }");
+    }"
+            );
         }
 
         [Fact]
         public async Task TestMove3_TopLevelStatement()
         {
             await TestAsync(
-@"
+                @"
 int [||]x;
 Console.WriteLine();
 {
@@ -159,7 +166,7 @@ Console.WriteLine();
     Console.WriteLine(x);
 }
 ",
-@"
+                @"
 
 Console.WriteLine();
 
@@ -172,14 +179,15 @@ Console.WriteLine(x);
     Console.WriteLine(x);
 }
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
         public async Task TestMove4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -189,7 +197,7 @@ Console.WriteLine(x);
             Console.WriteLine(x);
         }
     }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -198,21 +206,22 @@ Console.WriteLine(x);
             int x;
             Console.WriteLine(x);
         }
-    }");
+    }"
+            );
         }
 
         [Fact]
         public async Task TestMove4_TopLevelStatement()
         {
             await TestAsync(
-@"
+                @"
 int [||]x;
 Console.WriteLine();
 {
     Console.WriteLine(x);
 }
 ",
-@"
+                @"
 
 Console.WriteLine();
 {
@@ -221,14 +230,15 @@ Console.WriteLine();
     Console.WriteLine(x);
 }
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
         public async Task TestAssign1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -239,7 +249,7 @@ Console.WriteLine();
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -248,14 +258,15 @@ Console.WriteLine();
             Console.WriteLine(x);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAssign2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -266,7 +277,7 @@ Console.WriteLine();
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -275,14 +286,15 @@ Console.WriteLine();
             Console.WriteLine(x);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAssign3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -293,7 +305,7 @@ Console.WriteLine();
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -303,38 +315,41 @@ Console.WriteLine();
             Console.WriteLine(x);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissing1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int [||]x;
         Console.WriteLine(x);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissing1_TopLevelStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 int [||]x;
 Console.WriteLine(x);
-");
+"
+            );
         }
 
         [Fact, WorkItem(538424, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538424")]
         public async Task TestMissingWhenReferencedInDeclaration()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -343,14 +358,15 @@ Console.WriteLine(x);
         };
         x.ToString();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWhenInDeclarationGroup()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -358,25 +374,27 @@ Console.WriteLine(x);
         int j = 10;
         Console.WriteLine(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWhenInDeclarationGroup_TopLevelStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 int [||]i = 5;
 int j = 10;
 Console.WriteLine(i);
-");
+"
+            );
         }
 
         [Fact, WorkItem(541475, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541475")]
         public async Task Regression8190()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -384,14 +402,15 @@ Console.WriteLine(i);
             object x;
             [|object|] }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatting()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -399,38 +418,40 @@ Console.WriteLine(i);
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine();
         int i = 5; Console.Write(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFormatting_TopLevelStatement()
         {
             await TestAsync(
-@"
+                @"
 int [||]i = 5; Console.WriteLine();
 Console.Write(i);
 ",
-@"
+                @"
 
 Console.WriteLine();
 
 int i = 5; Console.Write(i);
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
         public async Task TestMissingInHiddenBlock1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#line default
+                @"#line default
 class Program
 {
     void Main()
@@ -441,14 +462,15 @@ class Program
         Bar(x);
     }
 #line default
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingInHiddenBlock2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#line default
+                @"#line default
 class Program
 {
     void Main()
@@ -460,14 +482,15 @@ class Program
 #line default
         Bar(x);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingInHiddenBlock2_TopLevelStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#line default
+                @"#line default
 
 int [|x|] = 0;
 Goo();
@@ -475,14 +498,15 @@ Goo();
 Goo();
 #line default
 Bar(x);
-");
+"
+            );
         }
 
         [Fact]
         public async Task TestAvailableInNonHiddenBlock1()
         {
             await TestInRegularAndScriptAsync(
-@"#line default
+                @"#line default
 class Program
 {
     void Main()
@@ -494,7 +518,7 @@ class Program
     }
 #line default
 }",
-@"#line default
+                @"#line default
 class Program
 {
     void Main()
@@ -505,14 +529,15 @@ class Program
 #line hidden
     }
 #line default
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAvailableInNonHiddenBlock2()
         {
             await TestInRegularAndScriptAsync(
-@"#line default
+                @"#line default
 class Program
 {
     void Main()
@@ -526,7 +551,7 @@ class Program
         Bar(x);
     }
 }",
-@"#line default
+                @"#line default
 class Program
 {
     void Main()
@@ -539,14 +564,15 @@ class Program
         int x = 0;
         Bar(x);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestAvailableInNonHiddenBlock2_TopLevelStatement()
         {
             await TestAsync(
-@"#line default
+                @"#line default
 
 int [||]x = 0;
 Goo();
@@ -556,7 +582,7 @@ Goo();
 Goo();
 Bar(x);
 ",
-@"#line default
+                @"#line default
 
 Goo();
 #line hidden
@@ -568,14 +594,15 @@ Goo();
 int x = 0;
 Bar(x);
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact, WorkItem(545435, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545435")]
         public async Task TestWarnOnChangingScopes1()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Linq;
+                @"using System.Linq;
 
 class Program
 {
@@ -589,7 +616,7 @@ class Program
         });
     }
 }",
-@"using System.Linq;
+                @"using System.Linq;
 
 class Program
 {
@@ -603,14 +630,15 @@ class Program
             }
         });
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545435, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545435")]
         public async Task TestWarnOnChangingScopes1_TopLevelStatement()
         {
             await TestAsync(
-@"using System.Linq;
+                @"using System.Linq;
 
 var [||]@lock = new object();
 new[] { 1 }.AsParallel().ForAll((i) => {
@@ -619,7 +647,7 @@ new[] { 1 }.AsParallel().ForAll((i) => {
     }
 });
 ",
-@"using System.Linq;
+                @"using System.Linq;
 
 new[] { 1 }.AsParallel().ForAll((i) =>
 {
@@ -630,14 +658,15 @@ new[] { 1 }.AsParallel().ForAll((i) =>
     }
 });
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact, WorkItem(545435, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545435")]
         public async Task TestWarnOnChangingScopes2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Linq;
 
 class Program
@@ -652,7 +681,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Linq;
 
 class Program
@@ -666,14 +695,15 @@ class Program
             i++;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545435, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545435")]
         public async Task TestWarnOnChangingScopes2_TopLevelStatement()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Linq;
 
 var [||]i = 0;
@@ -683,7 +713,7 @@ foreach (var v in new[] { 1 })
     i++;
 }
 ",
-@"using System;
+                @"using System;
 using System.Linq;
 
 foreach (var v in new[] { 1 })
@@ -694,14 +724,15 @@ foreach (var v in new[] { 1 })
     i++;
 }
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact, WorkItem(44664, "https://github.com/dotnet/roslyn/pull/44664")]
         public async Task TestWarnOnChangingScopes3()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Linq;
 
 class Program
@@ -716,7 +747,7 @@ class Program
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Linq;
 
 class Program
@@ -730,14 +761,15 @@ class Program
             i++;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(44664, "https://github.com/dotnet/roslyn/pull/44664")]
         public async Task TestWarnOnChangingScopes3_TopLevelStatement()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Linq;
 
 var [||]i = 0;
@@ -747,7 +779,7 @@ void LocalFunction()
     i++;
 }
 ",
-@"using System;
+                @"using System;
 using System.Linq;
 
 void LocalFunction()
@@ -758,14 +790,15 @@ void LocalFunction()
     i++;
 }
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact, WorkItem(545840, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545840")]
         public async Task InsertCastIfNecessary1()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 static class C
 {
@@ -784,8 +817,7 @@ static class C
         }
     }
 }",
-
-@"using System;
+                @"using System;
 
 static class C
 {
@@ -803,14 +835,15 @@ static class C
             Console.WriteLine(a);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(545835, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545835")]
         public async Task InsertCastIfNecessary2()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class X
 {
@@ -827,8 +860,7 @@ class X
         }
     }
 }",
-
-@"using System;
+                @"using System;
 
 class X
 {
@@ -844,14 +876,15 @@ class X
             Console.WriteLine(a);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(546267, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546267")]
         public async Task MissingIfNotInDeclarationSpan()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -870,14 +903,15 @@ class Program
         Console.WriteLine();
         Console.WriteLine(goo);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task Tuple()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -887,7 +921,7 @@ class Program
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -896,14 +930,15 @@ class Program
             Console.WriteLine(x);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TupleWithNames()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -913,7 +948,7 @@ class Program
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -922,14 +957,15 @@ class Program
             Console.WriteLine(x);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments01()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -940,7 +976,7 @@ class Program
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -950,14 +986,15 @@ class Program
         int i = 5;
         Console.Write(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments02()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -970,7 +1007,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -982,14 +1019,15 @@ class Program
             Console.Write(i);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments03()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1001,7 +1039,7 @@ class Program
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1012,14 +1050,15 @@ class Program
         // Existing trivia
         Console.Write(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments04()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1033,7 +1072,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1046,14 +1085,15 @@ class Program
             Console.Write(i);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments05()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1069,7 +1109,7 @@ class Program
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1083,14 +1123,15 @@ class Program
         int i = 0;
         Console.Write(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments06()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1108,7 +1149,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1124,14 +1165,15 @@ class Program
             Console.Write(i);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments07()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1148,7 +1190,7 @@ class Program
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1163,14 +1205,15 @@ class Program
         int i = 0;
         Console.Write(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestComments08()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1189,7 +1232,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1206,14 +1249,15 @@ class Program
             Console.Write(i);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMergeComments01()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1225,7 +1269,7 @@ class Program
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1235,14 +1279,15 @@ class Program
         int i = 0;
         Console.Write(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMergeComments02()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1256,7 +1301,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1268,14 +1313,15 @@ class Program
             Console.Write(i);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMergeComments03()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1288,7 +1334,7 @@ class Program
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1299,14 +1345,15 @@ class Program
         int i = 0;
         Console.Write(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMergeComments04()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1321,7 +1368,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1334,14 +1381,15 @@ class Program
             Console.Write(i);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMergeComments05()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1357,7 +1405,7 @@ class Program
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1371,14 +1419,15 @@ class Program
         int i = 0;
         Console.Write(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMergeComments06()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1396,7 +1445,7 @@ class Program
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1412,14 +1461,15 @@ class Program
             Console.Write(i);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMergeComments07()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1436,7 +1486,7 @@ class Program
         Console.Write(i);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1451,14 +1501,15 @@ class Program
         int i = 0;
         Console.Write(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMergeComments07_TopLevelStatement()
         {
             await TestAsync(
-@"
+                @"
 if (true)
 {
 }
@@ -1471,7 +1522,7 @@ Console.WriteLine();
 i = 0;
 Console.Write(i);
 ",
-@"
+                @"
 if (true)
 {
 }
@@ -1483,14 +1534,15 @@ Console.WriteLine();
 int i = 0;
 Console.Write(i);
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
         public async Task TestMergeComments08()
         {
             await TestInRegularAndScriptAsync(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1509,7 +1561,7 @@ Console.Write(i);
         }
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1526,14 +1578,15 @@ Console.Write(i);
             Console.Write(i);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMergeComments08_TopLevelStatement()
         {
             await TestAsync(
-@"
+                @"
 if (true)
 {
 }
@@ -1548,7 +1601,7 @@ Console.WriteLine();
     Console.Write(i);
 }
 ",
-@"
+                @"
 if (true)
 {
 }
@@ -1562,14 +1615,15 @@ Console.WriteLine();
     Console.Write(i);
 }
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact, WorkItem(21907, "https://github.com/dotnet/roslyn/issues/21907")]
         public async Task TestMissingOnCrossFunction1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Program
@@ -1591,14 +1645,15 @@ class Program
   }
 
   public static void Out<T>(out T t) => t = default;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(21907, "https://github.com/dotnet/roslyn/issues/21907")]
         public async Task TestMissingOnCrossFunction2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Program
@@ -1623,14 +1678,15 @@ class Program
   }
 
   public static void Out<T>(out T t) => t = default;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(21907, "https://github.com/dotnet/roslyn/issues/21907")]
         public async Task TestMissingOnCrossFunction3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Program
@@ -1654,14 +1710,15 @@ class Program
     }
 
     public static void Out<T>(out T t) => t = default;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(21907, "https://github.com/dotnet/roslyn/issues/21907")]
         public async Task TestMissingOnCrossFunction4()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class Program
@@ -1687,14 +1744,15 @@ class Program
     }
 
     public static void Out<T>(out T t) => t = default;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMoveInsideSwitchSection()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1708,7 +1766,7 @@ class Program
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1721,14 +1779,15 @@ class Program
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMoveIntoSwitchSection()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1741,7 +1800,7 @@ class Program
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1752,14 +1811,15 @@ class Program
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMoveIntoSwitchSection_TopLevelStatement()
         {
             await TestAsync(
-@"
+                @"
 int [||]x;
 switch (true)
 {
@@ -1768,7 +1828,7 @@ switch (true)
         break;
 }
 ",
-@"
+                @"
 switch (true)
 {
     case true:
@@ -1776,14 +1836,15 @@ switch (true)
         break;
 }
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
         public async Task TestUsedInMultipleSwitchSections_MoveToSwitchStatement()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1800,7 +1861,7 @@ switch (true)
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1816,14 +1877,15 @@ switch (true)
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUsedInMultipleSwitchSections_TopLevelStatement_MoveToSwitchStatement()
         {
             await TestAsync(
-@"
+                @"
 int [||]x;
 System.Console.WriteLine();
 switch (true)
@@ -1836,7 +1898,7 @@ switch (true)
         break;
 }
 ",
-@"
+                @"
 
 System.Console.WriteLine();
 
@@ -1851,14 +1913,15 @@ switch (true)
         break;
 }
 ",
-                Options.Regular);
+                Options.Regular
+            );
         }
 
         [Fact]
         public async Task TestUsedInMultipleSwitchSections_CannotMove()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -1873,14 +1936,15 @@ switch (true)
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUsedInMultipleSwitchSections_TopLevelStatement_CannotMove()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 int [||]x;
 switch (true)
 {
@@ -1891,7 +1955,8 @@ switch (true)
         x = 0;
         break;
 }
-");
+"
+            );
         }
     }
 }

@@ -6,7 +6,6 @@ using System.Text;
 using System.Runtime.InteropServices;
 using TestLibrary;
 
-
 [assembly: BestFitMapping(false, ThrowOnUnmappableChar = true)]
 
 [StructLayout(LayoutKind.Sequential)]
@@ -37,61 +36,97 @@ public class BFM_LPStrMarshaler
 {
 #pragma warning disable 618
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_String([In][MarshalAs(UnmanagedType.LPStr)]String s);
+    public static extern bool LPStrBuffer_In_String([In] [MarshalAs(UnmanagedType.LPStr)] String s);
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InByRef_String([In][MarshalAs(UnmanagedType.LPStr)]ref String s);
+    public static extern bool LPStrBuffer_InByRef_String(
+        [In] [MarshalAs(UnmanagedType.LPStr)] ref String s
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InOutByRef_String([In, Out][MarshalAs(UnmanagedType.LPStr)]ref String s);
+    public static extern bool LPStrBuffer_InOutByRef_String(
+        [In, Out] [MarshalAs(UnmanagedType.LPStr)] ref String s
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_StringBuilder([In][MarshalAs(UnmanagedType.LPStr)]StringBuilder s);
+    public static extern bool LPStrBuffer_In_StringBuilder(
+        [In] [MarshalAs(UnmanagedType.LPStr)] StringBuilder s
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InByRef_StringBuilder([In][MarshalAs(UnmanagedType.LPStr)]ref StringBuilder s);
+    public static extern bool LPStrBuffer_InByRef_StringBuilder(
+        [In] [MarshalAs(UnmanagedType.LPStr)] ref StringBuilder s
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InOutByRef_StringBuilder([In, Out][MarshalAs(UnmanagedType.LPStr)]ref StringBuilder s);
+    public static extern bool LPStrBuffer_InOutByRef_StringBuilder(
+        [In, Out] [MarshalAs(UnmanagedType.LPStr)] ref StringBuilder s
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_Struct_String_nothrow([In][MarshalAs(UnmanagedType.Struct)]LPStrTestStruct_nothrow strStruct);
+    public static extern bool LPStrBuffer_In_Struct_String_nothrow(
+        [In] [MarshalAs(UnmanagedType.Struct)] LPStrTestStruct_nothrow strStruct
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_Struct_String([In][MarshalAs(UnmanagedType.Struct)]LPStrTestStruct strStruct);
+    public static extern bool LPStrBuffer_In_Struct_String(
+        [In] [MarshalAs(UnmanagedType.Struct)] LPStrTestStruct strStruct
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InByRef_Struct_String([In][MarshalAs(UnmanagedType.Struct)]ref LPStrTestStruct strStruct);
+    public static extern bool LPStrBuffer_InByRef_Struct_String(
+        [In] [MarshalAs(UnmanagedType.Struct)] ref LPStrTestStruct strStruct
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InOutByRef_Struct_String([In, Out][MarshalAs(UnmanagedType.Struct)]ref LPStrTestStruct strStruct);
+    public static extern bool LPStrBuffer_InOutByRef_Struct_String(
+        [In, Out] [MarshalAs(UnmanagedType.Struct)] ref LPStrTestStruct strStruct
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_Array_String([In][MarshalAs(UnmanagedType.LPArray)]String[] strArray);
+    public static extern bool LPStrBuffer_In_Array_String(
+        [In] [MarshalAs(UnmanagedType.LPArray)] String[] strArray
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InByRef_Array_String([In][MarshalAs(UnmanagedType.LPArray)]ref String[] strArray);
+    public static extern bool LPStrBuffer_InByRef_Array_String(
+        [In] [MarshalAs(UnmanagedType.LPArray)] ref String[] strArray
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InOutByRef_Array_String([In, Out][MarshalAs(UnmanagedType.LPArray)]ref String[] Array);
+    public static extern bool LPStrBuffer_InOutByRef_Array_String(
+        [In, Out] [MarshalAs(UnmanagedType.LPArray)] ref String[] Array
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_In_Class_String([In][MarshalAs(UnmanagedType.LPStruct)]LPStrTestClass strClass);
+    public static extern bool LPStrBuffer_In_Class_String(
+        [In] [MarshalAs(UnmanagedType.LPStruct)] LPStrTestClass strClass
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InByRef_Class_String([In][MarshalAs(UnmanagedType.LPStruct)]ref LPStrTestClass strClass);
+    public static extern bool LPStrBuffer_InByRef_Class_String(
+        [In] [MarshalAs(UnmanagedType.LPStruct)] ref LPStrTestClass strClass
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = true, ThrowOnUnmappableChar = true)]
-    public static extern bool LPStrBuffer_InOutByRef_Class_String([In, Out][MarshalAs(UnmanagedType.LPStruct)]ref LPStrTestClass strClass);
+    public static extern bool LPStrBuffer_InOutByRef_Class_String(
+        [In, Out] [MarshalAs(UnmanagedType.LPStruct)] ref LPStrTestClass strClass
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = false)]
-    public static extern bool LPStrBuffer_In_Array_Struct([In][MarshalAs(UnmanagedType.LPArray)]LPStrTestStruct[] structArray);
+    public static extern bool LPStrBuffer_In_Array_Struct(
+        [In] [MarshalAs(UnmanagedType.LPArray)] LPStrTestStruct[] structArray
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = false)]
-    public static extern bool LPStrBuffer_InByRef_Array_Struct([In][MarshalAs(UnmanagedType.LPArray)]ref LPStrTestStruct[] structArray);
+    public static extern bool LPStrBuffer_InByRef_Array_Struct(
+        [In] [MarshalAs(UnmanagedType.LPArray)] ref LPStrTestStruct[] structArray
+    );
 
     [DllImport("LPStr_BestFitMappingNative", BestFitMapping = false, ThrowOnUnmappableChar = false)]
-    public static extern bool LPStrBuffer_InOutByRef_Array_Struct([In, Out][MarshalAs(UnmanagedType.LPArray)]ref LPStrTestStruct[] structArray);
+    public static extern bool LPStrBuffer_InOutByRef_Array_Struct(
+        [In, Out] [MarshalAs(UnmanagedType.LPArray)] ref LPStrTestStruct[] structArray
+    );
 #pragma warning restore 618
 
     static String GetValidString()
@@ -153,8 +188,14 @@ public class BFM_LPStrMarshaler
 
     static void testLPStrBufferStringBuilder()
     {
-        Assert.IsTrue(LPStrBuffer_In_StringBuilder(GetInvalidStringBuilder()), "[Error] Location tlpsbsb1");
-        Assert.IsTrue(LPStrBuffer_In_StringBuilder(GetValidStringBuilder()), "[Error] Location tlpsbsb2");
+        Assert.IsTrue(
+            LPStrBuffer_In_StringBuilder(GetInvalidStringBuilder()),
+            "[Error] Location tlpsbsb1"
+        );
+        Assert.IsTrue(
+            LPStrBuffer_In_StringBuilder(GetValidStringBuilder()),
+            "[Error] Location tlpsbsb2"
+        );
 
         StringBuilder cTemp = GetInvalidStringBuilder();
         StringBuilder cTempClone = cTemp;
@@ -342,7 +383,9 @@ public class BFM_LPStrMarshaler
     {
         if (System.Globalization.CultureInfo.CurrentCulture.Name != "en-US")
         {
-            Console.WriteLine("Non-US English platforms are not supported.\nPassing without running tests");
+            Console.WriteLine(
+                "Non-US English platforms are not supported.\nPassing without running tests"
+            );
 
             Console.WriteLine("--- Success");
             return 100;
@@ -355,9 +398,8 @@ public class BFM_LPStrMarshaler
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Test Failure: {e}"); 
-            return 101; 
+            Console.WriteLine($"Test Failure: {e}");
+            return 101;
         }
-
     }
 }

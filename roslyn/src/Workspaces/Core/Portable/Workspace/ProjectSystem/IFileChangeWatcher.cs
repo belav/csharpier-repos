@@ -36,7 +36,10 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
 
             if (extensionFilter != null && !extensionFilter.StartsWith("."))
             {
-                throw new ArgumentException($"{nameof(extensionFilter)} should start with a period.", nameof(extensionFilter));
+                throw new ArgumentException(
+                    $"{nameof(extensionFilter)} should start with a period.",
+                    nameof(extensionFilter)
+                );
             }
 
             Path = path;
@@ -69,7 +72,5 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
         IWatchedFile EnqueueWatchingFile(string filePath);
     }
 
-    internal interface IWatchedFile : IDisposable
-    {
-    }
+    internal interface IWatchedFile : IDisposable { }
 }

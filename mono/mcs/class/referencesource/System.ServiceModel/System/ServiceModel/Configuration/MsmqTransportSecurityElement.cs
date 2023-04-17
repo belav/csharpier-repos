@@ -15,24 +15,38 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class MsmqTransportSecurityElement : ServiceModelConfigurationElement
     {
-
-        [ConfigurationProperty(ConfigurationStrings.MsmqAuthenticationMode, DefaultValue = MsmqDefaults.MsmqAuthenticationMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MsmqAuthenticationMode,
+            DefaultValue = MsmqDefaults.MsmqAuthenticationMode
+        )]
         [ServiceModelEnumValidator(typeof(MsmqAuthenticationModeHelper))]
         public MsmqAuthenticationMode MsmqAuthenticationMode
         {
-            get { return (MsmqAuthenticationMode)base[ConfigurationStrings.MsmqAuthenticationMode]; }
+            get
+            {
+                return (MsmqAuthenticationMode)base[ConfigurationStrings.MsmqAuthenticationMode];
+            }
             set { base[ConfigurationStrings.MsmqAuthenticationMode] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MsmqEncryptionAlgorithm, DefaultValue = MsmqDefaults.MsmqEncryptionAlgorithm)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MsmqEncryptionAlgorithm,
+            DefaultValue = MsmqDefaults.MsmqEncryptionAlgorithm
+        )]
         [ServiceModelEnumValidator(typeof(MsmqEncryptionAlgorithmHelper))]
         public MsmqEncryptionAlgorithm MsmqEncryptionAlgorithm
         {
-            get { return (MsmqEncryptionAlgorithm)base[ConfigurationStrings.MsmqEncryptionAlgorithm]; }
+            get
+            {
+                return (MsmqEncryptionAlgorithm)base[ConfigurationStrings.MsmqEncryptionAlgorithm];
+            }
             set { base[ConfigurationStrings.MsmqEncryptionAlgorithm] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MsmqProtectionLevel, DefaultValue = MsmqDefaults.MsmqProtectionLevel)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MsmqProtectionLevel,
+            DefaultValue = MsmqDefaults.MsmqProtectionLevel
+        )]
         [ServiceModelEnumValidator(typeof(ProtectionLevelHelper))]
         public ProtectionLevel MsmqProtectionLevel
         {
@@ -44,7 +58,13 @@ namespace System.ServiceModel.Configuration
         [ServiceModelEnumValidator(typeof(MsmqSecureHashAlgorithmHelper))]
         public MsmqSecureHashAlgorithm MsmqSecureHashAlgorithm
         {
-            get { return (MsmqSecureHashAlgorithm)(base[ConfigurationStrings.MsmqSecureHashAlgorithm] ?? MsmqDefaults.MsmqSecureHashAlgorithm); }
+            get
+            {
+                return (MsmqSecureHashAlgorithm)(
+                    base[ConfigurationStrings.MsmqSecureHashAlgorithm]
+                    ?? MsmqDefaults.MsmqSecureHashAlgorithm
+                );
+            }
             set { base[ConfigurationStrings.MsmqSecureHashAlgorithm] = value; }
         }
 
@@ -64,10 +84,22 @@ namespace System.ServiceModel.Configuration
             if (security == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("security");
 
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MsmqAuthenticationMode, security.MsmqAuthenticationMode);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MsmqEncryptionAlgorithm, security.MsmqEncryptionAlgorithm);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MsmqProtectionLevel, security.MsmqProtectionLevel);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MsmqSecureHashAlgorithm, security.MsmqSecureHashAlgorithm);            
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MsmqAuthenticationMode,
+                security.MsmqAuthenticationMode
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MsmqEncryptionAlgorithm,
+                security.MsmqEncryptionAlgorithm
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MsmqProtectionLevel,
+                security.MsmqProtectionLevel
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MsmqSecureHashAlgorithm,
+                security.MsmqSecureHashAlgorithm
+            );
         }
     }
 }

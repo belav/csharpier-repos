@@ -46,7 +46,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             {
                 e = new X509SubjectKeyIdentifierExtension(
                     new AsnEncodedData(new ReadOnlySpan<byte>(rawData)),
-                    false);
+                    false
+                );
             }
             else
             {
@@ -99,7 +100,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 X509SubjectKeyIdentifierHashAlgorithm.Sha1,
                 false,
                 "04145971a65a334dda980780ff841ebe87f9723241f2".HexToByteArray(),
-                "5971A65A334DDA980780FF841EBE87F9723241F2");
+                "5971A65A334DDA980780FF841EBE87F9723241F2"
+            );
         }
 
         [Fact]
@@ -110,7 +112,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 X509SubjectKeyIdentifierHashAlgorithm.ShortSha1,
                 false,
                 "04084ebe87f9723241f2".HexToByteArray(),
-                "4EBE87F9723241F2");
+                "4EBE87F9723241F2"
+            );
         }
 
         [Fact]
@@ -121,7 +124,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 X509SubjectKeyIdentifierHashAlgorithm.CapiSha1,
                 false,
                 "0414a260a870be1145ed71e2bb5aa19463a4fe9dcc41".HexToByteArray(),
-                "A260A870BE1145ED71E2BB5AA19463A4FE9DCC41");
+                "A260A870BE1145ED71E2BB5AA19463A4FE9DCC41"
+            );
         }
 
         [Fact]
@@ -135,13 +139,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             string skid = ext.SubjectKeyIdentifier;
             Assert.Equal("5971A65A334DDA980780FF841EBE87F9723241F2", skid);
         }
-        
+
         private static void EncodeDecode(
             byte[] certBytes,
             X509SubjectKeyIdentifierHashAlgorithm algorithm,
             bool critical,
             byte[] expectedDer,
-            string expectedIdentifier)
+            string expectedIdentifier
+        )
         {
             PublicKey pk;
 
@@ -150,8 +155,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 pk = cert.PublicKey;
             }
 
-            X509SubjectKeyIdentifierExtension ext =
-                new X509SubjectKeyIdentifierExtension(pk, algorithm, critical);
+            X509SubjectKeyIdentifierExtension ext = new X509SubjectKeyIdentifierExtension(
+                pk,
+                algorithm,
+                critical
+            );
 
             byte[] rawData = ext.RawData;
             Assert.Equal(expectedDer, rawData);

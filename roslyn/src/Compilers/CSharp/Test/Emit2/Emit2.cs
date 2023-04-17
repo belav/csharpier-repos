@@ -12,8 +12,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
         [Fact]
         public void Test()
         {
-            var source = @"System.Console.Write(""I'm a new test project. Please delete this test."");";
-            CompileAndVerify(source, expectedOutput: "I'm a new test project. Please delete this test.");
+            var source =
+                @"System.Console.Write(""I'm a new test project. Please delete this test."");";
+            CompileAndVerify(
+                source,
+                expectedOutput: "I'm a new test project. Please delete this test."
+            );
         }
     }
 }

@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return this.Update(type.Type);
         }
 
-        public BoundDiscardExpression FailInference(Binder binder, BindingDiagnosticBag? diagnosticsOpt)
+        public BoundDiscardExpression FailInference(
+            Binder binder,
+            BindingDiagnosticBag? diagnosticsOpt
+        )
         {
             if (diagnosticsOpt?.DiagnosticBag != null)
             {
@@ -29,7 +32,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             get
             {
                 Debug.Assert(this.Type is { });
-                return new DiscardSymbol(TypeWithAnnotations.Create(this.Type, this.TopLevelNullability.Annotation.ToInternalAnnotation()));
+                return new DiscardSymbol(
+                    TypeWithAnnotations.Create(
+                        this.Type,
+                        this.TopLevelNullability.Annotation.ToInternalAnnotation()
+                    )
+                );
             }
         }
     }

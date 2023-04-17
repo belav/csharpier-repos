@@ -21,7 +21,8 @@ namespace System.Net.Security
 #endif
         private readonly SafeX509Handle? _certificate;
 
-        public SafeFreeCertContext(SafeX509Handle certificate) : base(IntPtr.Zero, true)
+        public SafeFreeCertContext(SafeX509Handle certificate)
+            : base(IntPtr.Zero, true)
         {
             // In certain scenarios (e.g. server querying for a client cert), the
             // input certificate may be invalid and this is OK
@@ -37,10 +38,7 @@ namespace System.Net.Security
 
         public override bool IsInvalid
         {
-            get
-            {
-                return handle == IntPtr.Zero;
-            }
+            get { return handle == IntPtr.Zero; }
         }
 
         protected override bool ReleaseHandle()
@@ -50,5 +48,4 @@ namespace System.Net.Security
             return true;
         }
     }
-
 }

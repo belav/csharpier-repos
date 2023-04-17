@@ -20,7 +20,10 @@ namespace System.Runtime.CompilerServices
         /// <param name="data">The closure array.</param>
         /// <param name="indexes">An array of indexes into the closure array where variables are found.</param>
         /// <returns>An interface to access variables.</returns>
-        [Obsolete("RuntimeOps has been deprecated and is not supported.", true), EditorBrowsable(EditorBrowsableState.Never)]
+        [
+            Obsolete("RuntimeOps has been deprecated and is not supported.", true),
+            EditorBrowsable(EditorBrowsableState.Never)
+        ]
         public static IRuntimeVariables CreateRuntimeVariables(object[] data, long[] indexes)
         {
             return new RuntimeVariableList(data, indexes);
@@ -30,7 +33,10 @@ namespace System.Runtime.CompilerServices
         /// Creates an interface that can be used to modify closed over variables at runtime.
         /// </summary>
         /// <returns>An interface to access variables.</returns>
-        [Obsolete("RuntimeOps has been deprecated and is not supported.", true), EditorBrowsable(EditorBrowsableState.Never)]
+        [
+            Obsolete("RuntimeOps has been deprecated and is not supported.", true),
+            EditorBrowsable(EditorBrowsableState.Never)
+        ]
         public static IRuntimeVariables CreateRuntimeVariables()
         {
             return new EmptyRuntimeVariables();
@@ -42,14 +48,8 @@ namespace System.Runtime.CompilerServices
 
             object? IRuntimeVariables.this[int index]
             {
-                get
-                {
-                    throw new IndexOutOfRangeException();
-                }
-                set
-                {
-                    throw new IndexOutOfRangeException();
-                }
+                get { throw new IndexOutOfRangeException(); }
+                set { throw new IndexOutOfRangeException(); }
             }
         }
 
@@ -84,14 +84,8 @@ namespace System.Runtime.CompilerServices
 
             public object? this[int index]
             {
-                get
-                {
-                    return GetStrongBox(index).Value;
-                }
-                set
-                {
-                    GetStrongBox(index).Value = value;
-                }
+                get { return GetStrongBox(index).Value; }
+                set { GetStrongBox(index).Value = value; }
             }
 
             private IStrongBox GetStrongBox(int index)

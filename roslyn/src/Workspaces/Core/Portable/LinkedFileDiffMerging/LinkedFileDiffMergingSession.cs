@@ -23,31 +23,45 @@ namespace Microsoft.CodeAnalysis
         private readonly Solution _newSolution;
         private readonly SolutionChanges _solutionChanges;
 
-        public LinkedFileDiffMergingSession(Solution oldSolution, Solution newSolution, SolutionChanges solutionChanges)
+        public LinkedFileDiffMergingSession(
+            Solution oldSolution,
+            Solution newSolution,
+            SolutionChanges solutionChanges
+        )
         {
             _oldSolution = oldSolution;
             _newSolution = newSolution;
             _solutionChanges = solutionChanges;
         }
 
-        internal async Task<LinkedFileMergeSessionResult> MergeDiffsAsync(IMergeConflictHandler mergeConflictHandler, CancellationToken cancellationToken)
+        internal async Task<LinkedFileMergeSessionResult> MergeDiffsAsync(
+            IMergeConflictHandler mergeConflictHandler,
+            CancellationToken cancellationToken
+        )
         {
             var sessionInfo = new LinkedFileDiffMergingSessionInfo();
 
             var linkedDocumentGroupsWithChanges = _solutionChanges
                 .GetProjectChanges()
                 .SelectMany(p => p.GetChangedDocuments())
-                .GroupBy(d => _oldSolution.GetDocument(d).FilePath, StringComparer.OrdinalIgnoreCase);
+                .GroupBy(
+                    d => _oldSolution.GetDocument(d).FilePath,
+                    StringComparer.OrdinalIgnoreCase
+                );
 
             var linkedFileMergeResults = new List<LinkedFileMergeResult>();
 
             var updatedSolution = _newSolution;
             foreach (var linkedDocumentsWithChanges in linkedDocumentGroupsWithChanges)
             {
-                var documentInNewSolution = _newSolution.GetDocument(linkedDocumentsWithChanges.First());
+                var documentInNewSolution = _newSolution.GetDocument(
+                    linkedDocumentsWithChanges.First()
+                );
 
-                // Ensure the first document in the group is the first in the list of 
-                var allLinkedDocuments = documentInNewSolution.GetLinkedDocumentIds().Add(documentInNewSolution.Id);
+                // Ensure the first document in the group is the first in the list of
+                var allLinkedDocuments = documentInNewSolution
+                    .GetLinkedDocumentIds()
+                    .Add(documentInNewSolution.Id);
                 if (allLinkedDocuments.Length == 1)
                 {
                     continue;
@@ -56,13 +70,23 @@ namespace Microsoft.CodeAnalysis
                 SourceText mergedText;
                 if (linkedDocumentsWithChanges.Count() > 1)
                 {
-                    var mergeGroupResult = await MergeLinkedDocumentGroupAsync(allLinkedDocuments, linkedDocumentsWithChanges, sessionInfo, mergeConflictHandler, cancellationToken).ConfigureAwait(false);
+                    var mergeGroupResult = await MergeLinkedDocumentGroupAsync(
+                            allLinkedDocuments,
+                            linkedDocumentsWithChanges,
+                            sessionInfo,
+                            mergeConflictHandler,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     linkedFileMergeResults.Add(mergeGroupResult);
                     mergedText = mergeGroupResult.MergedSourceText;
                 }
                 else
                 {
-                    mergedText = await _newSolution.GetDocument(linkedDocumentsWithChanges.Single()).GetTextAsync(cancellationToken).ConfigureAwait(false);
+                    mergedText = await _newSolution
+                        .GetDocument(linkedDocumentsWithChanges.Single())
+                        .GetTextAsync(cancellationToken)
+                        .ConfigureAwait(false);
                 }
 
                 foreach (var documentId in allLinkedDocuments)
@@ -79,30 +103,42 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<DocumentId> linkedDocumentGroup,
             LinkedFileDiffMergingSessionInfo sessionInfo,
             IMergeConflictHandler mergeConflictHandler,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var groupSessionInfo = new LinkedFileGroupSessionInfo();
 
             // Automatically merge non-conflicting diffs while collecting the conflicting diffs
 
-            var textDifferencingService = _oldSolution.Services.GetRequiredService<IDocumentTextDifferencingService>();
-            var appliedChanges = await textDifferencingService.GetTextChangesAsync(_oldSolution.GetDocument(linkedDocumentGroup.First()), _newSolution.GetDocument(linkedDocumentGroup.First()), cancellationToken).ConfigureAwait(false);
+            var textDifferencingService =
+                _oldSolution.Services.GetRequiredService<IDocumentTextDifferencingService>();
+            var appliedChanges = await textDifferencingService
+                .GetTextChangesAsync(
+                    _oldSolution.GetDocument(linkedDocumentGroup.First()),
+                    _newSolution.GetDocument(linkedDocumentGroup.First()),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var unmergedChanges = new List<UnmergedDocumentChanges>();
 
             foreach (var documentId in linkedDocumentGroup.Skip(1))
             {
                 appliedChanges = await AddDocumentMergeChangesAsync(
-                    _oldSolution.GetDocument(documentId),
-                    _newSolution.GetDocument(documentId),
-                    appliedChanges.ToList(),
-                    unmergedChanges,
-                    groupSessionInfo,
-                    textDifferencingService,
-                    cancellationToken).ConfigureAwait(false);
+                        _oldSolution.GetDocument(documentId),
+                        _newSolution.GetDocument(documentId),
+                        appliedChanges.ToList(),
+                        unmergedChanges,
+                        groupSessionInfo,
+                        textDifferencingService,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             var originalDocument = _oldSolution.GetDocument(linkedDocumentGroup.First());
-            var originalSourceText = await originalDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
+            var originalSourceText = await originalDocument
+                .GetTextAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Add comments in source explaining diffs that could not be merged
 
@@ -111,21 +147,37 @@ namespace Microsoft.CodeAnalysis
 
             if (unmergedChanges.Any())
             {
-                mergeConflictHandler ??= _oldSolution.GetDocument(linkedDocumentGroup.First()).GetLanguageService<ILinkedFileMergeConflictCommentAdditionService>();
-                var mergeConflictTextEdits = mergeConflictHandler.CreateEdits(originalSourceText, unmergedChanges);
+                mergeConflictHandler ??= _oldSolution
+                    .GetDocument(linkedDocumentGroup.First())
+                    .GetLanguageService<ILinkedFileMergeConflictCommentAdditionService>();
+                var mergeConflictTextEdits = mergeConflictHandler.CreateEdits(
+                    originalSourceText,
+                    unmergedChanges
+                );
 
-                allChanges = MergeChangesWithMergeFailComments(appliedChanges, mergeConflictTextEdits, mergeConflictResolutionSpan, groupSessionInfo);
+                allChanges = MergeChangesWithMergeFailComments(
+                    appliedChanges,
+                    mergeConflictTextEdits,
+                    mergeConflictResolutionSpan,
+                    groupSessionInfo
+                );
             }
             else
             {
                 allChanges = appliedChanges;
             }
 
-            groupSessionInfo.LinkedDocuments = _newSolution.GetDocumentIdsWithFilePath(originalDocument.FilePath).Length;
+            groupSessionInfo.LinkedDocuments = _newSolution
+                .GetDocumentIdsWithFilePath(originalDocument.FilePath)
+                .Length;
             groupSessionInfo.DocumentsWithChanges = linkedDocumentGroup.Count();
             sessionInfo.LogLinkedFileResult(groupSessionInfo);
 
-            return new LinkedFileMergeResult(allLinkedDocuments, originalSourceText.WithChanges(allChanges), mergeConflictResolutionSpan);
+            return new LinkedFileMergeResult(
+                allLinkedDocuments,
+                originalSourceText.WithChanges(allChanges),
+                mergeConflictResolutionSpan
+            );
         }
 
         private static async Task<ImmutableArray<TextChange>> AddDocumentMergeChangesAsync(
@@ -135,17 +187,23 @@ namespace Microsoft.CodeAnalysis
             List<UnmergedDocumentChanges> unmergedChanges,
             LinkedFileGroupSessionInfo groupSessionInfo,
             IDocumentTextDifferencingService textDiffService,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var unmergedDocumentChanges = new List<TextChange>();
             var successfullyMergedChanges = ArrayBuilder<TextChange>.GetInstance();
 
             var cumulativeChangeIndex = 0;
 
-            var textchanges = await textDiffService.GetTextChangesAsync(oldDocument, newDocument, cancellationToken).ConfigureAwait(false);
+            var textchanges = await textDiffService
+                .GetTextChangesAsync(oldDocument, newDocument, cancellationToken)
+                .ConfigureAwait(false);
             foreach (var change in textchanges)
             {
-                while (cumulativeChangeIndex < cumulativeChanges.Count && cumulativeChanges[cumulativeChangeIndex].Span.End < change.Span.Start)
+                while (
+                    cumulativeChangeIndex < cumulativeChanges.Count
+                    && cumulativeChanges[cumulativeChangeIndex].Span.End < change.Span.Start
+                )
                 {
                     // Existing change that does not overlap with the current change in consideration
                     successfullyMergedChanges.Add(cumulativeChanges[cumulativeChangeIndex]);
@@ -166,17 +224,23 @@ namespace Microsoft.CodeAnalysis
                     }
                     else
                     {
-                        if (change.Span != cumulativeChange.Span || change.NewText != cumulativeChange.NewText)
+                        if (
+                            change.Span != cumulativeChange.Span
+                            || change.NewText != cumulativeChange.NewText
+                        )
                         {
                             // The current change in consideration overlaps an existing change but
-                            // the changes are not identical. 
+                            // the changes are not identical.
                             unmergedDocumentChanges.Add(change);
 
                             groupSessionInfo.OverlappingDistinctDiffs++;
                             if (change.Span == cumulativeChange.Span)
                             {
                                 groupSessionInfo.OverlappingDistinctDiffsWithSameSpan++;
-                                if (change.NewText.Contains(cumulativeChange.NewText) || cumulativeChange.NewText.Contains(change.NewText))
+                                if (
+                                    change.NewText.Contains(cumulativeChange.NewText)
+                                    || cumulativeChange.NewText.Contains(change.NewText)
+                                )
                                 {
                                     groupSessionInfo.OverlappingDistinctDiffsWithSameSpanAndSubstringRelation++;
                                 }
@@ -211,10 +275,13 @@ namespace Microsoft.CodeAnalysis
 
             if (unmergedDocumentChanges.Any())
             {
-                unmergedChanges.Add(new UnmergedDocumentChanges(
-                    unmergedDocumentChanges.AsEnumerable(),
-                    oldDocument.Project.Name,
-                    oldDocument.Id));
+                unmergedChanges.Add(
+                    new UnmergedDocumentChanges(
+                        unmergedDocumentChanges.AsEnumerable(),
+                        oldDocument.Project.Name,
+                        oldDocument.Id
+                    )
+                );
             }
 
             return successfullyMergedChanges.ToImmutableAndFree();
@@ -224,7 +291,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<TextChange> mergedChanges,
             IEnumerable<TextChange> commentChanges,
             IList<TextSpan> mergeConflictResolutionSpans,
-            LinkedFileGroupSessionInfo groupSessionInfo)
+            LinkedFileGroupSessionInfo groupSessionInfo
+        )
         {
             var mergedChangesList = NormalizeChanges(mergedChanges).ToList();
             var commentChangesList = NormalizeChanges(commentChanges).ToList();
@@ -237,29 +305,60 @@ namespace Microsoft.CodeAnalysis
 
             foreach (var mergedChange in mergedChangesList)
             {
-                while (commentChangeIndex < commentChangesList.Count && commentChangesList[commentChangeIndex].Span.End <= mergedChange.Span.Start)
+                while (
+                    commentChangeIndex < commentChangesList.Count
+                    && commentChangesList[commentChangeIndex].Span.End <= mergedChange.Span.Start
+                )
                 {
                     // Add a comment change that does not conflict with any merge change
                     combinedChanges.Add(commentChangesList[commentChangeIndex]);
-                    mergeConflictResolutionSpans.Add(new TextSpan(commentChangesList[commentChangeIndex].Span.Start + currentPositionDelta, commentChangesList[commentChangeIndex].NewText.Length));
-                    currentPositionDelta += (commentChangesList[commentChangeIndex].NewText.Length - commentChangesList[commentChangeIndex].Span.Length);
+                    mergeConflictResolutionSpans.Add(
+                        new TextSpan(
+                            commentChangesList[commentChangeIndex].Span.Start
+                                + currentPositionDelta,
+                            commentChangesList[commentChangeIndex].NewText.Length
+                        )
+                    );
+                    currentPositionDelta += (
+                        commentChangesList[commentChangeIndex].NewText.Length
+                        - commentChangesList[commentChangeIndex].Span.Length
+                    );
                     commentChangeIndex++;
                 }
 
-                if (commentChangeIndex >= commentChangesList.Count || mergedChange.Span.End <= commentChangesList[commentChangeIndex].Span.Start)
+                if (
+                    commentChangeIndex >= commentChangesList.Count
+                    || mergedChange.Span.End <= commentChangesList[commentChangeIndex].Span.Start
+                )
                 {
                     // Add a merge change that does not conflict with any comment change
                     combinedChanges.Add(mergedChange);
-                    currentPositionDelta += (mergedChange.NewText.Length - mergedChange.Span.Length);
+                    currentPositionDelta += (
+                        mergedChange.NewText.Length - mergedChange.Span.Length
+                    );
                     continue;
                 }
 
                 // The current comment insertion location conflicts with a merge diff location. Add the comment before the diff.
                 var conflictingCommentInsertionLocation = new TextSpan(mergedChange.Span.Start, 0);
-                while (commentChangeIndex < commentChangesList.Count && commentChangesList[commentChangeIndex].Span.Start < mergedChange.Span.End)
+                while (
+                    commentChangeIndex < commentChangesList.Count
+                    && commentChangesList[commentChangeIndex].Span.Start < mergedChange.Span.End
+                )
                 {
-                    combinedChanges.Add(new TextChange(conflictingCommentInsertionLocation, commentChangesList[commentChangeIndex].NewText));
-                    mergeConflictResolutionSpans.Add(new TextSpan(commentChangesList[commentChangeIndex].Span.Start + currentPositionDelta, commentChangesList[commentChangeIndex].NewText.Length));
+                    combinedChanges.Add(
+                        new TextChange(
+                            conflictingCommentInsertionLocation,
+                            commentChangesList[commentChangeIndex].NewText
+                        )
+                    );
+                    mergeConflictResolutionSpans.Add(
+                        new TextSpan(
+                            commentChangesList[commentChangeIndex].Span.Start
+                                + currentPositionDelta,
+                            commentChangesList[commentChangeIndex].NewText.Length
+                        )
+                    );
                     currentPositionDelta += commentChangesList[commentChangeIndex].NewText.Length;
 
                     commentChangeIndex++;
@@ -274,14 +373,23 @@ namespace Microsoft.CodeAnalysis
             {
                 // Add a comment change that does not conflict with any merge change
                 combinedChanges.Add(commentChangesList[commentChangeIndex]);
-                mergeConflictResolutionSpans.Add(new TextSpan(commentChangesList[commentChangeIndex].Span.Start + currentPositionDelta, commentChangesList[commentChangeIndex].NewText.Length));
+                mergeConflictResolutionSpans.Add(
+                    new TextSpan(
+                        commentChangesList[commentChangeIndex].Span.Start + currentPositionDelta,
+                        commentChangesList[commentChangeIndex].NewText.Length
+                    )
+                );
 
-                currentPositionDelta += (commentChangesList[commentChangeIndex].NewText.Length - commentChangesList[commentChangeIndex].Span.Length);
+                currentPositionDelta += (
+                    commentChangesList[commentChangeIndex].NewText.Length
+                    - commentChangesList[commentChangeIndex].Span.Length
+                );
                 commentChangeIndex++;
             }
 
             groupSessionInfo.InsertedMergeConflictComments = commentChanges.Count();
-            groupSessionInfo.InsertedMergeConflictCommentsAtAdjustedLocation = insertedMergeConflictCommentsAtAdjustedLocation;
+            groupSessionInfo.InsertedMergeConflictCommentsAtAdjustedLocation =
+                insertedMergeConflictCommentsAtAdjustedLocation;
 
             return NormalizeChanges(combinedChanges);
         }
@@ -301,7 +409,10 @@ namespace Microsoft.CodeAnalysis
             {
                 if (nextChange.Span.Start == currentChange.Span.End)
                 {
-                    currentChange = new TextChange(TextSpan.FromBounds(currentChange.Span.Start, nextChange.Span.End), currentChange.NewText + nextChange.NewText);
+                    currentChange = new TextChange(
+                        TextSpan.FromBounds(currentChange.Span.Start, nextChange.Span.End),
+                        currentChange.NewText + nextChange.NewText
+                    );
                 }
                 else
                 {
@@ -318,8 +429,8 @@ namespace Microsoft.CodeAnalysis
         {
             public readonly List<LinkedFileGroupSessionInfo> LinkedFileGroups = new();
 
-            public void LogLinkedFileResult(LinkedFileGroupSessionInfo info)
-                => LinkedFileGroups.Add(info);
+            public void LogLinkedFileResult(LinkedFileGroupSessionInfo info) =>
+                LinkedFileGroups.Add(info);
         }
 
         internal class LinkedFileGroupSessionInfo

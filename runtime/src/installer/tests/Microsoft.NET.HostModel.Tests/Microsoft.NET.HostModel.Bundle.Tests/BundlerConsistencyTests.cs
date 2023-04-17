@@ -34,13 +34,18 @@ namespace Microsoft.NET.HostModel.Tests
             var bundleDir = BundleHelper.GetBundleDir(fixture);
             var targetOS = BundleHelper.GetTargetOS(fixture.CurrentRid);
             var targetArch = BundleHelper.GetTargetArch(fixture.CurrentRid);
-            Bundler bundler = new Bundler(hostName, bundleDir.FullName, targetOS: targetOS, targetArch: targetArch);
+            Bundler bundler = new Bundler(
+                hostName,
+                bundleDir.FullName,
+                targetOS: targetOS,
+                targetArch: targetArch
+            );
 
             FileSpec[][] invalidSpecs =
             {
-                new FileSpec[] {new FileSpec(hostName, null) },
-                new FileSpec[] {new FileSpec(hostName, "") },
-                new FileSpec[] {new FileSpec(hostName, "    ") }
+                new FileSpec[] { new FileSpec(hostName, null) },
+                new FileSpec[] { new FileSpec(hostName, "") },
+                new FileSpec[] { new FileSpec(hostName, "    ") }
             };
 
             foreach (var invalidSpec in invalidSpecs)
@@ -62,10 +67,20 @@ namespace Microsoft.NET.HostModel.Tests
 
             // Generate a file specification without the apphost
             var fileSpecs = new List<FileSpec>();
-            string[] files = { $"{appName}.dll", $"{appName}.deps.json", $"{appName}.runtimeconfig.json" };
+            string[] files =
+            {
+                $"{appName}.dll",
+                $"{appName}.deps.json",
+                $"{appName}.runtimeconfig.json"
+            };
             Array.ForEach(files, x => fileSpecs.Add(new FileSpec(x, x)));
 
-            Bundler bundler = new Bundler(hostName, bundleDir.FullName, targetOS: targetOS, targetArch: targetArch);
+            Bundler bundler = new Bundler(
+                hostName,
+                bundleDir.FullName,
+                targetOS: targetOS,
+                targetArch: targetArch
+            );
 
             Assert.Throws<ArgumentException>(() => bundler.GenerateBundle(fileSpecs));
         }
@@ -82,7 +97,9 @@ namespace Microsoft.NET.HostModel.Tests
 
             // Generate a file specification with duplicate entries
             var fileSpecs = new List<FileSpec>();
-            fileSpecs.Add(new FileSpec(BundleHelper.GetHostPath(fixture), BundleHelper.GetHostName(fixture)));
+            fileSpecs.Add(
+                new FileSpec(BundleHelper.GetHostPath(fixture), BundleHelper.GetHostName(fixture))
+            );
             string appPath = BundleHelper.GetAppPath(fixture);
             fileSpecs.Add(new FileSpec(appPath, "rel/app.repeat.dll"));
             fileSpecs.Add(new FileSpec(appPath, "rel/app.repeat.dll"));
@@ -90,12 +107,25 @@ namespace Microsoft.NET.HostModel.Tests
             fileSpecs.Add(new FileSpec(systemLibPath, "rel/system.repeat.dll"));
             fileSpecs.Add(new FileSpec(systemLibPath, "rel/system.repeat.dll"));
 
-            Bundler bundler = new Bundler(hostName, bundleDir.FullName, targetOS: targetOS, targetArch: targetArch);
+            Bundler bundler = new Bundler(
+                hostName,
+                bundleDir.FullName,
+                targetOS: targetOS,
+                targetArch: targetArch
+            );
             bundler.GenerateBundle(fileSpecs);
 
             // Exact duplicates are not duplicated in the bundle
-            bundler.BundleManifest.Files.Where(entry => entry.RelativePath.Equals("rel/app.repeat.dll")).Single().Type.Should().Be(FileType.Assembly);
-            bundler.BundleManifest.Files.Where(entry => entry.RelativePath.Equals("rel/system.repeat.dll")).Single().Type.Should().Be(FileType.Assembly);
+            bundler.BundleManifest.Files
+                .Where(entry => entry.RelativePath.Equals("rel/app.repeat.dll"))
+                .Single()
+                .Type.Should()
+                .Be(FileType.Assembly);
+            bundler.BundleManifest.Files
+                .Where(entry => entry.RelativePath.Equals("rel/system.repeat.dll"))
+                .Single()
+                .Type.Should()
+                .Be(FileType.Assembly);
         }
 
         [Fact]
@@ -110,15 +140,28 @@ namespace Microsoft.NET.HostModel.Tests
 
             // Generate a file specification with duplicate entries
             var fileSpecs = new List<FileSpec>();
-            fileSpecs.Add(new FileSpec(BundleHelper.GetHostPath(fixture), BundleHelper.GetHostName(fixture)));
+            fileSpecs.Add(
+                new FileSpec(BundleHelper.GetHostPath(fixture), BundleHelper.GetHostName(fixture))
+            );
             fileSpecs.Add(new FileSpec(BundleHelper.GetAppPath(fixture), "rel/app.repeat"));
-            fileSpecs.Add(new FileSpec(Path.Join(BundleHelper.GetPublishPath(fixture), "System.dll"), "rel/app.repeat"));
+            fileSpecs.Add(
+                new FileSpec(
+                    Path.Join(BundleHelper.GetPublishPath(fixture), "System.dll"),
+                    "rel/app.repeat"
+                )
+            );
 
-            Bundler bundler = new Bundler(hostName, bundleDir.FullName, targetOS: targetOS, targetArch: targetArch);
-            Assert.Throws<ArgumentException>(() => bundler.GenerateBundle(fileSpecs))
-                .Message
-                    .Should().Contain("rel/app.repeat")
-                    .And.Contain(BundleHelper.GetAppPath(fixture));
+            Bundler bundler = new Bundler(
+                hostName,
+                bundleDir.FullName,
+                targetOS: targetOS,
+                targetArch: targetArch
+            );
+            Assert
+                .Throws<ArgumentException>(() => bundler.GenerateBundle(fileSpecs))
+                .Message.Should()
+                .Contain("rel/app.repeat")
+                .And.Contain(BundleHelper.GetAppPath(fixture));
         }
 
         [Fact]
@@ -133,35 +176,65 @@ namespace Microsoft.NET.HostModel.Tests
 
             // Generate a file specification with duplicate entries
             var fileSpecs = new List<FileSpec>();
-            fileSpecs.Add(new FileSpec(BundleHelper.GetHostPath(fixture), BundleHelper.GetHostName(fixture)));
+            fileSpecs.Add(
+                new FileSpec(BundleHelper.GetHostPath(fixture), BundleHelper.GetHostName(fixture))
+            );
             fileSpecs.Add(new FileSpec(BundleHelper.GetAppPath(fixture), "rel/app.repeat.dll"));
-            fileSpecs.Add(new FileSpec(Path.Join(BundleHelper.GetPublishPath(fixture), "System.dll"), "rel/app.Repeat.dll"));
+            fileSpecs.Add(
+                new FileSpec(
+                    Path.Join(BundleHelper.GetPublishPath(fixture), "System.dll"),
+                    "rel/app.Repeat.dll"
+                )
+            );
 
-            Bundler bundler = new Bundler(hostName, bundleDir.FullName, targetOS: targetOS, targetArch: targetArch);
+            Bundler bundler = new Bundler(
+                hostName,
+                bundleDir.FullName,
+                targetOS: targetOS,
+                targetArch: targetArch
+            );
             bundler.GenerateBundle(fileSpecs);
 
-            bundler.BundleManifest.Files.Where(entry => entry.RelativePath.Equals("rel/app.repeat.dll")).Single().Type.Should().Be(FileType.Assembly);
-            bundler.BundleManifest.Files.Where(entry => entry.RelativePath.Equals("rel/app.Repeat.dll")).Single().Type.Should().Be(FileType.Assembly);
+            bundler.BundleManifest.Files
+                .Where(entry => entry.RelativePath.Equals("rel/app.repeat.dll"))
+                .Single()
+                .Type.Should()
+                .Be(FileType.Assembly);
+            bundler.BundleManifest.Files
+                .Where(entry => entry.RelativePath.Equals("rel/app.Repeat.dll"))
+                .Single()
+                .Type.Should()
+                .Be(FileType.Assembly);
         }
 
-        private (string bundleFileName, string bundleId) CreateSampleBundle(bool bundleMultipleFiles)
+        private (string bundleFileName, string bundleId) CreateSampleBundle(
+            bool bundleMultipleFiles
+        )
         {
             var fixture = sharedTestState.TestFixture.Copy();
 
             var hostName = BundleHelper.GetHostName(fixture);
             var bundleDir = Directory.CreateDirectory(
-                Path.Combine(BundleHelper.GetBundleDir(fixture).FullName, Path.GetRandomFileName()));
+                Path.Combine(BundleHelper.GetBundleDir(fixture).FullName, Path.GetRandomFileName())
+            );
             var targetOS = BundleHelper.GetTargetOS(fixture.CurrentRid);
             var targetArch = BundleHelper.GetTargetArch(fixture.CurrentRid);
 
             var fileSpecs = new List<FileSpec>();
-            fileSpecs.Add(new FileSpec(BundleHelper.GetHostPath(fixture), BundleHelper.GetHostName(fixture)));
+            fileSpecs.Add(
+                new FileSpec(BundleHelper.GetHostPath(fixture), BundleHelper.GetHostName(fixture))
+            );
             if (bundleMultipleFiles)
             {
                 fileSpecs.Add(new FileSpec(BundleHelper.GetAppPath(fixture), "rel/app.repeat.dll"));
             }
 
-            Bundler bundler = new Bundler(hostName, bundleDir.FullName, targetOS: targetOS, targetArch: targetArch);
+            Bundler bundler = new Bundler(
+                hostName,
+                bundleDir.FullName,
+                targetOS: targetOS,
+                targetArch: targetArch
+            );
             return (bundler.GenerateBundle(fileSpecs), bundler.BundleManifest.BundleID);
         }
 
@@ -173,10 +246,18 @@ namespace Microsoft.NET.HostModel.Tests
             var secondBundle = CreateSampleBundle(true);
             byte[] secondBundleContent = File.ReadAllBytes(secondBundle.bundleFileName);
 
-            firstBundle.bundleId.Should().BeEquivalentTo(secondBundle.bundleId,
-                "Deterministic/Reproducible build should produce identical bundle id for identical inputs");
-            firstBundleContent.Should().BeEquivalentTo(secondBundleContent,
-                "Deterministic/Reproducible build should produce identical binary for identical inputs");
+            firstBundle.bundleId
+                .Should()
+                .BeEquivalentTo(
+                    secondBundle.bundleId,
+                    "Deterministic/Reproducible build should produce identical bundle id for identical inputs"
+                );
+            firstBundleContent
+                .Should()
+                .BeEquivalentTo(
+                    secondBundleContent,
+                    "Deterministic/Reproducible build should produce identical binary for identical inputs"
+                );
         }
 
         [Fact]
@@ -200,7 +281,9 @@ namespace Microsoft.NET.HostModel.Tests
 
             // Generate a file specification with duplicate entries
             var fileSpecs = new List<FileSpec>();
-            fileSpecs.Add(new FileSpec(BundleHelper.GetHostPath(fixture), BundleHelper.GetHostName(fixture)));
+            fileSpecs.Add(
+                new FileSpec(BundleHelper.GetHostPath(fixture), BundleHelper.GetHostName(fixture))
+            );
             string appPath = BundleHelper.GetAppPath(fixture);
             fileSpecs.Add(new FileSpec(appPath, "rel/app.repeat.dll"));
             fileSpecs.Add(new FileSpec(appPath, "rel/app.repeat.dll"));
@@ -208,13 +291,19 @@ namespace Microsoft.NET.HostModel.Tests
             fileSpecs.Add(new FileSpec(appPath, "rel/system.repeat.dll"));
             fileSpecs.Add(new FileSpec(systemLibPath, "rel/system.repeat.dll"));
 
-            Bundler bundler = new Bundler(hostName, bundleDir.FullName, targetOS: targetOS, targetArch: targetArch);
-            Assert.Throws<ArgumentException>(() => bundler.GenerateBundle(fileSpecs))
-                .Message
-                    .Should().Contain("rel/system.repeat.dll")
-                    .And.NotContain("rel/app.repeat.dll")
-                    .And.Contain(appPath)
-                    .And.Contain(systemLibPath);
+            Bundler bundler = new Bundler(
+                hostName,
+                bundleDir.FullName,
+                targetOS: targetOS,
+                targetArch: targetArch
+            );
+            Assert
+                .Throws<ArgumentException>(() => bundler.GenerateBundle(fileSpecs))
+                .Message.Should()
+                .Contain("rel/system.repeat.dll")
+                .And.NotContain("rel/app.repeat.dll")
+                .And.Contain(appPath)
+                .And.Contain(systemLibPath);
         }
 
         [Fact]
@@ -235,7 +324,10 @@ namespace Microsoft.NET.HostModel.Tests
 
             void rename(string extension)
             {
-                File.Move(Path.Combine(publishPath, originalBaseName + extension), Path.Combine(publishPath, newBaseName + extension));
+                File.Move(
+                    Path.Combine(publishPath, originalBaseName + extension),
+                    Path.Combine(publishPath, newBaseName + extension)
+                );
             }
             rename(exe);
             rename(".deps.json");
@@ -245,13 +337,26 @@ namespace Microsoft.NET.HostModel.Tests
             var depsJson = newBaseName + ".deps.json";
             var runtimeconfigJson = newBaseName + ".runtimeconfig.json";
 
-            var bundler = new Bundler(hostName, bundleDir.FullName, targetOS: targetOS, targetArch: targetArch);
+            var bundler = new Bundler(
+                hostName,
+                bundleDir.FullName,
+                targetOS: targetOS,
+                targetArch: targetArch
+            );
             BundleHelper.GenerateBundle(bundler, publishPath, bundleDir.FullName);
 
             string[] jsonFiles = { depsJson, runtimeconfigJson };
 
-            bundler.BundleManifest.Files.Where(entry => entry.RelativePath.Equals(depsJson)).Single().Type.Should().Be(FileType.DepsJson);
-            bundler.BundleManifest.Files.Where(entry => entry.RelativePath.Equals(runtimeconfigJson)).Single().Type.Should().Be(FileType.RuntimeConfigJson);
+            bundler.BundleManifest.Files
+                .Where(entry => entry.RelativePath.Equals(depsJson))
+                .Single()
+                .Type.Should()
+                .Be(FileType.DepsJson);
+            bundler.BundleManifest.Files
+                .Where(entry => entry.RelativePath.Equals(runtimeconfigJson))
+                .Single()
+                .Type.Should()
+                .Be(FileType.RuntimeConfigJson);
             bundleDir.Should().NotHaveFiles(jsonFiles);
         }
 
@@ -267,7 +372,10 @@ namespace Microsoft.NET.HostModel.Tests
             var bundler = BundleHelper.Bundle(fixture, options);
             var bundledFiles = BundleHelper.GetBundledFiles(fixture);
 
-            Array.ForEach(bundledFiles, file => bundler.BundleManifest.Contains(file).Should().BeTrue());
+            Array.ForEach(
+                bundledFiles,
+                file => bundler.BundleManifest.Contains(file).Should().BeTrue()
+            );
         }
 
         [InlineData(BundleOptions.None)]
@@ -279,16 +387,21 @@ namespace Microsoft.NET.HostModel.Tests
         public void TestFilesNeverBundled(BundleOptions options)
         {
             var fixture = sharedTestState.TestFixture.Copy();
-            var appBaseName =  BundleHelper.GetAppBaseName(fixture);
+            var appBaseName = BundleHelper.GetAppBaseName(fixture);
             string publishPath = BundleHelper.GetPublishPath(fixture);
-            
+
             // Make up a app.runtimeconfig.dev.json file in the publish directory.
-            File.Copy(Path.Combine(publishPath, $"{appBaseName}.runtimeconfig.json"), 
-                      Path.Combine(publishPath, $"{appBaseName}.runtimeconfig.dev.json"));
+            File.Copy(
+                Path.Combine(publishPath, $"{appBaseName}.runtimeconfig.json"),
+                Path.Combine(publishPath, $"{appBaseName}.runtimeconfig.dev.json")
+            );
 
             var bundler = BundleHelper.Bundle(fixture, options);
 
-            bundler.BundleManifest.Contains($"{appBaseName}.runtimeconfig.dev.json").Should().BeFalse();
+            bundler.BundleManifest
+                .Contains($"{appBaseName}.runtimeconfig.dev.json")
+                .Should()
+                .BeFalse();
         }
 
         [InlineData(BundleOptions.None)]
@@ -300,7 +413,10 @@ namespace Microsoft.NET.HostModel.Tests
             var appBaseName = BundleHelper.GetAppBaseName(fixture);
             var bundler = BundleHelper.Bundle(fixture, options);
 
-            bundler.BundleManifest.Contains($"{appBaseName}.pdb").Should().Be(options.HasFlag(BundleOptions.BundleSymbolFiles));
+            bundler.BundleManifest
+                .Contains($"{appBaseName}.pdb")
+                .Should()
+                .Be(options.HasFlag(BundleOptions.BundleSymbolFiles));
         }
 
         [InlineData(BundleOptions.None)]
@@ -312,7 +428,10 @@ namespace Microsoft.NET.HostModel.Tests
             var coreclr = Path.GetFileName(fixture.TestProject.CoreClrDll);
             var bundler = BundleHelper.Bundle(fixture, options);
 
-            bundler.BundleManifest.Contains($"{coreclr}").Should().Be(options.HasFlag(BundleOptions.BundleNativeBinaries));
+            bundler.BundleManifest
+                .Contains($"{coreclr}")
+                .Should()
+                .Be(options.HasFlag(BundleOptions.BundleNativeBinaries));
         }
 
         [Fact]
@@ -322,8 +441,13 @@ namespace Microsoft.NET.HostModel.Tests
             var bundler = BundleHelper.Bundle(fixture);
             var publishPath = BundleHelper.GetPublishPath(fixture);
 
-            bundler.BundleManifest.Files.ForEach(file =>
-                Assert.True(file.Size == new FileInfo(Path.Combine(publishPath, file.RelativePath)).Length));
+            bundler.BundleManifest.Files.ForEach(
+                file =>
+                    Assert.True(
+                        file.Size
+                            == new FileInfo(Path.Combine(publishPath, file.RelativePath)).Length
+                    )
+            );
         }
 
         [Fact]
@@ -333,9 +457,12 @@ namespace Microsoft.NET.HostModel.Tests
             var bundler = BundleHelper.Bundle(fixture);
             var targetOS = BundleHelper.GetTargetOS(fixture.CurrentRid);
             var targetArch = BundleHelper.GetTargetArch(fixture.CurrentRid);
-            var alignment = (targetOS == OSPlatform.Linux && targetArch == Architecture.Arm64) ? 4096 : 16;
-            bundler.BundleManifest.Files.ForEach(file => 
-                Assert.True((file.Type != FileType.Assembly) || (file.Offset % alignment == 0)));
+            var alignment =
+                (targetOS == OSPlatform.Linux && targetArch == Architecture.Arm64) ? 4096 : 16;
+            bundler.BundleManifest.Files.ForEach(
+                file =>
+                    Assert.True((file.Type != FileType.Assembly) || (file.Offset % alignment == 0))
+            );
         }
 
         [Fact]
@@ -351,14 +478,14 @@ namespace Microsoft.NET.HostModel.Tests
                 file.Write(blob, 0, blob.Length);
             }
 
-            Command.Create(singleFile)
-                   .CaptureStdErr()
-                   .CaptureStdOut()
-                   .Execute()
-                   .Should()
-                   .Pass()
-                   .And
-                   .HaveStdOutContaining("Hello World!");
+            Command
+                .Create(singleFile)
+                .CaptureStdErr()
+                .CaptureStdOut()
+                .Execute()
+                .Should()
+                .Pass()
+                .And.HaveStdOutContaining("Hello World!");
         }
 
         public class SharedTestState : IDisposable
@@ -373,8 +500,10 @@ namespace Microsoft.NET.HostModel.Tests
                 TestFixture = new TestProjectFixture("StandaloneApp", RepoDirectories);
                 TestFixture
                     .EnsureRestoredForRid(TestFixture.CurrentRid)
-                    .PublishProject(runtime: TestFixture.CurrentRid,
-                                    outputDirectory: BundleHelper.GetPublishPath(TestFixture));
+                    .PublishProject(
+                        runtime: TestFixture.CurrentRid,
+                        outputDirectory: BundleHelper.GetPublishPath(TestFixture)
+                    );
             }
 
             public void Dispose()

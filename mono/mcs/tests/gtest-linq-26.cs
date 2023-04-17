@@ -3,41 +3,34 @@ using System.Linq;
 
 namespace Test
 {
-	class S<T>
-	{
-		public S ()
-		{
-		}
+    class S<T>
+    {
+        public S() { }
 
-		public string Where (Func<C, string> cexpr)
-		{
-			return String.Empty;
-		}
-	}
+        public string Where(Func<C, string> cexpr)
+        {
+            return String.Empty;
+        }
+    }
 
-	class C
-	{
-	}
+    class C { }
 
-	static class Extension
-	{
-		public static string Is (this C c)
-		{
-			return null;
-		}
-	}
-	
-	class Program
-	{
-		public static void Main ()
-		{
-			var value = new S<int> ();
-			var e = from item in value
-							  where item.Is ()
-							  select item;
+    static class Extension
+    {
+        public static string Is(this C c)
+        {
+            return null;
+        }
+    }
 
-			var foo = value.Where (p => p.Is ());
-		}
-	}	
+    class Program
+    {
+        public static void Main()
+        {
+            var value = new S<int>();
+            var e = from item in value where item.Is() select item;
+
+            var foo = value.Where(p => p.Is());
+        }
+    }
 }
-

@@ -12,55 +12,55 @@ public class SqlServerModelBuilderGenericTest : SqlServerModelBuilderTestBase
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerGenericInheritance : SqlServerInheritance
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerGenericOneToMany : SqlServerOneToMany
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerGenericManyToOne : SqlServerManyToOne
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerGenericOneToOne : SqlServerOneToOne
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerGenericManyToMany : SqlServerManyToMany
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
     }
 
     public class SqlServerGenericOwnedTypes : SqlServerOwnedTypes
     {
         protected override TestModelBuilder CreateTestModelBuilder(
             TestHelpers testHelpers,
-            Action<ModelConfigurationBuilder>? configure)
-            => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
+            Action<ModelConfigurationBuilder>? configure
+        ) => new ModelBuilderGenericTest.GenericTestModelBuilder(testHelpers, configure);
     }
 }

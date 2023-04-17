@@ -21,7 +21,12 @@ namespace System.Speech.Internal.SapiInterop
             if (!_disposed)
             {
                 // Called from the client proxy
-                _proxy.Invoke2(delegate { Marshal.ReleaseComObject(_recoContext); });
+                _proxy.Invoke2(
+                    delegate
+                    {
+                        Marshal.ReleaseComObject(_recoContext);
+                    }
+                );
                 _disposed = true;
             }
             GC.SuppressFinalize(this);
@@ -33,43 +38,93 @@ namespace System.Speech.Internal.SapiInterop
 
         internal void SetInterest(ulong eventInterest, ulong queuedInterest)
         {
-            _proxy.Invoke2(delegate { _recoContext.SetInterest(eventInterest, queuedInterest); });
+            _proxy.Invoke2(
+                delegate
+                {
+                    _recoContext.SetInterest(eventInterest, queuedInterest);
+                }
+            );
         }
 
         internal SapiGrammar CreateGrammar(ulong id)
         {
             ISpRecoGrammar sapiGrammar;
-            return (SapiGrammar)_proxy.Invoke(delegate { _recoContext.CreateGrammar(id, out sapiGrammar); return new SapiGrammar(sapiGrammar, _proxy); });
+            return (SapiGrammar)
+                _proxy.Invoke(
+                    delegate
+                    {
+                        _recoContext.CreateGrammar(id, out sapiGrammar);
+                        return new SapiGrammar(sapiGrammar, _proxy);
+                    }
+                );
         }
 
         internal void SetMaxAlternates(uint count)
         {
-            _proxy.Invoke2(delegate { _recoContext.SetMaxAlternates(count); });
+            _proxy.Invoke2(
+                delegate
+                {
+                    _recoContext.SetMaxAlternates(count);
+                }
+            );
         }
 
-        internal void SetAudioOptions(SPAUDIOOPTIONS options, IntPtr audioFormatId, IntPtr waveFormatEx)
+        internal void SetAudioOptions(
+            SPAUDIOOPTIONS options,
+            IntPtr audioFormatId,
+            IntPtr waveFormatEx
+        )
         {
-            _proxy.Invoke2(delegate { _recoContext.SetAudioOptions(options, audioFormatId, waveFormatEx); });
+            _proxy.Invoke2(
+                delegate
+                {
+                    _recoContext.SetAudioOptions(options, audioFormatId, waveFormatEx);
+                }
+            );
         }
 
         internal void Bookmark(SPBOOKMARKOPTIONS options, ulong position, IntPtr lparam)
         {
-            _proxy.Invoke2(delegate { _recoContext.Bookmark(options, position, lparam); });
+            _proxy.Invoke2(
+                delegate
+                {
+                    _recoContext.Bookmark(options, position, lparam);
+                }
+            );
         }
 
         internal void Resume()
         {
-            _proxy.Invoke2(delegate { _recoContext.Resume(0); });
+            _proxy.Invoke2(
+                delegate
+                {
+                    _recoContext.Resume(0);
+                }
+            );
         }
 
         internal void SetContextState(SPCONTEXTSTATE state)
         {
-            _proxy.Invoke2(delegate { _recoContext.SetContextState(state); });
+            _proxy.Invoke2(
+                delegate
+                {
+                    _recoContext.SetContextState(state);
+                }
+            );
         }
 
-        internal EventNotify CreateEventNotify(AsyncSerializedWorker asyncWorker, bool supportsSapi53)
+        internal EventNotify CreateEventNotify(
+            AsyncSerializedWorker asyncWorker,
+            bool supportsSapi53
+        )
         {
-            return (EventNotify)_proxy.Invoke(delegate { return new EventNotify(_recoContext, asyncWorker, supportsSapi53); });
+            return (EventNotify)
+                _proxy.Invoke(
+                    delegate
+                    {
+                        return new EventNotify(_recoContext, asyncWorker, supportsSapi53);
+                    }
+                );
         }
 
         internal void DisposeEventNotify(EventNotify eventNotify)
@@ -79,7 +134,12 @@ namespace System.Speech.Internal.SapiInterop
 
         internal void SetGrammarOptions(SPGRAMMAROPTIONS options)
         {
-            _proxy.Invoke2(delegate { ((ISpRecoContext2)_recoContext).SetGrammarOptions(options); });
+            _proxy.Invoke2(
+                delegate
+                {
+                    ((ISpRecoContext2)_recoContext).SetGrammarOptions(options);
+                }
+            );
         }
 
         #endregion

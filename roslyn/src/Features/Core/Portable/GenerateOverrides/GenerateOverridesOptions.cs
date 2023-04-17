@@ -13,21 +13,25 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
 {
     internal class GenerateOverridesOptions
     {
-        public static readonly Option2<bool> SelectAll = new(
-            nameof(GenerateOverridesOptions), nameof(SelectAll), defaultValue: true,
-            storageLocation: new RoamingProfileStorageLocation($"TextEditor.Specific.{nameof(GenerateOverridesOptions)}.{nameof(SelectAll)}"));
+        public static readonly Option2<bool> SelectAll =
+            new(
+                nameof(GenerateOverridesOptions),
+                nameof(SelectAll),
+                defaultValue: true,
+                storageLocation: new RoamingProfileStorageLocation(
+                    $"TextEditor.Specific.{nameof(GenerateOverridesOptions)}.{nameof(SelectAll)}"
+                )
+            );
 
         [ExportSolutionOptionProvider, Shared]
         internal class GenerateOverridesOptionsProvider : IOptionProvider
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public GenerateOverridesOptionsProvider()
-            {
-            }
+            public GenerateOverridesOptionsProvider() { }
 
-            public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-                GenerateOverridesOptions.SelectAll);
+            public ImmutableArray<IOption> Options { get; } =
+                ImmutableArray.Create<IOption>(GenerateOverridesOptions.SelectAll);
         }
     }
 }

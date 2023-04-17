@@ -33,19 +33,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
 
         private readonly ISettingsManager? _settingManager;
         private readonly ILegacyGlobalOptionService _legacyGlobalOptions;
-        private readonly ImmutableDictionary<string, Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>> _readFallbacks;
+        private readonly ImmutableDictionary<
+            string,
+            Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>
+        > _readFallbacks;
 
         /// <summary>
         /// Options that have been been fetched from <see cref="_settingManager"/>, by key. We track this so
         /// if a later change happens, we know to refresh that value.
         /// </summary>
-        private ImmutableDictionary<string, (OptionKey2 optionKey, Type storageType)> _optionsToMonitorForChanges
-            = ImmutableDictionary<string, (OptionKey2 optionKey, Type storageType)>.Empty;
+        private ImmutableDictionary<
+            string,
+            (OptionKey2 optionKey, Type storageType)
+        > _optionsToMonitorForChanges = ImmutableDictionary<
+            string,
+            (OptionKey2 optionKey, Type storageType)
+        >.Empty;
 
         /// <remarks>
         /// We make sure this code is from the UI by asking for all <see cref="IOptionPersister"/> in <see cref="RoslynPackage.InitializeAsync"/>
         /// </remarks>
-        public VisualStudioSettingsOptionPersister(ILegacyGlobalOptionService globalOptionService, ImmutableDictionary<string, Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>> readFallbacks, ISettingsManager? settingsManager)
+        public VisualStudioSettingsOptionPersister(
+            ILegacyGlobalOptionService globalOptionService,
+            ImmutableDictionary<
+                string,
+                Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>
+            > readFallbacks,
+            ISettingsManager? settingsManager
+        )
         {
             Contract.ThrowIfNull(globalOptionService);
 
@@ -68,8 +83,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
             var storageKey = args.PropertyName;
             if (_optionsToMonitorForChanges.TryGetValue(storageKey, out var entry))
             {
-                var optionValue = TryReadOptionValue(entry.optionKey, storageKey, entry.storageType);
-                if (optionValue.HasValue && _legacyGlobalOptions.GlobalOptions.RefreshOption(entry.optionKey, optionValue.Value))
+                var optionValue = TryReadOptionValue(
+                    entry.optionKey,
+                    storageKey,
+                    entry.storageType
+                );
+                if (
+                    optionValue.HasValue
+                    && _legacyGlobalOptions.GlobalOptions.RefreshOption(
+                        entry.optionKey,
+                        optionValue.Value
+                    )
+                )
                 {
                     // We may be updating the values of internally defined public options.
                     // Update solution snapshots of all workspaces to reflect the new values.
@@ -80,9 +105,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
             return Task.CompletedTask;
         }
 
-        private void RecordObservedValueToWatchForChanges(OptionKey2 optionKey, string storageKey, Type storageType)
+        private void RecordObservedValueToWatchForChanges(
+            OptionKey2 optionKey,
+            string storageKey,
+            Type storageType
+        )
         {
-            ImmutableInterlocked.GetOrAdd(ref _optionsToMonitorForChanges, storageKey, _ => (optionKey, storageType));
+            ImmutableInterlocked.GetOrAdd(
+                ref _optionsToMonitorForChanges,
+                storageKey,
+                _ => (optionKey, storageType)
+            );
         }
 
         public bool TryFetch(OptionKey2 optionKey, string storageKey, out object? value)
@@ -94,9 +127,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                 return true;
             }
 
-            if (_readFallbacks.TryGetValue(optionKey.Option.Definition.ConfigName, out var lazyReadFallback))
+            if (
+                _readFallbacks.TryGetValue(
+                    optionKey.Option.Definition.ConfigName,
+                    out var lazyReadFallback
+                )
+            )
             {
-                var fallbackResult = lazyReadFallback.Value.TryRead(optionKey.Language, (storageKey, storageType) => TryReadOptionValue(optionKey, storageKey, storageType));
+                var fallbackResult = lazyReadFallback.Value.TryRead(
+                    optionKey.Language,
+                    (storageKey, storageType) =>
+                        TryReadOptionValue(optionKey, storageKey, storageType)
+                );
                 if (fallbackResult.HasValue)
                 {
                     value = fallbackResult.Value;
@@ -108,35 +150,61 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
             return false;
         }
 
-        public Optional<object?> TryReadOptionValue(OptionKey2 optionKey, string storageKey, Type storageType)
+        public Optional<object?> TryReadOptionValue(
+            OptionKey2 optionKey,
+            string storageKey,
+            Type storageType
+        )
         {
             Contract.ThrowIfNull(_settingManager);
 
             RecordObservedValueToWatchForChanges(optionKey, storageKey, storageType);
 
-            if (storageType == typeof(bool) && _settingManager.TryGetValue(storageKey, out bool boolValue) == GetValueResult.Success)
+            if (
+                storageType == typeof(bool)
+                && _settingManager.TryGetValue(storageKey, out bool boolValue)
+                    == GetValueResult.Success
+            )
             {
                 return boolValue;
             }
 
-            if (storageType == typeof(bool?) && _settingManager.TryGetValue(storageKey, out bool? nullableBoolValue) == GetValueResult.Success)
+            if (
+                storageType == typeof(bool?)
+                && _settingManager.TryGetValue(storageKey, out bool? nullableBoolValue)
+                    == GetValueResult.Success
+            )
             {
                 return nullableBoolValue;
             }
 
-            if (storageType == typeof(int) && _settingManager.TryGetValue(storageKey, out int intValue) == GetValueResult.Success)
+            if (
+                storageType == typeof(int)
+                && _settingManager.TryGetValue(storageKey, out int intValue)
+                    == GetValueResult.Success
+            )
             {
                 return intValue;
             }
 
-            if (storageType.IsEnum && _settingManager.TryGetValue(storageKey, out int enumValue) == GetValueResult.Success)
+            if (
+                storageType.IsEnum
+                && _settingManager.TryGetValue(storageKey, out int enumValue)
+                    == GetValueResult.Success
+            )
             {
                 return Enum.ToObject(storageType, enumValue);
             }
 
-            if (storageType == typeof(NamingStylePreferences) || typeof(ICodeStyleOption).IsAssignableFrom(storageType))
+            if (
+                storageType == typeof(NamingStylePreferences)
+                || typeof(ICodeStyleOption).IsAssignableFrom(storageType)
+            )
             {
-                if (_settingManager.TryGetValue(storageKey, out string stringValue) == GetValueResult.Success)
+                if (
+                    _settingManager.TryGetValue(storageKey, out string stringValue)
+                    == GetValueResult.Success
+                )
                 {
                     try
                     {
@@ -146,8 +214,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                         }
                         else
                         {
-                            var fromXElement = storageType.GetMethod(nameof(CodeStyleOption<object>.FromXElement), BindingFlags.Public | BindingFlags.Static);
-                            return fromXElement.Invoke(null, new object[] { XElement.Parse(stringValue) });
+                            var fromXElement = storageType.GetMethod(
+                                nameof(CodeStyleOption<object>.FromXElement),
+                                BindingFlags.Public | BindingFlags.Static
+                            );
+                            return fromXElement.Invoke(
+                                null,
+                                new object[] { XElement.Parse(stringValue) }
+                            );
                         }
                     }
                     catch
@@ -157,13 +231,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
                 }
             }
 
-            if (storageType == typeof(ImmutableArray<string>) && _settingManager.TryGetValue(storageKey, out string[] stringArray) == GetValueResult.Success)
+            if (
+                storageType == typeof(ImmutableArray<string>)
+                && _settingManager.TryGetValue(storageKey, out string[] stringArray)
+                    == GetValueResult.Success
+            )
             {
                 return stringArray.ToImmutableArray();
             }
 
-            if (_settingManager.TryGetValue(storageKey, out object? value) == GetValueResult.Success &&
-                (value is null || value.GetType() == storageType))
+            if (
+                _settingManager.TryGetValue(storageKey, out object? value) == GetValueResult.Success
+                && (value is null || value.GetType() == storageType)
+            )
             {
                 return value;
             }

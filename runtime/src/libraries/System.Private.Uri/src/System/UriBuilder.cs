@@ -22,9 +22,7 @@ namespace System
         private bool _changed = true;
         private Uri? _uri;
 
-        public UriBuilder()
-        {
-        }
+        public UriBuilder() { }
 
         public UriBuilder([StringSyntax(StringSyntaxAttribute.Uri)] string uri)
         {
@@ -252,7 +250,8 @@ namespace System
             }
         }
 
-        public override bool Equals([NotNullWhen(true)] object? rparam) => rparam is not null && Uri.Equals(rparam.ToString());
+        public override bool Equals([NotNullWhen(true)] object? rparam) =>
+            rparam is not null && Uri.Equals(rparam.ToString());
 
         public override int GetHashCode() => Uri.GetHashCode();
 
@@ -327,8 +326,13 @@ namespace System
                 }
                 else
                 {
-                    schemeDelimiter = syntax.InFact(UriSyntaxFlags.MustHaveAuthority)
-                        || (host.Length != 0 && syntax.NotAny(UriSyntaxFlags.MailToLikeUri) && syntax.InFact(UriSyntaxFlags.OptionalAuthority))
+                    schemeDelimiter =
+                        syntax.InFact(UriSyntaxFlags.MustHaveAuthority)
+                        || (
+                            host.Length != 0
+                            && syntax.NotAny(UriSyntaxFlags.MailToLikeUri)
+                            && syntax.InFact(UriSyntaxFlags.OptionalAuthority)
+                        )
                             ? Uri.SchemeDelimiter
                             : ":";
                 }
@@ -361,7 +365,10 @@ namespace System
                     vsb.Append(':');
 
                     const int MaxUshortLength = 5;
-                    bool success = _port.TryFormat(vsb.AppendSpan(MaxUshortLength), out int charsWritten);
+                    bool success = _port.TryFormat(
+                        vsb.AppendSpan(MaxUshortLength),
+                        out int charsWritten
+                    );
                     Debug.Assert(success);
                     vsb.Length -= MaxUshortLength - charsWritten;
                 }

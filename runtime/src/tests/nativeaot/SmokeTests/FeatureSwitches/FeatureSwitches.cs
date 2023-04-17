@@ -11,7 +11,9 @@ class Program
     // These are substituted using the XML file
     // We're testing that the basic blocks that are known to be unreachable don't get compiled.
     static bool IsEnabled() => true;
+
     static int GetIntConstant() => 0;
+
     static bool s_isEnabled = IsEnabled();
 
     static int Main()
@@ -22,7 +24,7 @@ class Program
         TestEmptyFinally.Run();
         TestStaticField.Run();
         TestIntConstant.Run();
-        
+
         return 100;
     }
 
@@ -103,10 +105,7 @@ class Program
 
         public static void Run()
         {
-            try
-            {
-
-            }
+            try { }
             finally
             {
                 if (IsEnabled())
@@ -149,9 +148,13 @@ class Program
         }
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    private static bool IsTypePresent(Type testType, string typeName) => testType.GetNestedType(typeName, BindingFlags.NonPublic | BindingFlags.Public) != null;
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    private static bool IsTypePresent(Type testType, string typeName) =>
+        testType.GetNestedType(typeName, BindingFlags.NonPublic | BindingFlags.Public) != null;
 
     private static void ThrowIfPresent(Type testType, string typeName)
     {
@@ -161,7 +164,9 @@ class Program
         }
     }
 
-    private static void EnsurePresent([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type)
+    private static void EnsurePresent(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
+    )
     {
         if (type.GetConstructors().Length != 1)
             throw new Exception();

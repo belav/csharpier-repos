@@ -18,11 +18,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
     [UseExportProvider]
     public class LanguageServerTargetTests : AbstractLanguageServerProtocolTests
     {
-        public LanguageServerTargetTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public LanguageServerTargetTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
-        protected override TestComposition Composition => base.Composition.AddParts(typeof(StatefulLspServiceFactory), typeof(StatelessLspService));
+        protected override TestComposition Composition =>
+            base.Composition.AddParts(
+                typeof(StatefulLspServiceFactory),
+                typeof(StatelessLspService)
+            );
 
         [Fact]
         public async Task LanguageServerQueueEmptyOnShutdownMessage()
@@ -66,12 +69,24 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
             await using var serverTwo = await CreateTestLspServerAsync("");
 
             // Get an LSP service and verify each server has its own instance per server.
-            Assert.NotSame(serverOne.GetRequiredLspService<LspWorkspaceManager>(), serverTwo.GetRequiredLspService<LspWorkspaceManager>());
-            Assert.Same(serverOne.GetRequiredLspService<LspWorkspaceManager>(), serverOne.GetRequiredLspService<LspWorkspaceManager>());
-            Assert.Same(serverTwo.GetRequiredLspService<LspWorkspaceManager>(), serverTwo.GetRequiredLspService<LspWorkspaceManager>());
+            Assert.NotSame(
+                serverOne.GetRequiredLspService<LspWorkspaceManager>(),
+                serverTwo.GetRequiredLspService<LspWorkspaceManager>()
+            );
+            Assert.Same(
+                serverOne.GetRequiredLspService<LspWorkspaceManager>(),
+                serverOne.GetRequiredLspService<LspWorkspaceManager>()
+            );
+            Assert.Same(
+                serverTwo.GetRequiredLspService<LspWorkspaceManager>(),
+                serverTwo.GetRequiredLspService<LspWorkspaceManager>()
+            );
 
             // Get a stateless request handler and verify each server has the same instance.
-            Assert.Same(serverOne.GetRequiredLspService<DidOpenHandler>(), serverTwo.GetRequiredLspService<DidOpenHandler>());
+            Assert.Same(
+                serverOne.GetRequiredLspService<DidOpenHandler>(),
+                serverTwo.GetRequiredLspService<DidOpenHandler>()
+            );
         }
 
         [Fact]
@@ -112,16 +127,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public StatefulLspServiceFactory()
-            {
-            }
+            public StatefulLspServiceFactory() { }
 
-            public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind) => new StatefulLspService();
+            public ILspService CreateILspService(
+                LspServices lspServices,
+                WellKnownLspServerKinds serverKind
+            ) => new StatefulLspService();
         }
 
         internal class StatefulLspService : ILspService, IDisposable
         {
             public bool IsDisposed { get; private set; } = false;
+
             public void Dispose()
             {
                 IsDisposed = true;
@@ -133,11 +150,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public StatelessLspService()
-            {
-            }
+            public StatelessLspService() { }
 
             public bool IsDisposed { get; private set; } = false;
+
             public void Dispose()
             {
                 IsDisposed = true;

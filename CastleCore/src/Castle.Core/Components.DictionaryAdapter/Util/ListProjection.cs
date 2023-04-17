@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -25,17 +25,17 @@ namespace Castle.Components.DictionaryAdapter
 
     [DebuggerDisplay("Count = {Count}, Adapter = {Adapter}")]
     [DebuggerTypeProxy(typeof(ListProjectionDebugView<>))]
-    public class ListProjection<T> :
-        IBindingList<T>, // Castle
-        IBindingList,    // System
-        IEditableObject,
-        IRevertibleChangeTracking,
-        ICollectionProjection,
-        ICollectionAdapterObserver<T>
+    public class ListProjection<T>
+        : IBindingList<T>, // Castle
+            IBindingList, // System
+            IEditableObject,
+            IRevertibleChangeTracking,
+            ICollectionProjection,
+            ICollectionAdapterObserver<T>
     {
         private readonly ICollectionAdapter<T> adapter;
-        private int addNewIndex  = NoIndex;
-        private int addedIndex   = NoIndex;
+        private int addNewIndex = NoIndex;
+        private int addedIndex = NoIndex;
         private int suspendLevel = 0;
         private int changedIndex = NoIndex;
         private PropertyChangedEventHandler propertyHandler;
@@ -72,36 +72,108 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         // Generic IBindingList Properties
-        bool IBindingList<T>.AllowEdit                      { get { return true;  } }
-        bool IBindingList<T>.AllowNew                       { get { return true;  } }
-        bool IBindingList<T>.AllowRemove                    { get { return true;  } }
-        bool IBindingList<T>.SupportsChangeNotification     { get { return true;  } }
-        bool IBindingList<T>.SupportsSearching              { get { return false; } }
-        bool IBindingList<T>.SupportsSorting                { get { return false; } }
-        bool IBindingList<T>.IsSorted                       { get { return false; } }
-        SysPropertyDescriptor IBindingList<T>.SortProperty  { get { return null;  } }
-        ListSortDirection     IBindingList<T>.SortDirection { get { return ListSortDirection.Ascending; } }
+        bool IBindingList<T>.AllowEdit
+        {
+            get { return true; }
+        }
+        bool IBindingList<T>.AllowNew
+        {
+            get { return true; }
+        }
+        bool IBindingList<T>.AllowRemove
+        {
+            get { return true; }
+        }
+        bool IBindingList<T>.SupportsChangeNotification
+        {
+            get { return true; }
+        }
+        bool IBindingList<T>.SupportsSearching
+        {
+            get { return false; }
+        }
+        bool IBindingList<T>.SupportsSorting
+        {
+            get { return false; }
+        }
+        bool IBindingList<T>.IsSorted
+        {
+            get { return false; }
+        }
+        SysPropertyDescriptor IBindingList<T>.SortProperty
+        {
+            get { return null; }
+        }
+        ListSortDirection IBindingList<T>.SortDirection
+        {
+            get { return ListSortDirection.Ascending; }
+        }
 
         // System IBindingList Properties
-        bool IBindingList.AllowEdit                      { get { return true;  } }
-        bool IBindingList.AllowNew                       { get { return true;  } }
-        bool IBindingList.AllowRemove                    { get { return true;  } }
-        bool IBindingList.SupportsChangeNotification     { get { return true;  } }
-        bool IBindingList.SupportsSearching              { get { return false; } }
-        bool IBindingList.SupportsSorting                { get { return false; } }
-        bool IBindingList.IsSorted                       { get { return false; } }
-        SysPropertyDescriptor IBindingList.SortProperty  { get { return null;  } }
-        ListSortDirection     IBindingList.SortDirection { get { return ListSortDirection.Ascending; } }
+        bool IBindingList.AllowEdit
+        {
+            get { return true; }
+        }
+        bool IBindingList.AllowNew
+        {
+            get { return true; }
+        }
+        bool IBindingList.AllowRemove
+        {
+            get { return true; }
+        }
+        bool IBindingList.SupportsChangeNotification
+        {
+            get { return true; }
+        }
+        bool IBindingList.SupportsSearching
+        {
+            get { return false; }
+        }
+        bool IBindingList.SupportsSorting
+        {
+            get { return false; }
+        }
+        bool IBindingList.IsSorted
+        {
+            get { return false; }
+        }
+        SysPropertyDescriptor IBindingList.SortProperty
+        {
+            get { return null; }
+        }
+        ListSortDirection IBindingList.SortDirection
+        {
+            get { return ListSortDirection.Ascending; }
+        }
 
         // Other Binding Properties
-        bool IRaiseItemChangedEvents.RaisesItemChangedEvents { get { return true; } }
+        bool IRaiseItemChangedEvents.RaisesItemChangedEvents
+        {
+            get { return true; }
+        }
 
         // IList Properties
-        bool   IList.IsFixedSize          { get { return false; } }
-        bool   IList.IsReadOnly           { get { return false; } }
-        bool   ICollection<T>.IsReadOnly  { get { return false; } }
-        bool   ICollection.IsSynchronized { get { return false; } }
-        object ICollection.SyncRoot       { get { return this;  } }
+        bool IList.IsFixedSize
+        {
+            get { return false; }
+        }
+        bool IList.IsReadOnly
+        {
+            get { return false; }
+        }
+        bool ICollection<T>.IsReadOnly
+        {
+            get { return false; }
+        }
+        bool ICollection.IsSynchronized
+        {
+            get { return false; }
+        }
+        object ICollection.SyncRoot
+        {
+            get { return this; }
+        }
 
         public virtual bool Contains(T item)
         {
@@ -110,12 +182,12 @@ namespace Castle.Components.DictionaryAdapter
 
         bool IList.Contains(object item)
         {
-            return Contains((T) item);
+            return Contains((T)item);
         }
 
         public int IndexOf(T item)
         {
-            var count    = Count;
+            var count = Count;
             var comparer = Comparer;
 
             for (var i = 0; i < count; i++)
@@ -127,7 +199,7 @@ namespace Castle.Components.DictionaryAdapter
 
         int IList.IndexOf(object item)
         {
-            return IndexOf((T) item);
+            return IndexOf((T)item);
         }
 
         public void CopyTo(T[] array, int index)
@@ -140,7 +212,7 @@ namespace Castle.Components.DictionaryAdapter
 
         void ICollection.CopyTo(Array array, int index)
         {
-            CopyTo((T[]) array, index);
+            CopyTo((T[])array, index);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -165,7 +237,7 @@ namespace Castle.Components.DictionaryAdapter
         object IList.this[int index]
         {
             get { return this[index]; }
-            set { this[index] = (T) value; }
+            set { this[index] = (T)value; }
         }
 
         public void Replace(IEnumerable<T> items)
@@ -212,7 +284,7 @@ namespace Castle.Components.DictionaryAdapter
 
         public virtual T AddNew()
         {
-            var item = (T) adapter.AddNew();
+            var item = (T)adapter.AddNew();
             addNewIndex = addedIndex;
             return item;
         }
@@ -224,8 +296,7 @@ namespace Castle.Components.DictionaryAdapter
 
         public bool IsNew(int index)
         {
-            return index == addNewIndex
-                && index >= 0;
+            return index == addNewIndex && index >= 0;
         }
 
         public virtual void EndNew(int index)
@@ -255,7 +326,7 @@ namespace Castle.Components.DictionaryAdapter
 
         int IList.Add(object item)
         {
-            Add((T) item);
+            Add((T)item);
             return addedIndex;
         }
 
@@ -277,7 +348,7 @@ namespace Castle.Components.DictionaryAdapter
 
         void IList.Insert(int index, object item)
         {
-            Insert(index, (T) item);
+            Insert(index, (T)item);
         }
 
         protected virtual bool OnInserting(T value)
@@ -305,14 +376,15 @@ namespace Castle.Components.DictionaryAdapter
         public virtual bool Remove(T item)
         {
             var index = IndexOf(item);
-            if (index < 0) return false;
+            if (index < 0)
+                return false;
             RemoveAt(index);
             return true;
         }
 
         void IList.Remove(object value)
         {
-            Remove((T) value);
+            Remove((T)value);
         }
 
         public virtual void RemoveAt(int index)
@@ -367,7 +439,7 @@ namespace Castle.Components.DictionaryAdapter
                 var comparer = Comparer;
                 for (var i = 0; i < count; i++)
                 {
-                    var currentItem  = adapter.GetCurrentItem (i);
+                    var currentItem = adapter.GetCurrentItem(i);
                     var snapshotItem = adapter.GetSnapshotItem(i);
 
                     if (comparer.Equals(currentItem, snapshotItem) == false)
@@ -443,8 +515,8 @@ namespace Castle.Components.DictionaryAdapter
         private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             T item;
-            var notify
-                =  EventsEnabled
+            var notify =
+                EventsEnabled
                 && CanHandle(sender, e)
                 && TryGetChangedItem(sender, out item)
                 && TryGetChangedIndex(item);
@@ -452,7 +524,11 @@ namespace Castle.Components.DictionaryAdapter
             if (notify)
             {
                 var property = GetChangedProperty(e);
-                var change   = new ListChangedEventArgs(ListChangedType.ItemChanged, changedIndex, property);
+                var change = new ListChangedEventArgs(
+                    ListChangedType.ItemChanged,
+                    changedIndex,
+                    property
+                );
                 OnListChanged(change);
             }
         }
@@ -471,7 +547,7 @@ namespace Castle.Components.DictionaryAdapter
         {
             try
             {
-                item = (T) sender;
+                item = (T)sender;
                 return true;
             }
             catch (InvalidCastException)
@@ -484,13 +560,13 @@ namespace Castle.Components.DictionaryAdapter
 
         private bool TryGetChangedIndex(T item)
         {
-            var isSameItem
-                =  changedIndex >= 0
-                && changedIndex <  Count
+            var isSameItem =
+                changedIndex >= 0
+                && changedIndex < Count
                 && Comparer.Equals(this[changedIndex], item);
             if (isSameItem)
                 return true;
-            
+
             changedIndex = IndexOf(item);
             if (changedIndex >= 0)
                 return true;
@@ -509,6 +585,7 @@ namespace Castle.Components.DictionaryAdapter
         }
 
         public event ListChangedEventHandler ListChanged;
+
         protected virtual void OnListChanged(ListChangedEventArgs args)
         {
             var handler = ListChanged;
@@ -540,9 +617,7 @@ namespace Castle.Components.DictionaryAdapter
 
         public bool ResumeEvents()
         {
-            var enabled 
-                =    suspendLevel == 0
-                || --suspendLevel == 0;
+            var enabled = suspendLevel == 0 || --suspendLevel == 0;
 
             if (enabled)
                 NotifyListReset();

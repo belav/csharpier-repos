@@ -9,7 +9,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
     internal static class IEditorOptionsFactoryServiceExtensions
     {
-        public static IEditorOptions GetEditorOptions(this IEditorOptionsFactoryService editorOptionsFactory, SourceText text)
+        public static IEditorOptions GetEditorOptions(
+            this IEditorOptionsFactoryService editorOptionsFactory,
+            SourceText text
+        )
         {
             var textBuffer = text.Container.TryGetTextBuffer();
             if (textBuffer != null)
@@ -20,7 +23,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             return editorOptionsFactory.GlobalOptions;
         }
 
-        public static IEditorOptions GetEditorOptions(this IEditorOptionsFactoryService editorOptionsFactory, Document document)
+        public static IEditorOptions GetEditorOptions(
+            this IEditorOptionsFactoryService editorOptionsFactory,
+            Document document
+        )
         {
             if (document.TryGetText(out var text))
             {

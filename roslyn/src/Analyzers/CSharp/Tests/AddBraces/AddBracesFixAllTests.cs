@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument1()
         {
-            var input = @"
+            var input =
+                @"
 class Program1
 {
     static void Main()
@@ -27,7 +28,8 @@ class Program1
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 class Program1
 {
     static void Main()
@@ -45,12 +47,14 @@ class Program1
 
             await TestInRegularAndScriptAsync(input, expected);
         }
+
         [Fact]
         [Trait(Traits.Feature, Traits.Features.CodeActionsAddBraces)]
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument2()
         {
-            var input = @"
+            var input =
+                @"
 class Program1
 {
     static void Main()
@@ -60,7 +64,8 @@ class Program1
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 class Program1
 {
     static void Main()
@@ -84,7 +89,8 @@ class Program1
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -120,7 +126,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -171,7 +178,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInProject()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -206,7 +214,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -255,7 +264,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInSolution()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -290,7 +300,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -342,7 +353,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInContainingMember()
         {
-            var input = @"
+            var input =
+                @"
 class Program1
 {
     static void Main()
@@ -366,7 +378,8 @@ class OtherType
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class Program1
 {
     static void Main()
@@ -410,7 +423,8 @@ class OtherType
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInContainingType_AcrossSingleFile()
         {
-            var input = @"
+            var input =
+                @"
 class Program1
 {
     static void Main()
@@ -434,7 +448,8 @@ class OtherType
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 class Program1
 {
     static void Main()
@@ -484,7 +499,8 @@ class OtherType
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInContainingType_AcrossMultipleFiles()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -524,7 +540,8 @@ class Program2
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -598,7 +615,8 @@ class Program2
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInContainingMemberAndType_TopLevelStatements(string fixAllScope)
         {
-            var input = $@"
+            var input =
+                $@"
 {{|{fixAllScope}:if|}} (true) if (true) return;
 
 if (false) if (false) return;
@@ -611,7 +629,8 @@ class OtherType
     }}
 }}";
 
-            var expected = @"
+            var expected =
+                @"
 if (true)
 {
     if (true)
@@ -644,9 +663,12 @@ class OtherType
         [InlineData("FixAllInContainingType")]
         [Trait(Traits.Feature, Traits.Features.CodeActionsAddBraces)]
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
-        public async Task TestFixAllInContainingMemberAndType_TopLevelStatements_02(string fixAllScope)
+        public async Task TestFixAllInContainingMemberAndType_TopLevelStatements_02(
+            string fixAllScope
+        )
         {
-            var input = $@"
+            var input =
+                $@"
 using System;
 
 {{|{fixAllScope}:if|}} (true) if (true) return;
@@ -664,7 +686,8 @@ namespace N
     }}
 }}";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 if (true)
@@ -702,10 +725,13 @@ namespace N
         [InlineData("FixAllInContainingType")]
         [Trait(Traits.Feature, Traits.Features.CodeActionsAddBraces)]
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
-        public async Task TestFixAllInContainingMemberAndType_TopLevelStatements_ErrorCase(string fixAllScope)
+        public async Task TestFixAllInContainingMemberAndType_TopLevelStatements_ErrorCase(
+            string fixAllScope
+        )
         {
             // Error case: Global statements should precede non-global statements.
-            var input = $@"
+            var input =
+                $@"
 class OtherType
 {{
     void OtherMethod()

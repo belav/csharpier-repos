@@ -12,23 +12,15 @@ public class TagHelperContextTest
         var tagName = "test";
         var initialUniqueId = "123";
         var expectedUniqueId = "456";
-        var initialItems = new Dictionary<object, object>
-            {
-                { "test-entry", 1234 }
-            };
-        var expectedItems = new Dictionary<object, object>
-            {
-                { "something", "new" }
-            };
-        var initialAttributes = new TagHelperAttributeList
-            {
-                { "name", "value" }
-            };
+        var initialItems = new Dictionary<object, object> { { "test-entry", 1234 } };
+        var expectedItems = new Dictionary<object, object> { { "something", "new" } };
+        var initialAttributes = new TagHelperAttributeList { { "name", "value" } };
         var context = new TagHelperContext(
             tagName,
             initialAttributes,
             initialItems,
-            initialUniqueId);
+            initialUniqueId
+        );
 
         // Act
         context.Reinitialize(tagName, expectedItems, expectedUniqueId);
@@ -44,17 +36,15 @@ public class TagHelperContextTest
     public void Constructor_SetsProperties_AsExpected_WithTagName()
     {
         // Arrange
-        var expectedItems = new Dictionary<object, object>
-            {
-                { "test-entry", 1234 }
-            };
+        var expectedItems = new Dictionary<object, object> { { "test-entry", 1234 } };
 
         // Act
         var context = new TagHelperContext(
             tagName: "test",
             allAttributes: new TagHelperAttributeList(),
             items: expectedItems,
-            uniqueId: string.Empty);
+            uniqueId: string.Empty
+        );
 
         // Assert
         Assert.Equal("test", context.TagName);
@@ -69,16 +59,14 @@ public class TagHelperContextTest
     public void Constructor_SetsProperties_AsExpected_WithoutTagName()
     {
         // Arrange
-        var expectedItems = new Dictionary<object, object>
-            {
-                { "test-entry", 1234 }
-            };
+        var expectedItems = new Dictionary<object, object> { { "test-entry", 1234 } };
 
         // Act
         var context = new TagHelperContext(
             allAttributes: new TagHelperAttributeList(),
             items: expectedItems,
-            uniqueId: string.Empty);
+            uniqueId: string.Empty
+        );
 
         // Assert
         Assert.NotNull(context.Items);

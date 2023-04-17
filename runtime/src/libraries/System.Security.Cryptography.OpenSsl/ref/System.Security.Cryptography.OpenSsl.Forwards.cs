@@ -4,8 +4,18 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.Cryptography.DSAOpenSsl))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.Cryptography.ECDiffieHellmanOpenSsl))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.Cryptography.ECDsaOpenSsl))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.Cryptography.RSAOpenSsl))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Security.Cryptography.SafeEvpPKeyHandle))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.Cryptography.DSAOpenSsl)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.Cryptography.ECDiffieHellmanOpenSsl)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.Cryptography.ECDsaOpenSsl)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.Cryptography.RSAOpenSsl)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Security.Cryptography.SafeEvpPKeyHandle)
+)]

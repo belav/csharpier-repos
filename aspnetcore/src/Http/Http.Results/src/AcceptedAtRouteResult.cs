@@ -15,9 +15,7 @@ internal sealed class AcceptedAtRouteResult : ObjectResult
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to format in the entity body.</param>
     public AcceptedAtRouteResult(object? routeValues, object? value)
-        : this(routeName: null, routeValues: routeValues, value: value)
-    {
-    }
+        : this(routeName: null, routeValues: routeValues, value: value) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AcceptedAtRouteResult"/> class with the values
@@ -26,10 +24,7 @@ internal sealed class AcceptedAtRouteResult : ObjectResult
     /// <param name="routeName">The name of the route to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to format in the entity body.</param>
-    public AcceptedAtRouteResult(
-        string? routeName,
-        object? routeValues,
-        object? value)
+    public AcceptedAtRouteResult(string? routeName, object? routeValues, object? value)
         : base(value, StatusCodes.Status202Accepted)
     {
         RouteName = routeName;
@@ -54,7 +49,8 @@ internal sealed class AcceptedAtRouteResult : ObjectResult
             context,
             RouteName,
             RouteValues,
-            fragment: FragmentString.Empty);
+            fragment: FragmentString.Empty
+        );
 
         if (string.IsNullOrEmpty(url))
         {

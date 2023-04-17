@@ -41,7 +41,13 @@ public abstract class BlazorTemplateTest : LoggedTest
 
     public abstract string ProjectType { get; }
 
-    protected async Task<Project> CreateBuildPublishAsync(string auth = null, string[] args = null, string targetFramework = null, bool serverProject = false, bool onlyCreate = false)
+    protected async Task<Project> CreateBuildPublishAsync(
+        string auth = null,
+        string[] args = null,
+        string targetFramework = null,
+        bool serverProject = false,
+        bool onlyCreate = false
+    )
     {
         // Additional arguments are needed. See: https://github.com/dotnet/aspnetcore/issues/24278
         Environment.SetEnvironmentVariable("EnableDefaultScopedCssItems", "true");
@@ -52,8 +58,16 @@ public abstract class BlazorTemplateTest : LoggedTest
             project.TargetFramework = targetFramework;
         }
 
-        var createResult = await project.RunDotNetNewAsync(ProjectType, auth: auth, args: args, errorOnRestoreError: false);
-        Assert.True(0 == createResult.ExitCode, ErrorMessages.GetFailedProcessMessage("create/restore", project, createResult));
+        var createResult = await project.RunDotNetNewAsync(
+            ProjectType,
+            auth: auth,
+            args: args,
+            errorOnRestoreError: false
+        );
+        Assert.True(
+            0 == createResult.ExitCode,
+            ErrorMessages.GetFailedProcessMessage("create/restore", project, createResult)
+        );
 
         if (!onlyCreate)
         {
@@ -64,13 +78,20 @@ public abstract class BlazorTemplateTest : LoggedTest
             }
 
             var publishResult = await targetProject.RunDotNetPublishAsync(noRestore: false);
-            Assert.True(0 == publishResult.ExitCode, ErrorMessages.GetFailedProcessMessage("publish", targetProject, publishResult));
+            Assert.True(
+                0 == publishResult.ExitCode,
+                ErrorMessages.GetFailedProcessMessage("publish", targetProject, publishResult)
+            );
         }
 
         return project;
     }
 
-    protected static Project GetSubProject(Project project, string projectDirectory, string projectName)
+    protected static Project GetSubProject(
+        Project project,
+        string projectDirectory,
+        string projectName
+    )
     {
         var subProjectDirectory = Path.Combine(project.TemplateOutputDir, projectDirectory);
         if (!Directory.Exists(subProjectDirectory))

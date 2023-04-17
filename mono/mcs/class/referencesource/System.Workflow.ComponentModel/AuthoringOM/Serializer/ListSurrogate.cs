@@ -13,9 +13,17 @@ namespace System.Workflow.ComponentModel.Serialization
     internal sealed class ListSurrogate : ISerializationSurrogate
     {
         internal ListSurrogate() { }
-        void ISerializationSurrogate.GetObjectData(object obj, SerializationInfo info, StreamingContext context)
+
+        void ISerializationSurrogate.GetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context
+        )
         {
-            if (!obj.GetType().IsGenericType || obj.GetType().GetGenericTypeDefinition() != typeof(List<>))
+            if (
+                !obj.GetType().IsGenericType
+                || obj.GetType().GetGenericTypeDefinition() != typeof(List<>)
+            )
                 throw new ArgumentException(SR.GetString(SR.Error_InvalidArgumentValue), "obj");
 
             Type[] args = obj.GetType().GetGenericArguments();
@@ -31,7 +39,13 @@ namespace System.Workflow.ComponentModel.Serialization
             info.AddValue("itemType", args[0]);
             info.SetType(typeof(ListRef));
         }
-        object ISerializationSurrogate.SetObjectData(object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector)
+
+        object ISerializationSurrogate.SetObjectData(
+            object obj,
+            SerializationInfo info,
+            StreamingContext context,
+            ISurrogateSelector selector
+        )
         {
             return null;
         }
@@ -42,6 +56,7 @@ namespace System.Workflow.ComponentModel.Serialization
         {
             [OptionalField]
             private IList items = null;
+
             [OptionalField]
             private object item = null;
             private Type itemType = null;
@@ -53,11 +68,14 @@ namespace System.Workflow.ComponentModel.Serialization
             {
                 if (this.list == null)
                 {
-                    Type listType = typeof(List<int>).GetGenericTypeDefinition().MakeGenericType(itemType);
+                    Type listType = typeof(List<int>)
+                        .GetGenericTypeDefinition()
+                        .MakeGenericType(itemType);
                     this.list = listType.GetConstructor(Type.EmptyTypes).Invoke(null);
                 }
                 return this.list;
             }
+
             void IDeserializationCallback.OnDeserialization(Object sender)
             {
                 if (this.list != null)

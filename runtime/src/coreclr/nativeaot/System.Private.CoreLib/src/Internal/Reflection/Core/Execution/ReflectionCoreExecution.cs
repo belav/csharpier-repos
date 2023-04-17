@@ -20,33 +20,34 @@ namespace Internal.Reflection.Core.Execution
         //
         // One time initialization to supply the information needed to initialize the execution environment.
         //
-        public static void InitializeExecutionDomain(ReflectionDomainSetup executionDomainSetup, ExecutionEnvironment executionEnvironment)
+        public static void InitializeExecutionDomain(
+            ReflectionDomainSetup executionDomainSetup,
+            ExecutionEnvironment executionEnvironment
+        )
         {
-            ExecutionDomain executionDomain = new ExecutionDomain(executionDomainSetup, executionEnvironment);
+            ExecutionDomain executionDomain = new ExecutionDomain(
+                executionDomainSetup,
+                executionEnvironment
+            );
             //@todo: This check has a race window but since this is a private api targeted by the toolchain, perhaps this is not so critical.
             if (s_executionDomain != null)
                 throw new InvalidOperationException(); // Multiple Initializes not allowed.
             s_executionDomain = executionDomain;
 
-            ReflectionCoreCallbacks reflectionCallbacks = new ReflectionCoreCallbacksImplementation();
+            ReflectionCoreCallbacks reflectionCallbacks =
+                new ReflectionCoreCallbacksImplementation();
             ReflectionAugments.Initialize(reflectionCallbacks);
             return;
         }
 
         public static ExecutionDomain ExecutionDomain
         {
-            get
-            {
-                return s_executionDomain;
-            }
+            get { return s_executionDomain; }
         }
 
         internal static ExecutionEnvironment ExecutionEnvironment
         {
-            get
-            {
-                return ExecutionDomain.ExecutionEnvironment;
-            }
+            get { return ExecutionDomain.ExecutionEnvironment; }
         }
 
         private static volatile ExecutionDomain s_executionDomain;

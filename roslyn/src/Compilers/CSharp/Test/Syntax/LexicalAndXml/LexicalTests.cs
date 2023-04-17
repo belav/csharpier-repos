@@ -91,8 +91,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     result = blender.ReadToken(InternalSyntax.LexerMode.Syntax);
                     blender = result.Blender;
                     yield return result;
-                }
-                while (result.Token.Kind != SyntaxKind.EndOfFileToken);
+                } while (result.Token.Kind != SyntaxKind.EndOfFileToken);
             }
         }
 
@@ -119,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Trait("Feature", "Comments")]
         public void TestSingleLineCommentWithUnicode()
         {
-            var text = "// ҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉ ҉҉̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌… ̒̓̔̕̚ ̍̎̏̐̑̒̓̔̕̚̕̚ ̡̢̛̗̘̙̜̝̞̟̠̊̋̌̍̎̏̚ ̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎… ̕̚̕̚ ̔̕̚̕̚҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉ ";
+            var text =
+                "// ҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉ ҉҉̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌… ̒̓̔̕̚ ̍̎̏̐̑̒̓̔̕̚̕̚ ̡̢̛̗̘̙̜̝̞̟̠̊̋̌̍̎̏̚ ̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎… ̕̚̕̚ ̔̕̚̕̚҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉ ";
             var token = LexToken(text);
 
             Assert.NotEqual(default, token);
@@ -198,7 +198,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestMultiLineCommentOnMultipleLines()
         {
             var text =
-@"/* 
+                @"/* 
  comment 
  on many lines
 */";
@@ -220,7 +220,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TestMultiLineXmlCommentOnMultipleLines()
         {
             var text =
-@"/** 
+                @"/** 
  xml comment 
  on many lines
 **/";
@@ -326,7 +326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Trait("Feature", "Identifiers")]
         public void TestIdentifierWithUnicode()
         {
-            var text = "Fō̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄o";
+            var text =
+                "Fō̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄̄o";
             var token = LexToken(text);
 
             Assert.NotEqual(default, token);
@@ -531,7 +532,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var token = LexToken(text);
 
             Assert.NotEqual('\\', text[0]);
-            Assert.Equal(System.Globalization.UnicodeCategory.UppercaseLetter, CharUnicodeInfo.GetUnicodeCategory(text[0]));
+            Assert.Equal(
+                System.Globalization.UnicodeCategory.UppercaseLetter,
+                CharUnicodeInfo.GetUnicodeCategory(text[0])
+            );
 
             Assert.NotEqual(default, token);
             Assert.Equal(SyntaxKind.IdentifierToken, token.Kind());
@@ -660,7 +664,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Trait("Feature", "Literals")]
         public void TestStringLiteralWithUnicode()
         {
-            var text = "\"҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉ ҉҉̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌… ̒̓̔̕̚ ̍̎̏̐̑̒̓̔̕̚̕̚ ̡̢̛̗̘̙̜̝̞̟̠̊̋̌̍̎̏̚ ̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎… ̕̚̕̚ ̔̕̚̕̚҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉\"";
+            var text =
+                "\"҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉ ҉҉̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌… ̒̓̔̕̚ ̍̎̏̐̑̒̓̔̕̚̕̚ ̡̢̛̗̘̙̜̝̞̟̠̊̋̌̍̎̏̚ ̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎… ̕̚̕̚ ̔̕̚̕̚҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉\"";
             var token = LexToken(text);
 
             Assert.NotEqual(default, token);
@@ -668,7 +673,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(text, token.Text);
             var errors = token.Errors();
             Assert.Equal(0, errors.Length);
-            Assert.Equal("҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉ ҉҉̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌… ̒̓̔̕̚ ̍̎̏̐̑̒̓̔̕̚̕̚ ̡̢̛̗̘̙̜̝̞̟̠̊̋̌̍̎̏̚ ̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎… ̕̚̕̚ ̔̕̚̕̚҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉", token.ValueText);
+            Assert.Equal(
+                "҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉ ҉҉̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌… ̒̓̔̕̚ ̍̎̏̐̑̒̓̔̕̚̕̚ ̡̢̛̗̘̙̜̝̞̟̠̊̋̌̍̎̏̚ ̡̢̡̢̛̛̖̗̘̙̜̝̞̟̠̖̗̘̙̜̝̞̟̠̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎… ̕̚̕̚ ̔̕̚̕̚҉ ҉̵̞̟̠̖̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̐̑̒̓̔̊̋̌̍̎̏̐̑̒̓̔̿̿̿… ͡҉҉ ̵̡̢̛̗̘̙̜̝̞̟̠͇̊̋̌̍̎̏̿̿̿̚ ҉",
+                token.ValueText
+            );
         }
 
         [Fact]
@@ -1382,8 +1390,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Trait("Feature", "Literals")]
         public void TestNumericLiteralWithHugeNumberAndHugeDecimal()
         {
-            var value = 12332434234234234234234234324234234234.45623423423423423423423423423423423423;
-            var text = "12332434234234234234234234324234234234.45623423423423423423423423423423423423";
+            var value =
+                12332434234234234234234234324234234234.45623423423423423423423423423423423423;
+            var text =
+                "12332434234234234234234234324234234234.45623423423423423423423423423423423423";
             var token = LexToken(text);
 
             Assert.NotEqual(default, token);
@@ -1494,7 +1504,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(SyntaxKind.NumericLiteralToken, token.Kind());
             var errors = token.Errors();
             decimal d;
-            if (decimal.TryParse("0E1", System.Globalization.NumberStyles.AllowExponent, null, out d))
+            if (
+                decimal.TryParse(
+                    "0E1",
+                    System.Globalization.NumberStyles.AllowExponent,
+                    null,
+                    out d
+                )
+            )
             {
                 Assert.Equal(0, errors.Length);
             }
@@ -2614,7 +2631,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_IntOverflow, errors[0].Code);
-            Assert.Equal("error CS1021: Integral constant is too large", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1021: Integral constant is too large",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
         }
 
@@ -2630,7 +2650,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
         }
 
@@ -2818,7 +2841,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "1000_.0";
@@ -2829,7 +2855,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             // parses as Int32.Member, where Member is _0
@@ -2844,7 +2873,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "1000.0_e1";
@@ -2855,7 +2887,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "1000.0e_1";
@@ -2866,7 +2901,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "1000.0e1_";
@@ -2877,7 +2915,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "0xA_";
@@ -2888,7 +2929,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "0b1_";
@@ -2899,7 +2943,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "0x_";
@@ -2910,7 +2957,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "0x_2_";
@@ -2921,7 +2971,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "1E+_2";
@@ -2932,7 +2985,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "1E-_2";
@@ -2943,7 +2999,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
 
             text = "1E_";
@@ -2955,7 +3014,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(2, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_InvalidNumber, errors[0].Code);
             Assert.Equal((int)ErrorCode.ERR_FloatOverflow, errors[1].Code);
-            Assert.Equal("error CS1013: Invalid number", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS1013: Invalid number",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
         }
 
@@ -3143,7 +3205,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var errors = token.Errors();
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_LegacyObjectIdSyntax, errors[0].Code);
-            Assert.Equal("error CS2043: 'id#' syntax is no longer supported. Use '$id' instead.", errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull));
+            Assert.Equal(
+                "error CS2043: 'id#' syntax is no longer supported. Use '$id' instead.",
+                errors[0].ToString(EnsureEnglishUICulture.PreferredOrNull)
+            );
             Assert.Equal(text, token.Text);
             Assert.Equal(text, token.Value);
 
@@ -3262,17 +3327,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             AssertGoodDecimalLiteral("792E26m", "600000000ae7ac71ffe8b45b00000000");
             AssertBadDecimalLiteral("793E26m"); //too large
 
-            AssertGoodDecimalLiteral("7922816251426433759354395033E1m", "fffffffaffffffffffffffff00000000");
+            AssertGoodDecimalLiteral(
+                "7922816251426433759354395033E1m",
+                "fffffffaffffffffffffffff00000000"
+            );
             AssertBadDecimalLiteral("7922816251426433759354395034E1m"); //too large
 
             // Exact boundary with various scales
-            AssertGoodDecimalLiteral("79228162514264337593543950335E0m", "ffffffffffffffffffffffff00000000");
+            AssertGoodDecimalLiteral(
+                "79228162514264337593543950335E0m",
+                "ffffffffffffffffffffffff00000000"
+            );
             AssertBadDecimalLiteral("79228162514264337593543950346E0m"); //too large
 
-            AssertGoodDecimalLiteral("7922816251426433759354395033.5E1m", "ffffffffffffffffffffffff00000000");
+            AssertGoodDecimalLiteral(
+                "7922816251426433759354395033.5E1m",
+                "ffffffffffffffffffffffff00000000"
+            );
             AssertBadDecimalLiteral("7922816251426433759354395034.6E1m"); //too large
 
-            AssertGoodDecimalLiteral("7.9228162514264337593543950335E28m", "ffffffffffffffffffffffff00000000");
+            AssertGoodDecimalLiteral(
+                "7.9228162514264337593543950335E28m",
+                "ffffffffffffffffffffffff00000000"
+            );
             AssertBadDecimalLiteral("7.9228162514264337593543950346E28m"); //too large
 
             // Exponent has too many digits.
@@ -3283,9 +3360,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             // Exponent has way too many digits.
             AssertBadDecimalLiteral("1e99999999999999999999999999M");
-            AssertGoodDecimalLiteral("1e-99999999999999999999999999M", "000000000000000000000000001c0000"); // Native compiler reports CS0594
+            AssertGoodDecimalLiteral(
+                "1e-99999999999999999999999999M",
+                "000000000000000000000000001c0000"
+            ); // Native compiler reports CS0594
             AssertBadDecimalLiteral("1.0e99999999999999999999999999M");
-            AssertGoodDecimalLiteral("1.0e-99999999999999999999999999M", "000000000000000000000000001c0000"); // Native compiler reports CS0594
+            AssertGoodDecimalLiteral(
+                "1.0e-99999999999999999999999999M",
+                "000000000000000000000000001c0000"
+            ); // Native compiler reports CS0594
 
             // Zeroes with precision.
             AssertGoodDecimalLiteral("0e-27M", "000000000000000000000000001b0000");
@@ -3301,12 +3384,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DecimalLiteralsManyDigits()
         {
-            AssertGoodDecimalLiteral("1.23456789012345678901234567890123456789012345678901234567890e28m", "6e39811546bec9b127e41b3200000000");
-            AssertBadDecimalLiteral("1.23456789012345678901234567890123456789012345678901234567890e29m");
-            AssertGoodDecimalLiteral("123456789012345678901234567890123456789012345678901234567890e-31m", "6e39811546bec9b127e41b3200000000");
-            AssertBadDecimalLiteral("123456789012345678901234567890123456789012345678901234567890e-30m");
-            AssertGoodDecimalLiteral("123456789012345678901234567890.123456789012345678901234567890e-1m", "6e39811546bec9b127e41b3200000000");
-            AssertBadDecimalLiteral("123456789012345678901234567890.123456789012345678901234567890e-0m");
+            AssertGoodDecimalLiteral(
+                "1.23456789012345678901234567890123456789012345678901234567890e28m",
+                "6e39811546bec9b127e41b3200000000"
+            );
+            AssertBadDecimalLiteral(
+                "1.23456789012345678901234567890123456789012345678901234567890e29m"
+            );
+            AssertGoodDecimalLiteral(
+                "123456789012345678901234567890123456789012345678901234567890e-31m",
+                "6e39811546bec9b127e41b3200000000"
+            );
+            AssertBadDecimalLiteral(
+                "123456789012345678901234567890123456789012345678901234567890e-30m"
+            );
+            AssertGoodDecimalLiteral(
+                "123456789012345678901234567890.123456789012345678901234567890e-1m",
+                "6e39811546bec9b127e41b3200000000"
+            );
+            AssertBadDecimalLiteral(
+                "123456789012345678901234567890.123456789012345678901234567890e-0m"
+            );
         }
 
         [Fact]
@@ -3314,11 +3412,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // Max value is 79228162514264337593543950335
 
-            AssertGoodDecimalLiteral("792281625142643375935439503350E-1M", "ffffffffffffffffffffffff00000000");
-            AssertGoodDecimalLiteral("7922816251426433759354395033500000E-5M", "ffffffffffffffffffffffff00000000");
+            AssertGoodDecimalLiteral(
+                "792281625142643375935439503350E-1M",
+                "ffffffffffffffffffffffff00000000"
+            );
+            AssertGoodDecimalLiteral(
+                "7922816251426433759354395033500000E-5M",
+                "ffffffffffffffffffffffff00000000"
+            );
 
-            AssertGoodDecimalLiteral("792281625142643375935439503354E-1M", "ffffffffffffffffffffffff00000000");
-            AssertGoodDecimalLiteral("7922816251426433759354395033549999E-5M", "ffffffffffffffffffffffff00000000");
+            AssertGoodDecimalLiteral(
+                "792281625142643375935439503354E-1M",
+                "ffffffffffffffffffffffff00000000"
+            );
+            AssertGoodDecimalLiteral(
+                "7922816251426433759354395033549999E-5M",
+                "ffffffffffffffffffffffff00000000"
+            );
         }
 
         [Fact]
@@ -3386,13 +3496,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private static string ToHexString(decimal d)
         {
-            return string.Join("", decimal.GetBits(d).Select(word => string.Format("{0:x8}", word)));
+            return string.Join(
+                "",
+                decimal.GetBits(d).Select(word => string.Format("{0:x8}", word))
+            );
         }
 
         [Fact]
         public void TestGreaterThanConflictMarkerNotConsumedWhenLegalInGeneric()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -3406,9 +3520,15 @@ class C
             var diagnostics = tree.GetDiagnostics();
             Assert.Empty(diagnostics);
 
-            Assert.False(tree.GetRoot().DescendantTokens().Any(
-                t => t.LeadingTrivia.Any(SyntaxKind.ConflictMarkerTrivia) ||
-                     t.TrailingTrivia.Any(SyntaxKind.ConflictMarkerTrivia)));
+            Assert.False(
+                tree.GetRoot()
+                    .DescendantTokens()
+                    .Any(
+                        t =>
+                            t.LeadingTrivia.Any(SyntaxKind.ConflictMarkerTrivia)
+                            || t.TrailingTrivia.Any(SyntaxKind.ConflictMarkerTrivia)
+                    )
+            );
         }
 
         [Fact]
@@ -3699,7 +3819,9 @@ class C
             Assert.Equal(21, trivia.Span.Start);
             Assert.Equal(13, trivia.Span.Length);
 
-            token = Lex("{\r\n======= Trailing\r\ndisabled text\r\n>>>> still disabled").Skip(1).First();
+            token = Lex("{\r\n======= Trailing\r\ndisabled text\r\n>>>> still disabled")
+                .Skip(1)
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(3, token.LeadingTrivia.Count);
@@ -3716,7 +3838,9 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
             Assert.Equal(34, trivia.Span.Length);
 
-            token = Lex("{\r\n======= Trailing\r\ndisabled text\r\n>>>>>>> Actually the end").Skip(1).First();
+            token = Lex("{\r\n======= Trailing\r\ndisabled text\r\n>>>>>>> Actually the end")
+                .Skip(1)
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(4, token.LeadingTrivia.Count);
@@ -3744,13 +3868,16 @@ class C
         public void TestEqualsConflictMarker3()
         {
             // second ======= is part of disabled text
-            var token = Lex("""
+            var token = Lex(
+                    """
                 ======= Trailing
                 disabled text 2
                 ======= 
                 more disabled text
                 >>>>>>> Actually the end
-                """).First();
+                """
+                )
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(4, token.LeadingTrivia.Count);
@@ -3759,38 +3886,50 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal("======= Trailing", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
 
             trivia = token.LeadingTrivia[1];
             Assert.True(trivia.Kind() == SyntaxKind.EndOfLineTrivia);
 
             trivia = token.LeadingTrivia[2];
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 disabled text 2
                 ======= 
                 more disabled text
 
-                """, trivia.ToFullString());
+                """,
+                trivia.ToFullString()
+            );
 
             trivia = token.LeadingTrivia[3];
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal(">>>>>>> Actually the end", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
         }
 
         [Fact]
         public void TestEqualsConflictMarker4()
         {
             // ||||||| is part of disabled text
-            var token = Lex("""
+            var token = Lex(
+                    """
                 ======= Trailing
                 disabled text 2
                 ||||||| 
                 more disabled text
                 >>>>>>> Actually the end
-                """).First();
+                """
+                )
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(4, token.LeadingTrivia.Count);
@@ -3799,25 +3938,34 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal("======= Trailing", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
 
             trivia = token.LeadingTrivia[1];
             Assert.True(trivia.Kind() == SyntaxKind.EndOfLineTrivia);
 
             trivia = token.LeadingTrivia[2];
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 disabled text 2
                 ||||||| 
                 more disabled text
 
-                """, trivia.ToFullString());
+                """,
+                trivia.ToFullString()
+            );
 
             trivia = token.LeadingTrivia[3];
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal(">>>>>>> Actually the end", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
         }
 
         [Fact]
@@ -3851,10 +3999,13 @@ class C
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, errors[0].Code);
 
-            token = Lex("""
+            token = Lex(
+                    """
                 ||||||| Trailing
                 disabled text
-                """).First();
+                """
+                )
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(3, token.LeadingTrivia.Count);
@@ -3872,11 +4023,14 @@ class C
             trivia = token.LeadingTrivia[2];
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
 
-            token = Lex("""
+            token = Lex(
+                    """
                 ||||||| Trailing
                 disabled text
                 >>>> still disabled
-                """).First();
+                """
+                )
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(3, token.LeadingTrivia.Count);
@@ -3895,11 +4049,14 @@ class C
             trivia = token.LeadingTrivia[2];
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
 
-            token = Lex("""
+            token = Lex(
+                    """
                 ||||||| Trailing
                 disabled text
                 >>>>>>> Actually the end
-                """).First();
+                """
+                )
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(4, token.LeadingTrivia.Count);
@@ -3925,10 +4082,13 @@ class C
             Assert.Equal(1, errors.Length);
             Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, errors[0].Code);
 
-            token = Lex("""
+            token = Lex(
+                    """
                 ||||||| Trailing
                 >>>>>>> Actually the end
-                """).First();
+                """
+                )
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(3, token.LeadingTrivia.Count);
@@ -3955,11 +4115,14 @@ class C
         [Fact]
         public void TestPipeConflictMarker2()
         {
-            var token = Lex("""
+            var token = Lex(
+                    """
                 ||||||| Mid
                 ======= Trailing
                 >>>>>>> Actually the end
-                """).First();
+                """
+                )
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(5, token.LeadingTrivia.Count);
@@ -3968,7 +4131,10 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal("||||||| Mid", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
 
             trivia = token.LeadingTrivia[1];
             Assert.True(trivia.Kind() == SyntaxKind.EndOfLineTrivia);
@@ -3977,7 +4143,10 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal("======= Trailing", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
 
             trivia = token.LeadingTrivia[3];
             Assert.True(trivia.Kind() == SyntaxKind.EndOfLineTrivia);
@@ -3986,19 +4155,25 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal(">>>>>>> Actually the end", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
         }
 
         [Fact]
         public void TestPipeConflictMarker3()
         {
-            var token = Lex("""
+            var token = Lex(
+                    """
                 ||||||| Mid
                 disabled text 1
                 ======= Trailing
                 disabled text 2
                 >>>>>>> Actually the end
-                """).First();
+                """
+                )
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(7, token.LeadingTrivia.Count);
@@ -4007,46 +4182,62 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal("||||||| Mid", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
 
             trivia = token.LeadingTrivia[1];
             Assert.True(trivia.Kind() == SyntaxKind.EndOfLineTrivia);
 
             trivia = token.LeadingTrivia[2];
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 disabled text 1
 
-                """, trivia.ToFullString());
+                """,
+                trivia.ToFullString()
+            );
 
             trivia = token.LeadingTrivia[3];
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal("======= Trailing", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
 
             trivia = token.LeadingTrivia[4];
             Assert.True(trivia.Kind() == SyntaxKind.EndOfLineTrivia);
 
             trivia = token.LeadingTrivia[5];
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 disabled text 2
 
-                """, trivia.ToFullString());
+                """,
+                trivia.ToFullString()
+            );
 
             trivia = token.LeadingTrivia[6];
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal(">>>>>>> Actually the end", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
         }
 
         [Fact]
         public void TestPipeConflictMarker4()
         {
             // second ======= is pat of disabled text
-            var token = Lex("""
+            var token = Lex(
+                    """
                 ||||||| Mid
                 disabled text 1
                 ======= Trailing
@@ -4054,7 +4245,9 @@ class C
                 ======= 
                 more disabled text
                 >>>>>>> Actually the end
-                """).First();
+                """
+                )
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(7, token.LeadingTrivia.Count);
@@ -4063,48 +4256,64 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal("||||||| Mid", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
 
             trivia = token.LeadingTrivia[1];
             Assert.True(trivia.Kind() == SyntaxKind.EndOfLineTrivia);
 
             trivia = token.LeadingTrivia[2];
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 disabled text 1
 
-                """, trivia.ToFullString());
+                """,
+                trivia.ToFullString()
+            );
 
             trivia = token.LeadingTrivia[3];
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal("======= Trailing", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
 
             trivia = token.LeadingTrivia[4];
             Assert.True(trivia.Kind() == SyntaxKind.EndOfLineTrivia);
 
             trivia = token.LeadingTrivia[5];
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 disabled text 2
                 ======= 
                 more disabled text
 
-                """, trivia.ToFullString());
+                """,
+                trivia.ToFullString()
+            );
 
             trivia = token.LeadingTrivia[6];
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal(">>>>>>> Actually the end", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
         }
 
         [Fact]
         public void TestPipeConflictMarker5()
         {
             // second ||||||| is pat of disabled text
-            var token = Lex("""
+            var token = Lex(
+                    """
                 ||||||| Mid
                 disabled text 1
                 ||||||| 
@@ -4112,7 +4321,9 @@ class C
                 ======= Trailing
                 disabled text 2
                 >>>>>>> Actually the end
-                """).First();
+                """
+                )
+                .First();
             Assert.Equal(SyntaxKind.EndOfFileToken, token.Kind());
             Assert.True(token.HasLeadingTrivia);
             Assert.Equal(7, token.LeadingTrivia.Count);
@@ -4121,41 +4332,56 @@ class C
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal("||||||| Mid", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
 
             trivia = token.LeadingTrivia[1];
             Assert.True(trivia.Kind() == SyntaxKind.EndOfLineTrivia);
 
             trivia = token.LeadingTrivia[2];
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 disabled text 1
                 ||||||| 
                 more disabled text
 
-                """, trivia.ToFullString());
+                """,
+                trivia.ToFullString()
+            );
 
             trivia = token.LeadingTrivia[3];
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal("======= Trailing", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
 
             trivia = token.LeadingTrivia[4];
             Assert.True(trivia.Kind() == SyntaxKind.EndOfLineTrivia);
 
             trivia = token.LeadingTrivia[5];
             Assert.True(trivia.Kind() == SyntaxKind.DisabledTextTrivia);
-            Assert.Equal("""
+            Assert.Equal(
+                """
                 disabled text 2
 
-                """, trivia.ToFullString());
+                """,
+                trivia.ToFullString()
+            );
 
             trivia = token.LeadingTrivia[6];
             Assert.True(trivia.Kind() == SyntaxKind.ConflictMarkerTrivia);
             Assert.Equal(">>>>>>> Actually the end", trivia.ToFullString());
             Assert.True(trivia.ContainsDiagnostics);
-            Assert.Equal((int)ErrorCode.ERR_Merge_conflict_marker_encountered, trivia.Errors().Single().Code);
+            Assert.Equal(
+                (int)ErrorCode.ERR_Merge_conflict_marker_encountered,
+                trivia.Errors().Single().Code
+            );
         }
     }
 }

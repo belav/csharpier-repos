@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 /// </summary>
 public class ClientErrorResultFilterConvention : IActionModelConvention
 {
-    private readonly ClientErrorResultFilterFactory _filterFactory = new ClientErrorResultFilterFactory();
+    private readonly ClientErrorResultFilterFactory _filterFactory =
+        new ClientErrorResultFilterFactory();
 
     /// <inheritdoc />
     public void Apply(ActionModel action)

@@ -37,7 +37,8 @@ public class CompiledQueryCache : ICompiledQueryCache
     /// </summary>
     public virtual Func<QueryContext, TResult> GetOrAddQuery<TResult>(
         object cacheKey,
-        Func<Func<QueryContext, TResult>> compiler)
+        Func<Func<QueryContext, TResult>> compiler
+    )
     {
         // ReSharper disable once InconsistentlySynchronizedField
         if (_memoryCache.TryGetValue(cacheKey, out Func<QueryContext, TResult>? compiledQuery))
@@ -64,7 +65,11 @@ public class CompiledQueryCache : ICompiledQueryCache
                     EntityFrameworkEventSource.Log.CompiledQueryCacheMiss();
 
                     compiledQuery = compiler();
-                    _memoryCache.Set(cacheKey, compiledQuery, new MemoryCacheEntryOptions { Size = 10 });
+                    _memoryCache.Set(
+                        cacheKey,
+                        compiledQuery,
+                        new MemoryCacheEntryOptions { Size = 10 }
+                    );
                 }
 
                 return compiledQuery!;

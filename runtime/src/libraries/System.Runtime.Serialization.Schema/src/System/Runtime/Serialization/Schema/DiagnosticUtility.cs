@@ -15,8 +15,13 @@ namespace System.Runtime.Serialization
             while (exception != null)
             {
                 // NetFx checked for FatalException and FatalInternalException as well, which were ServiceModel constructs.
-                if ((exception is OutOfMemoryException && !(exception is InsufficientMemoryException)) ||
-                    exception is ThreadAbortException)
+                if (
+                    (
+                        exception is OutOfMemoryException
+                        && !(exception is InsufficientMemoryException)
+                    )
+                    || exception is ThreadAbortException
+                )
                 {
                     return true;
                 }
@@ -24,8 +29,10 @@ namespace System.Runtime.Serialization
                 // These exceptions aren't themselves fatal, but since the CLR uses them to wrap other exceptions,
                 // we want to check to see whether they've been used to wrap a fatal exception.  If so, then they
                 // count as fatal.
-                if (exception is TypeInitializationException ||
-                    exception is TargetInvocationException)
+                if (
+                    exception is TypeInitializationException
+                    || exception is TargetInvocationException
+                )
                 {
                     exception = exception.InnerException!;
                 }
@@ -91,6 +98,7 @@ namespace System.Runtime.Serialization
             {
                 return ThrowHelperError(new Exception(message, innerException));
             }
+
             internal static Exception ThrowHelperCallback(Exception e)
             {
                 return ThrowHelperError(e);

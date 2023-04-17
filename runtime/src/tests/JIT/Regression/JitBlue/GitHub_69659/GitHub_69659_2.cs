@@ -10,6 +10,7 @@ public class _65659_2
     public static short[,][] s_8;
     public static bool[] s_10;
     public static ushort[][] s_29;
+
     public static int Main()
     {
         bool vr1 = M47();

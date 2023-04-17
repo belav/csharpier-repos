@@ -10,7 +10,12 @@ namespace System.Xml.Tests
     //[TestModule(Name = "Xsltc", Desc = "Xsltc Compiler Tests", Pri = 1)]
     public class XsltcModule : CTestModule
     {
-        public static string TargetDirectory = Path.Combine("TestFiles", FilePathUtil.GetTestDataPath(), "xsltc", "baseline");
+        public static string TargetDirectory = Path.Combine(
+            "TestFiles",
+            FilePathUtil.GetTestDataPath(),
+            "xsltc",
+            "baseline"
+        );
 
         public void CopyDataFiles(string sourcePath, string targetDir)
         {
@@ -34,9 +39,18 @@ namespace System.Xml.Tests
             int ret = base.Init(objParam);
 
             // copy all the data files to working folder
-            CopyDataFiles(Path.Combine("TestFiles", FilePathUtil.GetTestDataPath(), "xsltc"), TargetDirectory);
-            CopyDataFiles(Path.Combine("TestFiles", FilePathUtil.GetTestDataPath(), "xsltc", "precompiled"), TargetDirectory);
-            CopyDataFiles(Path.Combine("TestFiles", FilePathUtil.GetTestDataPath(), "xsltc", "baseline"), TargetDirectory);
+            CopyDataFiles(
+                Path.Combine("TestFiles", FilePathUtil.GetTestDataPath(), "xsltc"),
+                TargetDirectory
+            );
+            CopyDataFiles(
+                Path.Combine("TestFiles", FilePathUtil.GetTestDataPath(), "xsltc", "precompiled"),
+                TargetDirectory
+            );
+            CopyDataFiles(
+                Path.Combine("TestFiles", FilePathUtil.GetTestDataPath(), "xsltc", "baseline"),
+                TargetDirectory
+            );
 
             return ret;
         }

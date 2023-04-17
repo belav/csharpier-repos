@@ -28,6 +28,6 @@ public static class SqlServerDatabaseFacadeExtensions
     /// </remarks>
     /// <param name="database">The facade from <see cref="DbContext.Database" />.</param>
     /// <returns><see langword="true" /> if SQL Server is being used; <see langword="false" /> otherwise.</returns>
-    public static bool IsSqlServer(this DatabaseFacade database)
-        => database.ProviderName == typeof(SqlServerOptionsExtension).Assembly.GetName().Name;
+    public static bool IsSqlServer(this DatabaseFacade database) =>
+        database.ProviderName == typeof(SqlServerOptionsExtension).Assembly.GetName().Name;
 }

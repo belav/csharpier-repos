@@ -29,36 +29,47 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
     internal static class DocumentOutlineHelper
     {
         /// <summary>
-        /// Makes an LSP document symbol request and returns the response and the text snapshot used at 
+        /// Makes an LSP document symbol request and returns the response and the text snapshot used at
         /// the time the LSP client sends the request to the server.
         /// </summary>
-        public static async Task<(JToken response, ITextSnapshot snapshot)?> DocumentSymbolsRequestAsync(
+        public static async Task<(
+            JToken response,
+            ITextSnapshot snapshot
+        )?> DocumentSymbolsRequestAsync(
             ITextBuffer textBuffer,
             ILanguageServiceBroker2 languageServiceBroker,
             string textViewFilePath,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             ITextSnapshot? requestSnapshot = null;
             JToken ParameterFunction(ITextSnapshot snapshot)
             {
                 requestSnapshot = snapshot;
-                return JToken.FromObject(new RoslynDocumentSymbolParams()
-                {
-                    UseHierarchicalSymbols = true,
-                    TextDocument = new TextDocumentIdentifier()
+                return JToken.FromObject(
+                    new RoslynDocumentSymbolParams()
                     {
-                        Uri = new Uri(textViewFilePath)
+                        UseHierarchicalSymbols = true,
+                        TextDocument = new TextDocumentIdentifier()
+                        {
+                            Uri = new Uri(textViewFilePath)
+                        }
                     }
-                });
+                );
             }
 
-            var response = (await languageServiceBroker.RequestAsync(
-                textBuffer: textBuffer,
-                method: Methods.TextDocumentDocumentSymbolName,
-                capabilitiesFilter: _ => true,
-                languageServerName: WellKnownLspServerKinds.AlwaysActiveVSLspServer.ToUserVisibleString(),
-                parameterFactory: ParameterFunction,
-                cancellationToken: cancellationToken).ConfigureAwait(false))?.Response;
+            var response = (
+                await languageServiceBroker
+                    .RequestAsync(
+                        textBuffer: textBuffer,
+                        method: Methods.TextDocumentDocumentSymbolName,
+                        capabilitiesFilter: _ => true,
+                        languageServerName: WellKnownLspServerKinds.AlwaysActiveVSLspServer.ToUserVisibleString(),
+                        parameterFactory: ParameterFunction,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            )?.Response;
 
             // The request snapshot or response can be null if there is no LSP server implementation for
             // the document symbol request for that language.
@@ -68,16 +79,16 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         /// <summary>
         /// Given an array of Document Symbols in a document, returns a DocumentSymbolDataModel.
         /// </summary>
-        /// 
-        /// As of right now, the LSP document symbol response only has at most 2 levels of nesting, 
+        ///
+        /// As of right now, the LSP document symbol response only has at most 2 levels of nesting,
         /// so we nest the symbols first before converting the LSP DocumentSymbols to DocumentSymbolData.
-        /// 
+        ///
         /// Example file structure:
         /// Class A
         ///     ClassB
         ///         Method1
         ///         Method2
-        ///         
+        ///
         /// LSP document symbol response:
         /// [
         ///     {
@@ -86,7 +97,7 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         ///     },
         ///     {
         ///         Name: ClassB,
-        ///         Children: 
+        ///         Children:
         ///         [
         ///             {
         ///                 Name: Method1,
@@ -99,7 +110,10 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         ///         ]
         ///     }
         /// ]
-        public static DocumentSymbolDataModel CreateDocumentSymbolDataModel(LspDocumentSymbol[] documentSymbols, ITextSnapshot originalSnapshot)
+        public static DocumentSymbolDataModel CreateDocumentSymbolDataModel(
+            LspDocumentSymbol[] documentSymbols,
+            ITextSnapshot originalSnapshot
+        )
         {
             // Obtain a flat list of all the document symbols sorted by location in the document.
             var allSymbols = documentSymbols
@@ -119,7 +133,11 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
 
             // Returns the symbol in the list at index start (the parent symbol) with the following symbols in the list
             // (descendants) appropriately nested into the parent.
-            DocumentSymbolData NestDescendantSymbols(ImmutableArray<LspDocumentSymbol> allSymbols, int start, out int newStart)
+            DocumentSymbolData NestDescendantSymbols(
+                ImmutableArray<LspDocumentSymbol> allSymbols,
+                int start,
+                out int newStart
+            )
             {
                 var currentParent = allSymbols[start];
                 start++;
@@ -128,7 +146,9 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 // Iterates through the following symbols and checks whether the next symbol is in range of the parent and needs
                 // to be nested into the current parent symbol (along with following symbols that may be siblings/grandchildren/etc)
                 // or if the next symbol is a new parent.
-                using var _2 = ArrayBuilder<DocumentSymbolData>.GetInstance(out var currentSymbolChildren);
+                using var _2 = ArrayBuilder<DocumentSymbolData>.GetInstance(
+                    out var currentSymbolChildren
+                );
                 while (newStart < allSymbols.Length)
                 {
                     var nextSymbol = allSymbols[newStart];
@@ -138,7 +158,9 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                         break;
 
                     // Otherwise, nest this child symbol and add it to currentSymbolChildren.
-                    currentSymbolChildren.Add(NestDescendantSymbols(allSymbols, start: newStart, out newStart));
+                    currentSymbolChildren.Add(
+                        NestDescendantSymbols(allSymbols, start: newStart, out newStart)
+                    );
                 }
 
                 // Return the nested parent symbol.
@@ -146,20 +168,29 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                     currentParent,
                     GetSymbolRangeSpan(currentParent.Range),
                     GetSymbolRangeSpan(currentParent.SelectionRange),
-                    currentSymbolChildren.ToImmutable());
+                    currentSymbolChildren.ToImmutable()
+                );
             }
 
             // Returns whether the child symbol is in range of the parent symbol.
-            static bool Contains(LspDocumentSymbol parent, LspDocumentSymbol child)
-                => child.Range.Start.Line > parent.Range.Start.Line && child.Range.End.Line < parent.Range.End.Line;
+            static bool Contains(LspDocumentSymbol parent, LspDocumentSymbol child) =>
+                child.Range.Start.Line > parent.Range.Start.Line
+                && child.Range.End.Line < parent.Range.End.Line;
 
             // Converts a Document Symbol Range to a SnapshotSpan within the text snapshot used for the LSP request.
             SnapshotSpan GetSymbolRangeSpan(Range symbolRange)
             {
-                var originalStartPosition = originalSnapshot.GetLineFromLineNumber(symbolRange.Start.Line).Start.Position + symbolRange.Start.Character;
-                var originalEndPosition = originalSnapshot.GetLineFromLineNumber(symbolRange.End.Line).Start.Position + symbolRange.End.Character;
+                var originalStartPosition =
+                    originalSnapshot.GetLineFromLineNumber(symbolRange.Start.Line).Start.Position
+                    + symbolRange.Start.Character;
+                var originalEndPosition =
+                    originalSnapshot.GetLineFromLineNumber(symbolRange.End.Line).Start.Position
+                    + symbolRange.End.Character;
 
-                return new SnapshotSpan(originalSnapshot, Span.FromBounds(originalStartPosition, originalEndPosition));
+                return new SnapshotSpan(
+                    originalSnapshot,
+                    Span.FromBounds(originalStartPosition, originalEndPosition)
+                );
             }
         }
 
@@ -169,52 +200,70 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         public static ImmutableArray<DocumentSymbolData> SortDocumentSymbolData(
             ImmutableArray<DocumentSymbolData> documentSymbolData,
             SortOption sortOption,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             // Log which sort option was used
-            Logger.Log(sortOption switch
-            {
-                SortOption.Name => FunctionId.DocumentOutline_SortByName,
-                SortOption.Location => FunctionId.DocumentOutline_SortByOrder,
-                SortOption.Type => FunctionId.DocumentOutline_SortByType,
-                _ => throw new NotImplementedException(),
-            }, logLevel: LogLevel.Information);
+            Logger.Log(
+                sortOption switch
+                {
+                    SortOption.Name => FunctionId.DocumentOutline_SortByName,
+                    SortOption.Location => FunctionId.DocumentOutline_SortByOrder,
+                    SortOption.Type => FunctionId.DocumentOutline_SortByType,
+                    _ => throw new NotImplementedException(),
+                },
+                logLevel: LogLevel.Information
+            );
 
             return SortDocumentSymbols(documentSymbolData, sortOption, cancellationToken);
 
             static ImmutableArray<DocumentSymbolData> SortDocumentSymbols(
                 ImmutableArray<DocumentSymbolData> documentSymbolData,
                 SortOption sortOption,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                using var _ = ArrayBuilder<DocumentSymbolData>.GetInstance(out var sortedDocumentSymbols);
+                using var _ = ArrayBuilder<DocumentSymbolData>.GetInstance(
+                    out var sortedDocumentSymbols
+                );
                 foreach (var documentSymbol in documentSymbolData)
                 {
-                    var sortedChildren = SortDocumentSymbols(documentSymbol.Children, sortOption, cancellationToken);
+                    var sortedChildren = SortDocumentSymbols(
+                        documentSymbol.Children,
+                        sortOption,
+                        cancellationToken
+                    );
                     sortedDocumentSymbols.Add(documentSymbol.WithChildren(sortedChildren));
                 }
 
                 switch (sortOption)
                 {
                     case SortOption.Name:
-                        sortedDocumentSymbols.Sort(static (x, y) => StringComparer.OrdinalIgnoreCase.Compare(x.Name, y.Name));
+                        sortedDocumentSymbols.Sort(
+                            static (x, y) =>
+                                StringComparer.OrdinalIgnoreCase.Compare(x.Name, y.Name)
+                        );
                         break;
                     case SortOption.Location:
-                        sortedDocumentSymbols.Sort(static (x, y) => x.RangeSpan.Start - y.RangeSpan.Start);
+                        sortedDocumentSymbols.Sort(
+                            static (x, y) => x.RangeSpan.Start - y.RangeSpan.Start
+                        );
                         break;
                     case SortOption.Type:
                         // At the moment, we sort the symbols by the SymbolKind enum values.
-                        sortedDocumentSymbols.Sort(static (x, y) =>
-                        {
-                            if (x.SymbolKind == y.SymbolKind)
-                                return x.Name.CompareTo(y.Name);
+                        sortedDocumentSymbols.Sort(
+                            static (x, y) =>
+                            {
+                                if (x.SymbolKind == y.SymbolKind)
+                                    return x.Name.CompareTo(y.Name);
 
-                            return x.SymbolKind - y.SymbolKind;
-                        });
+                                return x.SymbolKind - y.SymbolKind;
+                            }
+                        );
                         break;
                     default:
                         ExceptionUtilities.UnexpectedValue(sortOption);
@@ -231,16 +280,27 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         public static ImmutableArray<DocumentSymbolData> SearchDocumentSymbolData(
             ImmutableArray<DocumentSymbolData> documentSymbolData,
             string pattern,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            using var _ = ArrayBuilder<DocumentSymbolData>.GetInstance(out var filteredDocumentSymbols);
-            var patternMatcher = PatternMatcher.CreatePatternMatcher(pattern, includeMatchedSpans: false, allowFuzzyMatching: true);
+            using var _ = ArrayBuilder<DocumentSymbolData>.GetInstance(
+                out var filteredDocumentSymbols
+            );
+            var patternMatcher = PatternMatcher.CreatePatternMatcher(
+                pattern,
+                includeMatchedSpans: false,
+                allowFuzzyMatching: true
+            );
 
             foreach (var documentSymbol in documentSymbolData)
             {
-                var filteredChildren = SearchDocumentSymbolData(documentSymbol.Children, pattern, cancellationToken);
+                var filteredChildren = SearchDocumentSymbolData(
+                    documentSymbol.Children,
+                    pattern,
+                    cancellationToken
+                );
                 if (SearchNodeTree(documentSymbol, patternMatcher, cancellationToken))
                     filteredDocumentSymbols.Add(documentSymbol.WithChildren(filteredChildren));
             }
@@ -248,23 +308,37 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             return filteredDocumentSymbols.ToImmutable();
 
             // Returns true if the name of one of the tree nodes results in a pattern match.
-            static bool SearchNodeTree(DocumentSymbolData tree, PatternMatcher patternMatcher, CancellationToken cancellationToken)
+            static bool SearchNodeTree(
+                DocumentSymbolData tree,
+                PatternMatcher patternMatcher,
+                CancellationToken cancellationToken
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                return patternMatcher.Matches(tree.Name) || tree.Children.Any(c => SearchNodeTree(c, patternMatcher, cancellationToken));
+                return patternMatcher.Matches(tree.Name)
+                    || tree.Children.Any(c => SearchNodeTree(c, patternMatcher, cancellationToken));
             }
         }
 
         /// <summary>
         /// Converts an immutable array of DocumentSymbolData to an immutable array of DocumentSymbolUIItems.
         /// </summary>
-        public static ImmutableArray<DocumentSymbolUIItem> GetDocumentSymbolUIItems(ImmutableArray<DocumentSymbolData> documentSymbolData, IThreadingContext threadingContext)
+        public static ImmutableArray<DocumentSymbolUIItem> GetDocumentSymbolUIItems(
+            ImmutableArray<DocumentSymbolData> documentSymbolData,
+            IThreadingContext threadingContext
+        )
         {
-            using var _ = ArrayBuilder<DocumentSymbolUIItem>.GetInstance(out var documentSymbolItems);
+            using var _ = ArrayBuilder<DocumentSymbolUIItem>.GetInstance(
+                out var documentSymbolItems
+            );
             foreach (var documentSymbol in documentSymbolData)
             {
                 var children = GetDocumentSymbolUIItems(documentSymbol.Children, threadingContext);
-                var documentSymbolItem = new DocumentSymbolUIItem(documentSymbol, children, threadingContext);
+                var documentSymbolItem = new DocumentSymbolUIItem(
+                    documentSymbol,
+                    children,
+                    threadingContext
+                );
                 documentSymbolItems.Add(documentSymbolItem);
             }
 
@@ -277,12 +351,19 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         public static DocumentSymbolUIItem? GetDocumentNodeToSelect(
             ImmutableArray<DocumentSymbolUIItem> documentSymbolItems,
             ITextSnapshot originalSnapshot,
-            SnapshotPoint currentCaretPoint)
+            SnapshotPoint currentCaretPoint
+        )
         {
-            var originalCaretPoint = currentCaretPoint.TranslateTo(originalSnapshot, PointTrackingMode.Negative);
+            var originalCaretPoint = currentCaretPoint.TranslateTo(
+                originalSnapshot,
+                PointTrackingMode.Negative
+            );
             return GetNodeToSelect(documentSymbolItems, null);
 
-            DocumentSymbolUIItem? GetNodeToSelect(ImmutableArray<DocumentSymbolUIItem> documentSymbols, DocumentSymbolUIItem? parent)
+            DocumentSymbolUIItem? GetNodeToSelect(
+                ImmutableArray<DocumentSymbolUIItem> documentSymbols,
+                DocumentSymbolUIItem? parent
+            )
             {
                 var selectedSymbol = GetNodeSelectedByCaret(documentSymbols);
 
@@ -293,7 +374,9 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             }
 
             // Returns a DocumentSymbolItem if the current caret position is in its range and null otherwise.
-            DocumentSymbolUIItem? GetNodeSelectedByCaret(ImmutableArray<DocumentSymbolUIItem> documentSymbolItems)
+            DocumentSymbolUIItem? GetNodeSelectedByCaret(
+                ImmutableArray<DocumentSymbolUIItem> documentSymbolItems
+            )
             {
                 foreach (var symbol in documentSymbolItems)
                 {
@@ -312,23 +395,33 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         public static void SetIsExpanded(
             ImmutableArray<DocumentSymbolUIItem> documentSymbolItems,
             IEnumerable<DocumentSymbolUIItem> currentDocumentSymbolItems,
-            ExpansionOption expansionOption)
+            ExpansionOption expansionOption
+        )
         {
             for (var i = 0; i < documentSymbolItems.Length; i++)
             {
                 if (expansionOption is ExpansionOption.CurrentExpansion)
-                    documentSymbolItems[i].IsExpanded = currentDocumentSymbolItems.ElementAt(i).IsExpanded;
+                    documentSymbolItems[i].IsExpanded = currentDocumentSymbolItems
+                        .ElementAt(i)
+                        .IsExpanded;
                 else
                     documentSymbolItems[i].IsExpanded = expansionOption is ExpansionOption.Expand;
 
-                SetIsExpanded(documentSymbolItems[i].Children, currentDocumentSymbolItems.ElementAt(i).Children, expansionOption);
+                SetIsExpanded(
+                    documentSymbolItems[i].Children,
+                    currentDocumentSymbolItems.ElementAt(i).Children,
+                    expansionOption
+                );
             }
         }
 
         /// <summary>
         /// Expands all the ancestors of a DocumentSymbolUIItem.
         /// </summary>
-        public static void ExpandAncestors(ImmutableArray<DocumentSymbolUIItem> documentSymbolItems, SnapshotSpan documentSymbolRangeSpan)
+        public static void ExpandAncestors(
+            ImmutableArray<DocumentSymbolUIItem> documentSymbolItems,
+            SnapshotSpan documentSymbolRangeSpan
+        )
         {
             var symbol = GetSymbolInRange(documentSymbolItems, documentSymbolRangeSpan);
             if (symbol is not null)
@@ -337,7 +430,10 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 ExpandAncestors(symbol.Children, documentSymbolRangeSpan);
             }
 
-            static DocumentSymbolUIItem? GetSymbolInRange(ImmutableArray<DocumentSymbolUIItem> documentSymbolItems, SnapshotSpan rangeSpan)
+            static DocumentSymbolUIItem? GetSymbolInRange(
+                ImmutableArray<DocumentSymbolUIItem> documentSymbolItems,
+                SnapshotSpan rangeSpan
+            )
             {
                 foreach (var symbol in documentSymbolItems)
                 {

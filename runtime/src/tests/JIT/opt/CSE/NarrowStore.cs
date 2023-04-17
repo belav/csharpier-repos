@@ -5,11 +5,11 @@ using System;
 
 namespace NarrowStore
 {
-    class Program 
-    { 
+    class Program
+    {
         byte x01;
         byte t01;
-    
+
         int Test()
         {
             x01 = 3;
@@ -26,13 +26,12 @@ namespace NarrowStore
             }
         }
 
-        static int Main() 
-        { 
+        static int Main()
+        {
             Program prog = new Program();
-            
+
             int result = prog.Test();
             return result;
         }
     }
 }
-

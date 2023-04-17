@@ -25,7 +25,9 @@ namespace System.Activities.Validation
             }
             else
             {
-                this.allValidationErrors = new ReadOnlyCollection<ValidationError>(allValidationErrors);
+                this.allValidationErrors = new ReadOnlyCollection<ValidationError>(
+                    allValidationErrors
+                );
             }
         }
 

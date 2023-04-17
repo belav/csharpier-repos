@@ -34,7 +34,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 {
     public class MSBuildWorkspaceTests : MSBuildWorkspaceTestBase
     {
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public void TestCreateMSBuildWorkspace()
         {
             using var workspace = CreateMSBuildWorkspace();
@@ -47,7 +50,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             Assert.NotNull(workspace.Services.TextFactory);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_SingleProjectSolution()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -60,10 +66,17 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var tree = await document.GetSyntaxTreeAsync();
             var type = tree.GetRoot().DescendantTokens().First(t => t.ToString() == "class").Parent;
             Assert.NotNull(type);
-            Assert.StartsWith("public class CSharpClass", type.ToString(), StringComparison.Ordinal);
+            Assert.StartsWith(
+                "public class CSharpClass",
+                type.ToString(),
+                StringComparison.Ordinal
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_MultiProjectSolution()
         {
             CreateFiles(GetMultiProjectSolutionFiles());
@@ -76,7 +89,9 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             // verify the dependent project has the correct metadata references (and does not include the output for the project references)
             var references = vbProject.MetadataReferences.ToList();
             Assert.Equal(4, references.Count);
-            var fileNames = new HashSet<string>(references.Select(r => Path.GetFileName(((PortableExecutableReference)r).FilePath)));
+            var fileNames = new HashSet<string>(
+                references.Select(r => Path.GetFileName(((PortableExecutableReference)r).FilePath))
+            );
             Assert.Contains("System.Core.dll", fileNames);
             Assert.Contains("System.dll", fileNames);
             Assert.Contains("Microsoft.VisualBasic.dll", fileNames);
@@ -88,30 +103,59 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             Assert.Equal(5, compReferences.Count);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled), AlwaysSkip = "https://github.com/dotnet/roslyn/issues/41456"), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(
+                typeof(VisualStudioMSBuildInstalled),
+                AlwaysSkip = "https://github.com/dotnet/roslyn/issues/41456"
+            ),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(2824, "https://github.com/dotnet/roslyn/issues/2824")]
         public async Task Test_OpenProjectReferencingPortableProject()
         {
             var files = new FileSet(
-                (@"CSharpProject\ReferencesPortableProject.csproj", Resources.ProjectFiles.CSharp.ReferencesPortableProject),
+                (
+                    @"CSharpProject\ReferencesPortableProject.csproj",
+                    Resources.ProjectFiles.CSharp.ReferencesPortableProject
+                ),
                 (@"CSharpProject\Program.cs", Resources.SourceFiles.CSharp.CSharpClass),
-                (@"CSharpProject\PortableProject.csproj", Resources.ProjectFiles.CSharp.PortableProject),
-                (@"CSharpProject\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass));
+                (
+                    @"CSharpProject\PortableProject.csproj",
+                    Resources.ProjectFiles.CSharp.PortableProject
+                ),
+                (@"CSharpProject\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass)
+            );
 
             CreateFiles(files);
 
-            var projectFilePath = GetSolutionFileName(@"CSharpProject\ReferencesPortableProject.csproj");
+            var projectFilePath = GetSolutionFileName(
+                @"CSharpProject\ReferencesPortableProject.csproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
             AssertFailures(workspace);
 
-            var hasFacades = project.MetadataReferences.OfType<PortableExecutableReference>().Any(r => r.FilePath.Contains("Facade"));
-            Assert.True(hasFacades, userMessage: "Expected to find facades in the project references:" + Environment.NewLine +
-                string.Join(Environment.NewLine, project.MetadataReferences.OfType<PortableExecutableReference>().Select(r => r.FilePath)));
+            var hasFacades = project.MetadataReferences
+                .OfType<PortableExecutableReference>()
+                .Any(r => r.FilePath.Contains("Facade"));
+            Assert.True(
+                hasFacades,
+                userMessage: "Expected to find facades in the project references:"
+                    + Environment.NewLine
+                    + string.Join(
+                        Environment.NewLine,
+                        project.MetadataReferences
+                            .OfType<PortableExecutableReference>()
+                            .Select(r => r.FilePath)
+                    )
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task Test_SharedMetadataReferences()
         {
             CreateFiles(GetMultiProjectSolutionFiles());
@@ -134,7 +178,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             Assert.Same(p0mscorlib, p1mscorlib);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(546171, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546171")]
         public async Task Test_SharedMetadataReferencesWithAliases()
         {
@@ -144,7 +191,11 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var files = new FileSet(
                 (projPath1, Resources.ProjectFiles.CSharp.ExternAlias),
                 (projPath2, Resources.ProjectFiles.CSharp.ExternAlias2),
-                (@"CSharpProject\CSharpExternAlias.cs", Resources.SourceFiles.CSharp.CSharpExternAlias));
+                (
+                    @"CSharpProject\CSharpExternAlias.cs",
+                    Resources.SourceFiles.CSharp.CSharpExternAlias
+                )
+            );
 
             CreateFiles(files);
 
@@ -187,22 +238,30 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             Assert.Same(mdp1Sys1.Id, mdp2Sys3.Id);
         }
 
-        private static MetadataReference GetMetadataReference(Project project, string name)
-            => project.MetadataReferences
+        private static MetadataReference GetMetadataReference(Project project, string name) =>
+            project.MetadataReferences
                 .OfType<PortableExecutableReference>()
                 .SingleOrDefault(mr => mr.FilePath.Contains(name));
 
-        private static MetadataReference GetMetadataReferenceByAlias(Project project, string aliasName)
-            => project.MetadataReferences
+        private static MetadataReference GetMetadataReferenceByAlias(
+            Project project,
+            string aliasName
+        ) =>
+            project.MetadataReferences
                 .OfType<PortableExecutableReference>()
-                .SingleOrDefault(mr =>
-                    !mr.Properties.Aliases.IsDefault &&
-                    mr.Properties.Aliases.Contains(aliasName));
+                .SingleOrDefault(
+                    mr =>
+                        !mr.Properties.Aliases.IsDefault
+                        && mr.Properties.Aliases.Contains(aliasName)
+                );
 
-        private static Metadata GetMetadata(MetadataReference metadataReference)
-            => ((PortableExecutableReference)metadataReference).GetMetadata();
+        private static Metadata GetMetadata(MetadataReference metadataReference) =>
+            ((PortableExecutableReference)metadataReference).GetMetadata();
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(552981, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/552981")]
         public async Task TestOpenSolution_DuplicateProjectGuids()
         {
@@ -213,7 +272,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(831379, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/831379")]
         public async Task GetCompilationWithCircularProjectReferences()
         {
@@ -227,18 +289,29 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var projects = solution.Projects.ToArray();
 
             // Exactly one of them should have a reference to the other. Which one it is, is unspecced
-            Assert.True(projects[0].ProjectReferences.Any(r => r.ProjectId == projects[1].Id) ||
-                        projects[1].ProjectReferences.Any(r => r.ProjectId == projects[0].Id));
+            Assert.True(
+                projects[0].ProjectReferences.Any(r => r.ProjectId == projects[1].Id)
+                    || projects[1].ProjectReferences.Any(r => r.ProjectId == projects[0].Id)
+            );
 
             var compilation1 = await projects[0].GetCompilationAsync();
             var compilation2 = await projects[1].GetCompilationAsync();
 
             // Exactly one of them should have a compilation to the other. Which one it is, is unspecced
-            Assert.True(compilation1.References.OfType<CompilationReference>().Any(c => c.Compilation == compilation2) ||
-                        compilation2.References.OfType<CompilationReference>().Any(c => c.Compilation == compilation1));
+            Assert.True(
+                compilation1.References
+                    .OfType<CompilationReference>()
+                    .Any(c => c.Compilation == compilation2)
+                    || compilation2.References
+                        .OfType<CompilationReference>()
+                        .Any(c => c.Compilation == compilation1)
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOutputFilePaths()
         {
             CreateFiles(GetMultiProjectSolutionFiles());
@@ -253,7 +326,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             Assert.Equal("VisualBasicProject.dll", Path.GetFileName(p2.OutputFilePath));
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOutputInfo()
         {
             CreateFiles(GetMultiProjectSolutionFiles());
@@ -264,11 +340,20 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var p1 = sol.Projects.First(p => p.Language == LanguageNames.CSharp);
             var p2 = sol.Projects.First(p => p.Language == LanguageNames.VisualBasic);
 
-            Assert.Equal("CSharpProject.dll", Path.GetFileName(p1.CompilationOutputInfo.AssemblyPath));
-            Assert.Equal("VisualBasicProject.dll", Path.GetFileName(p2.CompilationOutputInfo.AssemblyPath));
+            Assert.Equal(
+                "CSharpProject.dll",
+                Path.GetFileName(p1.CompilationOutputInfo.AssemblyPath)
+            );
+            Assert.Equal(
+                "VisualBasicProject.dll",
+                Path.GetFileName(p2.CompilationOutputInfo.AssemblyPath)
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCrossLanguageReferencesUsesInMemoryGeneratedMetadata()
         {
             CreateFiles(GetMultiProjectSolutionFiles());
@@ -286,11 +371,16 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             // prove that vb project refers to csharp project via generated metadata (skeleton) assembly.
             // it should be a MetadataImageReference
             var c2 = await p2.GetCompilationAsync();
-            var pref = c2.References.OfType<PortableExecutableReference>().FirstOrDefault(r => r.Display == "CSharpProject");
+            var pref = c2.References
+                .OfType<PortableExecutableReference>()
+                .FirstOrDefault(r => r.Display == "CSharpProject");
             Assert.NotNull(pref);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCrossLanguageReferencesWithOutOfDateMetadataOnDiskUsesInMemoryGeneratedMetadata()
         {
             await PrepareCrossLanguageProjectWithEmittedMetadataAsync();
@@ -305,7 +395,12 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var d1 = p1.Documents.First();
             var root = await d1.GetSyntaxRootAsync();
             var decl = root.DescendantNodes().OfType<CS.Syntax.ClassDeclarationSyntax>().First();
-            var newDecl = decl.WithIdentifier(CS.SyntaxFactory.Identifier("Pogrom").WithLeadingTrivia(decl.Identifier.LeadingTrivia).WithTrailingTrivia(decl.Identifier.TrailingTrivia));
+            var newDecl = decl.WithIdentifier(
+                CS.SyntaxFactory
+                    .Identifier("Pogrom")
+                    .WithLeadingTrivia(decl.Identifier.LeadingTrivia)
+                    .WithTrailingTrivia(decl.Identifier.TrailingTrivia)
+            );
             var newRoot = root.ReplaceNode(decl, newDecl);
             var newDoc = d1.WithSyntaxRoot(newRoot);
             p1 = newDoc.Project;
@@ -313,39 +408,58 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             // we should now find a MetadataImageReference that was generated instead of a MetadataFileReference
             var c2 = await p2.GetCompilationAsync();
-            var pref = c2.References.OfType<PortableExecutableReference>().FirstOrDefault(r => r.Display == "EmittedCSharpProject");
+            var pref = c2.References
+                .OfType<PortableExecutableReference>()
+                .FirstOrDefault(r => r.Display == "EmittedCSharpProject");
             Assert.NotNull(pref);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled), AlwaysSkip = "https://github.com/dotnet/roslyn/issues/54818"), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(
+                typeof(VisualStudioMSBuildInstalled),
+                AlwaysSkip = "https://github.com/dotnet/roslyn/issues/54818"
+            ),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestInternalsVisibleToSigned()
         {
             var solution = await SolutionAsync(
                 Project(
                     ProjectName("Project1"),
                     Sign,
-                    Document(string.Format(
-@"using System.Runtime.CompilerServices;
+                    Document(
+                        string.Format(
+                            @"using System.Runtime.CompilerServices;
 [assembly:InternalsVisibleTo(""Project2, PublicKey={0}"")]
 class C1
 {{
-}}", PublicKey))),
+}}",
+                            PublicKey
+                        )
+                    )
+                ),
                 Project(
                     ProjectName("Project2"),
                     Sign,
                     ProjectReference("Project1"),
-                    Document(@"class C2 : C1 { }")));
+                    Document(@"class C2 : C1 { }")
+                )
+            );
 
             var project2 = solution.GetProjectsByName("Project2").First();
             var compilation = await project2.GetCompilationAsync();
-            var diagnostics = compilation.GetDiagnostics()
+            var diagnostics = compilation
+                .GetDiagnostics()
                 .Where(d => d.Severity is DiagnosticSeverity.Error or DiagnosticSeverity.Warning)
                 .ToArray();
 
             Assert.Empty(diagnostics);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestVersions()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -375,12 +489,17 @@ class C1
             Assert.Equal(latestDV1, await document1.GetTextVersionAsync()); // projects latest doc version should be this doc's version
 
             // update project
-            var solution2 = solution1.WithProjectCompilationOptions(project.Id, project.CompilationOptions.WithOutputKind(OutputKind.NetModule));
+            var solution2 = solution1.WithProjectCompilationOptions(
+                project.Id,
+                project.CompilationOptions.WithOutputKind(OutputKind.NetModule)
+            );
             var document2 = solution2.GetDocument(document.Id);
             var dversion2 = await document2.GetTextVersionAsync();
             Assert.Equal(dversion1, dversion2); // document didn't change, so version should be the same.
             Assert.NotEqual(document1.Project.Version, document2.Project.Version); // project did change, so project versions should be different
-            Assert.True(document2.Project.Version.GetTestAccessor().IsNewerThan(document1.Project.Version));
+            Assert.True(
+                document2.Project.Version.GetTestAccessor().IsNewerThan(document1.Project.Version)
+            );
             Assert.Equal(solution1.Version, solution2.Version); // solution didn't change, just individual project.
 
             // update solution
@@ -390,7 +509,10 @@ class C1
             Assert.True(solution3.Version.GetTestAccessor().IsNewerThan(solution2.Version));
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_LoadMetadataForReferencedProjects()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -406,16 +528,31 @@ class C1
             Assert.Equal(expectedFileName, tree.FilePath);
             var type = tree.GetRoot().DescendantTokens().First(t => t.ToString() == "class").Parent;
             Assert.NotNull(type);
-            Assert.StartsWith("public class CSharpClass", type.ToString(), StringComparison.Ordinal);
+            Assert.StartsWith(
+                "public class CSharpClass",
+                type.ToString(),
+                StringComparison.Ordinal
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(33047, "https://github.com/dotnet/roslyn/issues/33047")]
         public async Task TestOpenProject_CSharp_GlobalPropertyShouldUnsetParentConfigurationAndPlatformDefault()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.ShouldUnsetParentConfigurationAndPlatform)
-                .WithFile(@"CSharpProject\ShouldUnsetParentConfigurationAndPlatformConditional.cs", Resources.SourceFiles.CSharp.CSharpClass));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.ShouldUnsetParentConfigurationAndPlatform
+                    )
+                    .WithFile(
+                        @"CSharpProject\ShouldUnsetParentConfigurationAndPlatformConditional.cs",
+                        Resources.SourceFiles.CSharp.CSharpClass
+                    )
+            );
 
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
@@ -427,30 +564,53 @@ class C1
             Assert.Equal(expectedFileName, tree.FilePath);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(33047, "https://github.com/dotnet/roslyn/issues/33047")]
         public async Task TestOpenProject_CSharp_GlobalPropertyShouldUnsetParentConfigurationAndPlatformTrue()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.ShouldUnsetParentConfigurationAndPlatform)
-                .WithFile(@"CSharpProject\ShouldUnsetParentConfigurationAndPlatformConditional.cs", Resources.SourceFiles.CSharp.CSharpClass));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.ShouldUnsetParentConfigurationAndPlatform
+                    )
+                    .WithFile(
+                        @"CSharpProject\ShouldUnsetParentConfigurationAndPlatformConditional.cs",
+                        Resources.SourceFiles.CSharp.CSharpClass
+                    )
+            );
 
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
-            using var workspace = CreateMSBuildWorkspace(("ShouldUnsetParentConfigurationAndPlatform", bool.TrueString));
+            using var workspace = CreateMSBuildWorkspace(
+                ("ShouldUnsetParentConfigurationAndPlatform", bool.TrueString)
+            );
             var project = await workspace.OpenProjectAsync(projectFilePath);
             var document = project.Documents.First();
             var tree = await document.GetSyntaxTreeAsync();
-            var expectedFileName = GetSolutionFileName(@"CSharpProject\ShouldUnsetParentConfigurationAndPlatformConditional.cs");
+            var expectedFileName = GetSolutionFileName(
+                @"CSharpProject\ShouldUnsetParentConfigurationAndPlatformConditional.cs"
+            );
             Assert.Equal(expectedFileName, tree.FilePath);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(739043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/739043")]
         public async Task TestOpenProject_CSharp_WithoutPrefer32BitAndConsoleApplication()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithoutPrefer32Bit));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.WithoutPrefer32Bit
+                    )
+            );
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -459,13 +619,25 @@ class C1
             Assert.Equal(Platform.AnyCpu, compilation.Options.Platform);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(739043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/739043")]
         public async Task TestOpenProject_CSharp_WithoutPrefer32BitAndLibrary()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithoutPrefer32Bit)
-                .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", "OutputType", "Library"));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.WithoutPrefer32Bit
+                    )
+                    .ReplaceFileElement(
+                        @"CSharpProject\CSharpProject.csproj",
+                        "OutputType",
+                        "Library"
+                    )
+            );
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -474,12 +646,20 @@ class C1
             Assert.Equal(Platform.AnyCpu, compilation.Options.Platform);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(739043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/739043")]
         public async Task TestOpenProject_CSharp_WithPrefer32BitAndConsoleApplication()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithPrefer32Bit));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.WithPrefer32Bit
+                    )
+            );
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -488,13 +668,25 @@ class C1
             Assert.Equal(Platform.AnyCpu32BitPreferred, compilation.Options.Platform);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(739043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/739043")]
         public async Task TestOpenProject_CSharp_WithPrefer32BitAndLibrary()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithPrefer32Bit)
-                .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", "OutputType", "Library"));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.WithPrefer32Bit
+                    )
+                    .ReplaceFileElement(
+                        @"CSharpProject\CSharpProject.csproj",
+                        "OutputType",
+                        "Library"
+                    )
+            );
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -503,13 +695,25 @@ class C1
             Assert.Equal(Platform.AnyCpu, compilation.Options.Platform);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(739043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/739043")]
         public async Task TestOpenProject_CSharp_WithPrefer32BitAndWinMDObj()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithPrefer32Bit)
-                .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", "OutputType", "winmdobj"));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.WithPrefer32Bit
+                    )
+                    .ReplaceFileElement(
+                        @"CSharpProject\CSharpProject.csproj",
+                        "OutputType",
+                        "winmdobj"
+                    )
+            );
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -518,11 +722,16 @@ class C1
             Assert.Equal(Platform.AnyCpu, compilation.Options.Platform);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_CSharp_WithoutOutputPath()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", "OutputPath", ""));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", "OutputPath", "")
+            );
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -530,11 +739,16 @@ class C1
             Assert.NotEmpty(project.OutputFilePath);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_CSharp_WithoutAssemblyName()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", "AssemblyName", ""));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", "AssemblyName", "")
+            );
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -542,11 +756,19 @@ class C1
             Assert.NotEmpty(project.OutputFilePath);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_CSharp_WithoutCSharpTargetsImported_DocumentsArePickedUp()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithoutCSharpTargetsImported));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.WithoutCSharpTargetsImported
+                    )
+            );
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -555,25 +777,45 @@ class C1
             Assert.NotEmpty(project.Documents);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_VisualBasic_WithoutVBTargetsImported_DocumentsArePickedUp()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.WithoutVBTargetsImported));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.WithoutVBTargetsImported
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
             Assert.NotEmpty(project.Documents);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(739043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/739043")]
         public async Task TestOpenProject_VisualBasic_WithoutPrefer32BitAndConsoleApplication()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.WithoutPrefer32Bit));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.WithoutPrefer32Bit
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
@@ -581,14 +823,28 @@ class C1
             Assert.Equal(Platform.AnyCpu, compilation.Options.Platform);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(739043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/739043")]
         public async Task TestOpenProject_VisualBasic_WithoutPrefer32BitAndLibrary()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.WithoutPrefer32Bit)
-                .ReplaceFileElement(@"VisualBasicProject\VisualBasicProject.vbproj", "OutputType", "Library"));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.WithoutPrefer32Bit
+                    )
+                    .ReplaceFileElement(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        "OutputType",
+                        "Library"
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
@@ -596,13 +852,23 @@ class C1
             Assert.Equal(Platform.AnyCpu, compilation.Options.Platform);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(739043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/739043")]
         public async Task TestOpenProject_VisualBasic_WithPrefer32BitAndConsoleApplication()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.WithPrefer32Bit));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.WithPrefer32Bit
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
@@ -610,14 +876,28 @@ class C1
             Assert.Equal(Platform.AnyCpu32BitPreferred, compilation.Options.Platform);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(739043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/739043")]
         public async Task TestOpenProject_VisualBasic_WithPrefer32BitAndLibrary()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.WithPrefer32Bit)
-                .ReplaceFileElement(@"VisualBasicProject\VisualBasicProject.vbproj", "OutputType", "Library"));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.WithPrefer32Bit
+                    )
+                    .ReplaceFileElement(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        "OutputType",
+                        "Library"
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
@@ -625,14 +905,28 @@ class C1
             Assert.Equal(Platform.AnyCpu, compilation.Options.Platform);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(739043, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/739043")]
         public async Task TestOpenProject_VisualBasic_WithPrefer32BitAndWinMDObj()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.WithPrefer32Bit)
-                .ReplaceFileElement(@"VisualBasicProject\VisualBasicProject.vbproj", "OutputType", "winmdobj"));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.WithPrefer32Bit
+                    )
+                    .ReplaceFileElement(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        "OutputType",
+                        "winmdobj"
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
@@ -640,51 +934,110 @@ class C1
             Assert.Equal(Platform.AnyCpu, compilation.Options.Platform);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_VisualBasic_WithoutOutputPath()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.WithPrefer32Bit)
-                .ReplaceFileElement(@"VisualBasicProject\VisualBasicProject.vbproj", "OutputPath", ""));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.WithPrefer32Bit
+                    )
+                    .ReplaceFileElement(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        "OutputPath",
+                        ""
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
             Assert.NotEmpty(project.OutputFilePath);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_VisualBasic_WithLanguageVersion15_3()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .ReplaceFileElement(@"VisualBasicProject\VisualBasicProject.vbproj", "LangVersion", "15.3"));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .ReplaceFileElement(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        "LangVersion",
+                        "15.3"
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
-            Assert.Equal(VB.LanguageVersion.VisualBasic15_3, ((VB.VisualBasicParseOptions)project.ParseOptions).LanguageVersion);
+            Assert.Equal(
+                VB.LanguageVersion.VisualBasic15_3,
+                ((VB.VisualBasicParseOptions)project.ParseOptions).LanguageVersion
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_VisualBasic_WithLatestLanguageVersion()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .ReplaceFileElement(@"VisualBasicProject\VisualBasicProject.vbproj", "LangVersion", "Latest"));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .ReplaceFileElement(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        "LangVersion",
+                        "Latest"
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
-            Assert.Equal(VB.LanguageVersionFacts.MapSpecifiedToEffectiveVersion(VB.LanguageVersion.Latest), ((VB.VisualBasicParseOptions)project.ParseOptions).LanguageVersion);
-            Assert.Equal(VB.LanguageVersion.Latest, ((VB.VisualBasicParseOptions)project.ParseOptions).SpecifiedLanguageVersion);
+            Assert.Equal(
+                VB.LanguageVersionFacts.MapSpecifiedToEffectiveVersion(VB.LanguageVersion.Latest),
+                ((VB.VisualBasicParseOptions)project.ParseOptions).LanguageVersion
+            );
+            Assert.Equal(
+                VB.LanguageVersion.Latest,
+                ((VB.VisualBasicParseOptions)project.ParseOptions).SpecifiedLanguageVersion
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_VisualBasic_WithoutAssemblyName()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.WithPrefer32Bit)
-                .ReplaceFileElement(@"VisualBasicProject\VisualBasicProject.vbproj", "AssemblyName", ""));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.WithPrefer32Bit
+                    )
+                    .ReplaceFileElement(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        "AssemblyName",
+                        ""
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
@@ -692,12 +1045,23 @@ class C1
             Assert.NotEmpty(project.OutputFilePath);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task Test_Respect_ReferenceOutputassembly_Flag()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"VisualBasicProject_Circular_Top.vbproj", Resources.ProjectFiles.VisualBasic.Circular_Top)
-                .WithFile(@"VisualBasicProject_Circular_Target.vbproj", Resources.ProjectFiles.VisualBasic.Circular_Target));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject_Circular_Top.vbproj",
+                        Resources.ProjectFiles.VisualBasic.Circular_Top
+                    )
+                    .WithFile(
+                        @"VisualBasicProject_Circular_Target.vbproj",
+                        Resources.ProjectFiles.VisualBasic.Circular_Target
+                    )
+            );
             var projectFilePath = GetSolutionFileName(@"VisualBasicProject_Circular_Top.vbproj");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -705,19 +1069,35 @@ class C1
             Assert.Empty(project.ProjectReferences);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithXaml()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithXaml)
-                .WithFile(@"CSharpProject\App.xaml", Resources.SourceFiles.Xaml.App)
-                .WithFile(@"CSharpProject\App.xaml.cs", Resources.SourceFiles.CSharp.App)
-                .WithFile(@"CSharpProject\MainWindow.xaml", Resources.SourceFiles.Xaml.MainWindow)
-                .WithFile(@"CSharpProject\MainWindow.xaml.cs", Resources.SourceFiles.CSharp.MainWindow));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.WithXaml
+                    )
+                    .WithFile(@"CSharpProject\App.xaml", Resources.SourceFiles.Xaml.App)
+                    .WithFile(@"CSharpProject\App.xaml.cs", Resources.SourceFiles.CSharp.App)
+                    .WithFile(
+                        @"CSharpProject\MainWindow.xaml",
+                        Resources.SourceFiles.Xaml.MainWindow
+                    )
+                    .WithFile(
+                        @"CSharpProject\MainWindow.xaml.cs",
+                        Resources.SourceFiles.CSharp.MainWindow
+                    )
+            );
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
             // Ensure the Xaml compiler does not run in a separate appdomain. It appears that this won't work within xUnit.
-            using var workspace = CreateMSBuildWorkspace(("AlwaysCompileMarkupFilesInSeparateDomain", "false"));
+            using var workspace = CreateMSBuildWorkspace(
+                ("AlwaysCompileMarkupFilesInSeparateDomain", "false")
+            );
             var project = await workspace.OpenProjectAsync(projectFilePath);
             var documents = project.Documents.ToList();
 
@@ -729,36 +1109,56 @@ class C1
             Assert.Contains(documents, d => d.Name == "MainWindow.xaml.cs");
 
             // prove no xaml files are documents
-            Assert.DoesNotContain(documents, d => d.Name.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase));
+            Assert.DoesNotContain(
+                documents,
+                d => d.Name.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase)
+            );
 
             // prove that generated source files for xaml files are included in documents list
             Assert.Contains(documents, d => d.Name == "App.g.cs");
             Assert.Contains(documents, d => d.Name == "MainWindow.g.cs");
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestMetadataReferenceHasBadHintPath()
         {
             // prove that even with bad hint path for metadata reference the workspace can succeed at finding the correct metadata reference.
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.BadHintPath));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.BadHintPath
+                    )
+            );
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
             var project = solution.Projects.First();
             var refs = project.MetadataReferences.ToList();
-            var csharpLib = refs.OfType<PortableExecutableReference>().FirstOrDefault(r => r.FilePath.Contains("Microsoft.CSharp"));
+            var csharpLib = refs.OfType<PortableExecutableReference>()
+                .FirstOrDefault(r => r.FilePath.Contains("Microsoft.CSharp"));
             Assert.NotNull(csharpLib);
         }
 
-        [ConditionalFact(typeof(VisualStudio16_9_Preview3OrHigherMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudio16_9_Preview3OrHigherMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(531631, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531631")]
         public async Task TestOpenProject_AssemblyNameIsPath()
         {
             // prove that even if assembly name is specified as a path instead of just a name, workspace still succeeds at opening project.
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.AssemblyNameIsPath));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.AssemblyNameIsPath
+                    )
+            );
 
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
@@ -771,12 +1171,20 @@ class C1
             Assert.Equal(expectedOutputPath, Path.GetDirectoryName(project.OutputFilePath));
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(531631, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531631")]
         public async Task TestOpenProject_AssemblyNameIsPath2()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.AssemblyNameIsPath2));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.AssemblyNameIsPath2
+                    )
+            );
 
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
@@ -786,15 +1194,26 @@ class C1
             var comp = await project.GetCompilationAsync();
             Assert.Equal("ReproApp", comp.AssemblyName);
             var expectedOutputPath = Path.Combine(Path.GetDirectoryName(project.FilePath), @"bin");
-            Assert.Equal(expectedOutputPath, Path.GetDirectoryName(Path.GetFullPath(project.OutputFilePath)));
+            Assert.Equal(
+                expectedOutputPath,
+                Path.GetDirectoryName(Path.GetFullPath(project.OutputFilePath))
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithDuplicateFile()
         {
             // Verify that we don't throw in this case
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.DuplicateFile));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.DuplicateFile
+                    )
+            );
 
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
@@ -805,48 +1224,78 @@ class C1
             Assert.Equal(2, documents.Count);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithInvalidFileExtensionAsync()
         {
             // make sure the file does in fact exist, but with an unrecognized extension
             const string ProjFileName = @"CSharpProject\CSharpProject.csproj.nyi";
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(ProjFileName, Resources.ProjectFiles.CSharp.CSharpProject));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(ProjFileName, Resources.ProjectFiles.CSharp.CSharpProject)
+            );
 
-            var e = await Assert.ThrowsAsync<InvalidOperationException>(async delegate
-            {
-                await MSBuildWorkspace.Create().OpenProjectAsync(GetSolutionFileName(ProjFileName));
-            });
+            var e = await Assert.ThrowsAsync<InvalidOperationException>(
+                async delegate
+                {
+                    await MSBuildWorkspace
+                        .Create()
+                        .OpenProjectAsync(GetSolutionFileName(ProjFileName));
+                }
+            );
 
-            var expected = string.Format(WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language, GetSolutionFileName(ProjFileName), ".nyi");
+            var expected = string.Format(
+                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                GetSolutionFileName(ProjFileName),
+                ".nyi"
+            );
             Assert.Equal(expected, e.Message);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_ProjectFileExtensionAssociatedWithUnknownLanguageAsync()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
             var projFileName = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
             var language = "lingo";
-            var e = await Assert.ThrowsAsync<InvalidOperationException>(async delegate
-            {
-                var ws = MSBuildWorkspace.Create();
-                ws.AssociateFileExtensionWithLanguage("csproj", language); // non-existent language
-                await ws.OpenProjectAsync(projFileName);
-            });
+            var e = await Assert.ThrowsAsync<InvalidOperationException>(
+                async delegate
+                {
+                    var ws = MSBuildWorkspace.Create();
+                    ws.AssociateFileExtensionWithLanguage("csproj", language); // non-existent language
+                    await ws.OpenProjectAsync(projFileName);
+                }
+            );
 
             // the exception should tell us something about the language being unrecognized.
-            var expected = string.Format(WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported, projFileName, language);
+            var expected = string.Format(
+                WorkspacesResources.Cannot_open_project_0_because_the_language_1_is_not_supported,
+                projFileName,
+                language
+            );
             Assert.Equal(expected, e.Message);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithAssociatedLanguageExtension1()
         {
             // make a CSharp solution with a project file having the incorrect extension 'vbproj', and then load it using the overload the lets us
             // specify the language directly, instead of inferring from the extension
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.vbproj", Resources.ProjectFiles.CSharp.CSharpProject));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.vbproj",
+                        Resources.ProjectFiles.CSharp.CSharpProject
+                    )
+            );
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.vbproj");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -858,13 +1307,21 @@ class C1
             Assert.Empty(diagnostics);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithAssociatedLanguageExtension2_IgnoreCase()
         {
             // make a CSharp solution with a project file having the incorrect extension 'anyproj', and then load it using the overload the lets us
             // specify the language directly, instead of inferring from the extension
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.anyproj", Resources.ProjectFiles.CSharp.CSharpProject));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.anyproj",
+                        Resources.ProjectFiles.CSharp.CSharpProject
+                    )
+            );
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.anyproj");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -877,7 +1334,10 @@ class C1
             Assert.Empty(diagnostics);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithNonExistentSolutionFile_FailsAsync()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -890,11 +1350,16 @@ class C1
             });
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithInvalidSolutionFile_FailsAsync()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
-            var solutionFilePath = GetSolutionFileName(@"http://localhost/Invalid/InvalidSolution.sln");
+            var solutionFilePath = GetSolutionFileName(
+                @"http://localhost/Invalid/InvalidSolution.sln"
+            );
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
@@ -903,7 +1368,10 @@ class C1
             });
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithTemporaryLockedFile_SucceedsWithoutFailureEvent()
         {
             // when skipped we should see a diagnostic for the invalid project
@@ -924,7 +1392,13 @@ class C1
 
                 // wait 1 unit of retry delay then close file
                 var delay = TextLoader.RetryDelay;
-                await Task.Delay(delay).ContinueWith(t => file.Close(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                await Task.Delay(delay)
+                    .ContinueWith(
+                        t => file.Close(),
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    );
 
                 // finish reading text
                 var text = await getTextTask;
@@ -938,7 +1412,10 @@ class C1
             Assert.Empty(ws.Diagnostics);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithLockedFile_FailsWithFailureEvent()
         {
             // when skipped we should see a diagnostic for the invalid project
@@ -965,13 +1442,18 @@ class C1
             Assert.Equal(WorkspaceDiagnosticKind.Failure, workspace.Diagnostics.Single().Kind);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithInvalidProjectPath_SkipTrue_SucceedsWithFailureEvent()
         {
             // when skipped we should see a diagnostic for the invalid project
 
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"TestSolution.sln", Resources.SolutionFiles.InvalidProjectPath));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(@"TestSolution.sln", Resources.SolutionFiles.InvalidProjectPath)
+            );
 
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
@@ -981,11 +1463,16 @@ class C1
         }
 
         [WorkItem(985906, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/985906")]
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task HandleSolutionProjectTypeSolutionFolder()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"TestSolution.sln", Resources.SolutionFiles.SolutionFolder));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(@"TestSolution.sln", Resources.SolutionFiles.SolutionFolder)
+            );
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -993,28 +1480,40 @@ class C1
             Assert.Empty(workspace.Diagnostics);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithInvalidProjectPath_SkipFalse_Fails()
         {
             // when not skipped we should get an exception for the invalid project
 
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"TestSolution.sln", Resources.SolutionFiles.InvalidProjectPath));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(@"TestSolution.sln", Resources.SolutionFiles.InvalidProjectPath)
+            );
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
             workspace.SkipUnrecognizedProjects = false;
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => workspace.OpenSolutionAsync(solutionFilePath));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => workspace.OpenSolutionAsync(solutionFilePath)
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithNonExistentProject_SkipTrue_SucceedsWithFailureEvent()
         {
             // when skipped we should see a diagnostic for the non-existent project
 
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"TestSolution.sln", Resources.SolutionFiles.NonExistentProject));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(@"TestSolution.sln", Resources.SolutionFiles.NonExistentProject)
+            );
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -1023,28 +1522,46 @@ class C1
             Assert.Single(workspace.Diagnostics);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithNonExistentProject_SkipFalse_Fails()
         {
             // when skipped we should see an exception for the non-existent project
 
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"TestSolution.sln", Resources.SolutionFiles.NonExistentProject));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(@"TestSolution.sln", Resources.SolutionFiles.NonExistentProject)
+            );
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
             workspace.SkipUnrecognizedProjects = false;
 
-            await Assert.ThrowsAsync<FileNotFoundException>(() => workspace.OpenSolutionAsync(solutionFilePath));
+            await Assert.ThrowsAsync<FileNotFoundException>(
+                () => workspace.OpenSolutionAsync(solutionFilePath)
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithUnrecognizedProjectFileExtension_Fails()
         {
             // proves that for solution open, project type guid and extension are both necessary
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"TestSolution.sln", Resources.SolutionFiles.CSharp_UnknownProjectExtension)
-                .WithFile(@"CSharpProject\CSharpProject.noproj", Resources.ProjectFiles.CSharp.CSharpProject));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"TestSolution.sln",
+                        Resources.SolutionFiles.CSharp_UnknownProjectExtension
+                    )
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.noproj",
+                        Resources.ProjectFiles.CSharp.CSharpProject
+                    )
+            );
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -1052,12 +1569,20 @@ class C1
             Assert.Empty(solution.ProjectIds);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithUnrecognizedProjectTypeGuidButRecognizedExtension_Succeeds()
         {
             // proves that if project type guid is not recognized, a known project file extension is all we need.
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"TestSolution.sln", Resources.SolutionFiles.CSharp_UnknownProjectTypeGuid));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"TestSolution.sln",
+                        Resources.SolutionFiles.CSharp_UnknownProjectTypeGuid
+                    )
+            );
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -1065,13 +1590,24 @@ class C1
             Assert.Single(solution.ProjectIds);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithUnrecognizedProjectTypeGuidAndUnrecognizedExtension_WithSkipTrue_SucceedsWithFailureEvent()
         {
             // proves that if both project type guid and file extension are unrecognized, then project is skipped.
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"TestSolution.sln", Resources.SolutionFiles.CSharp_UnknownProjectTypeGuidAndUnknownExtension)
-                .WithFile(@"CSharpProject\CSharpProject.noproj", Resources.ProjectFiles.CSharp.CSharpProject));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"TestSolution.sln",
+                        Resources.SolutionFiles.CSharp_UnknownProjectTypeGuidAndUnknownExtension
+                    )
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.noproj",
+                        Resources.ProjectFiles.CSharp.CSharpProject
+                    )
+            );
 
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
@@ -1082,14 +1618,22 @@ class C1
             Assert.Empty(solution.ProjectIds);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithUnrecognizedProjectTypeGuidAndUnrecognizedExtension_WithSkipFalse_FailsAsync()
         {
             // proves that if both project type guid and file extension are unrecognized, then open project fails.
             const string NoProjFileName = @"CSharpProject\CSharpProject.noproj";
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"TestSolution.sln", Resources.SolutionFiles.CSharp_UnknownProjectTypeGuidAndUnknownExtension)
-                .WithFile(NoProjFileName, Resources.ProjectFiles.CSharp.CSharpProject));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"TestSolution.sln",
+                        Resources.SolutionFiles.CSharp_UnknownProjectTypeGuidAndUnknownExtension
+                    )
+                    .WithFile(NoProjFileName, Resources.ProjectFiles.CSharp.CSharpProject)
+            );
 
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
@@ -1101,13 +1645,21 @@ class C1
             });
 
             var noProjFullFileName = GetSolutionFileName(NoProjFileName);
-            var expected = string.Format(WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language, noProjFullFileName, ".noproj");
+            var expected = string.Format(
+                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                noProjFullFileName,
+                ".noproj"
+            );
             Assert.Equal(expected, e.Message);
         }
 
-        private readonly IEnumerable<Assembly> _defaultAssembliesWithoutCSharp = MefHostServices.DefaultAssemblies.Where(a => !a.FullName.Contains("CSharp"));
+        private readonly IEnumerable<Assembly> _defaultAssembliesWithoutCSharp =
+            MefHostServices.DefaultAssemblies.Where(a => !a.FullName.Contains("CSharp"));
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(3931, "https://github.com/dotnet/roslyn/issues/3931")]
         public async Task TestOpenSolution_WithMissingLanguageLibraries_WithSkipFalse_ThrowsAsync()
         {
@@ -1117,17 +1669,26 @@ class C1
 
             var e = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
-                using var workspace = CreateMSBuildWorkspace(MefHostServices.Create(_defaultAssembliesWithoutCSharp));
+                using var workspace = CreateMSBuildWorkspace(
+                    MefHostServices.Create(_defaultAssembliesWithoutCSharp)
+                );
                 workspace.SkipUnrecognizedProjects = false;
                 await workspace.OpenSolutionAsync(solutionFilePath);
             });
 
             var projFileName = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
-            var expected = string.Format(WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language, projFileName, ".csproj");
+            var expected = string.Format(
+                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                projFileName,
+                ".csproj"
+            );
             Assert.Equal(expected, e.Message);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(3931, "https://github.com/dotnet/roslyn/issues/3931")]
         public async Task TestOpenSolution_WithMissingLanguageLibraries_WithSkipTrue_SucceedsWithDiagnostic()
         {
@@ -1135,17 +1696,26 @@ class C1
             CreateFiles(GetSimpleCSharpSolutionFiles());
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
-            using var workspace = CreateMSBuildWorkspace(MefHostServices.Create(_defaultAssembliesWithoutCSharp));
+            using var workspace = CreateMSBuildWorkspace(
+                MefHostServices.Create(_defaultAssembliesWithoutCSharp)
+            );
             workspace.SkipUnrecognizedProjects = true;
 
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
 
             var projFileName = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
-            var expected = string.Format(WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language, projFileName, ".csproj");
+            var expected = string.Format(
+                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                projFileName,
+                ".csproj"
+            );
             Assert.Equal(expected, workspace.Diagnostics.Single().Message);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(3931, "https://github.com/dotnet/roslyn/issues/3931")]
         public async Task TestOpenProject_WithMissingLanguageLibraries_Throws()
         {
@@ -1153,18 +1723,31 @@ class C1
             CreateFiles(GetSimpleCSharpSolutionFiles());
             var projectName = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
-            using var workspace = MSBuildWorkspace.Create(MefHostServices.Create(_defaultAssembliesWithoutCSharp));
-            var e = await Assert.ThrowsAsync<InvalidOperationException>(() => workspace.OpenProjectAsync(projectName));
+            using var workspace = MSBuildWorkspace.Create(
+                MefHostServices.Create(_defaultAssembliesWithoutCSharp)
+            );
+            var e = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => workspace.OpenProjectAsync(projectName)
+            );
 
-            var expected = string.Format(WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language, projectName, ".csproj");
+            var expected = string.Format(
+                WorkspacesResources.Cannot_open_project_0_because_the_file_extension_1_is_not_associated_with_a_language,
+                projectName,
+                ".csproj"
+            );
             Assert.Equal(expected, e.Message);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithInvalidFilePath_Fails()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
-            var projectFilePath = GetSolutionFileName(@"http://localhost/Invalid/InvalidProject.csproj");
+            var projectFilePath = GetSolutionFileName(
+                @"http://localhost/Invalid/InvalidProject.csproj"
+            );
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
@@ -1173,7 +1756,10 @@ class C1
             });
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithNonExistentProjectFile_FailsAsync()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -1186,12 +1772,22 @@ class C1
             });
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithInvalidProjectReference_SkipTrue_SucceedsWithEvent()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.InvalidProjectReference));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.InvalidProjectReference
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
@@ -1203,12 +1799,22 @@ class C1
             Assert.NotEmpty(workspace.Diagnostics);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithInvalidProjectReference_SkipFalse_Fails()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.InvalidProjectReference));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.InvalidProjectReference
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
@@ -1218,12 +1824,22 @@ class C1
             });
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithNonExistentProjectReference_SkipTrue_SucceedsWithEvent()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.NonExistentProjectReference));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.NonExistentProjectReference
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
@@ -1235,12 +1851,22 @@ class C1
             Assert.NotEmpty(workspace.Diagnostics);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithNonExistentProjectReference_SkipFalse_FailsAsync()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.NonExistentProjectReference));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.NonExistentProjectReference
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             await Assert.ThrowsAsync<FileNotFoundException>(async () =>
             {
@@ -1250,13 +1876,26 @@ class C1
             });
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithUnrecognizedProjectReferenceFileExtension_SkipTrue_SucceedsWithEvent()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.UnknownProjectExtension)
-                .WithFile(@"CSharpProject\CSharpProject.noproj", Resources.ProjectFiles.CSharp.CSharpProject));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.UnknownProjectExtension
+                    )
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.noproj",
+                        Resources.ProjectFiles.CSharp.CSharpProject
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var project = await workspace.OpenProjectAsync(projectFilePath);
@@ -1268,13 +1907,26 @@ class C1
             Assert.NotEmpty(workspace.Diagnostics);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithUnrecognizedProjectReferenceFileExtension_SkipFalse_Fails()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.UnknownProjectExtension)
-                .WithFile(@"CSharpProject\CSharpProject.noproj", Resources.ProjectFiles.CSharp.CSharpProject));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.UnknownProjectExtension
+                    )
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.noproj",
+                        Resources.ProjectFiles.CSharp.CSharpProject
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
@@ -1284,14 +1936,30 @@ class C1
             });
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithUnrecognizedProjectReferenceFileExtension_WithMetadata_SkipTrue_SucceedsByLoadingMetadata()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.UnknownProjectExtension)
-                .WithFile(@"CSharpProject\CSharpProject.noproj", Resources.ProjectFiles.CSharp.CSharpProject)
-                .WithFile(@"CSharpProject\bin\Debug\CSharpProject.dll", Resources.Dlls.CSharpProject));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.UnknownProjectExtension
+                    )
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.noproj",
+                        Resources.ProjectFiles.CSharp.CSharpProject
+                    )
+                    .WithFile(
+                        @"CSharpProject\bin\Debug\CSharpProject.dll",
+                        Resources.Dlls.CSharpProject
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             // keep metadata reference from holding files open
             Workspace.TestHookStandaloneProjectsDoNotHoldReferences = true;
@@ -1304,17 +1972,38 @@ class C1
             Assert.Empty(project.AllProjectReferences);
 
             var metaRefs = project.MetadataReferences.ToList();
-            Assert.Contains(metaRefs, r => r is PortableExecutableReference reference && reference.Display.Contains("CSharpProject.dll"));
+            Assert.Contains(
+                metaRefs,
+                r =>
+                    r is PortableExecutableReference reference
+                    && reference.Display.Contains("CSharpProject.dll")
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithUnrecognizedProjectReferenceFileExtension_WithMetadata_SkipFalse_SucceedsByLoadingMetadata()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.UnknownProjectExtension)
-                .WithFile(@"CSharpProject\CSharpProject.noproj", Resources.ProjectFiles.CSharp.CSharpProject)
-                .WithFile(@"CSharpProject\bin\Debug\CSharpProject.dll", Resources.Dlls.CSharpProject));
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.UnknownProjectExtension
+                    )
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.noproj",
+                        Resources.ProjectFiles.CSharp.CSharpProject
+                    )
+                    .WithFile(
+                        @"CSharpProject\bin\Debug\CSharpProject.dll",
+                        Resources.Dlls.CSharpProject
+                    )
+            );
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             // keep metadata reference from holding files open
             Workspace.TestHookStandaloneProjectsDoNotHoldReferences = true;
@@ -1326,17 +2015,32 @@ class C1
             Assert.Single(project.Solution.ProjectIds);
             Assert.Empty(project.ProjectReferences);
             Assert.Empty(project.AllProjectReferences);
-            Assert.Contains(project.MetadataReferences, r => r is PortableExecutableReference reference && reference.Display.Contains("CSharpProject.dll"));
+            Assert.Contains(
+                project.MetadataReferences,
+                r =>
+                    r is PortableExecutableReference reference
+                    && reference.Display.Contains("CSharpProject.dll")
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithUnrecognizedProjectReferenceFileExtension_BadMsbuildProject_SkipTrue_SucceedsWithDanglingProjectReference()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.UnknownProjectExtension)
-                .WithFile(@"CSharpProject\CSharpProject.noproj", Resources.Dlls.CSharpProject)); // use metadata file as stand-in for bad project file
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.UnknownProjectExtension
+                    )
+                    .WithFile(@"CSharpProject\CSharpProject.noproj", Resources.Dlls.CSharpProject)
+            ); // use metadata file as stand-in for bad project file
 
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             // keep metadata reference from holding files open
             Workspace.TestHookStandaloneProjectsDoNotHoldReferences = true;
@@ -1353,13 +2057,23 @@ class C1
             Assert.InRange(workspace.Diagnostics.Count, 2, 3);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithReferencedProject_LoadMetadata_ExistingMetadata_Succeeds()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"CSharpProject\bin\Debug\CSharpProject.dll", Resources.Dlls.CSharpProject));
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\bin\Debug\CSharpProject.dll",
+                        Resources.Dlls.CSharpProject
+                    )
+            );
 
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             // keep metadata reference from holding files open
             Workspace.TestHookStandaloneProjectsDoNotHoldReferences = true;
@@ -1372,14 +2086,24 @@ class C1
             var projRefs = project.ProjectReferences.ToList();
             var metaRefs = project.MetadataReferences.ToList();
             Assert.Empty(projRefs);
-            Assert.Contains(metaRefs, r => r is PortableExecutableReference reference && reference.Display.Contains("CSharpProject.dll"));
+            Assert.Contains(
+                metaRefs,
+                r =>
+                    r is PortableExecutableReference reference
+                    && reference.Display.Contains("CSharpProject.dll")
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithReferencedProject_LoadMetadata_NonExistentMetadata_LoadsProjectInstead()
         {
             CreateFiles(GetMultiProjectSolutionFiles());
-            var projectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            var projectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
 
             // keep metadata reference from holding files open
             Workspace.TestHookStandaloneProjectsDoNotHoldReferences = true;
@@ -1395,12 +2119,22 @@ class C1
             Assert.DoesNotContain(metaRefs, r => r.Properties.Aliases.Contains("CSharpProject"));
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_UpdateExistingReferences()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"CSharpProject\bin\Debug\CSharpProject.dll", Resources.Dlls.CSharpProject));
-            var vbProjectFilePath = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\bin\Debug\CSharpProject.dll",
+                        Resources.Dlls.CSharpProject
+                    )
+            );
+            var vbProjectFilePath = GetSolutionFileName(
+                @"VisualBasicProject\VisualBasicProject.vbproj"
+            );
             var csProjectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
             // keep metadata reference from holding files open
@@ -1413,7 +2147,12 @@ class C1
 
             // prove vb project references c# project as a metadata reference
             Assert.Empty(vbProject.ProjectReferences);
-            Assert.Contains(vbProject.MetadataReferences, r => r is PortableExecutableReference reference && reference.Display.Contains("CSharpProject.dll"));
+            Assert.Contains(
+                vbProject.MetadataReferences,
+                r =>
+                    r is PortableExecutableReference reference
+                    && reference.Display.Contains("CSharpProject.dll")
+            );
 
             // now explicitly open the c# project that got referenced as metadata
             var csProject = await workspace.OpenProjectAsync(csProjectFilePath);
@@ -1421,7 +2160,10 @@ class C1
             // show that the vb project now references the c# project directly (not as metadata)
             vbProject = workspace.CurrentSolution.GetProject(vbProject.Id);
             Assert.Single(vbProject.ProjectReferences);
-            Assert.DoesNotContain(vbProject.MetadataReferences, r => r.Properties.Aliases.Contains("CSharpProject"));
+            Assert.DoesNotContain(
+                vbProject.MetadataReferences,
+                r => r.Properties.Aliases.Contains("CSharpProject")
+            );
         }
 
         [ConditionalFact(typeof(VisualStudioMSBuildInstalled), typeof(Framework35Installed))]
@@ -1430,8 +2172,15 @@ class C1
         public async Task TestOpenProject_AddVBDefaultReferences()
         {
             var files = new FileSet(
-                ("VisualBasicProject_3_5.vbproj", Resources.ProjectFiles.VisualBasic.VisualBasicProject_3_5),
-                ("VisualBasicProject_VisualBasicClass.vb", Resources.SourceFiles.VisualBasic.VisualBasicClass));
+                (
+                    "VisualBasicProject_3_5.vbproj",
+                    Resources.ProjectFiles.VisualBasic.VisualBasicProject_3_5
+                ),
+                (
+                    "VisualBasicProject_VisualBasicClass.vb",
+                    Resources.SourceFiles.VisualBasic.VisualBasicClass
+                )
+            );
 
             CreateFiles(files);
 
@@ -1446,182 +2195,302 @@ class C1
             var diagnostics = compilation.GetDiagnostics();
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_DebugType_Full()
         {
             CreateCSharpFilesWith("DebugType", "full");
             await AssertCSParseOptionsAsync(0, options => options.Errors.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_DebugType_None()
         {
             CreateCSharpFilesWith("DebugType", "none");
             await AssertCSParseOptionsAsync(0, options => options.Errors.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_DebugType_PDBOnly()
         {
             CreateCSharpFilesWith("DebugType", "pdbonly");
             await AssertCSParseOptionsAsync(0, options => options.Errors.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_DebugType_Portable()
         {
             CreateCSharpFilesWith("DebugType", "portable");
             await AssertCSParseOptionsAsync(0, options => options.Errors.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_DebugType_Embedded()
         {
             CreateCSharpFilesWith("DebugType", "embedded");
             await AssertCSParseOptionsAsync(0, options => options.Errors.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_OutputKind_DynamicallyLinkedLibrary()
         {
             CreateCSharpFilesWith("OutputType", "Library");
-            await AssertCSCompilationOptionsAsync(OutputKind.DynamicallyLinkedLibrary, options => options.OutputKind);
+            await AssertCSCompilationOptionsAsync(
+                OutputKind.DynamicallyLinkedLibrary,
+                options => options.OutputKind
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_OutputKind_ConsoleApplication()
         {
             CreateCSharpFilesWith("OutputType", "Exe");
-            await AssertCSCompilationOptionsAsync(OutputKind.ConsoleApplication, options => options.OutputKind);
+            await AssertCSCompilationOptionsAsync(
+                OutputKind.ConsoleApplication,
+                options => options.OutputKind
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_OutputKind_WindowsApplication()
         {
             CreateCSharpFilesWith("OutputType", "WinExe");
-            await AssertCSCompilationOptionsAsync(OutputKind.WindowsApplication, options => options.OutputKind);
+            await AssertCSCompilationOptionsAsync(
+                OutputKind.WindowsApplication,
+                options => options.OutputKind
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_OutputKind_NetModule()
         {
             CreateCSharpFilesWith("OutputType", "Module");
-            await AssertCSCompilationOptionsAsync(OutputKind.NetModule, options => options.OutputKind);
+            await AssertCSCompilationOptionsAsync(
+                OutputKind.NetModule,
+                options => options.OutputKind
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_OptimizationLevel_Release()
         {
             CreateCSharpFilesWith("Optimize", "True");
-            await AssertCSCompilationOptionsAsync(OptimizationLevel.Release, options => options.OptimizationLevel);
+            await AssertCSCompilationOptionsAsync(
+                OptimizationLevel.Release,
+                options => options.OptimizationLevel
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_OptimizationLevel_Debug()
         {
             CreateCSharpFilesWith("Optimize", "False");
-            await AssertCSCompilationOptionsAsync(OptimizationLevel.Debug, options => options.OptimizationLevel);
+            await AssertCSCompilationOptionsAsync(
+                OptimizationLevel.Debug,
+                options => options.OptimizationLevel
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_MainFileName()
         {
             CreateCSharpFilesWith("StartupObject", "Foo");
             await AssertCSCompilationOptionsAsync("Foo", options => options.MainTypeName);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_AssemblyOriginatorKeyFile_SignAssembly_Missing()
         {
             CreateCSharpFiles();
             await AssertCSCompilationOptionsAsync(null, options => options.CryptoKeyFile);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_AssemblyOriginatorKeyFile_SignAssembly_False()
         {
             CreateCSharpFilesWith("SignAssembly", "false");
             await AssertCSCompilationOptionsAsync(null, options => options.CryptoKeyFile);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_AssemblyOriginatorKeyFile_SignAssembly_True()
         {
             CreateCSharpFilesWith("SignAssembly", "true");
-            await AssertCSCompilationOptionsAsync("snKey.snk", options => Path.GetFileName(options.CryptoKeyFile));
+            await AssertCSCompilationOptionsAsync(
+                "snKey.snk",
+                options => Path.GetFileName(options.CryptoKeyFile)
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_AssemblyOriginatorKeyFile_DelaySign_False()
         {
             CreateCSharpFilesWith("DelaySign", "false");
             await AssertCSCompilationOptionsAsync(null, options => options.DelaySign);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_AssemblyOriginatorKeyFile_DelaySign_True()
         {
             CreateCSharpFilesWith("DelaySign", "true");
             await AssertCSCompilationOptionsAsync(true, options => options.DelaySign);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_CheckOverflow_True()
         {
             CreateCSharpFilesWith("CheckForOverflowUnderflow", "true");
             await AssertCSCompilationOptionsAsync(true, options => options.CheckOverflow);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_CSharp_CheckOverflow_False()
         {
             CreateCSharpFilesWith("CheckForOverflowUnderflow", "false");
             await AssertCSCompilationOptionsAsync(false, options => options.CheckOverflow);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestParseOptions_CSharp_Compatibility_ECMA1()
         {
             CreateCSharpFilesWith("LangVersion", "ISO-1");
-            await AssertCSParseOptionsAsync(CS.LanguageVersion.CSharp1, options => options.LanguageVersion);
+            await AssertCSParseOptionsAsync(
+                CS.LanguageVersion.CSharp1,
+                options => options.LanguageVersion
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestParseOptions_CSharp_Compatibility_ECMA2()
         {
             CreateCSharpFilesWith("LangVersion", "ISO-2");
-            await AssertCSParseOptionsAsync(CS.LanguageVersion.CSharp2, options => options.LanguageVersion);
+            await AssertCSParseOptionsAsync(
+                CS.LanguageVersion.CSharp2,
+                options => options.LanguageVersion
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestParseOptions_CSharp_Compatibility_None()
         {
             CreateCSharpFilesWith("LangVersion", "3");
-            await AssertCSParseOptionsAsync(CS.LanguageVersion.CSharp3, options => options.LanguageVersion);
+            await AssertCSParseOptionsAsync(
+                CS.LanguageVersion.CSharp3,
+                options => options.LanguageVersion
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled), AlwaysSkip = "https://github.com/dotnet/roslyn/issues/38301"), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(
+                typeof(VisualStudioMSBuildInstalled),
+                AlwaysSkip = "https://github.com/dotnet/roslyn/issues/38301"
+            ),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestParseOptions_CSharp_LanguageVersion_Default()
         {
             CreateCSharpFiles();
-            await AssertCSParseOptionsAsync(CS.LanguageVersion.Default.MapSpecifiedToEffectiveVersion(), options => options.LanguageVersion);
+            await AssertCSParseOptionsAsync(
+                CS.LanguageVersion.Default.MapSpecifiedToEffectiveVersion(),
+                options => options.LanguageVersion
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestParseOptions_CSharp_PreprocessorSymbols()
         {
             CreateCSharpFilesWith("DefineConstants", "DEBUG;TRACE;X;Y");
-            await AssertCSParseOptionsAsync("DEBUG,TRACE,X,Y", options => string.Join(",", options.PreprocessorSymbolNames));
+            await AssertCSParseOptionsAsync(
+                "DEBUG,TRACE,X,Y",
+                options => string.Join(",", options.PreprocessorSymbolNames)
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestConfigurationDebug()
         {
             CreateCSharpFiles();
-            await AssertCSParseOptionsAsync("DEBUG,TRACE", options => string.Join(",", options.PreprocessorSymbolNames));
+            await AssertCSParseOptionsAsync(
+                "DEBUG,TRACE",
+                options => string.Join(",", options.PreprocessorSymbolNames)
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestConfigurationRelease()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -1636,92 +2505,151 @@ class C1
             Assert.Contains(options.PreprocessorSymbolNames, name => name == "TRACE");
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_DebugType_Full()
         {
             CreateVBFilesWith("DebugType", "full");
             await AssertVBParseOptionsAsync(0, options => options.Errors.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_DebugType_None()
         {
             CreateVBFilesWith("DebugType", "none");
             await AssertVBParseOptionsAsync(0, options => options.Errors.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_DebugType_PDBOnly()
         {
             CreateVBFilesWith("DebugType", "pdbonly");
             await AssertVBParseOptionsAsync(0, options => options.Errors.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_DebugType_Portable()
         {
             CreateVBFilesWith("DebugType", "portable");
             await AssertVBParseOptionsAsync(0, options => options.Errors.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_DebugType_Embedded()
         {
             CreateVBFilesWith("DebugType", "embedded");
             await AssertVBParseOptionsAsync(0, options => options.Errors.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_VBRuntime_Embed()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicProject.vbproj", Resources.ProjectFiles.VisualBasic.Embed));
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        Resources.ProjectFiles.VisualBasic.Embed
+                    )
+            );
             await AssertVBCompilationOptionsAsync(true, options => options.EmbedVbCoreRuntime);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OutputKind_DynamicallyLinkedLibrary()
         {
             CreateVBFilesWith("OutputType", "Library");
-            await AssertVBCompilationOptionsAsync(OutputKind.DynamicallyLinkedLibrary, options => options.OutputKind);
+            await AssertVBCompilationOptionsAsync(
+                OutputKind.DynamicallyLinkedLibrary,
+                options => options.OutputKind
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OutputKind_ConsoleApplication()
         {
             CreateVBFilesWith("OutputType", "Exe");
-            await AssertVBCompilationOptionsAsync(OutputKind.ConsoleApplication, options => options.OutputKind);
+            await AssertVBCompilationOptionsAsync(
+                OutputKind.ConsoleApplication,
+                options => options.OutputKind
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OutputKind_WindowsApplication()
         {
             CreateVBFilesWith("OutputType", "WinExe");
-            await AssertVBCompilationOptionsAsync(OutputKind.WindowsApplication, options => options.OutputKind);
+            await AssertVBCompilationOptionsAsync(
+                OutputKind.WindowsApplication,
+                options => options.OutputKind
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OutputKind_NetModule()
         {
             CreateVBFilesWith("OutputType", "Module");
-            await AssertVBCompilationOptionsAsync(OutputKind.NetModule, options => options.OutputKind);
+            await AssertVBCompilationOptionsAsync(
+                OutputKind.NetModule,
+                options => options.OutputKind
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_RootNamespace()
         {
             CreateVBFilesWith("RootNamespace", "Foo.Bar");
             await AssertVBCompilationOptionsAsync("Foo.Bar", options => options.RootNamespace);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionStrict_On()
         {
             CreateVBFilesWith("OptionStrict", "On");
-            await AssertVBCompilationOptionsAsync(VB.OptionStrict.On, options => options.OptionStrict);
+            await AssertVBCompilationOptionsAsync(
+                VB.OptionStrict.On,
+                options => options.OptionStrict
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionStrict_Off()
         {
             CreateVBFilesWith("OptionStrict", "Off");
@@ -1729,80 +2657,119 @@ class C1
             // The VBC MSBuild task specifies '/optionstrict:custom' rather than '/optionstrict-'
             // See https://github.com/dotnet/roslyn/blob/58f44c39048032c6b823ddeedddd20fa589912f5/src/Compilers/Core/MSBuildTask/Vbc.cs#L390-L418 for details.
 
-            await AssertVBCompilationOptionsAsync(VB.OptionStrict.Custom, options => options.OptionStrict);
+            await AssertVBCompilationOptionsAsync(
+                VB.OptionStrict.Custom,
+                options => options.OptionStrict
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionStrict_Custom()
         {
             CreateVBFilesWith("OptionStrictType", "Custom");
-            await AssertVBCompilationOptionsAsync(VB.OptionStrict.Custom, options => options.OptionStrict);
+            await AssertVBCompilationOptionsAsync(
+                VB.OptionStrict.Custom,
+                options => options.OptionStrict
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionInfer_True()
         {
             CreateVBFilesWith("OptionInfer", "On");
             await AssertVBCompilationOptionsAsync(true, options => options.OptionInfer);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionInfer_False()
         {
             CreateVBFilesWith("OptionInfer", "Off");
             await AssertVBCompilationOptionsAsync(false, options => options.OptionInfer);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionExplicit_True()
         {
             CreateVBFilesWith("OptionExplicit", "On");
             await AssertVBCompilationOptionsAsync(true, options => options.OptionExplicit);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionExplicit_False()
         {
             CreateVBFilesWith("OptionExplicit", "Off");
             await AssertVBCompilationOptionsAsync(false, options => options.OptionExplicit);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionCompareText_True()
         {
             CreateVBFilesWith("OptionCompare", "Text");
             await AssertVBCompilationOptionsAsync(true, options => options.OptionCompareText);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionCompareText_False()
         {
             CreateVBFilesWith("OptionCompare", "Binary");
             await AssertVBCompilationOptionsAsync(false, options => options.OptionCompareText);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionRemoveIntegerOverflowChecks_True()
         {
             CreateVBFilesWith("RemoveIntegerChecks", "true");
             await AssertVBCompilationOptionsAsync(false, options => options.CheckOverflow);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionRemoveIntegerOverflowChecks_False()
         {
             CreateVBFilesWith("RemoveIntegerChecks", "false");
             await AssertVBCompilationOptionsAsync(true, options => options.CheckOverflow);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_OptionAssemblyOriginatorKeyFile_SignAssemblyFalse()
         {
             CreateVBFilesWith("SignAssembly", "false");
             await AssertVBCompilationOptionsAsync(null, options => options.CryptoKeyFile);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestCompilationOptions_VisualBasic_GlobalImports()
         {
             CreateFiles(GetMultiProjectSolutionFiles());
@@ -1817,21 +2784,31 @@ class C1
             AssertEx.Equal(
                 expected: new[]
                 {
-                        "Microsoft.VisualBasic",
-                        "System",
-                        "System.Collections",
-                        "System.Collections.Generic",
-                        "System.Diagnostics",
-                        "System.Linq",
+                    "Microsoft.VisualBasic",
+                    "System",
+                    "System.Collections",
+                    "System.Collections.Generic",
+                    "System.Diagnostics",
+                    "System.Linq",
                 },
-                actual: imports.Select(i => i.Name));
+                actual: imports.Select(i => i.Name)
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestParseOptions_VisualBasic_PreprocessorSymbols()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .ReplaceFileElement(@"VisualBasicProject\VisualBasicProject.vbproj", "DefineConstants", "X=1,Y=2,Z,T=-1,VBC_VER=123,F=false"));
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .ReplaceFileElement(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        "DefineConstants",
+                        "X=1,Y=2,Z,T=-1,VBC_VER=123,F=false"
+                    )
+            );
             var solutionFilePath = GetSolutionFileName("TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -1844,28 +2821,41 @@ class C1
             AssertEx.Equal(
                 expected: new[]
                 {
-                        new KeyValuePair<string, object>("_MyType", "Windows"),
-                        new KeyValuePair<string, object>("CONFIG", "Debug"),
-                        new KeyValuePair<string, object>("DEBUG", -1),
-                        new KeyValuePair<string, object>("F", false),
-                        new KeyValuePair<string, object>("PLATFORM", "AnyCPU"),
-                        new KeyValuePair<string, object>("T", -1),
-                        new KeyValuePair<string, object>("TARGET", "library"),
-                        new KeyValuePair<string, object>("TRACE", -1),
-                        new KeyValuePair<string, object>("VBC_VER", 123),
-                        new KeyValuePair<string, object>("X", 1),
-                        new KeyValuePair<string, object>("Y", 2),
-                        new KeyValuePair<string, object>("Z", true),
+                    new KeyValuePair<string, object>("_MyType", "Windows"),
+                    new KeyValuePair<string, object>("CONFIG", "Debug"),
+                    new KeyValuePair<string, object>("DEBUG", -1),
+                    new KeyValuePair<string, object>("F", false),
+                    new KeyValuePair<string, object>("PLATFORM", "AnyCPU"),
+                    new KeyValuePair<string, object>("T", -1),
+                    new KeyValuePair<string, object>("TARGET", "library"),
+                    new KeyValuePair<string, object>("TRACE", -1),
+                    new KeyValuePair<string, object>("VBC_VER", 123),
+                    new KeyValuePair<string, object>("X", 1),
+                    new KeyValuePair<string, object>("Y", 2),
+                    new KeyValuePair<string, object>("Z", true),
                 },
-                actual: defines);
+                actual: defines
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task Test_VisualBasic_ConditionalAttributeEmitted()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicClass.vb", Resources.SourceFiles.VisualBasic.VisualBasicClass_WithConditionalAttributes)
-                .ReplaceFileElement(@"VisualBasicProject\VisualBasicProject.vbproj", "DefineConstants", "EnableMyAttribute"));
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicClass.vb",
+                        Resources.SourceFiles.VisualBasic.VisualBasicClass_WithConditionalAttributes
+                    )
+                    .ReplaceFileElement(
+                        @"VisualBasicProject\VisualBasicProject.vbproj",
+                        "DefineConstants",
+                        "EnableMyAttribute"
+                    )
+            );
             var solutionFilePath = GetSolutionFileName("TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -1877,18 +2867,29 @@ class C1
             var compilation = await project.GetCompilationAsync();
             var metadataBytes = compilation.EmitToArray();
             var mtref = MetadataReference.CreateFromImage(metadataBytes);
-            var mtcomp = CS.CSharpCompilation.Create("MT", references: new MetadataReference[] { mtref });
+            var mtcomp = CS.CSharpCompilation.Create(
+                "MT",
+                references: new MetadataReference[] { mtref }
+            );
             var sym = (IAssemblySymbol)mtcomp.GetAssemblyOrModuleSymbol(mtref);
             var attrs = sym.GetAttributes();
 
             Assert.Contains(attrs, ad => ad.AttributeClass.Name == "MyAttribute");
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task Test_VisualBasic_ConditionalAttributeNotEmitted()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"VisualBasicProject\VisualBasicClass.vb", Resources.SourceFiles.VisualBasic.VisualBasicClass_WithConditionalAttributes));
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"VisualBasicProject\VisualBasicClass.vb",
+                        Resources.SourceFiles.VisualBasic.VisualBasicClass_WithConditionalAttributes
+                    )
+            );
             var solutionFilePath = GetSolutionFileName("TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -1900,19 +2901,34 @@ class C1
             var compilation = await project.GetCompilationAsync();
             var metadataBytes = compilation.EmitToArray();
             var mtref = MetadataReference.CreateFromImage(metadataBytes);
-            var mtcomp = CS.CSharpCompilation.Create("MT", references: new MetadataReference[] { mtref });
+            var mtcomp = CS.CSharpCompilation.Create(
+                "MT",
+                references: new MetadataReference[] { mtref }
+            );
             var sym = (IAssemblySymbol)mtcomp.GetAssemblyOrModuleSymbol(mtref);
             var attrs = sym.GetAttributes();
 
             Assert.DoesNotContain(attrs, ad => ad.AttributeClass.Name == "MyAttribute");
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task Test_CSharp_ConditionalAttributeEmitted()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass_WithConditionalAttributes)
-                .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", "DefineConstants", "EnableMyAttribute"));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpClass.cs",
+                        Resources.SourceFiles.CSharp.CSharpClass_WithConditionalAttributes
+                    )
+                    .ReplaceFileElement(
+                        @"CSharpProject\CSharpProject.csproj",
+                        "DefineConstants",
+                        "EnableMyAttribute"
+                    )
+            );
             var solutionFilePath = GetSolutionFileName("TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -1924,18 +2940,29 @@ class C1
             var compilation = await project.GetCompilationAsync();
             var metadataBytes = compilation.EmitToArray();
             var mtref = MetadataReference.CreateFromImage(metadataBytes);
-            var mtcomp = CS.CSharpCompilation.Create("MT", references: new MetadataReference[] { mtref });
+            var mtcomp = CS.CSharpCompilation.Create(
+                "MT",
+                references: new MetadataReference[] { mtref }
+            );
             var sym = (IAssemblySymbol)mtcomp.GetAssemblyOrModuleSymbol(mtref);
             var attrs = sym.GetAttributes();
 
             Assert.Contains(attrs, ad => ad.AttributeClass.Name == "MyAttr");
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task Test_CSharp_ConditionalAttributeNotEmitted()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass_WithConditionalAttributes));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpClass.cs",
+                        Resources.SourceFiles.CSharp.CSharpClass_WithConditionalAttributes
+                    )
+            );
             var solutionFilePath = GetSolutionFileName("TestSolution.sln");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -1947,19 +2974,30 @@ class C1
             var compilation = await project.GetCompilationAsync();
             var metadataBytes = compilation.EmitToArray();
             var mtref = MetadataReference.CreateFromImage(metadataBytes);
-            var mtcomp = CS.CSharpCompilation.Create("MT", references: new MetadataReference[] { mtref });
+            var mtcomp = CS.CSharpCompilation.Create(
+                "MT",
+                references: new MetadataReference[] { mtref }
+            );
             var sym = (IAssemblySymbol)mtcomp.GetAssemblyOrModuleSymbol(mtref);
             var attrs = sym.GetAttributes();
 
             Assert.DoesNotContain(attrs, ad => ad.AttributeClass.Name == "MyAttr");
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_CSharp_WithLinkedDocument()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithLink)
-                .WithFile(@"OtherStuff\Foo.cs", Resources.SourceFiles.CSharp.OtherStuff_Foo));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.WithLink
+                    )
+                    .WithFile(@"OtherStuff\Foo.cs", Resources.SourceFiles.CSharp.OtherStuff_Foo)
+            );
 
             var solutionFilePath = GetSolutionFileName("TestSolution.sln");
 
@@ -1978,7 +3016,10 @@ class C1
             Assert.Equal(Resources.SourceFiles.CSharp.OtherStuff_Foo, text);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestAddDocumentAsync()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2012,14 +3053,19 @@ class C1
             // reload project & solution to prove project file change was good
             using var workspaceB = CreateMSBuildWorkspace();
             var solutionB = await workspaceB.OpenSolutionAsync(solutionFilePath);
-            var projectB = workspaceB.CurrentSolution.GetProjectsByName("CSharpProject").FirstOrDefault();
+            var projectB = workspaceB.CurrentSolution
+                .GetProjectsByName("CSharpProject")
+                .FirstOrDefault();
             var documentsB = projectB.Documents.ToList();
             Assert.Equal(4, documentsB.Count);
             var documentB = documentsB.Single(d => d.Name == "Bar.cs");
             Assert.Single(documentB.Folders);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestUpdateDocumentAsync()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2032,7 +3078,9 @@ class C1
             var originalText = await document.GetTextAsync();
 
             var newText = SourceText.From("public class Bar { }");
-            workspace.TryApplyChanges(solution.WithDocumentText(document.Id, newText, PreservationMode.PreserveIdentity));
+            workspace.TryApplyChanges(
+                solution.WithDocumentText(document.Id, newText, PreservationMode.PreserveIdentity)
+            );
 
             // check workspace current solution
             var solution2 = workspace.CurrentSolution;
@@ -2053,7 +3101,10 @@ class C1
             Assert.Equal(originalText.ToString(), text.ToString());
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestRemoveDocumentAsync()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2080,7 +3131,10 @@ class C1
             Assert.Equal(originalText.ToString(), text.ToString());
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestApplyChanges_UpdateDocumentText()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2088,7 +3142,10 @@ class C1
 
             using var workspace = CreateMSBuildWorkspace();
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
-            var documents = solution.GetProjectsByName("CSharpProject").FirstOrDefault().Documents.ToList();
+            var documents = solution
+                .GetProjectsByName("CSharpProject")
+                .FirstOrDefault()
+                .Documents.ToList();
             var document = documents.Single(d => d.Name.Contains("CSharpClass"));
             var text = await document.GetTextAsync();
             var newText = SourceText.From("using System.Diagnostics;\r\n" + text.ToString());
@@ -2107,7 +3164,10 @@ class C1
             Assert.Equal(newText.ToString(), textOnDisk);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestApplyChanges_UpdateAdditionalDocumentText()
         {
             CreateFiles(GetSimpleCSharpSolutionWithAdditionaFile());
@@ -2115,7 +3175,10 @@ class C1
             using var workspace = CreateMSBuildWorkspace();
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
 
-            var documents = solution.GetProjectsByName("CSharpProject").FirstOrDefault().AdditionalDocuments.ToList();
+            var documents = solution
+                .GetProjectsByName("CSharpProject")
+                .FirstOrDefault()
+                .AdditionalDocuments.ToList();
             var document = documents.Single(d => d.Name.Contains("ValidAdditionalFile"));
             var text = await document.GetTextAsync();
             var newText = SourceText.From("New Text In Additional File.\r\n" + text.ToString());
@@ -2134,7 +3197,10 @@ class C1
             Assert.Equal(newText.ToString(), textOnDisk);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestApplyChanges_AddDocument()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2160,7 +3226,10 @@ class C1
             Assert.Equal(newText.ToString(), textOnDisk);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestApplyChanges_NotSupportedChangesFail()
         {
             var csharpProjPath = @"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj";
@@ -2178,23 +3247,40 @@ class C1
 
             // adding additional documents not supported.
             Assert.False(workspace.CanApplyChange(ApplyChangesKind.AddAdditionalDocument));
-            Assert.Throws<NotSupportedException>(delegate
-            {
-                workspace.TryApplyChanges(workspace.CurrentSolution.AddAdditionalDocument(DocumentId.CreateNewId(csProjectId), "foo.xaml", SourceText.From("<foo></foo>")));
-            });
+            Assert.Throws<NotSupportedException>(
+                delegate
+                {
+                    workspace.TryApplyChanges(
+                        workspace.CurrentSolution.AddAdditionalDocument(
+                            DocumentId.CreateNewId(csProjectId),
+                            "foo.xaml",
+                            SourceText.From("<foo></foo>")
+                        )
+                    );
+                }
+            );
 
-            var xaml = workspace.CurrentSolution.GetProject(csProjectId).AdditionalDocuments.FirstOrDefault(d => d.Name == "XamlFile.xaml");
+            var xaml = workspace.CurrentSolution
+                .GetProject(csProjectId)
+                .AdditionalDocuments.FirstOrDefault(d => d.Name == "XamlFile.xaml");
             Assert.NotNull(xaml);
 
             // removing additional documents not supported
             Assert.False(workspace.CanApplyChange(ApplyChangesKind.RemoveAdditionalDocument));
-            Assert.Throws<NotSupportedException>(delegate
-            {
-                workspace.TryApplyChanges(workspace.CurrentSolution.RemoveAdditionalDocument(xaml.Id));
-            });
+            Assert.Throws<NotSupportedException>(
+                delegate
+                {
+                    workspace.TryApplyChanges(
+                        workspace.CurrentSolution.RemoveAdditionalDocument(xaml.Id)
+                    );
+                }
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestWorkspaceChangedEvent()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2216,15 +3302,28 @@ class C1
             var text = await doc.GetTextAsync();
             var newText = "/* new text */\r\n" + text.ToString();
 
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithDocumentText(doc.Id, SourceText.From(newText), PreservationMode.PreserveIdentity));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithDocumentText(
+                    doc.Id,
+                    SourceText.From(newText),
+                    PreservationMode.PreserveIdentity
+                )
+            );
 
-            Assert.True(eventWaiter.WaitForEventToFire(AsyncEventTimeout),
-                string.Format("event {0} was not fired within {1}",
-                Enum.GetName(typeof(WorkspaceChangeKind), expectedEventKind),
-                AsyncEventTimeout));
+            Assert.True(
+                eventWaiter.WaitForEventToFire(AsyncEventTimeout),
+                string.Format(
+                    "event {0} was not fired within {1}",
+                    Enum.GetName(typeof(WorkspaceChangeKind), expectedEventKind),
+                    AsyncEventTimeout
+                )
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestWorkspaceChangedWeakEvent()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2247,21 +3346,31 @@ class C1
             var newText = "/* new text */\r\n" + text.ToString();
 
             workspace.TryApplyChanges(
-                workspace
-                .CurrentSolution
-                .WithDocumentText(
+                workspace.CurrentSolution.WithDocumentText(
                     doc.Id,
                     SourceText.From(newText),
-                    PreservationMode.PreserveIdentity));
+                    PreservationMode.PreserveIdentity
+                )
+            );
 
-            Assert.True(eventWanter.WaitForEventToFire(AsyncEventTimeout),
-                string.Format("event {0} was not fired within {1}",
-                Enum.GetName(typeof(WorkspaceChangeKind), expectedEventKind),
-                AsyncEventTimeout));
+            Assert.True(
+                eventWanter.WaitForEventToFire(AsyncEventTimeout),
+                string.Format(
+                    "event {0} was not fired within {1}",
+                    Enum.GetName(typeof(WorkspaceChangeKind), expectedEventKind),
+                    AsyncEventTimeout
+                )
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
-        [WorkItem(529276, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529276"), WorkItem(12086, "DevDiv_Projects/Roslyn")]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
+        [
+            WorkItem(529276, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/529276"),
+            WorkItem(12086, "DevDiv_Projects/Roslyn")
+        ]
         public async Task TestOpenProject_LoadMetadataForReferenceProjects_NoMetadata()
         {
             var projPath = @"CSharpProject\CSharpProject_ProjectReference.csproj";
@@ -2285,11 +3394,18 @@ class C1
             Assert.Empty(errs);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(918072, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/918072")]
         public async Task TestAnalyzerReferenceLoadStandalone()
         {
-            var projPaths = new[] { @"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj", @"AnalyzerSolution\VisualBasicProject_AnalyzerReference.vbproj" };
+            var projPaths = new[]
+            {
+                @"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj",
+                @"AnalyzerSolution\VisualBasicProject_AnalyzerReference.vbproj"
+            };
             var files = GetAnalyzerReferenceSolutionFiles();
 
             CreateFiles(files);
@@ -2303,17 +3419,29 @@ class C1
                 Assert.Equal(1, proj.AnalyzerReferences.Count);
                 var analyzerReference = proj.AnalyzerReferences[0] as AnalyzerFileReference;
                 Assert.NotNull(analyzerReference);
-                Assert.True(analyzerReference.FullPath.EndsWith("CSharpProject.dll", StringComparison.OrdinalIgnoreCase));
+                Assert.True(
+                    analyzerReference.FullPath.EndsWith(
+                        "CSharpProject.dll",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                );
             }
 
             // prove that project gets opened instead.
             Assert.Equal(2, workspace.CurrentSolution.Projects.Count());
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestAdditionalFilesStandalone()
         {
-            var projPaths = new[] { @"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj", @"AnalyzerSolution\VisualBasicProject_AnalyzerReference.vbproj" };
+            var projPaths = new[]
+            {
+                @"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj",
+                @"AnalyzerSolution\VisualBasicProject_AnalyzerReference.vbproj"
+            };
             var files = GetAnalyzerReferenceSolutionFiles();
 
             CreateFiles(files);
@@ -2331,28 +3459,47 @@ class C1
             }
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestLoadTextSync()
         {
             var files = GetAnalyzerReferenceSolutionFiles();
 
             CreateFiles(files);
 
-            using var workspace = new AdhocWorkspace(MSBuildMefHostServices.DefaultServices, WorkspaceKind.MSBuild);
-            var projectFullPath = GetSolutionFileName(@"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj");
+            using var workspace = new AdhocWorkspace(
+                MSBuildMefHostServices.DefaultServices,
+                WorkspaceKind.MSBuild
+            );
+            var projectFullPath = GetSolutionFileName(
+                @"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj"
+            );
 
             var loader = new MSBuildProjectLoader(workspace);
             var infos = await loader.LoadProjectInfoAsync(projectFullPath);
 
             var doc = infos[0].Documents[0];
-            var tav = doc.TextLoader.LoadTextAndVersionSynchronously(workspace, doc.Id, CancellationToken.None);
+            var tav = doc.TextLoader.LoadTextAndVersionSynchronously(
+                workspace,
+                doc.Id,
+                CancellationToken.None
+            );
 
             var adoc = infos[0].AdditionalDocuments.First(a => a.Name == "XamlFile.xaml");
-            var atav = adoc.TextLoader.LoadTextAndVersionSynchronously(workspace, adoc.Id, CancellationToken.None);
+            var atav = adoc.TextLoader.LoadTextAndVersionSynchronously(
+                workspace,
+                adoc.Id,
+                CancellationToken.None
+            );
             Assert.Contains("Window", atav.Text.ToString(), StringComparison.Ordinal);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestGetTextSynchronously()
         {
             var files = GetAnalyzerReferenceSolutionFiles();
@@ -2360,7 +3507,9 @@ class C1
             CreateFiles(files);
 
             using var workspace = CreateMSBuildWorkspace();
-            var projectFullPath = GetSolutionFileName(@"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj");
+            var projectFullPath = GetSolutionFileName(
+                @"AnalyzerSolution\CSharpProject_AnalyzerReference.csproj"
+            );
             var proj = await workspace.OpenProjectAsync(projectFullPath);
 
             var doc = proj.Documents.First();
@@ -2371,14 +3520,21 @@ class C1
             Assert.Contains("Window", atext.ToString(), StringComparison.Ordinal);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(546171, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546171")]
         public async Task TestCSharpExternAlias()
         {
             var projPath = @"CSharpProject\CSharpProject_ExternAlias.csproj";
             var files = new FileSet(
                 (projPath, Resources.ProjectFiles.CSharp.ExternAlias),
-                (@"CSharpProject\CSharpExternAlias.cs", Resources.SourceFiles.CSharp.CSharpExternAlias));
+                (
+                    @"CSharpProject\CSharpExternAlias.cs",
+                    Resources.SourceFiles.CSharp.CSharpExternAlias
+                )
+            );
 
             CreateFiles(files);
 
@@ -2389,7 +3545,10 @@ class C1
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(530337, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530337")]
         public async Task TestProjectReferenceWithExternAlias()
         {
@@ -2405,13 +3564,23 @@ class C1
             comp.GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Info).Verify();
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestProjectReferenceWithReferenceOutputAssemblyFalse()
         {
             var files = GetProjectReferenceSolutionFiles();
             files = VisitProjectReferences(
                 files,
-                r => r.Add(new XElement(XName.Get("ReferenceOutputAssembly", MSBuildNamespace), "false")));
+                r =>
+                    r.Add(
+                        new XElement(
+                            XName.Get("ReferenceOutputAssembly", MSBuildNamespace),
+                            "false"
+                        )
+                    )
+            );
 
             CreateFiles(files);
 
@@ -2425,7 +3594,10 @@ class C1
             }
         }
 
-        private static FileSet VisitProjectReferences(FileSet files, Action<XElement> visitProjectReference)
+        private static FileSet VisitProjectReferences(
+            FileSet files,
+            Action<XElement> visitProjectReference
+        )
         {
             var result = new List<(string, object)>();
             foreach (var (fileName, fileContent) in files)
@@ -2442,10 +3614,15 @@ class C1
             return new FileSet(result.ToArray());
         }
 
-        private static string VisitProjectReferences(string projectFileText, Action<XElement> visitProjectReference)
+        private static string VisitProjectReferences(
+            string projectFileText,
+            Action<XElement> visitProjectReference
+        )
         {
             var document = XDocument.Parse(projectFileText);
-            var projectReferenceItems = document.Descendants(XName.Get("ProjectReference", MSBuildNamespace));
+            var projectReferenceItems = document.Descendants(
+                XName.Get("ProjectReference", MSBuildNamespace)
+            );
             foreach (var projectReferenceItem in projectReferenceItems)
             {
                 visitProjectReference(projectReferenceItem);
@@ -2454,13 +3631,17 @@ class C1
             return document.ToString();
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestProjectReferenceWithNoGuid()
         {
             var files = GetProjectReferenceSolutionFiles();
             files = VisitProjectReferences(
                 files,
-                r => r.Elements(XName.Get("Project", MSBuildNamespace)).Remove());
+                r => r.Elements(XName.Get("Project", MSBuildNamespace)).Remove()
+            );
 
             CreateFiles(files);
 
@@ -2474,7 +3655,13 @@ class C1
             }
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled), AlwaysSkip = "https://github.com/dotnet/roslyn/issues/23685"), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(
+                typeof(VisualStudioMSBuildInstalled),
+                AlwaysSkip = "https://github.com/dotnet/roslyn/issues/23685"
+            ),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(5668, "https://github.com/dotnet/roslyn/issues/5668")]
         public async Task TestOpenProject_MetadataReferenceHasDocComments()
         {
@@ -2491,7 +3678,10 @@ class C1
             Assert.NotEmpty(docComment);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_CSharp_HasSourceDocComments()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2509,7 +3699,10 @@ class C1
             Assert.NotEmpty(docComment);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_VisualBasic_HasSourceDocComments()
         {
             CreateFiles(GetMultiProjectSolutionFiles());
@@ -2527,7 +3720,10 @@ class C1
             Assert.NotEmpty(docComment);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_CrossLanguageSkeletonReferenceHasDocComments()
         {
             CreateFiles(GetMultiProjectSolutionFiles());
@@ -2535,7 +3731,9 @@ class C1
 
             using var workspace = CreateMSBuildWorkspace();
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
-            var csproject = workspace.CurrentSolution.Projects.First(p => p.Language == LanguageNames.CSharp);
+            var csproject = workspace.CurrentSolution.Projects.First(
+                p => p.Language == LanguageNames.CSharp
+            );
             var csoptions = (CS.CSharpParseOptions)csproject.ParseOptions;
             Assert.Equal(DocumentationMode.Parse, csoptions.DocumentationMode);
             var cscomp = await csproject.GetCompilationAsync();
@@ -2543,7 +3741,9 @@ class C1
             var cscomment = cssymbol.GetDocumentationCommentXml();
             Assert.NotNull(cscomment);
 
-            var vbproject = workspace.CurrentSolution.Projects.First(p => p.Language == LanguageNames.VisualBasic);
+            var vbproject = workspace.CurrentSolution.Projects.First(
+                p => p.Language == LanguageNames.VisualBasic
+            );
             var vboptions = (VB.VisualBasicParseOptions)vbproject.ParseOptions;
             Assert.Equal(DocumentationMode.Diagnose, vboptions.DocumentationMode);
             var vbcomp = await vbproject.GetCompilationAsync();
@@ -2554,7 +3754,10 @@ class C1
             Assert.Equal(cscomment, vbcomment);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled), typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled), typeof(IsEnglishLocal)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithProjectFileLockedAsync()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2570,7 +3773,10 @@ class C1
             }
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WithNonExistentProjectFileAsync()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2578,13 +3784,16 @@ class C1
             // open for read-write so no-one else can read
             var projectFile = GetSolutionFileName(@"CSharpProject\NoProject.csproj");
             await Assert.ThrowsAsync<FileNotFoundException>(async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    await workspace.OpenProjectAsync(projectFile);
-                });
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                await workspace.OpenProjectAsync(projectFile);
+            });
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_WithNonExistentSolutionFileAsync()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2592,20 +3801,30 @@ class C1
             // open for read-write so no-one else can read
             var solutionFile = GetSolutionFileName(@"NoSolution.sln");
             await Assert.ThrowsAsync<FileNotFoundException>(async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    await workspace.OpenSolutionAsync(solutionFile);
-                });
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                await workspace.OpenSolutionAsync(solutionFile);
+            });
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_SolutionFileHasEmptyLinesAndWhitespaceOnlyLines()
         {
             var files = new FileSet(
                 (@"TestSolution.sln", Resources.SolutionFiles.CSharp_EmptyLines),
-                (@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.CSharpProject),
+                (
+                    @"CSharpProject\CSharpProject.csproj",
+                    Resources.ProjectFiles.CSharp.CSharpProject
+                ),
                 (@"CSharpProject\CSharpClass.cs", Resources.SourceFiles.CSharp.CSharpClass),
-                (@"CSharpProject\Properties\AssemblyInfo.cs", Resources.SourceFiles.CSharp.AssemblyInfo));
+                (
+                    @"CSharpProject\Properties\AssemblyInfo.cs",
+                    Resources.SourceFiles.CSharp.AssemblyInfo
+                )
+            );
 
             CreateFiles(files);
             var solutionFilePath = GetSolutionFileName("TestSolution.sln");
@@ -2615,12 +3834,16 @@ class C1
             var project = solution.Projects.First();
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(531543, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531543")]
         public async Task TestOpenSolution_SolutionFileHasEmptyLineBetweenProjectBlock()
         {
             var files = new FileSet(
-                (@"TestSolution.sln", Resources.SolutionFiles.EmptyLineBetweenProjectBlock));
+                (@"TestSolution.sln", Resources.SolutionFiles.EmptyLineBetweenProjectBlock)
+            );
 
             CreateFiles(files);
             var solutionFilePath = GetSolutionFileName("TestSolution.sln");
@@ -2629,7 +3852,10 @@ class C1
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled), AlwaysSkip = "MSBuild parsing API throws InvalidProjectFileException")]
+        [ConditionalFact(
+            typeof(VisualStudioMSBuildInstalled),
+            AlwaysSkip = "MSBuild parsing API throws InvalidProjectFileException"
+        )]
         [Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
         [WorkItem(531283, "DevDiv")]
         public async Task TestOpenSolution_SolutionFileHasMissingEndProject()
@@ -2637,7 +3863,8 @@ class C1
             var files = new FileSet(
                 (@"TestSolution1.sln", Resources.SolutionFiles.MissingEndProject1),
                 (@"TestSolution2.sln", Resources.SolutionFiles.MissingEndProject2),
-                (@"TestSolution3.sln", Resources.SolutionFiles.MissingEndProject3));
+                (@"TestSolution3.sln", Resources.SolutionFiles.MissingEndProject3)
+            );
 
             CreateFiles(files);
 
@@ -2660,14 +3887,24 @@ class C1
             }
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(792912, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/792912")]
         public async Task TestOpenSolution_WithDuplicatedGuidsBecomeSelfReferential()
         {
             var files = new FileSet(
-                (@"DuplicatedGuids.sln", Resources.SolutionFiles.DuplicatedGuidsBecomeSelfReferential),
-                (@"ReferenceTest\ReferenceTest.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidsBecomeSelfReferential),
-                (@"Library1\Library1.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidLibrary1));
+                (
+                    @"DuplicatedGuids.sln",
+                    Resources.SolutionFiles.DuplicatedGuidsBecomeSelfReferential
+                ),
+                (
+                    @"ReferenceTest\ReferenceTest.csproj",
+                    Resources.ProjectFiles.CSharp.DuplicatedGuidsBecomeSelfReferential
+                ),
+                (@"Library1\Library1.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidLibrary1)
+            );
 
             CreateFiles(files);
             var solutionFilePath = GetSolutionFileName("DuplicatedGuids.sln");
@@ -2685,15 +3922,25 @@ class C1
             Assert.Empty(libraryProject.AllProjectReferences);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(792912, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/792912")]
         public async Task TestOpenSolution_WithDuplicatedGuidsBecomeCircularReferential()
         {
             var files = new FileSet(
-                (@"DuplicatedGuids.sln", Resources.SolutionFiles.DuplicatedGuidsBecomeCircularReferential),
-                (@"ReferenceTest\ReferenceTest.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidsBecomeCircularReferential),
+                (
+                    @"DuplicatedGuids.sln",
+                    Resources.SolutionFiles.DuplicatedGuidsBecomeCircularReferential
+                ),
+                (
+                    @"ReferenceTest\ReferenceTest.csproj",
+                    Resources.ProjectFiles.CSharp.DuplicatedGuidsBecomeCircularReferential
+                ),
                 (@"Library1\Library1.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidLibrary3),
-                (@"Library2\Library2.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidLibrary4));
+                (@"Library2\Library2.csproj", Resources.ProjectFiles.CSharp.DuplicatedGuidLibrary4)
+            );
 
             CreateFiles(files);
             var solutionFilePath = GetSolutionFileName("DuplicatedGuids.sln");
@@ -2715,25 +3962,47 @@ class C1
             Assert.Empty(library2Project.AllProjectReferences);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_CSharp_WithMissingDebugType()
         {
-            CreateFiles(new FileSet(
-                (@"ProjectLoadErrorOnMissingDebugType.sln", Resources.SolutionFiles.ProjectLoadErrorOnMissingDebugType),
-                (@"ProjectLoadErrorOnMissingDebugType\ProjectLoadErrorOnMissingDebugType.csproj", Resources.ProjectFiles.CSharp.ProjectLoadErrorOnMissingDebugType)));
+            CreateFiles(
+                new FileSet(
+                    (
+                        @"ProjectLoadErrorOnMissingDebugType.sln",
+                        Resources.SolutionFiles.ProjectLoadErrorOnMissingDebugType
+                    ),
+                    (
+                        @"ProjectLoadErrorOnMissingDebugType\ProjectLoadErrorOnMissingDebugType.csproj",
+                        Resources.ProjectFiles.CSharp.ProjectLoadErrorOnMissingDebugType
+                    )
+                )
+            );
             var solutionFilePath = GetSolutionFileName(@"ProjectLoadErrorOnMissingDebugType.sln");
 
             using var workspace = CreateMSBuildWorkspace();
             await workspace.OpenSolutionAsync(solutionFilePath);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(991528, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/991528")]
         public async Task MSBuildProjectShouldHandleCodePageProperty()
         {
             var files = new FileSet(
-                ("Encoding.csproj", Resources.ProjectFiles.CSharp.Encoding.Replace("<CodePage>ReplaceMe</CodePage>", "<CodePage>1254</CodePage>")),
-                ("class1.cs", "//\u201C"));
+                (
+                    "Encoding.csproj",
+                    Resources.ProjectFiles.CSharp.Encoding.Replace(
+                        "<CodePage>ReplaceMe</CodePage>",
+                        "<CodePage>1254</CodePage>"
+                    )
+                ),
+                ("class1.cs", "//\u201C")
+            );
 
             CreateFiles(files);
 
@@ -2744,20 +4013,30 @@ class C1
             var text = await document.GetTextAsync();
             Assert.Equal(Encoding.GetEncoding(1254), text.Encoding);
 
-            // The smart quote (“) in class1.cs shows up as "â€œ" in codepage 1254. Do a sanity
+            // The smart quote (ï¿½) in class1.cs shows up as "â€œ" in codepage 1254. Do a sanity
             // check here to make sure this file hasn't been corrupted in a way that would
             // impact subsequent asserts.
             Assert.Equal(5, "//\u00E2\u20AC\u0153".Length);
             Assert.Equal("//\u00E2\u20AC\u0153".Length, text.Length);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(991528, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/991528")]
         public async Task MSBuildProjectShouldHandleInvalidCodePageProperty()
         {
             var files = new FileSet(
-                ("Encoding.csproj", Resources.ProjectFiles.CSharp.Encoding.Replace("<CodePage>ReplaceMe</CodePage>", "<CodePage>-1</CodePage>")),
-                ("class1.cs", "//\u201C"));
+                (
+                    "Encoding.csproj",
+                    Resources.ProjectFiles.CSharp.Encoding.Replace(
+                        "<CodePage>ReplaceMe</CodePage>",
+                        "<CodePage>-1</CodePage>"
+                    )
+                ),
+                ("class1.cs", "//\u201C")
+            );
 
             CreateFiles(files);
 
@@ -2767,16 +4046,29 @@ class C1
             var project = await workspace.OpenProjectAsync(projPath);
             var document = project.Documents.First(d => d.Name == "class1.cs");
             var text = await document.GetTextAsync();
-            Assert.Equal(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true), text.Encoding);
+            Assert.Equal(
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true),
+                text.Encoding
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(991528, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/991528")]
         public async Task MSBuildProjectShouldHandleInvalidCodePageProperty2()
         {
             var files = new FileSet(
-                ("Encoding.csproj", Resources.ProjectFiles.CSharp.Encoding.Replace("<CodePage>ReplaceMe</CodePage>", "<CodePage>Broken</CodePage>")),
-                ("class1.cs", "//\u201C"));
+                (
+                    "Encoding.csproj",
+                    Resources.ProjectFiles.CSharp.Encoding.Replace(
+                        "<CodePage>ReplaceMe</CodePage>",
+                        "<CodePage>Broken</CodePage>"
+                    )
+                ),
+                ("class1.cs", "//\u201C")
+            );
 
             CreateFiles(files);
 
@@ -2786,16 +4078,29 @@ class C1
             var project = await workspace.OpenProjectAsync(projPath);
             var document = project.Documents.First(d => d.Name == "class1.cs");
             var text = await document.GetTextAsync();
-            Assert.Equal(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true), text.Encoding);
+            Assert.Equal(
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true),
+                text.Encoding
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(991528, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/991528")]
         public async Task MSBuildProjectShouldHandleDefaultCodePageProperty()
         {
             var files = new FileSet(
-                ("Encoding.csproj", Resources.ProjectFiles.CSharp.Encoding.Replace("<CodePage>ReplaceMe</CodePage>", string.Empty)),
-                ("class1.cs", "//\u201C"));
+                (
+                    "Encoding.csproj",
+                    Resources.ProjectFiles.CSharp.Encoding.Replace(
+                        "<CodePage>ReplaceMe</CodePage>",
+                        string.Empty
+                    )
+                ),
+                ("class1.cs", "//\u201C")
+            );
 
             CreateFiles(files);
 
@@ -2805,31 +4110,51 @@ class C1
             var project = await workspace.OpenProjectAsync(projPath);
             var document = project.Documents.First(d => d.Name == "class1.cs");
             var text = await document.GetTextAsync();
-            Assert.Equal(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true), text.Encoding);
+            Assert.Equal(
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true),
+                text.Encoding
+            );
             Assert.Equal("//\u201C", text.ToString());
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(981208, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/981208")]
         [WorkItem(28639, "https://github.com/dotnet/roslyn/issues/28639")]
         public void DisposeMSBuildWorkspaceAndServicesCollected()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
 
-            var sol = ObjectReference.CreateFromFactory(() => MSBuildWorkspace.Create().OpenSolutionAsync(GetSolutionFileName("TestSolution.sln")).Result);
+            var sol = ObjectReference.CreateFromFactory(
+                () =>
+                    MSBuildWorkspace
+                        .Create()
+                        .OpenSolutionAsync(GetSolutionFileName("TestSolution.sln"))
+                        .Result
+            );
             var workspace = sol.GetObjectReference(static s => s.Workspace);
             var project = sol.GetObjectReference(static s => s.Projects.First());
             var document = project.GetObjectReference(static p => p.Documents.First());
             var tree = document.UseReference(static d => d.GetSyntaxTreeAsync().Result);
             var type = tree.GetRoot().DescendantTokens().First(t => t.ToString() == "class").Parent;
             Assert.NotNull(type);
-            Assert.StartsWith("public class CSharpClass", type.ToString(), StringComparison.Ordinal);
+            Assert.StartsWith(
+                "public class CSharpClass",
+                type.ToString(),
+                StringComparison.Ordinal
+            );
 
-            var compilation = document.GetObjectReference(static d => d.GetSemanticModelAsync(CancellationToken.None).Result);
+            var compilation = document.GetObjectReference(
+                static d => d.GetSemanticModelAsync(CancellationToken.None).Result
+            );
             Assert.NotNull(compilation);
 
             // MSBuildWorkspace doesn't have a cache service
-            Assert.Null(workspace.UseReference(static w => w.CurrentSolution.Services.CacheService));
+            Assert.Null(
+                workspace.UseReference(static w => w.CurrentSolution.Services.CacheService)
+            );
 
             document.ReleaseStrongReference();
             project.ReleaseStrongReference();
@@ -2839,16 +4164,27 @@ class C1
             sol.AssertReleased();
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(1088127, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1088127")]
         public async Task MSBuildWorkspacePreservesEncoding()
         {
             var encoding = Encoding.BigEndianUnicode;
-            var fileContent = @"//“
+            var fileContent =
+                @"//ï¿½
 class C { }";
             var files = new FileSet(
-                ("Encoding.csproj", Resources.ProjectFiles.CSharp.Encoding.Replace("<CodePage>ReplaceMe</CodePage>", string.Empty)),
-                ("class1.cs", encoding.GetBytesWithPreamble(fileContent)));
+                (
+                    "Encoding.csproj",
+                    Resources.ProjectFiles.CSharp.Encoding.Replace(
+                        "<CodePage>ReplaceMe</CodePage>",
+                        string.Empty
+                    )
+                ),
+                ("class1.cs", encoding.GetBytesWithPreamble(fileContent))
+            );
 
             CreateFiles(files);
             var projPath = GetSolutionFileName("Encoding.csproj");
@@ -2893,12 +4229,20 @@ class C { }";
 
             // prove the written document still has the same encoding
             var filePath = GetSolutionFileName("Class1.cs");
-            using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using var stream = new FileStream(
+                filePath,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite
+            );
             var reloadedText = EncodedStringText.Create(stream);
             Assert.Equal(encoding.EncodingName, reloadedText.Encoding.EncodingName);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestAddRemoveMetadataReference_GAC()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -2912,7 +4256,9 @@ class C { }";
             var solution = await workspace.OpenSolutionAsync(solutionFilePath);
             var project = solution.Projects.First();
 
-            var mref = MetadataReference.CreateFromFile(typeof(System.Xaml.XamlObjectReader).Assembly.Location);
+            var mref = MetadataReference.CreateFromFile(
+                typeof(System.Xaml.XamlObjectReader).Assembly.Location
+            );
 
             // add reference to System.Xaml
             workspace.TryApplyChanges(project.AddMetadataReference(mref).Solution);
@@ -2920,7 +4266,12 @@ class C { }";
             Assert.Contains(@"<Reference Include=""System.Xaml,", projFileText);
 
             // remove reference to System.Xaml
-            workspace.TryApplyChanges(workspace.CurrentSolution.GetProject(project.Id).RemoveMetadataReference(mref).Solution);
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution
+                    .GetProject(project.Id)
+                    .RemoveMetadataReference(mref)
+                    .Solution
+            );
             projFileText = File.ReadAllText(projFile);
             Assert.DoesNotContain(@"<Reference Include=""System.Xaml,", projFileText);
         }
@@ -2929,8 +4280,13 @@ class C { }";
         [Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
         public async Task TestAddRemoveMetadataReference_ReferenceAssembly()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithSystemNumerics));
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.WithSystemNumerics
+                    )
+            );
 
             var csProjFile = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
             var csProjFileText = File.ReadAllText(csProjFile);
@@ -2941,11 +4297,15 @@ class C { }";
             Assert.False(vbProjFileText.Contains(@"System.Numerics"));
 
             using var workspace = CreateMSBuildWorkspace();
-            var solution = await workspace.OpenSolutionAsync(GetSolutionFileName("TestSolution.sln"));
+            var solution = await workspace.OpenSolutionAsync(
+                GetSolutionFileName("TestSolution.sln")
+            );
             var csProject = solution.Projects.First(p => p.Language == LanguageNames.CSharp);
             var vbProject = solution.Projects.First(p => p.Language == LanguageNames.VisualBasic);
 
-            var numericsMetadata = csProject.MetadataReferences.Single(m => m.Display.Contains("System.Numerics"));
+            var numericsMetadata = csProject.MetadataReferences.Single(
+                m => m.Display.Contains("System.Numerics")
+            );
 
             // add reference to System.Xaml
             workspace.TryApplyChanges(vbProject.AddMetadataReference(numericsMetadata).Solution);
@@ -2953,16 +4313,26 @@ class C { }";
             Assert.Contains(@"<Reference Include=""System.Numerics""", newVbProjFileText);
 
             // remove reference MyAssembly.dll
-            workspace.TryApplyChanges(workspace.CurrentSolution.GetProject(vbProject.Id).RemoveMetadataReference(numericsMetadata).Solution);
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution
+                    .GetProject(vbProject.Id)
+                    .RemoveMetadataReference(numericsMetadata)
+                    .Solution
+            );
             var newVbProjFileText2 = File.ReadAllText(vbProjFile);
             Assert.DoesNotContain(@"<Reference Include=""System.Numerics""", newVbProjFileText2);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestAddRemoveMetadataReference_NonGACorRefAssembly()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"References\MyAssembly.dll", Resources.Dlls.EmptyLibrary));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(@"References\MyAssembly.dll", Resources.Dlls.EmptyLibrary)
+            );
 
             var projFile = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
             var projFileText = File.ReadAllText(projFile);
@@ -2983,17 +4353,27 @@ class C { }";
             Assert.Contains(@"<HintPath>..\References\MyAssembly.dll", projFileText);
 
             // remove reference MyAssembly.dll
-            workspace.TryApplyChanges(workspace.CurrentSolution.GetProject(project.Id).RemoveMetadataReference(mref).Solution);
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution
+                    .GetProject(project.Id)
+                    .RemoveMetadataReference(mref)
+                    .Solution
+            );
             projFileText = File.ReadAllText(projFile);
             Assert.DoesNotContain(@"<Reference Include=""MyAssembly""", projFileText);
             Assert.DoesNotContain(@"<HintPath>..\References\MyAssembly.dll", projFileText);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestAddRemoveAnalyzerReference()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"Analyzers\MyAnalyzer.dll", Resources.Dlls.EmptyLibrary));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(@"Analyzers\MyAnalyzer.dll", Resources.Dlls.EmptyLibrary)
+            );
 
             var projFile = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
             var projFileText = File.ReadAllText(projFile);
@@ -3013,19 +4393,31 @@ class C { }";
             Assert.Contains(@"<Analyzer Include=""..\Analyzers\MyAnalyzer.dll", projFileText);
 
             // remove reference MyAnalyzer.dll
-            workspace.TryApplyChanges(workspace.CurrentSolution.GetProject(project.Id).RemoveAnalyzerReference(aref).Solution);
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution
+                    .GetProject(project.Id)
+                    .RemoveAnalyzerReference(aref)
+                    .Solution
+            );
             projFileText = File.ReadAllText(projFile);
             Assert.DoesNotContain(@"<Analyzer Include=""..\Analyzers\MyAnalyzer.dll", projFileText);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestAddRemoveProjectReference()
         {
             CreateFiles(GetMultiProjectSolutionFiles());
 
             var projFile = GetSolutionFileName(@"VisualBasicProject\VisualBasicProject.vbproj");
             var projFileText = File.ReadAllText(projFile);
-            Assert.True(projFileText.Contains(@"<ProjectReference Include=""..\CSharpProject\CSharpProject.csproj"">"));
+            Assert.True(
+                projFileText.Contains(
+                    @"<ProjectReference Include=""..\CSharpProject\CSharpProject.csproj"">"
+                )
+            );
 
             using var workspace = CreateMSBuildWorkspace();
             var solutionFilePath = GetSolutionFileName("TestSolution.sln");
@@ -3034,26 +4426,47 @@ class C { }";
             var pref = project.ProjectReferences.First();
 
             // remove project reference
-            workspace.TryApplyChanges(workspace.CurrentSolution.GetProject(project.Id).RemoveProjectReference(pref).Solution);
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution
+                    .GetProject(project.Id)
+                    .RemoveProjectReference(pref)
+                    .Solution
+            );
             Assert.Empty(workspace.CurrentSolution.GetProject(project.Id).ProjectReferences);
 
             projFileText = File.ReadAllText(projFile);
-            Assert.DoesNotContain(@"<ProjectReference Include=""..\CSharpProject\CSharpProject.csproj"">", projFileText);
+            Assert.DoesNotContain(
+                @"<ProjectReference Include=""..\CSharpProject\CSharpProject.csproj"">",
+                projFileText
+            );
 
             // add it back
-            workspace.TryApplyChanges(workspace.CurrentSolution.GetProject(project.Id).AddProjectReference(pref).Solution);
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.GetProject(project.Id).AddProjectReference(pref).Solution
+            );
             Assert.Single(workspace.CurrentSolution.GetProject(project.Id).ProjectReferences);
 
             projFileText = File.ReadAllText(projFile);
-            Assert.Contains(@"<ProjectReference Include=""..\CSharpProject\CSharpProject.csproj"">", projFileText);
+            Assert.Contains(
+                @"<ProjectReference Include=""..\CSharpProject\CSharpProject.csproj"">",
+                projFileText
+            );
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(1101040, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1101040")]
         public async Task TestOpenProject_BadLink()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.BadLink));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.BadLink
+                    )
+            );
 
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
@@ -3063,11 +4476,19 @@ class C { }";
             Assert.Equal(3, docs.Count);
         }
 
-        [ConditionalFact(typeof(IsEnglishLocal), typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(IsEnglishLocal), typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_BadElement()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.BadElement));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.BadElement
+                    )
+            );
 
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
@@ -3080,11 +4501,19 @@ class C { }";
             Assert.Empty(proj.DocumentIds);
         }
 
-        [ConditionalFact(typeof(IsEnglishLocal), typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(IsEnglishLocal), typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_BadTaskImport()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.BadTasks));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.BadTasks
+                    )
+            );
 
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
@@ -3097,11 +4526,19 @@ class C { }";
             Assert.Empty(proj.DocumentIds);
         }
 
-        [ConditionalFact(typeof(IsEnglishLocal), typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(IsEnglishLocal), typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenSolution_BadTaskImport()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.BadTasks));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.BadTasks
+                    )
+            );
 
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
@@ -3115,11 +4552,19 @@ class C { }";
             Assert.Empty(project.DocumentIds);
         }
 
-        [ConditionalFact(typeof(IsEnglishLocal), typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(IsEnglishLocal), typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_MsbuildError()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.MsbuildError));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.MsbuildError
+                    )
+            );
 
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
@@ -3130,11 +4575,19 @@ class C { }";
             Assert.StartsWith("Msbuild failed", diagnostic.Message);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_WildcardsWithLink()
         {
-            CreateFiles(GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.Wildcards));
+            CreateFiles(
+                GetSimpleCSharpSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.Wildcards
+                    )
+            );
 
             var projectFilePath = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
 
@@ -3145,7 +4598,10 @@ class C { }";
             Assert.Contains(proj.Documents, d => d.Name == "AssemblyInfo.cs");
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestOpenProject_CommandLineArgsHaveNoErrors()
         {
             CreateFiles(GetSimpleCSharpSolutionFiles());
@@ -3160,8 +4616,14 @@ class C { }";
             var buildManager = new ProjectBuildManager(ImmutableDictionary<string, string>.Empty);
             buildManager.StartBatchBuild();
 
-            var projectFile = await loader.LoadProjectFileAsync(projectFilePath, buildManager, CancellationToken.None);
-            var projectFileInfo = (await projectFile.GetProjectFileInfosAsync(CancellationToken.None)).Single();
+            var projectFile = await loader.LoadProjectFileAsync(
+                projectFilePath,
+                buildManager,
+                CancellationToken.None
+            );
+            var projectFileInfo = (
+                await projectFile.GetProjectFileInfosAsync(CancellationToken.None)
+            ).Single();
             buildManager.EndBatchBuild();
 
             var commandLineParser = workspace.Services
@@ -3173,35 +4635,95 @@ class C { }";
                 arguments: projectFileInfo.CommandLineArgs,
                 baseDirectory: projectDirectory,
                 isInteractive: false,
-                sdkDirectory: System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory());
+                sdkDirectory: System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory()
+            );
 
             Assert.Empty(commandLineArgs.Errors);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(29122, "https://github.com/dotnet/roslyn/issues/29122")]
         public async Task TestOpenSolution_ProjectReferencesWithUnconventionalOutputPaths()
         {
-            CreateFiles(GetBaseFiles()
-                .WithFile(@"TestVB2.sln", Resources.SolutionFiles.Issue29122_Solution)
-                .WithFile(@"Proj1\ClassLibrary1.vbproj", Resources.ProjectFiles.VisualBasic.Issue29122_ClassLibrary1)
-                .WithFile(@"Proj1\Class1.vb", Resources.SourceFiles.VisualBasic.VisualBasicClass)
-                .WithFile(@"Proj1\My Project\Application.Designer.vb", Resources.SourceFiles.VisualBasic.Application_Designer)
-                .WithFile(@"Proj1\My Project\Application.myapp", Resources.SourceFiles.VisualBasic.Application)
-                .WithFile(@"Proj1\My Project\AssemblyInfo.vb", Resources.SourceFiles.VisualBasic.AssemblyInfo)
-                .WithFile(@"Proj1\My Project\Resources.Designer.vb", Resources.SourceFiles.VisualBasic.Resources_Designer)
-                .WithFile(@"Proj1\My Project\Resources.resx", Resources.SourceFiles.VisualBasic.Resources)
-                .WithFile(@"Proj1\My Project\Settings.Designer.vb", Resources.SourceFiles.VisualBasic.Settings_Designer)
-                .WithFile(@"Proj1\My Project\Settings.settings", Resources.SourceFiles.VisualBasic.Settings)
-                .WithFile(@"Proj2\ClassLibrary2.vbproj", Resources.ProjectFiles.VisualBasic.Issue29122_ClassLibrary2)
-                .WithFile(@"Proj2\Class1.vb", Resources.SourceFiles.VisualBasic.VisualBasicClass)
-                .WithFile(@"Proj2\My Project\Application.Designer.vb", Resources.SourceFiles.VisualBasic.Application_Designer)
-                .WithFile(@"Proj2\My Project\Application.myapp", Resources.SourceFiles.VisualBasic.Application)
-                .WithFile(@"Proj2\My Project\AssemblyInfo.vb", Resources.SourceFiles.VisualBasic.AssemblyInfo)
-                .WithFile(@"Proj2\My Project\Resources.Designer.vb", Resources.SourceFiles.VisualBasic.Resources_Designer)
-                .WithFile(@"Proj2\My Project\Resources.resx", Resources.SourceFiles.VisualBasic.Resources)
-                .WithFile(@"Proj2\My Project\Settings.Designer.vb", Resources.SourceFiles.VisualBasic.Settings_Designer)
-                .WithFile(@"Proj2\My Project\Settings.settings", Resources.SourceFiles.VisualBasic.Settings));
+            CreateFiles(
+                GetBaseFiles()
+                    .WithFile(@"TestVB2.sln", Resources.SolutionFiles.Issue29122_Solution)
+                    .WithFile(
+                        @"Proj1\ClassLibrary1.vbproj",
+                        Resources.ProjectFiles.VisualBasic.Issue29122_ClassLibrary1
+                    )
+                    .WithFile(
+                        @"Proj1\Class1.vb",
+                        Resources.SourceFiles.VisualBasic.VisualBasicClass
+                    )
+                    .WithFile(
+                        @"Proj1\My Project\Application.Designer.vb",
+                        Resources.SourceFiles.VisualBasic.Application_Designer
+                    )
+                    .WithFile(
+                        @"Proj1\My Project\Application.myapp",
+                        Resources.SourceFiles.VisualBasic.Application
+                    )
+                    .WithFile(
+                        @"Proj1\My Project\AssemblyInfo.vb",
+                        Resources.SourceFiles.VisualBasic.AssemblyInfo
+                    )
+                    .WithFile(
+                        @"Proj1\My Project\Resources.Designer.vb",
+                        Resources.SourceFiles.VisualBasic.Resources_Designer
+                    )
+                    .WithFile(
+                        @"Proj1\My Project\Resources.resx",
+                        Resources.SourceFiles.VisualBasic.Resources
+                    )
+                    .WithFile(
+                        @"Proj1\My Project\Settings.Designer.vb",
+                        Resources.SourceFiles.VisualBasic.Settings_Designer
+                    )
+                    .WithFile(
+                        @"Proj1\My Project\Settings.settings",
+                        Resources.SourceFiles.VisualBasic.Settings
+                    )
+                    .WithFile(
+                        @"Proj2\ClassLibrary2.vbproj",
+                        Resources.ProjectFiles.VisualBasic.Issue29122_ClassLibrary2
+                    )
+                    .WithFile(
+                        @"Proj2\Class1.vb",
+                        Resources.SourceFiles.VisualBasic.VisualBasicClass
+                    )
+                    .WithFile(
+                        @"Proj2\My Project\Application.Designer.vb",
+                        Resources.SourceFiles.VisualBasic.Application_Designer
+                    )
+                    .WithFile(
+                        @"Proj2\My Project\Application.myapp",
+                        Resources.SourceFiles.VisualBasic.Application
+                    )
+                    .WithFile(
+                        @"Proj2\My Project\AssemblyInfo.vb",
+                        Resources.SourceFiles.VisualBasic.AssemblyInfo
+                    )
+                    .WithFile(
+                        @"Proj2\My Project\Resources.Designer.vb",
+                        Resources.SourceFiles.VisualBasic.Resources_Designer
+                    )
+                    .WithFile(
+                        @"Proj2\My Project\Resources.resx",
+                        Resources.SourceFiles.VisualBasic.Resources
+                    )
+                    .WithFile(
+                        @"Proj2\My Project\Settings.Designer.vb",
+                        Resources.SourceFiles.VisualBasic.Settings_Designer
+                    )
+                    .WithFile(
+                        @"Proj2\My Project\Settings.settings",
+                        Resources.SourceFiles.VisualBasic.Settings
+                    )
+            );
 
             var solutionFilePath = GetSolutionFileName(@"TestVB2.sln");
 
@@ -3211,17 +4733,29 @@ class C { }";
             // Neither project should contain any unresolved metadata references
             foreach (var project in solution.Projects)
             {
-                Assert.DoesNotContain(project.MetadataReferences, mr => mr is UnresolvedMetadataReference);
+                Assert.DoesNotContain(
+                    project.MetadataReferences,
+                    mr => mr is UnresolvedMetadataReference
+                );
             }
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(29494, "https://github.com/dotnet/roslyn/issues/29494")]
         public async Task TestOpenProjectAsync_MalformedAdditionalFilePath()
         {
             var files = GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.MallformedAdditionalFilePath)
-                .WithFile(@"CSharpProject\ValidAdditionalFile.txt", Resources.SourceFiles.Text.ValidAdditionalFile);
+                .WithFile(
+                    @"CSharpProject\CSharpProject.csproj",
+                    Resources.ProjectFiles.CSharp.MallformedAdditionalFilePath
+                )
+                .WithFile(
+                    @"CSharpProject\ValidAdditionalFile.txt",
+                    Resources.SourceFiles.Text.ValidAdditionalFile
+                );
 
             CreateFiles(files);
 
@@ -3237,7 +4771,10 @@ class C { }";
             Assert.Contains(project.AdditionalDocuments, doc => doc.Name == "TEST::");
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         [WorkItem(31390, "https://github.com/dotnet/roslyn/issues/31390")]
         public async Task TestDuplicateProjectAndMetadataReferences()
         {
@@ -3248,24 +4785,35 @@ class C { }";
 
             using var workspace = CreateMSBuildWorkspace();
             var solution = await workspace.OpenSolutionAsync(fullPath);
-            var project = solution.Projects.Single(p => p.FilePath.EndsWith("CSharpProject_ProjectReference.csproj"));
+            var project = solution.Projects.Single(
+                p => p.FilePath.EndsWith("CSharpProject_ProjectReference.csproj")
+            );
 
             Assert.Single(project.ProjectReferences);
 
             AssertEx.Equal(
                 new[] { "EmptyLibrary.dll", "System.Core.dll", "mscorlib.dll" },
-                project.MetadataReferences.Select(r => Path.GetFileName(((PortableExecutableReference)r).FilePath)).OrderBy(StringComparer.Ordinal));
+                project.MetadataReferences
+                    .Select(r => Path.GetFileName(((PortableExecutableReference)r).FilePath))
+                    .OrderBy(StringComparer.Ordinal)
+            );
 
             var compilation = await project.GetCompilationAsync();
 
             Assert.Single(compilation.References.OfType<CompilationReference>());
         }
 
-        [ConditionalFact(typeof(VisualStudio16_2OrHigherMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudio16_2OrHigherMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestEditorConfigDiscovery()
         {
             var files = GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithDiscoverEditorConfigFiles)
+                .WithFile(
+                    @"CSharpProject\CSharpProject.csproj",
+                    Resources.ProjectFiles.CSharp.WithDiscoverEditorConfigFiles
+                )
                 .WithFile(".editorconfig", "root = true");
 
             CreateFiles(files);
@@ -3279,18 +4827,30 @@ class C { }";
 
             // We should have exactly one .editorconfig corresponding to the file we had. We may also
             // have other files if there is a .editorconfig floating around somewhere higher on the disk.
-            var analyzerConfigDocument = Assert.Single(project.AnalyzerConfigDocuments.Where(d => d.FilePath == expectedEditorConfigPath));
+            var analyzerConfigDocument = Assert.Single(
+                project.AnalyzerConfigDocuments.Where(d => d.FilePath == expectedEditorConfigPath)
+            );
             Assert.Equal(".editorconfig", analyzerConfigDocument.Name);
             var text = await analyzerConfigDocument.GetTextAsync();
             Assert.Equal("root = true", text.ToString());
         }
 
-        [ConditionalFact(typeof(VisualStudio16_2OrHigherMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudio16_2OrHigherMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestEditorConfigDiscoveryDisabled()
         {
             var files = GetSimpleCSharpSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.WithDiscoverEditorConfigFiles)
-                .ReplaceFileElement(@"CSharpProject\CSharpProject.csproj", "DiscoverEditorConfigFiles", "false")
+                .WithFile(
+                    @"CSharpProject\CSharpProject.csproj",
+                    Resources.ProjectFiles.CSharp.WithDiscoverEditorConfigFiles
+                )
+                .ReplaceFileElement(
+                    @"CSharpProject\CSharpProject.csproj",
+                    "DiscoverEditorConfigFiles",
+                    "false"
+                )
                 .WithFile(".editorconfig", "root = true");
 
             CreateFiles(files);
@@ -3302,11 +4862,16 @@ class C { }";
             Assert.Empty(project.AnalyzerConfigDocuments);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestSolutionFilterSupport()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"CSharpSolutionFilter.slnf", Resources.SolutionFilters.CSharp));
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(@"CSharpSolutionFilter.slnf", Resources.SolutionFilters.CSharp)
+            );
             var solutionFilePath = GetSolutionFileName(@"CSharpSolutionFilter.slnf");
 
             using var workspace = CreateMSBuildWorkspace();
@@ -3316,24 +4881,29 @@ class C { }";
             Assert.Equal(LanguageNames.CSharp, csharpProject.Language);
         }
 
-        [ConditionalFact(typeof(VisualStudioMSBuildInstalled)), Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)]
+        [
+            ConditionalFact(typeof(VisualStudioMSBuildInstalled)),
+            Trait(Traits.Feature, Traits.Features.MSBuildWorkspace)
+        ]
         public async Task TestInvalidSolutionFilterDoesNotLoad()
         {
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"InvalidSolutionFilter.slnf", Resources.SolutionFilters.Invalid));
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(@"InvalidSolutionFilter.slnf", Resources.SolutionFilters.Invalid)
+            );
             var solutionFilePath = GetSolutionFileName(@"InvalidSolutionFilter.slnf");
 
             using var workspace = CreateMSBuildWorkspace();
-            var exception = await Assert.ThrowsAsync<Exception>(() => workspace.OpenSolutionAsync(solutionFilePath));
+            var exception = await Assert.ThrowsAsync<Exception>(
+                () => workspace.OpenSolutionAsync(solutionFilePath)
+            );
 
             Assert.Equal(0, workspace.CurrentSolution.ProjectIds.Count);
         }
 
         private class InMemoryAssemblyLoader : IAnalyzerAssemblyLoader
         {
-            public void AddDependencyLocation(string fullPath)
-            {
-            }
+            public void AddDependencyLocation(string fullPath) { }
 
             public Assembly LoadFromPath(string fullPath)
             {

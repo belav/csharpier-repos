@@ -280,17 +280,11 @@ namespace System.ServiceModel
 #else
     static class ThreadTrace
     {
-        public static void Trace(string operation)
-        {
-        }
+        public static void Trace(string operation) { }
 
-        public static void StopTracing()
-        {
-        }
+        public static void StopTracing() { }
 
-        public static void Save()
-        {
-        }
+        public static void Save() { }
     }
 #endif
 }

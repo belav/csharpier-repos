@@ -43,24 +43,35 @@ public class HubConnectionHandlerTestUtils
                 var actualInvocation = Assert.IsType<InvocationMessage>(actual);
 
                 // Either both must have non-null invocationIds or both must have null invocation IDs. Checking the exact value is NOT desired here though as it could be randomly generated
-                Assert.True((expectedInvocation.InvocationId == null && actualInvocation.InvocationId == null) ||
-                    (expectedInvocation.InvocationId != null && actualInvocation.InvocationId != null));
+                Assert.True(
+                    (
+                        expectedInvocation.InvocationId == null
+                        && actualInvocation.InvocationId == null
+                    )
+                        || (
+                            expectedInvocation.InvocationId != null
+                            && actualInvocation.InvocationId != null
+                        )
+                );
                 Assert.Equal(expectedInvocation.Target, actualInvocation.Target);
                 Assert.Equal(expectedInvocation.Arguments, actualInvocation.Arguments);
                 break;
             default:
-                throw new InvalidOperationException($"Unsupported Hub Message type {expected.GetType()}");
+                throw new InvalidOperationException(
+                    $"Unsupported Hub Message type {expected.GetType()}"
+                );
         }
     }
 
-    public static IServiceProvider CreateServiceProvider(Action<ServiceCollection> addServices = null, ILoggerFactory loggerFactory = null)
+    public static IServiceProvider CreateServiceProvider(
+        Action<ServiceCollection> addServices = null,
+        ILoggerFactory loggerFactory = null
+    )
     {
         var services = new ServiceCollection();
-        services.AddOptions()
-            .AddLogging();
+        services.AddOptions().AddLogging();
 
-        services.AddSignalR()
-            .AddMessagePackProtocol();
+        services.AddSignalR().AddMessagePackProtocol();
 
         addServices?.Invoke(services);
 
@@ -72,10 +83,15 @@ public class HubConnectionHandlerTestUtils
         return services.BuildServiceProvider();
     }
 
-    public static Connections.ConnectionHandler GetHubConnectionHandler(Type hubType, ILoggerFactory loggerFactory = null, Action<ServiceCollection> addServices = null)
+    public static Connections.ConnectionHandler GetHubConnectionHandler(
+        Type hubType,
+        ILoggerFactory loggerFactory = null,
+        Action<ServiceCollection> addServices = null
+    )
     {
         var serviceProvider = CreateServiceProvider(addServices, loggerFactory);
-        return (Connections.ConnectionHandler)serviceProvider.GetService(GetConnectionHandlerType(hubType));
+        return (Connections.ConnectionHandler)
+            serviceProvider.GetService(GetConnectionHandlerType(hubType));
     }
 }
 

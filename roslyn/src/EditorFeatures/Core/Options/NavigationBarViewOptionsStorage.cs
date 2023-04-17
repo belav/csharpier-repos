@@ -8,6 +8,6 @@ namespace Microsoft.CodeAnalysis.Editor.Options;
 
 internal sealed class NavigationBarViewOptionsStorage
 {
-    public static readonly PerLanguageOption2<bool> ShowNavigationBar = new(
-        "NavigationBarOptions_ShowNavigationBar", defaultValue: true);
+    public static readonly PerLanguageOption2<bool> ShowNavigationBar =
+        new("NavigationBarOptions_ShowNavigationBar", defaultValue: true);
 }

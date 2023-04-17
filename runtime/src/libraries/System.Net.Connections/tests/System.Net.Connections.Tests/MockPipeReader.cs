@@ -12,24 +12,23 @@ namespace System.Net.Connections.Tests
         public Action<SequencePosition, SequencePosition> OnAdvanceTo { get; set; }
         public Action OnCancelPendingRead { get; set; }
         public Action<Exception> OnComplete { get; set; }
-        public Func<Exception,ValueTask> OnCompleteAsync { get; set; }
+        public Func<Exception, ValueTask> OnCompleteAsync { get; set; }
         public Func<CancellationToken, ValueTask<ReadResult>> OnReadAsync { get; set; }
         public Func<ReadResult?> OnTryRead { get; set; }
 
-        public override void AdvanceTo(SequencePosition consumed)
-            => OnAdvanceTo(consumed, consumed);
+        public override void AdvanceTo(SequencePosition consumed) =>
+            OnAdvanceTo(consumed, consumed);
 
-        public override void AdvanceTo(SequencePosition consumed, SequencePosition examined)
-            => OnAdvanceTo(consumed, examined);
+        public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) =>
+            OnAdvanceTo(consumed, examined);
 
-        public override void CancelPendingRead()
-            => OnCancelPendingRead();
+        public override void CancelPendingRead() => OnCancelPendingRead();
 
-        public override void Complete(Exception exception = null)
-            => OnComplete(exception);
+        public override void Complete(Exception exception = null) => OnComplete(exception);
 
-        public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
-            => OnReadAsync(cancellationToken);
+        public override ValueTask<ReadResult> ReadAsync(
+            CancellationToken cancellationToken = default
+        ) => OnReadAsync(cancellationToken);
 
         public override bool TryRead(out ReadResult result)
         {
@@ -38,7 +37,7 @@ namespace System.Net.Connections.Tests
             return r.HasValue;
         }
 
-        public override ValueTask CompleteAsync(Exception exception = null)
-            => OnCompleteAsync(exception);
+        public override ValueTask CompleteAsync(Exception exception = null) =>
+            OnCompleteAsync(exception);
     }
 }

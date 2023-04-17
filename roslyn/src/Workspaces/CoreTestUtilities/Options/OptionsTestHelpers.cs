@@ -21,16 +21,32 @@ namespace Microsoft.CodeAnalysis.UnitTests
 {
     internal static class OptionsTestHelpers
     {
-        public static readonly Option<bool> CustomPublicOption = new Option<bool>("My Feature", "My Option", defaultValue: true);
+        public static readonly Option<bool> CustomPublicOption = new Option<bool>(
+            "My Feature",
+            "My Option",
+            defaultValue: true
+        );
 
         // all public options and their non-default values:
-        public static readonly ImmutableArray<(IOption, object)> PublicCustomOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
-            (CustomPublicOption, false));
+        public static readonly ImmutableArray<(
+            IOption,
+            object
+        )> PublicCustomOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
+            (CustomPublicOption, false)
+        );
 
-        public static readonly ImmutableArray<(IOption, object)> PublicAutoFormattingOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
-            (FormattingOptions.SmartIndent, FormattingOptions.IndentStyle.Block));
+        public static readonly ImmutableArray<(
+            IOption,
+            object
+        )> PublicAutoFormattingOptionsWithNonDefaultValues = ImmutableArray.Create<(
+            IOption,
+            object
+        )>((FormattingOptions.SmartIndent, FormattingOptions.IndentStyle.Block));
 
-        public static readonly ImmutableArray<(IOption, object)> PublicFormattingOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
+        public static readonly ImmutableArray<(
+            IOption,
+            object
+        )> PublicFormattingOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
             (FormattingOptions.UseTabs, true),
             (FormattingOptions.TabSize, 5),
             (FormattingOptions.IndentationSize, 7),
@@ -79,60 +95,113 @@ namespace Microsoft.CodeAnalysis.UnitTests
             (CSharpFormattingOptions.SpaceWithinOtherParentheses, true),
             (CSharpFormattingOptions.SpaceWithinSquareBrackets, true),
             (CSharpFormattingOptions.SpacingAfterMethodDeclarationName, true),
-            (CSharpFormattingOptions.SpacingAroundBinaryOperator, BinaryOperatorSpacingOptions.Remove),
+            (
+                CSharpFormattingOptions.SpacingAroundBinaryOperator,
+                BinaryOperatorSpacingOptions.Remove
+            ),
             (CSharpFormattingOptions.WrappingKeepStatementsOnSingleLine, false),
-            (CSharpFormattingOptions.WrappingPreserveSingleLine, false));
+            (CSharpFormattingOptions.WrappingPreserveSingleLine, false)
+        );
 
-        public static readonly ImmutableArray<(IOption, object)> PublicCodeStyleOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
-            (CodeStyleOptions.QualifyFieldAccess, new CodeStyleOption<bool>(true, NotificationOption.Suggestion)),
-            (CodeStyleOptions.QualifyPropertyAccess, new CodeStyleOption<bool>(true, NotificationOption.Suggestion)),
-            (CodeStyleOptions.QualifyMethodAccess, new CodeStyleOption<bool>(true, NotificationOption.Suggestion)),
-            (CodeStyleOptions.QualifyEventAccess, new CodeStyleOption<bool>(true, NotificationOption.Suggestion)),
-            (CodeStyleOptions.PreferIntrinsicPredefinedTypeKeywordInDeclaration, new CodeStyleOption<bool>(false, NotificationOption.Suggestion)),
-            (CodeStyleOptions.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, new CodeStyleOption<bool>(false, NotificationOption.Suggestion)));
+        public static readonly ImmutableArray<(
+            IOption,
+            object
+        )> PublicCodeStyleOptionsWithNonDefaultValues = ImmutableArray.Create<(IOption, object)>(
+            (
+                CodeStyleOptions.QualifyFieldAccess,
+                new CodeStyleOption<bool>(true, NotificationOption.Suggestion)
+            ),
+            (
+                CodeStyleOptions.QualifyPropertyAccess,
+                new CodeStyleOption<bool>(true, NotificationOption.Suggestion)
+            ),
+            (
+                CodeStyleOptions.QualifyMethodAccess,
+                new CodeStyleOption<bool>(true, NotificationOption.Suggestion)
+            ),
+            (
+                CodeStyleOptions.QualifyEventAccess,
+                new CodeStyleOption<bool>(true, NotificationOption.Suggestion)
+            ),
+            (
+                CodeStyleOptions.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                new CodeStyleOption<bool>(false, NotificationOption.Suggestion)
+            ),
+            (
+                CodeStyleOptions.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                new CodeStyleOption<bool>(false, NotificationOption.Suggestion)
+            )
+        );
 
         public static readonly IEnumerable<(IOption, object)> AllPublicOptionsWithNonDefaultValues =
             PublicCustomOptionsWithNonDefaultValues
-            .Concat(PublicAutoFormattingOptionsWithNonDefaultValues)
-            .Concat(PublicFormattingOptionsWithNonDefaultValues)
-            .Concat(PublicCodeStyleOptionsWithNonDefaultValues);
+                .Concat(PublicAutoFormattingOptionsWithNonDefaultValues)
+                .Concat(PublicFormattingOptionsWithNonDefaultValues)
+                .Concat(PublicCodeStyleOptionsWithNonDefaultValues);
 
-        public static OptionSet GetOptionSetWithChangedOptions(OptionSet options, IEnumerable<(IOption, object)> optionsWithNonDefaultValues)
+        public static OptionSet GetOptionSetWithChangedOptions(
+            OptionSet options,
+            IEnumerable<(IOption, object)> optionsWithNonDefaultValues
+        )
         {
             var updatedOptions = options;
             foreach (var (option, newValue) in optionsWithNonDefaultValues)
             {
                 foreach (var language in GetApplicableLanguages(option))
                 {
-                    updatedOptions = updatedOptions.WithChangedOption(new OptionKey(option, language), newValue);
+                    updatedOptions = updatedOptions.WithChangedOption(
+                        new OptionKey(option, language),
+                        newValue
+                    );
                 }
             }
 
             return updatedOptions;
         }
 
-        public static IEnumerable<string?> GetApplicableLanguages(IOption option)
-            => option.IsPerLanguage ? new[] { LanguageNames.CSharp, LanguageNames.VisualBasic } : new string?[] { null };
+        public static IEnumerable<string?> GetApplicableLanguages(IOption option) =>
+            option.IsPerLanguage
+                ? new[] { LanguageNames.CSharp, LanguageNames.VisualBasic }
+                : new string?[] { null };
 
-        public static object? GetDifferentValue(Type type, object? value)
-            => value switch
+        public static object? GetDifferentValue(Type type, object? value) =>
+            value switch
             {
                 _ when type == typeof(bool) => !(bool)value!,
                 _ when type == typeof(string) => (string?)value == "X" ? "Y" : "X",
                 _ when type == typeof(int) => (int)value! == 0 ? 1 : 0,
                 _ when type == typeof(long) => (long)value! == 0 ? 1L : 0L,
                 _ when type.IsEnum => GetDifferentEnumValue(type, value!),
-                ICodeStyleOption codeStyle => codeStyle
-                    .WithValue(GetDifferentValue(codeStyle.GetType().GetGenericArguments()[0], codeStyle.Value!)!)
-                    .WithNotification((codeStyle.Notification == NotificationOption2.Error) ? NotificationOption2.Warning : NotificationOption2.Error),
-                NamingStylePreferences namingPreference => namingPreference.IsEmpty ? NamingStylePreferences.Default : NamingStylePreferences.Empty,
+                ICodeStyleOption codeStyle
+                    => codeStyle
+                        .WithValue(
+                            GetDifferentValue(
+                                codeStyle.GetType().GetGenericArguments()[0],
+                                codeStyle.Value!
+                            )!
+                        )
+                        .WithNotification(
+                            (codeStyle.Notification == NotificationOption2.Error)
+                                ? NotificationOption2.Warning
+                                : NotificationOption2.Error
+                        ),
+                NamingStylePreferences namingPreference
+                    => namingPreference.IsEmpty
+                        ? NamingStylePreferences.Default
+                        : NamingStylePreferences.Empty,
                 _ when type == typeof(bool?) => value is null ? true : null,
                 _ when type == typeof(int?) => value is null ? 1 : null,
                 _ when type == typeof(long?) => value is null ? 1L : null,
-                ImmutableArray<bool> array => array.IsEmpty ? ImmutableArray.Create(true) : ImmutableArray<bool>.Empty,
-                ImmutableArray<string> array => array is ["X"] ? ImmutableArray.Create("X", "Y") : ImmutableArray.Create("X"),
-                ImmutableArray<int> array => array.IsEmpty ? ImmutableArray.Create(1) : ImmutableArray<int>.Empty,
-                ImmutableArray<long> array => array.IsEmpty ? ImmutableArray.Create(1L) : ImmutableArray<long>.Empty,
+                ImmutableArray<bool> array
+                    => array.IsEmpty ? ImmutableArray.Create(true) : ImmutableArray<bool>.Empty,
+                ImmutableArray<string> array
+                    => array is ["X"]
+                        ? ImmutableArray.Create("X", "Y")
+                        : ImmutableArray.Create("X"),
+                ImmutableArray<int> array
+                    => array.IsEmpty ? ImmutableArray.Create(1) : ImmutableArray<int>.Empty,
+                ImmutableArray<long> array
+                    => array.IsEmpty ? ImmutableArray.Create(1L) : ImmutableArray<long>.Empty,
 
                 // Hit when a new option is introduced that uses type not handled above:
                 _ => throw ExceptionUtilities.UnexpectedValue(type)
@@ -147,23 +216,25 @@ namespace Microsoft.CodeAnalysis.UnitTests
         /// <summary>
         /// True if the type is a type of an option value.
         /// </summary>
-        public static bool IsOptionValueType(Type type)
-            => type == typeof(bool) ||
-               type == typeof(string) ||
-               type == typeof(int) ||
-               type == typeof(long) ||
-               type == typeof(bool?) ||
-               type == typeof(int?) ||
-               type == typeof(long?) ||
-               type.IsEnum ||
-               typeof(ICodeStyleOption).IsAssignableFrom(type) ||
-               type == typeof(NamingStylePreferences) ||
-               type == typeof(ImmutableArray<bool>) ||
-               type == typeof(ImmutableArray<string>) ||
-               type == typeof(ImmutableArray<int>) ||
-               type == typeof(ImmutableArray<long>);
+        public static bool IsOptionValueType(Type type) =>
+            type == typeof(bool)
+            || type == typeof(string)
+            || type == typeof(int)
+            || type == typeof(long)
+            || type == typeof(bool?)
+            || type == typeof(int?)
+            || type == typeof(long?)
+            || type.IsEnum
+            || typeof(ICodeStyleOption).IsAssignableFrom(type)
+            || type == typeof(NamingStylePreferences)
+            || type == typeof(ImmutableArray<bool>)
+            || type == typeof(ImmutableArray<string>)
+            || type == typeof(ImmutableArray<int>)
+            || type == typeof(ImmutableArray<long>);
 
-        public static Type GetNonNullableType(Type type)
-            => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) ? type.GetGenericArguments()[0] : type;
+        public static Type GetNonNullableType(Type type) =>
+            type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
+                ? type.GetGenericArguments()[0]
+                : type;
     }
 }

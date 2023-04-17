@@ -11,16 +11,23 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class RefSafetyAnalysis : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+    internal sealed partial class RefSafetyAnalysis
+        : BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
     {
-        internal static void Analyze(CSharpCompilation compilation, Symbol symbol, BoundNode node, BindingDiagnosticBag diagnostics)
+        internal static void Analyze(
+            CSharpCompilation compilation,
+            Symbol symbol,
+            BoundNode node,
+            BindingDiagnosticBag diagnostics
+        )
         {
             var visitor = new RefSafetyAnalysis(
                 compilation,
                 symbol,
                 inUnsafeRegion: InUnsafeMethod(symbol),
                 useUpdatedEscapeRules: symbol.ContainingModule.UseUpdatedEscapeRules,
-                diagnostics);
+                diagnostics
+            );
             try
             {
                 visitor.Visit(node);
@@ -31,14 +38,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        internal static void Analyze(CSharpCompilation compilation, Symbol symbol, ImmutableArray<BoundInitializer> fieldAndPropertyInitializers, BindingDiagnosticBag diagnostics)
+        internal static void Analyze(
+            CSharpCompilation compilation,
+            Symbol symbol,
+            ImmutableArray<BoundInitializer> fieldAndPropertyInitializers,
+            BindingDiagnosticBag diagnostics
+        )
         {
             var visitor = new RefSafetyAnalysis(
                 compilation,
                 symbol,
                 inUnsafeRegion: InUnsafeMethod(symbol),
                 useUpdatedEscapeRules: symbol.ContainingModule.UseUpdatedEscapeRules,
-                diagnostics);
+                diagnostics
+            );
             foreach (var initializer in fieldAndPropertyInitializers)
             {
                 try
@@ -79,7 +92,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly BindingDiagnosticBag _diagnostics;
         private bool _inUnsafeRegion;
         private uint _localScopeDepth;
-        private Dictionary<LocalSymbol, (uint RefEscapeScope, uint ValEscapeScope)>? _localEscapeScopes;
+        private Dictionary<
+            LocalSymbol,
+            (uint RefEscapeScope, uint ValEscapeScope)
+        >? _localEscapeScopes;
         private Dictionary<BoundValuePlaceholderBase, uint>? _placeholderScopes;
         private uint _patternInputValEscape;
 
@@ -89,7 +105,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool inUnsafeRegion,
             bool useUpdatedEscapeRules,
             BindingDiagnosticBag diagnostics,
-            Dictionary<LocalSymbol, (uint RefEscapeScope, uint ValEscapeScope)>? localEscapeScopes = null)
+            Dictionary<LocalSymbol, (uint RefEscapeScope, uint ValEscapeScope)>? localEscapeScopes =
+                null
+        )
         {
             _compilation = compilation;
             _symbol = symbol;
@@ -115,7 +133,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _analysis._localScopeDepth++;
                 foreach (var local in locals)
                 {
-                    _analysis.AddLocalScopes(local, refEscapeScope: _analysis._localScopeDepth, valEscapeScope: CallingMethodScope);
+                    _analysis.AddLocalScopes(
+                        local,
+                        refEscapeScope: _analysis._localScopeDepth,
+                        valEscapeScope: CallingMethodScope
+                    );
                 }
             }
 
@@ -170,7 +192,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly RefSafetyAnalysis _analysis;
             private readonly ArrayBuilder<(BoundValuePlaceholderBase, uint)> _placeholders;
 
-            public PlaceholderRegion(RefSafetyAnalysis analysis, ArrayBuilder<(BoundValuePlaceholderBase, uint)> placeholders)
+            public PlaceholderRegion(
+                RefSafetyAnalysis analysis,
+                ArrayBuilder<(BoundValuePlaceholderBase, uint)> placeholders
+            )
             {
                 _analysis = analysis;
                 _placeholders = placeholders;
@@ -234,10 +259,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode? Visit(BoundNode? node)
         {
 #if DEBUG
-            if (node is BoundValuePlaceholderBase placeholder
+            if (
+                node is BoundValuePlaceholderBase placeholder
                 // CheckValEscapeOfObjectInitializer() does not use BoundObjectOrCollectionValuePlaceholder.
                 // CheckInterpolatedStringHandlerConversionEscape() does not use BoundInterpolatedStringHandlerPlaceholder.
-                && node is not (BoundObjectOrCollectionValuePlaceholder or BoundInterpolatedStringHandlerPlaceholder))
+                && node
+                    is not (
+                        BoundObjectOrCollectionValuePlaceholder
+                        or BoundInterpolatedStringHandlerPlaceholder
+                    )
+            )
             {
                 Debug.Assert(_placeholderScopes?.ContainsKey(placeholder) == true);
             }
@@ -255,7 +286,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             base.Visit(value);
 
-            ValidateEscape(value, CallingMethodScope, isByRef: field.RefKind != RefKind.None, _diagnostics);
+            ValidateEscape(
+                value,
+                CallingMethodScope,
+                isByRef: field.RefKind != RefKind.None,
+                _diagnostics
+            );
         }
 
         public override BoundNode? VisitLocalFunctionStatement(BoundLocalFunctionStatement node)
@@ -264,7 +300,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             // https://github.com/dotnet/roslyn/issues/65353: We should not reuse _localEscapeScopes
             // across nested local functions or lambdas because _localScopeDepth is reset when entering
             // the function or lambda so the scopes across the methods are unrelated.
-            var analysis = new RefSafetyAnalysis(_compilation, localFunction, _inUnsafeRegion || localFunction.IsUnsafe, _useUpdatedEscapeRules, _diagnostics, _localEscapeScopes);
+            var analysis = new RefSafetyAnalysis(
+                _compilation,
+                localFunction,
+                _inUnsafeRegion || localFunction.IsUnsafe,
+                _useUpdatedEscapeRules,
+                _diagnostics,
+                _localEscapeScopes
+            );
             analysis.Visit(node.BlockBody);
             analysis.Visit(node.ExpressionBody);
             return null;
@@ -276,7 +319,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             // https://github.com/dotnet/roslyn/issues/65353: We should not reuse _localEscapeScopes
             // across nested local functions or lambdas because _localScopeDepth is reset when entering
             // the function or lambda so the scopes across the methods are unrelated.
-            var analysis = new RefSafetyAnalysis(_compilation, lambda, _inUnsafeRegion, _useUpdatedEscapeRules, _diagnostics, _localEscapeScopes);
+            var analysis = new RefSafetyAnalysis(
+                _compilation,
+                lambda,
+                _inUnsafeRegion,
+                _useUpdatedEscapeRules,
+                _diagnostics,
+                _localEscapeScopes
+            );
             analysis.Visit(node.Body);
             return null;
         }
@@ -349,7 +399,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        public override BoundNode? VisitConvertedSwitchExpression(BoundConvertedSwitchExpression node)
+        public override BoundNode? VisitConvertedSwitchExpression(
+            BoundConvertedSwitchExpression node
+        )
         {
             using var _ = new PatternInput(this, GetValEscape(node.Expression, _localScopeDepth));
             base.VisitConvertedSwitchExpression(node);
@@ -377,8 +429,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode? VisitLocal(BoundLocal node)
         {
             // _localEscapeScopes may be null for locals in top-level statements.
-            Debug.Assert(_localEscapeScopes?.ContainsKey(node.LocalSymbol) == true ||
-                (node.LocalSymbol.ContainingSymbol is SynthesizedSimpleProgramEntryPointSymbol entryPoint && _symbol != entryPoint));
+            Debug.Assert(
+                _localEscapeScopes?.ContainsKey(node.LocalSymbol) == true
+                    || (
+                        node.LocalSymbol.ContainingSymbol
+                            is SynthesizedSimpleProgramEntryPointSymbol entryPoint
+                        && _symbol != entryPoint
+                    )
+            );
 
             return base.VisitLocal(node);
         }
@@ -397,15 +455,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             var scopedModifier = _useUpdatedEscapeRules ? local.Scope : ScopedKind.None;
             if (scopedModifier != ScopedKind.None)
             {
-                refEscapeScope = scopedModifier == ScopedKind.ScopedRef ?
-                    _localScopeDepth :
-                    CurrentMethodScope;
-                valEscapeScope = scopedModifier == ScopedKind.ScopedValue ?
-                    _localScopeDepth :
-                    CallingMethodScope;
+                refEscapeScope =
+                    scopedModifier == ScopedKind.ScopedRef ? _localScopeDepth : CurrentMethodScope;
+                valEscapeScope =
+                    scopedModifier == ScopedKind.ScopedValue
+                        ? _localScopeDepth
+                        : CallingMethodScope;
             }
 
-            _localEscapeScopes ??= new Dictionary<LocalSymbol, (uint RefEscapeScope, uint ValEscapeScope)>();
+            _localEscapeScopes ??=
+                new Dictionary<LocalSymbol, (uint RefEscapeScope, uint ValEscapeScope)>();
             _localEscapeScopes.Add(local, (refEscapeScope, valEscapeScope));
         }
 
@@ -433,8 +492,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // If the local has a scoped modifier, then the lifetime is not inferred from
                     // the initializer. Validate the escape values for the initializer instead.
 
-                    Debug.Assert(localSymbol.RefKind == RefKind.None ||
-                        refEscapeScope >= GetRefEscape(initializer, _localScopeDepth));
+                    Debug.Assert(
+                        localSymbol.RefKind == RefKind.None
+                            || refEscapeScope >= GetRefEscape(initializer, _localScopeDepth)
+                    );
 
                     if (node.DeclaredTypeOpt?.Type.IsRefLikeType == true)
                     {
@@ -499,7 +560,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             SetPatternLocalScopes(node);
 
-            using var _ = new PatternInput(this, getDeclarationValEscape(node.DeclaredType, _patternInputValEscape));
+            using var _ = new PatternInput(
+                this,
+                getDeclarationValEscape(node.DeclaredType, _patternInputValEscape)
+            );
             return base.VisitDeclarationPattern(node);
 
             static uint getDeclarationValEscape(BoundTypeExpression typeExpression, uint valEscape)
@@ -522,25 +586,34 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode? VisitPositionalSubpattern(BoundPositionalSubpattern node)
         {
-            using var _ = new PatternInput(this, getPositionalValEscape(node.Symbol, _patternInputValEscape));
+            using var _ = new PatternInput(
+                this,
+                getPositionalValEscape(node.Symbol, _patternInputValEscape)
+            );
             return base.VisitPositionalSubpattern(node);
 
             static uint getPositionalValEscape(Symbol? symbol, uint valEscape)
             {
                 return symbol is null
                     ? valEscape
-                    : symbol.GetTypeOrReturnType().IsRefLikeType() ? valEscape : CallingMethodScope;
+                    : symbol.GetTypeOrReturnType().IsRefLikeType()
+                        ? valEscape
+                        : CallingMethodScope;
             }
         }
 
         public override BoundNode? VisitPropertySubpattern(BoundPropertySubpattern node)
         {
-            using var _ = new PatternInput(this, getMemberValEscape(node.Member, _patternInputValEscape));
+            using var _ = new PatternInput(
+                this,
+                getMemberValEscape(node.Member, _patternInputValEscape)
+            );
             return base.VisitPropertySubpattern(node);
 
             static uint getMemberValEscape(BoundPropertySubpatternMember? member, uint valEscape)
             {
-                if (member is null) return valEscape;
+                if (member is null)
+                    return valEscape;
                 valEscape = getMemberValEscape(member.Receiver, valEscape);
                 return member.Type.IsRefLikeType ? valEscape : CallingMethodScope;
             }
@@ -559,20 +632,39 @@ namespace Microsoft.CodeAnalysis.CSharp
             base.VisitConditionalOperator(node);
             if (node.IsRef)
             {
-                ValidateRefConditionalOperator(node.Syntax, node.Consequence, node.Alternative, _diagnostics);
+                ValidateRefConditionalOperator(
+                    node.Syntax,
+                    node.Consequence,
+                    node.Alternative,
+                    _diagnostics
+                );
             }
             return null;
         }
 
-        private PlaceholderRegion GetArgumentPlaceholders(BoundExpression? receiverOpt, ImmutableArray<BoundExpression> arguments)
+        private PlaceholderRegion GetArgumentPlaceholders(
+            BoundExpression? receiverOpt,
+            ImmutableArray<BoundExpression> arguments
+        )
         {
             var placeholders = ArrayBuilder<(BoundValuePlaceholderBase, uint)>.GetInstance();
             foreach (var arg in arguments)
             {
-                if (arg is BoundConversion { ConversionKind: ConversionKind.InterpolatedStringHandler, Operand: BoundInterpolatedString or BoundBinaryOperator } conversion)
+                if (
+                    arg is BoundConversion
+                    {
+                        ConversionKind: ConversionKind.InterpolatedStringHandler,
+                        Operand: BoundInterpolatedString or BoundBinaryOperator
+                    } conversion
+                )
                 {
                     var interpolationData = conversion.Operand.GetInterpolatedStringHandlerData();
-                    GetInterpolatedStringPlaceholders(placeholders, interpolationData, receiverOpt, arguments);
+                    GetInterpolatedStringPlaceholders(
+                        placeholders,
+                        interpolationData,
+                        receiverOpt,
+                        arguments
+                    );
                 }
             }
             return new PlaceholderRegion(this, placeholders);
@@ -595,7 +687,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node.ArgumentRefKindsOpt,
                     node.ArgsToParamsOpt,
                     _localScopeDepth,
-                    _diagnostics);
+                    _diagnostics
+                );
             }
 
             return null;
@@ -605,7 +698,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<(BoundValuePlaceholderBase, uint)> placeholders,
             in InterpolatedStringHandlerData interpolationData,
             BoundExpression? receiver,
-            ImmutableArray<BoundExpression> arguments)
+            ImmutableArray<BoundExpression> arguments
+        )
         {
             placeholders.Add((interpolationData.ReceiverPlaceholder, _localScopeDepth));
 
@@ -617,7 +711,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case BoundInterpolatedStringArgumentPlaceholder.InstanceParameter:
                         Debug.Assert(receiver != null);
-                        valEscapeScope = receiver.GetRefKind().IsWritableReference() ? GetRefEscape(receiver, _localScopeDepth) : GetValEscape(receiver, _localScopeDepth);
+                        valEscapeScope = receiver.GetRefKind().IsWritableReference()
+                            ? GetRefEscape(receiver, _localScopeDepth)
+                            : GetValEscape(receiver, _localScopeDepth);
                         break;
                     case BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter:
                     case BoundInterpolatedStringArgumentPlaceholder.UnspecifiedParameter:
@@ -649,7 +745,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node.ArgumentRefKindsOpt,
                     node.ArgsToParamsOpt,
                     _localScopeDepth,
-                    _diagnostics);
+                    _diagnostics
+                );
             }
 
             return null;
@@ -672,13 +769,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node.ArgumentRefKindsOpt,
                     node.ArgsToParamsOpt,
                     _localScopeDepth,
-                    _diagnostics);
+                    _diagnostics
+                );
             }
 
             return null;
         }
 
-        public override BoundNode? VisitFunctionPointerInvocation(BoundFunctionPointerInvocation node)
+        public override BoundNode? VisitFunctionPointerInvocation(
+            BoundFunctionPointerInvocation node
+        )
         {
             using var _ = GetArgumentPlaceholders(receiverOpt: null, node.Arguments);
             base.VisitFunctionPointerInvocation(node);
@@ -695,7 +795,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node.ArgumentRefKindsOpt,
                     argsToParamsOpt: default,
                     _localScopeDepth,
-                    _diagnostics);
+                    _diagnostics
+                );
             }
 
             return null;
@@ -704,13 +805,21 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode? VisitAwaitExpression(BoundAwaitExpression node)
         {
             var placeholders = ArrayBuilder<(BoundValuePlaceholderBase, uint)>.GetInstance();
-            GetAwaitableInstancePlaceholders(placeholders, node.AwaitableInfo, GetValEscape(node.Expression, _localScopeDepth));
+            GetAwaitableInstancePlaceholders(
+                placeholders,
+                node.AwaitableInfo,
+                GetValEscape(node.Expression, _localScopeDepth)
+            );
             using var _ = new PlaceholderRegion(this, placeholders);
             base.VisitAwaitExpression(node);
             return null;
         }
 
-        private void GetAwaitableInstancePlaceholders(ArrayBuilder<(BoundValuePlaceholderBase, uint)> placeholders, BoundAwaitableInfo awaitableInfo, uint valEscapeScope)
+        private void GetAwaitableInstancePlaceholders(
+            ArrayBuilder<(BoundValuePlaceholderBase, uint)> placeholders,
+            BoundAwaitableInfo awaitableInfo,
+            uint valEscapeScope
+        )
         {
             if (awaitableInfo.AwaitableInstancePlaceholder is { } placeholder)
             {
@@ -719,7 +828,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         // Based on NullableWalker.VisitDeconstructionAssignmentOperator().
-        public override BoundNode? VisitDeconstructionAssignmentOperator(BoundDeconstructionAssignmentOperator node)
+        public override BoundNode? VisitDeconstructionAssignmentOperator(
+            BoundDeconstructionAssignmentOperator node
+        )
         {
             base.VisitDeconstructionAssignmentOperator(node);
 
@@ -731,7 +842,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        private void VisitDeconstructionArguments(ArrayBuilder<DeconstructionVariable> variables, SyntaxNode syntax, Conversion conversion, BoundExpression right)
+        private void VisitDeconstructionArguments(
+            ArrayBuilder<DeconstructionVariable> variables,
+            SyntaxNode syntax,
+            Conversion conversion,
+            BoundExpression right
+        )
         {
             Debug.Assert(conversion.Kind == ConversionKind.Deconstruction);
 
@@ -756,7 +872,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var placeholders = ArrayBuilder<(BoundValuePlaceholderBase, uint)>.GetInstance();
-            placeholders.Add((conversion.DeconstructionInfo.InputPlaceholder, GetValEscape(right, _localScopeDepth)));
+            placeholders.Add(
+                (
+                    conversion.DeconstructionInfo.InputPlaceholder,
+                    GetValEscape(right, _localScopeDepth)
+                )
+            );
 
             var parameters = deconstructMethod.Parameters;
             int n = variables.Count;
@@ -785,7 +906,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 invocation.ArgumentRefKindsOpt,
                 invocation.ArgsToParamsOpt,
                 _localScopeDepth,
-                _diagnostics);
+                _diagnostics
+            );
 
             for (int i = 0; i < n; i++)
             {
@@ -793,9 +915,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var nestedVariables = variable.NestedVariables;
                 if (nestedVariables != null)
                 {
-                    var (placeholder, placeholderConversion) = conversion.DeconstructConversionInfo[i];
-                    var underlyingConversion = BoundNode.GetConversion(placeholderConversion, placeholder);
-                    VisitDeconstructionArguments(nestedVariables, syntax, underlyingConversion, right: invocation.Arguments[i + offset]);
+                    var (placeholder, placeholderConversion) = conversion.DeconstructConversionInfo[
+                        i
+                    ];
+                    var underlyingConversion = BoundNode.GetConversion(
+                        placeholderConversion,
+                        placeholder
+                    );
+                    VisitDeconstructionArguments(
+                        nestedVariables,
+                        syntax,
+                        underlyingConversion,
+                        right: invocation.Arguments[i + offset]
+                    );
                 }
             }
         }
@@ -806,7 +938,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal readonly uint ValEscape;
             internal readonly ArrayBuilder<DeconstructionVariable>? NestedVariables;
 
-            internal DeconstructionVariable(BoundExpression expression, uint valEscape, ArrayBuilder<DeconstructionVariable>? nestedVariables)
+            internal DeconstructionVariable(
+                BoundExpression expression,
+                uint valEscape,
+                ArrayBuilder<DeconstructionVariable>? nestedVariables
+            )
             {
                 Expression = expression;
                 ValEscape = valEscape;
@@ -814,7 +950,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private ArrayBuilder<DeconstructionVariable> GetDeconstructionAssignmentVariables(BoundTupleExpression tuple)
+        private ArrayBuilder<DeconstructionVariable> GetDeconstructionAssignmentVariables(
+            BoundTupleExpression tuple
+        )
         {
             var arguments = tuple.Arguments;
             var builder = ArrayBuilder<DeconstructionVariable>.GetInstance(arguments.Length);
@@ -827,12 +965,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             DeconstructionVariable getDeconstructionAssignmentVariable(BoundExpression expr)
             {
                 return expr is BoundTupleExpression tuple
-                    ? new DeconstructionVariable(expr, valEscape: uint.MaxValue, GetDeconstructionAssignmentVariables(tuple))
+                    ? new DeconstructionVariable(
+                        expr,
+                        valEscape: uint.MaxValue,
+                        GetDeconstructionAssignmentVariables(tuple)
+                    )
                     : new DeconstructionVariable(expr, GetValEscape(expr, _localScopeDepth), null);
             }
         }
 
-        private static ImmutableArray<BoundExpression> GetDeconstructionRightParts(BoundExpression expr)
+        private static ImmutableArray<BoundExpression> GetDeconstructionRightParts(
+            BoundExpression expr
+        )
         {
             switch (expr)
             {
@@ -858,7 +1002,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             foreach (var local in node.IterationVariables)
             {
-                AddLocalScopes(local, refEscapeScope: local.RefKind == RefKind.None ? _localScopeDepth : collectionEscape, valEscapeScope: collectionEscape);
+                AddLocalScopes(
+                    local,
+                    refEscapeScope: local.RefKind == RefKind.None
+                        ? _localScopeDepth
+                        : collectionEscape,
+                    valEscapeScope: collectionEscape
+                );
             }
 
             var placeholders = ArrayBuilder<(BoundValuePlaceholderBase, uint)>.GetInstance();
@@ -882,14 +1032,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        private static void Error(BindingDiagnosticBag diagnostics, ErrorCode code, SyntaxNodeOrToken syntax, params object[] args)
+        private static void Error(
+            BindingDiagnosticBag diagnostics,
+            ErrorCode code,
+            SyntaxNodeOrToken syntax,
+            params object[] args
+        )
         {
             var location = syntax.GetLocation();
             RoslynDebug.Assert(location is object);
             Error(diagnostics, code, location, args);
         }
 
-        private static void Error(BindingDiagnosticBag diagnostics, ErrorCode code, Location location, params object[] args)
+        private static void Error(
+            BindingDiagnosticBag diagnostics,
+            ErrorCode code,
+            Location location,
+            params object[] args
+        )
         {
             diagnostics.Add(new CSDiagnostic(new CSDiagnosticInfo(code, args), location));
         }

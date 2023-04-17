@@ -57,7 +57,10 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
-            JsonException e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<string, int>>("{\"Key\u0467\":1", options));
+            JsonException e = Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<Dictionary<string, int>>("{\"Key\u0467\":1", options)
+            );
             Assert.Equal(0, e.LineNumber);
             Assert.Equal(10, e.BytePositionInLine);
             Assert.Contains("LineNumber: 0 | BytePositionInLine: 10.", e.Message);
@@ -84,8 +87,10 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Equal(18, e.LineNumber);
                 Assert.Equal(8, e.BytePositionInLine);
                 Assert.Equal("$.mainSite.zip", e.Path);
-                Assert.Contains("Path: $.mainSite.zip | LineNumber: 18 | BytePositionInLine: 8.",
-                    e.Message);
+                Assert.Contains(
+                    "Path: $.mainSite.zip | LineNumber: 18 | BytePositionInLine: 8.",
+                    e.Message
+                );
 
                 // Verify Path is not repeated.
                 Assert.True(e.Message.IndexOf("Path:") == e.Message.LastIndexOf("Path:"));
@@ -142,20 +147,28 @@ namespace System.Text.Json.Serialization.Tests
             JsonException e;
 
             // Without custom escaper.
-            e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<string, int>>(Json));
+            e = Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<Dictionary<string, int>>(Json)
+            );
             Assert.Equal(Expected, e.Path);
 
-            e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<string, int>>(JsonEscaped));
+            e = Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<Dictionary<string, int>>(JsonEscaped)
+            );
             Assert.Equal(Expected, e.Path);
 
             // Custom escaper should not change Path.
             var options = new JsonSerializerOptions();
             options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
-            e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<string, int>>(Json, options));
+            e = Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<Dictionary<string, int>>(Json, options)
+            );
             Assert.Equal(Expected, e.Path);
 
-            e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<string, int>>(JsonEscaped, options));
+            e = Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<Dictionary<string, int>>(JsonEscaped, options)
+            );
             Assert.Equal(Expected, e.Path);
         }
 
@@ -185,10 +198,14 @@ namespace System.Text.Json.Serialization.Tests
             JsonException e;
 
             // Exception.
-            e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ClassWithUnicodePropertyName>(BadJson));
+            e = Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ClassWithUnicodePropertyName>(BadJson)
+            );
             Assert.Equal(Expected, e.Path);
 
-            e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ClassWithUnicodePropertyName>(BadJsonEscaped));
+            e = Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ClassWithUnicodePropertyName>(BadJsonEscaped)
+            );
             Assert.Equal(Expected, e.Path);
         }
 
@@ -313,7 +330,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             try
             {
-                JsonSerializer.Deserialize<RootClass>(@"{""Child"":{""MyDictionary"":{""Key"": bad]");
+                JsonSerializer.Deserialize<RootClass>(
+                    @"{""Child"":{""MyDictionary"":{""Key"": bad]"
+                );
                 Assert.True(false, "Expected JsonException was not thrown.");
             }
             catch (JsonException e)
@@ -327,7 +346,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             try
             {
-                JsonSerializer.Deserialize<RootClass>(@"{""Child"":{""MyDictionary"":{""Key1"":{""Children"":[{""MyDictionary"":{""K.e.y"":""");
+                JsonSerializer.Deserialize<RootClass>(
+                    @"{""Child"":{""MyDictionary"":{""Key1"":{""Children"":[{""MyDictionary"":{""K.e.y"":"""
+                );
                 Assert.True(false, "Expected JsonException was not thrown.");
             }
             catch (JsonException e)
@@ -341,7 +362,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             try
             {
-                JsonSerializer.Deserialize<RootClass>(@"{""Child"":{""Children"":[{}, {""MyDictionary"":{""K.e.y"": {""MyInt"":bad");
+                JsonSerializer.Deserialize<RootClass>(
+                    @"{""Child"":{""Children"":[{}, {""MyDictionary"":{""K.e.y"": {""MyInt"":bad"
+                );
                 Assert.True(false, "Expected JsonException was not thrown.");
             }
             catch (JsonException e)
@@ -355,7 +378,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             try
             {
-                ClassWithUnicodeProperty obj = JsonSerializer.Deserialize<ClassWithUnicodeProperty>("{\"A\u0467\":bad}");
+                ClassWithUnicodeProperty obj = JsonSerializer.Deserialize<ClassWithUnicodeProperty>(
+                    "{\"A\u0467\":bad}"
+                );
                 Assert.True(false, "Expected JsonException was not thrown.");
             }
             catch (JsonException e)
@@ -372,12 +397,18 @@ namespace System.Text.Json.Serialization.Tests
 
             // Baseline (no exception)
             {
-                SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(@"{""myint32"":1}", options);
+                SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(
+                    @"{""myint32"":1}",
+                    options
+                );
                 Assert.Equal(1, obj.MyInt32);
             }
 
             {
-                SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(@"{""MYINT32"":1}", options);
+                SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(
+                    @"{""MYINT32"":1}",
+                    options
+                );
                 Assert.Equal(1, obj.MyInt32);
             }
 
@@ -433,13 +464,17 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ClassWithUnsupportedArray()
         {
-            Exception ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithInvalidArray>(@"{""UnsupportedArray"":[]}"));
+            Exception ex = Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithInvalidArray>(@"{""UnsupportedArray"":[]}")
+            );
 
             // The exception contains the type.
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
 
-            ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(new ClassWithInvalidArray()));
+            ex = Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Serialize(new ClassWithInvalidArray())
+            );
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
             Assert.DoesNotContain("Path: ", ex.Message);
         }
@@ -447,15 +482,20 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ClassWithUnsupportedArrayInProperty()
         {
-            Exception ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithPropertyToClassWithInvalidArray>(@"{""Inner"":{""UnsupportedArray"":[]}}"));
+            Exception ex = Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithPropertyToClassWithInvalidArray>(
+                        @"{""Inner"":{""UnsupportedArray"":[]}}"
+                    )
+            );
 
             // The exception contains the type and Path.
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
             Assert.Contains("Path: $.Inner | LineNumber: 0 | BytePositionInLine: 10.", ex.Message);
 
-            ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Serialize(new ClassWithPropertyToClassWithInvalidArray()));
+            ex = Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Serialize(new ClassWithPropertyToClassWithInvalidArray())
+            );
 
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
             Assert.Contains(typeof(ClassWithInvalidArray).ToString(), ex.Message);
@@ -470,8 +510,12 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ClassWithUnsupportedDictionary()
         {
-            Exception ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<ClassWithInvalidDictionary>(@"{""UnsupportedDictionary"":{}}"));
+            Exception ex = Assert.Throws<NotSupportedException>(
+                () =>
+                    JsonSerializer.Deserialize<ClassWithInvalidDictionary>(
+                        @"{""UnsupportedDictionary"":{}}"
+                    )
+            );
 
             Assert.Contains("System.Int32[,]", ex.Message);
 
@@ -503,8 +547,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void UnsupportedTypeFromRoot()
         {
-            Exception ex = Assert.Throws<NotSupportedException>(() =>
-                JsonSerializer.Deserialize<int[,]>(@"[]"));
+            Exception ex = Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize<int[,]>(@"[]")
+            );
 
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
 
@@ -527,14 +572,18 @@ namespace System.Text.Json.Serialization.Tests
             {
                 string fullName = typeof(T).FullName;
 
-                NotSupportedException ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<T>(json));
+                NotSupportedException ex = Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Deserialize<T>(json)
+                );
                 string exAsStr = ex.ToString();
                 Assert.Contains(fullName, exAsStr);
                 Assert.Contains("$", exAsStr);
 
                 json = $@"{{""Prop"":{json}}}";
 
-                ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<ClassWithType<T>>(json));
+                ex = Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Deserialize<ClassWithType<T>>(json)
+                );
                 exAsStr = ex.ToString();
                 Assert.Contains(fullName, exAsStr);
                 Assert.Contains("$.Prop", exAsStr);
@@ -544,7 +593,9 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     Assert.Null(JsonSerializer.Deserialize<T>("null"));
 
-                    ClassWithType<T> obj = JsonSerializer.Deserialize<ClassWithType<T>>(@"{""Prop"":null}");
+                    ClassWithType<T> obj = JsonSerializer.Deserialize<ClassWithType<T>>(
+                        @"{""Prop"":null}"
+                    );
                     Assert.Null(obj.Prop);
                 }
             }
@@ -554,7 +605,9 @@ namespace System.Text.Json.Serialization.Tests
         public static void SerializeUnsupportedType()
         {
             RunTest<Type>(typeof(int));
-            RunTest<SerializationInfo>(new SerializationInfo(typeof(Type), new FormatterConverter()));
+            RunTest<SerializationInfo>(
+                new SerializationInfo(typeof(Type), new FormatterConverter())
+            );
             RunTest<IntPtr>((IntPtr)123);
             RunTest<UIntPtr>((UIntPtr)123);
 
@@ -563,7 +616,9 @@ namespace System.Text.Json.Serialization.Tests
                 Type type = typeof(T);
                 string fullName = type.FullName;
 
-                NotSupportedException ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(value));
+                NotSupportedException ex = Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Serialize(value)
+                );
                 string exAsStr = ex.ToString();
                 Assert.Contains(fullName, exAsStr);
                 Assert.Contains("$", exAsStr);
@@ -584,7 +639,10 @@ namespace System.Text.Json.Serialization.Tests
                     serialized = JsonSerializer.Serialize(obj);
                     Assert.Equal(@"{""Prop"":null}", serialized);
 
-                    serialized = JsonSerializer.Serialize(obj, new JsonSerializerOptions { IgnoreNullValues = true });
+                    serialized = JsonSerializer.Serialize(
+                        obj,
+                        new JsonSerializerOptions { IgnoreNullValues = true }
+                    );
                     Assert.Equal(@"{}", serialized);
                 }
             }
@@ -599,13 +657,20 @@ namespace System.Text.Json.Serialization.Tests
                 type,
                 BindingFlags.Instance | BindingFlags.Public,
                 binder: null,
-                args: new object[] { new SerializationInfo(typeof(Type), new FormatterConverter()), new StreamingContext(default) },
-                culture: null)!;
+                args: new object[]
+                {
+                    new SerializationInfo(typeof(Type), new FormatterConverter()),
+                    new StreamingContext(default)
+                },
+                culture: null
+            )!;
 
             Assert.Equal("{}", JsonSerializer.Serialize(instance, type));
 
             // Each constructor parameter must bind to an object property or field.
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize("{}", type));
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Deserialize("{}", type)
+            );
             string exAsStr = ex.ToString();
             Assert.Contains(typeof(SerializationInfo).FullName, exAsStr);
             Assert.Contains(typeof(StreamingContext).FullName, exAsStr);
@@ -620,19 +685,28 @@ namespace System.Text.Json.Serialization.Tests
                 type,
                 BindingFlags.Instance | BindingFlags.Public,
                 binder: null,
-                args: new object[] { new SerializationInfo(typeof(Type), new FormatterConverter()), new StreamingContext(default) },
-                culture: null)!;
+                args: new object[]
+                {
+                    new SerializationInfo(typeof(Type), new FormatterConverter()),
+                    new StreamingContext(default)
+                },
+                culture: null
+            )!;
 
             string serializationInfoName = typeof(SerializationInfo).FullName;
 
             // (De)serialization of SerializationInfo type is not supported.
 
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(instance, type));
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Serialize(instance, type)
+            );
             string exAsStr = ex.ToString();
             Assert.Contains(serializationInfoName, exAsStr);
             Assert.Contains("$.Info", exAsStr);
 
-            ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize(@"{""Info"":{}}", type));
+            ex = Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize(@"{""Info"":{}}", type)
+            );
             exAsStr = ex.ToString();
             Assert.Contains(serializationInfoName, exAsStr);
             Assert.Contains("$.Info", exAsStr);
@@ -642,8 +716,12 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Null(type.GetProperty("Info").GetValue(obj));
 
             // Deserialization of other non-null tokens is not okay.
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize(@"{""Info"":1}", type));
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize(@"{""Info"":""""}", type));
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize(@"{""Info"":1}", type)
+            );
+            Assert.Throws<NotSupportedException>(
+                () => JsonSerializer.Deserialize(@"{""Info"":""""}", type)
+            );
         }
 
         public class ClassWithBadCtor

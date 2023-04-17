@@ -13,15 +13,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
     {
         protected readonly string FieldName;
 
-        public AbstractSnippetFunctionClassName(AbstractSnippetExpansionClient snippetExpansionClient, ITextBuffer subjectBuffer, string fieldName)
+        public AbstractSnippetFunctionClassName(
+            AbstractSnippetExpansionClient snippetExpansionClient,
+            ITextBuffer subjectBuffer,
+            string fieldName
+        )
             : base(snippetExpansionClient, subjectBuffer)
         {
             this.FieldName = fieldName;
         }
 
-        protected abstract void GetContainingClassName(Document document, SnapshotSpan subjectBufferFieldSpan, CancellationToken cancellationToken, ref string value, ref bool hasCurrentValue);
+        protected abstract void GetContainingClassName(
+            Document document,
+            SnapshotSpan subjectBufferFieldSpan,
+            CancellationToken cancellationToken,
+            ref string value,
+            ref bool hasCurrentValue
+        );
 
-        protected override void GetDefaultValue(CancellationToken cancellationToken, out string value, out bool hasDefaultValue)
+        protected override void GetDefaultValue(
+            CancellationToken cancellationToken,
+            out string value,
+            out bool hasDefaultValue
+        )
         {
             hasDefaultValue = false;
             value = string.Empty;
@@ -32,14 +46,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
             Contract.ThrowIfNull(_snippetExpansionClient.ExpansionSession);
 
-            var surfaceBufferFieldSpan = _snippetExpansionClient.ExpansionSession.GetFieldSpan(FieldName);
+            var surfaceBufferFieldSpan = _snippetExpansionClient.ExpansionSession.GetFieldSpan(
+                FieldName
+            );
 
-            if (!_snippetExpansionClient.TryGetSubjectBufferSpan(surfaceBufferFieldSpan, out var subjectBufferFieldSpan))
+            if (
+                !_snippetExpansionClient.TryGetSubjectBufferSpan(
+                    surfaceBufferFieldSpan,
+                    out var subjectBufferFieldSpan
+                )
+            )
             {
                 return;
             }
 
-            GetContainingClassName(document, subjectBufferFieldSpan, cancellationToken, ref value, ref hasDefaultValue);
+            GetContainingClassName(
+                document,
+                subjectBufferFieldSpan,
+                cancellationToken,
+                ref value,
+                ref hasDefaultValue
+            );
         }
     }
 }

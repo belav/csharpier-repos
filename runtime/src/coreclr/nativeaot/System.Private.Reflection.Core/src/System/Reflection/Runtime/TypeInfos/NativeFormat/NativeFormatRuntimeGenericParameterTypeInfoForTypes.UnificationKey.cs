@@ -14,14 +14,19 @@ using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForTypes : NativeFormatRuntimeGenericParameterTypeInfo
+    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForTypes
+        : NativeFormatRuntimeGenericParameterTypeInfo
     {
         //
         // Key for unification.
         //
         internal struct UnificationKey : IEquatable<UnificationKey>
         {
-            public UnificationKey(MetadataReader reader, TypeDefinitionHandle typeDefinitionHandle, GenericParameterHandle genericParameterHandle)
+            public UnificationKey(
+                MetadataReader reader,
+                TypeDefinitionHandle typeDefinitionHandle,
+                GenericParameterHandle genericParameterHandle
+            )
             {
                 Reader = reader;
                 TypeDefinitionHandle = typeDefinitionHandle;

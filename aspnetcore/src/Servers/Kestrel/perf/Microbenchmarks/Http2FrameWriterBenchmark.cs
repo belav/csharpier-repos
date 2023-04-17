@@ -26,25 +26,35 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         {
             _memoryPool = PinnedBlockMemoryPoolFactory.Create();
 
-            var options = new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+            var options = new PipeOptions(
+                _memoryPool,
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            );
             _pipe = new Pipe(options);
 
             var serviceContext = TestContextFactory.CreateServiceContext(
                 serverOptions: new KestrelServerOptions(),
                 httpParser: new HttpParser<Http1ParsingHandler>(),
                 dateHeaderValueManager: new DateHeaderValueManager(),
-                log: new MockTrace());
+                log: new MockTrace()
+            );
 
             _frameWriter = new Http2FrameWriter(
                 new NullPipeWriter(),
                 connectionContext: null,
                 http2Connection: null,
-                new OutputFlowControl(new SingleAwaitableProvider(), initialWindowSize: int.MaxValue),
+                new OutputFlowControl(
+                    new SingleAwaitableProvider(),
+                    initialWindowSize: int.MaxValue
+                ),
                 timeoutControl: null,
                 minResponseDataRate: null,
                 "TestConnectionId",
                 _memoryPool,
-                serviceContext);
+                serviceContext
+            );
 
             _responseHeaders = new HttpResponseHeaders();
             _responseHeaders.HeaderContentType = "application/json";
@@ -54,7 +64,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         [Benchmark]
         public void WriteResponseHeaders()
         {
-            _frameWriter.WriteResponseHeaders(0, 200, Http2HeadersFrameFlags.END_HEADERS, _responseHeaders);
+            _frameWriter.WriteResponseHeaders(
+                0,
+                200,
+                Http2HeadersFrameFlags.END_HEADERS,
+                _responseHeaders
+            );
         }
 
         [GlobalCleanup]

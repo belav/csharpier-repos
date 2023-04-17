@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.SQLite
     /// Base type <see cref="v2.SQLitePersistentStorageService"/>.  Used as a common location for the common static
     /// helpers to load the sqlite pcl library.
     /// </summary>
-    internal abstract class AbstractSQLitePersistentStorageService : AbstractPersistentStorageService
+    internal abstract class AbstractSQLitePersistentStorageService
+        : AbstractPersistentStorageService
     {
         protected static bool TryInitializeLibraries() => s_initialized.Value;
 
@@ -36,9 +37,9 @@ namespace Microsoft.CodeAnalysis.SQLite
             return true;
         }
 
-        protected AbstractSQLitePersistentStorageService(IPersistentStorageLocationService locationService)
-            : base(locationService)
-        {
-        }
+        protected AbstractSQLitePersistentStorageService(
+            IPersistentStorageLocationService locationService
+        )
+            : base(locationService) { }
     }
 }

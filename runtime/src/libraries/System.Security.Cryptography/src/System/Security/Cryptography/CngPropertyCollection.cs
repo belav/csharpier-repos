@@ -10,8 +10,6 @@ namespace System.Security.Cryptography
     public sealed class CngPropertyCollection : Collection<CngProperty>
     {
         public CngPropertyCollection()
-            : base()
-        {
-        }
+            : base() { }
     }
 }

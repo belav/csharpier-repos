@@ -113,64 +113,67 @@ namespace RabbitMQ.Client.Impl
 
         private void UpdateContentBodyState()
         {
-            m_state = (m_remainingBodyBytes > 0)
-                ? AssemblyState.ExpectingContentBody
-                : AssemblyState.Complete;
+            m_state =
+                (m_remainingBodyBytes > 0)
+                    ? AssemblyState.ExpectingContentBody
+                    : AssemblyState.Complete;
         }
-        
+
         public Command HandleFrame(Frame f)
         {
             switch (m_state)
             {
                 case AssemblyState.ExpectingMethod:
+                {
+                    if (f.Type != CommonFraming.Constants.FrameMethod)
                     {
-                        if (f.Type != CommonFraming.Constants.FrameMethod)
-                        {
-                            throw new UnexpectedFrameException(f);
-                        }
-                        m_command.m_method = m_protocol.DecodeMethodFrom(f.GetReader());
-                        m_state = m_command.m_method.HasContent
-                            ? AssemblyState.ExpectingContentHeader
-                            : AssemblyState.Complete;
-                        return CompletedCommand();
+                        throw new UnexpectedFrameException(f);
                     }
+                    m_command.m_method = m_protocol.DecodeMethodFrom(f.GetReader());
+                    m_state = m_command.m_method.HasContent
+                        ? AssemblyState.ExpectingContentHeader
+                        : AssemblyState.Complete;
+                    return CompletedCommand();
+                }
                 case AssemblyState.ExpectingContentHeader:
+                {
+                    if (f.Type != CommonFraming.Constants.FrameHeader)
                     {
-                        if (f.Type != CommonFraming.Constants.FrameHeader)
-                        {
-                            throw new UnexpectedFrameException(f);
-                        }
-                        NetworkBinaryReader reader = f.GetReader();
-                        m_command.m_header = m_protocol.DecodeContentHeaderFrom(reader);
-                        m_remainingBodyBytes = m_command.m_header.ReadFrom(reader);
-                        UpdateContentBodyState();
-                        return CompletedCommand();
+                        throw new UnexpectedFrameException(f);
                     }
+                    NetworkBinaryReader reader = f.GetReader();
+                    m_command.m_header = m_protocol.DecodeContentHeaderFrom(reader);
+                    m_remainingBodyBytes = m_command.m_header.ReadFrom(reader);
+                    UpdateContentBodyState();
+                    return CompletedCommand();
+                }
                 case AssemblyState.ExpectingContentBody:
+                {
+                    if (f.Type != CommonFraming.Constants.FrameBody)
                     {
-                        if (f.Type != CommonFraming.Constants.FrameBody)
-                        {
-                            throw new UnexpectedFrameException(f);
-                        }
-                        byte[] fragment = f.Payload;
-                        m_command.AppendBodyFragment(fragment);
-                        if ((ulong)fragment.Length > m_remainingBodyBytes)
-                        {
-                            throw new MalformedFrameException
-                                (string.Format("Overlong content body received - {0} bytes remaining, {1} bytes received",
-                                               m_remainingBodyBytes,
-                                               fragment.Length));
-                        }
-                        m_remainingBodyBytes -= (ulong)fragment.Length;
-                        UpdateContentBodyState();
-                        return CompletedCommand();
+                        throw new UnexpectedFrameException(f);
                     }
+                    byte[] fragment = f.Payload;
+                    m_command.AppendBodyFragment(fragment);
+                    if ((ulong)fragment.Length > m_remainingBodyBytes)
+                    {
+                        throw new MalformedFrameException(
+                            string.Format(
+                                "Overlong content body received - {0} bytes remaining, {1} bytes received",
+                                m_remainingBodyBytes,
+                                fragment.Length
+                            )
+                        );
+                    }
+                    m_remainingBodyBytes -= (ulong)fragment.Length;
+                    UpdateContentBodyState();
+                    return CompletedCommand();
+                }
                 case AssemblyState.Complete:
                 default:
-                    Trace.Fail(string.Format(
-                        "Received frame in invalid state {0}; {1}",
-                        m_state, 
-                        f));
+                    Trace.Fail(
+                        string.Format("Received frame in invalid state {0}; {1}", m_state, f)
+                    );
                     return null;
             }
         }

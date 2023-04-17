@@ -10,10 +10,13 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["MaxNumberPairwise.Vector128.Single"] = MaxNumberPairwise_Vector128_Single,
-                ["MaxNumberPairwiseScalar.Vector64.Single"] = MaxNumberPairwiseScalar_Vector64_Single,
-                ["MaxNumberPairwiseScalar.Vector128.Double"] = MaxNumberPairwiseScalar_Vector128_Double,
+                ["MaxNumberPairwiseScalar.Vector64.Single"] =
+                    MaxNumberPairwiseScalar_Vector64_Single,
+                ["MaxNumberPairwiseScalar.Vector128.Double"] =
+                    MaxNumberPairwiseScalar_Vector128_Double,
                 ["MaxPairwise.Vector128.Byte"] = MaxPairwise_Vector128_Byte,
                 ["MaxPairwise.Vector128.Double"] = MaxPairwise_Vector128_Double,
                 ["MaxPairwise.Vector128.Int16"] = MaxPairwise_Vector128_Int16,
@@ -43,8 +46,10 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["MinNumberPairwise.Vector64.Single"] = MinNumberPairwise_Vector64_Single,
                 ["MinNumberPairwise.Vector128.Double"] = MinNumberPairwise_Vector128_Double,
                 ["MinNumberPairwise.Vector128.Single"] = MinNumberPairwise_Vector128_Single,
-                ["MinNumberPairwiseScalar.Vector64.Single"] = MinNumberPairwiseScalar_Vector64_Single,
-                ["MinNumberPairwiseScalar.Vector128.Double"] = MinNumberPairwiseScalar_Vector128_Double,
+                ["MinNumberPairwiseScalar.Vector64.Single"] =
+                    MinNumberPairwiseScalar_Vector64_Single,
+                ["MinNumberPairwiseScalar.Vector128.Double"] =
+                    MinNumberPairwiseScalar_Vector128_Double,
                 ["MinPairwise.Vector128.Byte"] = MinPairwise_Vector128_Byte,
                 ["MinPairwise.Vector128.Double"] = MinPairwise_Vector128_Double,
                 ["MinPairwise.Vector128.Int16"] = MinPairwise_Vector128_Int16,
@@ -59,48 +64,125 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["MinScalar.Vector64.Single"] = MinScalar_Vector64_Single,
                 ["Multiply.Vector128.Double"] = Multiply_Vector128_Double,
                 ["MultiplyByScalar.Vector128.Double"] = MultiplyByScalar_Vector128_Double,
-                ["MultiplyBySelectedScalar.Vector128.Double.Vector128.Double.1"] = MultiplyBySelectedScalar_Vector128_Double_Vector128_Double_1,
-                ["MultiplyDoublingSaturateHighScalar.Vector64.Int16"] = MultiplyDoublingSaturateHighScalar_Vector64_Int16,
-                ["MultiplyDoublingSaturateHighScalar.Vector64.Int32"] = MultiplyDoublingSaturateHighScalar_Vector64_Int32,
-                ["MultiplyDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int16.Vector64.Int16.3"] = MultiplyDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int16_Vector64_Int16_3,
-                ["MultiplyDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int16.Vector128.Int16.7"] = MultiplyDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int16_Vector128_Int16_7,
-                ["MultiplyDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int32.Vector64.Int32.1"] = MultiplyDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int32_Vector64_Int32_1,
-                ["MultiplyDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int32.Vector128.Int32.3"] = MultiplyDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int32_Vector128_Int32_3,
-                ["MultiplyDoublingWideningAndAddSaturateScalar.Vector64.Int16"] = MultiplyDoublingWideningAndAddSaturateScalar_Vector64_Int16,
-                ["MultiplyDoublingWideningAndAddSaturateScalar.Vector64.Int32"] = MultiplyDoublingWideningAndAddSaturateScalar_Vector64_Int32,
-                ["MultiplyDoublingWideningAndSubtractSaturateScalar.Vector64.Int16"] = MultiplyDoublingWideningAndSubtractSaturateScalar_Vector64_Int16,
-                ["MultiplyDoublingWideningAndSubtractSaturateScalar.Vector64.Int32"] = MultiplyDoublingWideningAndSubtractSaturateScalar_Vector64_Int32,
-                ["MultiplyDoublingWideningSaturateScalar.Vector64.Int16"] = MultiplyDoublingWideningSaturateScalar_Vector64_Int16,
-                ["MultiplyDoublingWideningSaturateScalar.Vector64.Int32"] = MultiplyDoublingWideningSaturateScalar_Vector64_Int32,
-                ["MultiplyDoublingWideningSaturateScalarBySelectedScalar.Vector64.Int16.Vector64.Int16.3"] = MultiplyDoublingWideningSaturateScalarBySelectedScalar_Vector64_Int16_Vector64_Int16_3,
-                ["MultiplyDoublingWideningSaturateScalarBySelectedScalar.Vector64.Int16.Vector128.Int16.7"] = MultiplyDoublingWideningSaturateScalarBySelectedScalar_Vector64_Int16_Vector128_Int16_7,
-                ["MultiplyDoublingWideningSaturateScalarBySelectedScalar.Vector64.Int32.Vector64.Int32.1"] = MultiplyDoublingWideningSaturateScalarBySelectedScalar_Vector64_Int32_Vector64_Int32_1,
-                ["MultiplyDoublingWideningSaturateScalarBySelectedScalar.Vector64.Int32.Vector128.Int32.3"] = MultiplyDoublingWideningSaturateScalarBySelectedScalar_Vector64_Int32_Vector128_Int32_3,
-                ["MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate.Vector64.Int16.Vector64.Int16.3"] = MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate_Vector64_Int16_Vector64_Int16_3,
-                ["MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate.Vector64.Int16.Vector128.Int16.7"] = MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate_Vector64_Int16_Vector128_Int16_7,
-                ["MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate.Vector64.Int32.Vector64.Int32.1"] = MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate_Vector64_Int32_Vector64_Int32_1,
-                ["MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate.Vector64.Int32.Vector128.Int32.3"] = MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate_Vector64_Int32_Vector128_Int32_3,
-                ["MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate.Vector64.Int16.Vector64.Int16.3"] = MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate_Vector64_Int16_Vector64_Int16_3,
-                ["MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate.Vector64.Int16.Vector128.Int16.7"] = MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate_Vector64_Int16_Vector128_Int16_7,
-                ["MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate.Vector64.Int32.Vector64.Int32.1"] = MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate_Vector64_Int32_Vector64_Int32_1,
-                ["MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate.Vector64.Int32.Vector128.Int32.3"] = MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate_Vector64_Int32_Vector128_Int32_3,
+                ["MultiplyBySelectedScalar.Vector128.Double.Vector128.Double.1"] =
+                    MultiplyBySelectedScalar_Vector128_Double_Vector128_Double_1,
+                ["MultiplyDoublingSaturateHighScalar.Vector64.Int16"] =
+                    MultiplyDoublingSaturateHighScalar_Vector64_Int16,
+                ["MultiplyDoublingSaturateHighScalar.Vector64.Int32"] =
+                    MultiplyDoublingSaturateHighScalar_Vector64_Int32,
+                [
+                    "MultiplyDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int16.Vector64.Int16.3"
+                ] =
+                    MultiplyDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int16_Vector64_Int16_3,
+                [
+                    "MultiplyDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int16.Vector128.Int16.7"
+                ] =
+                    MultiplyDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int16_Vector128_Int16_7,
+                [
+                    "MultiplyDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int32.Vector64.Int32.1"
+                ] =
+                    MultiplyDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int32_Vector64_Int32_1,
+                [
+                    "MultiplyDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int32.Vector128.Int32.3"
+                ] =
+                    MultiplyDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int32_Vector128_Int32_3,
+                ["MultiplyDoublingWideningAndAddSaturateScalar.Vector64.Int16"] =
+                    MultiplyDoublingWideningAndAddSaturateScalar_Vector64_Int16,
+                ["MultiplyDoublingWideningAndAddSaturateScalar.Vector64.Int32"] =
+                    MultiplyDoublingWideningAndAddSaturateScalar_Vector64_Int32,
+                ["MultiplyDoublingWideningAndSubtractSaturateScalar.Vector64.Int16"] =
+                    MultiplyDoublingWideningAndSubtractSaturateScalar_Vector64_Int16,
+                ["MultiplyDoublingWideningAndSubtractSaturateScalar.Vector64.Int32"] =
+                    MultiplyDoublingWideningAndSubtractSaturateScalar_Vector64_Int32,
+                ["MultiplyDoublingWideningSaturateScalar.Vector64.Int16"] =
+                    MultiplyDoublingWideningSaturateScalar_Vector64_Int16,
+                ["MultiplyDoublingWideningSaturateScalar.Vector64.Int32"] =
+                    MultiplyDoublingWideningSaturateScalar_Vector64_Int32,
+                [
+                    "MultiplyDoublingWideningSaturateScalarBySelectedScalar.Vector64.Int16.Vector64.Int16.3"
+                ] =
+                    MultiplyDoublingWideningSaturateScalarBySelectedScalar_Vector64_Int16_Vector64_Int16_3,
+                [
+                    "MultiplyDoublingWideningSaturateScalarBySelectedScalar.Vector64.Int16.Vector128.Int16.7"
+                ] =
+                    MultiplyDoublingWideningSaturateScalarBySelectedScalar_Vector64_Int16_Vector128_Int16_7,
+                [
+                    "MultiplyDoublingWideningSaturateScalarBySelectedScalar.Vector64.Int32.Vector64.Int32.1"
+                ] =
+                    MultiplyDoublingWideningSaturateScalarBySelectedScalar_Vector64_Int32_Vector64_Int32_1,
+                [
+                    "MultiplyDoublingWideningSaturateScalarBySelectedScalar.Vector64.Int32.Vector128.Int32.3"
+                ] =
+                    MultiplyDoublingWideningSaturateScalarBySelectedScalar_Vector64_Int32_Vector128_Int32_3,
+                [
+                    "MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate.Vector64.Int16.Vector64.Int16.3"
+                ] =
+                    MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate_Vector64_Int16_Vector64_Int16_3,
+                [
+                    "MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate.Vector64.Int16.Vector128.Int16.7"
+                ] =
+                    MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate_Vector64_Int16_Vector128_Int16_7,
+                [
+                    "MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate.Vector64.Int32.Vector64.Int32.1"
+                ] =
+                    MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate_Vector64_Int32_Vector64_Int32_1,
+                [
+                    "MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate.Vector64.Int32.Vector128.Int32.3"
+                ] =
+                    MultiplyDoublingWideningScalarBySelectedScalarAndAddSaturate_Vector64_Int32_Vector128_Int32_3,
+                [
+                    "MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate.Vector64.Int16.Vector64.Int16.3"
+                ] =
+                    MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate_Vector64_Int16_Vector64_Int16_3,
+                [
+                    "MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate.Vector64.Int16.Vector128.Int16.7"
+                ] =
+                    MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate_Vector64_Int16_Vector128_Int16_7,
+                [
+                    "MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate.Vector64.Int32.Vector64.Int32.1"
+                ] =
+                    MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate_Vector64_Int32_Vector64_Int32_1,
+                [
+                    "MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate.Vector64.Int32.Vector128.Int32.3"
+                ] =
+                    MultiplyDoublingWideningScalarBySelectedScalarAndSubtractSaturate_Vector64_Int32_Vector128_Int32_3,
                 ["MultiplyExtended.Vector64.Single"] = MultiplyExtended_Vector64_Single,
                 ["MultiplyExtended.Vector128.Double"] = MultiplyExtended_Vector128_Double,
                 ["MultiplyExtended.Vector128.Single"] = MultiplyExtended_Vector128_Single,
-                ["MultiplyExtendedByScalar.Vector128.Double"] = MultiplyExtendedByScalar_Vector128_Double,
-                ["MultiplyExtendedBySelectedScalar.Vector128.Double.Vector128.Double.1"] = MultiplyExtendedBySelectedScalar_Vector128_Double_Vector128_Double_1,
+                ["MultiplyExtendedByScalar.Vector128.Double"] =
+                    MultiplyExtendedByScalar_Vector128_Double,
+                ["MultiplyExtendedBySelectedScalar.Vector128.Double.Vector128.Double.1"] =
+                    MultiplyExtendedBySelectedScalar_Vector128_Double_Vector128_Double_1,
                 ["MultiplyExtendedScalar.Vector64.Double"] = MultiplyExtendedScalar_Vector64_Double,
                 ["MultiplyExtendedScalar.Vector64.Single"] = MultiplyExtendedScalar_Vector64_Single,
-                ["MultiplyExtendedScalarBySelectedScalar.Vector64.Double.Vector128.Double.1"] = MultiplyExtendedScalarBySelectedScalar_Vector64_Double_Vector128_Double_1,
-                ["MultiplyExtendedScalarBySelectedScalar.Vector64.Single.Vector64.Single.1"] = MultiplyExtendedScalarBySelectedScalar_Vector64_Single_Vector64_Single_1,
-                ["MultiplyExtendedScalarBySelectedScalar.Vector64.Single.Vector128.Single.3"] = MultiplyExtendedScalarBySelectedScalar_Vector64_Single_Vector128_Single_3,
-                ["MultiplyRoundedDoublingSaturateHighScalar.Vector64.Int16"] = MultiplyRoundedDoublingSaturateHighScalar_Vector64_Int16,
-                ["MultiplyRoundedDoublingSaturateHighScalar.Vector64.Int32"] = MultiplyRoundedDoublingSaturateHighScalar_Vector64_Int32,
-                ["MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int16.Vector64.Int16.3"] = MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int16_Vector64_Int16_3,
-                ["MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int16.Vector128.Int16.7"] = MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int16_Vector128_Int16_7,
-                ["MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int32.Vector64.Int32.1"] = MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int32_Vector64_Int32_1,
-                ["MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int32.Vector128.Int32.3"] = MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int32_Vector128_Int32_3,
-                ["MultiplyScalarBySelectedScalar.Vector64.Double.Vector128.Double.1"] = MultiplyScalarBySelectedScalar_Vector64_Double_Vector128_Double_1,
+                ["MultiplyExtendedScalarBySelectedScalar.Vector64.Double.Vector128.Double.1"] =
+                    MultiplyExtendedScalarBySelectedScalar_Vector64_Double_Vector128_Double_1,
+                ["MultiplyExtendedScalarBySelectedScalar.Vector64.Single.Vector64.Single.1"] =
+                    MultiplyExtendedScalarBySelectedScalar_Vector64_Single_Vector64_Single_1,
+                ["MultiplyExtendedScalarBySelectedScalar.Vector64.Single.Vector128.Single.3"] =
+                    MultiplyExtendedScalarBySelectedScalar_Vector64_Single_Vector128_Single_3,
+                ["MultiplyRoundedDoublingSaturateHighScalar.Vector64.Int16"] =
+                    MultiplyRoundedDoublingSaturateHighScalar_Vector64_Int16,
+                ["MultiplyRoundedDoublingSaturateHighScalar.Vector64.Int32"] =
+                    MultiplyRoundedDoublingSaturateHighScalar_Vector64_Int32,
+                [
+                    "MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int16.Vector64.Int16.3"
+                ] =
+                    MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int16_Vector64_Int16_3,
+                [
+                    "MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int16.Vector128.Int16.7"
+                ] =
+                    MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int16_Vector128_Int16_7,
+                [
+                    "MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int32.Vector64.Int32.1"
+                ] =
+                    MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int32_Vector64_Int32_1,
+                [
+                    "MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh.Vector64.Int32.Vector128.Int32.3"
+                ] =
+                    MultiplyRoundedDoublingScalarBySelectedScalarSaturateHigh_Vector64_Int32_Vector128_Int32_3,
+                ["MultiplyScalarBySelectedScalar.Vector64.Double.Vector128.Double.1"] =
+                    MultiplyScalarBySelectedScalar_Vector64_Double_Vector128_Double_1,
                 ["Negate.Vector128.Double"] = Negate_Vector128_Double,
                 ["Negate.Vector128.Int64"] = Negate_Vector128_Int64,
                 ["NegateSaturate.Vector128.Int64"] = NegateSaturate_Vector128_Int64,
@@ -110,7 +192,8 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["NegateSaturateScalar.Vector64.SByte"] = NegateSaturateScalar_Vector64_SByte,
                 ["NegateScalar.Vector64.Int64"] = NegateScalar_Vector64_Int64,
                 ["ReciprocalEstimate.Vector128.Double"] = ReciprocalEstimate_Vector128_Double,
-                ["ReciprocalEstimateScalar.Vector64.Double"] = ReciprocalEstimateScalar_Vector64_Double,
+                ["ReciprocalEstimateScalar.Vector64.Double"] =
+                    ReciprocalEstimateScalar_Vector64_Double,
             };
         }
     }

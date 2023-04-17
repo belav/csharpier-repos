@@ -18,7 +18,13 @@ namespace LoadIjwFromModuleHandle
         unsafe static int Main(string[] args)
         {
             // Disable running on Windows 7 until IJW activation work is complete.
-            if(Environment.OSVersion.Platform != PlatformID.Win32NT || (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1))
+            if (
+                Environment.OSVersion.Platform != PlatformID.Win32NT
+                || (
+                    Environment.OSVersion.Version.Major == 6
+                    && Environment.OSVersion.Version.Minor == 1
+                )
+            )
             {
                 return 100;
             }
@@ -28,24 +34,35 @@ namespace LoadIjwFromModuleHandle
                 HostPolicyMock.Initialize(Environment.CurrentDirectory, null);
 
                 Console.WriteLine("Verify that we can load an IJW assembly from native code.");
-                string ijwModulePath = Path.Combine(Environment.CurrentDirectory, "IjwNativeCallingManagedDll.dll");
+                string ijwModulePath = Path.Combine(
+                    Environment.CurrentDirectory,
+                    "IjwNativeCallingManagedDll.dll"
+                );
                 IntPtr ijwNativeHandle = NativeLibrary.Load(ijwModulePath);
 
-                using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                    0,
-                    ijwModulePath,
-                    string.Empty,
-                    string.Empty))
-                fixed (char* path = ijwModulePath)
-                {
-                    InMemoryAssemblyLoader.LoadInMemoryAssembly(ijwNativeHandle, (IntPtr)path);
-                }
+                using (
+                    HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                        0,
+                        ijwModulePath,
+                        string.Empty,
+                        string.Empty
+                    )
+                )
+                    fixed (char* path = ijwModulePath)
+                    {
+                        InMemoryAssemblyLoader.LoadInMemoryAssembly(ijwNativeHandle, (IntPtr)path);
+                    }
 
-                NativeEntryPointDelegate nativeEntryPoint = Marshal.GetDelegateForFunctionPointer<NativeEntryPointDelegate>(NativeLibrary.GetExport(ijwNativeHandle, "NativeEntryPoint"));
+                NativeEntryPointDelegate nativeEntryPoint =
+                    Marshal.GetDelegateForFunctionPointer<NativeEntryPointDelegate>(
+                        NativeLibrary.GetExport(ijwNativeHandle, "NativeEntryPoint")
+                    );
 
                 Assert.Equal(100, nativeEntryPoint());
 
-                Console.WriteLine("Test calls from managed to native to managed when an IJW assembly was first loaded via native.");
+                Console.WriteLine(
+                    "Test calls from managed to native to managed when an IJW assembly was first loaded via native."
+                );
 
                 Assembly ijwAssemblyManaged = Assembly.Load("IjwNativeCallingManagedDll");
                 Type testType = ijwAssemblyManaged.GetType("TestClass");
@@ -80,6 +97,5 @@ namespace LoadIjwFromModuleHandle
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         delegate int NativeEntryPointDelegate();
-
     }
 }

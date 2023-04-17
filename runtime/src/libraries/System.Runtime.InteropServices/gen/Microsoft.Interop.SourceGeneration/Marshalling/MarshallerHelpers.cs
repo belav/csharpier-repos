@@ -15,61 +15,83 @@ namespace Microsoft.Interop
     {
         public static readonly TypeSyntax SystemIntPtrType = ParseTypeName(TypeNames.System_IntPtr);
 
-        public static ForStatementSyntax GetForLoop(ExpressionSyntax lengthExpression, string indexerIdentifier)
+        public static ForStatementSyntax GetForLoop(
+            ExpressionSyntax lengthExpression,
+            string indexerIdentifier
+        )
         {
             // for(int <indexerIdentifier> = 0; <indexerIdentifier> < <lengthIdentifier>; ++<indexerIdentifier>)
             //      ;
             return ForStatement(EmptyStatement())
-            .WithDeclaration(
-                VariableDeclaration(
-                    PredefinedType(
-                        Token(SyntaxKind.IntKeyword)))
-                .WithVariables(
-                    SingletonSeparatedList(
-                        VariableDeclarator(
-                            Identifier(indexerIdentifier))
-                        .WithInitializer(
-                            EqualsValueClause(
-                                LiteralExpression(
-                                    SyntaxKind.NumericLiteralExpression,
-                                    Literal(0)))))))
-            .WithCondition(
-                BinaryExpression(
-                    SyntaxKind.LessThanExpression,
-                    IdentifierName(indexerIdentifier),
-                    lengthExpression))
-            .WithIncrementors(
-                SingletonSeparatedList<ExpressionSyntax>(
-                    PrefixUnaryExpression(
-                        SyntaxKind.PreIncrementExpression,
-                        IdentifierName(indexerIdentifier))));
+                .WithDeclaration(
+                    VariableDeclaration(PredefinedType(Token(SyntaxKind.IntKeyword)))
+                        .WithVariables(
+                            SingletonSeparatedList(
+                                VariableDeclarator(Identifier(indexerIdentifier))
+                                    .WithInitializer(
+                                        EqualsValueClause(
+                                            LiteralExpression(
+                                                SyntaxKind.NumericLiteralExpression,
+                                                Literal(0)
+                                            )
+                                        )
+                                    )
+                            )
+                        )
+                )
+                .WithCondition(
+                    BinaryExpression(
+                        SyntaxKind.LessThanExpression,
+                        IdentifierName(indexerIdentifier),
+                        lengthExpression
+                    )
+                )
+                .WithIncrementors(
+                    SingletonSeparatedList<ExpressionSyntax>(
+                        PrefixUnaryExpression(
+                            SyntaxKind.PreIncrementExpression,
+                            IdentifierName(indexerIdentifier)
+                        )
+                    )
+                );
         }
 
-        public static LocalDeclarationStatementSyntax Declare(TypeSyntax typeSyntax, string identifier, bool initializeToDefault)
+        public static LocalDeclarationStatementSyntax Declare(
+            TypeSyntax typeSyntax,
+            string identifier,
+            bool initializeToDefault
+        )
         {
-            return Declare(typeSyntax, identifier, initializeToDefault ? LiteralExpression(SyntaxKind.DefaultLiteralExpression) : null);
+            return Declare(
+                typeSyntax,
+                identifier,
+                initializeToDefault ? LiteralExpression(SyntaxKind.DefaultLiteralExpression) : null
+            );
         }
 
-        public static LocalDeclarationStatementSyntax Declare(TypeSyntax typeSyntax, string identifier, ExpressionSyntax? initializer)
+        public static LocalDeclarationStatementSyntax Declare(
+            TypeSyntax typeSyntax,
+            string identifier,
+            ExpressionSyntax? initializer
+        )
         {
             VariableDeclaratorSyntax decl = VariableDeclarator(identifier);
             if (initializer is not null)
             {
-                decl = decl.WithInitializer(
-                    EqualsValueClause(
-                        initializer));
+                decl = decl.WithInitializer(EqualsValueClause(initializer));
             }
 
             // <type> <identifier>;
             // or
             // <type> <identifier> = <initializer>;
             return LocalDeclarationStatement(
-                VariableDeclaration(
-                    typeSyntax,
-                    SingletonSeparatedList(decl)));
+                VariableDeclaration(typeSyntax, SingletonSeparatedList(decl))
+            );
         }
 
-        public static RefKind GetRefKindForByValueContentsKind(this ByValueContentsMarshalKind byValue)
+        public static RefKind GetRefKindForByValueContentsKind(
+            this ByValueContentsMarshalKind byValue
+        )
         {
             return byValue switch
             {
@@ -92,7 +114,6 @@ namespace Microsoft.Interop
             return spanElementTypeSyntax;
         }
 
-
         // Marshal.SetLastSystemError(<errorCode>);
         public static StatementSyntax CreateClearLastSystemErrorStatement(int errorCode) =>
             ExpressionStatement(
@@ -100,39 +121,65 @@ namespace Microsoft.Interop
                     MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         ParseName(TypeNames.System_Runtime_InteropServices_Marshal),
-                        IdentifierName("SetLastSystemError")),
-                    ArgumentList(SingletonSeparatedList(
-                        Argument(LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(errorCode)))))));
+                        IdentifierName("SetLastSystemError")
+                    ),
+                    ArgumentList(
+                        SingletonSeparatedList(
+                            Argument(
+                                LiteralExpression(
+                                    SyntaxKind.NumericLiteralExpression,
+                                    Literal(errorCode)
+                                )
+                            )
+                        )
+                    )
+                )
+            );
 
         // <lastError> = Marshal.GetLastSystemError();
-        public static StatementSyntax CreateGetLastSystemErrorStatement(string lastErrorIdentifier) =>
+        public static StatementSyntax CreateGetLastSystemErrorStatement(
+            string lastErrorIdentifier
+        ) =>
             ExpressionStatement(
                 AssignmentExpression(
                     SyntaxKind.SimpleAssignmentExpression,
                     IdentifierName(lastErrorIdentifier),
                     InvocationExpression(
                         MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        ParseName(TypeNames.System_Runtime_InteropServices_Marshal),
-                        IdentifierName("GetLastSystemError")))));
+                            SyntaxKind.SimpleMemberAccessExpression,
+                            ParseName(TypeNames.System_Runtime_InteropServices_Marshal),
+                            IdentifierName("GetLastSystemError")
+                        )
+                    )
+                )
+            );
 
         // Marshal.SetLastPInvokeError(<lastError>);
-        public static StatementSyntax CreateSetLastPInvokeErrorStatement(string lastErrorIdentifier) =>
+        public static StatementSyntax CreateSetLastPInvokeErrorStatement(
+            string lastErrorIdentifier
+        ) =>
             ExpressionStatement(
                 InvocationExpression(
                     MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         ParseName(TypeNames.System_Runtime_InteropServices_Marshal),
-                        IdentifierName("SetLastPInvokeError")),
-                    ArgumentList(SingletonSeparatedList(
-                        Argument(IdentifierName(lastErrorIdentifier))))));
+                        IdentifierName("SetLastPInvokeError")
+                    ),
+                    ArgumentList(
+                        SingletonSeparatedList(Argument(IdentifierName(lastErrorIdentifier)))
+                    )
+                )
+            );
 
         public static string GetMarshallerIdentifier(TypePositionInfo info, StubCodeContext context)
         {
             return context.GetAdditionalIdentifier(info, "marshaller");
         }
 
-        public static string GetManagedSpanIdentifier(TypePositionInfo info, StubCodeContext context)
+        public static string GetManagedSpanIdentifier(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             return context.GetAdditionalIdentifier(info, "managedSpan");
         }
@@ -142,14 +189,21 @@ namespace Microsoft.Interop
             return context.GetAdditionalIdentifier(info, "nativeSpan");
         }
 
-        public static string GetNumElementsIdentifier(TypePositionInfo info, StubCodeContext context)
+        public static string GetNumElementsIdentifier(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             return context.GetAdditionalIdentifier(info, "numElements");
         }
 
-        internal static bool CanUseCallerAllocatedBuffer(TypePositionInfo info, StubCodeContext context)
+        internal static bool CanUseCallerAllocatedBuffer(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
-            return context.SingleFrameSpansNativeContext && (!info.IsByRef || info.RefKind == RefKind.In);
+            return context.SingleFrameSpansNativeContext
+                && (!info.IsByRef || info.RefKind == RefKind.In);
         }
 
         /// <summary>
@@ -164,7 +218,8 @@ namespace Microsoft.Interop
         public static IEnumerable<T> GetTopologicallySortedElements<T, U>(
             ICollection<T> elements,
             Func<T, U> keyFn,
-            Func<T, IEnumerable<U>> getDependentIndicesFn)
+            Func<T, IEnumerable<U>> getDependentIndicesFn
+        )
         {
             Dictionary<U, int> elementIndexToEdgeMapNodeId = new(elements.Count);
             List<T> nodeIdToElement = new(elements.Count);
@@ -184,7 +239,10 @@ namespace Microsoft.Interop
                 {
                     // Add an edge from the node for dependentElementIndex-> the node for elementIndex
                     // This way, elements that have no dependencies have no edges pointing to them.
-                    edgeMap[elementIndexToEdgeMapNodeId[elementIndex], elementIndexToEdgeMapNodeId[dependentElementIndex]] = true;
+                    edgeMap[
+                        elementIndexToEdgeMapNodeId[elementIndex],
+                        elementIndexToEdgeMapNodeId[dependentElementIndex]
+                    ] = true;
                 }
             }
 
@@ -275,24 +333,44 @@ namespace Microsoft.Interop
         }
 
         public static IEnumerable<TypePositionInfo> GetDependentElementsOfMarshallingInfo(
-            MarshallingInfo elementMarshallingInfo)
+            MarshallingInfo elementMarshallingInfo
+        )
         {
             if (elementMarshallingInfo is NativeLinearCollectionMarshallingInfo nestedCollection)
             {
-                if (nestedCollection.ElementCountInfo is CountElementCountInfo { ElementInfo: TypePositionInfo nestedCountElement })
+                if (
+                    nestedCollection.ElementCountInfo is CountElementCountInfo
+                    {
+                        ElementInfo: TypePositionInfo nestedCountElement
+                    }
+                )
                 {
                     // Do not include dependent elements with no managed or native index.
                     // These values are dummy values that are inserted earlier to avoid emitting extra diagnostics.
-                    if (nestedCountElement.ManagedIndex != TypePositionInfo.UnsetIndex || nestedCountElement.NativeIndex != TypePositionInfo.UnsetIndex)
+                    if (
+                        nestedCountElement.ManagedIndex != TypePositionInfo.UnsetIndex
+                        || nestedCountElement.NativeIndex != TypePositionInfo.UnsetIndex
+                    )
                     {
                         yield return nestedCountElement;
                     }
                 }
-                foreach (KeyValuePair<MarshalMode, CustomTypeMarshallerData> mode in nestedCollection.Marshallers.Modes)
+                foreach (
+                    KeyValuePair<MarshalMode, CustomTypeMarshallerData> mode in nestedCollection
+                        .Marshallers
+                        .Modes
+                )
                 {
-                    foreach (TypePositionInfo nestedElement in GetDependentElementsOfMarshallingInfo(mode.Value.CollectionElementMarshallingInfo))
+                    foreach (
+                        TypePositionInfo nestedElement in GetDependentElementsOfMarshallingInfo(
+                            mode.Value.CollectionElementMarshallingInfo
+                        )
+                    )
                     {
-                        if (nestedElement.ManagedIndex != TypePositionInfo.UnsetIndex || nestedElement.NativeIndex != TypePositionInfo.UnsetIndex)
+                        if (
+                            nestedElement.ManagedIndex != TypePositionInfo.UnsetIndex
+                            || nestedElement.NativeIndex != TypePositionInfo.UnsetIndex
+                        )
                         {
                             yield return nestedElement;
                         }
@@ -301,24 +379,37 @@ namespace Microsoft.Interop
             }
         }
 
-        public static StatementSyntax SkipInitOrDefaultInit(TypePositionInfo info, StubCodeContext context)
+        public static StatementSyntax SkipInitOrDefaultInit(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             (TargetFramework fmk, _) = context.GetTargetFramework();
-            if (info.ManagedType is not PointerTypeInfo
+            if (
+                info.ManagedType is not PointerTypeInfo
                 && info.ManagedType is not ValueTypeInfo { IsByRefLike: true }
-                && fmk is TargetFramework.Net)
+                && fmk is TargetFramework.Net
+            )
             {
                 // Use the Unsafe.SkipInit<T> API when available and
                 // managed type is usable as a generic parameter.
                 return ExpressionStatement(
                     InvocationExpression(
-                        MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                            ParseName(TypeNames.System_Runtime_CompilerServices_Unsafe),
-                            IdentifierName("SkipInit")))
-                    .WithArgumentList(
-                        ArgumentList(SingletonSeparatedList(
-                            Argument(IdentifierName(info.InstanceIdentifier))
-                            .WithRefOrOutKeyword(Token(SyntaxKind.OutKeyword))))));
+                            MemberAccessExpression(
+                                SyntaxKind.SimpleMemberAccessExpression,
+                                ParseName(TypeNames.System_Runtime_CompilerServices_Unsafe),
+                                IdentifierName("SkipInit")
+                            )
+                        )
+                        .WithArgumentList(
+                            ArgumentList(
+                                SingletonSeparatedList(
+                                    Argument(IdentifierName(info.InstanceIdentifier))
+                                        .WithRefOrOutKeyword(Token(SyntaxKind.OutKeyword))
+                                )
+                            )
+                        )
+                );
             }
             else
             {
@@ -329,7 +420,10 @@ namespace Microsoft.Interop
                         IdentifierName(info.InstanceIdentifier),
                         LiteralExpression(
                             SyntaxKind.DefaultLiteralExpression,
-                            Token(SyntaxKind.DefaultKeyword))));
+                            Token(SyntaxKind.DefaultKeyword)
+                        )
+                    )
+                );
             }
         }
 
@@ -341,9 +435,15 @@ namespace Microsoft.Interop
         /// <param name="info">The info for an element.</param>
         /// <param name="context">The context for the stub.</param>
         /// <returns>The direction the element is marshalled.</returns>
-        public static MarshalDirection GetMarshalDirection(TypePositionInfo info, StubCodeContext context)
+        public static MarshalDirection GetMarshalDirection(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
-            if (context.Direction is not (MarshalDirection.ManagedToUnmanaged or MarshalDirection.UnmanagedToManaged))
+            if (
+                context.Direction
+                is not (MarshalDirection.ManagedToUnmanaged or MarshalDirection.UnmanagedToManaged)
+            )
             {
                 throw new ArgumentException("Stub context direction must not be bidirectional.");
             }
@@ -367,9 +467,10 @@ namespace Microsoft.Interop
                     case RefKind.Out:
                         return MarshalDirection.UnmanagedToManaged;
                 }
-                throw new UnreachableException("An element is either a return value or passed by value or by ref.");
+                throw new UnreachableException(
+                    "An element is either a return value or passed by value or by ref."
+                );
             }
-
 
             if (info.IsNativeReturnPosition)
             {
@@ -388,7 +489,9 @@ namespace Microsoft.Interop
                 case RefKind.Out:
                     return MarshalDirection.ManagedToUnmanaged;
             }
-            throw new UnreachableException("An element is either a return value or passed by value or by ref.");
+            throw new UnreachableException(
+                "An element is either a return value or passed by value or by ref."
+            );
         }
     }
 }

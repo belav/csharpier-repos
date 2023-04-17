@@ -20,7 +20,9 @@ namespace Internal.TypeSystem.Ecma
 
             foreach (var methodImplHandle in _typeDefinition.GetMethodImplementations())
             {
-                MethodImplementation methodImpl = metadataReader.GetMethodImplementation(methodImplHandle);
+                MethodImplementation methodImpl = metadataReader.GetMethodImplementation(
+                    methodImplHandle
+                );
 
                 EntityHandle methodDeclCheckHandle = methodImpl.MethodDeclaration;
                 HandleKind methodDeclHandleKind = methodDeclCheckHandle.Kind;
@@ -29,7 +31,9 @@ namespace Internal.TypeSystem.Ecma
                 // we need to dereference that handle to the underlying member reference to look at name matching.
                 if (methodDeclHandleKind == HandleKind.MethodSpecification)
                 {
-                    methodDeclCheckHandle = metadataReader.GetMethodSpecification((MethodSpecificationHandle)methodDeclCheckHandle).Method;
+                    methodDeclCheckHandle = metadataReader
+                        .GetMethodSpecification((MethodSpecificationHandle)methodDeclCheckHandle)
+                        .Method;
                     methodDeclHandleKind = methodDeclCheckHandle.Kind;
                 }
 
@@ -38,14 +42,32 @@ namespace Internal.TypeSystem.Ecma
                 switch (methodDeclHandleKind)
                 {
                     case HandleKind.MethodDefinition:
-                        if (stringComparer.Equals(metadataReader.GetMethodDefinition((MethodDefinitionHandle)methodDeclCheckHandle).Name, declName))
+                        if (
+                            stringComparer.Equals(
+                                metadataReader
+                                    .GetMethodDefinition(
+                                        (MethodDefinitionHandle)methodDeclCheckHandle
+                                    )
+                                    .Name,
+                                declName
+                            )
+                        )
                         {
                             foundRecord = true;
                         }
                         break;
 
                     case HandleKind.MemberReference:
-                        if (stringComparer.Equals(metadataReader.GetMemberReference((MemberReferenceHandle)methodDeclCheckHandle).Name, declName))
+                        if (
+                            stringComparer.Equals(
+                                metadataReader
+                                    .GetMemberReference(
+                                        (MemberReferenceHandle)methodDeclCheckHandle
+                                    )
+                                    .Name,
+                                declName
+                            )
+                        )
                         {
                             foundRecord = true;
                         }
@@ -60,7 +82,8 @@ namespace Internal.TypeSystem.Ecma
                 {
                     MethodImplRecord newRecord = new MethodImplRecord(
                         (MethodDesc)_module.GetObject(methodImpl.MethodDeclaration),
-                        (MethodDesc)_module.GetObject(methodImpl.MethodBody));
+                        (MethodDesc)_module.GetObject(methodImpl.MethodBody)
+                    );
 
                     foundRecords.Add(newRecord);
                 }
@@ -80,7 +103,9 @@ namespace Internal.TypeSystem.Ecma
 
             foreach (var methodImplHandle in _typeDefinition.GetMethodImplementations())
             {
-                MethodImplementation methodImpl = metadataReader.GetMethodImplementation(methodImplHandle);
+                MethodImplementation methodImpl = metadataReader.GetMethodImplementation(
+                    methodImplHandle
+                );
 
                 EntityHandle methodDeclCheckHandle = methodImpl.MethodDeclaration;
                 HandleKind methodDeclHandleKind = methodDeclCheckHandle.Kind;
@@ -90,7 +115,9 @@ namespace Internal.TypeSystem.Ecma
                 // look at the owning type.
                 if (methodDeclHandleKind == HandleKind.MethodSpecification)
                 {
-                    methodDeclCheckHandle = metadataReader.GetMethodSpecification((MethodSpecificationHandle)methodDeclCheckHandle).Method;
+                    methodDeclCheckHandle = metadataReader
+                        .GetMethodSpecification((MethodSpecificationHandle)methodDeclCheckHandle)
+                        .Method;
                     methodDeclHandleKind = methodDeclCheckHandle.Kind;
                 }
 
@@ -98,11 +125,15 @@ namespace Internal.TypeSystem.Ecma
                 switch (methodDeclHandleKind)
                 {
                     case HandleKind.MethodDefinition:
-                        owningType = ((MethodDesc)_module.GetObject(methodDeclCheckHandle)).OwningType as MetadataType;
+                        owningType =
+                            ((MethodDesc)_module.GetObject(methodDeclCheckHandle)).OwningType
+                            as MetadataType;
                         break;
 
                     case HandleKind.MemberReference:
-                        EntityHandle owningTypeHandle = metadataReader.GetMemberReference((MemberReferenceHandle)methodDeclCheckHandle).Parent;
+                        EntityHandle owningTypeHandle = metadataReader
+                            .GetMemberReference((MemberReferenceHandle)methodDeclCheckHandle)
+                            .Parent;
                         owningType = _module.GetObject(owningTypeHandle) as MetadataType;
                         break;
 
@@ -115,7 +146,8 @@ namespace Internal.TypeSystem.Ecma
                 {
                     MethodImplRecord newRecord = new MethodImplRecord(
                         (MethodDesc)_module.GetObject(methodImpl.MethodDeclaration),
-                        (MethodDesc)_module.GetObject(methodImpl.MethodBody));
+                        (MethodDesc)_module.GetObject(methodImpl.MethodBody)
+                    );
                     records.Add(newRecord);
                 }
             }

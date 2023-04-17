@@ -12,9 +12,7 @@ internal sealed class tagDBPROPSET
     public Int32 cProperties;
     public Guid guidPropertySet;
 
-    internal tagDBPROPSET()
-    {
-    }
+    internal tagDBPROPSET() { }
 
     internal tagDBPROPSET(int propertyCount, Guid propertySet)
     {

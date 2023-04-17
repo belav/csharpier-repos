@@ -12,6 +12,7 @@ interface IRT
 class CRT : IRT
 {
     public static object line;
+
     public void WriteLine<T>(T val) => line = val;
 }
 

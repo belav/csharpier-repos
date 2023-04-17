@@ -43,7 +43,8 @@ public static class NewtonsoftJsonMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddNewtonsoftJson(
         this IMvcCoreBuilder builder,
-        Action<MvcNewtonsoftJsonOptions> setupAction)
+        Action<MvcNewtonsoftJsonOptions> setupAction
+    )
     {
         if (builder == null)
         {
@@ -67,13 +68,20 @@ public static class NewtonsoftJsonMvcCoreBuilderExtensions
     {
         services.TryAddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, NewtonsoftJsonMvcOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<MvcOptions>,
+                NewtonsoftJsonMvcOptionsSetup
+            >()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IApiDescriptionProvider, JsonPatchOperationsArrayProvider>());
+            ServiceDescriptor.Transient<IApiDescriptionProvider, JsonPatchOperationsArrayProvider>()
+        );
 
-        var jsonResultExecutor = services.FirstOrDefault(f =>
-           f.ServiceType == typeof(IActionResultExecutor<JsonResult>) &&
-           f.ImplementationType?.Assembly == typeof(JsonResult).Assembly);
+        var jsonResultExecutor = services.FirstOrDefault(
+            f =>
+                f.ServiceType == typeof(IActionResultExecutor<JsonResult>)
+                && f.ImplementationType?.Assembly == typeof(JsonResult).Assembly
+        );
 
         if (jsonResultExecutor != null)
         {
@@ -82,9 +90,11 @@ public static class NewtonsoftJsonMvcCoreBuilderExtensions
         services.TryAddSingleton<IActionResultExecutor<JsonResult>, NewtonsoftJsonResultExecutor>();
 
         var viewFeaturesAssembly = typeof(IHtmlHelper).Assembly;
-        var tempDataSerializer = services.FirstOrDefault(f =>
-            f.ServiceType == typeof(TempDataSerializer) &&
-            f.ImplementationType?.Assembly == viewFeaturesAssembly);
+        var tempDataSerializer = services.FirstOrDefault(
+            f =>
+                f.ServiceType == typeof(TempDataSerializer)
+                && f.ImplementationType?.Assembly == viewFeaturesAssembly
+        );
 
         if (tempDataSerializer != null)
         {
@@ -97,8 +107,10 @@ public static class NewtonsoftJsonMvcCoreBuilderExtensions
         // JSON Helper
         //
         var jsonHelper = services.FirstOrDefault(
-            f => f.ServiceType == typeof(IJsonHelper) &&
-            f.ImplementationType?.Assembly == viewFeaturesAssembly);
+            f =>
+                f.ServiceType == typeof(IJsonHelper)
+                && f.ImplementationType?.Assembly == viewFeaturesAssembly
+        );
         if (jsonHelper != null)
         {
             services.Remove(jsonHelper);

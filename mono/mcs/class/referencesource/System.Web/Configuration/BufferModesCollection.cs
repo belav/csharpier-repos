@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Xml;
     using System.Configuration;
@@ -22,53 +23,59 @@ namespace System.Web.Configuration {
     using System.Security.Permissions;
 
     [ConfigurationCollection(typeof(BufferModeSettings))]
-    public sealed class BufferModesCollection : ConfigurationElementCollection {
+    public sealed class BufferModesCollection : ConfigurationElementCollection
+    {
         private static ConfigurationPropertyCollection _properties;
 
-        static BufferModesCollection() {
+        static BufferModesCollection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
         }
 
-        public BufferModesCollection() {
+        public BufferModesCollection() { }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
-        }
-
-        public void Add(BufferModeSettings bufferModeSettings) {
+        public void Add(BufferModeSettings bufferModeSettings)
+        {
             BaseAdd(bufferModeSettings);
         }
 
-        public void Remove(String s) {
+        public void Remove(String s)
+        {
             BaseRemove(s);
         }
 
-        public void Clear() {
+        public void Clear()
+        {
             BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement() {
+        protected override ConfigurationElement CreateNewElement()
+        {
             return new BufferModeSettings();
         }
-        protected override Object GetElementKey(ConfigurationElement element) {
+
+        protected override Object GetElementKey(ConfigurationElement element)
+        {
             return ((BufferModeSettings)element).Name;
         }
 
-        public new BufferModeSettings this[string key] {
-            get {
-                return (BufferModeSettings)BaseGet(key);
-            }
+        public new BufferModeSettings this[string key]
+        {
+            get { return (BufferModeSettings)BaseGet(key); }
         }
-        public BufferModeSettings this[int index] {
-            get {
-                return (BufferModeSettings)BaseGet(index);
-            }
-            set {
-                if (BaseGet(index) != null) {
+        public BufferModeSettings this[int index]
+        {
+            get { return (BufferModeSettings)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                {
                     BaseRemoveAt(index);
                 }
                 BaseAdd(index, value);

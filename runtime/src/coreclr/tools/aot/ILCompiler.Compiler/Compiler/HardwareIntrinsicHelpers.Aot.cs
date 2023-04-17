@@ -23,10 +23,17 @@ namespace ILCompiler
         /// Generates IL for the IsSupported property that reads this information from a field initialized by the runtime
         /// at startup. Only works for intrinsics that the code generator can generate detection code for.
         /// </summary>
-        public static MethodIL EmitIsSupportedIL(MethodDesc method, FieldDesc isSupportedField, InstructionSet instructionSet)
+        public static MethodIL EmitIsSupportedIL(
+            MethodDesc method,
+            FieldDesc isSupportedField,
+            InstructionSet instructionSet
+        )
         {
             Debug.Assert(IsIsSupportedMethod(method));
-            Debug.Assert(isSupportedField.IsStatic && isSupportedField.FieldType.IsWellKnownType(WellKnownType.Int32));
+            Debug.Assert(
+                isSupportedField.IsStatic
+                    && isSupportedField.FieldType.IsWellKnownType(WellKnownType.Int32)
+            );
 
             int flag = 0;
 
@@ -166,7 +173,8 @@ namespace ILCompiler
                     InstructionSet.X64_AVX512DQ_VL_X64 => Avx512dq_vl,
 
                     // SSE and SSE2 are baseline ISAs - they're always available
-                    InstructionSet.X64_SSE => 0,
+                    InstructionSet.X64_SSE
+                        => 0,
                     InstructionSet.X64_SSE_X64 => 0,
                     InstructionSet.X64_SSE2 => 0,
                     InstructionSet.X64_SSE2_X64 => 0,
@@ -174,7 +182,10 @@ namespace ILCompiler
                     InstructionSet.X64_X86Base => 0,
                     InstructionSet.X64_X86Base_X64 => 0,
 
-                    _ => throw new NotSupportedException(((InstructionSet_X64)instructionSet).ToString())
+                    _
+                        => throw new NotSupportedException(
+                            ((InstructionSet_X64)instructionSet).ToString()
+                        )
                 };
             }
         }
@@ -215,7 +226,10 @@ namespace ILCompiler
                     InstructionSet.ARM64_ArmBase => 0,
                     InstructionSet.ARM64_ArmBase_Arm64 => 0,
 
-                    _ => throw new NotSupportedException(((InstructionSet_ARM64)instructionSet).ToString())
+                    _
+                        => throw new NotSupportedException(
+                            ((InstructionSet_ARM64)instructionSet).ToString()
+                        )
                 };
             }
         }

@@ -21,7 +21,10 @@ namespace System.Text.RegularExpressions.Tests
                     int offset = loc.Data;
                     for (char l = loc.ChMin; l <= loc.ChMax; l++)
                     {
-                        Assert.True(culture.TextInfo.ToLower((char)l) == (char)(l + offset), $"The Unicode character range at index {k} in s_lcTable contains the character {(char)l} (decimal value: {l}). Its lowercase value cannot be obtained by using the specified offset.");
+                        Assert.True(
+                            culture.TextInfo.ToLower((char)l) == (char)(l + offset),
+                            $"The Unicode character range at index {k} in s_lcTable contains the character {(char)l} (decimal value: {l}). Its lowercase value cannot be obtained by using the specified offset."
+                        );
                     }
                 }
                 else if (loc.LcOp == RegexCharClass.LowercaseSet)
@@ -30,21 +33,30 @@ namespace System.Text.RegularExpressions.Tests
                     for (char l = loc.ChMin; l <= loc.ChMax; l++)
                     {
                         char uppercase = l;
-                        Assert.True(culture.TextInfo.ToLower(uppercase) == lowercase, $"The Unicode character range at index {k} in s_lcTable contains the character {uppercase} (decimal value: {(int)uppercase}, hex: {(int)uppercase:X}). Its lowercase value {culture.TextInfo.ToLower(uppercase).ToString()} (decimal value: {(int)culture.TextInfo.ToLower(uppercase)}, hex: {(int)culture.TextInfo.ToLower(uppercase):X}) is not the stored value {lowercase} (decimal value: {(int)lowercase}, hex: {(int)lowercase:X}).");
+                        Assert.True(
+                            culture.TextInfo.ToLower(uppercase) == lowercase,
+                            $"The Unicode character range at index {k} in s_lcTable contains the character {uppercase} (decimal value: {(int)uppercase}, hex: {(int)uppercase:X}). Its lowercase value {culture.TextInfo.ToLower(uppercase).ToString()} (decimal value: {(int)culture.TextInfo.ToLower(uppercase)}, hex: {(int)culture.TextInfo.ToLower(uppercase):X}) is not the stored value {lowercase} (decimal value: {(int)lowercase}, hex: {(int)lowercase:X})."
+                        );
                     }
                 }
                 else if (loc.LcOp == RegexCharClass.LowercaseBor)
                 {
                     for (char l = loc.ChMin; l <= loc.ChMax; l++)
                     {
-                        Assert.True(culture.TextInfo.ToLower((char)l) == (char)(l | (char)1), $"The Unicode character range at index {k} in s_lcTable contains the character {(char)l} (decimal value: {l}). Its lowercase value {culture.TextInfo.ToLower(l)} cannot be obtained by OR-ing with 1: {(char)(l | (char)1)}");
+                        Assert.True(
+                            culture.TextInfo.ToLower((char)l) == (char)(l | (char)1),
+                            $"The Unicode character range at index {k} in s_lcTable contains the character {(char)l} (decimal value: {l}). Its lowercase value {culture.TextInfo.ToLower(l)} cannot be obtained by OR-ing with 1: {(char)(l | (char)1)}"
+                        );
                     }
                 }
                 else if (loc.LcOp == RegexCharClass.LowercaseBad)
                 {
                     for (char l = loc.ChMin; l <= loc.ChMax; l++)
                     {
-                        Assert.True(culture.TextInfo.ToLower((char)l) == (char)(l + (l & 1)), $"The Unicode character range at index {k} in s_lcTable contains the character {(char)l} (decimal value: {l}). Its lowercase value cannot be obtained by AND-ing with 1.");
+                        Assert.True(
+                            culture.TextInfo.ToLower((char)l) == (char)(l + (l & 1)),
+                            $"The Unicode character range at index {k} in s_lcTable contains the character {(char)l} (decimal value: {l}). Its lowercase value cannot be obtained by AND-ing with 1."
+                        );
                     }
                 }
             }

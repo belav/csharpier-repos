@@ -69,7 +69,10 @@ public class ChunkWriterTests
     public void ChunkedPrefixReturnsSegmentThatDoesNotNeedToMove(int dataCount, bool expectSlice)
     {
         // Will call GetMemory on at least 5 bytes from the Http1OutputProducer
-        var prefixLength = ChunkWriter.GetPrefixBytesForChunk(dataCount, out var actualSliceOneByte);
+        var prefixLength = ChunkWriter.GetPrefixBytesForChunk(
+            dataCount,
+            out var actualSliceOneByte
+        );
         if (actualSliceOneByte)
         {
             dataCount--;
@@ -77,7 +80,10 @@ public class ChunkWriterTests
 
         var fakeMemory = new Memory<byte>(new byte[16]);
 
-        var actualLength = ChunkWriter.BeginChunkBytes(dataCount - prefixLength - 2, fakeMemory.Span);
+        var actualLength = ChunkWriter.BeginChunkBytes(
+            dataCount - prefixLength - 2,
+            fakeMemory.Span
+        );
 
         Assert.Equal(prefixLength, actualLength);
         Assert.Equal(expectSlice, actualSliceOneByte);

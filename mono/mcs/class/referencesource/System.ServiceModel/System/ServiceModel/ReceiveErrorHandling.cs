@@ -15,10 +15,10 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(ReceiveErrorHandling value)
         {
-            return value == ReceiveErrorHandling.Fault ||
-                value == ReceiveErrorHandling.Drop ||
-                value == ReceiveErrorHandling.Reject ||
-                value == ReceiveErrorHandling.Move;
+            return value == ReceiveErrorHandling.Fault
+                || value == ReceiveErrorHandling.Drop
+                || value == ReceiveErrorHandling.Reject
+                || value == ReceiveErrorHandling.Move;
         }
     }
 }

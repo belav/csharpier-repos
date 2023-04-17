@@ -24,21 +24,23 @@ namespace System.Workflow.ComponentModel
     [ToolboxBitmap(typeof(SuspendActivity), "Resources.Suspend.png")]
     [ActivityValidator(typeof(SuspendValidator))]
     [SRCategory(SR.Standard)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class SuspendActivity : Activity
     {
-        public static readonly DependencyProperty ErrorProperty = DependencyProperty.Register("Error", typeof(string), typeof(SuspendActivity));
+        public static readonly DependencyProperty ErrorProperty = DependencyProperty.Register(
+            "Error",
+            typeof(string),
+            typeof(SuspendActivity)
+        );
 
         #region Constructors
 
-        public SuspendActivity()
-        {
-        }
+        public SuspendActivity() { }
 
         public SuspendActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
 
@@ -50,7 +52,9 @@ namespace System.Workflow.ComponentModel
             base.Initialize(provider);
         }
 
-        protected internal override sealed ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected internal override sealed ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             executionContext.CloseActivity();
 
@@ -66,14 +70,8 @@ namespace System.Workflow.ComponentModel
         [DefaultValue((string)null)]
         public string Error
         {
-            get
-            {
-                return base.GetValue(ErrorProperty) as string;
-            }
-            set
-            {
-                base.SetValue(ErrorProperty, value);
-            }
+            get { return base.GetValue(ErrorProperty) as string; }
+            set { base.SetValue(ErrorProperty, value); }
         }
     }
 
@@ -85,14 +83,22 @@ namespace System.Workflow.ComponentModel
 
             SuspendActivity suspend = obj as SuspendActivity;
             if (suspend == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(SuspendActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_UnexpectedArgumentType, typeof(SuspendActivity).FullName),
+                    "obj"
+                );
 
             CompositeActivity parent = suspend.Parent;
             while (parent != null)
             {
                 if (parent.SupportsTransaction)
                 {
-                    validationErrors.Add(new ValidationError(SR.GetString(SR.Error_SuspendInAtomicScope), ErrorNumbers.Error_SuspendInAtomicScope));
+                    validationErrors.Add(
+                        new ValidationError(
+                            SR.GetString(SR.Error_SuspendInAtomicScope),
+                            ErrorNumbers.Error_SuspendInAtomicScope
+                        )
+                    );
                     break;
                 }
                 parent = parent.Parent;

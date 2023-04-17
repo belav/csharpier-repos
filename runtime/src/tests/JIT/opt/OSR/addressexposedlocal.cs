@@ -12,7 +12,7 @@ class AddressExposedLocal
     public static unsafe int I(ref int p) => p;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static unsafe void J(ref int p)  {}
+    public static unsafe void J(ref int p) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static unsafe int F(int from, int to)
@@ -32,5 +32,5 @@ class AddressExposedLocal
         int result = F(0, 1_000_000);
         Console.WriteLine($"done, sum is {result}");
         return (result == 1783293664) ? 100 : -1;
-    }  
+    }
 }

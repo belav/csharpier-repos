@@ -34,7 +34,10 @@ namespace System.Drawing.Imaging.Tests
             get
             {
                 yield return new object[] { new EncoderParameter[1] };
-                yield return new object[] { new EncoderParameter[1] { new EncoderParameter(Encoder.ChrominanceTable, 0) } };
+                yield return new object[]
+                {
+                    new EncoderParameter[1] { new EncoderParameter(Encoder.ChrominanceTable, 0) }
+                };
                 yield return new object[] { new EncoderParameter[1] { null } };
             }
         }

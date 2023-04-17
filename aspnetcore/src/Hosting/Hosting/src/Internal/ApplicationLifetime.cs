@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Hosting;
 /// Allows consumers to perform cleanup during a graceful shutdown.
 /// </summary>
 #pragma warning disable CS0618 // Type or member is obsolete
-internal sealed class ApplicationLifetime : IApplicationLifetime, Extensions.Hosting.IApplicationLifetime, IHostApplicationLifetime
+internal sealed class ApplicationLifetime
+    : IApplicationLifetime,
+        Extensions.Hosting.IApplicationLifetime,
+        IHostApplicationLifetime
 #pragma warning restore CS0618 // Type or member is obsolete
 {
     private readonly CancellationTokenSource _startedSource = new CancellationTokenSource();
@@ -58,9 +61,11 @@ internal sealed class ApplicationLifetime : IApplicationLifetime, Extensions.Hos
             }
             catch (Exception ex)
             {
-                _logger.ApplicationError(LoggerEventIds.ApplicationStoppingException,
-                                         "An error occurred stopping the application",
-                                         ex);
+                _logger.ApplicationError(
+                    LoggerEventIds.ApplicationStoppingException,
+                    "An error occurred stopping the application",
+                    ex
+                );
             }
         }
     }
@@ -76,9 +81,11 @@ internal sealed class ApplicationLifetime : IApplicationLifetime, Extensions.Hos
         }
         catch (Exception ex)
         {
-            _logger.ApplicationError(LoggerEventIds.ApplicationStartupException,
-                                     "An error occurred starting the application",
-                                     ex);
+            _logger.ApplicationError(
+                LoggerEventIds.ApplicationStartupException,
+                "An error occurred starting the application",
+                ex
+            );
         }
     }
 
@@ -93,9 +100,11 @@ internal sealed class ApplicationLifetime : IApplicationLifetime, Extensions.Hos
         }
         catch (Exception ex)
         {
-            _logger.ApplicationError(LoggerEventIds.ApplicationStoppedException,
-                                     "An error occurred stopping the application",
-                                     ex);
+            _logger.ApplicationError(
+                LoggerEventIds.ApplicationStoppedException,
+                "An error occurred stopping the application",
+                ex
+            );
         }
     }
 

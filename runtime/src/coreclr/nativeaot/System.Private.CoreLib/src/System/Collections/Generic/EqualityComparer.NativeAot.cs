@@ -25,11 +25,15 @@ namespace System.Collections.Generic
             // This body serves as a fallback when instantiation-specific implementation is unavailable.
             // If that happens, the compiler ensures we generate data structures to make the fallback work
             // when this method is compiled.
-            Interlocked.CompareExchange(ref s_default,
+            Interlocked.CompareExchange(
+                ref s_default,
                 SupportsGenericIEquatableInterfaces
-                ? Unsafe.As<EqualityComparer<T>>(EqualityComparerHelpers.GetComparer(typeof(T).TypeHandle))
-                : new ObjectEqualityComparer<T>(),
-                null);
+                    ? Unsafe.As<EqualityComparer<T>>(
+                        EqualityComparerHelpers.GetComparer(typeof(T).TypeHandle)
+                    )
+                    : new ObjectEqualityComparer<T>(),
+                null
+            );
             return s_default;
         }
 
@@ -44,7 +48,8 @@ namespace System.Collections.Generic
         }
     }
 
-    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T> where T : struct, Enum
+    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>
+        where T : struct, Enum
     {
         public sealed override bool Equals(T x, T y)
         {

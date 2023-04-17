@@ -22,7 +22,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
 {
-    internal abstract class SettingsProviderBase<TData, TOptionsUpdater, TOption, TValue> : ISettingsProvider<TData>
+    internal abstract class SettingsProviderBase<TData, TOptionsUpdater, TOption, TValue>
+        : ISettingsProvider<TData>
         where TOptionsUpdater : ISettingUpdater<TOption, TValue>
     {
         private readonly List<TData> _snapshot = new();
@@ -33,9 +34,17 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
         protected readonly Workspace Workspace;
         public readonly IGlobalOptionService GlobalOptions;
 
-        protected abstract void UpdateOptions(TieredAnalyzerConfigOptions options, ImmutableArray<Project> projectsInScope);
+        protected abstract void UpdateOptions(
+            TieredAnalyzerConfigOptions options,
+            ImmutableArray<Project> projectsInScope
+        );
 
-        protected SettingsProviderBase(string fileName, TOptionsUpdater settingsUpdater, Workspace workspace, IGlobalOptionService globalOptions)
+        protected SettingsProviderBase(
+            string fileName,
+            TOptionsUpdater settingsUpdater,
+            Workspace workspace,
+            IGlobalOptionService globalOptions
+        )
         {
             FileName = fileName;
             SettingsUpdater = settingsUpdater;
@@ -55,15 +64,22 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
                 return;
             }
 
-            var configFileDirectoryOptions = project.State.GetAnalyzerOptionsForPath(givenFolder.FullName, CancellationToken.None);
+            var configFileDirectoryOptions = project.State.GetAnalyzerOptionsForPath(
+                givenFolder.FullName,
+                CancellationToken.None
+            );
             var projectDirectoryOptions = project.GetAnalyzerConfigOptions();
 
             // TODO: Support for multiple languages https://github.com/dotnet/roslyn/issues/65859
             var options = new TieredAnalyzerConfigOptions(
-                new CombinedAnalyzerConfigOptions(configFileDirectoryOptions, projectDirectoryOptions),
+                new CombinedAnalyzerConfigOptions(
+                    configFileDirectoryOptions,
+                    projectDirectoryOptions
+                ),
                 GlobalOptions,
                 language: LanguageNames.CSharp,
-                editorConfigFileName: FileName);
+                editorConfigFileName: FileName
+            );
 
             UpdateOptions(options, projects);
         }
@@ -75,7 +91,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
                 return sourceText;
             }
 
-            var text = await SettingsUpdater.GetChangedEditorConfigAsync(sourceText, default).ConfigureAwait(false);
+            var text = await SettingsUpdater
+                .GetChangedEditorConfigAsync(sourceText, default)
+                .ConfigureAwait(false);
             return text is not null ? text : sourceText;
         }
 
@@ -97,15 +115,18 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
             _viewModel?.NotifyOfUpdate();
         }
 
-        public void RegisterViewModel(ISettingsEditorViewModel viewModel)
-            => _viewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        public void RegisterViewModel(ISettingsEditorViewModel viewModel) =>
+            _viewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
 
         private sealed class CombinedAnalyzerConfigOptions : StructuredAnalyzerConfigOptions
         {
             private readonly AnalyzerConfigData _fileDirectoryConfigData;
             private readonly AnalyzerConfigData? _projectDirectoryConfigData;
 
-            public CombinedAnalyzerConfigOptions(AnalyzerConfigData fileDirectoryConfigData, AnalyzerConfigData? projectDirectoryConfigData)
+            public CombinedAnalyzerConfigOptions(
+                AnalyzerConfigData fileDirectoryConfigData,
+                AnalyzerConfigData? projectDirectoryConfigData
+            )
             {
                 _fileDirectoryConfigData = fileDirectoryConfigData;
                 _projectDirectoryConfigData = projectDirectoryConfigData;
@@ -113,10 +134,12 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
 
             public override NamingStylePreferences GetNamingStylePreferences()
             {
-                var preferences = _fileDirectoryConfigData.ConfigOptions.GetNamingStylePreferences();
+                var preferences =
+                    _fileDirectoryConfigData.ConfigOptions.GetNamingStylePreferences();
                 if (preferences.IsEmpty && _projectDirectoryConfigData.HasValue)
                 {
-                    preferences = _projectDirectoryConfigData.Value.ConfigOptions.GetNamingStylePreferences();
+                    preferences =
+                        _projectDirectoryConfigData.Value.ConfigOptions.GetNamingStylePreferences();
                 }
 
                 return preferences;
@@ -142,8 +165,14 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
 
                 var diagnosticKey = "dotnet_diagnostic.(?<key>.*).severity";
                 var match = Regex.Match(key, diagnosticKey);
-                if (match.Success && match.Groups["key"].Value is string isolatedKey &&
-                    _projectDirectoryConfigData.Value.TreeOptions.TryGetValue(isolatedKey, out var severity))
+                if (
+                    match.Success
+                    && match.Groups["key"].Value is string isolatedKey
+                    && _projectDirectoryConfigData.Value.TreeOptions.TryGetValue(
+                        isolatedKey,
+                        out var severity
+                    )
+                )
                 {
                     value = severity.ToEditorConfigString();
                     return true;
@@ -172,8 +201,16 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
                     foreach (var (key, severity) in _projectDirectoryConfigData.Value.TreeOptions)
                     {
                         var diagnosticKey = "dotnet_diagnostic." + key + ".severity";
-                        if (!_fileDirectoryConfigData.ConfigOptions.TryGetValue(diagnosticKey, out _) &&
-                            !_projectDirectoryConfigData.Value.AnalyzerOptions.TryGetKey(diagnosticKey, out _))
+                        if (
+                            !_fileDirectoryConfigData.ConfigOptions.TryGetValue(
+                                diagnosticKey,
+                                out _
+                            )
+                            && !_projectDirectoryConfigData.Value.AnalyzerOptions.TryGetKey(
+                                diagnosticKey,
+                                out _
+                            )
+                        )
                         {
                             yield return diagnosticKey;
                         }

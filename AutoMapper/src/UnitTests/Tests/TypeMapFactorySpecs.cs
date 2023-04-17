@@ -71,7 +71,7 @@ namespace AutoMapper.UnitTests.Tests
     {
         private TypeMap _map;
         private ProfileMap _mappingOptions;
-        
+
         private class Source
         {
             public SubSource some__source { get; set; }
@@ -91,16 +91,24 @@ namespace AutoMapper.UnitTests.Tests
         {
             public override string ProfileName => "Test";
         }
+
         protected override void Establish_context()
         {
-            var namingConvention = new StubNamingConvention(s => s.Value.ToLower()){SeparatorCharacter = "__", SplittingExpression = new Regex(@"[\p{Ll}\p{Lu}0-9]+(?=__?)")};
+            var namingConvention = new StubNamingConvention(s => s.Value.ToLower())
+            {
+                SeparatorCharacter = "__",
+                SplittingExpression = new Regex(@"[\p{Ll}\p{Lu}0-9]+(?=__?)")
+            };
 
             var profile = new TestProfile();
-            profile.Internal().AddMemberConfiguration().AddMember<NameSplitMember>(_ =>
-            {
-                _.SourceMemberNamingConvention = namingConvention;
-                _.DestinationMemberNamingConvention = new PascalCaseNamingConvention();
-            });
+            profile
+                .Internal()
+                .AddMemberConfiguration()
+                .AddMember<NameSplitMember>(_ =>
+                {
+                    _.SourceMemberNamingConvention = namingConvention;
+                    _.DestinationMemberNamingConvention = new PascalCaseNamingConvention();
+                });
             _mappingOptions = new ProfileMap(profile);
         }
 
@@ -143,14 +151,21 @@ namespace AutoMapper.UnitTests.Tests
 
         protected override void Establish_context()
         {
-            var namingConvention = new StubNamingConvention(s => s.Value.ToLower()) { SeparatorCharacter = "__", SplittingExpression = new Regex(@"[\p{Ll}\p{Lu}0-9]+(?=__?)") };
+            var namingConvention = new StubNamingConvention(s => s.Value.ToLower())
+            {
+                SeparatorCharacter = "__",
+                SplittingExpression = new Regex(@"[\p{Ll}\p{Lu}0-9]+(?=__?)")
+            };
 
             var profile = new TestProfile();
-            profile.Internal().AddMemberConfiguration().AddMember<NameSplitMember>(_ =>
-            {
-                _.SourceMemberNamingConvention = new PascalCaseNamingConvention();
-                _.DestinationMemberNamingConvention = namingConvention;
-            });
+            profile
+                .Internal()
+                .AddMemberConfiguration()
+                .AddMember<NameSplitMember>(_ =>
+                {
+                    _.SourceMemberNamingConvention = new PascalCaseNamingConvention();
+                    _.DestinationMemberNamingConvention = namingConvention;
+                });
             _mappingOptions = new ProfileMap(profile);
         }
 
@@ -194,7 +209,14 @@ namespace AutoMapper.UnitTests.Tests
             });
 
             var mapper = config.CreateMapper();
-            var dest = mapper.Map<Destination>(new Source {Ävíator = 3, SubAirlinaFlight = 4, Value = 5});
+            var dest = mapper.Map<Destination>(
+                new Source
+                {
+                    Ävíator = 3,
+                    SubAirlinaFlight = 4,
+                    Value = 5
+                }
+            );
             dest.Aviator.ShouldBe(3);
             dest.SubAirlineFlight.ShouldBe(4);
             dest.Value.ShouldBe(5);
@@ -237,7 +259,14 @@ namespace AutoMapper.UnitTests.Tests
             });
 
             var mapper = config.CreateMapper();
-            var dest = mapper.Map<Destination>(new Source { Ävíator = 3, SubAirlinaFlight = 4, Value = 5 });
+            var dest = mapper.Map<Destination>(
+                new Source
+                {
+                    Ävíator = 3,
+                    SubAirlinaFlight = 4,
+                    Value = 5
+                }
+            );
             dest.Aviator.ShouldBe(3);
             dest.SubAirlineFlight.ShouldBe(4);
             dest.Value.ShouldBe(5);

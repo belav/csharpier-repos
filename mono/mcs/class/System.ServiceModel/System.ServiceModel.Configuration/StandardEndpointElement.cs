@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,75 +54,105 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public abstract class StandardEndpointElement : ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty name = new ConfigurationProperty ("name",
-				typeof (string), null, null, new StringValidator (0),
-				ConfigurationPropertyOptions.IsKey);
+    public abstract class StandardEndpointElement : ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty name = new ConfigurationProperty(
+            "name",
+            typeof(string),
+            null,
+            null,
+            new StringValidator(0),
+            ConfigurationPropertyOptions.IsKey
+        );
 
-		static StandardEndpointElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (name);
-		}
-		
-		[StringValidator (MinLength = 0)]
-		[ConfigurationProperty ("name", Options = ConfigurationPropertyOptions.IsKey)]
-		public string Name {
-			get { return (string) base [name]; }
-			set { base [name] = value; }
-		}
+        static StandardEndpointElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(name);
+        }
 
-		protected internal abstract Type EndpointType { get; }
-		
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        [StringValidator(MinLength = 0)]
+        [ConfigurationProperty("name", Options = ConfigurationPropertyOptions.IsKey)]
+        public string Name
+        {
+            get { return (string)base[name]; }
+            set { base[name] = value; }
+        }
 
-		public void ApplyConfiguration (ServiceEndpoint endpoint, ChannelEndpointElement channelEndpointElement)
-		{
-			OnApplyConfiguration (endpoint, channelEndpointElement);
-		}
+        protected internal abstract Type EndpointType { get; }
 
-		public void ApplyConfiguration (ServiceEndpoint endpoint, ServiceEndpointElement serviceEndpointElement)
-		{
-			OnApplyConfiguration (endpoint, serviceEndpointElement);
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected internal abstract ServiceEndpoint CreateServiceEndpoint (ContractDescription contractDescription);
+        public void ApplyConfiguration(
+            ServiceEndpoint endpoint,
+            ChannelEndpointElement channelEndpointElement
+        )
+        {
+            OnApplyConfiguration(endpoint, channelEndpointElement);
+        }
 
-		public void InitializeAndValidate (ChannelEndpointElement channelEndpointElement)
-		{
-			OnInitializeAndValidate (channelEndpointElement);
-		}
+        public void ApplyConfiguration(
+            ServiceEndpoint endpoint,
+            ServiceEndpointElement serviceEndpointElement
+        )
+        {
+            OnApplyConfiguration(endpoint, serviceEndpointElement);
+        }
 
-		public void InitializeAndValidate (ServiceEndpointElement serviceEndpointElement)
-		{
-			OnInitializeAndValidate (serviceEndpointElement);
-		}
+        protected internal abstract ServiceEndpoint CreateServiceEndpoint(
+            ContractDescription contractDescription
+        );
 
-		protected internal virtual void InitializeFrom (ServiceEndpoint endpoint)
-		{
-			if (endpoint == null)
-				throw new ArgumentNullException ("endpoint");
-			if (!EndpointType.IsAssignableFrom (endpoint.GetType ()))
-				throw new ArgumentNullException (String.Format ("Argument endpoint type is not of expected type '{0}'", EndpointType));
+        public void InitializeAndValidate(ChannelEndpointElement channelEndpointElement)
+        {
+            OnInitializeAndValidate(channelEndpointElement);
+        }
 
-			// not sure if that's all, but that's what is documented.
-		}
+        public void InitializeAndValidate(ServiceEndpointElement serviceEndpointElement)
+        {
+            OnInitializeAndValidate(serviceEndpointElement);
+        }
 
-		protected abstract void OnApplyConfiguration (ServiceEndpoint endpoint, ChannelEndpointElement channelEndpointElement);
+        protected internal virtual void InitializeFrom(ServiceEndpoint endpoint)
+        {
+            if (endpoint == null)
+                throw new ArgumentNullException("endpoint");
+            if (!EndpointType.IsAssignableFrom(endpoint.GetType()))
+                throw new ArgumentNullException(
+                    String.Format(
+                        "Argument endpoint type is not of expected type '{0}'",
+                        EndpointType
+                    )
+                );
 
-		protected abstract void OnApplyConfiguration (ServiceEndpoint endpoint, ServiceEndpointElement serviceEndpointElement);
+            // not sure if that's all, but that's what is documented.
+        }
 
-		protected abstract void OnInitializeAndValidate (ChannelEndpointElement channelEndpointElement);
+        protected abstract void OnApplyConfiguration(
+            ServiceEndpoint endpoint,
+            ChannelEndpointElement channelEndpointElement
+        );
 
-		protected abstract void OnInitializeAndValidate (ServiceEndpointElement serviceEndpointElement);
+        protected abstract void OnApplyConfiguration(
+            ServiceEndpoint endpoint,
+            ServiceEndpointElement serviceEndpointElement
+        );
 
-		protected override void Reset (ConfigurationElement parentElement)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        protected abstract void OnInitializeAndValidate(
+            ChannelEndpointElement channelEndpointElement
+        );
+
+        protected abstract void OnInitializeAndValidate(
+            ServiceEndpointElement serviceEndpointElement
+        );
+
+        protected override void Reset(ConfigurationElement parentElement)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

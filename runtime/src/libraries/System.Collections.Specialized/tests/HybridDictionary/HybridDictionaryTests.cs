@@ -8,7 +8,8 @@ namespace System.Collections.Specialized.Tests
 {
     public class HybridDictionary_CaseSensitive_Tests : HybridDictionaryTestBase
     {
-        protected override IDictionary NonGenericIDictionaryFactory() => new HybridDictionary(false);
+        protected override IDictionary NonGenericIDictionaryFactory() =>
+            new HybridDictionary(false);
     }
 
     public class HybridDictionary_CaseInsensitive_Tests : HybridDictionaryTestBase
@@ -18,9 +19,12 @@ namespace System.Collections.Specialized.Tests
 
     public abstract class HybridDictionaryTestBase : IDictionary_NonGeneric_Tests
     {
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType => typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
+            typeof(InvalidCastException);
 
         protected override object CreateTKey(int seed)
         {

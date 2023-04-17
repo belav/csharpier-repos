@@ -138,7 +138,11 @@ public class PrefixContainer
         }
     }
 
-    private static void GetKeyFromNonEmptyPrefix(string prefix, string entry, IDictionary<string, string> results)
+    private static void GetKeyFromNonEmptyPrefix(
+        string prefix,
+        string entry,
+        IDictionary<string, string> results
+    )
     {
         string key;
         string fullName;
@@ -202,7 +206,8 @@ public class PrefixContainer
                 candidate,
                 0,
                 prefix.Length,
-                StringComparison.OrdinalIgnoreCase);
+                StringComparison.OrdinalIgnoreCase
+            );
             if (compare == 0)
             {
                 Debug.Assert(candidate.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));
@@ -259,7 +264,8 @@ public class PrefixContainer
                 candidate,
                 0,
                 prefix.Length,
-                StringComparison.OrdinalIgnoreCase);
+                StringComparison.OrdinalIgnoreCase
+            );
             if (compare == 0)
             {
                 Debug.Assert(candidate.StartsWith(prefix, StringComparison.OrdinalIgnoreCase));

@@ -29,7 +29,8 @@ namespace Internal.Cryptography
             int paddingSizeInBytes,
             ReadOnlySpan<byte> key,
             ReadOnlySpan<byte> iv,
-            bool encrypting)
+            bool encrypting
+        )
         {
             Debug.Assert(algorithm != IntPtr.Zero);
 
@@ -40,7 +41,8 @@ namespace Internal.Cryptography
                 ref MemoryMarshal.GetReference(key),
                 key.Length * 8,
                 ref MemoryMarshal.GetReference(iv),
-                encrypting ? 1 : 0);
+                encrypting ? 1 : 0
+            );
 
             Interop.Crypto.CheckValidOpenSslHandle(_ctx);
 
@@ -72,7 +74,9 @@ namespace Internal.Cryptography
                 {
                     written = CipherUpdate(input, rented);
                     Span<byte> outputSpan = rented.AsSpan(written);
-                    CheckBoolReturn(Interop.Crypto.EvpCipherFinalEx(_ctx, outputSpan, out int finalWritten));
+                    CheckBoolReturn(
+                        Interop.Crypto.EvpCipherFinalEx(_ctx, outputSpan, out int finalWritten)
+                    );
                     written += finalWritten;
                     rented.AsSpan(0, written).CopyTo(output);
                     return written;
@@ -86,7 +90,9 @@ namespace Internal.Cryptography
             {
                 int written = CipherUpdate(input, output);
                 Span<byte> outputSpan = output.Slice(written);
-                CheckBoolReturn(Interop.Crypto.EvpCipherFinalEx(_ctx, outputSpan, out int finalWritten));
+                CheckBoolReturn(
+                    Interop.Crypto.EvpCipherFinalEx(_ctx, outputSpan, out int finalWritten)
+                );
                 written += finalWritten;
                 return written;
             }
@@ -141,11 +147,7 @@ namespace Internal.Cryptography
 
         private int CipherUpdate(ReadOnlySpan<byte> input, Span<byte> output)
         {
-            Interop.Crypto.EvpCipherUpdate(
-                _ctx,
-                output,
-                out int bytesWritten,
-                input);
+            Interop.Crypto.EvpCipherUpdate(_ctx, output, out int bytesWritten, input);
 
             return bytesWritten;
         }

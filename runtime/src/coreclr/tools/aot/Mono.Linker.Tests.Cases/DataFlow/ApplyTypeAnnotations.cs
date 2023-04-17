@@ -9,237 +9,275 @@ using Mono.Linker.Tests.Cases.Expectations.Assertions;
 
 namespace Mono.Linker.Tests.Cases.DataFlow
 {
-	[ExpectedNoWarnings]
-	public class ApplyTypeAnnotations
-	{
-		public static void Main ()
-		{
-			TestFromTypeOf ();
-			TestFromTypeGetTypeOverConstant ();
-			TestFromStringContantWithAnnotation ();
-			TestFromStringConstantWithGeneric ();
-			TestFromStringConstantWithGenericAndAssemblyQualified ();
-			TestFromStringConstantWithGenericAndAssemblyQualifiedInvalidAssembly ();
-			TestFromStringConstantWithGenericAndAssemblyQualifiedNonExistingAssembly ();
-		}
+    [ExpectedNoWarnings]
+    public class ApplyTypeAnnotations
+    {
+        public static void Main()
+        {
+            TestFromTypeOf();
+            TestFromTypeGetTypeOverConstant();
+            TestFromStringContantWithAnnotation();
+            TestFromStringConstantWithGeneric();
+            TestFromStringConstantWithGenericAndAssemblyQualified();
+            TestFromStringConstantWithGenericAndAssemblyQualifiedInvalidAssembly();
+            TestFromStringConstantWithGenericAndAssemblyQualifiedNonExistingAssembly();
+        }
 
-		[Kept]
-		static void TestFromTypeOf ()
-		{
-			RequireCombination (typeof (FromTypeOfTestType));
-		}
+        [Kept]
+        static void TestFromTypeOf()
+        {
+            RequireCombination(typeof(FromTypeOfTestType));
+        }
 
-		[Kept]
-		class FromTypeOfTestType
-		{
-			[Kept]
-			public FromTypeOfTestType () { }
-			public FromTypeOfTestType (int i) { }
+        [Kept]
+        class FromTypeOfTestType
+        {
+            [Kept]
+            public FromTypeOfTestType() { }
 
-			[Kept]
-			public void PublicMethod () { }
-			private void PrivateMethod () { }
+            public FromTypeOfTestType(int i) { }
 
-			[Kept]
-			public bool _publicField;
-			private bool _privateField;
+            [Kept]
+            public void PublicMethod() { }
 
-			[Kept]
-			[KeptBackingField]
-			public bool PublicProperty { [Kept] get; [Kept] set; }
-			private bool PrivateProperty { get; set; }
-		}
+            private void PrivateMethod() { }
 
-		[Kept]
-		static void TestFromTypeGetTypeOverConstant ()
-		{
-			RequireCombination (Type.GetType ("Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromTypeGetTypeOverConstantTestType"));
-		}
+            [Kept]
+            public bool _publicField;
+            private bool _privateField;
 
-		[Kept]
-		class FromTypeGetTypeOverConstantTestType
-		{
-			[Kept]
-			public FromTypeGetTypeOverConstantTestType () { }
-			public FromTypeGetTypeOverConstantTestType (int i) { }
+            [Kept]
+            [KeptBackingField]
+            public bool PublicProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+            private bool PrivateProperty { get; set; }
+        }
 
-			[Kept]
-			public void PublicMethod () { }
-			private void PrivateMethod () { }
+        [Kept]
+        static void TestFromTypeGetTypeOverConstant()
+        {
+            RequireCombination(
+                Type.GetType(
+                    "Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromTypeGetTypeOverConstantTestType"
+                )
+            );
+        }
 
-			[Kept]
-			public bool _publicField;
-			private bool _privateField;
+        [Kept]
+        class FromTypeGetTypeOverConstantTestType
+        {
+            [Kept]
+            public FromTypeGetTypeOverConstantTestType() { }
 
-			[Kept]
-			[KeptBackingField]
-			public bool PublicProperty { [Kept] get; [Kept] set; }
-			private bool PrivateProperty { get; set; }
-		}
+            public FromTypeGetTypeOverConstantTestType(int i) { }
 
-		[Kept]
-		static void TestFromStringContantWithAnnotation ()
-		{
-			RequireCombinationOnString ("Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithAnnotationTestType");
-		}
+            [Kept]
+            public void PublicMethod() { }
 
-		[Kept]
-		class FromStringConstantWithAnnotationTestType
-		{
-			[Kept]
-			public FromStringConstantWithAnnotationTestType () { }
-			public FromStringConstantWithAnnotationTestType (int i) { }
+            private void PrivateMethod() { }
 
-			[Kept]
-			public void PublicMethod () { }
-			private void PrivateMethod () { }
+            [Kept]
+            public bool _publicField;
+            private bool _privateField;
 
-			[Kept]
-			public bool _publicField;
-			private bool _privateField;
+            [Kept]
+            [KeptBackingField]
+            public bool PublicProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+            private bool PrivateProperty { get; set; }
+        }
 
-			[Kept]
-			[KeptBackingField]
-			public bool PublicProperty { [Kept] get; [Kept] set; }
-			private bool PrivateProperty { get; set; }
-		}
+        [Kept]
+        static void TestFromStringContantWithAnnotation()
+        {
+            RequireCombinationOnString(
+                "Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithAnnotationTestType"
+            );
+        }
 
-		[Kept]
-		private static void RequireCombination (
-			[KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-			[DynamicallyAccessedMembers(
-				DynamicallyAccessedMemberTypes.PublicParameterlessConstructor |
-				DynamicallyAccessedMemberTypes.PublicFields |
-				DynamicallyAccessedMemberTypes.PublicMethods |
-				DynamicallyAccessedMemberTypes.PublicProperties)]
-			Type type)
-		{
-		}
+        [Kept]
+        class FromStringConstantWithAnnotationTestType
+        {
+            [Kept]
+            public FromStringConstantWithAnnotationTestType() { }
 
-		[Kept]
-		private static void RequireCombinationOnString (
-			[KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-			[DynamicallyAccessedMembers(
-				DynamicallyAccessedMemberTypes.PublicParameterlessConstructor |
-				DynamicallyAccessedMemberTypes.PublicFields |
-				DynamicallyAccessedMemberTypes.PublicMethods |
-				DynamicallyAccessedMemberTypes.PublicProperties)]
-			string typeName)
-		{
-		}
+            public FromStringConstantWithAnnotationTestType(int i) { }
 
-		// https://github.com/dotnet/runtime/issues/72833
-		// NativeAOT doesn't implement full type name parser yet
-		[Kept (By = ProducedBy.Trimmer)]
-		class FromStringConstantWithGenericInner
-		{
-		}
+            [Kept]
+            public void PublicMethod() { }
 
-		[Kept]
-		[KeptMember (".ctor()")]
-		class FromStringConstantWithGeneric<T>
-		{
-			[Kept]
-			public T GetValue () { return default (T); }
-		}
+            private void PrivateMethod() { }
 
-		// https://github.com/dotnet/runtime/issues/72833
-		// NativeAOT doesn't implement full type name parser yet
-		[Kept (By = ProducedBy.Trimmer)]
-		class FromStringConstantWithGenericInnerInner
-		{
-			[Kept (By = ProducedBy.Trimmer)]
-			public void Method ()
-			{
-			}
+            [Kept]
+            public bool _publicField;
+            private bool _privateField;
 
-			int unusedField;
-		}
+            [Kept]
+            [KeptBackingField]
+            public bool PublicProperty
+            {
+                [Kept]
+                get;
+                [Kept]
+                set;
+            }
+            private bool PrivateProperty { get; set; }
+        }
 
-		[Kept (By = ProducedBy.Trimmer)]
-		class FromStringConstantWithGenericInnerOne<
-		[DynamicallyAccessedMembers (DynamicallyAccessedMemberTypes.PublicMethods)]
-		[KeptAttributeAttribute (typeof (DynamicallyAccessedMembersAttribute), By = ProducedBy.Trimmer)]
-		T>
-		{
-		}
+        [Kept]
+        private static void RequireCombination(
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                    | DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicProperties
+            )]
+                Type type
+        ) { }
 
-		// https://github.com/dotnet/runtime/issues/72833
-		// NativeAOT doesn't implement full type name parser yet
-		[Kept (By = ProducedBy.Trimmer)]
-		class FromStringConstantWithGenericInnerTwo
-		{
-			void UnusedMethod ()
-			{
-			}
-		}
+        [Kept]
+        private static void RequireCombinationOnString(
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                    | DynamicallyAccessedMemberTypes.PublicFields
+                    | DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.PublicProperties
+            )]
+                string typeName
+        ) { }
 
-		// https://github.com/dotnet/runtime/issues/72833
-		// NativeAOT doesn't implement full type name parser yet
-		[Kept (By = ProducedBy.Trimmer)]
-		class FromStringConstantWitGenericInnerMultiDimArray
-		{
-		}
+        // https://github.com/dotnet/runtime/issues/72833
+        // NativeAOT doesn't implement full type name parser yet
+        [Kept(By = ProducedBy.Trimmer)]
+        class FromStringConstantWithGenericInner { }
 
-		// https://github.com/dotnet/runtime/issues/72833
-		// NativeAOT actually preserves this, but for a slightly wrong reason - it completely ignores the array notations
-		[Kept]
-		[KeptMember (".ctor()", By = ProducedBy.NativeAot)]
-		class FromStringConstantWithMultiDimArray
-		{
-			// https://github.com/dotnet/runtime/issues/72833
-			// NativeAOT actually preserves this, but for a slightly wrong reason - it completely ignores the array notations
-			[Kept (By = ProducedBy.NativeAot)]
-			public void UnusedMethod () { }
-		}
+        [Kept]
+        [KeptMember(".ctor()")]
+        class FromStringConstantWithGeneric<T>
+        {
+            [Kept]
+            public T GetValue()
+            {
+                return default(T);
+            }
+        }
 
-		[Kept]
-		[KeptMember (".ctor()")]
-		class FromStringConstantWithGenericTwoParameters<T, S>
-		{
-		}
+        // https://github.com/dotnet/runtime/issues/72833
+        // NativeAOT doesn't implement full type name parser yet
+        [Kept(By = ProducedBy.Trimmer)]
+        class FromStringConstantWithGenericInnerInner
+        {
+            [Kept(By = ProducedBy.Trimmer)]
+            public void Method() { }
 
-		[Kept]
-		static void TestFromStringConstantWithGeneric ()
-		{
-			RequireCombinationOnString ("Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGeneric`1[[Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericInner]]");
-			RequireCombinationOnString ("Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericTwoParameters`2[Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericInnerOne`1[Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericInnerInner],Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericInnerTwo]");
-			RequireCombinationOnString ("Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGeneric`1[[Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWitGenericInnerMultiDimArray[,]]]");
-			RequireCombinationOnString ("Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithMultiDimArray[,]");
-		}
+            int unusedField;
+        }
 
-		[Kept]
-		[KeptMember (".ctor()")]
-		class FromStringConstantWithGenericAndAssemblyQualified<T>
-		{
-			[Kept]
-			public T GetValue () { return default (T); }
-		}
+        [Kept(By = ProducedBy.Trimmer)]
+        class FromStringConstantWithGenericInnerOne<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+            [KeptAttributeAttribute(
+                typeof(DynamicallyAccessedMembersAttribute),
+                By = ProducedBy.Trimmer
+            )]
+                T
+        > { }
 
-		[Kept]
-		static void TestFromStringConstantWithGenericAndAssemblyQualified ()
-		{
-			RequireCombinationOnString ("Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericAndAssemblyQualified`1[[Mono.Linker.Tests.Cases.Expectations.Assertions.KeptAttribute,Mono.Linker.Tests.Cases.Expectations]]");
-		}
+        // https://github.com/dotnet/runtime/issues/72833
+        // NativeAOT doesn't implement full type name parser yet
+        [Kept(By = ProducedBy.Trimmer)]
+        class FromStringConstantWithGenericInnerTwo
+        {
+            void UnusedMethod() { }
+        }
 
-		class InvalidAssemblyNameType
-		{
-		}
+        // https://github.com/dotnet/runtime/issues/72833
+        // NativeAOT doesn't implement full type name parser yet
+        [Kept(By = ProducedBy.Trimmer)]
+        class FromStringConstantWitGenericInnerMultiDimArray { }
 
-		[Kept]
-		static void TestFromStringConstantWithGenericAndAssemblyQualifiedInvalidAssembly ()
-		{
-			RequireCombinationOnString ("Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+InvalidAssemblyNameType,Invalid/Assembly/Name");
-		}
+        // https://github.com/dotnet/runtime/issues/72833
+        // NativeAOT actually preserves this, but for a slightly wrong reason - it completely ignores the array notations
+        [Kept]
+        [KeptMember(".ctor()", By = ProducedBy.NativeAot)]
+        class FromStringConstantWithMultiDimArray
+        {
+            // https://github.com/dotnet/runtime/issues/72833
+            // NativeAOT actually preserves this, but for a slightly wrong reason - it completely ignores the array notations
+            [Kept(By = ProducedBy.NativeAot)]
+            public void UnusedMethod() { }
+        }
 
-		class NonExistingAssemblyType
-		{
-		}
+        [Kept]
+        [KeptMember(".ctor()")]
+        class FromStringConstantWithGenericTwoParameters<T, S> { }
 
-		[Kept]
-		static void TestFromStringConstantWithGenericAndAssemblyQualifiedNonExistingAssembly ()
-		{
-			RequireCombinationOnString ("Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+InvalidAssemblyNameType,NonExistingAssembly");
-		}
-	}
+        [Kept]
+        static void TestFromStringConstantWithGeneric()
+        {
+            RequireCombinationOnString(
+                "Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGeneric`1[[Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericInner]]"
+            );
+            RequireCombinationOnString(
+                "Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericTwoParameters`2[Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericInnerOne`1[Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericInnerInner],Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericInnerTwo]"
+            );
+            RequireCombinationOnString(
+                "Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGeneric`1[[Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWitGenericInnerMultiDimArray[,]]]"
+            );
+            RequireCombinationOnString(
+                "Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithMultiDimArray[,]"
+            );
+        }
+
+        [Kept]
+        [KeptMember(".ctor()")]
+        class FromStringConstantWithGenericAndAssemblyQualified<T>
+        {
+            [Kept]
+            public T GetValue()
+            {
+                return default(T);
+            }
+        }
+
+        [Kept]
+        static void TestFromStringConstantWithGenericAndAssemblyQualified()
+        {
+            RequireCombinationOnString(
+                "Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+FromStringConstantWithGenericAndAssemblyQualified`1[[Mono.Linker.Tests.Cases.Expectations.Assertions.KeptAttribute,Mono.Linker.Tests.Cases.Expectations]]"
+            );
+        }
+
+        class InvalidAssemblyNameType { }
+
+        [Kept]
+        static void TestFromStringConstantWithGenericAndAssemblyQualifiedInvalidAssembly()
+        {
+            RequireCombinationOnString(
+                "Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+InvalidAssemblyNameType,Invalid/Assembly/Name"
+            );
+        }
+
+        class NonExistingAssemblyType { }
+
+        [Kept]
+        static void TestFromStringConstantWithGenericAndAssemblyQualifiedNonExistingAssembly()
+        {
+            RequireCombinationOnString(
+                "Mono.Linker.Tests.Cases.DataFlow.ApplyTypeAnnotations+InvalidAssemblyNameType,NonExistingAssembly"
+            );
+        }
+    }
 }

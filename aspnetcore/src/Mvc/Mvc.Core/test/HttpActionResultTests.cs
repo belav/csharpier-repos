@@ -36,7 +36,8 @@ public class HttpActionResultTests
         var context = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
 
         var httpResult = new Mock<IResult>();
-        httpResult.Setup(s => s.ExecuteAsync(httpContext))
+        httpResult
+            .Setup(s => s.ExecuteAsync(httpContext))
             .Returns(() => Task.CompletedTask)
             .Verifiable();
         var result = new HttpActionResult(httpResult.Object);

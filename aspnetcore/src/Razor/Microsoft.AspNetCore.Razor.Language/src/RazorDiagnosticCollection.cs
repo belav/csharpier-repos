@@ -192,9 +192,7 @@ public sealed class RazorDiagnosticCollection : IList<RazorDiagnostic>
 
         object IEnumerator.Current => Current;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public bool MoveNext()
         {

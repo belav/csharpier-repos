@@ -17,10 +17,14 @@ class PriorityTest
     private int medTime;
     private int youngTime;
 
-    
-    public PriorityTest(int oldDataSize, int medDataSize,
-                        int iterCount, int meanAllocSize,
-                        int medTime, int youngTime)
+    public PriorityTest(
+        int oldDataSize,
+        int medDataSize,
+        int iterCount,
+        int meanAllocSize,
+        int medTime,
+        int youngTime
+    )
     {
         rand = new Random(314159);
         this.oldDataSize = oldDataSize;
@@ -39,7 +43,7 @@ class PriorityTest
 
         for (int i = 0; i < old.Length; i++)
         {
-            old[i] =  new byte[meanAllocSize];
+            old[i] = new byte[meanAllocSize];
         }
 
         for (int i = 0; i < med.Length; i++)
@@ -50,22 +54,26 @@ class PriorityTest
 
     // churns data in the heap by replacing byte arrays with new ones of random length
     // this should induce concurrent GCs
-    void SteadyState(int oldDataSize, int medDataSize,
-                        int iterCount, int meanAllocSize,
-                        int medTime, int youngTime)
+    void SteadyState(
+        int oldDataSize,
+        int medDataSize,
+        int iterCount,
+        int meanAllocSize,
+        int medTime,
+        int youngTime
+    )
     {
-
         for (int i = 0; i < iterCount; i++)
         {
-            byte[] newarray  = new byte [meanAllocSize];
+            byte[] newarray = new byte[meanAllocSize];
 
             if ((i % medTime) == 0)
             {
-                old[rand.Next(0,old.Length)] = newarray;
+                old[rand.Next(0, old.Length)] = newarray;
             }
             if ((i % youngTime) == 0)
             {
-                med[rand.Next(0,med.Length)] = newarray;
+                med[rand.Next(0, med.Length)] = newarray;
             }
             if ((i % 5000) == 0)
             {
@@ -77,45 +85,39 @@ class PriorityTest
     // method that runs the test
     public void RunTest()
     {
-        for (int iteration=0; iteration < iterCount; iteration++)
+        for (int iteration = 0; iteration < iterCount; iteration++)
         {
-            AllocTest (oldDataSize, medDataSize, meanAllocSize);
+            AllocTest(oldDataSize, medDataSize, meanAllocSize);
 
-            SteadyState (oldDataSize, medDataSize,
-                iterCount, meanAllocSize,
-                medTime, youngTime);
+            SteadyState(oldDataSize, medDataSize, iterCount, meanAllocSize, medTime, youngTime);
         }
-
     }
-
 }
-
 
 class ConcurrentRepro
 {
-
     public static void Usage()
     {
         Console.WriteLine("Usage:");
         Console.WriteLine("\t<num iterations> <num threads>");
     }
-    
+
     public static int[] ParseArgs(string[] args)
     {
         int[] parameters = new int[2];
-        
+
         // set defaults
         parameters[0] = 100;
         parameters[1] = 4;
 
-        if (args.Length==0)
+        if (args.Length == 0)
         {
             //use defaults
             return parameters;
         }
-        if (args.Length==parameters.Length)
+        if (args.Length == parameters.Length)
         {
-            for (int i=0; i<args.Length; i++)
+            for (int i = 0; i < args.Length; i++)
             {
                 int j = 0;
                 if (!int.TryParse(args[i], out j))
@@ -125,33 +127,30 @@ class ConcurrentRepro
                 }
                 parameters[i] = j;
             }
-            
+
             return parameters;
         }
-        
-        // incorrect number of arguments        
+
+        // incorrect number of arguments
         Usage();
-        return null;              
+        return null;
     }
-    
 
     public static void Main(string[] args)
     {
-    
         // parse arguments
         int[] parameters = ParseArgs(args);
-        if (parameters==null)
+        if (parameters == null)
         {
             return;
         }
-
 
         PriorityTest priorityTest = new PriorityTest(1000000, 5000, parameters[0], 17, 30, 3);
         ThreadStart startDelegate = new ThreadStart(priorityTest.RunTest);
 
         // create threads
         Thread[] threads = new Thread[parameters[1]];
-        for (int i=0; i<threads.Length; i++)
+        for (int i = 0; i < threads.Length; i++)
         {
             threads[i] = new Thread(startDelegate);
             threads[i].Name = String.Format("Thread{0}", i);
@@ -159,11 +158,9 @@ class ConcurrentRepro
         }
 
         // wait for threads to complete
-        for (int i=0; i<threads.Length; i++)
+        for (int i = 0; i < threads.Length; i++)
         {
             threads[i].Join();
         }
     }
 }
-
-

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -124,13 +124,17 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 var instanceA = foo.A;
                 var instanceB = foo.A;
 
-                Assert.AreSame(instanceB, instanceA, "Same component must be returned from successive calls.");
+                Assert.AreSame(
+                    instanceB,
+                    instanceA,
+                    "Same component must be returned from successive calls."
+                );
             }
 
             [Test]
             public void Set()
             {
-                var xmlA = Xml(    "<Foo/>");
+                var xmlA = Xml("<Foo/>");
                 var xmlB = Xml("<Foo> <A> <B>b</B> </A> </Foo>");
                 var fooA = Create<IFoo>(xmlA);
                 var fooB = Create<IFoo>(xmlB);
@@ -201,7 +205,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 foo.A = Items;
 
-                CustomAssert.AreXmlEquivalent("<Foo> <A> <int>1</int> <int>2</int> </A> </Foo>", xml);
+                CustomAssert.AreXmlEquivalent(
+                    "<Foo> <A> <int>1</int> <int>2</int> </A> </Foo>",
+                    xml
+                );
             }
         }
 
@@ -248,7 +255,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             [XmlDefaults(IsNullable = true)]
             public interface IRoot
             {
-                string   Value { get; set; }
+                string Value { get; set; }
                 string[] Array { get; set; }
             }
 
@@ -260,7 +267,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 obj.Value = null;
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $xsi> <Value xsi:nil='true'/> </Root>"), xml);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $xsi> <Value xsi:nil='true'/> </Root>"),
+                    xml
+                );
             }
 
             [Test]
@@ -271,7 +281,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 obj.Value = null;
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $xsi> <Value xsi:nil='true'/> </Root>"), xml);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $xsi> <Value xsi:nil='true'/> </Root>"),
+                    xml
+                );
             }
 
             [Test]
@@ -282,7 +295,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 obj.Value = "TestValue";
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $xsi> <Value>TestValue</Value> </Root>"), xml);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $xsi> <Value>TestValue</Value> </Root>"),
+                    xml
+                );
             }
 
             [Test]
@@ -293,15 +309,25 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
                 obj.Array = new[] { "TestValue" };
 
-                CustomAssert.AreXmlEquivalent(Xml("<Root $xsi> <Array> <string>TestValue</string> </Array> </Root>"), xml);
+                CustomAssert.AreXmlEquivalent(
+                    Xml("<Root $xsi> <Array> <string>TestValue</string> </Array> </Root>"),
+                    xml
+                );
             }
         }
 
         [TestFixture]
         public class Coercion : XmlAdapterTestCase
         {
-            public interface IFoo : IDictionaryAdapter { string A { get; set; } }
-            public interface IBar : IDictionaryAdapter { string B { get; set; } }
+            public interface IFoo : IDictionaryAdapter
+            {
+                string A { get; set; }
+            }
+
+            public interface IBar : IDictionaryAdapter
+            {
+                string B { get; set; }
+            }
 
             [Test]
             public void Coerce()
@@ -370,11 +396,14 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 var foo = obj.Foo;
                 var bar = foo.Bar;
 
-                AsVirtual(obj).Realized += (s, e) => HandleRealized(s, obj, ref realizedObj, "(This should never happen!)");
-                AsVirtual(foo).Realized += (s, e) => HandleRealized(s, foo, ref realizedFoo, "Sender was Foo's virtual");
-                AsVirtual(bar).Realized += (s, e) => HandleRealized(s, bar, ref realizedBar, "Sender was Bar's virtual");
+                AsVirtual(obj).Realized += (s, e) =>
+                    HandleRealized(s, obj, ref realizedObj, "(This should never happen!)");
+                AsVirtual(foo).Realized += (s, e) =>
+                    HandleRealized(s, foo, ref realizedFoo, "Sender was Foo's virtual");
+                AsVirtual(bar).Realized += (s, e) =>
+                    HandleRealized(s, bar, ref realizedBar, "Sender was Bar's virtual");
 
-                Assert.True(AsVirtual(obj).IsReal , "Obj exists");
+                Assert.True(AsVirtual(obj).IsReal, "Obj exists");
                 Assert.False(AsVirtual(foo).IsReal, "Foo exists");
                 Assert.False(AsVirtual(bar).IsReal, "Bar exists");
 
@@ -389,7 +418,12 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 Assert.True(realizedBar, "Bar was realized");
             }
 
-            private static void HandleRealized(object sender, object expected, ref bool realized, string message)
+            private static void HandleRealized(
+                object sender,
+                object expected,
+                ref bool realized,
+                string message
+            )
             {
                 Assert.AreSame(AsVirtual(expected), sender, message);
                 realized = true;
@@ -397,7 +431,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
             private static IVirtual AsVirtual(object source)
             {
-                return ((IDictionaryAdapter) source).AsVirtual();
+                return ((IDictionaryAdapter)source).AsVirtual();
             }
         }
     }

@@ -22,7 +22,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override ObjectNodeSection GetSection(NodeFactory factory)
         {
-            return factory.Target.IsWindows ? ObjectNodeSection.ManagedCodeWindowsContentSection : ObjectNodeSection.ManagedCodeUnixContentSection;            
+            return factory.Target.IsWindows
+                ? ObjectNodeSection.ManagedCodeWindowsContentSection
+                : ObjectNodeSection.ManagedCodeUnixContentSection;
         }
 
         public override bool IsShareable => false;
@@ -42,9 +44,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return comparer.Compare(_owningMethod, otherNode._owningMethod);
         }
 
-        public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false) => _methodColdCode;
+        public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false) =>
+            _methodColdCode;
 
-        protected override string GetName(NodeFactory context) => throw new NotImplementedException();
+        protected override string GetName(NodeFactory context) =>
+            throw new NotImplementedException();
 
         public void SetCode(ObjectData data)
         {

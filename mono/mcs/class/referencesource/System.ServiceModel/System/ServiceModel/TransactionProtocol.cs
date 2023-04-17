@@ -29,16 +29,13 @@ namespace System.ServiceModel
             get { return WSAtomicTransaction11Protocol.Instance; }
         }
 
-        internal abstract string Name
-        {
-            get;
-        }
+        internal abstract string Name { get; }
 
         internal static bool IsDefined(TransactionProtocol transactionProtocol)
         {
-            return transactionProtocol == TransactionProtocol.OleTransactions ||
-                   transactionProtocol == TransactionProtocol.WSAtomicTransactionOctober2004 ||
-                   transactionProtocol == TransactionProtocol.WSAtomicTransaction11;
+            return transactionProtocol == TransactionProtocol.OleTransactions
+                || transactionProtocol == TransactionProtocol.WSAtomicTransactionOctober2004
+                || transactionProtocol == TransactionProtocol.WSAtomicTransaction11;
         }
     }
 

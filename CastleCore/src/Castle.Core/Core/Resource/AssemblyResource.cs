@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -56,12 +56,22 @@ namespace Castle.Core.Resource
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "AssemblyResource: [{0}] [{1}]", assemblyName, resourcePath);
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "AssemblyResource: [{0}] [{1}]",
+                assemblyName,
+                resourcePath
+            );
         }
 
         private Stream CreateResourceFromPath(string resource, string path)
         {
-            if (!resource.StartsWith("assembly" + CustomUri.SchemeDelimiter, StringComparison.CurrentCulture))
+            if (
+                !resource.StartsWith(
+                    "assembly" + CustomUri.SchemeDelimiter,
+                    StringComparison.CurrentCulture
+                )
+            )
             {
                 resource = "assembly" + CustomUri.SchemeDelimiter + resource;
             }
@@ -71,7 +81,8 @@ namespace Castle.Core.Resource
 
         private Stream CreateResourceFromUri(CustomUri resourcex, string path)
         {
-            if (resourcex == null) throw new ArgumentNullException(nameof(resourcex));
+            if (resourcex == null)
+                throw new ArgumentNullException(nameof(resourcex));
 
             assemblyName = resourcex.Host;
             resourcePath = ConvertToResourceName(assemblyName, resourcex.Path);
@@ -90,7 +101,11 @@ namespace Castle.Core.Resource
 
             if (nameFound == null)
             {
-                string message = string.Format(CultureInfo.InvariantCulture, "The assembly resource {0} could not be located", resourcePath);
+                string message = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "The assembly resource {0} could not be located",
+                    resourcePath
+                );
                 throw new ResourceException(message);
             }
 
@@ -102,7 +117,7 @@ namespace Castle.Core.Resource
         private string GetNameFound(string[] names)
         {
             string nameFound = null;
-            foreach(string name in names)
+            foreach (string name in names)
             {
                 if (string.Compare(resourcePath, name, StringComparison.OrdinalIgnoreCase) == 0)
                 {
@@ -117,13 +132,18 @@ namespace Castle.Core.Resource
         {
             assembly = GetSimpleName(assembly);
             // TODO: use path for relative name construction
-            return string.Format(CultureInfo.CurrentCulture, "{0}{1}", assembly, resource.Replace('/', '.'));
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "{0}{1}",
+                assembly,
+                resource.Replace('/', '.')
+            );
         }
 
         private string GetSimpleName(string assembly)
         {
             int indexOfComma = assembly.IndexOf(',');
-            if(indexOfComma<0)
+            if (indexOfComma < 0)
             {
                 return assembly;
             }
@@ -148,7 +168,11 @@ namespace Castle.Core.Resource
             }
             catch (Exception ex)
             {
-                string message = string.Format(CultureInfo.InvariantCulture, "The assembly {0} could not be loaded", assemblyName);
+                string message = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "The assembly {0} could not be loaded",
+                    assemblyName
+                );
                 throw new ResourceException(message, ex);
             }
         }

@@ -20,14 +20,12 @@ namespace System.Text.Json.Serialization
 
         protected abstract bool IsImmutable { get; }
         protected abstract void VerifyMutable();
+
         protected virtual void OnAddingElement(TItem item) { }
 
         public TItem this[int index]
         {
-            get
-            {
-                return _list[index];
-            }
+            get { return _list[index]; }
             set
             {
                 if (value == null)

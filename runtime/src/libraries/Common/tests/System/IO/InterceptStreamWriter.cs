@@ -9,8 +9,14 @@ internal sealed class InterceptStreamWriter : StreamWriter
 {
     private readonly StreamWriter _wrappedWriter;
 
-    public InterceptStreamWriter(Stream baseStream, StreamWriter wrappedWriter, Encoding encoding, int bufferSize, bool leaveOpen) :
-        base(baseStream, encoding, bufferSize, leaveOpen)
+    public InterceptStreamWriter(
+        Stream baseStream,
+        StreamWriter wrappedWriter,
+        Encoding encoding,
+        int bufferSize,
+        bool leaveOpen
+    )
+        : base(baseStream, encoding, bufferSize, leaveOpen)
     {
         _wrappedWriter = wrappedWriter;
     }

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -17,8 +17,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
     internal struct XmlCollectionItem<T>
     {
         public readonly IXmlNode Node;
-        public readonly T        Value;
-        public readonly bool     HasValue;
+        public readonly T Value;
+        public readonly bool HasValue;
 
         public XmlCollectionItem(IXmlNode node)
             : this(node, default(T), false) { }
@@ -28,8 +28,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private XmlCollectionItem(IXmlNode node, T value, bool hasValue)
         {
-            Node     = node;
-            Value    = value;
+            Node = node;
+            Value = value;
             HasValue = hasValue;
         }
 

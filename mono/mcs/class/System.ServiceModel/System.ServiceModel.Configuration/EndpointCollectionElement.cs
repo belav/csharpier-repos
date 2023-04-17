@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -56,25 +56,38 @@ using ConfigurationType = System.Configuration.Configuration;
 
 namespace System.ServiceModel.Configuration
 {
-	public abstract class EndpointCollectionElement : ConfigurationElement
-	{
-		public abstract ReadOnlyCollection<StandardEndpointElement> ConfiguredEndpoints { get; }
+    public abstract class EndpointCollectionElement : ConfigurationElement
+    {
+        public abstract ReadOnlyCollection<StandardEndpointElement> ConfiguredEndpoints { get; }
 
-		public string EndpointName {
-			get {
-				foreach (ExtensionElement el in ConfigUtil.StandardEndpointsSection.PropertiesInternal)
-					if (EndpointType.FullName == el.Type)
-						return el.Name;
-				throw new InvalidOperationException (String.Format ("This EndpointCollectionElement '{0}' is not found in the configuration", GetType ()));
-			}
-		}
+        public string EndpointName
+        {
+            get
+            {
+                foreach (
+                    ExtensionElement el in ConfigUtil.StandardEndpointsSection.PropertiesInternal
+                )
+                    if (EndpointType.FullName == el.Type)
+                        return el.Name;
+                throw new InvalidOperationException(
+                    String.Format(
+                        "This EndpointCollectionElement '{0}' is not found in the configuration",
+                        GetType()
+                    )
+                );
+            }
+        }
 
-		public abstract Type EndpointType { get; }
-		
-		public abstract bool ContainsKey (string name);
-		
-		protected internal abstract StandardEndpointElement GetDefaultStandardEndpointElement ();
-		
-		protected internal abstract bool TryAdd (string name, ServiceEndpoint endpoint, ConfigurationType config);
-	}
+        public abstract Type EndpointType { get; }
+
+        public abstract bool ContainsKey(string name);
+
+        protected internal abstract StandardEndpointElement GetDefaultStandardEndpointElement();
+
+        protected internal abstract bool TryAdd(
+            string name,
+            ServiceEndpoint endpoint,
+            ConfigurationType config
+        );
+    }
 }

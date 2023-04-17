@@ -17,16 +17,23 @@ namespace System.Reflection.Runtime.ParameterInfos
     //
     internal abstract class RuntimeMethodParameterInfo : RuntimeParameterInfo
     {
-        protected RuntimeMethodParameterInfo(MethodBase member, int position, QSignatureTypeHandle qualifiedParameterTypeHandle, TypeContext typeContext)
+        protected RuntimeMethodParameterInfo(
+            MethodBase member,
+            int position,
+            QSignatureTypeHandle qualifiedParameterTypeHandle,
+            TypeContext typeContext
+        )
             : base(member, position)
         {
             QualifiedParameterTypeHandle = qualifiedParameterTypeHandle;
             _typeContext = typeContext;
         }
 
-        public sealed override Type[] GetOptionalCustomModifiers() => QualifiedParameterTypeHandle.GetCustomModifiers(_typeContext, optional: true);
+        public sealed override Type[] GetOptionalCustomModifiers() =>
+            QualifiedParameterTypeHandle.GetCustomModifiers(_typeContext, optional: true);
 
-        public sealed override Type[] GetRequiredCustomModifiers() => QualifiedParameterTypeHandle.GetCustomModifiers(_typeContext, optional: false);
+        public sealed override Type[] GetRequiredCustomModifiers() =>
+            QualifiedParameterTypeHandle.GetCustomModifiers(_typeContext, optional: false);
 
         public sealed override Type ParameterType
         {

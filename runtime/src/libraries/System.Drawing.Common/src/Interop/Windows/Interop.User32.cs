@@ -16,7 +16,9 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hInst, IntPtr iconId);
+            HandleRef hInst,
+            IntPtr iconId
+        );
 
         [LibraryImport(Libraries.User32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -24,14 +26,20 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hIcon);
+            HandleRef hIcon
+        );
 
         [LibraryImport(Libraries.User32, SetLastError = true)]
         internal static partial IntPtr CopyImage(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hImage, int uType, int cxDesired, int cyDesired, int fuFlags);
+            HandleRef hImage,
+            int uType,
+            int cxDesired,
+            int cyDesired,
+            int fuFlags
+        );
 
         [LibraryImport(Libraries.User32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -39,7 +47,9 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hIcon, ref ICONINFO info);
+            HandleRef hIcon,
+            ref ICONINFO info
+        );
 
         [LibraryImport(Libraries.User32, SetLastError = true)]
         public static partial int GetSystemMetrics(int nIndex);
@@ -50,18 +60,33 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, int x, int y,
+            HandleRef hDC,
+            int x,
+            int y,
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hIcon, int width, int height, int iStepIfAniCursor,
+            HandleRef hIcon,
+            int width,
+            int height,
+            int iStepIfAniCursor,
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hBrushFlickerFree, int diFlags);
+            HandleRef hBrushFlickerFree,
+            int diFlags
+        );
 
         [LibraryImport(Libraries.User32, SetLastError = true)]
-        internal static unsafe partial IntPtr CreateIconFromResourceEx(byte* pbIconBits, uint cbIconBits, [MarshalAs(UnmanagedType.Bool)] bool fIcon, int dwVersion, int csDesired, int cyDesired, int flags);
+        internal static unsafe partial IntPtr CreateIconFromResourceEx(
+            byte* pbIconBits,
+            uint cbIconBits,
+            [MarshalAs(UnmanagedType.Bool)] bool fIcon,
+            int dwVersion,
+            int csDesired,
+            int cyDesired,
+            int flags
+        );
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct ICONINFO

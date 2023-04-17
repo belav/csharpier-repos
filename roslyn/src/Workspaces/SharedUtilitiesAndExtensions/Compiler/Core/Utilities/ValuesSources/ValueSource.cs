@@ -18,28 +18,32 @@ namespace Roslyn.Utilities
         public abstract T GetValue(CancellationToken cancellationToken = default);
         public abstract Task<T> GetValueAsync(CancellationToken cancellationToken = default);
 
-        public static ValueSource<T> Constant(T value)
-            => new AsyncLazy<T>(value);
+        public static ValueSource<T> Constant(T value) => new AsyncLazy<T>(value);
     }
 
     internal static class ValueSource
     {
-        public static ValueSource<T> Constant<T>(T value)
-            => ValueSource<T>.Constant(value);
+        public static ValueSource<T> Constant<T>(T value) => ValueSource<T>.Constant(value);
     }
 
     internal static class ValueSourceExtensions
     {
-        internal static T? GetValueOrNull<T>(this Optional<T> optional) where T : class
-            => optional.Value;
+        internal static T? GetValueOrNull<T>(this Optional<T> optional)
+            where T : class => optional.Value;
 
-        internal static T GetValueOrDefault<T>(this Optional<T> optional) where T : struct
-            => optional.Value;
+        internal static T GetValueOrDefault<T>(this Optional<T> optional)
+            where T : struct => optional.Value;
 
-        internal static T? GetValueOrNull<T>(this ValueSource<Optional<T>> optional, CancellationToken cancellationToken = default) where T : class
-            => optional.GetValue(cancellationToken).GetValueOrNull();
+        internal static T? GetValueOrNull<T>(
+            this ValueSource<Optional<T>> optional,
+            CancellationToken cancellationToken = default
+        )
+            where T : class => optional.GetValue(cancellationToken).GetValueOrNull();
 
-        internal static T GetValueOrDefault<T>(this ValueSource<Optional<T>> optional, CancellationToken cancellationToken = default) where T : struct
-            => optional.GetValue(cancellationToken).GetValueOrDefault();
+        internal static T GetValueOrDefault<T>(
+            this ValueSource<Optional<T>> optional,
+            CancellationToken cancellationToken = default
+        )
+            where T : struct => optional.GetValue(cancellationToken).GetValueOrDefault();
     }
 }

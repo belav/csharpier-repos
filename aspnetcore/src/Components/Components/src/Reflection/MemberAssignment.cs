@@ -12,7 +12,8 @@ internal sealed class MemberAssignment
 {
     public static IEnumerable<PropertyInfo> GetPropertiesIncludingInherited(
         [DynamicallyAccessedMembers(Component)] Type type,
-        BindingFlags bindingFlags)
+        BindingFlags bindingFlags
+    )
     {
         var dictionary = new Dictionary<string, object>(StringComparer.Ordinal);
 

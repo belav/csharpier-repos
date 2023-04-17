@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,64 +30,52 @@
 
 namespace System.Management
 {
-	public class PropertyData
-	{
-		internal PropertyData ()
-		{
-		}
+    public class PropertyData
+    {
+        internal PropertyData() { }
 
-		public bool IsArray {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public bool IsArray
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public bool IsLocal {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public bool IsLocal
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public string Name {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public string Name
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public string Origin {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public string Origin
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public QualifierDataCollection Qualifiers {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public QualifierDataCollection Qualifiers
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public CimType Type {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public CimType Type
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public object Value {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-			[MonoTODO]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
-	}
+        public object Value
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
+        }
+    }
 }
-

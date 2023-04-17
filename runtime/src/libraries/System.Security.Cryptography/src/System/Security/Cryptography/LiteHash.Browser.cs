@@ -33,7 +33,9 @@ namespace System.Security.Cryptography
         }
 
         public void Append(ReadOnlySpan<byte> data) => _provider.AppendHashData(data);
+
         public int Finalize(Span<byte> destination) => _provider.FinalizeHashAndReset(destination);
+
         public void Dispose() => _provider.Dispose();
     }
 
@@ -51,7 +53,9 @@ namespace System.Security.Cryptography
         }
 
         public void Append(ReadOnlySpan<byte> data) => _provider.AppendHashData(data);
+
         public int Finalize(Span<byte> destination) => _provider.FinalizeHashAndReset(destination);
+
         public void Dispose() => _provider.Dispose();
     }
 }

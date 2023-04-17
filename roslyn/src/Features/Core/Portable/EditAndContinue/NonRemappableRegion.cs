@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         /// <remarks>
         /// When a thread is executing in an old version of a method before it is remapped to the new version
-        /// its active statement needs to be mapped from <see cref="OldSpan"/> in the old version 
+        /// its active statement needs to be mapped from <see cref="OldSpan"/> in the old version
         /// to <see cref="NewSpan"/> in the new version of the method.
         /// </remarks>
         public readonly SourceFileSpan OldSpan;
@@ -31,34 +31,41 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public readonly bool IsExceptionRegion;
 
-        public NonRemappableRegion(SourceFileSpan oldSpan, SourceFileSpan newSpan, bool isExceptionRegion)
+        public NonRemappableRegion(
+            SourceFileSpan oldSpan,
+            SourceFileSpan newSpan,
+            bool isExceptionRegion
+        )
         {
             OldSpan = oldSpan;
             NewSpan = newSpan;
             IsExceptionRegion = isExceptionRegion;
         }
 
-        public override bool Equals(object? obj)
-            => obj is NonRemappableRegion region && Equals(region);
+        public override bool Equals(object? obj) =>
+            obj is NonRemappableRegion region && Equals(region);
 
-        public bool Equals(NonRemappableRegion other)
-            => OldSpan.Equals(other.OldSpan) &&
-               NewSpan.Equals(other.NewSpan) &&
-               IsExceptionRegion == other.IsExceptionRegion;
+        public bool Equals(NonRemappableRegion other) =>
+            OldSpan.Equals(other.OldSpan)
+            && NewSpan.Equals(other.NewSpan)
+            && IsExceptionRegion == other.IsExceptionRegion;
 
-        public override int GetHashCode()
-            => Hash.Combine(OldSpan.GetHashCode(), Hash.Combine(IsExceptionRegion, NewSpan.GetHashCode()));
+        public override int GetHashCode() =>
+            Hash.Combine(
+                OldSpan.GetHashCode(),
+                Hash.Combine(IsExceptionRegion, NewSpan.GetHashCode())
+            );
 
-        public static bool operator ==(NonRemappableRegion left, NonRemappableRegion right)
-            => left.Equals(right);
+        public static bool operator ==(NonRemappableRegion left, NonRemappableRegion right) =>
+            left.Equals(right);
 
-        public static bool operator !=(NonRemappableRegion left, NonRemappableRegion right)
-            => !(left == right);
+        public static bool operator !=(NonRemappableRegion left, NonRemappableRegion right) =>
+            !(left == right);
 
-        public NonRemappableRegion WithNewSpan(SourceFileSpan newSpan)
-            => new(OldSpan, newSpan, IsExceptionRegion);
+        public NonRemappableRegion WithNewSpan(SourceFileSpan newSpan) =>
+            new(OldSpan, newSpan, IsExceptionRegion);
 
-        internal string GetDebuggerDisplay()
-            => $"{(IsExceptionRegion ? "ER" : "AS")} {OldSpan} => {NewSpan.Span}";
+        internal string GetDebuggerDisplay() =>
+            $"{(IsExceptionRegion ? "ER" : "AS")} {OldSpan} => {NewSpan.Span}";
     }
 }

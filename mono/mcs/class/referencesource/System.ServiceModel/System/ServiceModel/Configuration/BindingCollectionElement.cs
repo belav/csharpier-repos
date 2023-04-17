@@ -11,7 +11,9 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    public abstract partial class BindingCollectionElement : ConfigurationElement, IConfigurationContextProviderInternal
+    public abstract partial class BindingCollectionElement
+        : ConfigurationElement,
+            IConfigurationContextProviderInternal
     {
         string bindingName = string.Empty;
 
@@ -30,20 +32,16 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        public abstract Type BindingType
-        {
-            get;
-        }
+        public abstract Type BindingType { get; }
 
-        public abstract ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings
-        {
-            get;
-        }
+        public abstract ReadOnlyCollection<IBindingConfigurationElement> ConfiguredBindings { get; }
 
         public abstract bool ContainsKey(string name);
 
-        [Fx.Tag.SecurityNote(Critical = "Calls UnsafeLookupCollection which elevates.",
-            Safe = "Doesn't leak config objects.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls UnsafeLookupCollection which elevates.",
+            Safe = "Doesn't leak config objects."
+        )]
         [SecuritySafeCritical]
         string GetBindingName()
         {
@@ -51,14 +49,23 @@ namespace System.ServiceModel.Configuration
             ExtensionElementCollection collection = null;
             Type extensionSectionType = this.GetType();
 
-            collection = ExtensionsSection.UnsafeLookupCollection(ConfigurationStrings.BindingExtensions, ConfigurationHelpers.GetEvaluationContext(this));
+            collection = ExtensionsSection.UnsafeLookupCollection(
+                ConfigurationStrings.BindingExtensions,
+                ConfigurationHelpers.GetEvaluationContext(this)
+            );
 
             if (null == collection)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigExtensionCollectionNotFound,
-                    ConfigurationStrings.BindingExtensions),
-                    this.ElementInformation.Source,
-                    this.ElementInformation.LineNumber));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigExtensionCollectionNotFound,
+                            ConfigurationStrings.BindingExtensions
+                        ),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
 
             for (int i = 0; i < collection.Count; i++)
@@ -66,7 +73,12 @@ namespace System.ServiceModel.Configuration
                 ExtensionElement collectionElement = collection[i];
 
                 // Optimize for assembly qualified names.
-                if (collectionElement.Type.Equals(extensionSectionType.AssemblyQualifiedName, StringComparison.Ordinal))
+                if (
+                    collectionElement.Type.Equals(
+                        extensionSectionType.AssemblyQualifiedName,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     configuredSectionName = collectionElement.Name;
                     break;
@@ -75,7 +87,10 @@ namespace System.ServiceModel.Configuration
                 // Check type directly for the case that the extension is registered with something less than
                 // an full assembly qualified name.
                 Type collectionElementType = Type.GetType(collectionElement.Type, false);
-                if (null != collectionElementType && extensionSectionType.Equals(collectionElementType))
+                if (
+                    null != collectionElementType
+                    && extensionSectionType.Equals(collectionElementType)
+                )
                 {
                     configuredSectionName = collectionElement.Name;
                     break;
@@ -84,11 +99,17 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(configuredSectionName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigExtensionTypeNotRegisteredInCollection,
-                    extensionSectionType.AssemblyQualifiedName,
-                    ConfigurationStrings.BindingExtensions),
-                    this.ElementInformation.Source,
-                    this.ElementInformation.LineNumber));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigExtensionTypeNotRegisteredInCollection,
+                            extensionSectionType.AssemblyQualifiedName,
+                            ConfigurationStrings.BindingExtensions
+                        ),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
 
             return configuredSectionName;
@@ -101,14 +122,15 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - the return value will be used for a security decision -- see comment in interface definition.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - the return value will be used for a security decision -- see comment in interface definition."
+        )]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
-            Fx.Assert("Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext");
+            Fx.Assert(
+                "Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext"
+            );
             return null;
         }
     }
 }
-
-
-

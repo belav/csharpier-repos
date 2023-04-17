@@ -9,23 +9,33 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-internal sealed class ListValueConverter<TMessage> : SettingsConverterBase<TMessage> where TMessage : IMessage, new()
+internal sealed class ListValueConverter<TMessage> : SettingsConverterBase<TMessage>
+    where TMessage : IMessage, new()
 {
-    public ListValueConverter(JsonContext context) : base(context)
-    {
-    }
+    public ListValueConverter(JsonContext context)
+        : base(context) { }
 
-    public override TMessage? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TMessage? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var message = new TMessage();
-        JsonConverterHelper.PopulateList(ref reader, options, message, message.Descriptor.Fields[ListValue.ValuesFieldNumber]);
+        JsonConverterHelper.PopulateList(
+            ref reader,
+            options,
+            message,
+            message.Descriptor.Fields[ListValue.ValuesFieldNumber]
+        );
 
         return message;
     }
 
     public override void Write(Utf8JsonWriter writer, TMessage value, JsonSerializerOptions options)
     {
-        var list = (IList)value.Descriptor.Fields[ListValue.ValuesFieldNumber].Accessor.GetValue(value);
+        var list = (IList)
+            value.Descriptor.Fields[ListValue.ValuesFieldNumber].Accessor.GetValue(value);
 
         JsonSerializer.Serialize(writer, list, list.GetType(), options);
     }

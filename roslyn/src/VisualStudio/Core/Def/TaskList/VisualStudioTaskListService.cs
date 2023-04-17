@@ -26,9 +26,7 @@ using TaskListItem = Microsoft.CodeAnalysis.TaskList.TaskListItem;
 namespace Microsoft.VisualStudio.LanguageServices.TaskList
 {
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
-    internal class VisualStudioTaskListService :
-        ITaskListProvider,
-        IEventListener<object>
+    internal class VisualStudioTaskListService : ITaskListProvider, IEventListener<object>
     {
         private readonly IThreadingContext _threadingContext;
         private readonly VisualStudioWorkspaceImpl _workspace;
@@ -46,12 +44,16 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
             SVsServiceProvider asyncServiceProvider,
-            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners)
+            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
+        )
         {
             _threadingContext = threadingContext;
             _workspace = workspace;
             _asyncServiceProvider = (IAsyncServiceProvider)asyncServiceProvider;
-            _eventListenerTracker = new EventListenerTracker<ITaskListProvider>(eventListeners, WellKnownEventListeners.TaskListProvider);
+            _eventListenerTracker = new EventListenerTracker<ITaskListProvider>(
+                eventListeners,
+                WellKnownEventListeners.TaskListProvider
+            );
 
             _listener = new TaskListListener(
                 globalOptions,
@@ -60,9 +62,18 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
                 onTaskListItemsUpdated: (documentId, oldComments, newComments) =>
                 {
                     if (TaskListUpdated != null && !oldComments.SequenceEqual(newComments))
-                        TaskListUpdated?.Invoke(this, new TaskListUpdatedArgs(documentId, _workspace.CurrentSolution, documentId, newComments));
+                        TaskListUpdated?.Invoke(
+                            this,
+                            new TaskListUpdatedArgs(
+                                documentId,
+                                _workspace.CurrentSolution,
+                                documentId,
+                                newComments
+                            )
+                        );
                 },
-                threadingContext.DisposalToken);
+                threadingContext.DisposalToken
+            );
         }
 
         void IEventListener<object>.StartListening(Workspace workspace, object _)
@@ -79,8 +90,11 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
             {
                 // Don't bother doing anything until the workspace has actually loaded.  We don't want to add to any
                 // startup costs by doing work too early.
-                var workspaceStatus = workspace.Services.GetRequiredService<IWorkspaceStatusService>();
-                await workspaceStatus.WaitUntilFullyLoadedAsync(_threadingContext.DisposalToken).ConfigureAwait(false);
+                var workspaceStatus =
+                    workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+                await workspaceStatus
+                    .WaitUntilFullyLoadedAsync(_threadingContext.DisposalToken)
+                    .ConfigureAwait(false);
 
                 // Wait until the task list is actually visible so that we don't perform pointless work analyzing files
                 // when the user would not even see the results.  When we actually do register the analyer (in
@@ -108,7 +122,9 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
         {
             var cancellationToken = _threadingContext.DisposalToken;
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var taskList = await _asyncServiceProvider.GetServiceAsync<SVsTaskList, ITaskList>(_threadingContext.JoinableTaskFactory).ConfigureAwait(true);
+            var taskList = await _asyncServiceProvider
+                .GetServiceAsync<SVsTaskList, ITaskList>(_threadingContext.JoinableTaskFactory)
+                .ConfigureAwait(true);
 
             var control = taskList.TableControl.Control;
 
@@ -124,7 +140,10 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
 
             return;
 
-            void Control_IsVisibleChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+            void Control_IsVisibleChanged(
+                object sender,
+                System.Windows.DependencyPropertyChangedEventArgs e
+            )
             {
                 if (control.IsVisible)
                 {
@@ -134,7 +153,10 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
             }
         }
 
-        public ImmutableArray<TaskListItem> GetTaskListItems(Workspace workspace, DocumentId documentId, CancellationToken cancellationToken)
-            => _listener.GetTaskListItems(documentId);
+        public ImmutableArray<TaskListItem> GetTaskListItems(
+            Workspace workspace,
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        ) => _listener.GetTaskListItems(documentId);
     }
 }

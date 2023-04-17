@@ -19,7 +19,9 @@ namespace System.Reflection.Runtime.MethodInfos
     /// These api's are to be implemented by parsing metadata.
     /// </summary>
     /// <typeparam name="TRuntimeMethodCommon"></typeparam>
-    internal interface IRuntimeMethodCommon<TRuntimeMethodCommon> where TRuntimeMethodCommon : IRuntimeMethodCommon<TRuntimeMethodCommon>, IEquatable<TRuntimeMethodCommon>
+    internal interface IRuntimeMethodCommon<TRuntimeMethodCommon>
+        where TRuntimeMethodCommon : IRuntimeMethodCommon<TRuntimeMethodCommon>,
+            IEquatable<TRuntimeMethodCommon>
     {
         MethodAttributes Attributes { get; }
         CallingConventions CallingConvention { get; }
@@ -41,11 +43,20 @@ namespace System.Reflection.Runtime.MethodInfos
         /// construct a RuntimeParameterInfo and fill in the VirtualRuntimeParameterInfoArray. Do remember to use contextMethod
         /// instead of using the one internal to the RuntimeMethodCommon, as the runtime may pass in a subtly different context.
         /// </summary>
-        void FillInMetadataDescribedParameters(ref VirtualRuntimeParameterInfoArray result, QSignatureTypeHandle[] parameterTypes, MethodBase contextMethod, TypeContext typeContext);
+        void FillInMetadataDescribedParameters(
+            ref VirtualRuntimeParameterInfoArray result,
+            QSignatureTypeHandle[] parameterTypes,
+            MethodBase contextMethod,
+            TypeContext typeContext
+        );
 
         string Name { get; }
 
-        MethodInvoker GetUncachedMethodInvoker(RuntimeTypeInfo[] methodArguments, MemberInfo exceptionPertainant, out Exception exception);
+        MethodInvoker GetUncachedMethodInvoker(
+            RuntimeTypeInfo[] methodArguments,
+            MemberInfo exceptionPertainant,
+            out Exception exception
+        );
 
         bool IsGenericMethodDefinition { get; }
         int GenericParameterCount { get; }
@@ -54,7 +65,9 @@ namespace System.Reflection.Runtime.MethodInfos
 
         TRuntimeMethodCommon RuntimeMethodCommonOfUninstantiatedMethod { get; }
 
-        RuntimeTypeInfo[] GetGenericTypeParametersWithSpecifiedOwningMethod(RuntimeNamedMethodInfo<TRuntimeMethodCommon> owningMethod);
+        RuntimeTypeInfo[] GetGenericTypeParametersWithSpecifiedOwningMethod(
+            RuntimeNamedMethodInfo<TRuntimeMethodCommon> owningMethod
+        );
 
         int MetadataToken { get; }
 

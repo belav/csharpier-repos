@@ -44,7 +44,8 @@ internal sealed partial class ContentResult : IResult
             (DefaultContentType, DefaultEncoding),
             ResponseContentTypeHelper.GetEncoding,
             out var resolvedContentType,
-            out var resolvedContentTypeEncoding);
+            out var resolvedContentTypeEncoding
+        );
 
         response.ContentType = resolvedContentType;
 
@@ -66,9 +67,12 @@ internal sealed partial class ContentResult : IResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Executing ContentResult with HTTP Response ContentType of {ContentType}",
-            EventName = "ContentResultExecuting")]
+            EventName = "ContentResultExecuting"
+        )]
         internal static partial void ContentResultExecuting(ILogger logger, string contentType);
     }
 }

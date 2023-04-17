@@ -17,20 +17,26 @@ namespace System.Configuration
         private readonly bool _lineNumberIsConstant;
         private readonly int _lineOffset;
 
-        internal ConfigXmlReader(string rawXml, string filename, int lineOffset) :
-            this(rawXml, filename, lineOffset, false)
-        { }
+        internal ConfigXmlReader(string rawXml, string filename, int lineOffset)
+            : this(rawXml, filename, lineOffset, false) { }
 
-        internal ConfigXmlReader(string rawXml, string filename, int lineOffset, bool lineNumberIsConstant) :
-            base(new StringReader(rawXml))
+        internal ConfigXmlReader(
+            string rawXml,
+            string filename,
+            int lineOffset,
+            bool lineNumberIsConstant
+        )
+            : base(new StringReader(rawXml))
         {
             RawXml = rawXml;
             _filename = filename;
             _lineOffset = lineOffset;
             _lineNumberIsConstant = lineNumberIsConstant;
 
-            Debug.Assert(!_lineNumberIsConstant || (_lineOffset > 0),
-                "!_lineNumberIsConstant || _lineOffset > 0");
+            Debug.Assert(
+                !_lineNumberIsConstant || (_lineOffset > 0),
+                "!_lineNumberIsConstant || _lineOffset > 0"
+            );
         }
 
         internal string RawXml { get; }
@@ -39,8 +45,10 @@ namespace System.Configuration
         {
             get
             {
-                if (_lineNumberIsConstant) return _lineOffset;
-                if (_lineOffset > 0) return LineNumber + (_lineOffset - 1);
+                if (_lineNumberIsConstant)
+                    return _lineOffset;
+                if (_lineOffset > 0)
+                    return LineNumber + (_lineOffset - 1);
                 return LineNumber;
             }
         }

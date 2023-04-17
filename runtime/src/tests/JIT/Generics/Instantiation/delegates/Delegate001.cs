@@ -19,7 +19,8 @@ internal class Test_Delegate001
 {
     public static int Main()
     {
-        int i, j;
+        int i,
+            j;
         Foo inst = new Foo();
         GenDelegate<int> MyDelegate = new GenDelegate<int>(inst.Function);
         i = MyDelegate(10, out j);
@@ -34,4 +35,3 @@ internal class Test_Delegate001
         return 100;
     }
 }
-

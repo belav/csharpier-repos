@@ -58,7 +58,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -108,7 +109,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -160,7 +162,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -195,7 +198,9 @@ public class ComplexRecordIntegrationTest
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?parameter.Customer.Name=bill&paramater.Customer.Address=not-used");
+            request.QueryString = new QueryString(
+                "?parameter.Customer.Name=bill&paramater.Customer.Address=not-used"
+            );
             request.ContentType = "application/json";
         });
 
@@ -214,7 +219,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -263,7 +269,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -312,7 +319,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -343,8 +351,9 @@ public class ComplexRecordIntegrationTest
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.Customer.Name=bill&parameter.Customer.Token=" + ByteArrayEncoded);
+            request.QueryString = new QueryString(
+                "?parameter.Customer.Name=bill&parameter.Customer.Token=" + ByteArrayEncoded
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -360,7 +369,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -396,7 +406,9 @@ public class ComplexRecordIntegrationTest
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?Customer.Name=bill&Customer.Token=" + ByteArrayEncoded);
+            request.QueryString = new QueryString(
+                "?Customer.Name=bill&Customer.Token=" + ByteArrayEncoded
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -412,7 +424,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -464,7 +477,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -517,7 +531,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -570,7 +585,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -624,7 +640,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -674,7 +691,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -731,7 +749,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -768,8 +787,9 @@ public class ComplexRecordIntegrationTest
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11");
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -785,7 +805,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -840,7 +861,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -895,7 +917,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -942,7 +965,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -971,8 +995,9 @@ public class ComplexRecordIntegrationTest
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11");
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -988,7 +1013,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1043,7 +1069,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1098,7 +1125,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1145,7 +1173,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1174,8 +1203,9 @@ public class ComplexRecordIntegrationTest
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.Name=bill&parameter.ProductIds[0].Key=key0&parameter.ProductIds[0].Value=10");
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductIds[0].Key=key0&parameter.ProductIds[0].Value=10"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1191,7 +1221,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1230,7 +1261,9 @@ public class ComplexRecordIntegrationTest
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?Name=bill&ProductIds[0].Key=key0&ProductIds[0].Value=10");
+            request.QueryString = new QueryString(
+                "?Name=bill&ProductIds[0].Key=key0&ProductIds[0].Value=10"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1246,7 +1279,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1301,7 +1335,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1348,7 +1383,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1376,21 +1412,18 @@ public class ComplexRecordIntegrationTest
     public async Task BindsDictionaryProperty_WithIEnumerableComplexTypeValue_Success()
     {
         // Arrange
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = typeof(Car1)
-        };
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car1) };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            var queryString = "?p.Name=Accord"
-                    + "&p.Specs[0].Key=camera_specs"
-                    + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
-                    + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
-                    + "&p.Specs[1].Key=tyre_specs"
-                    + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
-                    + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs[0].Key=camera_specs"
+                + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
+                + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
+                + "&p.Specs[1].Key=tyre_specs"
+                + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
+                + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
             request.QueryString = new QueryString(queryString);
         });
 
@@ -1407,7 +1440,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1429,7 +1463,8 @@ public class ComplexRecordIntegrationTest
                     (s) =>
                     {
                         Assert.Equal("camera_spec2.txt", s.Name);
-                    });
+                    }
+                );
             },
             (e) =>
             {
@@ -1443,8 +1478,10 @@ public class ComplexRecordIntegrationTest
                     (s) =>
                     {
                         Assert.Equal("tyre_spec2.txt", s.Name);
-                    });
-            });
+                    }
+                );
+            }
+        );
 
         Assert.Equal(7, modelState.Count);
         Assert.Equal(0, modelState.ErrorCount);
@@ -1483,21 +1520,18 @@ public class ComplexRecordIntegrationTest
     public async Task BindsDictionaryProperty_WithArrayOfComplexTypeValue_Success()
     {
         // Arrange
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = typeof(Car2)
-        };
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car2) };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            var queryString = "?p.Name=Accord"
-                    + "&p.Specs[0].Key=camera_specs"
-                    + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
-                    + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
-                    + "&p.Specs[1].Key=tyre_specs"
-                    + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
-                    + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs[0].Key=camera_specs"
+                + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
+                + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
+                + "&p.Specs[1].Key=tyre_specs"
+                + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
+                + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
             request.QueryString = new QueryString(queryString);
         });
 
@@ -1514,7 +1548,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1536,7 +1571,8 @@ public class ComplexRecordIntegrationTest
                     (s) =>
                     {
                         Assert.Equal("camera_spec2.txt", s.Name);
-                    });
+                    }
+                );
             },
             (e) =>
             {
@@ -1550,8 +1586,10 @@ public class ComplexRecordIntegrationTest
                     (s) =>
                     {
                         Assert.Equal("tyre_spec2.txt", s.Name);
-                    });
-            });
+                    }
+                );
+            }
+        );
 
         Assert.Equal(7, modelState.Count);
         Assert.Equal(0, modelState.ErrorCount);
@@ -1590,21 +1628,18 @@ public class ComplexRecordIntegrationTest
     public async Task BindsDictionaryProperty_WithIEnumerableOfKeyValuePair_Success()
     {
         // Arrange
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = typeof(Car3)
-        };
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car3) };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            var queryString = "?p.Name=Accord"
-                    + "&p.Specs[0].Key=camera_specs"
-                    + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
-                    + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
-                    + "&p.Specs[1].Key=tyre_specs"
-                    + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
-                    + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs[0].Key=camera_specs"
+                + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
+                + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
+                + "&p.Specs[1].Key=tyre_specs"
+                + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
+                + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
             request.QueryString = new QueryString(queryString);
         });
 
@@ -1621,7 +1656,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1643,7 +1679,8 @@ public class ComplexRecordIntegrationTest
                     (s) =>
                     {
                         Assert.Equal("camera_spec2.txt", s.Name);
-                    });
+                    }
+                );
             },
             (e) =>
             {
@@ -1657,8 +1694,10 @@ public class ComplexRecordIntegrationTest
                     (s) =>
                     {
                         Assert.Equal("tyre_spec2.txt", s.Name);
-                    });
-            });
+                    }
+                );
+            }
+        );
 
         Assert.Equal(7, modelState.Count);
         Assert.Equal(0, modelState.ErrorCount);
@@ -1708,8 +1747,9 @@ public class ComplexRecordIntegrationTest
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.Name=bill&parameter.ProductId.Key=key0&parameter.ProductId.Value=10");
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductId.Key=key0&parameter.ProductId.Value=10"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1725,7 +1765,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1764,7 +1805,9 @@ public class ComplexRecordIntegrationTest
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?Name=bill&ProductId.Key=key0&ProductId.Value=10");
+            request.QueryString = new QueryString(
+                "?Name=bill&ProductId.Key=key0&ProductId.Value=10"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1780,7 +1823,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1812,21 +1856,18 @@ public class ComplexRecordIntegrationTest
     public async Task Foo_BindsKeyValuePairProperty_WithPrefix_Success()
     {
         // Arrange
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = typeof(Car4)
-        };
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car4) };
 
         // Need to have a key here so that the ComplexObjectModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            var queryString = "?p.Name=Accord"
-                            + "&p.Specs.Key=camera_specs"
-                            + "&p.Specs.Value[0].Key=spec1"
-                            + "&p.Specs.Value[0].Value=spec1.txt"
-                            + "&p.Specs.Value[1].Key=spec2"
-                            + "&p.Specs.Value[1].Value=spec2.txt";
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs.Key=camera_specs"
+                + "&p.Specs.Value[0].Key=spec1"
+                + "&p.Specs.Value[0].Value=spec1.txt"
+                + "&p.Specs.Value[1].Key=spec2"
+                + "&p.Specs.Value[1].Value=spec2.txt";
 
             request.QueryString = new QueryString(queryString);
         });
@@ -1844,7 +1885,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1863,7 +1905,8 @@ public class ComplexRecordIntegrationTest
             {
                 Assert.Equal("spec2", e.Key);
                 Assert.Equal("spec2.txt", e.Value);
-            });
+            }
+        );
 
         Assert.Equal(6, modelState.Count);
         Assert.Equal(0, modelState.ErrorCount);
@@ -1930,7 +1973,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1976,7 +2020,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1992,23 +2037,33 @@ public class ComplexRecordIntegrationTest
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["Customer"].Errors);
-        Assert.Equal("A value for the 'Customer' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'Customer' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
     public async Task WithBindRequired_NoData_AndCustomizedMessage_AddsGivenMessage()
     {
         // Arrange
-        var parameterInfo = typeof(Order10).GetConstructor(new[] { typeof(Person10) }).GetParameters()[0];
+        var parameterInfo = typeof(Order10)
+            .GetConstructor(new[] { typeof(Person10) })
+            .GetParameters()[0];
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider
             .ForParameter(parameterInfo)
-            .BindingDetails((Action<ModelBinding.Metadata.BindingMetadata>)(binding =>
-            {
-                // A real details provider could customize message based on BindingMetadataProviderContext.
-                binding.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(
-                name => $"Hurts when '{ name }' is not provided.");
-            }));
+            .BindingDetails(
+                (Action<ModelBinding.Metadata.BindingMetadata>)(
+                    binding =>
+                    {
+                        // A real details provider could customize message based on BindingMetadataProviderContext.
+                        binding.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(
+                            name => $"Hurts when '{name}' is not provided."
+                        );
+                    }
+                )
+            );
 
         var parameter = new ParameterDescriptor()
         {
@@ -2032,7 +2087,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2084,7 +2140,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2106,7 +2163,10 @@ public class ComplexRecordIntegrationTest
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["parameter.Customer.Name"].Errors);
-        Assert.Equal("A value for the 'Name' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'Name' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2138,7 +2198,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2160,7 +2221,10 @@ public class ComplexRecordIntegrationTest
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["Customer.Name"].Errors);
-        Assert.Equal("A value for the 'Name' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'Name' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2171,10 +2235,7 @@ public class ComplexRecordIntegrationTest
         {
             Name = "parameter",
             ParameterType = typeof(Order11),
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "customParameter"
-            }
+            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" }
         };
 
         // No Data
@@ -2196,7 +2257,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2218,7 +2280,10 @@ public class ComplexRecordIntegrationTest
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["customParameter.Customer.Name"].Errors);
-        Assert.Equal("A value for the 'Name' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'Name' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     private record Order12([BindRequired] string ProductName);
@@ -2252,7 +2317,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2268,7 +2334,10 @@ public class ComplexRecordIntegrationTest
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["ProductName"].Errors);
-        Assert.Equal("A value for the 'ProductName' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'ProductName' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2279,10 +2348,7 @@ public class ComplexRecordIntegrationTest
         {
             Name = "parameter",
             ParameterType = typeof(Order12),
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "customParameter"
-            }
+            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" }
         };
 
         // No Data
@@ -2304,7 +2370,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2320,7 +2387,10 @@ public class ComplexRecordIntegrationTest
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["customParameter.ProductName"].Errors);
-        Assert.Equal("A value for the 'ProductName' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'ProductName' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2352,7 +2422,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2400,7 +2471,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2416,7 +2488,10 @@ public class ComplexRecordIntegrationTest
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["OrderIds"].Errors);
-        Assert.Equal("A value for the 'OrderIds' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'OrderIds' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2427,10 +2502,7 @@ public class ComplexRecordIntegrationTest
         {
             Name = "parameter",
             ParameterType = typeof(Order13),
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "customParameter"
-            }
+            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" }
         };
 
         // No Data
@@ -2452,7 +2524,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2468,7 +2541,10 @@ public class ComplexRecordIntegrationTest
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["customParameter.OrderIds"].Errors);
-        Assert.Equal("A value for the 'OrderIds' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'OrderIds' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2499,7 +2575,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2549,7 +2626,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2603,7 +2681,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2635,7 +2714,8 @@ public class ComplexRecordIntegrationTest
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task ModelNameOnPropertyType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -2647,7 +2727,8 @@ public class ComplexRecordIntegrationTest
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(
-            request => request.QueryString = new QueryString("?HomeAddress.Street=someStreet"));
+            request => request.QueryString = new QueryString("?HomeAddress.Street=someStreet")
+        );
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2662,7 +2743,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2684,7 +2766,8 @@ public class ComplexRecordIntegrationTest
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task ModelNameOnParameterType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -2696,7 +2779,8 @@ public class ComplexRecordIntegrationTest
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(
-            request => request.QueryString = new QueryString("?HomeAddress.Street=someStreet"));
+            request => request.QueryString = new QueryString("?HomeAddress.Street=someStreet")
+        );
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2711,7 +2795,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2739,7 +2824,8 @@ public class ComplexRecordIntegrationTest
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task BindAttributeOnPropertyType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -2751,8 +2837,11 @@ public class ComplexRecordIntegrationTest
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(
-            request => request.QueryString = new QueryString(
-                "?Address.Number=23&Address.Street=someStreet&Address.City=Redmond&Address.State=WA"));
+            request =>
+                request.QueryString = new QueryString(
+                    "?Address.Number=23&Address.Street=someStreet&Address.City=Redmond&Address.State=WA"
+                )
+        );
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2767,7 +2856,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2794,7 +2884,8 @@ public class ComplexRecordIntegrationTest
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task BindAttributeOnParameterType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -2806,7 +2897,11 @@ public class ComplexRecordIntegrationTest
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(
-            request => request.QueryString = new QueryString("?Number=23&Street=someStreet&City=Redmond&State=WA"));
+            request =>
+                request.QueryString = new QueryString(
+                    "?Number=23&Street=someStreet&City=Redmond&State=WA"
+                )
+        );
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2821,7 +2916,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2879,7 +2975,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2909,7 +3006,9 @@ public class ComplexRecordIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
             request.Headers.Add("GpsCoordinates", "10,20");
-            request.QueryString = new QueryString("?Id=1&Info.Key=location1&Info.Value.Zipcode=98052");
+            request.QueryString = new QueryString(
+                "?Id=1&Info.Key=location1&Info.Value.Zipcode=98052"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -2925,7 +3024,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2994,7 +3094,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3018,11 +3119,14 @@ public class ComplexRecordIntegrationTest
 
     private record TestModel(TestInnerModel[] InnerModels);
 
-    private record TestInnerModel([ModelBinder(BinderType = typeof(NumberModelBinder))] decimal Rate);
+    private record TestInnerModel(
+        [ModelBinder(BinderType = typeof(NumberModelBinder))] decimal Rate
+    );
 
     private class NumberModelBinder : IModelBinder
     {
-        private readonly NumberStyles _supportedStyles = NumberStyles.Float | NumberStyles.AllowThousands;
+        private readonly NumberStyles _supportedStyles =
+            NumberStyles.Float | NumberStyles.AllowThousands;
         private readonly DecimalModelBinder _innerBinder;
 
         public NumberModelBinder(ILoggerFactory loggerFactory)
@@ -3050,7 +3154,8 @@ public class ComplexRecordIntegrationTest
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
             request.QueryString = new QueryString(
-                "?parameter.InnerModels[0].Rate=1,000.00&parameter.InnerModels[1].Rate=2000");
+                "?parameter.InnerModels[0].Rate=1,000.00&parameter.InnerModels[1].Rate=2000"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -3066,7 +3171,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3076,7 +3182,8 @@ public class ComplexRecordIntegrationTest
         Assert.Collection(
             model.InnerModels,
             item => Assert.Equal(1000, item.Rate),
-            item => Assert.Equal(2000, item.Rate));
+            item => Assert.Equal(2000, item.Rate)
+        );
 
         Assert.True(modelState.IsValid);
         Assert.Collection(
@@ -3096,7 +3203,8 @@ public class ComplexRecordIntegrationTest
                 Assert.Empty(kvp.Value.Errors);
                 Assert.Equal("2000", kvp.Value.RawValue);
                 Assert.Equal(ModelValidationState.Valid, kvp.Value.ValidationState);
-            });
+            }
+        );
     }
 
     private record Person6(string Name, Person6 Mother, IFormFile Photo);
@@ -3130,7 +3238,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3182,7 +3291,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3219,7 +3329,8 @@ public class ComplexRecordIntegrationTest
                 Assert.Null(kvp.Value.AttemptedValue);
                 Assert.Empty(kvp.Value.Errors);
                 Assert.Null(kvp.Value.RawValue);
-            });
+            }
+        );
     }
 
     private record Person7(string Name, IList<Person7> Children, IFormFile Photo);
@@ -3257,7 +3368,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3283,7 +3395,8 @@ public class ComplexRecordIntegrationTest
                 {
                     Assert.Equal("Hello Ginger!", reader.ReadToEnd());
                 }
-            });
+            }
+        );
 
         Assert.Null(model.Name);
         Assert.NotNull(model.Photo);
@@ -3295,19 +3408,23 @@ public class ComplexRecordIntegrationTest
         Assert.True(modelState.IsValid);
     }
 
-    private record LoopyModel([ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound, LoopyModel SelfReference);
+    private record LoopyModel(
+        [ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound,
+        LoopyModel SelfReference
+    );
 
     // Regression test for #7052
     [Fact]
     public async Task ModelBindingSystem_ThrowsOn33Binders()
     {
         // Arrange
-        var expectedMessage = "Model binding system exceeded " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (32). Reduce the " +
-            $"potential nesting of '{typeof(LoopyModel)}'. For example, this type may have a property with a " +
-            "model binder that always succeeds. See the " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more " +
-            "information.";
+        var expectedMessage =
+            "Model binding system exceeded "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (32). Reduce the "
+            + $"potential nesting of '{typeof(LoopyModel)}'. For example, this type may have a property with a "
+            + "model binder that always succeeds. See the "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more "
+            + "information.";
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
@@ -3322,13 +3439,17 @@ public class ComplexRecordIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext));
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
     private record TwoDeepModel([ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound);
 
-    private record ThreeDeepModel([ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound, TwoDeepModel Inner);
+    private record ThreeDeepModel(
+        [ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound,
+        TwoDeepModel Inner
+    );
 
     // Ensure model binding system allows MaxModelBindingRecursionDepth binders on the stack.
     [Fact]
@@ -3342,7 +3463,8 @@ public class ComplexRecordIntegrationTest
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(
-            updateOptions: options => options.MaxModelBindingRecursionDepth = 3);
+            updateOptions: options => options.MaxModelBindingRecursionDepth = 3
+        );
 
         var modelState = testContext.ModelState;
         var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);
@@ -3363,19 +3485,23 @@ public class ComplexRecordIntegrationTest
         Assert.True(model.Inner.IsBound);
     }
 
-    private record FourDeepModel([ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound, ThreeDeepModel Inner);
+    private record FourDeepModel(
+        [ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound,
+        ThreeDeepModel Inner
+    );
 
     // Ensure model binding system disallows one more than MaxModelBindingRecursionDepth binders on the stack.
     [Fact]
     public async Task ModelBindingSystem_ThrowsOn4Binders()
     {
         // Arrange
-        var expectedMessage = $"Model binding system exceeded " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (3). Reduce the " +
-            $"potential nesting of '{typeof(FourDeepModel)}'. For example, this type may have a property with a " +
-            $"model binder that always succeeds. See the " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more " +
-            $"information.";
+        var expectedMessage =
+            $"Model binding system exceeded "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (3). Reduce the "
+            + $"potential nesting of '{typeof(FourDeepModel)}'. For example, this type may have a property with a "
+            + $"model binder that always succeeds. See the "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more "
+            + $"information.";
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
@@ -3383,7 +3509,8 @@ public class ComplexRecordIntegrationTest
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(
-            updateOptions: options => options.MaxModelBindingRecursionDepth = 3);
+            updateOptions: options => options.MaxModelBindingRecursionDepth = 3
+        );
 
         var modelState = testContext.ModelState;
         var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);
@@ -3392,26 +3519,37 @@ public class ComplexRecordIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext));
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
-    private record LoopyModel1([ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound, LoopyModel2 Inner);
+    private record LoopyModel1(
+        [ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound,
+        LoopyModel2 Inner
+    );
 
-    private record LoopyModel2([ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound, LoopyModel3 Inner);
+    private record LoopyModel2(
+        [ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound,
+        LoopyModel3 Inner
+    );
 
-    private record LoopyModel3([ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound, LoopyModel1 Inner);
+    private record LoopyModel3(
+        [ModelBinder(typeof(SuccessfulModelBinder))] bool IsBound,
+        LoopyModel1 Inner
+    );
 
     [Fact]
     public async Task ModelBindingSystem_ThrowsOn33Binders_WithIndirectModelTypeLoop()
     {
         // Arrange
-        var expectedMessage = $"Model binding system exceeded " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (32). Reduce the " +
-            $"potential nesting of '{typeof(LoopyModel1)}'. For example, this type may have a property with a " +
-            $"model binder that always succeeds. See the " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more " +
-            $"information.";
+        var expectedMessage =
+            $"Model binding system exceeded "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (32). Reduce the "
+            + $"potential nesting of '{typeof(LoopyModel1)}'. For example, this type may have a property with a "
+            + $"model binder that always succeeds. See the "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more "
+            + $"information.";
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
@@ -3426,7 +3564,8 @@ public class ComplexRecordIntegrationTest
 
         // Act & Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext));
+            () => parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -3464,7 +3603,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3506,7 +3646,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3549,7 +3690,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3592,7 +3734,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3643,7 +3786,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3689,7 +3833,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3704,7 +3849,10 @@ public class ComplexRecordIntegrationTest
         Assert.True(modelState.IsValid);
     }
 
-    public record RecordTypesWithDifferentMetadataOnParameterAndProperty([FromQuery] string Id, string Name)
+    public record RecordTypesWithDifferentMetadataOnParameterAndProperty(
+        [FromQuery] string Id,
+        string Name
+    )
     {
         [FromHeader]
         public string Id { get; init; } = Id;
@@ -3741,13 +3889,16 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
         Assert.True(modelState.IsValid);
 
-        var model = Assert.IsType<RecordTypesWithDifferentMetadataOnParameterAndProperty>(modelBindingResult.Model);
+        var model = Assert.IsType<RecordTypesWithDifferentMetadataOnParameterAndProperty>(
+            modelBindingResult.Model
+        );
         Assert.Equal("testId", model.Id);
         Assert.Equal("test", model.Name);
 
@@ -3784,12 +3935,15 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
 
-        var model = Assert.IsType<RecordTypesWithDifferentMetadataOnParameterAndProperty>(modelBindingResult.Model);
+        var model = Assert.IsType<RecordTypesWithDifferentMetadataOnParameterAndProperty>(
+            modelBindingResult.Model
+        );
         Assert.Null(model.Id);
         Assert.Equal("test", model.Name);
 
@@ -3829,7 +3983,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3872,7 +4027,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3916,13 +4072,16 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
         Assert.True(modelState.IsValid);
 
-        var model = Assert.IsType<RecordTypesWithReadOnlyCollectionParameter>(modelBindingResult.Model);
+        var model = Assert.IsType<RecordTypesWithReadOnlyCollectionParameter>(
+            modelBindingResult.Model
+        );
         Assert.Equal("test", model.Id);
         Assert.Equal(new[] { "tag1", "tag2" }, model.Tags);
 
@@ -3931,7 +4090,10 @@ public class ComplexRecordIntegrationTest
         Assert.Single(modelState, e => e.Key == "Tags[1]");
     }
 
-    private record RecordTypesWithDefaultParameterValue(string Id = "default-id", string[] Tags = null);
+    private record RecordTypesWithDefaultParameterValue(
+        string Id = "default-id",
+        string[] Tags = null
+    );
 
     [Fact]
     public async Task RecordTypesWithDefaultParameterValue_Data()
@@ -3961,7 +4123,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -4005,7 +4168,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -4046,7 +4210,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -4089,7 +4254,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -4134,7 +4300,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -4179,7 +4346,8 @@ public class ComplexRecordIntegrationTest
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -4197,12 +4365,17 @@ public class ComplexRecordIntegrationTest
 
         entry = Assert.Single(modelState, m => m.Key == "Name");
         var error = Assert.Single(entry.Value.Errors);
-        Assert.Equal("A value for the 'Name' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'Name' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     private static void SetJsonBodyContent(HttpRequest request, string content)
     {
-        var stream = new MemoryStream(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false).GetBytes(content));
+        var stream = new MemoryStream(
+            new UTF8Encoding(encoderShouldEmitUTF8Identifier: false).GetBytes(content)
+        );
         request.Body = stream;
         request.ContentType = "application/json";
     }
@@ -4220,9 +4393,13 @@ public class ComplexRecordIntegrationTest
         else
         {
             fileCollection = new FormFileCollection();
-            var formCollection = new FormCollection(new Dictionary<string, StringValues>(), fileCollection);
+            var formCollection = new FormCollection(
+                new Dictionary<string, StringValues>(),
+                fileCollection
+            );
 
-            request.ContentType = "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
+            request.ContentType =
+                "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
             request.Form = formCollection;
         }
 
@@ -4230,7 +4407,6 @@ public class ComplexRecordIntegrationTest
         var file = new FormFile(memoryStream, 0, memoryStream.Length, name, fileName)
         {
             Headers = new HeaderDictionary(),
-
             // Do not move this up. Headers must be non-null before the ContentDisposition property is accessed.
             ContentDisposition = $"form-data; name={name}; filename={fileName}",
         };
@@ -4238,7 +4414,10 @@ public class ComplexRecordIntegrationTest
         fileCollection.Add(file);
     }
 
-    private ModelMetadata GetMetadata(ModelBindingTestContext context, ParameterDescriptor parameter)
+    private ModelMetadata GetMetadata(
+        ModelBindingTestContext context,
+        ParameterDescriptor parameter
+    )
     {
         return context.MetadataProvider.GetMetadataForType(parameter.ParameterType);
     }
@@ -4246,11 +4425,13 @@ public class ComplexRecordIntegrationTest
     private IModelBinder GetModelBinder(
         ModelBindingTestContext context,
         ParameterDescriptor parameter,
-        ModelMetadata metadata)
+        ModelMetadata metadata
+    )
     {
         var factory = ModelBindingTestHelper.GetModelBinderFactory(
             context.MetadataProvider,
-            context.HttpContext.RequestServices);
+            context.HttpContext.RequestServices
+        );
         var factoryContext = new ModelBinderFactoryContext
         {
             BindingInfo = parameter.BindingInfo,

@@ -9,13 +9,18 @@ namespace Internal.Cryptography
 {
     internal static class PemKeyHelpers
     {
-        public delegate bool TryExportKeyAction<T>(T arg, Span<byte> destination, out int bytesWritten);
+        public delegate bool TryExportKeyAction<T>(
+            T arg,
+            Span<byte> destination,
+            out int bytesWritten
+        );
         public delegate bool TryExportEncryptedKeyAction<T>(
             T arg,
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten);
+            out int bytesWritten
+        );
 
         public static unsafe bool TryExportToEncryptedPem<T>(
             T arg,
@@ -23,7 +28,8 @@ namespace Internal.Cryptography
             PbeParameters pbeParameters,
             TryExportEncryptedKeyAction<T> exporter,
             Span<char> destination,
-            out int charsWritten)
+            out int charsWritten
+        )
         {
             int bufferSize = 4096;
 
@@ -41,7 +47,12 @@ namespace Internal.Cryptography
                         if (exporter(arg, password, pbeParameters, buffer, out bytesWritten))
                         {
                             Span<byte> writtenSpan = new Span<byte>(buffer, 0, bytesWritten);
-                            return PemEncoding.TryWrite(PemLabels.EncryptedPkcs8PrivateKey, writtenSpan, destination, out charsWritten);
+                            return PemEncoding.TryWrite(
+                                PemLabels.EncryptedPkcs8PrivateKey,
+                                writtenSpan,
+                                destination,
+                                out charsWritten
+                            );
                         }
                     }
                     finally
@@ -59,7 +70,8 @@ namespace Internal.Cryptography
             string label,
             TryExportKeyAction<T> exporter,
             Span<char> destination,
-            out int charsWritten)
+            out int charsWritten
+        )
         {
             int bufferSize = 4096;
 
@@ -77,7 +89,12 @@ namespace Internal.Cryptography
                         if (exporter(arg, buffer, out bytesWritten))
                         {
                             Span<byte> writtenSpan = new Span<byte>(buffer, 0, bytesWritten);
-                            return PemEncoding.TryWrite(label, writtenSpan, destination, out charsWritten);
+                            return PemEncoding.TryWrite(
+                                label,
+                                writtenSpan,
+                                destination,
+                                out charsWritten
+                            );
                         }
                     }
                     finally
@@ -94,17 +111,23 @@ namespace Internal.Cryptography
         {
             int pemSize = PemEncoding.GetEncodedSize(label.Length, data.Length);
 
-            return string.Create(pemSize, (label, data), static (destination, args) =>
-            {
-                (string label, ReadOnlyMemory<byte> data) = args;
-
-                if (!PemEncoding.TryWrite(label, data.Span, destination, out int charsWritten) ||
-                    charsWritten != destination.Length)
+            return string.Create(
+                pemSize,
+                (label, data),
+                static (destination, args) =>
                 {
-                    Debug.Fail("Pre-allocated buffer was not the correct size.");
-                    throw new CryptographicException();
+                    (string label, ReadOnlyMemory<byte> data) = args;
+
+                    if (
+                        !PemEncoding.TryWrite(label, data.Span, destination, out int charsWritten)
+                        || charsWritten != destination.Length
+                    )
+                    {
+                        Debug.Fail("Pre-allocated buffer was not the correct size.");
+                        throw new CryptographicException();
+                    }
                 }
-            });
+            );
         }
 
         public delegate void ImportKeyAction(ReadOnlySpan<byte> source, out int bytesRead);
@@ -112,12 +135,14 @@ namespace Internal.Cryptography
         public delegate void ImportEncryptedKeyAction<TPass>(
             ReadOnlySpan<TPass> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead);
+            out int bytesRead
+        );
 
         public static void ImportEncryptedPem<TPass>(
             ReadOnlySpan<char> input,
             ReadOnlySpan<TPass> password,
-            ImportEncryptedKeyAction<TPass> importAction)
+            ImportEncryptedKeyAction<TPass> importAction
+        )
         {
             bool foundEncryptedPem = false;
             PemFields foundFields = default;
@@ -132,7 +157,10 @@ namespace Internal.Cryptography
                 {
                     if (foundEncryptedPem)
                     {
-                        throw new ArgumentException(SR.Argument_PemImport_AmbiguousPem, nameof(input));
+                        throw new ArgumentException(
+                            SR.Argument_PemImport_AmbiguousPem,
+                            nameof(input)
+                        );
                     }
 
                     foundEncryptedPem = true;
@@ -200,7 +228,10 @@ namespace Internal.Cryptography
                     // PEM, we will throw a duplicate exception.
                     if (importAction != null || containsEncryptedPem)
                     {
-                        throw new ArgumentException(SR.Argument_PemImport_AmbiguousPem, nameof(input));
+                        throw new ArgumentException(
+                            SR.Argument_PemImport_AmbiguousPem,
+                            nameof(input)
+                        );
                     }
 
                     importAction = action;
@@ -211,7 +242,10 @@ namespace Internal.Cryptography
                 {
                     if (importAction != null || containsEncryptedPem)
                     {
-                        throw new ArgumentException(SR.Argument_PemImport_AmbiguousPem, nameof(input));
+                        throw new ArgumentException(
+                            SR.Argument_PemImport_AmbiguousPem,
+                            nameof(input)
+                        );
                     }
 
                     containsEncryptedPem = true;

@@ -28,22 +28,34 @@ namespace ILCompiler.Dataflow
             if (metadataType.Name.Length + 1 > name.Length)
                 return false;
 
-            if (!name.Slice(name.Length - metadataType.Name.Length).Equals(metadataType.Name.AsSpan(), StringComparison.Ordinal))
+            if (
+                !name.Slice(name.Length - metadataType.Name.Length)
+                    .Equals(metadataType.Name.AsSpan(), StringComparison.Ordinal)
+            )
                 return false;
 
             if (name[name.Length - metadataType.Name.Length - 1] != '.')
                 return false;
 
-            return name.Slice(0, name.Length - metadataType.Name.Length - 1).Equals(metadataType.Namespace, StringComparison.Ordinal);
+            return name.Slice(0, name.Length - metadataType.Name.Length - 1)
+                .Equals(metadataType.Namespace, StringComparison.Ordinal);
         }
 
         public static bool IsTypeOf(this TypeDesc type, ILLinkSharedWellKnownType wellKnownType) =>
             wellKnownType switch
             {
-                ILLinkSharedWellKnownType.System_String => type.IsWellKnownType(TypeSystemWellKnownType.String),
-                ILLinkSharedWellKnownType.System_Object => type.IsWellKnownType(TypeSystemWellKnownType.Object),
-                ILLinkSharedWellKnownType.System_Void => type.IsWellKnownType(TypeSystemWellKnownType.Void),
-                _ => wellKnownType == WellKnownTypeExtensions.GetWellKnownType((type as MetadataType)?.Namespace ?? string.Empty, ((type as MetadataType)?.Name) ?? string.Empty)
+                ILLinkSharedWellKnownType.System_String
+                    => type.IsWellKnownType(TypeSystemWellKnownType.String),
+                ILLinkSharedWellKnownType.System_Object
+                    => type.IsWellKnownType(TypeSystemWellKnownType.Object),
+                ILLinkSharedWellKnownType.System_Void
+                    => type.IsWellKnownType(TypeSystemWellKnownType.Void),
+                _
+                    => wellKnownType
+                        == WellKnownTypeExtensions.GetWellKnownType(
+                            (type as MetadataType)?.Namespace ?? string.Empty,
+                            ((type as MetadataType)?.Name) ?? string.Empty
+                        )
             };
 
         public static bool IsDeclaredOnType(this MethodDesc method, string fullTypeName)

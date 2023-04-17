@@ -31,147 +31,175 @@ using System.IO;
 using System.Text;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public class CreateVisualBasicManifestResourceName : CreateManifestResourceName {
+namespace Microsoft.Build.Tasks
+{
+    public class CreateVisualBasicManifestResourceName : CreateManifestResourceName
+    {
+        public CreateVisualBasicManifestResourceName() { }
 
-		public CreateVisualBasicManifestResourceName ()
-		{
-		}
+        protected override string CreateManifestName(
+            string fileName,
+            string linkFileName,
+            string rootNamespace,
+            string dependentUponFileName,
+            Stream binaryStream
+        )
+        {
+            string filename_to_use = String.IsNullOrEmpty(linkFileName) ? fileName : linkFileName;
+            if (String.IsNullOrEmpty(dependentUponFileName) || binaryStream == null)
+                return GetResourceIdFromFileName(Path.GetFileName(filename_to_use), rootNamespace);
 
-		protected override string CreateManifestName (string fileName,
-							      string linkFileName,
-							      string rootNamespace,
-							      string dependentUponFileName,
-							      Stream binaryStream)
-		{
-			string filename_to_use = String.IsNullOrEmpty (linkFileName) ? fileName : linkFileName;
-			if (String.IsNullOrEmpty (dependentUponFileName) || binaryStream == null)
-				return GetResourceIdFromFileName
-					(Path.GetFileName (filename_to_use), rootNamespace);
+            string ns = null;
+            string classname = null;
 
-			string ns = null;
-			string classname = null;
+            using (StreamReader rdr = new StreamReader(binaryStream))
+            {
+                while (true)
+                {
+                    string tok = GetNextToken(rdr);
+                    if (tok == null)
+                        break;
 
-			using (StreamReader rdr = new StreamReader (binaryStream)) {
-				while (true) {
-					string tok = GetNextToken (rdr);
-					if (tok == null)
-						break;
+                    if (String.Compare(tok, "namespace", true) == 0)
+                    {
+                        string t = GetNextToken(rdr);
+                        /* 'namespace' can be a attribute param also, */
+                        if (t == ":" && GetNextToken(rdr) == "=")
+                            continue;
+                        ns = t;
+                    }
 
-					if (String.Compare (tok, "namespace", true) == 0) {
-						string t = GetNextToken (rdr);
-						/* 'namespace' can be a attribute param also, */
-						if (t == ":" && GetNextToken (rdr) == "=")
-							continue;
-						ns = t;
-					}
+                    if (String.Compare(tok, "class", true) == 0)
+                    {
+                        string t = GetNextToken(rdr);
+                        /* 'class' can be a attribute param also, */
+                        if (t == ":" && GetNextToken(rdr) == "=")
+                            continue;
+                        classname = t;
+                        break;
+                    }
+                }
 
-					if (String.Compare (tok, "class", true) == 0) {
-						string t = GetNextToken (rdr);
-						/* 'class' can be a attribute param also, */
-						if (t == ":" && GetNextToken (rdr) == "=")
-							continue;
-						classname = t;
-						break;
-					}
-				}
+                if (classname == null)
+                    return GetResourceIdFromFileName(filename_to_use, rootNamespace);
 
-				if (classname == null)
-					return GetResourceIdFromFileName (filename_to_use, rootNamespace);
+                string culture,
+                    extn,
+                    only_filename;
+                if (
+                    AssignCulture.TrySplitResourceName(
+                        filename_to_use,
+                        out only_filename,
+                        out culture,
+                        out extn
+                    )
+                )
+                    extn = "." + culture;
+                else
+                    extn = String.Empty;
 
-				string culture, extn, only_filename;
-				if (AssignCulture.TrySplitResourceName (filename_to_use, out only_filename, out culture, out extn))
-					extn = "." + culture;
-				else
-					extn = String.Empty;
+                string rname;
+                if (ns == null)
+                    rname = classname + extn;
+                else
+                    rname = ns + '.' + classname + extn;
 
-				string rname;
-				if (ns == null)
-					rname = classname + extn;
-				else
-					rname = ns + '.' + classname + extn;
+                if (String.IsNullOrEmpty(rootNamespace))
+                    return rname;
+                else
+                    return rootNamespace + "." + rname;
+            }
+        }
 
-				if (String.IsNullOrEmpty (rootNamespace))
-					return rname;
-				else
-					return rootNamespace + "." + rname;
-			}
-		}
+        protected override bool IsSourceFile(string fileName)
+        {
+            return string.Equals(
+                Path.GetExtension(fileName),
+                ".vb",
+                StringComparison.OrdinalIgnoreCase
+            );
+        }
 
-		protected override bool	IsSourceFile (string fileName)
-		{
-			return string.Equals (Path.GetExtension (fileName), ".vb", StringComparison.OrdinalIgnoreCase);
-		}
+        /* Special parser for VB.NET files
+         * Assumes that the file is compilable
+         * skips comments,
+         * skips strings "foo"
+         */
+        string GetNextToken(StreamReader sr)
+        {
+            StringBuilder sb = new StringBuilder();
 
-		/* Special parser for VB.NET files
-		 * Assumes that the file is compilable
-		 * skips comments,
-		 * skips strings "foo"
-		 */
-		string GetNextToken (StreamReader sr)
-		{
-			StringBuilder sb = new StringBuilder ();
+            while (true)
+            {
+                int c = sr.Peek();
+                if (c == -1)
+                    return null;
 
-			while (true) {
-				int c = sr.Peek ();
-				if (c == -1)
-					return null;
+                if (c == '\r' || c == '\n')
+                {
+                    sr.ReadLine();
+                    if (sb.Length > 0)
+                        break;
 
-				if (c == '\r' || c == '\n') {
-					sr.ReadLine ();
-					if (sb.Length > 0)
-						break;
+                    continue;
+                }
 
-					continue;
-				}
+                if (c == '\'')
+                {
+                    /* comment */
+                    sr.ReadLine();
+                    if (sb.Length > 0)
+                        return sb.ToString();
 
-				if (c == '\'') {
-					/* comment */
-					sr.ReadLine ();
-					if (sb.Length > 0)
-						return sb.ToString ();
+                    continue;
+                }
 
-					continue;
-				}
+                if (c == '"')
+                {
+                    /* String */
+                    sr.Read();
+                    while (true)
+                    {
+                        int n = sr.Peek();
+                        if (n == '\r' || n == '\n' || n == -1)
+                            throw new Exception("String literal not closed");
 
-				if (c == '"') {
-					/* String */
-					sr.Read ();
-					while (true) {
-						int n = sr.Peek ();
-						if (n == '\r' || n == '\n' || n == -1)
-							throw new Exception ("String literal not closed");
+                        if (n == '"')
+                        {
+                            if (sb.Length > 0)
+                            {
+                                sr.Read();
+                                return sb.ToString();
+                            }
 
-						if (n == '"') {
-							if (sb.Length > 0) {
-								sr.Read ();
-								return sb.ToString ();
-							}
+                            break;
+                        }
+                        sr.Read();
+                    }
+                }
+                else
+                {
+                    if (Char.IsLetterOrDigit((char)c) || c == '_' || c == '.')
+                    {
+                        sb.Append((char)c);
+                    }
+                    else
+                    {
+                        if (sb.Length > 0)
+                            break;
 
-							break;
-						}
-						sr.Read ();
-					}
-				} else {
-					if (Char.IsLetterOrDigit ((char) c) || c == '_' || c == '.') {
-						sb.Append ((char) c);
-					} else {
-						if (sb.Length > 0)
-							break;
+                        if (c != ' ' && c != '\t')
+                        {
+                            sr.Read();
+                            return ((char)c).ToString();
+                        }
+                    }
+                }
 
-						if (c != ' ' && c != '\t') {
-							sr.Read ();
-							return ((char) c).ToString ();
-						}
-					}
-				}
+                sr.Read();
+            }
 
-				sr.Read ();
-			}
-
-			return sb.ToString ();
-		}
-
-	}
+            return sb.ToString();
+        }
+    }
 }
-

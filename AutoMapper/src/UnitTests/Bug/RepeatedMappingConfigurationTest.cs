@@ -27,13 +27,11 @@ public class When_mapping_for_derived_class_is_duplicated : NonValidatingSpecBas
     {
         new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<ModelSubObject, DtoObject>()
-                .Include<ModelSubObject, DtoSubObject>();
+            cfg.CreateMap<ModelSubObject, DtoObject>().Include<ModelSubObject, DtoSubObject>();
 
             cfg.CreateMap<ModelSubObject, DtoSubObject>();
 
-            cfg.CreateMap<ModelSubObject, DtoObject>()
-                .Include<ModelSubObject, DtoSubObject>();
+            cfg.CreateMap<ModelSubObject, DtoObject>().Include<ModelSubObject, DtoSubObject>();
 
             cfg.CreateMap<ModelSubObject, DtoSubObject>();
         });

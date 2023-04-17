@@ -5,10 +5,28 @@ namespace System.IO;
 
 internal static class Net6KeyParser
 {
-    internal static ConsoleKeyInfo Parse(char[] buffer, TerminalFormatStrings terminalFormatStrings, byte posixDisableValue, byte veraseCharacter, ref int startIndex, int endIndex)
+    internal static ConsoleKeyInfo Parse(
+        char[] buffer,
+        TerminalFormatStrings terminalFormatStrings,
+        byte posixDisableValue,
+        byte veraseCharacter,
+        ref int startIndex,
+        int endIndex
+    )
     {
-        MapBufferToConsoleKey(buffer, terminalFormatStrings, posixDisableValue, veraseCharacter, out ConsoleKey key,
-            out char ch, out bool isShift, out bool isAlt, out bool isCtrl, ref startIndex, endIndex);
+        MapBufferToConsoleKey(
+            buffer,
+            terminalFormatStrings,
+            posixDisableValue,
+            veraseCharacter,
+            out ConsoleKey key,
+            out char ch,
+            out bool isShift,
+            out bool isAlt,
+            out bool isCtrl,
+            ref startIndex,
+            endIndex
+        );
 
         // Replace the '\n' char for Enter by '\r' to match Windows behavior.
         if (key == ConsoleKey.Enter && ch == '\n')
@@ -19,11 +37,33 @@ internal static class Net6KeyParser
         return new ConsoleKeyInfo(ch, key, isShift, isAlt, isCtrl);
     }
 
-    private static bool MapBufferToConsoleKey(char[] buffer, TerminalFormatStrings terminalFormatStrings, byte posixDisableValue, byte veraseCharacter,
-        out ConsoleKey key, out char ch, out bool isShift, out bool isAlt, out bool isCtrl, ref int startIndex, int endIndex)
+    private static bool MapBufferToConsoleKey(
+        char[] buffer,
+        TerminalFormatStrings terminalFormatStrings,
+        byte posixDisableValue,
+        byte veraseCharacter,
+        out ConsoleKey key,
+        out char ch,
+        out bool isShift,
+        out bool isAlt,
+        out bool isCtrl,
+        ref int startIndex,
+        int endIndex
+    )
     {
         // Try to get the special key match from the TermInfo static information.
-        if (TryGetSpecialConsoleKey(buffer, startIndex, endIndex, terminalFormatStrings, posixDisableValue, veraseCharacter, out ConsoleKeyInfo keyInfo, out int keyLength))
+        if (
+            TryGetSpecialConsoleKey(
+                buffer,
+                startIndex,
+                endIndex,
+                terminalFormatStrings,
+                posixDisableValue,
+                veraseCharacter,
+                out ConsoleKeyInfo keyInfo,
+                out int keyLength
+            )
+        )
         {
             key = keyInfo.Key;
             isShift = (keyInfo.Modifiers & ConsoleModifiers.Shift) != 0;
@@ -36,11 +76,28 @@ internal static class Net6KeyParser
         }
 
         // Check if we can match Esc + combination and guess if alt was pressed.
-        if (buffer[startIndex] == (char)0x1B && // Alt is send as an escape character
-            endIndex - startIndex >= 2) // We have at least two characters to read
+        if (
+            buffer[startIndex] == (char)0x1B
+            && // Alt is send as an escape character
+            endIndex - startIndex >= 2
+        ) // We have at least two characters to read
         {
             startIndex++;
-            if (MapBufferToConsoleKey(buffer, terminalFormatStrings, posixDisableValue, veraseCharacter, out key, out ch, out isShift, out _, out isCtrl, ref startIndex, endIndex))
+            if (
+                MapBufferToConsoleKey(
+                    buffer,
+                    terminalFormatStrings,
+                    posixDisableValue,
+                    veraseCharacter,
+                    out key,
+                    out ch,
+                    out isShift,
+                    out _,
+                    out isCtrl,
+                    ref startIndex,
+                    endIndex
+                )
+            )
             {
                 isAlt = true;
                 return true;
@@ -64,8 +121,16 @@ internal static class Net6KeyParser
         return key != default(ConsoleKey);
     }
 
-    private static bool TryGetSpecialConsoleKey(char[] givenChars, int startIndex, int endIndex,
-        TerminalFormatStrings terminalFormatStrings, byte posixDisableValue, byte veraseCharacter, out ConsoleKeyInfo key, out int keyLength)
+    private static bool TryGetSpecialConsoleKey(
+        char[] givenChars,
+        int startIndex,
+        int endIndex,
+        TerminalFormatStrings terminalFormatStrings,
+        byte posixDisableValue,
+        byte veraseCharacter,
+        out ConsoleKeyInfo key,
+        out int keyLength
+    )
     {
         int unprocessedCharCount = endIndex - startIndex;
 
@@ -76,7 +141,13 @@ internal static class Net6KeyParser
             char c = givenChars[startIndex];
             if (c != posixDisableValue && c == veraseCharacter)
             {
-                key = new ConsoleKeyInfo(c, ConsoleKey.Backspace, shift: false, alt: false, control: false);
+                key = new ConsoleKeyInfo(
+                    c,
+                    ConsoleKey.Backspace,
+                    shift: false,
+                    alt: false,
+                    control: false
+                );
                 keyLength = 1;
                 return true;
             }

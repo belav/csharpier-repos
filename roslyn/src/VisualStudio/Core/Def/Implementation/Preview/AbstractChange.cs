@@ -37,8 +37,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             return (uint)CheckState << 12;
         }
 
-        public IVsPreviewChangesList GetChildren()
-            => Children;
+        public IVsPreviewChangesList GetChildren() => Children;
 
         internal abstract void GetDisplayData(VSTREEDISPLAYDATA[] pData);
 
@@ -113,18 +112,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         public virtual int CanRecurse
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
 
         public virtual int IsExpandable
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
 
         public abstract int OnRequestSource(object pIUnknownTextView);

@@ -15,7 +15,11 @@ namespace System.Security.Cryptography.Tests
             return SHA256.Create();
         }
 
-        protected override bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        protected override bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             return SHA256.TryHashData(source, destination, out bytesWritten);
         }
@@ -32,30 +36,44 @@ namespace System.Security.Cryptography.Tests
 
         protected override byte[] HashData(Stream source) => SHA256.HashData(source);
 
-        protected override ValueTask<int> HashDataAsync(Stream source, Memory<byte> destination, CancellationToken cancellationToken) =>
-            SHA256.HashDataAsync(source, destination, cancellationToken);
+        protected override ValueTask<int> HashDataAsync(
+            Stream source,
+            Memory<byte> destination,
+            CancellationToken cancellationToken
+        ) => SHA256.HashDataAsync(source, destination, cancellationToken);
 
-        protected override ValueTask<byte[]> HashDataAsync(Stream source, CancellationToken cancellationToken) =>
-            SHA256.HashDataAsync(source, cancellationToken);
+        protected override ValueTask<byte[]> HashDataAsync(
+            Stream source,
+            CancellationToken cancellationToken
+        ) => SHA256.HashDataAsync(source, cancellationToken);
 
         [Fact]
         public void Sha256_Empty()
         {
             Verify(
                 Array.Empty<byte>(),
-                "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+                "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            );
         }
 
         [Fact]
         public void Sha256_Empty_Stream()
         {
-            VerifyRepeating("", 0, "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+            VerifyRepeating(
+                "",
+                0,
+                "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            );
         }
 
         [Fact]
         public async Task Sha256_Empty_Stream_Async()
         {
-            await VerifyRepeatingAsync("", 0, "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+            await VerifyRepeatingAsync(
+                "",
+                0,
+                "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            );
         }
 
         [Fact]
@@ -66,7 +84,8 @@ namespace System.Security.Cryptography.Tests
             VerifyRepeating(
                 "0102030405060708",
                 1024,
-                "cedca4ad2cce0d0b399931708684800cd16be396ffa5af51297a091650aa3610");
+                "cedca4ad2cce0d0b399931708684800cd16be396ffa5af51297a091650aa3610"
+            );
         }
 
         [Fact]
@@ -77,7 +96,8 @@ namespace System.Security.Cryptography.Tests
             VerifyRepeating(
                 "0102030405060708",
                 1025,
-                "9e2e99445f5349c379ceb4c995dde401f63012422183a411d02eb251b1e02e65");
+                "9e2e99445f5349c379ceb4c995dde401f63012422183a411d02eb251b1e02e65"
+            );
         }
 
         [Fact]
@@ -88,7 +108,8 @@ namespace System.Security.Cryptography.Tests
             await VerifyRepeatingAsync(
                 "0102030405060708",
                 1025,
-                "9e2e99445f5349c379ceb4c995dde401f63012422183a411d02eb251b1e02e65");
+                "9e2e99445f5349c379ceb4c995dde401f63012422183a411d02eb251b1e02e65"
+            );
         }
 
         [Fact]
@@ -99,16 +120,15 @@ namespace System.Security.Cryptography.Tests
             await VerifyRepeatingAsync(
                 "0102030405060708",
                 1024,
-                "cedca4ad2cce0d0b399931708684800cd16be396ffa5af51297a091650aa3610");
+                "cedca4ad2cce0d0b399931708684800cd16be396ffa5af51297a091650aa3610"
+            );
         }
 
         // These test cases are from http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf Appendix B
         [Fact]
         public void Sha256_Fips180_1()
         {
-            Verify(
-                "abc",
-                "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
+            Verify("abc", "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
         }
 
         [Fact]
@@ -118,7 +138,8 @@ namespace System.Security.Cryptography.Tests
                 "ab",
                 "c",
                 "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
-                "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+                "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            );
         }
 
         [Fact]
@@ -126,7 +147,8 @@ namespace System.Security.Cryptography.Tests
         {
             Verify(
                 "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
-                "248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1");
+                "248d6a61d20638b8e5c026930c3e6039a33ce45964ff2167f6ecedd419db06c1"
+            );
         }
 
         [Fact]
@@ -135,7 +157,8 @@ namespace System.Security.Cryptography.Tests
             VerifyRepeating(
                 "a",
                 1000000,
-                "cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0");
+                "cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0"
+            );
         }
 
         [Fact]
@@ -144,7 +167,8 @@ namespace System.Security.Cryptography.Tests
             await VerifyRepeatingAsync(
                 "a",
                 1000000,
-                "cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0");
+                "cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0"
+            );
         }
     }
 }

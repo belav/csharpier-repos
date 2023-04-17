@@ -39,7 +39,13 @@ namespace System.IO.Tests
         [Fact]
         public void DisposingBufferedFileStreamThatWasClosedViaSafeFileHandleCloseDoesNotThrow()
         {
-            FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, bufferSize: 100);
+            FileStream fs = new FileStream(
+                GetTestFilePath(),
+                FileMode.Create,
+                FileAccess.ReadWrite,
+                FileShare.Read,
+                bufferSize: 100
+            );
             fs.SafeFileHandle.Dispose();
             fs.Dispose(); // must not throw
         }
@@ -49,8 +55,22 @@ namespace System.IO.Tests
         {
             string fileName = GetTestFilePath();
 
-            using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete))
-            using (FileStream fsr = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
+            using (
+                FileStream fs = new FileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite | FileShare.Delete
+                )
+            )
+            using (
+                FileStream fsr = new FileStream(
+                    fileName,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.ReadWrite | FileShare.Delete
+                )
+            )
             {
                 // write will be buffered
                 fs.Write(TestBuffer, 0, TestBuffer.Length);

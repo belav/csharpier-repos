@@ -58,24 +58,30 @@ namespace System.Reflection.Runtime.FieldInfos
                 if (DeclaringType.IsExplicitLayout)
                 {
                     int offset = ExplicitLayoutFieldOffsetData;
-                    CustomAttributeTypedArgument offsetArgument = new CustomAttributeTypedArgument(typeof(int), offset);
-                    yield return new RuntimePseudoCustomAttributeData(typeof(FieldOffsetAttribute), new CustomAttributeTypedArgument[] { offsetArgument });
+                    CustomAttributeTypedArgument offsetArgument = new CustomAttributeTypedArgument(
+                        typeof(int),
+                        offset
+                    );
+                    yield return new RuntimePseudoCustomAttributeData(
+                        typeof(FieldOffsetAttribute),
+                        new CustomAttributeTypedArgument[] { offsetArgument }
+                    );
                 }
 
                 FieldAttributes attributes = Attributes;
                 if (0 != (attributes & FieldAttributes.NotSerialized))
                 {
-                    yield return new RuntimePseudoCustomAttributeData(typeof(NonSerializedAttribute), null);
+                    yield return new RuntimePseudoCustomAttributeData(
+                        typeof(NonSerializedAttribute),
+                        null
+                    );
                 }
             }
         }
 
         public sealed override Type DeclaringType
         {
-            get
-            {
-                return _contextTypeInfo;
-            }
+            get { return _contextTypeInfo; }
         }
 
         public sealed override Type FieldType
@@ -115,21 +121,21 @@ namespace System.Reflection.Runtime.FieldInfos
 
         public sealed override Module Module
         {
-            get
-            {
-                return DefiningType.Module;
-            }
+            get { return DefiningType.Module; }
         }
 
         public sealed override Type ReflectedType
         {
-            get
-            {
-                return _reflectedType;
-            }
+            get { return _reflectedType; }
         }
 
-        public sealed override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
+        public sealed override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        )
         {
             FieldAccessor fieldAccessor = this.FieldAccessor;
             BinderBundle binderBundle = binder.ToBinderBundle(invokeAttr, culture);
@@ -153,10 +159,7 @@ namespace System.Reflection.Runtime.FieldInfos
 
         public sealed override string Name
         {
-            get
-            {
-                return MetadataName;
-            }
+            get { return MetadataName; }
         }
 
         public sealed override object GetRawConstantValue()
@@ -207,13 +210,19 @@ namespace System.Reflection.Runtime.FieldInfos
                             throw new BadImageFormatException(); // Field marked literal but has no default value.
                         }
 
-                        _lazyFieldAccessor = fieldAccessor = ReflectionCoreExecution.ExecutionEnvironment.CreateLiteralFieldAccessor(defaultValue, FieldType.TypeHandle);
+                        _lazyFieldAccessor = fieldAccessor =
+                            ReflectionCoreExecution.ExecutionEnvironment.CreateLiteralFieldAccessor(
+                                defaultValue,
+                                FieldType.TypeHandle
+                            );
                     }
                     else
                     {
                         _lazyFieldAccessor = fieldAccessor = TryGetFieldAccessor();
                         if (fieldAccessor == null)
-                            throw ReflectionCoreExecution.ExecutionDomain.CreateNonInvokabilityException(this);
+                            throw ReflectionCoreExecution.ExecutionDomain.CreateNonInvokabilityException(
+                                this
+                            );
                     }
                 }
                 return fieldAccessor;

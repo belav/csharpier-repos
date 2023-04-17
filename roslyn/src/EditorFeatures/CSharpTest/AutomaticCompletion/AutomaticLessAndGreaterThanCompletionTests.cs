@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Method_TypeParameter()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method$$
 }";
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Multiple_Nested()
         {
-            var code = @"class C<T>
+            var code =
+                @"class C<T>
 {
     C<C$$>
 }";
@@ -121,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void TypeArgument_Invalid()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -137,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void TypeArgument1()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -152,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void TypeArgument2()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -168,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void TypeParameterReturnType()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     List$$
 }";
@@ -183,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void TypeParameterInDecl()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void List$$
 }";
@@ -198,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void TypeParameterInDeclWith()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     async Task$$
 }";
@@ -213,7 +221,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void TypeArgumentWithUsing()
         {
-            var code = @"using System.Collections.Generic;
+            var code =
+                @"using System.Collections.Generic;
 
 class C
 {
@@ -233,7 +242,8 @@ class C
         [WpfFact]
         public void TypeArgumentNoUsing()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Test()
     {
@@ -249,7 +259,8 @@ class C
         [WpfFact]
         public void NotInLessThanComparisonOperation()
         {
-            var code = @"using System.Linq;
+            var code =
+                @"using System.Linq;
 class C
 {
     void Test(int[] args)
@@ -266,7 +277,8 @@ class C
         [WpfFact]
         public void NotInLessThanComparisonOperationAfterConditionalAccessExpression()
         {
-            var code = @"using System.Linq;
+            var code =
+                @"using System.Linq;
 class C
 {
     void Test(object[] args, object[] other)
@@ -283,7 +295,8 @@ class C
         [WpfFact]
         public void TypeArgumentInConditionalAccessExpressionSimple()
         {
-            var code = @"using System.Linq;
+            var code =
+                @"using System.Linq;
 class C
 {
     void Test(object[] args)
@@ -300,7 +313,8 @@ class C
         [WpfFact]
         public void TypeArgumentInConditionalAccessExpressionNested()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Test()
     {
@@ -330,7 +344,8 @@ class Inner<V>
         [WpfFact]
         public void TypeArgumentInConditionalAccessExpressionDeeplyNested()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Test()
     {
@@ -366,7 +381,8 @@ internal class Inner
         [WpfFact]
         public void TypeArgumentInConditionalAccessExpressionWithLambdas()
         {
-            var code = @"using System;
+            var code =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -399,7 +415,8 @@ public class Inner
         [WpfFact]
         public void FunctionPointerStartSession()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     delegate*$$";
@@ -415,7 +432,9 @@ class C
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                LessAndGreaterThan.OpenCharacter, LessAndGreaterThan.CloseCharacter);
+                LessAndGreaterThan.OpenCharacter,
+                LessAndGreaterThan.CloseCharacter
+            );
         }
     }
 }

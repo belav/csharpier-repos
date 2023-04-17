@@ -10,23 +10,22 @@ using Xunit;
 class Test
 {
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
-    private static extern UIntPtr Marshal_In([In]UIntPtr uintPtr);
+    private static extern UIntPtr Marshal_In([In] UIntPtr uintPtr);
 
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
-    private static extern UIntPtr Marshal_InOut([In, Out]UIntPtr uintPtr);
+    private static extern UIntPtr Marshal_InOut([In, Out] UIntPtr uintPtr);
 
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
-    private static extern UIntPtr Marshal_Out([Out]UIntPtr uintPtr);
+    private static extern UIntPtr Marshal_Out([Out] UIntPtr uintPtr);
 
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
-    private static extern UIntPtr MarshalPointer_In([In]ref UIntPtr puintPtr);
+    private static extern UIntPtr MarshalPointer_In([In] ref UIntPtr puintPtr);
 
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
     private static extern UIntPtr MarshalPointer_InOut(ref UIntPtr puintPtr);
 
     [DllImport(@"UIntPtrNative", CallingConvention = CallingConvention.StdCall)]
     private static extern UIntPtr MarshalPointer_Out(out UIntPtr puintPtr);
-
 
     public static int Main()
     {

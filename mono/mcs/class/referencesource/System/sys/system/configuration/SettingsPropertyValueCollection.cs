@@ -4,13 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-    using  System.Collections;
-    using  System.Collections.Specialized;
-    using  System.Runtime.Serialization;
-    using  System.Configuration.Provider;
-    using  System.Globalization;
-    using  System.IO;
+namespace System.Configuration
+{
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Runtime.Serialization;
+    using System.Configuration.Provider;
+    using System.Globalization;
+    using System.IO;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Xml.Serialization;
     using System.ComponentModel;
@@ -141,11 +142,20 @@ namespace System.Configuration {
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
         // ICollection interface
-        public int Count { get { return _Values.Count; } }
+        public int Count
+        {
+            get { return _Values.Count; }
+        }
 
-        public bool IsSynchronized { get { return false; } }
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
 
-        public object SyncRoot { get { return this; } }
+        public object SyncRoot
+        {
+            get { return this; }
+        }
 
         public void CopyTo(Array array, int index)
         {

@@ -32,12 +32,14 @@ internal sealed class PageContext : IAsyncDisposable
         IpcSender ipcSender,
         JSComponentConfigurationStore jsComponentsConfiguration,
         string baseUrl,
-        string startUrl)
+        string startUrl
+    )
     {
         _serviceScope = serviceScope;
         var services = serviceScope.ServiceProvider;
 
-        NavigationManager = (WebViewNavigationManager)services.GetRequiredService<NavigationManager>();
+        NavigationManager = (WebViewNavigationManager)
+            services.GetRequiredService<NavigationManager>();
         NavigationManager.AttachToWebView(ipcSender, baseUrl, startUrl);
 
         JSRuntime = (WebViewJSRuntime)services.GetRequiredService<IJSRuntime>();
@@ -45,7 +47,14 @@ internal sealed class PageContext : IAsyncDisposable
 
         var loggerFactory = services.GetRequiredService<ILoggerFactory>();
         var jsComponents = new JSComponentInterop(jsComponentsConfiguration);
-        Renderer = new WebViewRenderer(services, dispatcher, ipcSender, loggerFactory, JSRuntime, jsComponents);
+        Renderer = new WebViewRenderer(
+            services,
+            dispatcher,
+            ipcSender,
+            loggerFactory,
+            JSRuntime,
+            jsComponents
+        );
     }
 
     public ValueTask DisposeAsync()

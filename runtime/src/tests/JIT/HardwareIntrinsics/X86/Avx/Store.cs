@@ -21,12 +21,23 @@ namespace IntelHardwareIntrinsicTest
 
             if (Avx.IsSupported)
             {
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[4] { 1, -5, 100, 0 }, new double[4]))
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[4] { 1, -5, 100, 0 },
+                        new double[4]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector256<double>>(doubleTable.inArrayPtr);
                     Avx.Store((double*)(doubleTable.outArrayPtr), vf);
 
-                    if (!doubleTable.CheckResult((x, y) => BitConverter.DoubleToInt64Bits(x) == BitConverter.DoubleToInt64Bits(y)))
+                    if (
+                        !doubleTable.CheckResult(
+                            (x, y) =>
+                                BitConverter.DoubleToInt64Bits(x)
+                                == BitConverter.DoubleToInt64Bits(y)
+                        )
+                    )
                     {
                         Console.WriteLine("Avx Store failed on double:");
                         foreach (var item in doubleTable.outArray)
@@ -38,12 +49,23 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<float> floatTable = new TestTable<float>(new float[8] { 1, -5, 100, 0, 1, 2, 3, 4 }, new float[8]))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new float[8]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector256<float>>(floatTable.inArrayPtr);
                     Avx.Store((float*)(floatTable.outArrayPtr), vf);
 
-                    if (!floatTable.CheckResult((x, y) => BitConverter.SingleToInt32Bits(x) == BitConverter.SingleToInt32Bits(y)))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y) =>
+                                BitConverter.SingleToInt32Bits(x)
+                                == BitConverter.SingleToInt32Bits(y)
+                        )
+                    )
                     {
                         Console.WriteLine("Avx Store failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -55,7 +77,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<long> intTable = new TestTable<long>(new long[4] { 1, -5, 100, 0 }, new long[4]))
+                using (
+                    TestTable<long> intTable = new TestTable<long>(
+                        new long[4] { 1, -5, 100, 0 },
+                        new long[4]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector256<long>>(intTable.inArrayPtr);
                     Avx.Store((long*)(intTable.outArrayPtr), vf);
@@ -72,7 +99,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<ulong> intTable = new TestTable<ulong>(new ulong[4] { 1, 5, 100, 0 }, new ulong[4]))
+                using (
+                    TestTable<ulong> intTable = new TestTable<ulong>(
+                        new ulong[4] { 1, 5, 100, 0 },
+                        new ulong[4]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector256<ulong>>(intTable.inArrayPtr);
                     Avx.Store((ulong*)(intTable.outArrayPtr), vf);
@@ -89,7 +121,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<int> intTable = new TestTable<int>(new int[8] { 1, -5, 100, 0, 1, 2, 3, 4 }, new int[8]))
+                using (
+                    TestTable<int> intTable = new TestTable<int>(
+                        new int[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new int[8]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector256<int>>(intTable.inArrayPtr);
                     Avx.Store((int*)(intTable.outArrayPtr), vf);
@@ -106,7 +143,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<uint> intTable = new TestTable<uint>(new uint[8] { 1, 5, 100, 0, 1, 2, 3, 4 }, new uint[8]))
+                using (
+                    TestTable<uint> intTable = new TestTable<uint>(
+                        new uint[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new uint[8]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector256<uint>>(intTable.inArrayPtr);
                     Avx.Store((uint*)(intTable.outArrayPtr), vf);
@@ -123,7 +165,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<short> intTable = new TestTable<short>(new short[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4  }, new short[16]))
+                using (
+                    TestTable<short> intTable = new TestTable<short>(
+                        new short[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new short[16]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector256<short>>(intTable.inArrayPtr);
                     Avx.Store((short*)(intTable.outArrayPtr), vf);
@@ -140,7 +187,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<ushort> intTable = new TestTable<ushort>(new ushort[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4  }, new ushort[16]))
+                using (
+                    TestTable<ushort> intTable = new TestTable<ushort>(
+                        new ushort[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new ushort[16]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector256<ushort>>(intTable.inArrayPtr);
                     Avx.Store((ushort*)(intTable.outArrayPtr), vf);
@@ -157,7 +209,46 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<sbyte> intTable = new TestTable<sbyte>(new sbyte[32] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new sbyte[32]))
+                using (
+                    TestTable<sbyte> intTable = new TestTable<sbyte>(
+                        new sbyte[32]
+                        {
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4
+                        },
+                        new sbyte[32]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector256<sbyte>>(intTable.inArrayPtr);
                     Avx.Store((sbyte*)(intTable.outArrayPtr), vf);
@@ -174,7 +265,46 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<byte> intTable = new TestTable<byte>(new byte[32] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 }, new byte[32]))
+                using (
+                    TestTable<byte> intTable = new TestTable<byte>(
+                        new byte[32]
+                        {
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4
+                        },
+                        new byte[32]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector256<byte>>(intTable.inArrayPtr);
                     Avx.Store((byte*)(intTable.outArrayPtr), vf);
@@ -190,13 +320,13 @@ namespace IntelHardwareIntrinsicTest
                         testResult = Fail;
                     }
                 }
-
             }
 
             return testResult;
         }
 
-        public unsafe struct TestTable<T> : IDisposable where T : struct
+        public unsafe struct TestTable<T> : IDisposable
+            where T : struct
         {
             public T[] inArray;
             public T[] outArray;
@@ -206,6 +336,7 @@ namespace IntelHardwareIntrinsicTest
 
             GCHandle inHandle;
             GCHandle outHandle;
+
             public TestTable(T[] a, T[] b)
             {
                 this.inArray = a;
@@ -214,6 +345,7 @@ namespace IntelHardwareIntrinsicTest
                 inHandle = GCHandle.Alloc(inArray, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T, T, bool> check)
             {
                 for (int i = 0; i < inArray.Length; i++)
@@ -232,6 +364,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }
