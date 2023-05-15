@@ -29,12 +29,15 @@ namespace System.Security.Cryptography
         {
             m_hashName = "SHA1";
 #if FEATURE_CRYPTO && !FULL_AOT_RUNTIME
-            if (useManagedSha1) {
+            if (useManagedSha1)
+            {
 #endif // FEATURE_CRYPTO
-            m_hash1 = new SHA1Managed();
-            m_hash2 = new SHA1Managed();
+                m_hash1 = new SHA1Managed();
+                m_hash2 = new SHA1Managed();
 #if FEATURE_CRYPTO && !FULL_AOT_RUNTIME
-            } else {
+            }
+            else
+            {
                 m_hash1 = new SHA1CryptoServiceProvider();
                 m_hash2 = new SHA1CryptoServiceProvider();
             }

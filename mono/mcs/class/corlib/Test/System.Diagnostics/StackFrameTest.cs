@@ -149,7 +149,9 @@ namespace MonoTests.System.Diagnostics
         public void TestGetFileName2()
         {
 #if MOBILE && !DEBUG
-			Assert.Ignore ("The .mdb file won't be present inside the app and no file name will be available");
+            Assert.Ignore(
+                "The .mdb file won't be present inside the app and no file name will be available"
+            );
 #endif
             Assert.IsNotNull(frame2.GetFileName(), "File name not null");
             Assert.IsTrue(frame2.GetFileName().Length != 0, "File name not empty");
@@ -167,7 +169,9 @@ namespace MonoTests.System.Diagnostics
         public void TestGetFileLineNumber()
         {
 #if MOBILE && !DEBUG
-			Assert.Ignore ("The .mdb file won't be present inside the app and no line number will be available");
+            Assert.Ignore(
+                "The .mdb file won't be present inside the app and no line number will be available"
+            );
 #endif
             Assert.AreEqual(0, frame1.GetFileLineNumber(), "Line number (1)");
 
@@ -274,7 +278,9 @@ namespace MonoTests.System.Diagnostics
         public void TestGetFileName()
         {
 #if MOBILE && !DEBUG
-			Assert.Ignore ("The .mdb file won't be present inside the app and no file name will be available");
+            Assert.Ignore(
+                "The .mdb file won't be present inside the app and no file name will be available"
+            );
 #endif
             Assert.IsNull(frame1.GetFileName(), "File name (1)");
 
@@ -294,7 +300,9 @@ namespace MonoTests.System.Diagnostics
         public void TestGetFileLineNumber()
         {
 #if MOBILE && !DEBUG
-			Assert.Ignore ("The .mdb file won't be present inside the app and no line number will be available");
+            Assert.Ignore(
+                "The .mdb file won't be present inside the app and no line number will be available"
+            );
 #endif
             Assert.AreEqual(0, frame1.GetFileLineNumber(), "Line number (1)");
 

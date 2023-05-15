@@ -306,7 +306,7 @@ namespace System.Drawing
                     == IntPtr.Zero
                 )
 #endif
-                    comInterface = new ManagedToNativeWrapper(managedInterface).comInterface;
+                comInterface = new ManagedToNativeWrapper(managedInterface).comInterface;
 
                 return comInterface;
             }
@@ -678,7 +678,7 @@ namespace System.Drawing
                     ) == null
                 )
 #endif
-                    managedInterface = (IStream)new NativeToManagedWrapper(comInterface, outParam);
+                managedInterface = (IStream)new NativeToManagedWrapper(comInterface, outParam);
 
                 return managedInterface;
             }

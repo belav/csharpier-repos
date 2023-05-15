@@ -20,10 +20,7 @@ namespace Microsoft.CodeAnalysis.Collections
 {
     [DebuggerTypeProxy(typeof(ICollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
-    internal class SegmentedHashSet<T>
-        : ICollection<T>,
-            ISet<T>,
-            IReadOnlyCollection<T>
+    internal class SegmentedHashSet<T> : ICollection<T>, ISet<T>, IReadOnlyCollection<T>
 #if NET5_0_OR_GREATER
             ,
             IReadOnlySet<T>

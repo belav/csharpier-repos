@@ -937,6 +937,7 @@ namespace System.Runtime
 
 #if DEBUG && !INPLACE_RUNTIME
         private static MethodTable* s_pLowLevelObjectType;
+
         private static void AssertNotRuntimeObject(MethodTable* pClauseType)
         {
             //

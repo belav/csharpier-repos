@@ -4495,38 +4495,34 @@ namespace Microsoft.CSharp
                 try
                 {
 #endif // !FEATURE_PAL
-                    for (int i = 0; i < ea.Length; i++)
+            for (int i = 0; i < ea.Length; i++)
+            {
+                if (ea[i] == null)
+                    continue; // the other two batch methods just work if one element is null, so we'll match that.
+
+                ResolveReferencedAssemblies(options, ea[i]);
+                filenames[i] = options.TempFiles.AddExtension(i + FileExtension);
+                Stream temp = new FileStream(
+                    filenames[i],
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.Read
+                );
+                try
+                {
+                    using (StreamWriter sw = new StreamWriter(temp, Encoding.UTF8))
                     {
-                        if (ea[i] == null)
-                            continue; // the other two batch methods just work if one element is null, so we'll match that.
-
-                        ResolveReferencedAssemblies(options, ea[i]);
-                        filenames[i] = options.TempFiles.AddExtension(i + FileExtension);
-                        Stream temp = new FileStream(
-                            filenames[i],
-                            FileMode.Create,
-                            FileAccess.Write,
-                            FileShare.Read
-                        );
-                        try
-                        {
-                            using (StreamWriter sw = new StreamWriter(temp, Encoding.UTF8))
-                            {
-                                ((ICodeGenerator)this).GenerateCodeFromCompileUnit(
-                                    ea[i],
-                                    sw,
-                                    Options
-                                );
-                                sw.Flush();
-                            }
-                        }
-                        finally
-                        {
-                            temp.Close();
-                        }
+                        ((ICodeGenerator)this).GenerateCodeFromCompileUnit(ea[i], sw, Options);
+                        sw.Flush();
                     }
+                }
+                finally
+                {
+                    temp.Close();
+                }
+            }
 
-                    results = FromFileBatch(options, filenames);
+            results = FromFileBatch(options, filenames);
 #if !FEATURE_PAL
                 }
                 finally
@@ -4593,30 +4589,30 @@ namespace Microsoft.CSharp
                 try
                 {
 #endif // !FEATURE_PAL
-                    for (int i = 0; i < sources.Length; i++)
+            for (int i = 0; i < sources.Length; i++)
+            {
+                string name = options.TempFiles.AddExtension(i + FileExtension);
+                Stream temp = new FileStream(
+                    name,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.Read
+                );
+                try
+                {
+                    using (StreamWriter sw = new StreamWriter(temp, Encoding.UTF8))
                     {
-                        string name = options.TempFiles.AddExtension(i + FileExtension);
-                        Stream temp = new FileStream(
-                            name,
-                            FileMode.Create,
-                            FileAccess.Write,
-                            FileShare.Read
-                        );
-                        try
-                        {
-                            using (StreamWriter sw = new StreamWriter(temp, Encoding.UTF8))
-                            {
-                                sw.Write(sources[i]);
-                                sw.Flush();
-                            }
-                        }
-                        finally
-                        {
-                            temp.Close();
-                        }
-                        filenames[i] = name;
+                        sw.Write(sources[i]);
+                        sw.Flush();
                     }
-                    results = FromFileBatch(options, filenames);
+                }
+                finally
+                {
+                    temp.Close();
+                }
+                filenames[i] = name;
+            }
+            results = FromFileBatch(options, filenames);
 #if !FEATURE_PAL
                 }
                 finally

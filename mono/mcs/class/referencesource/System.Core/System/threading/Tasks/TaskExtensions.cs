@@ -53,46 +53,69 @@ namespace System.Threading.Tasks
 
             // tcs.Task serves as a proxy for task.Result.
             // AttachedToParent is the only legal option for TCS-style task.
-            var tcs = new TaskCompletionSource<Task>(task.CreationOptions & TaskCreationOptions.AttachedToParent);
+            var tcs = new TaskCompletionSource<Task>(
+                task.CreationOptions & TaskCreationOptions.AttachedToParent
+            );
 
             // Set up some actions to take when task has completed.
-            task.ContinueWith(delegate
-            {
-                switch (task.Status)
-                {
-                    // If task did not run to completion, then record the cancellation/fault information
-                    // to tcs.Task.
-                    case TaskStatus.Canceled:
-                    case TaskStatus.Faulted:
-                        result = tcs.TrySetFromTask(task);
-                        Contract.Assert(result, "Unwrap(Task<Task>): Expected TrySetFromTask #1 to succeed");
-                        break;
-
-                    case TaskStatus.RanToCompletion:
-                        // task.Result == null ==> proxy should be canceled.
-                        if (task.Result == null) tcs.TrySetCanceled();
-
-                        // When task.Result completes, take some action to set the completion state of tcs.Task.
-                        else
+            task.ContinueWith(
+                    delegate
+                    {
+                        switch (task.Status)
                         {
-                            task.Result.ContinueWith(_ =>
-                            {
-                                // Copy completion/cancellation/exception info from task.Result to tcs.Task.
-                                result = tcs.TrySetFromTask(task.Result);
-                                Contract.Assert(result, "Unwrap(Task<Task>): Expected TrySetFromTask #2 to succeed");
-                            }, TaskContinuationOptions.ExecuteSynchronously).ContinueWith(antecedent =>
-                            {
-                                // Clean up if ContinueWith() operation fails due to TSE
-                                tcs.TrySetException(antecedent.Exception);
-                            }, TaskContinuationOptions.OnlyOnFaulted);
+                            // If task did not run to completion, then record the cancellation/fault information
+                            // to tcs.Task.
+                            case TaskStatus.Canceled:
+                            case TaskStatus.Faulted:
+                                result = tcs.TrySetFromTask(task);
+                                Contract.Assert(
+                                    result,
+                                    "Unwrap(Task<Task>): Expected TrySetFromTask #1 to succeed"
+                                );
+                                break;
+
+                            case TaskStatus.RanToCompletion:
+                                // task.Result == null ==> proxy should be canceled.
+                                if (task.Result == null)
+                                    tcs.TrySetCanceled();
+                                // When task.Result completes, take some action to set the completion state of tcs.Task.
+                                else
+                                {
+                                    task.Result
+                                        .ContinueWith(
+                                            _ =>
+                                            {
+                                                // Copy completion/cancellation/exception info from task.Result to tcs.Task.
+                                                result = tcs.TrySetFromTask(task.Result);
+                                                Contract.Assert(
+                                                    result,
+                                                    "Unwrap(Task<Task>): Expected TrySetFromTask #2 to succeed"
+                                                );
+                                            },
+                                            TaskContinuationOptions.ExecuteSynchronously
+                                        )
+                                        .ContinueWith(
+                                            antecedent =>
+                                            {
+                                                // Clean up if ContinueWith() operation fails due to TSE
+                                                tcs.TrySetException(antecedent.Exception);
+                                            },
+                                            TaskContinuationOptions.OnlyOnFaulted
+                                        );
+                                }
+                                break;
                         }
-                        break;
-                }
-            }, TaskContinuationOptions.ExecuteSynchronously).ContinueWith(antecedent =>
-            {
-                // Clean up if ContinueWith() operation fails due to TSE
-                tcs.TrySetException(antecedent.Exception);
-            }, TaskContinuationOptions.OnlyOnFaulted);
+                    },
+                    TaskContinuationOptions.ExecuteSynchronously
+                )
+                .ContinueWith(
+                    antecedent =>
+                    {
+                        // Clean up if ContinueWith() operation fails due to TSE
+                        tcs.TrySetException(antecedent.Exception);
+                    },
+                    TaskContinuationOptions.OnlyOnFaulted
+                );
 
             // Return this immediately as a proxy.  When task.Result completes, or task is faulted/canceled,
             // the completion information will be transfered to tcs.Task.
@@ -130,48 +153,71 @@ namespace System.Threading.Tasks
 
             // tcs.Task serves as a proxy for task.Result.
             // AttachedToParent is the only legal option for TCS-style task.
-            var tcs = new TaskCompletionSource<TResult>(task.CreationOptions & TaskCreationOptions.AttachedToParent);
+            var tcs = new TaskCompletionSource<TResult>(
+                task.CreationOptions & TaskCreationOptions.AttachedToParent
+            );
 
             // Set up some actions to take when task has completed.
-            task.ContinueWith(delegate
-            {
-                switch (task.Status)
-                {
-                    // If task did not run to completion, then record the cancellation/fault information
-                    // to tcs.Task.
-                    case TaskStatus.Canceled:
-                    case TaskStatus.Faulted:
-                        result = tcs.TrySetFromTask(task);
-                        Contract.Assert(result, "Unwrap(Task<Task<T>>): Expected TrySetFromTask #1 to succeed");
-                        break;
-
-                    case TaskStatus.RanToCompletion:
-                        // task.Result == null ==> proxy should be canceled.
-                        if (task.Result == null) tcs.TrySetCanceled();
-
-                        // When task.Result completes, take some action to set the completion state of tcs.Task.
-                        else
+            task.ContinueWith(
+                    delegate
+                    {
+                        switch (task.Status)
                         {
-                            task.Result.ContinueWith(_ =>
-                            {
-                                // Copy completion/cancellation/exception info from task.Result to tcs.Task.
-                                result = tcs.TrySetFromTask(task.Result);
-                                Contract.Assert(result, "Unwrap(Task<Task<T>>): Expected TrySetFromTask #2 to succeed");
-                            },
-                            TaskContinuationOptions.ExecuteSynchronously).ContinueWith(antecedent =>
-                            {
-                                // Clean up if ContinueWith() operation fails due to TSE
-                                tcs.TrySetException(antecedent.Exception);
-                            }, TaskContinuationOptions.OnlyOnFaulted);
-                        }
+                            // If task did not run to completion, then record the cancellation/fault information
+                            // to tcs.Task.
+                            case TaskStatus.Canceled:
+                            case TaskStatus.Faulted:
+                                result = tcs.TrySetFromTask(task);
+                                Contract.Assert(
+                                    result,
+                                    "Unwrap(Task<Task<T>>): Expected TrySetFromTask #1 to succeed"
+                                );
+                                break;
 
-                        break;
-                }
-            }, TaskContinuationOptions.ExecuteSynchronously).ContinueWith(antecedent =>
-            {
-                // Clean up if ContinueWith() operation fails due to TSE
-                tcs.TrySetException(antecedent.Exception);
-            }, TaskContinuationOptions.OnlyOnFaulted); ;
+                            case TaskStatus.RanToCompletion:
+                                // task.Result == null ==> proxy should be canceled.
+                                if (task.Result == null)
+                                    tcs.TrySetCanceled();
+                                // When task.Result completes, take some action to set the completion state of tcs.Task.
+                                else
+                                {
+                                    task.Result
+                                        .ContinueWith(
+                                            _ =>
+                                            {
+                                                // Copy completion/cancellation/exception info from task.Result to tcs.Task.
+                                                result = tcs.TrySetFromTask(task.Result);
+                                                Contract.Assert(
+                                                    result,
+                                                    "Unwrap(Task<Task<T>>): Expected TrySetFromTask #2 to succeed"
+                                                );
+                                            },
+                                            TaskContinuationOptions.ExecuteSynchronously
+                                        )
+                                        .ContinueWith(
+                                            antecedent =>
+                                            {
+                                                // Clean up if ContinueWith() operation fails due to TSE
+                                                tcs.TrySetException(antecedent.Exception);
+                                            },
+                                            TaskContinuationOptions.OnlyOnFaulted
+                                        );
+                                }
+
+                                break;
+                        }
+                    },
+                    TaskContinuationOptions.ExecuteSynchronously
+                )
+                .ContinueWith(
+                    antecedent =>
+                    {
+                        // Clean up if ContinueWith() operation fails due to TSE
+                        tcs.TrySetException(antecedent.Exception);
+                    },
+                    TaskContinuationOptions.OnlyOnFaulted
+                );
+            ;
 
             // Return this immediately as a proxy.  When task.Result completes, or task is faulted/canceled,
             // the completion information will be transfered to tcs.Task.
@@ -188,12 +234,18 @@ namespace System.Threading.Tasks
 
 #if SILVERLIGHT && !FEATURE_NETCORE // CoreCLR only
         // Transfer the completion status from "source" to "me".
-        private static bool TrySetFromTask<TResult>(this TaskCompletionSource<TResult> me, Task source)
+        private static bool TrySetFromTask<TResult>(
+            this TaskCompletionSource<TResult> me,
+            Task source
+        )
         {
-            Contract.Assert(source.IsCompleted, "TrySetFromTask: Expected source to have completed.");
+            Contract.Assert(
+                source.IsCompleted,
+                "TrySetFromTask: Expected source to have completed."
+            );
             bool rval = false;
 
-            switch(source.Status)
+            switch (source.Status)
             {
                 case TaskStatus.Canceled:
                     rval = me.TrySetCanceled();
@@ -204,8 +256,8 @@ namespace System.Threading.Tasks
                     break;
 
                 case TaskStatus.RanToCompletion:
-                    if(source is Task<TResult>)
-                        rval = me.TrySetResult( ((Task<TResult>)source).Result);
+                    if (source is Task<TResult>)
+                        rval = me.TrySetResult(((Task<TResult>)source).Result);
                     else
                         rval = me.TrySetResult(default(TResult));
                     break;

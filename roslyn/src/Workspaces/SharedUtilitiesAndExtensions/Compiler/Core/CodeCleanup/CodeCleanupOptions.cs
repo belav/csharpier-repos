@@ -60,7 +60,7 @@ internal interface CodeCleanupOptionsProvider
 #if !CODE_STYLE
     OptionsProvider<CodeCleanupOptions>,
 #endif
-    SyntaxFormattingOptionsProvider,
+        SyntaxFormattingOptionsProvider,
         SimplifierOptionsProvider,
         AddImportPlacementOptionsProvider,
         DocumentFormattingOptionsProvider { }

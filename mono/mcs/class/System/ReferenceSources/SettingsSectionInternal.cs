@@ -32,17 +32,21 @@ namespace System.Net.Configuration
 
         internal bool Ipv6Enabled
         {
-            get {
+            get
+            {
 #if CONFIGURATION_DEP && !MOBILE
-				try {
-					var config = (SettingsSection) System.Configuration.ConfigurationManager.GetSection ("system.net/settings");
-					if (config != null)
-						return config.Ipv6.Enabled;
-				} catch {
-				}
+                try
+                {
+                    var config = (SettingsSection)
+                        System.Configuration.ConfigurationManager.GetSection("system.net/settings");
+                    if (config != null)
+                        return config.Ipv6.Enabled;
+                }
+                catch { }
 #endif
 
-                return true; }
+                return true;
+            }
         }
     }
 }

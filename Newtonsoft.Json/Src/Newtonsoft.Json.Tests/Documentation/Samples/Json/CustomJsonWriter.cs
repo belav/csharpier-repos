@@ -43,7 +43,7 @@ using NUnit.Framework;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 {
-    #region Types
+#region Types
     public class XmlJsonWriter : JsonWriter
     {
         private readonly XmlWriter _writer;
@@ -319,7 +319,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
             }
         }
     }
-    #endregion
+#endregion
 
     [TestFixture]
     public class CustomJsonWriter : TestFixtureBase
@@ -327,7 +327,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             var user = new
             {
                 Name = "James",
@@ -362,7 +362,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
             //    <Item type="String">Administrator</Item>
             //  </Roles>
             //</Root>
-            #endregion
+#endregion
 
             sw = new StringWriter();
 

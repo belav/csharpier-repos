@@ -45,7 +45,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         [Test]
         public void Example()
         {
-#region Usage
+            #region Usage
             JObject o = JObject.Parse(
                 @"{
               'name': 'Bill G',
@@ -65,7 +65,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             HashSet<string> changedProperties = o.Annotation<HashSet<string>>();
             // age
             // employer
-#endregion
+            #endregion
 
             Assert.AreEqual(true, changedProperties.Contains("age"));
             Assert.AreEqual(true, changedProperties.Contains("employer"));

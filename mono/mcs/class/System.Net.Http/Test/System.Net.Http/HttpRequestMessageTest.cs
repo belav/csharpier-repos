@@ -66,12 +66,12 @@ namespace MonoTests.System.Net.Http
             if (HttpClientTestHelpers.UsingSocketsHandler)
             {
 #endif
-            Assert.AreEqual(new Version(2, 0), m.Version, "#6");
-            Assert.AreEqual(
-                "Method: GET, RequestUri: '<null>', Version: 2.0, Content: <null>, Headers:\r\n{\r\n}",
-                m.ToString(),
-                "#7"
-            );
+                Assert.AreEqual(new Version(2, 0), m.Version, "#6");
+                Assert.AreEqual(
+                    "Method: GET, RequestUri: '<null>', Version: 2.0, Content: <null>, Headers:\r\n{\r\n}",
+                    m.ToString(),
+                    "#7"
+                );
 #if !MONOTOUCH_WATCH
             }
             else
@@ -798,11 +798,11 @@ namespace MonoTests.System.Net.Http
 #if !MONOTOUCH_WATCH
             if (HttpClientTestHelpers.UsingSocketsHandler)
 #endif
-            Assert.AreEqual(
-                "Method:GET,RequestUri:'<null>',Version:2.0,Content:<null>,Headers:{Age:vv}",
-                normalized,
-                "#3"
-            );
+                Assert.AreEqual(
+                    "Method:GET,RequestUri:'<null>',Version:2.0,Content:<null>,Headers:{Age:vv}",
+                    normalized,
+                    "#3"
+                );
 #if !MONOTOUCH_WATCH
             else
                 Assert.AreEqual(

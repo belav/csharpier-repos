@@ -357,7 +357,11 @@ namespace System.Collections.Generic
             info.AddValue(VersionName, m_version);
 
 #if FEATURE_RANDOMIZED_STRING_HASHING && !FEATURE_NETCORE
-            info.AddValue(ComparerName, HashHelpers.GetEqualityComparerForSerialization(m_comparer), typeof(IEqualityComparer<T>));
+            info.AddValue(
+                ComparerName,
+                HashHelpers.GetEqualityComparerForSerialization(m_comparer),
+                typeof(IEqualityComparer<T>)
+            );
 #else
             info.AddValue(ComparerName, m_comparer, typeof(IEqualityComparer<T>));
 #endif
@@ -1158,8 +1162,13 @@ namespace System.Collections.Generic
             m_version++;
 
 #if FEATURE_RANDOMIZED_STRING_HASHING && !FEATURE_NETCORE
-            if(collisionCount > HashHelpers.HashCollisionThreshold && HashHelpers.IsWellKnownEqualityComparer(m_comparer)) {
-                m_comparer = (IEqualityComparer<T>) HashHelpers.GetRandomizedEqualityComparer(m_comparer);
+            if (
+                collisionCount > HashHelpers.HashCollisionThreshold
+                && HashHelpers.IsWellKnownEqualityComparer(m_comparer)
+            )
+            {
+                m_comparer =
+                    (IEqualityComparer<T>)HashHelpers.GetRandomizedEqualityComparer(m_comparer);
                 SetCapacity(m_buckets.Length, true);
             }
 #endif // FEATURE_RANDOMIZED_STRING_HASHING

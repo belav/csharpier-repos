@@ -1871,7 +1871,7 @@ namespace System.Diagnostics
                     || OperatingSystem.Version.Major < 5
                 )
 #endif // !FEATURE_PAL
-                    throw new PlatformNotSupportedException(SR.GetString(SR.Win2kRequired));
+                throw new PlatformNotSupportedException(SR.GetString(SR.Win2kRequired));
             }
 
             if ((state & State.IsNt) != (State)0)
@@ -1879,7 +1879,7 @@ namespace System.Diagnostics
 #if !FEATURE_PAL
                 if (OperatingSystem.Platform != PlatformID.Win32NT)
 #endif // !FEATURE_PAL
-                    throw new PlatformNotSupportedException(SR.GetString(SR.WinNTRequired));
+                throw new PlatformNotSupportedException(SR.GetString(SR.WinNTRequired));
             }
 #endif // !MONO
 
@@ -3431,7 +3431,7 @@ namespace System.Diagnostics
             }
             else
 #endif // !FEATURE_PAL
-                return base.ToString();
+            return base.ToString();
         }
 
         /// <devdoc>

@@ -43,7 +43,7 @@ using NUnit.Framework;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 {
-    #region Types
+#region Types
     public class XmlJsonReader : JsonReader
     {
         private readonly Stack<JTokenType> _stateStack;
@@ -282,7 +282,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
             return (Value != null) ? (DateTimeOffset?)Convert.ToDateTime(Value) : null;
         }
     }
-    #endregion
+#endregion
 
     [TestFixture]
     public class CustomJsonReader : TestFixtureBase
@@ -290,7 +290,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             string xml =
                 @"<Root type=""Object"">
               <Null type=""Null"" />
@@ -355,7 +355,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                 //  "Constructor": new Date(2000, 12, 30)
                 //}
             }
-            #endregion
+#endregion
 
             using (
                 XmlReader xmlReader = XmlReader.Create(

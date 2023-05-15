@@ -793,8 +793,7 @@ internal static class ReflectionTest
     class TestPropertyAndEventAttributes
     {
         [Property("MyProperty")]
-        public static int Property
-        {
+        public static int Property {
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
             [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
@@ -802,8 +801,7 @@ internal static class ReflectionTest
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
             [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
-            set;
-        }
+            set; }
 
         class PropertyAttribute : Attribute
         {

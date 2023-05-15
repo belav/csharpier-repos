@@ -52,18 +52,18 @@ namespace System.Runtime.Serialization
                         finally
                         {
 #endif
-                        if (
-                            (appSettingsSection == null)
-                            || !int.TryParse(
-                                appSettingsSection[MaxMimePartsAppSettingsString],
-                                out maxMimeParts
+                            if (
+                                (appSettingsSection == null)
+                                || !int.TryParse(
+                                    appSettingsSection[MaxMimePartsAppSettingsString],
+                                    out maxMimeParts
+                                )
                             )
-                        )
-                        {
-                            maxMimeParts = DefaultMaxMimeParts;
-                        }
+                            {
+                                maxMimeParts = DefaultMaxMimeParts;
+                            }
 
-                        settingsInitalized = true;
+                            settingsInitalized = true;
 #if !NO_CONFIGURATION
                         }
 #endif

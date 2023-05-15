@@ -735,14 +735,14 @@ namespace System.Web
                 else
                 {
 #endif // !FEATURE_PAL
-                app.ProcessSpecialRequest(
-                    null,
-                    _sessionOnEndMethod,
-                    _sessionOnEndParamCount,
-                    eventSource,
-                    eventArgs,
-                    session
-                );
+                    app.ProcessSpecialRequest(
+                        null,
+                        _sessionOnEndMethod,
+                        _sessionOnEndParamCount,
+                        eventSource,
+                        eventArgs,
+                        session
+                    );
 #if !FEATURE_PAL // FEATURE_PAL does not enable COM
                 }
 #endif // !FEATURE_PAL

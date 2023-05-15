@@ -46,7 +46,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
         [Test]
         public void Example()
         {
-            #region Usage
+#region Usage
             string xml =
                 @"<person id='1'>
               <name>Alan</name>
@@ -92,7 +92,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Xml
             //     ]
             //   }
             // }
-            #endregion
+#endregion
 
             Assert.AreEqual(
                 @"{""person"":{""@id"":""1"",""name"":""Alan"",""url"":""http://www.google.com"",""role"":[""Admin""]}}",

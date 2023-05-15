@@ -190,7 +190,7 @@ namespace System
                 else
                 {
 #endif
-                return 1;
+                    return 1;
 #if FEATURE_LEGACYNETCF
                 }
 #endif
@@ -209,7 +209,7 @@ namespace System
                 else
                 {
 #endif
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBeVersion"));
+                    throw new ArgumentException(Environment.GetResourceString("Arg_MustBeVersion"));
 #if FEATURE_LEGACYNETCF
                 }
 #endif

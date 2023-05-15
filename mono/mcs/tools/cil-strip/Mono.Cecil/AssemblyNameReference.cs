@@ -140,7 +140,8 @@ namespace Mono.Cecil
 
         public byte[] PublicKeyToken
         {
-            get {
+            get
+            {
 #if !CF_1_0
                 if (
                     (m_publicKeyToken == null || m_publicKeyToken.Length == 0)
@@ -165,7 +166,8 @@ namespace Mono.Cecil
                     Array.Reverse(m_publicKeyToken, 0, 8);
                 }
 #endif
-                return m_publicKeyToken; }
+                return m_publicKeyToken;
+            }
             set
             {
                 m_publicKeyToken = value;

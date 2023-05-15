@@ -213,60 +213,93 @@ namespace System.Drawing
         };
 
 #if !MONOTOUCH && !XAMMAC && !XAMMAC_4_5 && SUPPORTS_WINDOWS_COLORS
-		static KnownColors ()
-		{
-			if (GDIPlus.RunningOnWindows ()) {
-				// If we're on Windows we should behave like MS and pull the colors
-				RetrieveWindowsSystemColors ();
-			}
-			// note: Mono's SWF Theme class will call the static Update method to apply
-			// correct system colors outside Windows
-		}
+        static KnownColors()
+        {
+            if (GDIPlus.RunningOnWindows())
+            {
+                // If we're on Windows we should behave like MS and pull the colors
+                RetrieveWindowsSystemColors();
+            }
+            // note: Mono's SWF Theme class will call the static Update method to apply
+            // correct system colors outside Windows
+        }
 
-		// Windows values are in BGR format and without alpha
-		// so we force it to opaque (or everything will be transparent) and reverse B and R
-		static uint GetSysColor (GetSysColorIndex index)
-		{
-			uint bgr = GDIPlus.Win32GetSysColor (index);
-			return 0xFF000000 | (bgr & 0xFF) << 16 | (bgr & 0xFF00) | (bgr >> 16);
-		}
+        // Windows values are in BGR format and without alpha
+        // so we force it to opaque (or everything will be transparent) and reverse B and R
+        static uint GetSysColor(GetSysColorIndex index)
+        {
+            uint bgr = GDIPlus.Win32GetSysColor(index);
+            return 0xFF000000 | (bgr & 0xFF) << 16 | (bgr & 0xFF00) | (bgr >> 16);
+        }
 
-		static void RetrieveWindowsSystemColors ()
-		{
-			ArgbValues [(int)KnownColor.ActiveBorder] = GetSysColor (GetSysColorIndex.COLOR_ACTIVEBORDER);
-			ArgbValues [(int)KnownColor.ActiveCaption] = GetSysColor (GetSysColorIndex.COLOR_ACTIVECAPTION);
-			ArgbValues [(int)KnownColor.ActiveCaptionText] = GetSysColor (GetSysColorIndex.COLOR_CAPTIONTEXT);
-			ArgbValues [(int)KnownColor.AppWorkspace] = GetSysColor (GetSysColorIndex.COLOR_APPWORKSPACE);
-			ArgbValues [(int)KnownColor.Control] = GetSysColor (GetSysColorIndex.COLOR_BTNFACE);
-			ArgbValues [(int)KnownColor.ControlDark] = GetSysColor (GetSysColorIndex.COLOR_BTNSHADOW);
-			ArgbValues [(int)KnownColor.ControlDarkDark] = GetSysColor (GetSysColorIndex.COLOR_3DDKSHADOW);
-			ArgbValues [(int)KnownColor.ControlLight] = GetSysColor (GetSysColorIndex.COLOR_3DLIGHT);
-			ArgbValues [(int)KnownColor.ControlLightLight] = GetSysColor (GetSysColorIndex.COLOR_BTNHIGHLIGHT);
-			ArgbValues [(int)KnownColor.ControlText] = GetSysColor (GetSysColorIndex.COLOR_BTNTEXT);
-			ArgbValues [(int)KnownColor.Desktop] = GetSysColor (GetSysColorIndex.COLOR_DESKTOP);
-			ArgbValues [(int)KnownColor.GrayText] = GetSysColor (GetSysColorIndex.COLOR_GRAYTEXT);
-			ArgbValues [(int)KnownColor.Highlight] = GetSysColor (GetSysColorIndex.COLOR_HIGHLIGHT);
-			ArgbValues [(int)KnownColor.HighlightText] = GetSysColor (GetSysColorIndex.COLOR_HIGHLIGHTTEXT);
-			ArgbValues [(int)KnownColor.HotTrack] = GetSysColor (GetSysColorIndex.COLOR_HOTLIGHT);
-			ArgbValues [(int)KnownColor.InactiveBorder] = GetSysColor (GetSysColorIndex.COLOR_INACTIVEBORDER);
-			ArgbValues [(int)KnownColor.InactiveCaption] = GetSysColor (GetSysColorIndex.COLOR_INACTIVECAPTION);
-			ArgbValues [(int)KnownColor.InactiveCaptionText] = GetSysColor (GetSysColorIndex.COLOR_INACTIVECAPTIONTEXT);
-			ArgbValues [(int)KnownColor.Info] = GetSysColor (GetSysColorIndex.COLOR_INFOBK);
-			ArgbValues [(int)KnownColor.InfoText] = GetSysColor (GetSysColorIndex.COLOR_INFOTEXT);
-			ArgbValues [(int)KnownColor.Menu] = GetSysColor (GetSysColorIndex.COLOR_MENU);
-			ArgbValues [(int)KnownColor.MenuText] = GetSysColor (GetSysColorIndex.COLOR_MENUTEXT);
-			ArgbValues [(int)KnownColor.ScrollBar] = GetSysColor (GetSysColorIndex.COLOR_SCROLLBAR);
-			ArgbValues [(int)KnownColor.Window] = GetSysColor (GetSysColorIndex.COLOR_WINDOW);
-			ArgbValues [(int)KnownColor.WindowFrame] = GetSysColor (GetSysColorIndex.COLOR_WINDOWFRAME);
-			ArgbValues [(int)KnownColor.WindowText] = GetSysColor (GetSysColorIndex.COLOR_WINDOWTEXT);
-			ArgbValues [(int)KnownColor.ButtonFace] = GetSysColor (GetSysColorIndex.COLOR_BTNFACE);
-			ArgbValues [(int)KnownColor.ButtonHighlight] = GetSysColor (GetSysColorIndex.COLOR_BTNHIGHLIGHT);
-			ArgbValues [(int)KnownColor.ButtonShadow] = GetSysColor (GetSysColorIndex.COLOR_BTNSHADOW);
-			ArgbValues [(int)KnownColor.GradientActiveCaption] = GetSysColor (GetSysColorIndex.COLOR_GRADIENTACTIVECAPTION);
-			ArgbValues [(int)KnownColor.GradientInactiveCaption] = GetSysColor (GetSysColorIndex.COLOR_GRADIENTINACTIVECAPTION);
-			ArgbValues [(int)KnownColor.MenuBar] = GetSysColor (GetSysColorIndex.COLOR_MENUBAR);
-			ArgbValues [(int)KnownColor.MenuHighlight] = GetSysColor (GetSysColorIndex.COLOR_MENUHIGHLIGHT);
-		}
+        static void RetrieveWindowsSystemColors()
+        {
+            ArgbValues[(int)KnownColor.ActiveBorder] = GetSysColor(
+                GetSysColorIndex.COLOR_ACTIVEBORDER
+            );
+            ArgbValues[(int)KnownColor.ActiveCaption] = GetSysColor(
+                GetSysColorIndex.COLOR_ACTIVECAPTION
+            );
+            ArgbValues[(int)KnownColor.ActiveCaptionText] = GetSysColor(
+                GetSysColorIndex.COLOR_CAPTIONTEXT
+            );
+            ArgbValues[(int)KnownColor.AppWorkspace] = GetSysColor(
+                GetSysColorIndex.COLOR_APPWORKSPACE
+            );
+            ArgbValues[(int)KnownColor.Control] = GetSysColor(GetSysColorIndex.COLOR_BTNFACE);
+            ArgbValues[(int)KnownColor.ControlDark] = GetSysColor(GetSysColorIndex.COLOR_BTNSHADOW);
+            ArgbValues[(int)KnownColor.ControlDarkDark] = GetSysColor(
+                GetSysColorIndex.COLOR_3DDKSHADOW
+            );
+            ArgbValues[(int)KnownColor.ControlLight] = GetSysColor(GetSysColorIndex.COLOR_3DLIGHT);
+            ArgbValues[(int)KnownColor.ControlLightLight] = GetSysColor(
+                GetSysColorIndex.COLOR_BTNHIGHLIGHT
+            );
+            ArgbValues[(int)KnownColor.ControlText] = GetSysColor(GetSysColorIndex.COLOR_BTNTEXT);
+            ArgbValues[(int)KnownColor.Desktop] = GetSysColor(GetSysColorIndex.COLOR_DESKTOP);
+            ArgbValues[(int)KnownColor.GrayText] = GetSysColor(GetSysColorIndex.COLOR_GRAYTEXT);
+            ArgbValues[(int)KnownColor.Highlight] = GetSysColor(GetSysColorIndex.COLOR_HIGHLIGHT);
+            ArgbValues[(int)KnownColor.HighlightText] = GetSysColor(
+                GetSysColorIndex.COLOR_HIGHLIGHTTEXT
+            );
+            ArgbValues[(int)KnownColor.HotTrack] = GetSysColor(GetSysColorIndex.COLOR_HOTLIGHT);
+            ArgbValues[(int)KnownColor.InactiveBorder] = GetSysColor(
+                GetSysColorIndex.COLOR_INACTIVEBORDER
+            );
+            ArgbValues[(int)KnownColor.InactiveCaption] = GetSysColor(
+                GetSysColorIndex.COLOR_INACTIVECAPTION
+            );
+            ArgbValues[(int)KnownColor.InactiveCaptionText] = GetSysColor(
+                GetSysColorIndex.COLOR_INACTIVECAPTIONTEXT
+            );
+            ArgbValues[(int)KnownColor.Info] = GetSysColor(GetSysColorIndex.COLOR_INFOBK);
+            ArgbValues[(int)KnownColor.InfoText] = GetSysColor(GetSysColorIndex.COLOR_INFOTEXT);
+            ArgbValues[(int)KnownColor.Menu] = GetSysColor(GetSysColorIndex.COLOR_MENU);
+            ArgbValues[(int)KnownColor.MenuText] = GetSysColor(GetSysColorIndex.COLOR_MENUTEXT);
+            ArgbValues[(int)KnownColor.ScrollBar] = GetSysColor(GetSysColorIndex.COLOR_SCROLLBAR);
+            ArgbValues[(int)KnownColor.Window] = GetSysColor(GetSysColorIndex.COLOR_WINDOW);
+            ArgbValues[(int)KnownColor.WindowFrame] = GetSysColor(
+                GetSysColorIndex.COLOR_WINDOWFRAME
+            );
+            ArgbValues[(int)KnownColor.WindowText] = GetSysColor(GetSysColorIndex.COLOR_WINDOWTEXT);
+            ArgbValues[(int)KnownColor.ButtonFace] = GetSysColor(GetSysColorIndex.COLOR_BTNFACE);
+            ArgbValues[(int)KnownColor.ButtonHighlight] = GetSysColor(
+                GetSysColorIndex.COLOR_BTNHIGHLIGHT
+            );
+            ArgbValues[(int)KnownColor.ButtonShadow] = GetSysColor(
+                GetSysColorIndex.COLOR_BTNSHADOW
+            );
+            ArgbValues[(int)KnownColor.GradientActiveCaption] = GetSysColor(
+                GetSysColorIndex.COLOR_GRADIENTACTIVECAPTION
+            );
+            ArgbValues[(int)KnownColor.GradientInactiveCaption] = GetSysColor(
+                GetSysColorIndex.COLOR_GRADIENTINACTIVECAPTION
+            );
+            ArgbValues[(int)KnownColor.MenuBar] = GetSysColor(GetSysColorIndex.COLOR_MENUBAR);
+            ArgbValues[(int)KnownColor.MenuHighlight] = GetSysColor(
+                GetSysColorIndex.COLOR_MENUHIGHLIGHT
+            );
+        }
 #endif
 
         public static Color FromKnownColor(KnownColor kc)

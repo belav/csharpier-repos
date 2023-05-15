@@ -36,7 +36,13 @@ namespace System.Net.Http
 
         public static TheoryDataSet<string> InvalidFilePaths
         {
-            get { return new TheoryDataSet<string> { "", " ", "  ",
+            get
+            {
+                return new TheoryDataSet<string>
+                {
+                    "",
+                    " ",
+                    "  ",
 #if !NETCOREAPP // .NET Core does not enforce path validity in many APIs.
                     "\t\t \n ",
                     "c:\\a<b",
@@ -46,7 +52,10 @@ namespace System.Net.Http
                     "c:\\a|b",
                     "c:\\a\bb",
 #endif
-                    "c:\\a\0b", "c :\\a\0b", }; }
+                    "c:\\a\0b",
+                    "c :\\a\0b",
+                };
+            }
         }
 
         [Fact]

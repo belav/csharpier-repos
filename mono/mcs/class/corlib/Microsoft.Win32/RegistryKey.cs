@@ -272,7 +272,7 @@ namespace Microsoft.Win32
                 RegistryApi = new Win32RegistryApi();
             else
 #endif
-            RegistryApi = new UnixRegistryApi();
+                RegistryApi = new UnixRegistryApi();
         }
 
         /// <summary>

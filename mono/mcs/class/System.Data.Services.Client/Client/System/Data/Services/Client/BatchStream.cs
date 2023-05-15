@@ -1368,7 +1368,13 @@ namespace System.Data.Services.Client
             public override void Flush() { }
 
 #if DEBUG && !ASTORIA_LIGHT
-            public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+            public override IAsyncResult BeginRead(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback callback,
+                object state
+            )
             {
                 throw Error.NotSupported();
             }

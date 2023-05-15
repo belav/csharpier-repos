@@ -27,8 +27,16 @@ namespace System.Security.Cryptography
             m_hashName = "SHA256";
 
 #if FEATURE_CRYPTO && !FULL_AOT_RUNTIME
-            m_hash1 = GetHashAlgorithmWithFipsFallback(() => new SHA256Managed(), () => HashAlgorithm.Create("System.Security.Cryptography.SHA256CryptoServiceProvider"));
-            m_hash2 = GetHashAlgorithmWithFipsFallback(() => new SHA256Managed(), () => HashAlgorithm.Create("System.Security.Cryptography.SHA256CryptoServiceProvider"));
+            m_hash1 = GetHashAlgorithmWithFipsFallback(
+                () => new SHA256Managed(),
+                () =>
+                    HashAlgorithm.Create("System.Security.Cryptography.SHA256CryptoServiceProvider")
+            );
+            m_hash2 = GetHashAlgorithmWithFipsFallback(
+                () => new SHA256Managed(),
+                () =>
+                    HashAlgorithm.Create("System.Security.Cryptography.SHA256CryptoServiceProvider")
+            );
 #else
             m_hash1 = new SHA256Managed();
             m_hash2 = new SHA256Managed();

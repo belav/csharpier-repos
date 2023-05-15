@@ -59,7 +59,9 @@ namespace System.Data.Services.Client
         private bool moved;
 
 #if DEBUG && !ASTORIA_LIGHT
-        private System.IO.TextWriter writer = new System.IO.StringWriter(System.Globalization.CultureInfo.InvariantCulture);
+        private System.IO.TextWriter writer = new System.IO.StringWriter(
+            System.Globalization.CultureInfo.InvariantCulture
+        );
 #else
 #pragma warning disable 649
         private System.IO.TextWriter writer;

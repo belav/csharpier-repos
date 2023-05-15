@@ -146,7 +146,7 @@ namespace MonoTests.System.ServiceModel
             void Block(string s);
         }
 
-#region "bug #567672"
+        #region "bug #567672"
         [Test]
         [Category("NotWorking")]
         public void CallbackExample1()
@@ -369,9 +369,9 @@ namespace MonoTests.System.ServiceModel
             [OperationContract(IsOneWay = false)]
             void ShowMessage(string message);
         }
-#endregion
+        #endregion
 
-#region ConcurrencyMode testing
+        #region ConcurrencyMode testing
 
         ManualResetEvent wait_handle = new ManualResetEvent(false);
 
@@ -447,7 +447,7 @@ namespace MonoTests.System.ServiceModel
             }
         }
 
-#endregion
+        #endregion
     }
 }
 #endif

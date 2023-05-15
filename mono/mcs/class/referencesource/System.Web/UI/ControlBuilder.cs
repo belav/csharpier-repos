@@ -2176,8 +2176,8 @@ namespace System.Web.UI
                         );
 #endif // DONTUSEFACTORYGENERATOR
 
-                    // It's not public, so we must stick with slower reflection
-                    factory = new ReflectionBasedControlBuilderFactory(cba.BuilderType);
+                        // It's not public, so we must stick with slower reflection
+                        factory = new ReflectionBasedControlBuilderFactory(cba.BuilderType);
 #if !DONTUSEFACTORYGENERATOR
                     }
 #endif // DONTUSEFACTORYGENERATOR

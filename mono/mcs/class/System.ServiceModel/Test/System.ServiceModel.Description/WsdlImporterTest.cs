@@ -356,7 +356,7 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreEqual(2, od.Messages.Count, "#CD17");
 
             MessageDescription md = od.Messages[0];
-#region MessageDescription 0
+            #region MessageDescription 0
             Assert.AreEqual("http://myns/echo/IEchoService/Echo", md.Action, "#CD18");
             Assert.AreEqual(MessageDirection.Input, md.Direction, "#CD19");
             Assert.AreEqual(0, md.Headers.Count, "#CD20");
@@ -367,7 +367,7 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.IsNull(md.Body.ReturnValue, "#CD22");
             Assert.AreEqual("Echo", md.Body.WrapperName, "#CD23");
             Assert.AreEqual("http://myns/echo", md.Body.WrapperNamespace, "#CD24");
-#region MessagePartDescription
+            #region MessagePartDescription
             //MessagePartDescription 0
 
             Assert.AreEqual(3, md.Body.Parts.Count, "#CD25");
@@ -399,12 +399,12 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreEqual("http://myns/echo", mpd.Namespace, "#CD34");
             Assert.IsNull(mpd.Type, "#CD35");
 
-#endregion
-#endregion
+            #endregion
+            #endregion
 
             md = od.Messages[1];
 
-#region MessageDescription 1
+            #region MessageDescription 1
 
             Assert.AreEqual("http://myns/echo/IEchoService/EchoResponse", md.Action, "#CD36");
             Assert.AreEqual(MessageDirection.Output, md.Direction, "#CD37");
@@ -420,7 +420,7 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreEqual("http://myns/echo", md.Body.WrapperNamespace, "#CD45");
             Assert.AreEqual(0, md.Body.Parts.Count, "#CD46");
 
-#endregion
+            #endregion
         }
 
         public void CheckOperationDescriptionDouble_it(OperationDescription od)
@@ -442,7 +442,7 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreEqual(2, od.Messages.Count, "#CD17");
 
             MessageDescription md = od.Messages[0];
-#region MessageDescription 0
+            #region MessageDescription 0
             Assert.AreEqual("http://myns/echo/IEchoService/DoubleIt", md.Action, "#CD18");
             Assert.AreEqual(MessageDirection.Input, md.Direction, "#CD19");
             Assert.AreEqual(0, md.Headers.Count, "#CD20");
@@ -453,7 +453,7 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.IsNull(md.Body.ReturnValue, "#CD22");
             Assert.AreEqual("DoubleIt", md.Body.WrapperName, "#CD23");
             Assert.AreEqual("http://myns/echo", md.Body.WrapperNamespace, "#CD24");
-#region MessagePartDescription
+            #region MessagePartDescription
             //MessagePartDescription 0
 
             //Assert.AreEqual (0, md.Body.Parts.Count, "#CD25");
@@ -475,12 +475,12 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreEqual("http://myns/echo", mpd.Namespace, "#CD34");
             Assert.IsNull(mpd.Type, "#CD35");
 
-#endregion
-#endregion
+            #endregion
+            #endregion
 
             md = od.Messages[1];
 
-#region MessageDescription 1
+            #region MessageDescription 1
 
             Assert.AreEqual("http://myns/echo/IEchoService/DoubleItResponse", md.Action, "#CD36");
             Assert.AreEqual(MessageDirection.Output, md.Direction, "#CD37");
@@ -496,7 +496,7 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.AreEqual("http://myns/echo", md.Body.WrapperNamespace, "#CD45");
             Assert.AreEqual(0, md.Body.Parts.Count, "#CD46");
 
-#endregion
+            #endregion
         }
 
         [Test]

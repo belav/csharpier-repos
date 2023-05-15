@@ -1201,38 +1201,38 @@ namespace System.Diagnostics
                     )
                     {
 #endif
-                    if (error == NativeMethods.ERROR_EVENTLOG_FILE_CHANGED)
-                    {
-                        // somewhere along the way the event log file changed - probably it
-                        // got cleared while we were looping here. Reset the handle and
-                        // try again.
-                        Reset(currentMachineName);
-                    }
-                    // try again with a bigger buffer if necessary
-                    else if (minBytesNeeded > buf.Length)
-                    {
-                        Debug.WriteLineIf(
-                            CompModSwitches.EventLog.TraceVerbose,
-                            "Increasing buffer size from "
-                                + buf.Length.ToString(CultureInfo.InvariantCulture)
-                                + " to "
-                                + minBytesNeeded.ToString(CultureInfo.InvariantCulture)
-                                + " bytes"
+                        if (error == NativeMethods.ERROR_EVENTLOG_FILE_CHANGED)
+                        {
+                            // somewhere along the way the event log file changed - probably it
+                            // got cleared while we were looping here. Reset the handle and
+                            // try again.
+                            Reset(currentMachineName);
+                        }
+                        // try again with a bigger buffer if necessary
+                        else if (minBytesNeeded > buf.Length)
+                        {
+                            Debug.WriteLineIf(
+                                CompModSwitches.EventLog.TraceVerbose,
+                                "Increasing buffer size from "
+                                    + buf.Length.ToString(CultureInfo.InvariantCulture)
+                                    + " to "
+                                    + minBytesNeeded.ToString(CultureInfo.InvariantCulture)
+                                    + " bytes"
+                            );
+                            buf = new byte[minBytesNeeded];
+                        }
+                        success = UnsafeNativeMethods.ReadEventLog(
+                            readHandle,
+                            NativeMethods.FORWARDS_READ | NativeMethods.SEEK_READ,
+                            oldestEntry + idx,
+                            buf,
+                            buf.Length,
+                            out bytesRead,
+                            out minBytesNeeded
                         );
-                        buf = new byte[minBytesNeeded];
-                    }
-                    success = UnsafeNativeMethods.ReadEventLog(
-                        readHandle,
-                        NativeMethods.FORWARDS_READ | NativeMethods.SEEK_READ,
-                        oldestEntry + idx,
-                        buf,
-                        buf.Length,
-                        out bytesRead,
-                        out minBytesNeeded
-                    );
-                    if (!success)
-                        // we'll just stop right here.
-                        break;
+                        if (!success)
+                            // we'll just stop right here.
+                            break;
 #if !RETRY_ON_ALL_ERRORS
                     }
                     else

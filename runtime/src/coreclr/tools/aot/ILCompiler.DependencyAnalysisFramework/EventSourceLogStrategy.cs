@@ -83,12 +83,15 @@ namespace ILCompiler.DependencyAnalysisFramework
 
         public static bool IsEventSourceEnabled
         {
-            get { return
+            get
+            {
+                return
 #if !ALWAYS_SUPPORT_EVENTSOURCE_LOG
                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                     && // Processing these event source events is only implemented on Windows
 #endif
-                GraphEventSource.Log.IsEnabled(); }
+                    GraphEventSource.Log.IsEnabled();
+            }
         }
 
         bool IDependencyAnalysisMarkStrategy<DependencyContextType>.MarkNode(

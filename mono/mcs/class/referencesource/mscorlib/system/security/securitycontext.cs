@@ -47,11 +47,12 @@ namespace System.Security
     }
 
 #if !FEATURE_PAL && FEATURE_IMPERSONATION
-    internal enum WindowsImpersonationFlowMode { 
-    IMP_FASTFLOW = 0,
-       IMP_NOFLOW = 1,
-       IMP_ALWAYSFLOW = 2,
-       IMP_DEFAULT = IMP_FASTFLOW 
+    internal enum WindowsImpersonationFlowMode
+    {
+        IMP_FASTFLOW = 0,
+        IMP_NOFLOW = 1,
+        IMP_ALWAYSFLOW = 2,
+        IMP_DEFAULT = IMP_FASTFLOW
     }
 #endif
 

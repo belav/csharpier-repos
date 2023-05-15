@@ -46,11 +46,7 @@ namespace System
     //
     [ComVisible(true)]
     [Serializable]
-    public sealed partial class String
-        : IComparable,
-            ICloneable,
-            IConvertible,
-            IEnumerable
+    public sealed partial class String : IComparable, ICloneable, IConvertible, IEnumerable
 #if GENERICS_WORK
             ,
             IComparable<String>,
@@ -1078,7 +1074,7 @@ namespace System
 #if !MONO && DEBUG
                     // We want to ensure we can change our hash function daily.
                     // This is perfectly fine as long as you don't persist the
-                    // value from GetHashCode to disk or count on String A 
+                    // value from GetHashCode to disk or count on String A
                     // hashing before string B.  Those are bugs in your code.
                     hash1 ^= ThisAssembly.DailyBuildNumber;
 #endif
@@ -1142,7 +1138,7 @@ namespace System
 #if !MONO && DEBUG
                     // We want to ensure we can change our hash function daily.
                     // This is perfectly fine as long as you don't persist the
-                    // value from GetHashCode to disk or count on String A 
+                    // value from GetHashCode to disk or count on String A
                     // hashing before string B.  Those are bugs in your code.
                     hash1 ^= ThisAssembly.DailyBuildNumber;
 #endif

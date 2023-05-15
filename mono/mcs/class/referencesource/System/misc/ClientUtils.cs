@@ -519,7 +519,7 @@ namespace System.Windows.Forms
                 }
             }
 
-            #region IList Members
+        #region IList Members
             public void Clear()
             {
                 InnerList.Clear();
@@ -563,9 +563,9 @@ namespace System.Windows.Forms
                 }
                 return InnerList.Add(CreateWeakRefObject(value));
             }
-            #endregion
+        #endregion
 
-            #region ICollection Members
+        #region ICollection Members
             /// <include file='doc\ArrangedElementCollection.uex' path='docs/doc[@for="ArrangedElementCollection.Count"]/*' />
             public int Count
             {
@@ -589,14 +589,14 @@ namespace System.Windows.Forms
             {
                 get { return InnerList.IsSynchronized; }
             }
-            #endregion
+        #endregion
 
-            #region IEnumerable Members
+        #region IEnumerable Members
             public IEnumerator GetEnumerator()
             {
                 return InnerList.GetEnumerator();
             }
-            #endregion
+        #endregion
 
             /// <summary>
             ///     Wraps a weak ref object.

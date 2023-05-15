@@ -246,12 +246,19 @@ namespace System.IO
             {
 #endif  // !FEATURE_PAL
 
-            fixed (byte* p = bytes)
-            {
-                readSuccess = (
-                    0 != Win32Native.ReadFile(hFile, p + offset, count, out bytesRead, IntPtr.Zero)
-                );
-            }
+                fixed (byte* p = bytes)
+                {
+                    readSuccess = (
+                        0
+                        != Win32Native.ReadFile(
+                            hFile,
+                            p + offset,
+                            count,
+                            out bytesRead,
+                            IntPtr.Zero
+                        )
+                    );
+                }
 
 #if !FEATURE_PAL
             }
@@ -314,21 +321,21 @@ namespace System.IO
             {
 #endif  // !FEATURE_PAL
 
-            fixed (byte* p = bytes)
-            {
-                int numBytesWritten;
-                writeSuccess = (
-                    0
-                    != Win32Native.WriteFile(
-                        hFile,
-                        p + offset,
-                        count,
-                        out numBytesWritten,
-                        IntPtr.Zero
-                    )
-                );
-                Contract.Assert(!writeSuccess || count == numBytesWritten);
-            }
+                fixed (byte* p = bytes)
+                {
+                    int numBytesWritten;
+                    writeSuccess = (
+                        0
+                        != Win32Native.WriteFile(
+                            hFile,
+                            p + offset,
+                            count,
+                            out numBytesWritten,
+                            IntPtr.Zero
+                        )
+                    );
+                    Contract.Assert(!writeSuccess || count == numBytesWritten);
+                }
 
 #if !FEATURE_PAL
             }

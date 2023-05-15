@@ -430,9 +430,9 @@ namespace System.Data
                         }
                         else
 #endif
-                        Bid.Trace(
-                            "<sc.LocalDBAPI.CreateLocalDBInstance> No system.data.localdb section found in configuration"
-                        );
+                            Bid.Trace(
+                                "<sc.LocalDBAPI.CreateLocalDBInstance> No system.data.localdb section found in configuration"
+                            );
                         s_configurableInstances = tempConfigurableInstances;
                     }
                 }

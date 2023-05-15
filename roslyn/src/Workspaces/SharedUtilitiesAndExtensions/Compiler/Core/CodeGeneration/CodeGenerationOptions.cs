@@ -102,18 +102,19 @@ internal readonly record struct CodeAndImportGenerationOptions
 #endif
 }
 
-internal interface CodeGenerationOptionsProvider :
+internal interface CodeGenerationOptionsProvider
+    :
 #if !CODE_STYLE
     OptionsProvider<CodeGenerationOptions>,
 #endif
-    NamingStylePreferencesProvider { }
+        NamingStylePreferencesProvider { }
 
 internal interface CodeAndImportGenerationOptionsProvider
     :
 #if !CODE_STYLE
     OptionsProvider<CodeAndImportGenerationOptions>,
 #endif
-    CodeGenerationOptionsProvider,
+        CodeGenerationOptionsProvider,
         AddImportPlacementOptionsProvider { }
 
 internal static class CodeGenerationOptionsProviders

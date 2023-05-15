@@ -157,23 +157,29 @@ namespace System.Xml.Serialization
 #endif
             deleteTempFiles = (db == null || db == "no");
 #if !MOBILE && CONFIGURATION_DEP
-			// DiagnosticsSection
-			ConfigurationSection table = (ConfigurationSection) ConfigurationSettings.GetConfig("system.diagnostics");
-			var bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-			if (table != null) 
-			{
-				// SwitchElementsCollection
-				var pi = table.GetType ().GetProperty ("Switches", bf);
-				var switchesElement = (ConfigurationElementCollection) pi.GetValue (table, null);
-				foreach (ConfigurationElement e in switchesElement) {
-					// SwitchElement
-					if (e.GetType ().GetProperty ("Name", bf).GetValue (e, null) as string == "XmlSerialization.Compilation") {
-						if (e.GetType ().GetProperty ("Value", bf).GetValue (e, null) as string == "1")
-							deleteTempFiles = false;
-						break;
-					}
-				}
-			}
+            // DiagnosticsSection
+            ConfigurationSection table = (ConfigurationSection)
+                ConfigurationSettings.GetConfig("system.diagnostics");
+            var bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+            if (table != null)
+            {
+                // SwitchElementsCollection
+                var pi = table.GetType().GetProperty("Switches", bf);
+                var switchesElement = (ConfigurationElementCollection)pi.GetValue(table, null);
+                foreach (ConfigurationElement e in switchesElement)
+                {
+                    // SwitchElement
+                    if (
+                        e.GetType().GetProperty("Name", bf).GetValue(e, null) as string
+                        == "XmlSerialization.Compilation"
+                    )
+                    {
+                        if (e.GetType().GetProperty("Value", bf).GetValue(e, null) as string == "1")
+                            deleteTempFiles = false;
+                        break;
+                    }
+                }
+            }
 #endif
         }
 

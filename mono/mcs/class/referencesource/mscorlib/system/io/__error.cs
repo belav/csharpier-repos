@@ -125,7 +125,12 @@ namespace System.IO
                 if (!isInvalidPath)
                 {
 #if !FEATURE_CORECLR && MONO_FEATURE_CAS
-                    FileIOPermission.QuickDemand(FileIOPermissionAccess.PathDiscovery, path, false, false);
+                    FileIOPermission.QuickDemand(
+                        FileIOPermissionAccess.PathDiscovery,
+                        path,
+                        false,
+                        false
+                    );
 #endif
                     safeToReturn = true;
                 }

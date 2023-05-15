@@ -5048,7 +5048,7 @@ namespace System.Xml
                         }
                         else
 #endif
-                        attr.TrimSpacesInValue();
+                            attr.TrimSpacesInValue();
                     }
                 }
             }
@@ -6918,7 +6918,7 @@ namespace System.Xml
                 }
                 else
 #endif
-                Throw(Res.Xml_UndeclaredEntity, name, ps.LineNo, entityStartLinePos);
+                    Throw(Res.Xml_UndeclaredEntity, name, ps.LineNo, entityStartLinePos);
             }
 
             if (entity.IsUnparsedEntity)
@@ -6932,7 +6932,7 @@ namespace System.Xml
                 }
                 else
 #endif
-                Throw(Res.Xml_UnparsedEntityRef, name, ps.LineNo, entityStartLinePos);
+                    Throw(Res.Xml_UnparsedEntityRef, name, ps.LineNo, entityStartLinePos);
             }
 
             if (standalone && entity.IsDeclaredInExternal)
@@ -7041,18 +7041,18 @@ namespace System.Xml
             else
             {
 #endif
-            if (checkEntityNesting)
-            {
-                if (ps.entityId != nodes[index].entityId)
+                if (checkEntityNesting)
                 {
-                    Throw(Res.Xml_IncompleteEntity);
+                    if (ps.entityId != nodes[index].entityId)
+                    {
+                        Throw(Res.Xml_IncompleteEntity);
+                    }
                 }
-            }
 
-            PopEntity();
+                PopEntity();
 
-            reportedEncoding = ps.encoding;
-            reportedBaseUri = ps.baseUriStr;
+                reportedEncoding = ps.encoding;
+                reportedBaseUri = ps.baseUriStr;
 #if !SILVERLIGHT // Needed only for XmlTextReader (reporting of entities)
                 return false;
             }

@@ -704,14 +704,16 @@ namespace System.Web
         /// </devdoc>
         public static HttpContext Current
         {
-            get {
+            get
+            {
 #if DBG
                 if (NeedDebugAssertOnAccessToCurrent)
                 {
                     Debug.Assert(ContextBase.Current != null);
                 }
 #endif
-                return ContextBase.Current as HttpContext; }
+                return ContextBase.Current as HttpContext;
+            }
             set { ContextBase.Current = value; }
         }
 

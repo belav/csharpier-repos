@@ -45,7 +45,7 @@ namespace System
 #if MONO
                 if (uriKind != DotNetRelativeOrAbsolute)
 #endif
-                throw new ArgumentException(SR.GetString(SR.net_uri_InvalidUriKind, uriKind));
+                    throw new ArgumentException(SR.GetString(SR.net_uri_InvalidUriKind, uriKind));
             }
 
             m_String = uri == null ? string.Empty : uri;
@@ -886,7 +886,7 @@ namespace System
 #if MONO
                 if (uriKind != DotNetRelativeOrAbsolute)
 #endif
-                throw new ArgumentException(SR.GetString(SR.net_uri_InvalidUriKind, uriKind));
+                    throw new ArgumentException(SR.GetString(SR.net_uri_InvalidUriKind, uriKind));
             }
 
             UriParser syntax = null;
@@ -966,7 +966,7 @@ namespace System
                     )
 #endif
 
-                    return relativeUri;
+                        return relativeUri;
                 }
 
                 relativeStr = relativeUri.OriginalString;

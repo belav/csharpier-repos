@@ -89,7 +89,11 @@ namespace Newtonsoft.Json.Utilities
                 case DateTimeKind.Utc:
                     return "yyyy-MM-ddTHH:mm:ss.FFFFFFFZ";
                 default:
-                    throw MiscellaneousUtils.CreateArgumentOutOfRangeException(nameof(kind), kind, "Unexpected DateTimeKind value.");
+                    throw MiscellaneousUtils.CreateArgumentOutOfRangeException(
+                        nameof(kind),
+                        kind,
+                        "Unexpected DateTimeKind value."
+                    );
             }
         }
 #endif

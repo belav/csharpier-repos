@@ -142,10 +142,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
 #if !FEATURE_PAL && FEATURE_SERIALIZATION
             // This is a hack to allow us to write a type-limiting deserializer
-            // when we know exactly what type to expect at the head of the 
+            // when we know exactly what type to expect at the head of the
             // object graph.
-            if (m_binder != null) {
-                ResourceReader.TypeLimitingDeserializationBinder tldBinder = m_binder as ResourceReader.TypeLimitingDeserializationBinder;
+            if (m_binder != null)
+            {
+                ResourceReader.TypeLimitingDeserializationBinder tldBinder =
+                    m_binder as ResourceReader.TypeLimitingDeserializationBinder;
                 if (tldBinder != null)
                     tldBinder.ObjectReader = this;
             }

@@ -1233,7 +1233,7 @@ namespace TestRunner
                             );
                     else
 #endif
-                    tester = new DomainTester();
+                        tester = new DomainTester();
 
                     if (!tester.Test(binaryFileName))
                         return false;

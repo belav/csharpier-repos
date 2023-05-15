@@ -223,9 +223,9 @@ namespace MonoTests.System.ServiceModel.Dispatcher
         }
     }
 
-#region helpers
+    #region helpers
 
-#region message inspectors
+    #region message inspectors
 
     public class MessageInspectBehavior : IServiceBehavior
     {
@@ -268,7 +268,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             res = result;
         }
 
-#region IDispatchMessageInspector Members
+        #region IDispatchMessageInspector Members
 
         public object AfterReceiveRequest(
             ref Message request,
@@ -287,12 +287,12 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             res.AddCurrentOperationContextInfo();
         }
 
-#endregion
+        #endregion
     }
 
-#endregion
+    #endregion
 
-#region InstanceProvider
+    #region InstanceProvider
 
     public class MyInstanceProvider : IInstanceProvider
     {
@@ -305,7 +305,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             res = result;
         }
 
-#region IInstanceProvider Members
+        #region IInstanceProvider Members
 
         public object GetInstance(InstanceContext instanceContext, Message message)
         {
@@ -327,12 +327,12 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             res.AddCurrentOperationContextInfo();
         }
 
-#endregion
+        #endregion
     }
 
-#endregion
+    #endregion
 
-#region InstanceContextProvider
+    #region InstanceContextProvider
 
     public class MyInstanceContextProvider : IInstanceContextProvider
     {
@@ -345,7 +345,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             res = result;
         }
 
-#region IInstanceContextProvider Members
+        #region IInstanceContextProvider Members
 
         public InstanceContext GetExistingInstanceContext(Message message, IContextChannel channel)
         {
@@ -380,12 +380,12 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             res.AddCurrentOperationContextInfo();
         }
 
-#endregion
+        #endregion
     }
 
-#endregion
+    #endregion
 
-#region InstanceContextInitializer
+    #region InstanceContextInitializer
 
     public class MyInstanceContextInitializer : IInstanceContextInitializer
     {
@@ -403,9 +403,9 @@ namespace MonoTests.System.ServiceModel.Dispatcher
         }
     }
 
-#endregion
+    #endregion
 
-#region Helpers
+    #region Helpers
 
     public class Result
     {
@@ -462,9 +462,9 @@ namespace MonoTests.System.ServiceModel.Dispatcher
         int Get(int i);
     }
 
-#endregion
+    #endregion
 
-#region ClientProxy
+    #region ClientProxy
 
     public class AllActionsProxy : ClientBase<IAllActions>, IAllActions
     {
@@ -477,7 +477,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
         }
     }
 
-#endregion
-#endregion
+    #endregion
+    #endregion
 }
 #endif

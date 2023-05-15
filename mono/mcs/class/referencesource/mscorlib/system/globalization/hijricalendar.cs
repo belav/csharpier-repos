@@ -356,18 +356,37 @@ namespace System.Globalization
 
             const int parameterValueLength = 255;
             StringBuilder parameterValue = new StringBuilder(parameterValueLength);
-            bool rc = Win32Native.FetchConfigurationString(true, HijriAdvanceRegKeyEntry, parameterValue, parameterValueLength);
-            if( rc )
+            bool rc = Win32Native.FetchConfigurationString(
+                true,
+                HijriAdvanceRegKeyEntry,
+                parameterValue,
+                parameterValueLength
+            );
+            if (rc)
             {
                 String str = parameterValue.ToString();
-                if (String.Compare(str, 0, HijriAdvanceRegKeyEntry, 0, HijriAdvanceRegKeyEntry.Length, true, CultureInfo.InvariantCulture) == 0) {
+                if (
+                    String.Compare(
+                        str,
+                        0,
+                        HijriAdvanceRegKeyEntry,
+                        0,
+                        HijriAdvanceRegKeyEntry.Length,
+                        true,
+                        CultureInfo.InvariantCulture
+                    ) == 0
+                )
+                {
                     if (str.Length == HijriAdvanceRegKeyEntry.Length)
                         hijriAdvance = -1;
-                    else {
+                    else
+                    {
                         str = str.Substring(HijriAdvanceRegKeyEntry.Length);
-                        try {
+                        try
+                        {
                             int advance = Int32.Parse(str.ToString(), CultureInfo.InvariantCulture);
-                            if ((advance >= MinAdvancedHijri) && (advance <= MaxAdvancedHijri)) {
+                            if ((advance >= MinAdvancedHijri) && (advance <= MaxAdvancedHijri))
+                            {
                                 hijriAdvance = advance;
                             }
                         }

@@ -1205,7 +1205,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ? Location.None
                     :
 #endif
-                GetInterfaceLocation(interfaceMember, implementingType), useSiteInfo);
+                    GetInterfaceLocation(interfaceMember, implementingType),
+                useSiteInfo
+            );
 
             if (defaultImpl is object)
             {
@@ -1297,11 +1299,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 ? Location.None
                                 :
 #endif
-                            GetImplicitImplementationDiagnosticLocation(
-                                interfaceMember,
-                                implementingType,
-                                implicitImpl
-                            ),
+                                GetImplicitImplementationDiagnosticLocation(
+                                    interfaceMember,
+                                    implementingType,
+                                    implicitImpl
+                                ),
                             useSiteInfo2
                         );
                     }

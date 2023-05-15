@@ -563,7 +563,7 @@ namespace System.Security.Permissions
                                 foundMatch = wp.IsInRole(m_array[i].Sid);
                             else
 #endif // !FEATURE_PAL && FEATURE_IMPERSONATION
-                            foundMatch = principal.IsInRole(m_array[i].m_role);
+                                foundMatch = principal.IsInRole(m_array[i].m_role);
                         }
 
                         if (foundMatch)

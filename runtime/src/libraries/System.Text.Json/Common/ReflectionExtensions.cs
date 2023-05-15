@@ -394,7 +394,8 @@ namespace System.Text.Json.Reflection
 #if !BUILDING_SOURCE_GENERATOR
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
 #endif
-            this Type type)
+            this Type type
+        )
         {
             if (!type.IsInterface)
             {

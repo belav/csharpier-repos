@@ -172,11 +172,13 @@ namespace System.Net
         /// </devdoc>
         public SecureString SecurePassword
         {
-            get {
+            get
+            {
 #if MONO_FEATURE_CAS
                 ExceptionHelper.UnmanagedPermission.Demand();
 #endif
-                return InternalGetSecurePassword().Copy(); }
+                return InternalGetSecurePassword().Copy();
+            }
             set
             {
                 if (value == null)

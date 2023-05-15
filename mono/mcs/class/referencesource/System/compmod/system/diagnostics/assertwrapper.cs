@@ -168,12 +168,12 @@ namespace System.Diagnostics
             else
             {
 #endif
-                // Run the message box on its own thread.
-                rval = new MessageBoxPopup(
-                    fullMessage,
-                    SR.GetString(SR.DebugAssertTitle),
-                    flags
-                ).ShowMessageBox();
+            // Run the message box on its own thread.
+            rval = new MessageBoxPopup(
+                fullMessage,
+                SR.GetString(SR.DebugAssertTitle),
+                flags
+            ).ShowMessageBox();
 
 #if !SILVERLIGHT
             }

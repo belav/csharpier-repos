@@ -110,9 +110,9 @@ namespace System
                 }
                 else
 #endif
-                    throw new NotSupportedException(
-                        Environment.GetResourceString("NotSupported_ActivAttrOnNonMBR")
-                    );
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_ActivAttrOnNonMBR")
+                );
             }
 
             RuntimeType rt = type.UnderlyingSystemType as RuntimeType;

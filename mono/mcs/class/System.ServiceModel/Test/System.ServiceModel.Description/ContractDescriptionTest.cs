@@ -1302,36 +1302,36 @@ namespace MonoTests.System.ServiceModel.Description
 
         public class S : IS
         {
-#region IS implementation
+            #region IS implementation
             public void MethodS()
             {
                 throw new NotImplementedException();
             }
-#endregion
-#region IA2 implementation
+            #endregion
+            #region IA2 implementation
             public void MethodA2()
             {
                 throw new NotImplementedException();
             }
-#endregion
-#region IA1 implementation
+            #endregion
+            #region IA1 implementation
             public void MethodA1()
             {
                 throw new NotImplementedException();
             }
-#endregion
-#region IB2 implementation
+            #endregion
+            #region IB2 implementation
             public void MethodB2()
             {
                 throw new NotImplementedException();
             }
-#endregion
-#region IB1 implementation
+            #endregion
+            #region IB1 implementation
             public void MethodB1()
             {
                 throw new NotImplementedException();
             }
-#endregion
+            #endregion
         }
 
         [Test]

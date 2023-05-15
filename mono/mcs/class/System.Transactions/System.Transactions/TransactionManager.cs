@@ -39,7 +39,8 @@ namespace System.Transactions
 
         public static TimeSpan DefaultTimeout
         {
-            get {
+            get
+            {
                 // Obtain timeout from configuration setting..
                 //		- http://msdn.microsoft.com/en-us/library/ms973865.aspx
                 //		- http://sankarsan.wordpress.com/2009/02/01/transaction-timeout-in-systemtransactions/
@@ -50,7 +51,8 @@ namespace System.Transactions
                     return defaultSettings.Timeout;
 #endif
 
-                return defaultTimeout; }
+                return defaultTimeout;
+            }
         }
 
         [MonoTODO("Not implemented")]
@@ -62,13 +64,15 @@ namespace System.Transactions
 
         public static TimeSpan MaximumTimeout
         {
-            get {
+            get
+            {
 #if !MOBILE
                 if (machineSettings != null)
                     return machineSettings.MaxTimeout;
 #endif
 
-                return maxTimeout; }
+                return maxTimeout;
+            }
         }
 
         [MonoTODO("Not implemented")]

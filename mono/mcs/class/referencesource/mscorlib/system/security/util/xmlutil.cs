@@ -510,7 +510,7 @@ namespace System.Security.Util
                             return new KeyContainerPermission(permState);
                         else
 #endif // !FEATURE_PAL
-                            goto USEREFLECTION;
+                        goto USEREFLECTION;
                     }
 
                 case 24:

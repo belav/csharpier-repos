@@ -42,10 +42,10 @@ namespace Mono.Interop
     [StructLayout(LayoutKind.Sequential)]
     internal class ComInteropProxy : RealProxy, IRemotingTypeInfo
     {
-#region Sync with object-internals.h
+        #region Sync with object-internals.h
         private __ComObject com_object;
         int ref_count = 1; // wrapper ref count
-#endregion
+        #endregion
         private string type_name;
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

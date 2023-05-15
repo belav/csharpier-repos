@@ -37,7 +37,8 @@ namespace System.ComponentModel
 
         private static bool UseCompatibleTypeConversion
         {
-            get {
+            get
+            {
 #if !MONO
                 if (firstLoadAppSetting)
                 {
@@ -69,7 +70,8 @@ namespace System.ComponentModel
                     }
                 }
 #endif
-                return useCompatibleTypeConversion; }
+                return useCompatibleTypeConversion;
+            }
         }
 
         /// <devdoc>

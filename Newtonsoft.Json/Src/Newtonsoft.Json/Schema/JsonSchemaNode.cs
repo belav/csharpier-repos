@@ -83,7 +83,9 @@ namespace Newtonsoft.Json.Schema
         {
             return string.Join(
                 "-",
-                schemata.Select(s => s.InternalId).OrderBy(id => id, StringComparer.Ordinal)
+                schemata
+                    .Select(s => s.InternalId)
+                    .OrderBy(id => id, StringComparer.Ordinal)
 #if !HAVE_STRING_JOIN_WITH_ENUMERABLE
                     .ToArray()
 #endif

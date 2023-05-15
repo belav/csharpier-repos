@@ -326,7 +326,7 @@ namespace MonoTests.System.ServiceModel.Channels
             Assert.IsFalse(sec.SupportsServerAuthentication, "#5.6");
         }
 
-#region contracts
+        #region contracts
 
         [ServiceContract]
         interface IFoo
@@ -335,9 +335,9 @@ namespace MonoTests.System.ServiceModel.Channels
             string DoWork(string s1, string s2);
         }
 
-#endregion
+        #endregion
 
-#region connection test
+        #region connection test
 
         string svcret;
 
@@ -456,9 +456,9 @@ namespace MonoTests.System.ServiceModel.Channels
             return null; // OK
         }
 
-#endregion
+        #endregion
 
-#region metadata
+        #region metadata
 
         [Test]
         public void ExportPolicyDefault()
@@ -647,7 +647,7 @@ namespace MonoTests.System.ServiceModel.Channels
             Assert.AreEqual(0, using_addressing_node.ChildNodes.Count, "#B5");
         }
 
-#endregion
+        #endregion
     }
 }
 #endif

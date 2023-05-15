@@ -166,12 +166,12 @@ namespace System.ServiceModel.Channels
             }
             else
 #endif
-            message = Message.CreateMessage(
-                version,
-                fc,
-                error.Message,
-                version.Addressing.FaultNamespace
-            );
+                message = Message.CreateMessage(
+                    version,
+                    fc,
+                    error.Message,
+                    version.Addressing.FaultNamespace
+                );
 
             return true;
         }

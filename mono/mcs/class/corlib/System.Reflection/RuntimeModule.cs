@@ -95,14 +95,16 @@ namespace System.Reflection
 
         public override string FullyQualifiedName
         {
-            get {
+            get
+            {
 #if !MOBILE
                 if (SecurityManager.SecurityEnabled)
                 {
                     new FileIOPermission(FileIOPermissionAccess.PathDiscovery, fqname).Demand();
                 }
 #endif
-                return fqname; }
+                return fqname;
+            }
         }
 
         public override bool IsResource()

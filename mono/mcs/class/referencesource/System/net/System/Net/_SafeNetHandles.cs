@@ -2897,22 +2897,22 @@ namespace System.Net
                 try
                 {
 #endif
-                InnerSafeCloseSocket innerSocket =
-                    m_InnerSocket == null
-                        ? null
-                        : Interlocked.Exchange<InnerSafeCloseSocket>(ref m_InnerSocket, null);
-                Close();
-                if (innerSocket != null)
-                {
-                    // Wait until it's safe.
-                    while (!m_Released)
+                    InnerSafeCloseSocket innerSocket =
+                        m_InnerSocket == null
+                            ? null
+                            : Interlocked.Exchange<InnerSafeCloseSocket>(ref m_InnerSocket, null);
+                    Close();
+                    if (innerSocket != null)
                     {
-                        Thread.SpinWait(1);
-                    }
+                        // Wait until it's safe.
+                        while (!m_Released)
+                        {
+                            Thread.SpinWait(1);
+                        }
 
-                    // Now free it with blocking.
-                    innerSocket.BlockingRelease();
-                }
+                        // Now free it with blocking.
+                        innerSocket.BlockingRelease();
+                    }
 #if DEBUG
                 }
                 catch (Exception exception)
@@ -2953,111 +2953,34 @@ namespace System.Net
                 try
                 {
 #endif
-                GlobalLog.Print(
-                    "SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ")"
-                );
-
-                SocketError errorCode;
-
-                // If m_Blockable was set in BlockingRelease, it's safe to block here, which means
-                // we can honor the linger options set on the socket.  It also means closesocket() might return WSAEWOULDBLOCK, in which
-                // case we need to do some recovery.
-                if (m_Blockable)
-                {
                     GlobalLog.Print(
-                        "SafeCloseSocket::ReleaseHandle(handle:"
-                            + handle.ToString("x")
-                            + ") Following 'blockable' branch."
+                        "SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ")"
                     );
 
-                    errorCode = UnsafeNclNativeMethods.SafeNetHandles.closesocket(handle);
+                    SocketError errorCode;
+
+                    // If m_Blockable was set in BlockingRelease, it's safe to block here, which means
+                    // we can honor the linger options set on the socket.  It also means closesocket() might return WSAEWOULDBLOCK, in which
+                    // case we need to do some recovery.
+                    if (m_Blockable)
+                    {
+                        GlobalLog.Print(
+                            "SafeCloseSocket::ReleaseHandle(handle:"
+                                + handle.ToString("x")
+                                + ") Following 'blockable' branch."
+                        );
+
+                        errorCode = UnsafeNclNativeMethods.SafeNetHandles.closesocket(handle);
 #if DEBUG
                         m_CloseSocketHandle = handle;
                         m_CloseSocketResult = errorCode;
-#endif
-                    if (errorCode == SocketError.SocketError)
-                        errorCode = (SocketError)Marshal.GetLastWin32Error();
-                    GlobalLog.Print(
-                        "SafeCloseSocket::ReleaseHandle(handle:"
-                            + handle.ToString("x")
-                            + ") closesocket()#1:"
-                            + errorCode.ToString()
-                    );
-
-                    // If it's not WSAEWOULDBLOCK, there's no more recourse - we either succeeded or failed.
-                    if (errorCode != SocketError.WouldBlock)
-                    {
-                        return ret = errorCode == SocketError.Success;
-                    }
-
-                    // The socket must be non-blocking with a linger timeout set.
-                    // We have to set the socket to blocking.
-                    int nonBlockCmd = 0;
-                    errorCode = UnsafeNclNativeMethods.SafeNetHandles.ioctlsocket(
-                        handle,
-                        IoctlSocketConstants.FIONBIO,
-                        ref nonBlockCmd
-                    );
-                    if (errorCode == SocketError.SocketError)
-                        errorCode = (SocketError)Marshal.GetLastWin32Error();
-                    GlobalLog.Print(
-                        "SafeCloseSocket::ReleaseHandle(handle:"
-                            + handle.ToString("x")
-                            + ") ioctlsocket()#1:"
-                            + errorCode.ToString()
-                    );
-
-                    // This can fail if there's a pending WSAEventSelect.  Try canceling it.
-                    if (errorCode == SocketError.InvalidArgument)
-                    {
-                        errorCode = UnsafeNclNativeMethods.SafeNetHandles.WSAEventSelect(
-                            handle,
-                            IntPtr.Zero,
-                            AsyncEventBits.FdNone
-                        );
-                        GlobalLog.Print(
-                            "SafeCloseSocket::ReleaseHandle(handle:"
-                                + handle.ToString("x")
-                                + ") WSAEventSelect():"
-                                + (
-                                    errorCode == SocketError.SocketError
-                                        ? (SocketError)Marshal.GetLastWin32Error()
-                                        : errorCode
-                                ).ToString()
-                        );
-
-                        // Now retry the ioctl.
-                        errorCode = UnsafeNclNativeMethods.SafeNetHandles.ioctlsocket(
-                            handle,
-                            IoctlSocketConstants.FIONBIO,
-                            ref nonBlockCmd
-                        );
-                        GlobalLog.Print(
-                            "SafeCloseSocket::ReleaseHandle(handle:"
-                                + handle.ToString("x")
-                                + ") ioctlsocket#2():"
-                                + (
-                                    errorCode == SocketError.SocketError
-                                        ? (SocketError)Marshal.GetLastWin32Error()
-                                        : errorCode
-                                ).ToString()
-                        );
-                    }
-
-                    // If that succeeded, try again.
-                    if (errorCode == SocketError.Success)
-                    {
-                        errorCode = UnsafeNclNativeMethods.SafeNetHandles.closesocket(handle);
-#if DEBUG
-                            m_CloseSocketHandle = handle;
-                            m_CloseSocketResult = errorCode;
 #endif
                         if (errorCode == SocketError.SocketError)
                             errorCode = (SocketError)Marshal.GetLastWin32Error();
                         GlobalLog.Print(
                             "SafeCloseSocket::ReleaseHandle(handle:"
                                 + handle.ToString("x")
-                                + ") closesocket#2():"
+                                + ") closesocket()#1:"
                                 + errorCode.ToString()
                         );
 
@@ -3066,62 +2989,139 @@ namespace System.Net
                         {
                             return ret = errorCode == SocketError.Success;
                         }
+
+                        // The socket must be non-blocking with a linger timeout set.
+                        // We have to set the socket to blocking.
+                        int nonBlockCmd = 0;
+                        errorCode = UnsafeNclNativeMethods.SafeNetHandles.ioctlsocket(
+                            handle,
+                            IoctlSocketConstants.FIONBIO,
+                            ref nonBlockCmd
+                        );
+                        if (errorCode == SocketError.SocketError)
+                            errorCode = (SocketError)Marshal.GetLastWin32Error();
+                        GlobalLog.Print(
+                            "SafeCloseSocket::ReleaseHandle(handle:"
+                                + handle.ToString("x")
+                                + ") ioctlsocket()#1:"
+                                + errorCode.ToString()
+                        );
+
+                        // This can fail if there's a pending WSAEventSelect.  Try canceling it.
+                        if (errorCode == SocketError.InvalidArgument)
+                        {
+                            errorCode = UnsafeNclNativeMethods.SafeNetHandles.WSAEventSelect(
+                                handle,
+                                IntPtr.Zero,
+                                AsyncEventBits.FdNone
+                            );
+                            GlobalLog.Print(
+                                "SafeCloseSocket::ReleaseHandle(handle:"
+                                    + handle.ToString("x")
+                                    + ") WSAEventSelect():"
+                                    + (
+                                        errorCode == SocketError.SocketError
+                                            ? (SocketError)Marshal.GetLastWin32Error()
+                                            : errorCode
+                                    ).ToString()
+                            );
+
+                            // Now retry the ioctl.
+                            errorCode = UnsafeNclNativeMethods.SafeNetHandles.ioctlsocket(
+                                handle,
+                                IoctlSocketConstants.FIONBIO,
+                                ref nonBlockCmd
+                            );
+                            GlobalLog.Print(
+                                "SafeCloseSocket::ReleaseHandle(handle:"
+                                    + handle.ToString("x")
+                                    + ") ioctlsocket#2():"
+                                    + (
+                                        errorCode == SocketError.SocketError
+                                            ? (SocketError)Marshal.GetLastWin32Error()
+                                            : errorCode
+                                    ).ToString()
+                            );
+                        }
+
+                        // If that succeeded, try again.
+                        if (errorCode == SocketError.Success)
+                        {
+                            errorCode = UnsafeNclNativeMethods.SafeNetHandles.closesocket(handle);
+#if DEBUG
+                            m_CloseSocketHandle = handle;
+                            m_CloseSocketResult = errorCode;
+#endif
+                            if (errorCode == SocketError.SocketError)
+                                errorCode = (SocketError)Marshal.GetLastWin32Error();
+                            GlobalLog.Print(
+                                "SafeCloseSocket::ReleaseHandle(handle:"
+                                    + handle.ToString("x")
+                                    + ") closesocket#2():"
+                                    + errorCode.ToString()
+                            );
+
+                            // If it's not WSAEWOULDBLOCK, there's no more recourse - we either succeeded or failed.
+                            if (errorCode != SocketError.WouldBlock)
+                            {
+                                return ret = errorCode == SocketError.Success;
+                            }
+                        }
+
+                        // It failed.  Fall through to the regular abortive close.
                     }
 
-                    // It failed.  Fall through to the regular abortive close.
-                }
+                    // By default or if CloseAsIs() path failed, set linger timeout to zero to get an abortive close (RST).
+                    Linger lingerStruct;
+                    lingerStruct.OnOff = 1;
+                    lingerStruct.Time = 0;
 
-                // By default or if CloseAsIs() path failed, set linger timeout to zero to get an abortive close (RST).
-                Linger lingerStruct;
-                lingerStruct.OnOff = 1;
-                lingerStruct.Time = 0;
-
-                errorCode = UnsafeNclNativeMethods.SafeNetHandles.setsockopt(
-                    handle,
-                    SocketOptionLevel.Socket,
-                    SocketOptionName.Linger,
-                    ref lingerStruct,
-                    4
-                );
+                    errorCode = UnsafeNclNativeMethods.SafeNetHandles.setsockopt(
+                        handle,
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.Linger,
+                        ref lingerStruct,
+                        4
+                    );
 #if DEBUG
                     m_CloseSocketLinger = errorCode;
 #endif
-                if (errorCode == SocketError.SocketError)
-                    errorCode = (SocketError)Marshal.GetLastWin32Error();
-                GlobalLog.Print(
-                    "SafeCloseSocket::ReleaseHandle(handle:"
-                        + handle.ToString("x")
-                        + ") setsockopt():"
-                        + errorCode.ToString()
-                );
+                    if (errorCode == SocketError.SocketError)
+                        errorCode = (SocketError)Marshal.GetLastWin32Error();
+                    GlobalLog.Print(
+                        "SafeCloseSocket::ReleaseHandle(handle:"
+                            + handle.ToString("x")
+                            + ") setsockopt():"
+                            + errorCode.ToString()
+                    );
 
-                if (
-                    errorCode != SocketError.Success
-                    && errorCode != SocketError.InvalidArgument
-                    && errorCode != SocketError.ProtocolOption
-                )
-                {
-                    // Too dangerous to try closesocket() - it might block!
-                    return ret = false;
-                }
+                    if (
+                        errorCode != SocketError.Success
+                        && errorCode != SocketError.InvalidArgument
+                        && errorCode != SocketError.ProtocolOption
+                    )
+                    {
+                        // Too dangerous to try closesocket() - it might block!
+                        return ret = false;
+                    }
 
-                errorCode = UnsafeNclNativeMethods.SafeNetHandles.closesocket(handle);
+                    errorCode = UnsafeNclNativeMethods.SafeNetHandles.closesocket(handle);
 #if DEBUG
                     m_CloseSocketHandle = handle;
                     m_CloseSocketResult = errorCode;
 #endif
-                GlobalLog.Print(
-                    "SafeCloseSocket::ReleaseHandle(handle:"
-                        + handle.ToString("x")
-                        + ") closesocket#3():"
-                        + (
-                            errorCode == SocketError.SocketError
-                                ? (SocketError)Marshal.GetLastWin32Error()
-                                : errorCode
-                        ).ToString()
-                );
+                    GlobalLog.Print(
+                        "SafeCloseSocket::ReleaseHandle(handle:"
+                            + handle.ToString("x")
+                            + ") closesocket#3():"
+                            + (
+                                errorCode == SocketError.SocketError
+                                    ? (SocketError)Marshal.GetLastWin32Error()
+                                    : errorCode
+                            ).ToString()
+                    );
 
-                return ret = errorCode == SocketError.Success;
+                    return ret = errorCode == SocketError.Success;
 #if DEBUG
                 }
                 catch (Exception exception)

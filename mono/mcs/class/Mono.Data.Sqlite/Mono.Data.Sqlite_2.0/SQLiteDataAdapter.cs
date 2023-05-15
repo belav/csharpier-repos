@@ -72,7 +72,8 @@ namespace Mono.Data.Sqlite
         /// </summary>
         public event EventHandler<RowUpdatingEventArgs> RowUpdating
         {
-            add {
+            add
+            {
 #if !PLATFORM_COMPACTFRAMEWORK
                 EventHandler<RowUpdatingEventArgs> previous =
                     (EventHandler<RowUpdatingEventArgs>)base.Events[_updatingEventPH];
@@ -86,7 +87,8 @@ namespace Mono.Data.Sqlite
                     }
                 }
 #endif
-                base.Events.AddHandler(_updatingEventPH, value); }
+                base.Events.AddHandler(_updatingEventPH, value);
+            }
             remove { base.Events.RemoveHandler(_updatingEventPH, value); }
         }
 

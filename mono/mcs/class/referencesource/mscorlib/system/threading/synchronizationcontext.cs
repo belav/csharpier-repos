@@ -312,7 +312,7 @@ namespace System.Threading
 
 #if MONODROID && !MOBILE_DESKTOP_HOST
             if (context == null)
-                context = AndroidPlatform.GetDefaultSyncContext ();
+                context = AndroidPlatform.GetDefaultSyncContext();
 #endif
 
             return context;

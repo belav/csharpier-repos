@@ -124,7 +124,7 @@ namespace MonoTests.System.Net.Http.Headers
 #if !MONOTOUCH_WATCH
             if (HttpClientTestHelpers.UsingSocketsHandler)
 #endif
-            Assert.AreEqual("agent2/2.0 user,agent/1.0", headers.UserAgent.ToString(), "#2");
+                Assert.AreEqual("agent2/2.0 user,agent/1.0", headers.UserAgent.ToString(), "#2");
 #if !MONOTOUCH_WATCH
             else
                 Assert.AreEqual("agent2/2.0user,agent/1.0", headers.UserAgent.ToString(), "#2");

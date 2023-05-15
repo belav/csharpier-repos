@@ -133,10 +133,10 @@ namespace System.Security.Cryptography
             if (mode != CipherMode.ECB)
             {
 #endif // !FEATURE_CRYPTO
-            if (rgbIV == null)
-            {
-                rgbIV = Utils.GenerateRandom(BlockSizeValue / 8);
-            }
+                if (rgbIV == null)
+                {
+                    rgbIV = Utils.GenerateRandom(BlockSizeValue / 8);
+                }
 #if !FEATURE_CRYPTO
             }
 #endif // !FEATURE_CRYPTO

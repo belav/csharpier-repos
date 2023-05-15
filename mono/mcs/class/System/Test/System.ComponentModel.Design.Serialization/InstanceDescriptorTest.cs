@@ -198,8 +198,8 @@ namespace MonoTests.System.ComponentModel.Design.Serialization
         public void Property_Arguments_Mismatch()
         {
 #if MOBILE && !DISABLE_SECURITY
-			// ensure the property is not linked out of the application since it make the test fails
-			Assert.IsNotNull (Thread.CurrentPrincipal, "pre-test");
+            // ensure the property is not linked out of the application since it make the test fails
+            Assert.IsNotNull(Thread.CurrentPrincipal, "pre-test");
 #endif
             PropertyInfo pi = typeof(Thread).GetProperty("CurrentPrincipal");
 
@@ -222,8 +222,8 @@ namespace MonoTests.System.ComponentModel.Design.Serialization
         public void Property_Arguments_Null()
         {
 #if MOBILE && !DISABLE_SECURITY
-			// ensure the property is not linked out of the application since it make the test fails
-			Assert.IsNotNull (Thread.CurrentPrincipal, "pre-test");
+            // ensure the property is not linked out of the application since it make the test fails
+            Assert.IsNotNull(Thread.CurrentPrincipal, "pre-test");
 #endif
             PropertyInfo pi = typeof(Thread).GetProperty("CurrentPrincipal");
 

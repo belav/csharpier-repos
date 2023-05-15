@@ -130,7 +130,7 @@ namespace MonoTests.System.ServiceModel
             }
         }
 
-#region UseCase1
+        #region UseCase1
 
         ServiceHost host;
 
@@ -338,10 +338,10 @@ namespace MonoTests.System.ServiceModel
             }
         }
 
-#endregion
+        #endregion
 
         // For contract that directly receives and sends Message instances.
-#region UseCase2
+        #region UseCase2
         [Test]
         [Ignore("With Orcas it does not work fine")]
         public void UseCase2Test()
@@ -419,7 +419,7 @@ namespace MonoTests.System.ServiceModel
             }
         }
 
-#endregion
+        #endregion
 
         [Test]
         [Ignore("With Orcas it does not work fine")]

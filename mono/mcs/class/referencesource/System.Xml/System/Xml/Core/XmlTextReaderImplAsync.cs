@@ -4766,7 +4766,7 @@ namespace System.Xml
                 }
                 else
 #endif
-                Throw(Res.Xml_UndeclaredEntity, name, ps.LineNo, entityStartLinePos);
+                    Throw(Res.Xml_UndeclaredEntity, name, ps.LineNo, entityStartLinePos);
             }
 
             if (entity.IsUnparsedEntity)
@@ -4780,7 +4780,7 @@ namespace System.Xml
                 }
                 else
 #endif
-                Throw(Res.Xml_UnparsedEntityRef, name, ps.LineNo, entityStartLinePos);
+                    Throw(Res.Xml_UnparsedEntityRef, name, ps.LineNo, entityStartLinePos);
             }
 
             if (standalone && entity.IsDeclaredInExternal)

@@ -472,7 +472,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
         JSMGetDatabasesResponse EndJSMGetDatabases(System.IAsyncResult result);
     }
 
-#region JSMGetDatabases
+    #region JSMGetDatabases
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     [System.ServiceModel.MessageContractAttribute(
@@ -505,7 +505,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
             this.JSMGetDatabasesResult = JSMGetDatabasesResult;
         }
     }
-#endregion
+    #endregion
 
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -662,13 +662,13 @@ namespace WebServiceMoonlightTest.ServiceReference2
 
         private System.Threading.SendOrPostCallback onCloseCompletedDelegate;
 
-#region JSMGetDatabasesDelegates
+        #region JSMGetDatabasesDelegates
         private BeginOperationDelegate onBeginJSMGetDatabasesDelegate;
 
         private EndOperationDelegate onEndJSMGetDatabasesDelegate;
 
         private System.Threading.SendOrPostCallback onJSMGetDatabasesCompletedDelegate;
-#endregion
+        #endregion
 
         public Service1Client() { }
 
@@ -1088,7 +1088,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
             }
         }
 
-#region JSMGetDatabases
+        #region JSMGetDatabases
         [System.ComponentModel.EditorBrowsableAttribute(
             System.ComponentModel.EditorBrowsableState.Advanced
         )]
@@ -1195,7 +1195,7 @@ namespace WebServiceMoonlightTest.ServiceReference2
                 userState
             );
         }
-#endregion
+        #endregion
 
         public void CloseAsync()
         {

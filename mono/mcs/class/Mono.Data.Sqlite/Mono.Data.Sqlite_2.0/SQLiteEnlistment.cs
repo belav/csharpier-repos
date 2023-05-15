@@ -37,7 +37,7 @@ namespace Mono.Data.Sqlite
             _scope = null;
         }
 
-#region IEnlistmentNotification Members
+        #region IEnlistmentNotification Members
 
         public void Commit(Enlistment enlistment)
         {
@@ -87,7 +87,7 @@ namespace Mono.Data.Sqlite
             }
         }
 
-#endregion
+        #endregion
     }
 }
 #endif // !PLATFORM_COMPACT_FRAMEWORK

@@ -674,13 +674,13 @@ namespace System.Reflection
                     );
                 else
 #endif
-                    throw new MemberAccessException(
-                        String.Format(
-                            CultureInfo.CurrentUICulture,
-                            Environment.GetResourceString("Acc_CreateGenericEx"),
-                            declaringType
-                        )
-                    );
+                throw new MemberAccessException(
+                    String.Format(
+                        CultureInfo.CurrentUICulture,
+                        Environment.GetResourceString("Acc_CreateGenericEx"),
+                        declaringType
+                    )
+                );
             }
             // ctor is declared on System.Void
             else if (declaringType == typeof(void))
@@ -762,12 +762,12 @@ namespace System.Reflection
                     CodeAccessPermission.Demand(PermissionType.ReflectionMemberAccess);
                 if ((invocationFlags & INVOCATION_FLAGS.INVOCATION_FLAGS_NEED_SECURITY) != 0)
 #endif // !FEATURE_CORECLR
-                    RuntimeMethodHandle.PerformSecurityCheck(
-                        obj,
-                        this,
-                        m_declaringType,
-                        (uint)m_invocationFlags
-                    );
+                RuntimeMethodHandle.PerformSecurityCheck(
+                    obj,
+                    this,
+                    m_declaringType,
+                    (uint)m_invocationFlags
+                );
             }
 
             Signature sig = Signature;
@@ -889,14 +889,12 @@ namespace System.Reflection
                     CodeAccessPermission.Demand(PermissionType.ReflectionMemberAccess);
                 if ((invocationFlags & INVOCATION_FLAGS.INVOCATION_FLAGS_NEED_SECURITY) != 0)
 #endif // !FEATURE_CORECLR
-                    RuntimeMethodHandle.PerformSecurityCheck(
-                        null,
-                        this,
-                        m_declaringType,
-                        (uint)(
-                            m_invocationFlags | INVOCATION_FLAGS.INVOCATION_FLAGS_CONSTRUCTOR_INVOKE
-                        )
-                    );
+                RuntimeMethodHandle.PerformSecurityCheck(
+                    null,
+                    this,
+                    m_declaringType,
+                    (uint)(m_invocationFlags | INVOCATION_FLAGS.INVOCATION_FLAGS_CONSTRUCTOR_INVOKE)
+                );
 #if !FEATURE_CORECLR
                 if ((invocationFlags & INVOCATION_FLAGS.INVOCATION_FLAGS_IS_DELEGATE_CTOR) != 0)
                     new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();

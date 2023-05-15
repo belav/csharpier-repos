@@ -64,8 +64,8 @@ namespace System.Net
         public ServicePoint ServicePoint { get; }
 
 #if MONOTOUCH && !MONOTOUCH_TV && !MONOTOUCH_WATCH
-		[System.Runtime.InteropServices.DllImport ("__Internal")]
-		static extern void xamarin_start_wwan (string uri);
+        [System.Runtime.InteropServices.DllImport("__Internal")]
+        static extern void xamarin_start_wwan(string uri);
 #endif
 
         public WebConnection(ServicePoint sPoint)
@@ -130,9 +130,10 @@ namespace System.Net
             if (hostEntry == null || hostEntry.AddressList.Length == 0)
             {
 #if MONOTOUCH && !MONOTOUCH_TV && !MONOTOUCH_WATCH
-					xamarin_start_wwan (ServicePoint.Address.ToString ());
-					hostEntry = ServicePoint.HostEntry;
-					if (hostEntry == null) {
+                xamarin_start_wwan(ServicePoint.Address.ToString());
+                hostEntry = ServicePoint.HostEntry;
+                if (hostEntry == null)
+                {
 #endif
                 throw GetException(
                     ServicePoint.UsesProxy
@@ -141,7 +142,7 @@ namespace System.Net
                     null
                 );
 #if MONOTOUCH && !MONOTOUCH_TV && !MONOTOUCH_WATCH
-					}
+                }
 #endif
             }
 

@@ -222,78 +222,86 @@ namespace MonoTests.System.Data.Common
                 Assert.IsNotNull(ex.Message, "#4");
             }
         }
+
 #if !MOBILE && !XAMMAC_4_5 && WORKING_SQLITE
-		[Test]
-		[Category ("NotWorking")] // Requires newer sqlite than is on wrench
-		public void XimarinBugzillaBug853Test()
+        [Test]
+        [Category("NotWorking")] // Requires newer sqlite than is on wrench
+        public void XimarinBugzillaBug853Test()
+        {
+            string connectionString =
+                "URI = file:"
+                + TestResourceHelper.GetFullPathOfResource("Test/System.Data.Common/SqliteTest.db")
+                + "; Version = 3"; //will be in System.Data directory
+            SqliteConnection dbConnection = new SqliteConnection(connectionString);
+            dbConnection.Open();
+            SqliteCommand ClearTableEntry = new SqliteCommand("DELETE FROM Primus;", dbConnection);
+            ClearTableEntry.ExecuteNonQuery();
+
+            SqliteDataAdapter sqliteDataAdapter = new SqliteDataAdapter(
+                "SELECT * FROM primus",
+                dbConnection
+            );
+            SqliteCommandBuilder builder = new SqliteCommandBuilder(sqliteDataAdapter);
+            sqliteDataAdapter.InsertCommand = builder.GetInsertCommand();
+            sqliteDataAdapter.DeleteCommand = builder.GetDeleteCommand();
+
+            DataSet dataSet = new DataSet();
+
+            sqliteDataAdapter.Fill(dataSet, "Primus"); //reset
+
+            DataRow rowToBeAdded = dataSet.Tables["Primus"].NewRow();
+            rowToBeAdded["id"] = 123;
+            rowToBeAdded["name"] = "Name"; //not null primary key
+            rowToBeAdded["value"] = 777;
+
+            dataSet.Tables["Primus"].Rows.Add(rowToBeAdded);
+            sqliteDataAdapter.Update(dataSet, "Primus");
+
+            //This would fail with NULL constraint violation in bug
+            //report.  Because before the patch, it would create
+            //a new record with all fields being null-- if the
+            //exception rises, test fails
+            sqliteDataAdapter.Update(dataSet, "Primus");
+
+            dbConnection.Close();
+            dbConnection = null;
+        }
+
+        [Test]
+        [Category("NotWorking")] // Requires newer sqlite than is on wrench
+        public void UpdateResetRowErrorCorrectly()
+        {
+            const string connectionString = "URI = file::memory:; Version = 3";
+            using (var dbConnection = new SqliteConnection(connectionString))
+            {
+                dbConnection.Open();
+
+                using (var cmd = dbConnection.CreateCommand())
                 {
-                        string connectionString = "URI = file:" + TestResourceHelper.GetFullPathOfResource ("Test/System.Data.Common/SqliteTest.db") + "; Version = 3";//will be in System.Data directory
-                        SqliteConnection dbConnection = new SqliteConnection(connectionString);
-                        dbConnection.Open();
-			SqliteCommand ClearTableEntry=new SqliteCommand("DELETE FROM Primus;",dbConnection);
-			ClearTableEntry.ExecuteNonQuery();
+                    cmd.CommandText = "CREATE TABLE data (id PRIMARY KEY, name TEXT)";
+                    cmd.ExecuteNonQuery();
+                }
 
-                        SqliteDataAdapter sqliteDataAdapter = new SqliteDataAdapter("SELECT * FROM primus", dbConnection);
-                        SqliteCommandBuilder builder = new SqliteCommandBuilder(sqliteDataAdapter);
-			sqliteDataAdapter.InsertCommand = builder.GetInsertCommand();
-                        sqliteDataAdapter.DeleteCommand = builder.GetDeleteCommand();
-			
-                        DataSet dataSet = new DataSet();
+                var ts = dbConnection.BeginTransaction();
+                var da = new SqliteDataAdapter("SELECT * FROM data", dbConnection);
+                var builder = new SqliteCommandBuilder(da);
+                da.UpdateCommand = builder.GetUpdateCommand();
+                da.UpdateCommand.Transaction = ts;
 
-                        sqliteDataAdapter.Fill(dataSet, "Primus");//reset
+                var ds1 = new DataSet();
+                da.Fill(ds1, "data");
 
-                        DataRow rowToBeAdded = dataSet.Tables["Primus"].NewRow();
-                        rowToBeAdded["id"] = 123;
-                        rowToBeAdded["name"] = "Name";//not null primary key
-                        rowToBeAdded["value"] = 777;
+                var table = ds1.Tables[0];
+                var row = table.NewRow();
+                row["id"] = 10;
+                row["name"] = "Bart";
+                table.Rows.Add(row);
 
-                        dataSet.Tables["Primus"].Rows.Add(rowToBeAdded);
-sqliteDataAdapter.Update (dataSet, "Primus");
-
-			//This would fail with NULL constraint violation in bug
-			//report.  Because before the patch, it would create
-			//a new record with all fields being null-- if the
-			//exception rises, test fails
-                        sqliteDataAdapter.Update (dataSet, "Primus");
-
-                        dbConnection.Close();
-                        dbConnection = null;
-		}
-
-		[Test]
-		[Category ("NotWorking")] // Requires newer sqlite than is on wrench
-		public void UpdateResetRowErrorCorrectly ()
-		{
-			const string connectionString = "URI = file::memory:; Version = 3";
-			using (var dbConnection = new SqliteConnection (connectionString)) {
-				dbConnection.Open ();
-
-				using (var cmd = dbConnection.CreateCommand ()) {
-					cmd.CommandText = "CREATE TABLE data (id PRIMARY KEY, name TEXT)";
-					cmd.ExecuteNonQuery ();
-				}
-
-
-				var ts = dbConnection.BeginTransaction ();
-				var da = new SqliteDataAdapter ("SELECT * FROM data", dbConnection);
-				var builder = new SqliteCommandBuilder (da);
-				da.UpdateCommand = builder.GetUpdateCommand ();
-				da.UpdateCommand.Transaction = ts;
-
-				var ds1 = new DataSet ();
-				da.Fill (ds1, "data");
-
-				var table = ds1.Tables [0];
-				var row = table.NewRow ();
-				row ["id"] = 10;
-				row ["name"] = "Bart";
-				table.Rows.Add (row);
-
-				var ds2 = ds1.GetChanges ();
-				da.Update (ds2, "data");
-				Assert.IsFalse (ds2.HasErrors);
-			}
-		}
+                var ds2 = ds1.GetChanges();
+                da.Update(ds2, "data");
+                Assert.IsFalse(ds2.HasErrors);
+            }
+        }
 #endif
 
         class MyAdapter : DbDataAdapter

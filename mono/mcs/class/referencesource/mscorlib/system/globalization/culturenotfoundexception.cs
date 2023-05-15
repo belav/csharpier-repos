@@ -112,7 +112,8 @@ namespace System.Globalization
 
         private String FormatedInvalidCultureId
         {
-            get {
+            get
+            {
 #if !FEATURE_CORECLR
                 if (InvalidCultureId != null)
                 {
@@ -123,7 +124,8 @@ namespace System.Globalization
                     );
                 }
 #endif //!FEATURE_CORECLR
-                return InvalidCultureName; }
+                return InvalidCultureName;
+            }
         }
 
         public override String Message

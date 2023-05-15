@@ -394,7 +394,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
 
             public CommunicationState State { get; set; }
 
-#region IChannelListener Members
+            #region IChannelListener Members
 
             public IAsyncResult BeginWaitForChannel(
                 TimeSpan timeout,
@@ -425,9 +425,9 @@ namespace MonoTests.System.ServiceModel.Dispatcher
                 throw new NotImplementedException();
             }
 
-#endregion
+            #endregion
 
-#region ICommunicationObject Members
+            #region ICommunicationObject Members
 
             public void Abort()
             {
@@ -494,7 +494,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
 
             public event EventHandler Opening;
 
-#endregion
+            #endregion
         }
     }
 }

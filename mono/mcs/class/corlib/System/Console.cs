@@ -191,10 +191,11 @@ namespace System
                 );
 
 #if MONODROID && !MOBILE_DESKTOP_HOST
-				if (LogcatTextWriter.IsRunningOnAndroid ()) {
-					stdout = TextWriter.Synchronized (new LogcatTextWriter ("mono-stdout", stdout));
-					stderr = TextWriter.Synchronized (new LogcatTextWriter ("mono-stderr", stderr));
-				}
+                if (LogcatTextWriter.IsRunningOnAndroid())
+                {
+                    stdout = TextWriter.Synchronized(new LogcatTextWriter("mono-stdout", stdout));
+                    stderr = TextWriter.Synchronized(new LogcatTextWriter("mono-stderr", stderr));
+                }
 #endif // MONODROID
 #endif // MONOTOUCH
             }

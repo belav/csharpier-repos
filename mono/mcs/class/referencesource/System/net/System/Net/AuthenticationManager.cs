@@ -143,11 +143,13 @@ namespace System.Net
         public static ICredentialPolicy CredentialPolicy
         {
             get { return Instance.CredentialPolicy; }
-            set {
+            set
+            {
 #if MONO_FEATURE_CAS
                 ExceptionHelper.ControlPolicyPermission.Demand();
 #endif
-                Instance.CredentialPolicy = value; }
+                Instance.CredentialPolicy = value;
+            }
         }
 
         public static StringDictionary CustomTargetNameDictionary

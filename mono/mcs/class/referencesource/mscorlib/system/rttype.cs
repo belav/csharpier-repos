@@ -204,7 +204,7 @@ namespace System
         {
             private const int MAXNAMELEN = 1024;
 
-        #region Definitions
+            #region Definitions
             internal enum CacheType
             {
                 Method,
@@ -276,7 +276,7 @@ namespace System
             private class MemberInfoCache<T>
                 where T : MemberInfo
             {
-        #region Private Data Members
+                #region Private Data Members
 
                 // MemberInfo caches
                 private CerHashtable<string, T[]> m_csMemberInfos;
@@ -293,9 +293,9 @@ namespace System
 
                 // This is the strong reference back to the cache
                 private RuntimeTypeCache m_runtimeTypeCache;
-        #endregion
+                #endregion
 
-        #region Constructor
+                #region Constructor
 #if MDA_SUPPORTED
                 [System.Security.SecuritySafeCritical] // auto-generated
 #endif
@@ -713,9 +713,9 @@ namespace System
 
                     m_allMembers = cachedMembers;
                 }
-        #endregion
+                #endregion
 
-        #region Population Logic
+                #region Population Logic
 
                 [System.Security.SecuritySafeCritical] // auto-generated
                 private unsafe RuntimeMethodInfo[] PopulateMethods(Filter filter)
@@ -727,7 +727,7 @@ namespace System
 
                     if (RuntimeTypeHandle.IsInterface(declaringType))
                     {
-        #region IsInterface
+                        #region IsInterface
 
                         foreach (
                             RuntimeMethodHandleInternal methodHandle in RuntimeTypeHandle.GetIntroducedMethods(
@@ -754,7 +754,7 @@ namespace System
                                     continue;
                             }
 
-        #region Loop through all methods on the interface
+                            #region Loop through all methods on the interface
                             Contract.Assert(!methodHandle.IsNullHandle());
                             // Except for .ctor, .cctor, IL_STUB*, and static methods, all interface methods should be abstract, virtual, and non-RTSpecialName.
                             // Note that this assumption will become invalid when we add support for non-abstract or static methods on interfaces.
@@ -778,7 +778,7 @@ namespace System
                                         .StartsWith("IL_STUB", StringComparison.Ordinal)
                             );
 
-        #region Calculate Binding Flags
+                            #region Calculate Binding Flags
                             MethodAttributes methodAttributes = RuntimeMethodHandle.GetAttributes(
                                 methodHandle
                             );
@@ -792,7 +792,7 @@ namespace System
                                 isInherited,
                                 isStatic
                             );
-        #endregion
+                            #endregion
 
                             if ((methodAttributes & MethodAttributes.RTSpecialName) != 0)
                                 continue;
@@ -815,13 +815,13 @@ namespace System
                             );
 
                             list.Add(runtimeMethodInfo);
-        #endregion
+                            #endregion
                         }
-        #endregion
+                        #endregion
                     }
                     else
                     {
-        #region IsClass or GenericParameter
+                        #region IsClass or GenericParameter
                         while (RuntimeTypeHandle.IsGenericVariable(declaringType))
                             declaringType = declaringType.GetBaseType();
 
@@ -862,7 +862,7 @@ namespace System
                                         continue;
                                 }
 
-        #region Loop through all methods on the current type
+                                #region Loop through all methods on the current type
                                 Contract.Assert(!methodHandle.IsNullHandle());
 
                                 MethodAttributes methodAttributes =
@@ -870,7 +870,7 @@ namespace System
                                 MethodAttributes methodAccess =
                                     methodAttributes & MethodAttributes.MemberAccessMask;
 
-        #region Continue if this is a constructor
+                                #region Continue if this is a constructor
                                 Contract.Assert(
                                     (
                                         RuntimeMethodHandle.GetAttributes(methodHandle)
@@ -884,9 +884,9 @@ namespace System
 
                                 if ((methodAttributes & MethodAttributes.RTSpecialName) != 0)
                                     continue;
-        #endregion
+                                #endregion
 
-        #region Continue if this is a private declared on a base type
+                                #region Continue if this is a private declared on a base type
                                 bool isVirtual = false;
                                 int methodSlot = 0;
                                 if ((methodAttributes & MethodAttributes.Virtual) != 0)
@@ -908,9 +908,9 @@ namespace System
                                     if (isInherited && isPrivate && !isVirtual)
                                         continue;
                                 }
-        #endregion
+                                #endregion
 
-        #region Continue if this is a virtual and is already overridden
+                                #region Continue if this is a virtual and is already overridden
                                 if (isVirtual)
                                 {
                                     Contract.Assert(
@@ -944,9 +944,9 @@ namespace System
                                         ) == 0
                                     );
                                 }
-        #endregion
+                                #endregion
 
-        #region Calculate Binding Flags
+                                #region Calculate Binding Flags
                                 bool isPublic = methodAccess == MethodAttributes.Public;
                                 bool isStatic = (methodAttributes & MethodAttributes.Static) != 0;
                                 BindingFlags bindingFlags = RuntimeType.FilterPreCalculate(
@@ -954,7 +954,7 @@ namespace System
                                     isInherited,
                                     isStatic
                                 );
-        #endregion
+                                #endregion
 
                                 // get the unboxing stub or instantiating stub if needed
                                 RuntimeMethodHandleInternal instantiatedHandle =
@@ -974,12 +974,12 @@ namespace System
                                 );
 
                                 list.Add(runtimeMethodInfo);
-        #endregion
+                                #endregion
                             }
 
                             declaringType = RuntimeTypeHandle.GetBaseType(declaringType);
                         } while (declaringType != null);
-        #endregion
+                        #endregion
                     }
 
                     return list.ToArray();
@@ -1038,7 +1038,7 @@ namespace System
                                 && (methodAttributes & MethodAttributes.Virtual) == 0
                         );
 
-        #region Calculate Binding Flags
+                        #region Calculate Binding Flags
                         bool isPublic =
                             (methodAttributes & MethodAttributes.MemberAccessMask)
                             == MethodAttributes.Public;
@@ -1049,7 +1049,7 @@ namespace System
                             isInherited,
                             isStatic
                         );
-        #endregion
+                        #endregion
 
                         // get the unboxing stub or instantiating stub if needed
                         RuntimeMethodHandleInternal instantiatedHandle =
@@ -1076,7 +1076,7 @@ namespace System
 
                     RuntimeType declaringType = ReflectedType;
 
-        #region Populate all static, instance and literal fields
+                    #region Populate all static, instance and literal fields
                     while (RuntimeTypeHandle.IsGenericVariable(declaringType))
                         declaringType = declaringType.GetBaseType();
 
@@ -1088,9 +1088,9 @@ namespace System
 
                         declaringType = RuntimeTypeHandle.GetBaseType(declaringType);
                     }
-        #endregion
+                    #endregion
 
-        #region Populate Literal Fields on Interfaces
+                    #region Populate Literal Fields on Interfaces
                     if (ReflectedType.IsGenericParameter)
                     {
                         Type[] interfaces = ReflectedType.BaseType.GetInterfaces();
@@ -1116,7 +1116,7 @@ namespace System
                             }
                         }
                     }
-        #endregion
+                    #endregion
 
                     return list.ToArray();
                 }
@@ -1202,7 +1202,7 @@ namespace System
                                 continue;
                         }
 
-        #region Calculate Binding Flags
+                        #region Calculate Binding Flags
                         bool isPublic = fieldAccess == FieldAttributes.Public;
                         bool isStatic = (fieldAttributes & FieldAttributes.Static) != 0;
                         BindingFlags bindingFlags = RuntimeType.FilterPreCalculate(
@@ -1210,7 +1210,7 @@ namespace System
                             isInherited,
                             isStatic
                         );
-        #endregion
+                        #endregion
 
                         // correct the FieldDesc if needed
                         if (needsStaticFieldForGeneric && isStatic)
@@ -1282,7 +1282,7 @@ namespace System
                                     continue;
                             }
 
-        #region Calculate Binding Flags
+                            #region Calculate Binding Flags
                             bool isPublic = fieldAccess == FieldAttributes.Public;
                             bool isStatic = (fieldAttributes & FieldAttributes.Static) != 0;
                             BindingFlags bindingFlags = RuntimeType.FilterPreCalculate(
@@ -1290,7 +1290,7 @@ namespace System
                                 isInherited,
                                 isStatic
                             );
-        #endregion
+                            #endregion
 
                             RuntimeFieldInfo runtimeFieldInfo = new MdFieldInfo(
                                 tkField,
@@ -1596,12 +1596,12 @@ namespace System
                             out isPrivate
                         );
 
-        #region Remove Inherited Privates
+                        #region Remove Inherited Privates
                         if (declaringType != m_runtimeTypeCache.GetRuntimeType() && isPrivate)
                             continue;
-        #endregion
+                        #endregion
 
-        #region Remove Duplicates
+                        #region Remove Duplicates
                         if (csEventInfos != null)
                         {
                             string name = eventInfo.Name;
@@ -1616,7 +1616,7 @@ namespace System
                             if (list.Count > 0)
                                 break;
                         }
-        #endregion
+                        #endregion
 
                         list.Add(eventInfo);
                     }
@@ -1757,12 +1757,12 @@ namespace System
                         // If this is a class, not an interface
                         if (usedSlots != null)
                         {
-        #region Remove Privates
+                            #region Remove Privates
                             if (declaringType != ReflectedType && isPrivate)
                                 continue;
-        #endregion
+                            #endregion
 
-        #region Duplicate check based on vtable slots
+                            #region Duplicate check based on vtable slots
 
                             // The inheritance of properties are defined by the inheritance of their
                             // getters and setters.
@@ -1793,9 +1793,9 @@ namespace System
                                         usedSlots[slot] = true;
                                 }
                             }
-        #endregion
+                            #endregion
 
-        #region Duplicate check based on name and signature
+                            #region Duplicate check based on name and signature
 
                             // For backward compatibility, even if the vtable slots don't match, we will still treat
                             // a property as duplicate if the names and signatures match.
@@ -1876,15 +1876,15 @@ namespace System
                                 if (duplicate)
                                     continue;
                             }
-        #endregion
+                            #endregion
                         }
 
                         list.Add(propertyInfo);
                     }
                 }
-        #endregion
+                #endregion
 
-        #region NonPrivate Members
+                #region NonPrivate Members
                 internal T[] GetMemberList(
                     MemberListType listType,
                     string name,
@@ -1922,11 +1922,11 @@ namespace System
                 {
                     get { return m_runtimeTypeCache.GetRuntimeType(); }
                 }
-        #endregion
+                #endregion
             }
-        #endregion
+            #endregion
 
-        #region Private Data Members
+            #region Private Data Members
             private RuntimeType m_runtimeType;
             private RuntimeType m_enclosingType;
             private TypeCode m_typeCode;
@@ -1954,18 +1954,18 @@ namespace System
 #endif
             private string m_defaultMemberName;
             private Object m_genericCache; // Generic cache for rare scenario specific data. It is used to cache Enum names and values.
-        #endregion
+            #endregion
 
-        #region Constructor
+            #region Constructor
             internal RuntimeTypeCache(RuntimeType runtimeType)
             {
                 m_typeCode = TypeCode.Empty;
                 m_runtimeType = runtimeType;
                 m_isGlobal = RuntimeTypeHandle.GetModule(runtimeType).RuntimeType == runtimeType;
             }
-        #endregion
+            #endregion
 
-        #region Private Members
+            #region Private Members
             private string ConstructName(ref string name, TypeNameFormatFlags formatFlags)
             {
                 if (name == null)
@@ -2030,9 +2030,9 @@ namespace System
 
                 return existingCache;
             }
-        #endregion
+            #endregion
 
-        #region Internal Members
+            #region Internal Members
 
             internal Object GenericCache
             {
@@ -2211,9 +2211,9 @@ namespace System
 
                 return m_defaultMemberName;
             }
-        #endregion
+            #endregion
 
-        #region Caches Accessors
+            #region Caches Accessors
             [System.Security.SecurityCritical] // auto-generated
             internal MethodInfo GetGenericMethodInfo(RuntimeMethodHandleInternal genericMethod)
             {
@@ -2394,7 +2394,7 @@ namespace System
                 return m_fieldInfoCache.AddField(field);
             }
 
-        #endregion
+            #endregion
         }
 #endif
         #endregion
@@ -6784,12 +6784,12 @@ namespace System
                             else
                             {
 #endif
-                                // fast path??
-                                server = Activator.CreateInstance(
-                                    this,
-                                    nonPublic: true,
-                                    wrapExceptions: wrapExceptions
-                                );
+                            // fast path??
+                            server = Activator.CreateInstance(
+                                this,
+                                nonPublic: true,
+                                wrapExceptions: wrapExceptions
+                            );
 #if MONO && FEATURE_REMOTING
                             }
 #endif
@@ -6812,12 +6812,12 @@ namespace System
                             else
                             {
 #endif
-                                server = ((ConstructorInfo)invokeMethod).Invoke(
-                                    bindingAttr,
-                                    binder,
-                                    args,
-                                    culture
-                                );
+                            server = ((ConstructorInfo)invokeMethod).Invoke(
+                                bindingAttr,
+                                binder,
+                                args,
+                                culture
+                            );
 #if MONO && FEATURE_REMOTING
                             }
 #endif
@@ -7218,8 +7218,14 @@ namespace System
 #endif
         #region COM
 #if FEATURE_COMINTEROP && FEATURE_REMOTING && !MONO
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        private Object ForwardCallToInvokeMember(String memberName, BindingFlags flags, Object target, int[] aWrapperTypes, ref MessageData msgData)
+        [System.Security.SecuritySafeCritical] // auto-generated
+        private Object ForwardCallToInvokeMember(
+            String memberName,
+            BindingFlags flags,
+            Object target,
+            int[] aWrapperTypes,
+            ref MessageData msgData
+        )
         {
             ParameterModifier[] aParamMod = null;
             Object ret = null;
@@ -7236,7 +7242,7 @@ namespace System
             // Retrieve information from the method we are invoking on.
             ParameterInfo[] aParams = meth.GetParametersNoCopy();
 
-            // If we have arguments, then set the byref flags to true for byref arguments. 
+            // If we have arguments, then set the byref flags to true for byref arguments.
             // We also wrap the arguments that require wrapping.
             if (cArgs > 0)
             {
@@ -7253,7 +7259,7 @@ namespace System
                 if (aWrapperTypes != null)
                     WrapArgsForInvokeCall(aArgs, aWrapperTypes);
             }
-            
+
             // If the method has a void return type, then set the IgnoreReturn binding flag.
             if (Object.ReferenceEquals(meth.ReturnType, typeof(void)))
                 flags |= BindingFlags.IgnoreReturn;
@@ -7322,7 +7328,7 @@ namespace System
                         case DispatchWrapperType.Dispatch:
                             wrapperType = typeof(DispatchWrapper);
                             break;
-                        case DispatchWrapperType.Error:   
+                        case DispatchWrapperType.Error:
                             wrapperType = typeof(ErrorWrapper);
                             break;
                         case DispatchWrapperType.Currency:
@@ -7333,7 +7339,10 @@ namespace System
                             isString = true;
                             break;
                         default:
-                            Contract.Assert(false, "[RuntimeType.WrapArgsForInvokeCall]Invalid safe array wrapper type specified.");
+                            Contract.Assert(
+                                false,
+                                "[RuntimeType.WrapArgsForInvokeCall]Invalid safe array wrapper type specified."
+                            );
                             break;
                     }
 
@@ -7344,25 +7353,29 @@ namespace System
 
                     // Retrieve the ConstructorInfo for the wrapper type.
                     ConstructorInfo wrapperCons;
-                    if(isString)
+                    if (isString)
                     {
-                         wrapperCons = wrapperType.GetConstructor(new Type[] {typeof(String)});
+                        wrapperCons = wrapperType.GetConstructor(new Type[] { typeof(String) });
                     }
                     else
                     {
-                         wrapperCons = wrapperType.GetConstructor(new Type[] {typeof(Object)});
+                        wrapperCons = wrapperType.GetConstructor(new Type[] { typeof(Object) });
                     }
-                
+
                     // Wrap each of the elements of the array.
                     for (int currElem = 0; currElem < numElems; currElem++)
                     {
-                        if(isString)
+                        if (isString)
                         {
-                            newArray[currElem] = wrapperCons.Invoke(new Object[] {(String)oldArray.GetValue(currElem)});
+                            newArray[currElem] = wrapperCons.Invoke(
+                                new Object[] { (String)oldArray.GetValue(currElem) }
+                            );
                         }
                         else
                         {
-                            newArray[currElem] = wrapperCons.Invoke(new Object[] {oldArray.GetValue(currElem)});
+                            newArray[currElem] = wrapperCons.Invoke(
+                                new Object[] { oldArray.GetValue(currElem) }
+                            );
                         }
                     }
 
@@ -7370,7 +7383,7 @@ namespace System
                     aArgs[i] = newArray;
                 }
                 else
-                {                           
+                {
                     // Determine the wrapper to use and then wrap the argument.
                     switch ((DispatchWrapperType)aWrapperTypes[i])
                     {
@@ -7380,7 +7393,7 @@ namespace System
                         case DispatchWrapperType.Dispatch:
                             aArgs[i] = new DispatchWrapper(aArgs[i]);
                             break;
-                        case DispatchWrapperType.Error:   
+                        case DispatchWrapperType.Error:
                             aArgs[i] = new ErrorWrapper(aArgs[i]);
                             break;
                         case DispatchWrapperType.Currency:
@@ -7390,16 +7403,19 @@ namespace System
                             aArgs[i] = new BStrWrapper((String)aArgs[i]);
                             break;
                         default:
-                            Contract.Assert(false, "[RuntimeType.WrapArgsForInvokeCall]Invalid wrapper type specified.");
+                            Contract.Assert(
+                                false,
+                                "[RuntimeType.WrapArgsForInvokeCall]Invalid wrapper type specified."
+                            );
                             break;
                     }
                 }
             }
         }
 
-        private OleAutBinder ForwardCallBinder 
+        private OleAutBinder ForwardCallBinder
         {
-            get 
+            get
             {
                 // Synchronization is not required.
                 if (s_ForwardCallBinder == null)
@@ -7413,13 +7429,13 @@ namespace System
         private enum DispatchWrapperType : int
         {
             // This enum must stay in sync with the DispatchWrapperType enum defined in MLInfo.h
-            Unknown         = 0x00000001,
-            Dispatch        = 0x00000002,
-            Record          = 0x00000004,
-            Error           = 0x00000008,
-            Currency        = 0x00000010,
-            BStr            = 0x00000020,
-            SafeArray       = 0x00010000
+            Unknown = 0x00000001,
+            Dispatch = 0x00000002,
+            Record = 0x00000004,
+            Error = 0x00000008,
+            Currency = 0x00000010,
+            BStr = 0x00000020,
+            SafeArray = 0x00010000
         }
 
         private static volatile OleAutBinder s_ForwardCallBinder;

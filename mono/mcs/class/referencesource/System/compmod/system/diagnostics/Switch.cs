@@ -313,10 +313,10 @@ namespace System.Diagnostics
                     else
                     {
 #endif
-                    // We don't use the property here because we don't want to catch exceptions
-                    // and rethrow them as ConfigurationException.  In this case there's no config.
-                    switchValueString = defaultValue;
-                    OnValueChanged();
+                        // We don't use the property here because we don't want to catch exceptions
+                        // and rethrow them as ConfigurationException.  In this case there's no config.
+                        switchValueString = defaultValue;
+                        OnValueChanged();
 #if CONFIGURATION_DEP
                     }
 #endif
