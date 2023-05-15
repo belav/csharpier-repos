@@ -10,45 +10,42 @@ using System;
 
 public interface I<T>
 {
-	int M<N>(T t);
+    int M<N>(T t);
 }
 
 public class C : I<String>
 {
-	int I<String>.M<N>(String t)
-	{
-		return 3;
-	}
+    int I<String>.M<N>(String t)
+    {
+        return 3;
+    }
 }
-
-
 
 public class Test_testExplicitOverride
 {
-	public static int Main()
-	{
-		try
-		{
-			I<String> cGen = new C();
+    public static int Main()
+    {
+        try
+        {
+            I<String> cGen = new C();
 
-			int ret = cGen.M<String>("Hello");
+            int ret = cGen.M<String>("Hello");
 
-			if (ret == 3)
-			{
-				Console.WriteLine("PASS");
-				return 100;
-			}
-			else
-			{
-				Console.WriteLine("FAIL: Incorrect method was invoked. Ret =" + ret);
-				return 99;
-			}
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine("FAIL: Caugh unexpected exception: " + e);
-			return 101;
-		}
-
-	}
+            if (ret == 3)
+            {
+                Console.WriteLine("PASS");
+                return 100;
+            }
+            else
+            {
+                Console.WriteLine("FAIL: Incorrect method was invoked. Ret =" + ret);
+                return 99;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("FAIL: Caugh unexpected exception: " + e);
+            return 101;
+        }
+    }
 }

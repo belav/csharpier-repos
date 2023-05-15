@@ -12,19 +12,35 @@ namespace Microsoft.CodeAnalysis.FindUsages
     {
         public IStreamingProgressTracker ProgressTracker { get; }
 
-        protected FindUsagesContext()
-            => this.ProgressTracker = new StreamingProgressTracker(this.ReportProgressAsync);
+        protected FindUsagesContext() =>
+            this.ProgressTracker = new StreamingProgressTracker(this.ReportProgressAsync);
 
-        public virtual ValueTask ReportMessageAsync(string message, CancellationToken cancellationToken) => default;
+        public virtual ValueTask ReportMessageAsync(
+            string message,
+            CancellationToken cancellationToken
+        ) => default;
 
-        public virtual ValueTask SetSearchTitleAsync(string title, CancellationToken cancellationToken) => default;
+        public virtual ValueTask SetSearchTitleAsync(
+            string title,
+            CancellationToken cancellationToken
+        ) => default;
 
         public virtual ValueTask OnCompletedAsync(CancellationToken cancellationToken) => default;
 
-        public virtual ValueTask OnDefinitionFoundAsync(DefinitionItem definition, CancellationToken cancellationToken) => default;
+        public virtual ValueTask OnDefinitionFoundAsync(
+            DefinitionItem definition,
+            CancellationToken cancellationToken
+        ) => default;
 
-        public virtual ValueTask OnReferenceFoundAsync(SourceReferenceItem reference, CancellationToken cancellationToken) => default;
+        public virtual ValueTask OnReferenceFoundAsync(
+            SourceReferenceItem reference,
+            CancellationToken cancellationToken
+        ) => default;
 
-        protected virtual ValueTask ReportProgressAsync(int current, int maximum, CancellationToken cancellationToken) => default;
+        protected virtual ValueTask ReportProgressAsync(
+            int current,
+            int maximum,
+            CancellationToken cancellationToken
+        ) => default;
     }
 }

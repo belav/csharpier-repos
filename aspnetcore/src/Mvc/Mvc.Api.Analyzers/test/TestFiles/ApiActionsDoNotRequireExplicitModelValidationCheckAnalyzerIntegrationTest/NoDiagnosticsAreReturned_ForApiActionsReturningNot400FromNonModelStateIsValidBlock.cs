@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.ApiActionsDoNotRequir
 {
     [ApiController]
     [Route("/api/[controller]")]
-    public class NoDiagnosticsAreReturned_ForApiActionsReturningNot400FromNonModelStateIsValidBlock : ControllerBase
+    public class NoDiagnosticsAreReturned_ForApiActionsReturningNot400FromNonModelStateIsValidBlock
+        : ControllerBase
     {
         public IActionResult Method(int id)
         {

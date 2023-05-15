@@ -14,7 +14,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     /// </remarks>
-    [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
+    [Obsolete(
+        "Entity types with defining navigations have been replaced by shared-type entity types"
+    )]
     public class OwnedTypesConvention : IEntityTypeRemovedConvention
     {
         /// <summary>
@@ -40,8 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeRemoved(
             IConventionModelBuilder modelBuilder,
             IConventionEntityType entityType,
-            IConventionContext<IConventionEntityType> context)
-        {
-        }
+            IConventionContext<IConventionEntityType> context
+        ) { }
     }
 }

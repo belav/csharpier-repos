@@ -35,7 +35,10 @@ namespace System.Linq
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="size"/> is below 1.
         /// </exception>
-        public static IEnumerable<TSource[]> Chunk<TSource>(this IEnumerable<TSource> source, int size)
+        public static IEnumerable<TSource[]> Chunk<TSource>(
+            this IEnumerable<TSource> source,
+            int size
+        )
         {
             if (source == null)
             {
@@ -50,7 +53,10 @@ namespace System.Linq
             return ChunkIterator(source, size);
         }
 
-        private static IEnumerable<TSource[]> ChunkIterator<TSource>(IEnumerable<TSource> source, int size)
+        private static IEnumerable<TSource[]> ChunkIterator<TSource>(
+            IEnumerable<TSource> source,
+            int size
+        )
         {
             using IEnumerator<TSource> e = source.GetEnumerator();
 
@@ -102,8 +108,7 @@ namespace System.Linq
                     }
 
                     yield return array;
-                }
-                while (i >= size && e.MoveNext());
+                } while (i >= size && e.MoveNext());
             }
         }
     }

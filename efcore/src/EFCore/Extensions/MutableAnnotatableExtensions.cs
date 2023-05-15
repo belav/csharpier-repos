@@ -11,7 +11,5 @@ namespace Microsoft.EntityFrameworkCore
     ///     Extension methods for <see cref="IMutableAnnotatable" />.
     /// </summary>
     [Obsolete("Use IMutableAnnotatable")]
-    public static class MutableAnnotatableExtensions
-    {
-    }
+    public static class MutableAnnotatableExtensions { }
 }

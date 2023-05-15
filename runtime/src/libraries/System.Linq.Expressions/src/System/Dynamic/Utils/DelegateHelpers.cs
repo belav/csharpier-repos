@@ -18,18 +18,31 @@ namespace System.Dynamic.Utils
         // with the Reflection.Emit statics below.
         private static class DynamicDelegateLightup
         {
-            public static Func<Type, Func<object?[], object?>, Delegate> CreateObjectArrayDelegate { get; }
-                = CreateObjectArrayDelegateInternal();
+            public static Func<
+                Type,
+                Func<object?[], object?>,
+                Delegate
+            > CreateObjectArrayDelegate { get; } = CreateObjectArrayDelegateInternal();
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-                Justification = "Works around https://github.com/dotnet/linker/issues/2392")]
-            private static Func<Type, Func<object?[], object?>, Delegate> CreateObjectArrayDelegateInternal()
-                => Type.GetType("Internal.Runtime.Augments.DynamicDelegateAugments")!
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2075:UnrecognizedReflectionPattern",
+                Justification = "Works around https://github.com/dotnet/linker/issues/2392"
+            )]
+            private static Func<
+                Type,
+                Func<object?[], object?>,
+                Delegate
+            > CreateObjectArrayDelegateInternal() =>
+                Type.GetType("Internal.Runtime.Augments.DynamicDelegateAugments")!
                     .GetMethod("CreateObjectArrayDelegate")!
                     .CreateDelegate<Func<Type, Func<object?[], object?>, Delegate>>();
         }
 
-        internal static Delegate CreateObjectArrayDelegate(Type delegateType, Func<object?[], object?> handler)
+        internal static Delegate CreateObjectArrayDelegate(
+            Type delegateType,
+            Func<object?[], object?> handler
+        )
         {
             if (CanEmitObjectArrayDelegate)
             {
@@ -41,8 +54,14 @@ namespace System.Dynamic.Utils
             }
         }
 
-        private static readonly CacheDict<Type, MethodInfo> s_thunks = new CacheDict<Type, MethodInfo>(256);
-        private static readonly MethodInfo s_FuncInvoke = typeof(Func<object?[], object?>).GetMethod("Invoke")!;
+        private static readonly CacheDict<Type, MethodInfo> s_thunks = new CacheDict<
+            Type,
+            MethodInfo
+        >(256);
+        private static readonly MethodInfo s_FuncInvoke = typeof(Func<
+            object?[],
+            object?
+        >).GetMethod("Invoke")!;
         private static readonly MethodInfo s_ArrayEmpty = GetEmptyObjectArrayMethod();
         private static readonly MethodInfo[] s_ActionThunks = GetActionThunks();
         private static readonly MethodInfo[] s_FuncThunks = GetFuncThunks();
@@ -55,12 +74,12 @@ namespace System.Dynamic.Utils
 
         public static void ActionThunk1<T1>(Func<object?[], object?> handler, T1 t1)
         {
-            handler(new object?[]{t1});
+            handler(new object?[] { t1 });
         }
 
         public static void ActionThunk2<T1, T2>(Func<object?[], object?> handler, T1 t1, T2 t2)
         {
-            handler(new object?[]{t1, t2});
+            handler(new object?[] { t1, t2 });
         }
 
         public static TReturn FuncThunk<TReturn>(Func<object?[], object> handler)
@@ -70,12 +89,16 @@ namespace System.Dynamic.Utils
 
         public static TReturn FuncThunk1<T1, TReturn>(Func<object?[], object> handler, T1 t1)
         {
-            return (TReturn)handler(new object?[]{t1});
+            return (TReturn)handler(new object?[] { t1 });
         }
 
-        public static TReturn FuncThunk2<T1, T2, TReturn>(Func<object?[], object> handler, T1 t1, T2 t2)
+        public static TReturn FuncThunk2<T1, T2, TReturn>(
+            Func<object?[], object> handler,
+            T1 t1,
+            T2 t2
+        )
         {
-            return (TReturn)handler(new object?[]{t1, t2});
+            return (TReturn)handler(new object?[] { t1, t2 });
         }
 
         private static MethodInfo GetEmptyObjectArrayMethod() =>
@@ -84,22 +107,35 @@ namespace System.Dynamic.Utils
         private static MethodInfo[] GetActionThunks()
         {
             Type delHelpers = typeof(DelegateHelpers);
-            return new MethodInfo[]{delHelpers.GetMethod("ActionThunk")!,
-                                    delHelpers.GetMethod("ActionThunk1")!,
-                                    delHelpers.GetMethod("ActionThunk2")!};
+            return new MethodInfo[]
+            {
+                delHelpers.GetMethod("ActionThunk")!,
+                delHelpers.GetMethod("ActionThunk1")!,
+                delHelpers.GetMethod("ActionThunk2")!
+            };
         }
 
         private static MethodInfo[] GetFuncThunks()
         {
             Type delHelpers = typeof(DelegateHelpers);
-            return new MethodInfo[]{delHelpers.GetMethod("FuncThunk")!,
-                                    delHelpers.GetMethod("FuncThunk1")!,
-                                    delHelpers.GetMethod("FuncThunk2")!};
+            return new MethodInfo[]
+            {
+                delHelpers.GetMethod("FuncThunk")!,
+                delHelpers.GetMethod("FuncThunk1")!,
+                delHelpers.GetMethod("FuncThunk2")!
+            };
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2060:MakeGenericMethod",
-            Justification = "The above ActionThunk and FuncThunk methods don't have trimming annotations.")]
-        private static MethodInfo? GetCSharpThunk(Type returnType, bool hasReturnValue, ParameterInfo[] parameters)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2060:MakeGenericMethod",
+            Justification = "The above ActionThunk and FuncThunk methods don't have trimming annotations."
+        )]
+        private static MethodInfo? GetCSharpThunk(
+            Type returnType,
+            bool hasReturnValue,
+            ParameterInfo[] parameters
+        )
         {
             try
             {
@@ -116,7 +152,11 @@ namespace System.Dynamic.Utils
                 foreach (ParameterInfo parameter in parameters)
                 {
                     Type parameterType = parameter.ParameterType;
-                    if  (parameterType.IsByRefLike || parameterType.IsByRef || parameterType.IsPointer)
+                    if (
+                        parameterType.IsByRefLike
+                        || parameterType.IsByRef
+                        || parameterType.IsPointer
+                    )
                     {
                         return null; // Don't use C# thunks for types that cannot be generic arguments
                     }
@@ -126,7 +166,8 @@ namespace System.Dynamic.Utils
                 if (hasReturnValue)
                     thunkTypeArgCount++;
 
-                Type[] thunkTypeArgs = thunkTypeArgCount == 0 ? Type.EmptyTypes : new Type[thunkTypeArgCount];
+                Type[] thunkTypeArgs =
+                    thunkTypeArgCount == 0 ? Type.EmptyTypes : new Type[thunkTypeArgCount];
                 for (int i = 0; i < parameters.Length; i++)
                 {
                     thunkTypeArgs[i] = parameters[i].ParameterType;
@@ -144,9 +185,9 @@ namespace System.Dynamic.Utils
                     uninstantiatedMethod = s_ActionThunks[parameters.Length];
                 }
 
-                return (thunkTypeArgs.Length > 0) ?
-                    uninstantiatedMethod.MakeGenericMethod(thunkTypeArgs) :
-                    uninstantiatedMethod;
+                return (thunkTypeArgs.Length > 0)
+                    ? uninstantiatedMethod.MakeGenericMethod(thunkTypeArgs)
+                    : uninstantiatedMethod;
             }
             catch
             {
@@ -171,7 +212,10 @@ namespace System.Dynamic.Utils
         //      param0 = (T0)args[0];   // only generated for each byref argument
         // }
         // return (TRet)ret;
-        private static Delegate CreateObjectArrayDelegateRefEmit(Type delegateType, Func<object?[], object?> handler)
+        private static Delegate CreateObjectArrayDelegateRefEmit(
+            Type delegateType,
+            Func<object?[], object?> handler
+        )
         {
             if (!s_thunks.TryGetValue(delegateType, out MethodInfo? thunkMethod))
             {
@@ -206,7 +250,11 @@ namespace System.Dynamic.Utils
                         paramTypes[i + 1] = parameters[i].ParameterType;
                     }
 
-                    DynamicMethod dynamicThunkMethod = new DynamicMethod(thunkName.ToString(), returnType, paramTypes);
+                    DynamicMethod dynamicThunkMethod = new DynamicMethod(
+                        thunkName.ToString(),
+                        returnType,
+                        paramTypes
+                    );
                     thunkMethod = dynamicThunkMethod;
                     ILGenerator ilgen = dynamicThunkMethod.GetILGenerator();
 
@@ -270,8 +318,8 @@ namespace System.Dynamic.Utils
                         ilgen.BeginFinallyBlock();
                         for (int i = 0; i < parameters.Length; i++)
                         {
-                           if (parameters[i].ParameterType.IsByRef)
-                           {
+                            if (parameters[i].ParameterType.IsByRef)
+                            {
                                 Type byrefToType = parameters[i].ParameterType.GetElementType()!;
 
                                 // update parameter

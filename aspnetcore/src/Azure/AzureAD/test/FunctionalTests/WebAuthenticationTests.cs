@@ -29,12 +29,12 @@ public class WebAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
     public static TheoryData<string> NotAddedEndpoints =>
         new TheoryData<string>()
         {
-                "/AzureAD/Account/SignIn",
-                "/AzureAD/Account/SignOut",
-                "/AzureADB2C/Account/SignIn",
-                "/AzureADB2C/Account/ResetPassword",
-                "/AzureADB2C/Account/EditProfile",
-                "/AzureADB2C/Account/SignOut",
+            "/AzureAD/Account/SignIn",
+            "/AzureAD/Account/SignOut",
+            "/AzureADB2C/Account/SignIn",
+            "/AzureADB2C/Account/ResetPassword",
+            "/AzureADB2C/Account/EditProfile",
+            "/AzureADB2C/Account/SignOut",
         };
 
     [Theory]
@@ -51,46 +51,65 @@ public class WebAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
     public static TheoryData<string, HttpStatusCode> AddedEndpointsStatusCodesAD =>
         new TheoryData<string, HttpStatusCode>()
         {
-                { "/AzureAD/Account/AccessDenied", HttpStatusCode.OK },
-                { "/AzureAD/Account/Error", HttpStatusCode.OK },
-                { "/AzureAD/Account/SignedOut", HttpStatusCode.OK },
-                { "/AzureAD/Account/SignIn", HttpStatusCode.Redirect },
-                { "/AzureAD/Account/SignOut", HttpStatusCode.Redirect },
+            { "/AzureAD/Account/AccessDenied", HttpStatusCode.OK },
+            { "/AzureAD/Account/Error", HttpStatusCode.OK },
+            { "/AzureAD/Account/SignedOut", HttpStatusCode.OK },
+            { "/AzureAD/Account/SignIn", HttpStatusCode.Redirect },
+            { "/AzureAD/Account/SignOut", HttpStatusCode.Redirect },
         };
 
     [Theory]
     [MemberData(nameof(AddedEndpointsStatusCodesAD))]
-    public async Task ADEndpoints_AreAvailable_When_Authentication_IsAdded(string endpoint, HttpStatusCode expectedStatusCode)
+    public async Task ADEndpoints_AreAvailable_When_Authentication_IsAdded(
+        string endpoint,
+        HttpStatusCode expectedStatusCode
+    )
     {
         // Act & Assert
-        var client = Factory.WithWebHostBuilder(builder => builder.ConfigureTestServices(
-            services =>
-            {
-                services
-                    .AddAuthentication(AzureADDefaults.AuthenticationScheme)
-                    .AddAzureAD(o =>
+        var client = Factory
+            .WithWebHostBuilder(
+                builder =>
+                    builder.ConfigureTestServices(services =>
                     {
-                        o.Instance = "https://login.microsoftonline.com/";
-                        o.Domain = "test.onmicrosoft.com";
-                        o.ClientId = "ClientId";
-                        o.TenantId = "TenantId";
-                    });
+                        services
+                            .AddAuthentication(AzureADDefaults.AuthenticationScheme)
+                            .AddAzureAD(o =>
+                            {
+                                o.Instance = "https://login.microsoftonline.com/";
+                                o.Domain = "test.onmicrosoft.com";
+                                o.ClientId = "ClientId";
+                                o.TenantId = "TenantId";
+                            });
 
-                services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, o =>
-                {
-                    o.Configuration = new OpenIdConnectConfiguration()
-                    {
-                        Issuer = "https://www.example.com",
-                        TokenEndpoint = "https://www.example.com/token",
-                        AuthorizationEndpoint = "https://www.example.com/authorize",
-                        EndSessionEndpoint = "https://www.example.com/logout"
-                    };
-                });
+                        services.Configure<OpenIdConnectOptions>(
+                            AzureADDefaults.OpenIdScheme,
+                            o =>
+                            {
+                                o.Configuration = new OpenIdConnectConfiguration()
+                                {
+                                    Issuer = "https://www.example.com",
+                                    TokenEndpoint = "https://www.example.com/token",
+                                    AuthorizationEndpoint = "https://www.example.com/authorize",
+                                    EndSessionEndpoint = "https://www.example.com/logout"
+                                };
+                            }
+                        );
 
-                services.AddMvc(o => o.Filters.Add(
-                    new AuthorizeFilter(new AuthorizationPolicyBuilder(new[] { AzureADDefaults.AuthenticationScheme })
-                        .RequireAuthenticatedUser().Build())));
-            })).CreateDefaultClient();
+                        services.AddMvc(
+                            o =>
+                                o.Filters.Add(
+                                    new AuthorizeFilter(
+                                        new AuthorizationPolicyBuilder(
+                                            new[] { AzureADDefaults.AuthenticationScheme }
+                                        )
+                                            .RequireAuthenticatedUser()
+                                            .Build()
+                                    )
+                                )
+                        );
+                    })
+            )
+            .CreateDefaultClient();
 
         var response = await client.GetAsync(endpoint);
 
@@ -101,51 +120,70 @@ public class WebAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
     public static TheoryData<string, HttpStatusCode> AddedEndpointsStatusCodesADB2C =>
         new TheoryData<string, HttpStatusCode>()
         {
-                { "/AzureADB2C/Account/AccessDenied", HttpStatusCode.OK },
-                { "/AzureADB2C/Account/Error", HttpStatusCode.OK },
-                { "/AzureADB2C/Account/SignedOut", HttpStatusCode.OK },
-                { "/AzureADB2C/Account/SignIn", HttpStatusCode.Redirect },
-                { "/AzureADB2C/Account/ResetPassword", HttpStatusCode.Redirect },
-                { "/AzureADB2C/Account/EditProfile", HttpStatusCode.Redirect },
-                { "/AzureADB2C/Account/SignOut", HttpStatusCode.Redirect }
+            { "/AzureADB2C/Account/AccessDenied", HttpStatusCode.OK },
+            { "/AzureADB2C/Account/Error", HttpStatusCode.OK },
+            { "/AzureADB2C/Account/SignedOut", HttpStatusCode.OK },
+            { "/AzureADB2C/Account/SignIn", HttpStatusCode.Redirect },
+            { "/AzureADB2C/Account/ResetPassword", HttpStatusCode.Redirect },
+            { "/AzureADB2C/Account/EditProfile", HttpStatusCode.Redirect },
+            { "/AzureADB2C/Account/SignOut", HttpStatusCode.Redirect }
         };
 
     [Theory]
     [MemberData(nameof(AddedEndpointsStatusCodesADB2C))]
-    public async Task ADB2CEndpoints_AreAvailable_When_Authentication_IsAdded(string endpoint, HttpStatusCode expectedStatusCode)
+    public async Task ADB2CEndpoints_AreAvailable_When_Authentication_IsAdded(
+        string endpoint,
+        HttpStatusCode expectedStatusCode
+    )
     {
         // Act & Assert
-        var client = Factory.WithWebHostBuilder(builder => builder.ConfigureTestServices(
-            services =>
-            {
-                services
-                    .AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
-                    .AddAzureADB2C(o =>
+        var client = Factory
+            .WithWebHostBuilder(
+                builder =>
+                    builder.ConfigureTestServices(services =>
                     {
-                        o.Instance = "https://login.microsoftonline.com/tfp/";
-                        o.ClientId = "ClientId";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "test.onmicrosoft.com";
-                        o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                        o.ResetPasswordPolicyId = "B2C_1_SSPR";
-                        o.EditProfilePolicyId = "B2C_1_SiPe";
-                    });
+                        services
+                            .AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
+                            .AddAzureADB2C(o =>
+                            {
+                                o.Instance = "https://login.microsoftonline.com/tfp/";
+                                o.ClientId = "ClientId";
+                                o.CallbackPath = "/signin-oidc";
+                                o.Domain = "test.onmicrosoft.com";
+                                o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
+                                o.ResetPasswordPolicyId = "B2C_1_SSPR";
+                                o.EditProfilePolicyId = "B2C_1_SiPe";
+                            });
 
-                services.Configure<OpenIdConnectOptions>(AzureADB2CDefaults.OpenIdScheme, o =>
-                {
-                    o.Configuration = new OpenIdConnectConfiguration()
-                    {
-                        Issuer = "https://www.example.com",
-                        TokenEndpoint = "https://www.example.com/token",
-                        AuthorizationEndpoint = "https://www.example.com/authorize",
-                        EndSessionEndpoint = "https://www.example.com/logout"
-                    };
-                });
+                        services.Configure<OpenIdConnectOptions>(
+                            AzureADB2CDefaults.OpenIdScheme,
+                            o =>
+                            {
+                                o.Configuration = new OpenIdConnectConfiguration()
+                                {
+                                    Issuer = "https://www.example.com",
+                                    TokenEndpoint = "https://www.example.com/token",
+                                    AuthorizationEndpoint = "https://www.example.com/authorize",
+                                    EndSessionEndpoint = "https://www.example.com/logout"
+                                };
+                            }
+                        );
 
-                services.AddMvc(o => o.Filters.Add(
-                    new AuthorizeFilter(new AuthorizationPolicyBuilder(new[] { AzureADB2CDefaults.AuthenticationScheme })
-                        .RequireAuthenticatedUser().Build())));
-            })).CreateDefaultClient();
+                        services.AddMvc(
+                            o =>
+                                o.Filters.Add(
+                                    new AuthorizeFilter(
+                                        new AuthorizationPolicyBuilder(
+                                            new[] { AzureADB2CDefaults.AuthenticationScheme }
+                                        )
+                                            .RequireAuthenticatedUser()
+                                            .Build()
+                                    )
+                                )
+                        );
+                    })
+            )
+            .CreateDefaultClient();
 
         var response = await client.GetAsync(endpoint);
 
@@ -156,40 +194,56 @@ public class WebAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
     [Fact]
     public async Task ADB2C_EndToEnd_PasswordReset()
     {
-        var client = Factory.WithWebHostBuilder(builder => builder.ConfigureTestServices(
-            services =>
-            {
-                services
-                    .AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
-                    .AddAzureADB2C(o =>
+        var client = Factory
+            .WithWebHostBuilder(
+                builder =>
+                    builder.ConfigureTestServices(services =>
                     {
-                        o.Instance = "https://login.microsoftonline.com/tfp/";
-                        o.ClientId = "ClientId";
-                        o.CallbackPath = "/signin-oidc";
-                        o.Domain = "test.onmicrosoft.com";
-                        o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
-                        o.ResetPasswordPolicyId = "B2C_1_SSPR";
-                        o.EditProfilePolicyId = "B2C_1_SiPe";
-                    });
+                        services
+                            .AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
+                            .AddAzureADB2C(o =>
+                            {
+                                o.Instance = "https://login.microsoftonline.com/tfp/";
+                                o.ClientId = "ClientId";
+                                o.CallbackPath = "/signin-oidc";
+                                o.Domain = "test.onmicrosoft.com";
+                                o.SignUpSignInPolicyId = "B2C_1_SiUpIn";
+                                o.ResetPasswordPolicyId = "B2C_1_SSPR";
+                                o.EditProfilePolicyId = "B2C_1_SiPe";
+                            });
 
-                services.Configure<OpenIdConnectOptions>(AzureADB2CDefaults.OpenIdScheme, o =>
-                {
-                    o.Configuration = new OpenIdConnectConfiguration()
-                    {
-                        Issuer = "https://www.example.com",
-                        TokenEndpoint = "https://www.example.com/token",
-                        AuthorizationEndpoint = "https://www.example.com/authorize",
-                        EndSessionEndpoint = "https://www.example.com/logout"
-                    };
-                    // CookieContainer doesn't allow cookies from other paths
-                    o.CorrelationCookie.Path = "/";
-                    o.NonceCookie.Path = "/";
-                });
+                        services.Configure<OpenIdConnectOptions>(
+                            AzureADB2CDefaults.OpenIdScheme,
+                            o =>
+                            {
+                                o.Configuration = new OpenIdConnectConfiguration()
+                                {
+                                    Issuer = "https://www.example.com",
+                                    TokenEndpoint = "https://www.example.com/token",
+                                    AuthorizationEndpoint = "https://www.example.com/authorize",
+                                    EndSessionEndpoint = "https://www.example.com/logout"
+                                };
+                                // CookieContainer doesn't allow cookies from other paths
+                                o.CorrelationCookie.Path = "/";
+                                o.NonceCookie.Path = "/";
+                            }
+                        );
 
-                services.AddMvc(o => o.Filters.Add(
-                    new AuthorizeFilter(new AuthorizationPolicyBuilder(new[] { AzureADB2CDefaults.AuthenticationScheme })
-                        .RequireAuthenticatedUser().Build())));
-            })).CreateClient(new WebApplicationFactoryClientOptions() { AllowAutoRedirect = false });
+                        services.AddMvc(
+                            o =>
+                                o.Filters.Add(
+                                    new AuthorizeFilter(
+                                        new AuthorizationPolicyBuilder(
+                                            new[] { AzureADB2CDefaults.AuthenticationScheme }
+                                        )
+                                            .RequireAuthenticatedUser()
+                                            .Build()
+                                    )
+                                )
+                        );
+                    })
+            )
+            .CreateClient(new WebApplicationFactoryClientOptions() { AllowAutoRedirect = false });
 
         var response = await client.GetAsync("/api/get");
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
@@ -202,9 +256,14 @@ public class WebAuthenticationTests : IClassFixture<WebApplicationFactory<Startu
         Assert.False(StringValues.IsNullOrEmpty(state));
 
         // Mock Authorization response
-        response = await client.GetAsync($"/signin-oidc?error=access_denied&error_description=AADB2C90118&state={state}");
+        response = await client.GetAsync(
+            $"/signin-oidc?error=access_denied&error_description=AADB2C90118&state={state}"
+        );
 
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("/AzureADB2C/Account/ResetPassword/AzureADB2C", response.Headers.Location.OriginalString);
+        Assert.Equal(
+            "/AzureADB2C/Account/ResetPassword/AzureADB2C",
+            response.Headers.Location.OriginalString
+        );
     }
 }

@@ -26,9 +26,17 @@ namespace System.Activities.Runtime
             set { this.callbackWrapper = value; }
         }
 
-        public WorkItem GenerateWorkItem(Exception propagatedException, ActivityInstance propagatedFrom, ActivityInstanceReference originalExceptionSource)
+        public WorkItem GenerateWorkItem(
+            Exception propagatedException,
+            ActivityInstance propagatedFrom,
+            ActivityInstanceReference originalExceptionSource
+        )
         {
-            return this.callbackWrapper.CreateWorkItem(propagatedException, propagatedFrom, originalExceptionSource);
+            return this.callbackWrapper.CreateWorkItem(
+                propagatedException,
+                propagatedFrom,
+                originalExceptionSource
+            );
         }
     }
 }

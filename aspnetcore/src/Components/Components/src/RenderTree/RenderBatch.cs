@@ -37,7 +37,8 @@ public readonly struct RenderBatch
         ArrayRange<RenderTreeDiff> updatedComponents,
         ArrayRange<RenderTreeFrame> referenceFrames,
         ArrayRange<int> disposedComponentIDs,
-        ArrayRange<ulong> disposedEventHandlerIDs)
+        ArrayRange<ulong> disposedEventHandlerIDs
+    )
     {
         UpdatedComponents = updatedComponents;
         ReferenceFrames = referenceFrames;
@@ -45,4 +46,3 @@ public readonly struct RenderBatch
         DisposedEventHandlerIDs = disposedEventHandlerIDs;
     }
 }
-

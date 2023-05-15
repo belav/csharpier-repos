@@ -11,11 +11,19 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void Write_ConcurrentCollection()
         {
-            Assert.Equal(@"[""1""]", JsonSerializer.Serialize(new BlockingCollection<string> { "1" }));
+            Assert.Equal(
+                @"[""1""]",
+                JsonSerializer.Serialize(new BlockingCollection<string> { "1" })
+            );
 
             Assert.Equal(@"[""1""]", JsonSerializer.Serialize(new ConcurrentBag<string> { "1" }));
 
-            Assert.Equal(@"{""key"":""value""}", JsonSerializer.Serialize(new ConcurrentDictionary<string, string> { ["key"] = "value" }));
+            Assert.Equal(
+                @"{""key"":""value""}",
+                JsonSerializer.Serialize(
+                    new ConcurrentDictionary<string, string> { ["key"] = "value" }
+                )
+            );
 
             ConcurrentQueue<string> qc = new ConcurrentQueue<string>();
             qc.Enqueue("1");

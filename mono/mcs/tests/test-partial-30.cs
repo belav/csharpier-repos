@@ -2,25 +2,19 @@
 
 namespace PartialProblems
 {
-	class Classes
-	{
-		class partial
-		{
-		}
-		
-		void M1 (partial formalParameter)
-		{
-		}
+    class Classes
+    {
+        class partial { }
 
-		partial M3 ()
-		{
-			return null;
-		}
+        void M1(partial formalParameter) { }
 
-		partial field;
-		
-		public static void Main ()
-		{
-		}
-	}
+        partial M3()
+        {
+            return null;
+        }
+
+        partial field;
+
+        public static void Main() { }
+    }
 }

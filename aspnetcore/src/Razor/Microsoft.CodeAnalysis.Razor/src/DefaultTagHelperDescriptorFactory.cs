@@ -25,19 +25,38 @@ internal class DefaultTagHelperDescriptorFactory
     internal static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
         SymbolDisplayFormat.FullyQualifiedFormat
             .WithGlobalNamespaceStyle(SymbolDisplayGlobalNamespaceStyle.Omitted)
-            .WithMiscellaneousOptions(SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes));
+            .WithMiscellaneousOptions(
+                SymbolDisplayFormat.FullyQualifiedFormat.MiscellaneousOptions
+                    & (~SymbolDisplayMiscellaneousOptions.UseSpecialTypes)
+            );
 
-    public DefaultTagHelperDescriptorFactory(Compilation compilation, bool includeDocumentation, bool excludeHidden)
+    public DefaultTagHelperDescriptorFactory(
+        Compilation compilation,
+        bool includeDocumentation,
+        bool excludeHidden
+    )
     {
         IncludeDocumentation = includeDocumentation;
         ExcludeHidden = excludeHidden;
 
-        _htmlAttributeNameAttributeSymbol = compilation.GetTypeByMetadataName(TagHelperTypes.HtmlAttributeNameAttribute);
-        _htmlAttributeNotBoundAttributeSymbol = compilation.GetTypeByMetadataName(TagHelperTypes.HtmlAttributeNotBoundAttribute);
-        _htmlTargetElementAttributeSymbol = compilation.GetTypeByMetadataName(TagHelperTypes.HtmlTargetElementAttribute);
-        _outputElementHintAttributeSymbol = compilation.GetTypeByMetadataName(TagHelperTypes.OutputElementHintAttribute);
-        _restrictChildrenAttributeSymbol = compilation.GetTypeByMetadataName(TagHelperTypes.RestrictChildrenAttribute);
-        _editorBrowsableAttributeSymbol = compilation.GetTypeByMetadataName(typeof(EditorBrowsableAttribute).FullName);
+        _htmlAttributeNameAttributeSymbol = compilation.GetTypeByMetadataName(
+            TagHelperTypes.HtmlAttributeNameAttribute
+        );
+        _htmlAttributeNotBoundAttributeSymbol = compilation.GetTypeByMetadataName(
+            TagHelperTypes.HtmlAttributeNotBoundAttribute
+        );
+        _htmlTargetElementAttributeSymbol = compilation.GetTypeByMetadataName(
+            TagHelperTypes.HtmlTargetElementAttribute
+        );
+        _outputElementHintAttributeSymbol = compilation.GetTypeByMetadataName(
+            TagHelperTypes.OutputElementHintAttribute
+        );
+        _restrictChildrenAttributeSymbol = compilation.GetTypeByMetadataName(
+            TagHelperTypes.RestrictChildrenAttribute
+        );
+        _editorBrowsableAttributeSymbol = compilation.GetTypeByMetadataName(
+            typeof(EditorBrowsableAttribute).FullName
+        );
         _iDictionarySymbol = compilation.GetTypeByMetadataName(TagHelperTypes.IDictionary);
     }
 
@@ -75,11 +94,19 @@ internal class DefaultTagHelperDescriptorFactory
         return descriptor;
     }
 
-    private void AddTagMatchingRules(INamedTypeSymbol type, TagHelperDescriptorBuilder descriptorBuilder)
+    private void AddTagMatchingRules(
+        INamedTypeSymbol type,
+        TagHelperDescriptorBuilder descriptorBuilder
+    )
     {
-        var targetElementAttributes = type
-            .GetAttributes()
-            .Where(attribute => SymbolEqualityComparer.Default.Equals(attribute.AttributeClass, _htmlTargetElementAttributeSymbol));
+        var targetElementAttributes = type.GetAttributes()
+            .Where(
+                attribute =>
+                    SymbolEqualityComparer.Default.Equals(
+                        attribute.AttributeClass,
+                        _htmlTargetElementAttributeSymbol
+                    )
+            );
 
         // If there isn't an attribute specifying the tag name derive it from the name
         if (!targetElementAttributes.Any())
@@ -113,7 +140,9 @@ internal class DefaultTagHelperDescriptorFactory
                 var tagStructure = HtmlTargetElementAttribute_TagStructure(targetElementAttribute);
                 ruleBuilder.TagStructure = tagStructure;
 
-                var requiredAttributeString = HtmlTargetElementAttribute_Attributes(targetElementAttribute);
+                var requiredAttributeString = HtmlTargetElementAttribute_Attributes(
+                    targetElementAttribute
+                );
                 RequiredAttributeParser.AddRequiredAttributes(requiredAttributeString, ruleBuilder);
             });
         }
@@ -138,19 +167,33 @@ internal class DefaultTagHelperDescriptorFactory
 
     private void AddAllowedChildren(INamedTypeSymbol type, TagHelperDescriptorBuilder builder)
     {
-        var restrictChildrenAttribute = type.GetAttributes().Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, _restrictChildrenAttributeSymbol)).FirstOrDefault();
+        var restrictChildrenAttribute = type.GetAttributes()
+            .Where(
+                a =>
+                    SymbolEqualityComparer.Default.Equals(
+                        a.AttributeClass,
+                        _restrictChildrenAttributeSymbol
+                    )
+            )
+            .FirstOrDefault();
         if (restrictChildrenAttribute == null)
         {
             return;
         }
 
-        builder.AllowChildTag(childTagBuilder => childTagBuilder.Name = (string)restrictChildrenAttribute.ConstructorArguments[0].Value);
+        builder.AllowChildTag(
+            childTagBuilder =>
+                childTagBuilder.Name = (string)
+                    restrictChildrenAttribute.ConstructorArguments[0].Value
+        );
 
         if (restrictChildrenAttribute.ConstructorArguments.Length == 2)
         {
             foreach (var value in restrictChildrenAttribute.ConstructorArguments[1].Values)
             {
-                builder.AllowChildTag(childTagBuilder => childTagBuilder.Name = (string)value.Value);
+                builder.AllowChildTag(
+                    childTagBuilder => childTagBuilder.Name = (string)value.Value
+                );
             }
         }
     }
@@ -173,7 +216,15 @@ internal class DefaultTagHelperDescriptorFactory
     private void AddTagOutputHint(INamedTypeSymbol type, TagHelperDescriptorBuilder builder)
     {
         string outputElementHint = null;
-        var outputElementHintAttribute = type.GetAttributes().Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, _outputElementHintAttributeSymbol)).FirstOrDefault();
+        var outputElementHintAttribute = type.GetAttributes()
+            .Where(
+                a =>
+                    SymbolEqualityComparer.Default.Equals(
+                        a.AttributeClass,
+                        _outputElementHintAttributeSymbol
+                    )
+            )
+            .FirstOrDefault();
         if (outputElementHintAttribute != null)
         {
             outputElementHint = (string)(outputElementHintAttribute.ConstructorArguments[0]).Value;
@@ -184,18 +235,27 @@ internal class DefaultTagHelperDescriptorFactory
     private void ConfigureBoundAttribute(
         BoundAttributeDescriptorBuilder builder,
         IPropertySymbol property,
-        INamedTypeSymbol containingType)
+        INamedTypeSymbol containingType
+    )
     {
         var attributeNameAttribute = property
             .GetAttributes()
-            .Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, _htmlAttributeNameAttributeSymbol))
+            .Where(
+                a =>
+                    SymbolEqualityComparer.Default.Equals(
+                        a.AttributeClass,
+                        _htmlAttributeNameAttributeSymbol
+                    )
+            )
             .FirstOrDefault();
 
         bool hasExplicitName;
         string attributeName;
-        if (attributeNameAttribute == null ||
-            attributeNameAttribute.ConstructorArguments.Length == 0 ||
-            string.IsNullOrEmpty((string)attributeNameAttribute.ConstructorArguments[0].Value))
+        if (
+            attributeNameAttribute == null
+            || attributeNameAttribute.ConstructorArguments.Length == 0
+            || string.IsNullOrEmpty((string)attributeNameAttribute.ConstructorArguments[0].Value)
+        )
         {
             hasExplicitName = false;
             attributeName = HtmlConventions.ToHtmlCase(property.Name);
@@ -206,7 +266,9 @@ internal class DefaultTagHelperDescriptorFactory
             attributeName = (string)attributeNameAttribute.ConstructorArguments[0].Value;
         }
 
-        var hasPublicSetter = property.SetMethod != null && property.SetMethod.DeclaredAccessibility == Accessibility.Public;
+        var hasPublicSetter =
+            property.SetMethod != null
+            && property.SetMethod.DeclaredAccessibility == Accessibility.Public;
         var typeName = GetFullName(property.Type);
         builder.TypeName = typeName;
         builder.SetPropertyName(property.Name);
@@ -233,11 +295,21 @@ internal class DefaultTagHelperDescriptorFactory
         else if (hasExplicitName && !IsPotentialDictionaryProperty(property))
         {
             // Specified HtmlAttributeNameAttribute.Name though property has no public setter.
-            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidAttributeNameNullOrEmpty(GetFullName(containingType), property.Name);
+            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidAttributeNameNullOrEmpty(
+                GetFullName(containingType),
+                property.Name
+            );
             builder.Diagnostics.Add(diagnostic);
         }
 
-        ConfigureDictionaryBoundAttribute(builder, property, containingType, attributeNameAttribute, attributeName, hasPublicSetter);
+        ConfigureDictionaryBoundAttribute(
+            builder,
+            property,
+            containingType,
+            attributeNameAttribute,
+            attributeName,
+            hasPublicSetter
+        );
     }
 
     private void ConfigureDictionaryBoundAttribute(
@@ -246,7 +318,8 @@ internal class DefaultTagHelperDescriptorFactory
         INamedTypeSymbol containingType,
         AttributeData attributeNameAttribute,
         string attributeName,
-        bool hasPublicSetter)
+        bool hasPublicSetter
+    )
     {
         string dictionaryAttributePrefix = null;
         var dictionaryAttributePrefixSet = false;
@@ -289,17 +362,26 @@ internal class DefaultTagHelperDescriptorFactory
             {
                 // DictionaryAttributePrefix is not supported unless associated with an
                 // IDictionary<string, TValue> property.
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidAttributePrefixNotNull(GetFullName(containingType), property.Name);
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidAttributePrefixNotNull(
+                        GetFullName(containingType),
+                        property.Name
+                    );
                 builder.Diagnostics.Add(diagnostic);
             }
 
             return;
         }
-        else if (!hasPublicSetter && attributeNameAttribute != null && !dictionaryAttributePrefixSet)
+        else if (
+            !hasPublicSetter && attributeNameAttribute != null && !dictionaryAttributePrefixSet
+        )
         {
             // Must set DictionaryAttributePrefix when using HtmlAttributeNameAttribute with a dictionary property
             // that lacks a public setter.
-            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidAttributePrefixNull(GetFullName(containingType), property.Name);
+            var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidAttributePrefixNull(
+                GetFullName(containingType),
+                property.Name
+            );
             builder.Diagnostics.Add(diagnostic);
 
             return;
@@ -309,13 +391,24 @@ internal class DefaultTagHelperDescriptorFactory
     private IReadOnlyList<ITypeSymbol> GetDictionaryArgumentTypes(IPropertySymbol property)
     {
         INamedTypeSymbol dictionaryType;
-        if (SymbolEqualityComparer.Default.Equals((property.Type as INamedTypeSymbol)?.ConstructedFrom, _iDictionarySymbol))
+        if (
+            SymbolEqualityComparer.Default.Equals(
+                (property.Type as INamedTypeSymbol)?.ConstructedFrom,
+                _iDictionarySymbol
+            )
+        )
         {
             dictionaryType = (INamedTypeSymbol)property.Type;
         }
-        else if (property.Type.AllInterfaces.Any(s => SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)))
+        else if (
+            property.Type.AllInterfaces.Any(
+                s => SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
+            )
+        )
         {
-            dictionaryType = property.Type.AllInterfaces.First(s => SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol));
+            dictionaryType = property.Type.AllInterfaces.First(
+                s => SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
+            );
         }
         else
         {
@@ -378,9 +471,17 @@ internal class DefaultTagHelperDescriptorFactory
 
     private bool IsPotentialDictionaryProperty(IPropertySymbol property)
     {
-        return
-            (SymbolEqualityComparer.Default.Equals((property.Type as INamedTypeSymbol)?.ConstructedFrom, _iDictionarySymbol) || property.Type.AllInterfaces.Any(s => SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol))) &&
-            GetDictionaryArgumentTypes(property)?[0].SpecialType == SpecialType.System_String;
+        return (
+                SymbolEqualityComparer.Default.Equals(
+                    (property.Type as INamedTypeSymbol)?.ConstructedFrom,
+                    _iDictionarySymbol
+                )
+                || property.Type.AllInterfaces.Any(
+                    s =>
+                        SymbolEqualityComparer.Default.Equals(s.ConstructedFrom, _iDictionarySymbol)
+                )
+            )
+            && GetDictionaryArgumentTypes(property)?[0].SpecialType == SpecialType.System_String;
     }
 
     private IEnumerable<IPropertySymbol> GetAccessibleProperties(INamedTypeSymbol typeSymbol)
@@ -392,23 +493,44 @@ internal class DefaultTagHelperDescriptorFactory
             for (var i = 0; i < members.Length; i++)
             {
                 var property = members[i] as IPropertySymbol;
-                if (property != null &&
-                    property.Parameters.Length == 0 &&
-                    property.GetMethod != null &&
-                    property.GetMethod.DeclaredAccessibility == Accessibility.Public &&
-                    property.GetAttributes().Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, _htmlAttributeNotBoundAttributeSymbol)).FirstOrDefault() == null &&
-                    (property.GetAttributes().Any(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, _htmlAttributeNameAttributeSymbol)) ||
-                    property.SetMethod != null && property.SetMethod.DeclaredAccessibility == Accessibility.Public ||
-                    IsPotentialDictionaryProperty(property)) &&
-                    !accessibleProperties.ContainsKey(property.Name))
+                if (
+                    property != null
+                    && property.Parameters.Length == 0
+                    && property.GetMethod != null
+                    && property.GetMethod.DeclaredAccessibility == Accessibility.Public
+                    && property
+                        .GetAttributes()
+                        .Where(
+                            a =>
+                                SymbolEqualityComparer.Default.Equals(
+                                    a.AttributeClass,
+                                    _htmlAttributeNotBoundAttributeSymbol
+                                )
+                        )
+                        .FirstOrDefault() == null
+                    && (
+                        property
+                            .GetAttributes()
+                            .Any(
+                                a =>
+                                    SymbolEqualityComparer.Default.Equals(
+                                        a.AttributeClass,
+                                        _htmlAttributeNameAttributeSymbol
+                                    )
+                            )
+                        || property.SetMethod != null
+                            && property.SetMethod.DeclaredAccessibility == Accessibility.Public
+                        || IsPotentialDictionaryProperty(property)
+                    )
+                    && !accessibleProperties.ContainsKey(property.Name)
+                )
                 {
                     accessibleProperties.Add(property.Name, property);
                 }
             }
 
             typeSymbol = typeSymbol.BaseType;
-        }
-        while (typeSymbol != null);
+        } while (typeSymbol != null);
 
         return accessibleProperties.Values;
     }
@@ -417,7 +539,16 @@ internal class DefaultTagHelperDescriptorFactory
     {
         if (ExcludeHidden)
         {
-            var editorBrowsableAttribute = symbol.GetAttributes().Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, _editorBrowsableAttributeSymbol)).FirstOrDefault();
+            var editorBrowsableAttribute = symbol
+                .GetAttributes()
+                .Where(
+                    a =>
+                        SymbolEqualityComparer.Default.Equals(
+                            a.AttributeClass,
+                            _editorBrowsableAttributeSymbol
+                        )
+                )
+                .FirstOrDefault();
 
             if (editorBrowsableAttribute == null)
             {
@@ -426,12 +557,14 @@ internal class DefaultTagHelperDescriptorFactory
 
             if (editorBrowsableAttribute.ConstructorArguments.Length > 0)
             {
-                return (EditorBrowsableState)editorBrowsableAttribute.ConstructorArguments[0].Value == EditorBrowsableState.Never;
+                return (EditorBrowsableState)editorBrowsableAttribute.ConstructorArguments[0].Value
+                    == EditorBrowsableState.Never;
             }
         }
 
         return false;
     }
 
-    protected static string GetFullName(ITypeSymbol type) => type.ToDisplayString(FullNameTypeDisplayFormat);
+    protected static string GetFullName(ITypeSymbol type) =>
+        type.ToDisplayString(FullNameTypeDisplayFormat);
 }

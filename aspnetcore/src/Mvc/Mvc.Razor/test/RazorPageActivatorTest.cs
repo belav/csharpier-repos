@@ -49,7 +49,10 @@ public class RazorPageActivatorTest
         var activator = CreateActivator();
 
         var instance = new TestRazorPage();
-        var viewData = new ViewDataDictionary<MyModel>(MetadataProvider, new ModelStateDictionary());
+        var viewData = new ViewDataDictionary<MyModel>(
+            MetadataProvider,
+            new ModelStateDictionary()
+        );
         var viewContext = CreateViewContext();
 
         var urlHelper = UrlHelperFactory.GetUrlHelper(viewContext);
@@ -107,9 +110,9 @@ public class RazorPageActivatorTest
         var activator = CreateActivator();
 
         var viewData = new ViewDataDictionary<object>(MetadataProvider, new ModelStateDictionary())
-            {
-                { "key", "value" },
-            };
+        {
+            { "key", "value" },
+        };
         var viewContext = CreateViewContext(viewData);
 
         var urlHelper = UrlHelperFactory.GetUrlHelper(viewContext);
@@ -151,7 +154,10 @@ public class RazorPageActivatorTest
         // Arrange
         var activator = CreateActivator();
 
-        var viewData = new ViewDataDictionary<MyModel>(MetadataProvider, new ModelStateDictionary());
+        var viewData = new ViewDataDictionary<MyModel>(
+            MetadataProvider,
+            new ModelStateDictionary()
+        );
         var viewContext = CreateViewContext(viewData);
 
         var instance = new HasIncorrectViewDataPropertyType();
@@ -167,9 +173,9 @@ public class RazorPageActivatorTest
         var activator = CreateActivator();
 
         var viewData = new ViewDataDictionary<object>(MetadataProvider, new ModelStateDictionary())
-            {
-                { "key", "value" },
-            };
+        {
+            { "key", "value" },
+        };
         var viewContext = CreateViewContext(viewData);
         var page = new ModelTypeProviderRazorPage();
 
@@ -225,7 +231,14 @@ public class RazorPageActivatorTest
 
     private RazorPageActivator CreateActivator()
     {
-        return new RazorPageActivator(MetadataProvider, UrlHelperFactory, JsonHelper, DiagnosticListener, HtmlEncoder, ModelExpressionProvider);
+        return new RazorPageActivator(
+            MetadataProvider,
+            UrlHelperFactory,
+            JsonHelper,
+            DiagnosticListener,
+            HtmlEncoder,
+            ModelExpressionProvider
+        );
     }
 
     private ViewContext CreateViewContext(ViewDataDictionary viewData = null)
@@ -243,10 +256,7 @@ public class RazorPageActivatorTest
             .AddSingleton(htmlHelper)
             .BuildServiceProvider();
 
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = serviceProvider
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         return new ViewContext(
             actionContext,
@@ -254,7 +264,8 @@ public class RazorPageActivatorTest
             viewData,
             Mock.Of<ITempDataDictionary>(),
             TextWriter.Null,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
     }
 
     private abstract class TestPageBase<TModel> : RazorPage<TModel>
@@ -332,7 +343,5 @@ public class RazorPageActivatorTest
         }
     }
 
-    private class MyModel
-    {
-    }
+    private class MyModel { }
 }

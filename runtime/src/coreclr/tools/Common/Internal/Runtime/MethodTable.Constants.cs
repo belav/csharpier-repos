@@ -221,8 +221,10 @@ namespace Internal.Runtime
         Double = 0x0F,
 
         ValueType = 0x10,
+
         // Enum = 0x11, // EETypes store enums as their underlying type
         Nullable = 0x12,
+
         // Unused 0x13,
 
         Class = 0x14,
@@ -290,6 +292,7 @@ namespace Internal.Runtime
     internal static class WritableData
     {
         public static int GetSize(int pointerSize) => pointerSize;
+
         public static int GetAlignment(int pointerSize) => pointerSize;
     }
 }

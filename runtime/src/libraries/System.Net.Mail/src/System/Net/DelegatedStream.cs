@@ -20,34 +20,22 @@ namespace System.Net
 
         protected Stream BaseStream
         {
-            get
-            {
-                return _stream;
-            }
+            get { return _stream; }
         }
 
         public override bool CanRead
         {
-            get
-            {
-                return _stream.CanRead;
-            }
+            get { return _stream.CanRead; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return _stream.CanSeek;
-            }
+            get { return _stream.CanSeek; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return _stream.CanWrite;
-            }
+            get { return _stream.CanWrite; }
         }
 
         public override long Length
@@ -79,7 +67,13 @@ namespace System.Net
             }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             if (!CanRead)
                 throw new NotSupportedException(SR.ReadNotSupported);
@@ -87,7 +81,13 @@ namespace System.Net
             return _stream.BeginRead(buffer, offset, count, callback, state);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             if (!CanWrite)
                 throw new NotSupportedException(SR.WriteNotSupported);
@@ -136,7 +136,12 @@ namespace System.Net
             return _stream.Read(buffer, offset, count);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (!CanRead)
                 throw new NotSupportedException(SR.ReadNotSupported);
@@ -144,7 +149,10 @@ namespace System.Net
             return _stream.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (!CanRead)
                 throw new NotSupportedException(SR.ReadNotSupported);
@@ -176,7 +184,12 @@ namespace System.Net
             _stream.Write(buffer, offset, count);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (!CanWrite)
                 throw new NotSupportedException(SR.WriteNotSupported);
@@ -184,7 +197,10 @@ namespace System.Net
             return _stream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (!CanWrite)
                 throw new NotSupportedException(SR.WriteNotSupported);

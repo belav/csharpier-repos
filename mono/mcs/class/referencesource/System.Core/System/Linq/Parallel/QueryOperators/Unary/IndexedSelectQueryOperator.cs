@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -25,9 +25,9 @@ namespace System.Linq.Parallel
     /// </summary>
     /// <typeparam name="TInput"></typeparam>
     /// <typeparam name="TOutput"></typeparam>
-    internal sealed class IndexedSelectQueryOperator<TInput, TOutput> : UnaryQueryOperator<TInput, TOutput>
+    internal sealed class IndexedSelectQueryOperator<TInput, TOutput>
+        : UnaryQueryOperator<TInput, TOutput>
     {
-
         // Selector function. Used to project elements to a transformed view during execution.
         private readonly Func<TInput, int, TOutput> m_selector;
         private bool m_prematureMerge = false; // Whether to prematurely merge the input of this operator.
@@ -44,9 +44,11 @@ namespace System.Linq.Parallel
         //    selector must be non null.
         //
 
-        internal IndexedSelectQueryOperator(IEnumerable<TInput> child,
-                                            Func<TInput, int, TOutput> selector)
-            :base(child)
+        internal IndexedSelectQueryOperator(
+            IEnumerable<TInput> child,
+            Func<TInput, int, TOutput> selector
+        )
+            : base(child)
         {
             Contract.Assert(child != null, "child data source cannot be null");
             Contract.Assert(selector != null, "need a selector function");
@@ -82,15 +84,23 @@ namespace System.Linq.Parallel
         // partitions as needed.
         //
 
-        internal override QueryResults<TOutput> Open(
-            QuerySettings settings, bool preferStriping)
+        internal override QueryResults<TOutput> Open(QuerySettings settings, bool preferStriping)
         {
             QueryResults<TInput> childQueryResults = Child.Open(settings, preferStriping);
-            return IndexedSelectQueryOperatorResults.NewResults(childQueryResults, this, settings, preferStriping);
+            return IndexedSelectQueryOperatorResults.NewResults(
+                childQueryResults,
+                this,
+                settings,
+                preferStriping
+            );
         }
 
-        internal override void  WrapPartitionedStream<TKey>(
-            PartitionedStream<TInput, TKey> inputStream, IPartitionedStreamRecipient<TOutput> recipient, bool preferStriping, QuerySettings settings)
+        internal override void WrapPartitionedStream<TKey>(
+            PartitionedStream<TInput, TKey> inputStream,
+            IPartitionedStreamRecipient<TOutput> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
 
@@ -98,8 +108,14 @@ namespace System.Linq.Parallel
             PartitionedStream<TInput, int> inputStreamInt;
             if (m_prematureMerge)
             {
-                ListQueryResults<TInput> listResults = QueryOperator<TInput>.ExecuteAndCollectResults(
-                    inputStream, partitionCount, Child.OutputOrdered, preferStriping, settings);
+                ListQueryResults<TInput> listResults =
+                    QueryOperator<TInput>.ExecuteAndCollectResults(
+                        inputStream,
+                        partitionCount,
+                        Child.OutputOrdered,
+                        preferStriping,
+                        settings
+                    );
                 inputStreamInt = listResults.GetPartitionedStream();
             }
             else
@@ -109,17 +125,22 @@ namespace System.Linq.Parallel
             }
 
             // Since the index is correct, the type of the index must be int
-            PartitionedStream<TOutput, int> outputStream =
-                new PartitionedStream<TOutput, int>(partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState);
+            PartitionedStream<TOutput, int> outputStream = new PartitionedStream<TOutput, int>(
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState
+            );
 
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new IndexedSelectQueryOperatorEnumerator(inputStreamInt[i], m_selector);
+                outputStream[i] = new IndexedSelectQueryOperatorEnumerator(
+                    inputStreamInt[i],
+                    m_selector
+                );
             }
 
             recipient.Receive(outputStream);
         }
-
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
@@ -137,15 +158,17 @@ namespace System.Linq.Parallel
 
         class IndexedSelectQueryOperatorEnumerator : QueryOperatorEnumerator<TOutput, int>
         {
-
             private readonly QueryOperatorEnumerator<TInput, int> m_source; // The data source to enumerate.
-            private readonly Func<TInput, int, TOutput> m_selector;  // The actual select function.
+            private readonly Func<TInput, int, TOutput> m_selector; // The actual select function.
 
             //---------------------------------------------------------------------------------------
             // Instantiates a new select enumerator.
             //
 
-            internal IndexedSelectQueryOperatorEnumerator(QueryOperatorEnumerator<TInput, int> source, Func<TInput, int, TOutput> selector)
+            internal IndexedSelectQueryOperatorEnumerator(
+                QueryOperatorEnumerator<TInput, int> source,
+                Func<TInput, int, TOutput> selector
+            )
             {
                 Contract.Assert(source != null);
                 Contract.Assert(selector != null);
@@ -175,9 +198,7 @@ namespace System.Linq.Parallel
             {
                 m_source.Dispose();
             }
-
         }
-
 
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
@@ -195,28 +216,42 @@ namespace System.Linq.Parallel
 
         class IndexedSelectQueryOperatorResults : UnaryQueryOperatorResults
         {
-            IndexedSelectQueryOperator<TInput, TOutput> m_selectOp;  // Operator that generated the results
+            IndexedSelectQueryOperator<TInput, TOutput> m_selectOp; // Operator that generated the results
             int m_childCount; // The number of elements in child results
 
             public static QueryResults<TOutput> NewResults(
-                QueryResults<TInput> childQueryResults, IndexedSelectQueryOperator<TInput, TOutput> op,
-                QuerySettings settings, bool preferStriping)
+                QueryResults<TInput> childQueryResults,
+                IndexedSelectQueryOperator<TInput, TOutput> op,
+                QuerySettings settings,
+                bool preferStriping
+            )
             {
                 if (childQueryResults.IsIndexible)
                 {
                     return new IndexedSelectQueryOperatorResults(
-                        childQueryResults, op, settings, preferStriping);
+                        childQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
                 else
                 {
                     return new UnaryQueryOperatorResults(
-                        childQueryResults, op, settings, preferStriping);
+                        childQueryResults,
+                        op,
+                        settings,
+                        preferStriping
+                    );
                 }
             }
 
             private IndexedSelectQueryOperatorResults(
-                QueryResults<TInput> childQueryResults, IndexedSelectQueryOperator<TInput, TOutput> op, 
-                QuerySettings settings, bool preferStriping)
+                QueryResults<TInput> childQueryResults,
+                IndexedSelectQueryOperator<TInput, TOutput> op,
+                QuerySettings settings,
+                bool preferStriping
+            )
                 : base(childQueryResults, op, settings, preferStriping)
             {
                 m_selectOp = op;
@@ -227,7 +262,7 @@ namespace System.Linq.Parallel
 
             internal override int ElementsCount
             {
-                get 
+                get
                 {
                     Contract.Assert(m_childCount >= 0);
                     return m_childQueryResults.ElementsCount;

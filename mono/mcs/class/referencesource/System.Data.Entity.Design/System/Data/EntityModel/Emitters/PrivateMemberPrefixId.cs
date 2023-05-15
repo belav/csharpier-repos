@@ -11,9 +11,6 @@ using System;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 
-
-
-
 namespace System.Data.EntityModel.Emitters
 {
     internal enum PrivateMemberPrefixId
@@ -22,7 +19,8 @@ namespace System.Data.EntityModel.Emitters
         IntializeMethod,
         PropertyInfoProperty,
         PropertyInfoField,
+
         // add additional members here
-        Count 
-    }  
+        Count
+    }
 }

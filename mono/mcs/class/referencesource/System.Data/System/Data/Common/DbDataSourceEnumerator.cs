@@ -6,8 +6,8 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Common {
-
+namespace System.Data.Common
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -15,11 +15,11 @@ namespace System.Data.Common {
     using System.Diagnostics;
     using System.Threading;
 
-    public abstract class DbDataSourceEnumerator { // V1.2.3300
-    
-        protected DbDataSourceEnumerator() { // V1.2.3300
+    public abstract class DbDataSourceEnumerator
+    { // V1.2.3300
+        protected DbDataSourceEnumerator()
+        { // V1.2.3300
         }
-
 
         abstract public DataTable GetDataSources(); // V1.2.3300
 

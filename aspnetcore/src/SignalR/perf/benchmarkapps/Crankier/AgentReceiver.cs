@@ -36,17 +36,20 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                             case "pong":
                                 await _agent.PongAsync(
                                     message.Value["Id"].ToObject<int>(),
-                                    message.Value["Value"].ToObject<int>());
+                                    message.Value["Value"].ToObject<int>()
+                                );
                                 break;
                             case "log":
                                 await _agent.LogAsync(
                                     message.Value["Id"].ToObject<int>(),
-                                    message.Value["Text"].ToObject<string>());
+                                    message.Value["Text"].ToObject<string>()
+                                );
                                 break;
                             case "status":
                                 await _agent.StatusAsync(
                                     message.Value["Id"].ToObject<int>(),
-                                    message.Value["StatusInformation"].ToObject<StatusInformation>());
+                                    message.Value["StatusInformation"].ToObject<StatusInformation>()
+                                );
                                 break;
                         }
                     }

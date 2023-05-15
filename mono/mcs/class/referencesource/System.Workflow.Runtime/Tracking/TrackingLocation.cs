@@ -24,7 +24,9 @@ namespace System.Workflow.Runtime.Tracking
     /// Contains data that is used to match instance locations.
     /// </summary>
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowTrackingLocation
     {
         #region Private Data Members
@@ -35,9 +37,7 @@ namespace System.Workflow.Runtime.Tracking
 
         #region Constructors
 
-        public WorkflowTrackingLocation()
-        {
-        }
+        public WorkflowTrackingLocation() { }
 
         public WorkflowTrackingLocation(IList<TrackingWorkflowEvent> events)
         {
@@ -68,7 +68,9 @@ namespace System.Workflow.Runtime.Tracking
     /// Contains data that is used to match activity locations.
     /// </summary>
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityTrackingLocation
     {
         #region Private Data Members
@@ -83,9 +85,7 @@ namespace System.Workflow.Runtime.Tracking
 
         #region Constructors
 
-        public ActivityTrackingLocation()
-        {
-        }
+        public ActivityTrackingLocation() { }
 
         public ActivityTrackingLocation(string activityTypeName)
         {
@@ -103,7 +103,10 @@ namespace System.Workflow.Runtime.Tracking
             _activityType = activityType;
         }
 
-        public ActivityTrackingLocation(string activityTypeName, IEnumerable<ActivityExecutionStatus> executionStatusEvents)
+        public ActivityTrackingLocation(
+            string activityTypeName,
+            IEnumerable<ActivityExecutionStatus> executionStatusEvents
+        )
         {
             if (null == activityTypeName)
                 throw new ArgumentNullException("activityTypeName");
@@ -115,7 +118,10 @@ namespace System.Workflow.Runtime.Tracking
             _events.AddRange(executionStatusEvents);
         }
 
-        public ActivityTrackingLocation(Type activityType, IEnumerable<ActivityExecutionStatus> executionStatusEvents)
+        public ActivityTrackingLocation(
+            Type activityType,
+            IEnumerable<ActivityExecutionStatus> executionStatusEvents
+        )
         {
             if (null == activityType)
                 throw new ArgumentNullException("activityType");
@@ -127,7 +133,11 @@ namespace System.Workflow.Runtime.Tracking
             _events.AddRange(executionStatusEvents);
         }
 
-        public ActivityTrackingLocation(string activityTypeName, bool matchDerivedTypes, IEnumerable<ActivityExecutionStatus> executionStatusEvents)
+        public ActivityTrackingLocation(
+            string activityTypeName,
+            bool matchDerivedTypes,
+            IEnumerable<ActivityExecutionStatus> executionStatusEvents
+        )
         {
             if (null == activityTypeName)
                 throw new ArgumentNullException("activityTypeName");
@@ -140,7 +150,11 @@ namespace System.Workflow.Runtime.Tracking
             _events.AddRange(executionStatusEvents);
         }
 
-        public ActivityTrackingLocation(Type activityType, bool matchDerivedTypes, IEnumerable<ActivityExecutionStatus> executionStatusEvents)
+        public ActivityTrackingLocation(
+            Type activityType,
+            bool matchDerivedTypes,
+            IEnumerable<ActivityExecutionStatus> executionStatusEvents
+        )
         {
             if (null == activityType)
                 throw new ArgumentNullException("activityType");
@@ -194,7 +208,7 @@ namespace System.Workflow.Runtime.Tracking
             if (null == activity)
                 throw new ArgumentNullException("activity");
             //
-            // Matching the type is generally going to be cheaper 
+            // Matching the type is generally going to be cheaper
             // so do it first and short circuit if we don't match
             if (!TypeIsMatch(activity))
             {
@@ -244,7 +258,9 @@ namespace System.Workflow.Runtime.Tracking
     /// Contains data that is used to match code locations.
     /// </summary>
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class UserTrackingLocation
     {
         #region Private Data Members
@@ -265,9 +281,7 @@ namespace System.Workflow.Runtime.Tracking
 
         #region Constructors
 
-        public UserTrackingLocation()
-        {
-        }
+        public UserTrackingLocation() { }
 
         public UserTrackingLocation(Type argumentType)
         {
@@ -418,7 +432,6 @@ namespace System.Workflow.Runtime.Tracking
             return true;
         }
 
-
         #endregion
     }
 
@@ -462,7 +475,7 @@ namespace System.Workflow.Runtime.Tracking
         {
             Type objType = obj.GetType();
             //
-            // First check if the type is a direct match.  
+            // First check if the type is a direct match.
             // Can't just use Type.IsInstanceOfType at this point because that matches bases and interfaces.
             // If not then use IsInstanceOfType to check bases and interfaces if we are matching derived
             if (objType == matchType)

@@ -15,7 +15,9 @@ namespace System.Globalization.Tests
             Type globalizationMode = Type.GetType("System.Globalization.GlobalizationMode");
             if (globalizationMode != null)
             {
-                MethodInfo methodInfo = globalizationMode.GetProperty("UseNls", BindingFlags.NonPublic | BindingFlags.Static)?.GetMethod;
+                MethodInfo methodInfo = globalizationMode
+                    .GetProperty("UseNls", BindingFlags.NonPublic | BindingFlags.Static)
+                    ?.GetMethod;
                 if (methodInfo != null)
                 {
                     Assert.True((bool)methodInfo.Invoke(null, null));
@@ -23,13 +25,18 @@ namespace System.Globalization.Tests
                 }
             }
 
-            throw new XunitException("Couldn't get System.Globalization.GlobalizationMode.UseIcu property.");
+            throw new XunitException(
+                "Couldn't get System.Globalization.GlobalizationMode.UseIcu property."
+            );
         }
 
         [Fact]
         public static void IcuShouldNotBeLoaded()
         {
-            Assert.False(PlatformDetection.IsIcuGlobalization, $"Found ICU: {PlatformDetection.ICUVersion}");
+            Assert.False(
+                PlatformDetection.IsIcuGlobalization,
+                $"Found ICU: {PlatformDetection.ICUVersion}"
+            );
         }
     }
 }

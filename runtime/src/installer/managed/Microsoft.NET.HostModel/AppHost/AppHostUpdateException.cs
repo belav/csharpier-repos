@@ -9,7 +9,5 @@ namespace Microsoft.NET.HostModel.AppHost
     /// An instance of this exception is thrown when an AppHost binary update
     /// fails due to known user errors.
     /// </summary>
-    public class AppHostUpdateException : Exception
-    {
-    }
+    public class AppHostUpdateException : Exception { }
 }

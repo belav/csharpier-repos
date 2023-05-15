@@ -21,7 +21,10 @@ namespace System.Xml.XmlSchemaTests
                 XmlSchemaSet sc = new XmlSchemaSet();
                 sc.ValidationEventHandler += new ValidationEventHandler((s, args) => { });
                 sc.XmlResolver = null;
-                XmlSchema Schema = sc.Add(null, Path.Combine(TestData._Root, "XmlResolver", "File", "simpledtd.xml"));
+                XmlSchema Schema = sc.Add(
+                    null,
+                    Path.Combine(TestData._Root, "XmlResolver", "File", "simpledtd.xml")
+                );
             }
             catch (Exception)
             {
@@ -61,7 +64,9 @@ namespace System.Xml.XmlSchemaTests
             {
                 bool warningCallback = false;
                 XmlSchemaSet sc = new XmlSchemaSet();
-                sc.ValidationEventHandler += new ValidationEventHandler((s, args) => warningCallback |= args.Severity == XmlSeverityType.Warning);
+                sc.ValidationEventHandler += new ValidationEventHandler(
+                    (s, args) => warningCallback |= args.Severity == XmlSeverityType.Warning
+                );
                 sc.Add(null, Path.Combine(TestData._Root, "xmlresolver_v4.xsd"));
                 CError.Compare(sc.Count, 2, "SchemaSet count");
                 CError.Compare(warningCallback, false, "Warning thrown");
@@ -77,7 +82,9 @@ namespace System.Xml.XmlSchemaTests
             {
                 bool warningCallback = false;
                 XmlSchemaSet sc = new XmlSchemaSet();
-                sc.ValidationEventHandler += new ValidationEventHandler((s, args) => warningCallback |= args.Severity == XmlSeverityType.Warning);
+                sc.ValidationEventHandler += new ValidationEventHandler(
+                    (s, args) => warningCallback |= args.Severity == XmlSeverityType.Warning
+                );
                 sc.Add(null, Path.Combine(TestData._Root, "xmlresolver_v5.xsd"));
                 CError.Compare(sc.Count, 3, "SchemaSet count");
                 CError.Compare(warningCallback, false, "Warning not thrown");
@@ -90,7 +97,9 @@ namespace System.Xml.XmlSchemaTests
         {
             bool warningCallback = false;
             XmlSchemaSet sc = new XmlSchemaSet();
-            sc.ValidationEventHandler += new ValidationEventHandler((s, args) => warningCallback |= args.Severity == XmlSeverityType.Warning);
+            sc.ValidationEventHandler += new ValidationEventHandler(
+                (s, args) => warningCallback |= args.Severity == XmlSeverityType.Warning
+            );
             sc.Add(null, Path.Combine(TestData._Root, "xmlresolver_v4.xsd"));
             CError.Compare(sc.Count, 1, "SchemaSet count");
             CError.Compare(warningCallback, false, "Warning thrown");

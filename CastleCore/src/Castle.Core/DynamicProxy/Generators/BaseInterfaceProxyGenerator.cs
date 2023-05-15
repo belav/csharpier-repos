@@ -33,8 +33,13 @@ namespace Castle.DynamicProxy.Generators
 
         protected FieldReference targetField;
 
-        protected BaseInterfaceProxyGenerator(ModuleScope scope, Type targetType, Type[] interfaces,
-                                              Type proxyTargetType, ProxyGenerationOptions options)
+        protected BaseInterfaceProxyGenerator(
+            ModuleScope scope,
+            Type targetType,
+            Type[] interfaces,
+            Type proxyTargetType,
+            ProxyGenerationOptions options
+        )
             : base(scope, targetType, interfaces, options)
         {
             CheckNotGenericTypeDefinition(proxyTargetType, nameof(proxyTargetType));
@@ -47,17 +52,26 @@ namespace Castle.DynamicProxy.Generators
 
         protected abstract string GeneratorType { get; }
 
-        protected abstract CompositeTypeContributor GetProxyTargetContributor(Type proxyTargetType, INamingScope namingScope);
+        protected abstract CompositeTypeContributor GetProxyTargetContributor(
+            Type proxyTargetType,
+            INamingScope namingScope
+        );
 
         protected abstract ProxyTargetAccessorContributor GetProxyTargetAccessorContributor();
 
-        protected abstract void AddMappingForAdditionalInterfaces(CompositeTypeContributor contributor, Type[] proxiedInterfaces,
-                                                                  IDictionary<Type, ITypeContributor> typeImplementerMapping,
-                                                                  ICollection<Type> targetInterfaces);
+        protected abstract void AddMappingForAdditionalInterfaces(
+            CompositeTypeContributor contributor,
+            Type[] proxiedInterfaces,
+            IDictionary<Type, ITypeContributor> typeImplementerMapping,
+            ICollection<Type> targetInterfaces
+        );
 
-        protected virtual ITypeContributor AddMappingForTargetType(IDictionary<Type, ITypeContributor> typeImplementerMapping,
-                                                                   Type proxyTargetType, ICollection<Type> targetInterfaces,
-                                                                   INamingScope namingScope)
+        protected virtual ITypeContributor AddMappingForTargetType(
+            IDictionary<Type, ITypeContributor> typeImplementerMapping,
+            Type proxyTargetType,
+            ICollection<Type> targetInterfaces,
+            INamingScope namingScope
+        )
         {
             var contributor = GetProxyTargetContributor(proxyTargetType, namingScope);
             var proxiedInterfaces = targetType.GetAllInterfaces();
@@ -67,7 +81,12 @@ namespace Castle.DynamicProxy.Generators
                 AddMappingNoCheck(@interface, contributor, typeImplementerMapping);
             }
 
-            AddMappingForAdditionalInterfaces(contributor, proxiedInterfaces, typeImplementerMapping, targetInterfaces);
+            AddMappingForAdditionalInterfaces(
+                contributor,
+                proxiedInterfaces,
+                typeImplementerMapping,
+                targetInterfaces
+            );
             return contributor;
         }
 
@@ -87,7 +106,11 @@ namespace Castle.DynamicProxy.Generators
         protected override Type GenerateType(string typeName, INamingScope namingScope)
         {
             IEnumerable<ITypeContributor> contributors;
-            var allInterfaces = GetTypeImplementerMapping(proxyTargetType, out contributors, namingScope);
+            var allInterfaces = GetTypeImplementerMapping(
+                proxyTargetType,
+                out contributors,
+                namingScope
+            );
 
             var model = new MetaType();
             // Collect methods
@@ -100,7 +123,13 @@ namespace Castle.DynamicProxy.Generators
 
             ClassEmitter emitter;
             FieldReference interceptorsField;
-            var baseType = Init(typeName, out emitter, proxyTargetType, out interceptorsField, allInterfaces);
+            var baseType = Init(
+                typeName,
+                out emitter,
+                proxyTargetType,
+                out interceptorsField,
+                allInterfaces
+            );
 
             // Constructor
 
@@ -132,7 +161,9 @@ namespace Castle.DynamicProxy.Generators
             CompleteInitCacheMethod(cctor.CodeBuilder);
 
             // non-inheritable attributes from proxied type
-            var nonInheritableAttributesContributor = new NonInheritableAttributesContributor(targetType);
+            var nonInheritableAttributesContributor = new NonInheritableAttributesContributor(
+                targetType
+            );
             nonInheritableAttributesContributor.Generate(emitter);
 
             // Crosses fingers and build type
@@ -143,14 +174,23 @@ namespace Castle.DynamicProxy.Generators
         }
 
         protected virtual InterfaceProxyWithoutTargetContributor GetContributorForAdditionalInterfaces(
-            INamingScope namingScope)
+            INamingScope namingScope
+        )
         {
-            return new InterfaceProxyWithoutTargetContributor(namingScope, (c, m) => NullExpression.Instance) { Logger = Logger };
+            return new InterfaceProxyWithoutTargetContributor(
+                namingScope,
+                (c, m) => NullExpression.Instance
+            )
+            {
+                Logger = Logger
+            };
         }
 
-        protected virtual IEnumerable<Type> GetTypeImplementerMapping(Type proxyTargetType,
-                                                                      out IEnumerable<ITypeContributor> contributors,
-                                                                      INamingScope namingScope)
+        protected virtual IEnumerable<Type> GetTypeImplementerMapping(
+            Type proxyTargetType,
+            out IEnumerable<ITypeContributor> contributors,
+            INamingScope namingScope
+        )
         {
             var contributorsList = new List<ITypeContributor>(capacity: 5);
             var targetInterfaces = proxyTargetType.GetAllInterfaces();
@@ -158,13 +198,21 @@ namespace Castle.DynamicProxy.Generators
 
             // Order of interface precedence:
             // 1. first target
-            var targetContributor = AddMappingForTargetType(typeImplementerMapping, proxyTargetType, targetInterfaces, namingScope);
+            var targetContributor = AddMappingForTargetType(
+                typeImplementerMapping,
+                proxyTargetType,
+                targetInterfaces,
+                namingScope
+            );
             contributorsList.Add(targetContributor);
 
             // 2. then mixins
             if (ProxyGenerationOptions.HasMixins)
             {
-                var mixinContributor = new MixinContributor(namingScope, AllowChangeTarget) { Logger = Logger };
+                var mixinContributor = new MixinContributor(namingScope, AllowChangeTarget)
+                {
+                    Logger = Logger
+                };
                 contributorsList.Add(mixinContributor);
 
                 foreach (var mixinInterface in ProxyGenerationOptions.MixinData.MixinInterfaces)
@@ -194,7 +242,9 @@ namespace Castle.DynamicProxy.Generators
             // 3. then additional interfaces
             if (interfaces.Length > 0)
             {
-                var additionalInterfacesContributor = GetContributorForAdditionalInterfaces(namingScope);
+                var additionalInterfacesContributor = GetContributorForAdditionalInterfaces(
+                    namingScope
+                );
                 contributorsList.Add(additionalInterfacesContributor);
 
                 foreach (var @interface in interfaces)
@@ -209,14 +259,22 @@ namespace Castle.DynamicProxy.Generators
                     }
 
                     additionalInterfacesContributor.AddInterfaceToProxy(@interface);
-                    AddMappingNoCheck(@interface, additionalInterfacesContributor, typeImplementerMapping);
+                    AddMappingNoCheck(
+                        @interface,
+                        additionalInterfacesContributor,
+                        typeImplementerMapping
+                    );
                 }
             }
 
             // 4. plus special interfaces
 
 #if FEATURE_SERIALIZATION
-            var serializableContributor = new InterfaceProxySerializableContributor(targetType, GeneratorType, interfaces);
+            var serializableContributor = new InterfaceProxySerializableContributor(
+                targetType,
+                GeneratorType,
+                interfaces
+            );
             contributorsList.Add(serializableContributor);
             AddMappingForISerializable(typeImplementerMapping, serializableContributor);
 #endif
@@ -225,7 +283,11 @@ namespace Castle.DynamicProxy.Generators
             contributorsList.Add(proxyTargetAccessorContributor);
             try
             {
-                AddMappingNoCheck(typeof(IProxyTargetAccessor), proxyTargetAccessorContributor, typeImplementerMapping);
+                AddMappingNoCheck(
+                    typeof(IProxyTargetAccessor),
+                    proxyTargetAccessorContributor,
+                    typeImplementerMapping
+                );
             }
             catch (ArgumentException)
             {
@@ -236,8 +298,13 @@ namespace Castle.DynamicProxy.Generators
             return typeImplementerMapping.Keys;
         }
 
-        protected virtual Type Init(string typeName, out ClassEmitter emitter, Type proxyTargetType,
-                                    out FieldReference interceptorsField, IEnumerable<Type> allInterfaces)
+        protected virtual Type Init(
+            string typeName,
+            out ClassEmitter emitter,
+            Type proxyTargetType,
+            out FieldReference interceptorsField,
+            IEnumerable<Type> allInterfaces
+        )
         {
             var baseType = ProxyGenerationOptions.BaseTypeForInterfaceProxy;
 
@@ -264,7 +331,8 @@ namespace Castle.DynamicProxy.Generators
             if (type == null)
             {
                 throw new ArgumentException(
-                    "Base type for proxy is null reference. Please set it to System.Object or some other valid type.");
+                    "Base type for proxy is null reference. Please set it to System.Object or some other valid type."
+                );
             }
 
             if (!type.IsClass)
@@ -277,8 +345,12 @@ namespace Castle.DynamicProxy.Generators
                 ThrowInvalidBaseType(type, "it is sealed");
             }
 
-            var constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                                                  null, Type.EmptyTypes, null);
+            var constructor = type.GetConstructor(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                null,
+                Type.EmptyTypes,
+                null
+            );
 
             if (constructor == null || constructor.IsPrivate)
             {
@@ -286,11 +358,16 @@ namespace Castle.DynamicProxy.Generators
             }
         }
 
-        private void ThrowInvalidBaseType(Type type, string doesNotHaveAccessibleParameterlessConstructor)
+        private void ThrowInvalidBaseType(
+            Type type,
+            string doesNotHaveAccessibleParameterlessConstructor
+        )
         {
             var format =
                 "Type {0} is not valid base type for interface proxy, because {1}. Only a non-sealed class with non-private default constructor can be used as base type for interface proxy. Please use some other valid type.";
-            throw new ArgumentException(string.Format(format, type, doesNotHaveAccessibleParameterlessConstructor));
+            throw new ArgumentException(
+                string.Format(format, type, doesNotHaveAccessibleParameterlessConstructor)
+            );
         }
     }
 }

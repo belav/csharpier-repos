@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,9 +34,9 @@ namespace Castle.DynamicProxy
         ///   - Get all the mixin interfaces
         ///   - Sort them by full name
         ///   - Return them by position
-        /// 
+        ///
         /// The idea is to have reproducible behavior for the case that mixins are registered in different orders.
-        /// This method is here because it is required 
+        /// This method is here because it is required
         /// </summary>
         public MixinData(IEnumerable<object> mixinInstances)
         {
@@ -81,14 +81,16 @@ namespace Castle.DynamicProxy
                                     "The list of mixins contains two mixins implementing the same interface '{0}': {1} and {2}. An interface cannot be added by more than one mixin.",
                                     inter.FullName,
                                     interMixin.GetType().Name,
-                                    mixin.GetType().Name);
+                                    mixin.GetType().Name
+                                );
                             }
                             else
                             {
                                 Debug.Assert(inter.IsDelegateType());
                                 message = string.Format(
                                     "The list of mixins already contains a mixin for delegate type '{0}'.",
-                                    inter.FullName);
+                                    inter.FullName
+                                );
                             }
                             throw new ArgumentException(message, nameof(mixinInstances));
                         }
@@ -106,16 +108,26 @@ namespace Castle.DynamicProxy
                         if (mixedInType.IsDelegateType())
                         {
                             var invokeMethod = mixedInType.GetMethod("Invoke");
-                            if (invokeMethods.Contains(invokeMethod, MethodSignatureComparer.Instance))
+                            if (
+                                invokeMethods.Contains(
+                                    invokeMethod,
+                                    MethodSignatureComparer.Instance
+                                )
+                            )
                             {
-                                throw new ArgumentException("The list of mixins contains at least two delegate mixins for the same delegate signature.", nameof(mixinInstances));
+                                throw new ArgumentException(
+                                    "The list of mixins contains at least two delegate mixins for the same delegate signature.",
+                                    nameof(mixinInstances)
+                                );
                             }
                             invokeMethods.Add(invokeMethod);
                         }
                     }
                 }
 
-                sortedMixedInterfaceTypes.Sort((x, y) => string.CompareOrdinal(x.FullName, y.FullName));
+                sortedMixedInterfaceTypes.Sort(
+                    (x, y) => string.CompareOrdinal(x.FullName, y.FullName)
+                );
 
                 for (var i = 0; i < sortedMixedInterfaceTypes.Count; i++)
                 {
@@ -177,8 +189,12 @@ namespace Castle.DynamicProxy
 
             if (delegateMixinCount > 0)
             {
-                var delegateMixinTypes = mixinPositions.Select(m => m.Key).Where(TypeUtil.IsDelegateType);
-                var otherDelegateMixinTypes = other.mixinPositions.Select(m => m.Key).Where(TypeUtil.IsDelegateType);
+                var delegateMixinTypes = mixinPositions
+                    .Select(m => m.Key)
+                    .Where(TypeUtil.IsDelegateType);
+                var otherDelegateMixinTypes = other.mixinPositions
+                    .Select(m => m.Key)
+                    .Where(TypeUtil.IsDelegateType);
                 return Enumerable.SequenceEqual(delegateMixinTypes, otherDelegateMixinTypes);
             }
 
@@ -191,7 +207,9 @@ namespace Castle.DynamicProxy
             var hashCode = 0;
             foreach (var mixinImplementation in mixinsImpl)
             {
-                hashCode = unchecked(29 * hashCode + mixinImplementation?.GetType().GetHashCode() ?? 307);
+                hashCode = unchecked(
+                    29 * hashCode + mixinImplementation?.GetType().GetHashCode() ?? 307
+                );
             }
 
             return hashCode;

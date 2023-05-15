@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public InternalClrEntityEntry(
             IStateManager stateManager,
             IEntityType entityType,
-            object entity)
+            object entity
+        )
             : base(stateManager, entityType)
         {
             Entity = entity;

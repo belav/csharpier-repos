@@ -14,15 +14,16 @@ namespace System.ServiceModel.Security.Tokens
     class NonValidatingSecurityTokenAuthenticator<TTokenType> : SecurityTokenAuthenticator
     {
         public NonValidatingSecurityTokenAuthenticator()
-            : base()
-        { }
+            : base() { }
 
         protected override bool CanValidateTokenCore(SecurityToken token)
         {
             return (token is TTokenType);
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             return EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance;
         }

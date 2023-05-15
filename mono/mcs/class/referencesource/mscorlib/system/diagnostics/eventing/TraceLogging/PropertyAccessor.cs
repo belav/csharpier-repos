@@ -23,9 +23,9 @@ namespace System.Diagnostics.Tracing
         public static PropertyAccessor<ContainerType> Create(PropertyAnalysis property)
         {
             // Due to current Project N limitations on handling generic instantiations with
-            // 2 generic parameters we have to explicitly create the instantiations that we consider 
-            // important to EventSource performance (we have considered int, long, string for the moment). 
-            // Everything else is handled by NonGenericPropertyWriter that ends up boxing the container object. 
+            // 2 generic parameters we have to explicitly create the instantiations that we consider
+            // important to EventSource performance (we have considered int, long, string for the moment).
+            // Everything else is handled by NonGenericPropertyWriter that ends up boxing the container object.
             var retType = property.getterInfo.ReturnType;
             if (!Statics.IsValueType(typeof(ContainerType)))
             {
@@ -41,15 +41,15 @@ namespace System.Diagnostics.Tracing
                 // Handle the case if it is a struct (DD 1027919)
             }
 
-            // Otherwise use the boxing one.  
+            // Otherwise use the boxing one.
             return new NonGenericProperytWriter<ContainerType>(property);
         }
     }
 
     /// <summary>
-    /// The type specific version of the property writers uses generics in a way 
-    /// that Project N can't handle at the moment.   To avoid this we simply 
-    /// use reflection completely.  
+    /// The type specific version of the property writers uses generics in a way
+    /// that Project N can't handle at the moment.   To avoid this we simply
+    /// use reflection completely.
     /// </summary>
     internal class NonGenericProperytWriter<ContainerType> : PropertyAccessor<ContainerType>
     {
@@ -61,9 +61,7 @@ namespace System.Diagnostics.Tracing
 
         public override void Write(TraceLoggingDataCollector collector, ref ContainerType container)
         {
-            object value = container == null
-                ? null
-                : getterInfo.Invoke((object)container, null);
+            object value = container == null ? null : getterInfo.Invoke((object)container, null);
             this.typeInfo.WriteObjectData(collector, value);
         }
 
@@ -84,8 +82,7 @@ namespace System.Diagnostics.Tracing
     /// </summary>
     /// <typeparam name="ContainerType">The type of the object from which properties are read.</typeparam>
     /// <typeparam name="ValueType">Type of the property being read.</typeparam>
-    internal class StructPropertyWriter<ContainerType, ValueType>
-            : PropertyAccessor<ContainerType>
+    internal class StructPropertyWriter<ContainerType, ValueType> : PropertyAccessor<ContainerType>
     {
         private delegate ValueType Getter(ref ContainerType container);
         private readonly TraceLoggingTypeInfo<ValueType> valueTypeInfo;
@@ -94,24 +91,18 @@ namespace System.Diagnostics.Tracing
         public StructPropertyWriter(PropertyAnalysis property)
         {
             this.valueTypeInfo = (TraceLoggingTypeInfo<ValueType>)property.typeInfo;
-            this.getter = (Getter)Statics.CreateDelegate(
-                typeof(Getter),
-                property.getterInfo);
+            this.getter = (Getter)Statics.CreateDelegate(typeof(Getter), property.getterInfo);
         }
 
         public override void Write(TraceLoggingDataCollector collector, ref ContainerType container)
         {
-            var value = container == null
-                ? default(ValueType)
-                : getter(ref container);
+            var value = container == null ? default(ValueType) : getter(ref container);
             this.valueTypeInfo.WriteData(collector, ref value);
         }
 
         public override object GetData(ContainerType container)
         {
-            return container == null
-                ? default(ValueType)
-                : getter(ref container);
+            return container == null ? default(ValueType) : getter(ref container);
         }
     }
 
@@ -121,8 +112,7 @@ namespace System.Diagnostics.Tracing
     /// </summary>
     /// <typeparam name="ContainerType">The type of the object from which properties are read.</typeparam>
     /// <typeparam name="ValueType">Type of the property being read.</typeparam>
-    internal class ClassPropertyWriter<ContainerType, ValueType>
-            : PropertyAccessor<ContainerType>
+    internal class ClassPropertyWriter<ContainerType, ValueType> : PropertyAccessor<ContainerType>
     {
         private delegate ValueType Getter(ContainerType container);
         private readonly TraceLoggingTypeInfo<ValueType> valueTypeInfo;
@@ -131,24 +121,18 @@ namespace System.Diagnostics.Tracing
         public ClassPropertyWriter(PropertyAnalysis property)
         {
             this.valueTypeInfo = (TraceLoggingTypeInfo<ValueType>)property.typeInfo;
-            this.getter = (Getter)Statics.CreateDelegate(
-                typeof(Getter),
-                property.getterInfo);
+            this.getter = (Getter)Statics.CreateDelegate(typeof(Getter), property.getterInfo);
         }
 
         public override void Write(TraceLoggingDataCollector collector, ref ContainerType container)
         {
-            var value = container == null
-                ? default(ValueType)
-                : getter(container);
+            var value = container == null ? default(ValueType) : getter(container);
             this.valueTypeInfo.WriteData(collector, ref value);
         }
 
         public override object GetData(ContainerType container)
         {
-            return container == null
-                ? default(ValueType)
-                : getter(container);
+            return container == null ? default(ValueType) : getter(container);
         }
     }
 }

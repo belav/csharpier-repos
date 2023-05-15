@@ -19,7 +19,6 @@ namespace System.Workflow.Activities
     using System.Workflow.ComponentModel.Design;
     using System.Runtime.Serialization;
 
-
     internal partial class StateDesigner : FreeformActivityDesigner
     {
         #region ContainedDesignersParser class
@@ -28,23 +27,30 @@ namespace System.Workflow.Activities
         /// </summary>
         private class ContainedDesignersParser
         {
-            List<StateInitializationDesigner> _stateInitializationDesigners = new List<StateInitializationDesigner>();
-            List<StateFinalizationDesigner> _stateFinalizationDesigners = new List<StateFinalizationDesigner>();
+            List<StateInitializationDesigner> _stateInitializationDesigners =
+                new List<StateInitializationDesigner>();
+            List<StateFinalizationDesigner> _stateFinalizationDesigners =
+                new List<StateFinalizationDesigner>();
             List<EventDrivenDesigner> _eventDrivenDesigners = new List<EventDrivenDesigner>();
             List<StateDesigner> _leafStateDesigners = new List<StateDesigner>();
             List<StateDesigner> _stateDesigners = new List<StateDesigner>();
             List<ActivityDesigner> _ordered;
-            internal ContainedDesignersParser(ReadOnlyCollection<ActivityDesigner> containedDesigners)
+
+            internal ContainedDesignersParser(
+                ReadOnlyCollection<ActivityDesigner> containedDesigners
+            )
             {
                 foreach (ActivityDesigner designer in containedDesigners)
                 {
-                    StateInitializationDesigner stateInitializationDesigner = designer as StateInitializationDesigner;
+                    StateInitializationDesigner stateInitializationDesigner =
+                        designer as StateInitializationDesigner;
                     if (stateInitializationDesigner != null)
                     {
                         _stateInitializationDesigners.Add(stateInitializationDesigner);
                         continue;
                     }
-                    StateFinalizationDesigner stateFinalizationDesigner = designer as StateFinalizationDesigner;
+                    StateFinalizationDesigner stateFinalizationDesigner =
+                        designer as StateFinalizationDesigner;
                     if (stateFinalizationDesigner != null)
                     {
                         _stateFinalizationDesigners.Add(stateFinalizationDesigner);
@@ -89,42 +95,27 @@ namespace System.Workflow.Activities
 
             public List<StateInitializationDesigner> StateInitializationDesigners
             {
-                get
-                {
-                    return _stateInitializationDesigners;
-                }
+                get { return _stateInitializationDesigners; }
             }
 
             public List<StateFinalizationDesigner> StateFinalizationDesigners
             {
-                get
-                {
-                    return _stateFinalizationDesigners;
-                }
+                get { return _stateFinalizationDesigners; }
             }
 
             public List<EventDrivenDesigner> EventDrivenDesigners
             {
-                get
-                {
-                    return _eventDrivenDesigners;
-                }
+                get { return _eventDrivenDesigners; }
             }
 
             public List<StateDesigner> LeafStateDesigners
             {
-                get
-                {
-                    return _leafStateDesigners;
-                }
+                get { return _leafStateDesigners; }
             }
 
             public List<StateDesigner> StateDesigners
             {
-                get
-                {
-                    return _stateDesigners;
-                }
+                get { return _stateDesigners; }
             }
         }
         #endregion

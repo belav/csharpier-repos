@@ -11,9 +11,14 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         private sealed class VisualBasicRebuildCompiler : VisualBasicCompiler
         {
             internal VisualBasicRebuildCompiler(string[] args)
-                : base(VisualBasicCommandLineParser.Default, responseFile: null, args, StandardBuildPaths, additionalReferenceDirectories: null, new DefaultAnalyzerAssemblyLoader())
-            {
-            }
+                : base(
+                    VisualBasicCommandLineParser.Default,
+                    responseFile: null,
+                    args,
+                    StandardBuildPaths,
+                    additionalReferenceDirectories: null,
+                    new DefaultAnalyzerAssemblyLoader()
+                ) { }
         }
     }
 }

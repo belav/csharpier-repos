@@ -5,14 +5,14 @@ using System.Diagnostics;
 
 public class SharedExceptions
 {
-    public int retVal =0;
+    public int retVal = 0;
 
     public static int Main()
     {
         Console.WriteLine("Test that StackTrace for OOM is proper if memory is available");
         SharedExceptions test = new SharedExceptions();
         test.RunTest();
-        Console.WriteLine(100 == test.retVal ? "Test Passed":"Test Failed");
+        Console.WriteLine(100 == test.retVal ? "Test Passed" : "Test Failed");
         return test.retVal;
     }
 
@@ -29,7 +29,7 @@ public class SharedExceptions
         {
             throw new Exception();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             currStack = e.StackTrace;
         }
@@ -38,7 +38,7 @@ public class SharedExceptions
         {
             Guid[] g = new Guid[Int32.MaxValue];
         }
-        catch(OutOfMemoryException e)
+        catch (OutOfMemoryException e)
         {
             retVal = 100;
 
@@ -61,7 +61,7 @@ public class SharedExceptions
             {
                 Console.WriteLine("Actual Exception Stack Trace:");
                 Console.WriteLine(e.StackTrace);
-                Console.WriteLine();				
+                Console.WriteLine();
                 Console.WriteLine("Expected Stack Trace:");
                 Console.WriteLine(currStack.ToString());
                 retVal = 50;
@@ -69,4 +69,3 @@ public class SharedExceptions
         }
     }
 }
-

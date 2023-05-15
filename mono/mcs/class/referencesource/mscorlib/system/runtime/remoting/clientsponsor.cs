@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //+----------------------------------------------------------------------------
 //
@@ -19,17 +19,18 @@ namespace System.Runtime.Remoting.Lifetime
     using System.Collections;
     using System.Security.Permissions;
 
-    [System.Security.SecurityCritical]  // auto-generated_required
-    [SecurityPermissionAttribute(SecurityAction.InheritanceDemand, Flags=SecurityPermissionFlag.Infrastructure)]    
+    [System.Security.SecurityCritical] // auto-generated_required
+    [SecurityPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Flags = SecurityPermissionFlag.Infrastructure
+    )]
     [System.Runtime.InteropServices.ComVisible(true)]
     public class ClientSponsor : MarshalByRefObject, ISponsor
     {
         private Hashtable sponsorTable = new Hashtable(10);
         private TimeSpan m_renewalTime = TimeSpan.FromMinutes(2);
 
-        public ClientSponsor()
-        {
-        }
+        public ClientSponsor() { }
 
         public ClientSponsor(TimeSpan renewalTime)
         {
@@ -38,33 +39,33 @@ namespace System.Runtime.Remoting.Lifetime
 
         public TimeSpan RenewalTime
         {
-            get{ return m_renewalTime;}
-            set{ m_renewalTime = value;}
+            get { return m_renewalTime; }
+            set { m_renewalTime = value; }
         }
-            
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         public bool Register(MarshalByRefObject obj)
         {
-            BCLDebug.Trace("REMOTE", "ClientSponsor Register "+obj);
+            BCLDebug.Trace("REMOTE", "ClientSponsor Register " + obj);
             ILease lease = (ILease)obj.GetLifetimeService();
             if (lease == null)
                 return false;
 
             lease.Register(this);
-            lock(sponsorTable)
+            lock (sponsorTable)
             {
                 sponsorTable[obj] = lease;
             }
             return true;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public void Unregister(MarshalByRefObject obj)
         {
-            BCLDebug.Trace("REMOTE", "ClientSponsor Unregister "+obj);
+            BCLDebug.Trace("REMOTE", "ClientSponsor Unregister " + obj);
 
             ILease lease = null;
-            lock(sponsorTable)
+            lock (sponsorTable)
             {
                 lease = (ILease)sponsorTable[obj];
             }
@@ -76,18 +77,18 @@ namespace System.Runtime.Remoting.Lifetime
         [System.Security.SecurityCritical]
         public TimeSpan Renewal(ILease lease)
         {
-            BCLDebug.Trace("REMOTE", "ClientSponsor Renewal "+m_renewalTime);
+            BCLDebug.Trace("REMOTE", "ClientSponsor Renewal " + m_renewalTime);
             return m_renewalTime;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public void Close()
         {
-            BCLDebug.Trace("REMOTE","ClientSponsor Close");
-            lock(sponsorTable)
+            BCLDebug.Trace("REMOTE", "ClientSponsor Close");
+            lock (sponsorTable)
             {
                 IDictionaryEnumerator e = sponsorTable.GetEnumerator();
-                while(e.MoveNext())
+                while (e.MoveNext())
                     ((ILease)e.Value).Unregister(this);
                 sponsorTable.Clear();
             }
@@ -103,7 +104,7 @@ namespace System.Runtime.Remoting.Lifetime
         [System.Security.SecuritySafeCritical] // finalizers should be treated as safe
         ~ClientSponsor()
         {
-            BCLDebug.Trace("REMOTE","ClientSponsor Finalize");
+            BCLDebug.Trace("REMOTE", "ClientSponsor Finalize");
         }
     }
 }

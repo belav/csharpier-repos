@@ -11,7 +11,12 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        internal LoadGrammarCompletedEventArgs(Grammar grammar, Exception error, bool cancelled, object userState)
+        internal LoadGrammarCompletedEventArgs(
+            Grammar grammar,
+            Exception error,
+            bool cancelled,
+            object userState
+        )
             : base(error, cancelled, userState)
         {
             _grammar = grammar;
@@ -34,6 +39,5 @@ namespace System.Speech.Recognition
 #pragma warning restore 6524
 
         #endregion
-
     }
 }

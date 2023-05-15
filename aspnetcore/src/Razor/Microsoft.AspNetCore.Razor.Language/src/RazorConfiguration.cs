@@ -15,13 +15,15 @@ public abstract class RazorConfiguration : IEquatable<RazorConfiguration>
         RazorLanguageVersion.Latest,
         "unnamed",
         Array.Empty<RazorExtension>(),
-        false);
+        false
+    );
 
     public static RazorConfiguration Create(
         RazorLanguageVersion languageVersion,
         string configurationName,
         IEnumerable<RazorExtension> extensions,
-        bool useConsolidatedMvcViews = false)
+        bool useConsolidatedMvcViews = false
+    )
     {
         if (languageVersion == null)
         {
@@ -38,7 +40,12 @@ public abstract class RazorConfiguration : IEquatable<RazorConfiguration>
             throw new ArgumentNullException(nameof(extensions));
         }
 
-        return new DefaultRazorConfiguration(languageVersion, configurationName, extensions.ToArray(), useConsolidatedMvcViews);
+        return new DefaultRazorConfiguration(
+            languageVersion,
+            configurationName,
+            extensions.ToArray(),
+            useConsolidatedMvcViews
+        );
     }
 
     public abstract string ConfigurationName { get; }
@@ -112,7 +119,8 @@ public abstract class RazorConfiguration : IEquatable<RazorConfiguration>
             RazorLanguageVersion languageVersion,
             string configurationName,
             RazorExtension[] extensions,
-            bool useConsolidatedMvcViews = false)
+            bool useConsolidatedMvcViews = false
+        )
         {
             LanguageVersion = languageVersion;
             ConfigurationName = configurationName;

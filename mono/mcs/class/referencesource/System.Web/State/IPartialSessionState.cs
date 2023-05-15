@@ -11,20 +11,21 @@
  *
  */
 
-namespace System.Web.SessionState {
-
+namespace System.Web.SessionState
+{
     using System.Security.Permissions;
     using System.Collections.Generic;
-/*
- * Marker interface to indicate that class uses granular session state.
- */
+
+    /*
+     * Marker interface to indicate that class uses granular session state.
+     */
 
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public interface IPartialSessionState {
+    public interface IPartialSessionState
+    {
         IList<string> PartialSessionStateKeys { get; }
     }
-
 }

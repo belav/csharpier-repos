@@ -22,8 +22,12 @@ namespace SharedHostPolicy
         {
             if (assemblyName.Name == "SharedLibrary")
             {
-                string startupHookDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                string sharedLibrary = Path.GetFullPath(Path.Combine(startupHookDirectory, "SharedLibrary.dll"));
+                string startupHookDirectory = Path.GetDirectoryName(
+                    Assembly.GetExecutingAssembly().Location
+                );
+                string sharedLibrary = Path.GetFullPath(
+                    Path.Combine(startupHookDirectory, "SharedLibrary.dll")
+                );
                 return AssemblyLoadContext.Default.LoadFromAssemblyPath(sharedLibrary);
             }
             return null;

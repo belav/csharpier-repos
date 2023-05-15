@@ -31,7 +31,9 @@ namespace System.Workflow.ComponentModel.Design
     /// <summary>
     /// Represents accessibility object associated with CompositeActivityDesigner
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class CompositeDesignerAccessibleObject : ActivityDesignerAccessibleObject
     {
         /// <summary>
@@ -39,24 +41,27 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         /// <param name="activityDesigner">Designer which is associated with accessibility object</param>
         public CompositeDesignerAccessibleObject(CompositeActivityDesigner activityDesigner)
-            : base(activityDesigner)
-        {
-        }
+            : base(activityDesigner) { }
 
         public override AccessibleStates State
         {
             get
             {
                 AccessibleStates state = base.State;
-                CompositeActivityDesigner compositeDesigner = base.ActivityDesigner as CompositeActivityDesigner;
-                state |= (compositeDesigner.Expanded) ? AccessibleStates.Expanded : AccessibleStates.Collapsed;
+                CompositeActivityDesigner compositeDesigner =
+                    base.ActivityDesigner as CompositeActivityDesigner;
+                state |=
+                    (compositeDesigner.Expanded)
+                        ? AccessibleStates.Expanded
+                        : AccessibleStates.Collapsed;
                 return state;
             }
         }
 
         public override AccessibleObject GetChild(int index)
         {
-            CompositeActivityDesigner compositeDesigner = base.ActivityDesigner as CompositeActivityDesigner;
+            CompositeActivityDesigner compositeDesigner =
+                base.ActivityDesigner as CompositeActivityDesigner;
             if (index >= 0 && index < compositeDesigner.ContainedDesigners.Count)
                 return compositeDesigner.ContainedDesigners[index].AccessibilityObject;
             else
@@ -65,10 +70,10 @@ namespace System.Workflow.ComponentModel.Design
 
         public override int GetChildCount()
         {
-            CompositeActivityDesigner compositeDesigner = base.ActivityDesigner as CompositeActivityDesigner;
+            CompositeActivityDesigner compositeDesigner =
+                base.ActivityDesigner as CompositeActivityDesigner;
             return compositeDesigner.ContainedDesigners.Count;
         }
     }
     #endregion
-
 }

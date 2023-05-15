@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,75 +54,93 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class WSHttpTransportSecurityElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty client_credential_type;
-		static ConfigurationProperty proxy_credential_type;
-		static ConfigurationProperty realm;
+    [MonoTODO]
+    public sealed partial class WSHttpTransportSecurityElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty client_credential_type;
+        static ConfigurationProperty proxy_credential_type;
+        static ConfigurationProperty realm;
 
-		static WSHttpTransportSecurityElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			client_credential_type = new ConfigurationProperty ("clientCredentialType",
-				typeof (HttpClientCredentialType), "Windows", null/* FIXME: get converter for HttpClientCredentialType*/, null,
-				ConfigurationPropertyOptions.None);
+        static WSHttpTransportSecurityElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            client_credential_type = new ConfigurationProperty(
+                "clientCredentialType",
+                typeof(HttpClientCredentialType),
+                "Windows",
+                null /* FIXME: get converter for HttpClientCredentialType*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			proxy_credential_type = new ConfigurationProperty ("proxyCredentialType",
-				typeof (HttpProxyCredentialType), "None", null/* FIXME: get converter for HttpProxyCredentialType*/, null,
-				ConfigurationPropertyOptions.None);
+            proxy_credential_type = new ConfigurationProperty(
+                "proxyCredentialType",
+                typeof(HttpProxyCredentialType),
+                "None",
+                null /* FIXME: get converter for HttpProxyCredentialType*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			realm = new ConfigurationProperty ("realm",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+            realm = new ConfigurationProperty(
+                "realm",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			properties.Add (client_credential_type);
-			properties.Add (proxy_credential_type);
-			properties.Add (realm);
-		}
+            properties.Add(client_credential_type);
+            properties.Add(proxy_credential_type);
+            properties.Add(realm);
+        }
 
-		public WSHttpTransportSecurityElement ()
-		{
-		}
+        public WSHttpTransportSecurityElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "clientCredentialType",
+            DefaultValue = "Windows",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public HttpClientCredentialType ClientCredentialType
+        {
+            get { return (HttpClientCredentialType)base[client_credential_type]; }
+            set { base[client_credential_type] = value; }
+        }
 
-		[ConfigurationProperty ("clientCredentialType",
-			 DefaultValue = "Windows",
-			 Options = ConfigurationPropertyOptions.None)]
-		public HttpClientCredentialType ClientCredentialType {
-			get { return (HttpClientCredentialType) base [client_credential_type]; }
-			set { base [client_credential_type] = value; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        [ConfigurationProperty(
+            "proxyCredentialType",
+            DefaultValue = "None",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public HttpProxyCredentialType ProxyCredentialType
+        {
+            get { return (HttpProxyCredentialType)base[proxy_credential_type]; }
+            set { base[proxy_credential_type] = value; }
+        }
 
-		[ConfigurationProperty ("proxyCredentialType",
-			 DefaultValue = "None",
-			 Options = ConfigurationPropertyOptions.None)]
-		public HttpProxyCredentialType ProxyCredentialType {
-			get { return (HttpProxyCredentialType) base [proxy_credential_type]; }
-			set { base [proxy_credential_type] = value; }
-		}
-
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("realm",
-			 DefaultValue = "",
-			 Options = ConfigurationPropertyOptions.None)]
-		public string Realm {
-			get { return (string) base [realm]; }
-			set { base [realm] = value; }
-		}
-
-
-	}
-
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "realm",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public string Realm
+        {
+            get { return (string)base[realm]; }
+            set { base[realm] = value; }
+        }
+    }
 }

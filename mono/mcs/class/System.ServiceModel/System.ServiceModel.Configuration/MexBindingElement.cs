@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,25 +54,24 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public abstract partial class MexBindingElement<TStandardBinding>
-		 : StandardBindingElement,  IBindingConfigurationElement
-		where TStandardBinding : Binding
-	{
+    public abstract partial class MexBindingElement<TStandardBinding>
+        : StandardBindingElement,
+            IBindingConfigurationElement
+        where TStandardBinding : Binding
+    {
+        protected MexBindingElement(string name)
+            : base(name) { }
 
-		protected MexBindingElement (string name)
-			: base (name) {
-		}
+        // Properties
 
+        protected override Type BindingElementType
+        {
+            get { return typeof(TStandardBinding); }
+        }
 
-		// Properties
-
-		protected override Type BindingElementType {
-			get { return typeof (TStandardBinding); }
-		}
-
-		protected override void OnApplyConfiguration (Binding binding) {
-			throw new NotImplementedException ();
-		}
-	}
-
+        protected override void OnApplyConfiguration(Binding binding)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

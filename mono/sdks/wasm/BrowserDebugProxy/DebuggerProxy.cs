@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.WebAssembly.Diagnostics
 {
-
     // This type is the public entrypoint that allows external code to attach the debugger proxy
     // to a given websocket listener. Everything else in this package can be internal.
 

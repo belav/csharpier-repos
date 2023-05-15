@@ -35,19 +35,17 @@ using Mono.Cecil;
 
 namespace Mono.Linker.Steps
 {
+    public class RegenerateGuidStep : BaseStep
+    {
+        protected override void ProcessAssembly(AssemblyDefinition assembly)
+        {
+            if (Annotations.GetAction(assembly) == AssemblyAction.Link)
+                RegenerateGuid(assembly);
+        }
 
-	public class RegenerateGuidStep : BaseStep
-	{
-
-		protected override void ProcessAssembly (AssemblyDefinition assembly)
-		{
-			if (Annotations.GetAction (assembly) == AssemblyAction.Link)
-				RegenerateGuid (assembly);
-		}
-
-		static void RegenerateGuid (AssemblyDefinition asm)
-		{
-			asm.MainModule.Mvid = Guid.NewGuid ();
-		}
-	}
+        static void RegenerateGuid(AssemblyDefinition asm)
+        {
+            asm.MainModule.Mvid = Guid.NewGuid();
+        }
+    }
 }

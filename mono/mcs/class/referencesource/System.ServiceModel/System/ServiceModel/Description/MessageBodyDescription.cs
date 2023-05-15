@@ -58,7 +58,13 @@ namespace System.ServiceModel.Description
         public string WrapperName
         {
             get { return wrapperName == null ? null : wrapperName.EncodedName; }
-            set { wrapperName = new XmlName(value, true /*isEncoded*/); }
+            set
+            {
+                wrapperName = new XmlName(
+                    value,
+                    true /*isEncoded*/
+                );
+            }
         }
 
         [DefaultValue(null)]
@@ -67,6 +73,5 @@ namespace System.ServiceModel.Description
             get { return wrapperNs; }
             set { wrapperNs = value; }
         }
-
     }
 }

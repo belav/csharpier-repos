@@ -11,7 +11,8 @@ public static class GenericSecurity
 {
     private static int s_result = 99;
 
-    private static void Gen<T>() where T : System.Exception, new()
+    private static void Gen<T>()
+        where T : System.Exception, new()
     {
         try
         {

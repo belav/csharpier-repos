@@ -21,6 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.I
     internal interface ICompilerOptionsHostObject
     {
         [PreserveSig]
-        int SetCompilerOptions([MarshalAs(UnmanagedType.BStr)] string compilerOptions, [MarshalAs(UnmanagedType.VariantBool)] out bool supported);
+        int SetCompilerOptions(
+            [MarshalAs(UnmanagedType.BStr)] string compilerOptions,
+            [MarshalAs(UnmanagedType.VariantBool)] out bool supported
+        );
     }
 }

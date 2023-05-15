@@ -39,7 +39,8 @@ namespace Microsoft.TestCommon
         public override IEnumerable<IXunitTestCase> Discover(
             ITestFrameworkDiscoveryOptions discoveryOptions,
             ITestMethod testMethod,
-            IAttributeInfo factAttribute)
+            IAttributeInfo factAttribute
+        )
         {
             var baseCases = base.Discover(discoveryOptions, testMethod, factAttribute);
             if (!String.IsNullOrEmpty(factAttribute.GetNamedArgument<string>("Skip")))
@@ -71,14 +72,21 @@ namespace Microsoft.TestCommon
             }
 
             // Replace test with its skipped equivalent.
-            var platformJustification = factAttribute.GetNamedArgument<string>("PlatformJustification");
-            var skipReason = String.Format(platformJustification, platforms.ToString().Replace(", ", " | "), Platform);
+            var platformJustification = factAttribute.GetNamedArgument<string>(
+                "PlatformJustification"
+            );
+            var skipReason = String.Format(
+                platformJustification,
+                platforms.ToString().Replace(", ", " | "),
+                Platform
+            );
             var testCase = new SkippedXunitTestCase(
                 _diagnosticMessageSink,
                 discoveryOptions.MethodDisplayOrDefault(),
                 skipReason,
                 baseCase.TestMethod,
-                baseCase.TestMethodArguments);
+                baseCase.TestMethodArguments
+            );
 
             return new[] { testCase };
         }

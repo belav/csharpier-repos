@@ -17,19 +17,19 @@ namespace POS_Server.Controllers
     public class SettingController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller> get all setting
         [HttpPost]
         [Route("Get")]
-       public string Get(string token)
+        public string Get(string token)
         {
-
             // public ResponseVM GetPurinv(string token)
 
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -56,36 +56,30 @@ namespace POS_Server.Controllers
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
-
                         var list = entity.setting
-
-                           .Select(c => new
-                           {
-                               c.settingId,
-                               c.name,
-                               c.notes,
-
-                           })
-                                       .ToList();
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        c.settingId,
+                                        c.name,
+                                        c.notes,
+                                    }
+                            )
+                            .ToList();
 
                         return TokenManager.GenerateToken(list);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
-            //       
-            //        
+            //
+            //
             //        string token = "";
 
             //        if (headers.Contains("APIKey"))
@@ -104,7 +98,7 @@ namespace POS_Server.Controllers
             //               .Select(c => new  {
             //                 c.settingId ,
             //                 c.name,
-            //                 c.notes, 
+            //                 c.notes,
 
             //})
             //               .ToList();
@@ -121,20 +115,17 @@ namespace POS_Server.Controllers
             //            return NotFound();
         }
 
-
-
-        // GET api/<controller>  Get medal By ID 
+        // GET api/<controller>  Get medal By ID
         [HttpPost]
         [Route("GetByID")]
-      public string   GetByID(string token)
+        public string GetByID(string token)
         {
-
             // public ResponseVM GetPurinv(string token)int printerId
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -152,22 +143,21 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-
                     var item = entity.setting
-                   .Where(c => c.settingId == Id)
-                   .Select(c => new
-                   {
-                       c.settingId,
-                       c.name,
-                       c.notes,
-
-
-                   })
-                           .FirstOrDefault();
+                        .Where(c => c.settingId == Id)
+                        .Select(
+                            c =>
+                                new
+                                {
+                                    c.settingId,
+                                    c.name,
+                                    c.notes,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(item);
                 }
             }
-
 
             //var re = Request;
             //
@@ -209,26 +199,24 @@ namespace POS_Server.Controllers
             //    return NotFound();
         }
 
-
-
         // GET api/<controller> get all setting
         [HttpPost]
         [Route("GetByNotes")]
-      public string   GetByNotes(string token)
+        public string GetByNotes(string token)
         {
             // public ResponseVM GetPurinv(string token)string notes
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-                string notes ="";
+                string notes = "";
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -239,19 +227,23 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-
                     List<setting> settingList1 = entity.setting.ToList();
-                    var list = settingList1.Where(c => c.notes == notes).Select(c => new setting
-                    {
-                        settingId = c.settingId,
-                        name = c.name,
-                        notes = c.notes,
-                    }).ToList();
+                    var list = settingList1
+                        .Where(c => c.notes == notes)
+                        .Select(
+                            c =>
+                                new setting
+                                {
+                                    settingId = c.settingId,
+                                    name = c.name,
+                                    notes = c.notes,
+                                }
+                        )
+                        .ToList();
 
                     return TokenManager.GenerateToken(list);
                 }
             }
-
 
             //var re = Request;
             //
@@ -287,21 +279,16 @@ namespace POS_Server.Controllers
             //return NotFound();
         }
 
-
-
-        // add or update medal 
+        // add or update medal
         [HttpPost]
         [Route("Save")]
-      public string   Save(string token)
+        public string Save(string token)
         {
-
             //string Object string newObject
             string message = "";
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -317,64 +304,52 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<setting>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<setting>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
                     setting tmpObject;
-              
 
                     try
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-                          
-                                var sEntity = entity.Set<setting>();
-                                if (newObject.settingId == 0)
-                                {
-
-                                    sEntity.Add(newObject);
-                                    entity.SaveChanges();
-                                    message = newObject.settingId.ToString();
-                                }
-                                else
-                                {
-
-                                tmpObject = entity.setting.Where(p => p.settingId == newObject.settingId).FirstOrDefault();
-
-
+                            var sEntity = entity.Set<setting>();
+                            if (newObject.settingId == 0)
+                            {
+                                sEntity.Add(newObject);
+                                entity.SaveChanges();
+                                message = newObject.settingId.ToString();
+                            }
+                            else
+                            {
+                                tmpObject = entity.setting
+                                    .Where(p => p.settingId == newObject.settingId)
+                                    .FirstOrDefault();
 
                                 tmpObject.settingId = newObject.settingId;
                                 tmpObject.name = newObject.name;
                                 tmpObject.notes = newObject.notes;
 
-
-
-                                    entity.SaveChanges();
-                                    message = tmpObject.settingId.ToString();
-                                }
-
-
-                             
+                                entity.SaveChanges();
+                                message = tmpObject.settingId.ToString();
                             }
+                        }
                         return TokenManager.GenerateToken(message);
-
                     }
                     catch
                     {
                         message = "0";
-                      return TokenManager.GenerateToken(message);
+                        return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
-              return TokenManager.GenerateToken(message);
-
+                return TokenManager.GenerateToken(message);
             }
             //var re = Request;
             //
@@ -436,16 +411,14 @@ namespace POS_Server.Controllers
 
         [HttpPost]
         [Route("Delete")]
-      public string   Delete(string token)
+        public string Delete(string token)
         {
             // public ResponseVM Delete(string token)
             //long Id, long userId
             string message = "";
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -454,7 +427,6 @@ namespace POS_Server.Controllers
             {
                 long Id = 0;
                 long userId = 0;
-           
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -467,7 +439,6 @@ namespace POS_Server.Controllers
                     {
                         userId = long.Parse(c.Value);
                     }
-
                 }
 
                 try
@@ -479,7 +450,7 @@ namespace POS_Server.Controllers
                         entity.setting.Remove(sObj);
                         message = entity.SaveChanges().ToString();
 
-                      //  return Ok("medal is Deleted Successfully");
+                        //  return Ok("medal is Deleted Successfully");
                     }
                     return TokenManager.GenerateToken(message);
                 }
@@ -487,10 +458,7 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
-
 
             //var re = Request;
             //

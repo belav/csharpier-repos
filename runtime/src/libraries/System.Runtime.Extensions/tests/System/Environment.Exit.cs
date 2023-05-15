@@ -24,7 +24,13 @@ namespace System.Tests
         [MemberData(nameof(ExitCodeValues))]
         public static void CheckExitCode(int expectedExitCode)
         {
-            RemoteExecutor.Invoke(s => int.Parse(s), expectedExitCode.ToString(), new RemoteInvokeOptions { ExpectedExitCode = expectedExitCode }).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    s => int.Parse(s),
+                    expectedExitCode.ToString(),
+                    new RemoteInvokeOptions { ExpectedExitCode = expectedExitCode }
+                )
+                .Dispose();
         }
 
         [Theory]

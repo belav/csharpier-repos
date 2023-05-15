@@ -17,10 +17,9 @@ namespace POS_Server.Models
         public Nullable<long> createUserId { get; set; }
         public Nullable<long> updateUserId { get; set; }
 
-      
         public Nullable<long> offerId { get; set; }
         public Nullable<long> couponId { get; set; }
-      
+
         public string medalName { get; set; }
         public string agentName { get; set; }
         public string offerName { get; set; }

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,48 +31,57 @@
 
 using System.Security.Permissions;
 
-namespace System.Diagnostics {
+namespace System.Diagnostics
+{
+    [Serializable]
+    public class PerformanceCounterPermissionEntry
+    {
+        private const PerformanceCounterPermissionAccess All = (PerformanceCounterPermissionAccess)
+            0x07;
+        private PerformanceCounterPermissionAccess permissionAccess;
+        private string machineName;
+        private string categoryName;
 
-	[Serializable]
-	public class PerformanceCounterPermissionEntry {
+        public PerformanceCounterPermissionEntry(
+            PerformanceCounterPermissionAccess permissionAccess,
+            string machineName,
+            string categoryName
+        )
+        {
+            if (machineName == null)
+                throw new ArgumentNullException("machineName");
+            if ((permissionAccess | All) != All)
+                throw new ArgumentException("permissionAccess");
+            ResourcePermissionBase.ValidateMachineName(machineName);
+            if (categoryName == null)
+                throw new ArgumentNullException("categoryName");
 
-		private const PerformanceCounterPermissionAccess All = (PerformanceCounterPermissionAccess) 0x07;
-		private PerformanceCounterPermissionAccess permissionAccess;
-		private string machineName;
-		private string categoryName;
+            this.permissionAccess = permissionAccess;
+            this.machineName = machineName;
+            this.categoryName = categoryName;
+        }
 
-		public PerformanceCounterPermissionEntry (PerformanceCounterPermissionAccess permissionAccess,
-			string machineName, string categoryName)
-		{
-			if (machineName == null)
-				throw new ArgumentNullException ("machineName");
-			if ((permissionAccess | All) != All)
-				throw new ArgumentException ("permissionAccess");
-			ResourcePermissionBase.ValidateMachineName (machineName);
-			if (categoryName == null)
-				throw new ArgumentNullException ("categoryName");
+        public string CategoryName
+        {
+            get { return categoryName; }
+        }
 
-			this.permissionAccess = permissionAccess;
-			this.machineName = machineName;
-			this.categoryName = categoryName;
-		}
+        public string MachineName
+        {
+            get { return machineName; }
+        }
 
-		public string CategoryName {
-			get { return categoryName; }
-		}
+        public PerformanceCounterPermissionAccess PermissionAccess
+        {
+            get { return permissionAccess; }
+        }
 
-		public string MachineName {
-			get { return machineName; }
-		}
-
-		public PerformanceCounterPermissionAccess PermissionAccess {
-			get { return permissionAccess; }
-		}
-
-		internal ResourcePermissionBaseEntry CreateResourcePermissionBaseEntry ()
-		{
-			return new ResourcePermissionBaseEntry ((int) permissionAccess, new string[] { machineName, categoryName });
-		} 
-	}
+        internal ResourcePermissionBaseEntry CreateResourcePermissionBaseEntry()
+        {
+            return new ResourcePermissionBaseEntry(
+                (int)permissionAccess,
+                new string[] { machineName, categoryName }
+            );
+        }
+    }
 }
-

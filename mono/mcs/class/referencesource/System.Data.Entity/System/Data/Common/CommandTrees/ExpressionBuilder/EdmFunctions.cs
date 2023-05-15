@@ -18,46 +18,69 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
     /// <summary>
     /// Provides an API to construct <see cref="DbExpression"/>s that invoke canonical EDM functions, and allows that API to be accessed as extension methods on the expression type itself.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Edm"
+    )]
     public static class EdmFunctions
     {
         #region Private Implementation
-                
-        private static EdmFunction ResolveCanonicalFunction(string functionName, TypeUsage[] argumentTypes)
+
+        private static EdmFunction ResolveCanonicalFunction(
+            string functionName,
+            TypeUsage[] argumentTypes
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(functionName), "Function name must not be null");
 
             List<EdmFunction> functions = new List<EdmFunction>(
                 System.Linq.Enumerable.Where(
                     EdmProviderManifest.Instance.GetStoreFunctions(),
-                    func => string.Equals(func.Name, functionName, StringComparison.Ordinal))
+                    func => string.Equals(func.Name, functionName, StringComparison.Ordinal)
+                )
             );
 
             EdmFunction foundFunction = null;
             bool ambiguous = false;
             if (functions.Count > 0)
             {
-                foundFunction = EntitySql.FunctionOverloadResolver.ResolveFunctionOverloads(functions, argumentTypes, false, out ambiguous);
+                foundFunction = EntitySql.FunctionOverloadResolver.ResolveFunctionOverloads(
+                    functions,
+                    argumentTypes,
+                    false,
+                    out ambiguous
+                );
                 if (ambiguous)
                 {
-                    throw EntityUtil.Argument(Strings.Cqt_Function_CanonicalFunction_AmbiguousMatch(functionName));
+                    throw EntityUtil.Argument(
+                        Strings.Cqt_Function_CanonicalFunction_AmbiguousMatch(functionName)
+                    );
                 }
             }
 
             if (foundFunction == null)
             {
-                throw EntityUtil.Argument(Strings.Cqt_Function_CanonicalFunction_NotFound(functionName));
+                throw EntityUtil.Argument(
+                    Strings.Cqt_Function_CanonicalFunction_NotFound(functionName)
+                );
             }
 
             return foundFunction;
         }
 
-        internal static DbFunctionExpression InvokeCanonicalFunction(string functionName, params DbExpression[] arguments)
+        internal static DbFunctionExpression InvokeCanonicalFunction(
+            string functionName,
+            params DbExpression[] arguments
+        )
         {
             TypeUsage[] argumentTypes = new TypeUsage[arguments.Length];
             for (int idx = 0; idx < arguments.Length; idx++)
             {
-                Debug.Assert(arguments[idx] != null, "Ensure arguments are non-null before calling InvokeCanonicalFunction");
+                Debug.Assert(
+                    arguments[idx] != null,
+                    "Ensure arguments are non-null before calling InvokeCanonicalFunction"
+                );
                 argumentTypes[idx] = arguments[idx].ResultType;
             }
 
@@ -138,7 +161,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             EntityUtil.CheckArgumentNull(collection, "collection");
             return InvokeCanonicalFunction("Min", collection);
         }
-                
+
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'Sum' function over the
         /// specified collection. The result type of the expression is the same as the element type of the collection.
@@ -161,7 +184,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that produces the standard deviation value over non-null members of the collection.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="collection"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'StDev' function accepts an argument with the result type of <paramref name="collection"/>.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "St")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1709:IdentifiersShouldBeCasedCorrectly",
+            MessageId = "St"
+        )]
         public static DbFunctionExpression StDev(this DbExpression collection)
         {
             EntityUtil.CheckArgumentNull(collection, "collection");
@@ -176,7 +203,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that produces the standard deviation value.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="collection"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'StDevP' function accepts an argument with the result type of <paramref name="collection"/>.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "St")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1709:IdentifiersShouldBeCasedCorrectly",
+            MessageId = "St"
+        )]
         public static DbFunctionExpression StDevP(this DbExpression collection)
         {
             EntityUtil.CheckArgumentNull(collection, "collection");
@@ -232,7 +263,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             return InvokeCanonicalFunction("Concat", string1, string2);
         }
 
-        // 
+        //
 
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'Contains' function with the
@@ -244,13 +275,16 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns a Boolean value indicating whether or not <paramref name="searchedForString"/> occurs within <paramref name="searchedString"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="searchedString"/> or <paramref name="searchedForString"/>is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'Contains' function accepts arguments with the result types of <paramref name="searchedString"/> and <paramref name="searchedForString"/>.</exception>
-        public static DbExpression Contains(this DbExpression searchedString, DbExpression searchedForString)
+        public static DbExpression Contains(
+            this DbExpression searchedString,
+            DbExpression searchedForString
+        )
         {
             EntityUtil.CheckArgumentNull(searchedString, "searchedString");
             EntityUtil.CheckArgumentNull(searchedForString, "searchedForString");
             return InvokeCanonicalFunction("Contains", searchedString, searchedForString);
         }
-                
+
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'EndsWith' function with the
         /// specified arguments, which must each have a string result type. The result type of the expression is
@@ -261,7 +295,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that indicates whether <paramref name="stringArgument"/> ends with <paramref name="suffix"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="stringArgument"/> or <paramref name="suffix"/>is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'EndsWith' function accepts arguments with the result types of <paramref name="stringArgument"/> and <paramref name="suffix"/>.</exception>
-        public static DbFunctionExpression EndsWith(this DbExpression stringArgument, DbExpression suffix)
+        public static DbFunctionExpression EndsWith(
+            this DbExpression stringArgument,
+            DbExpression suffix
+        )
         {
             EntityUtil.CheckArgumentNull(stringArgument, "stringArgument");
             EntityUtil.CheckArgumentNull(suffix, "suffix");
@@ -279,7 +316,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the first index of <paramref name="stringToFind"/> in <paramref name="searchString"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="searchString"/> or <paramref name="stringToFind"/>is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'IndexOf' function accepts arguments with the result types of <paramref name="searchString"/> and <paramref name="stringToFind"/>.</exception>
-        public static DbFunctionExpression IndexOf(this DbExpression searchString, DbExpression stringToFind)
+        public static DbFunctionExpression IndexOf(
+            this DbExpression searchString,
+            DbExpression stringToFind
+        )
         {
             EntityUtil.CheckArgumentNull(searchString, "searchString");
             EntityUtil.CheckArgumentNull(stringToFind, "stringToFind");
@@ -296,7 +336,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the the leftmost substring of length <paramref name="length"/> from <paramref name="stringArgument"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="stringArgument"/> or <paramref name="length"/>is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'Left' function accepts arguments with the result types of <paramref name="stringArgument"/>.</exception>
-        public static DbFunctionExpression Left(this DbExpression stringArgument, DbExpression length)
+        public static DbFunctionExpression Left(
+            this DbExpression stringArgument,
+            DbExpression length
+        )
         {
             EntityUtil.CheckArgumentNull(stringArgument, "stringArgument");
             EntityUtil.CheckArgumentNull(length, "length");
@@ -329,14 +372,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression than returns a new string based on <paramref name="stringArgument"/> where every occurence of <paramref name="toReplace"/> is replaced by <paramref name="replacement"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="stringArgument"/>, <paramref name="toReplace"/> or <paramref name="replacement"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'Length' function accepts arguments with the result types of <paramref name="stringArgument"/>, <paramref name="toReplace"/> and <paramref name="replacement"/>.</exception>
-        public static DbFunctionExpression Replace(this DbExpression stringArgument, DbExpression toReplace, DbExpression replacement)
+        public static DbFunctionExpression Replace(
+            this DbExpression stringArgument,
+            DbExpression toReplace,
+            DbExpression replacement
+        )
         {
             EntityUtil.CheckArgumentNull(stringArgument, "stringArgument");
             EntityUtil.CheckArgumentNull(toReplace, "toReplace");
             EntityUtil.CheckArgumentNull(replacement, "replacement");
             return InvokeCanonicalFunction("Replace", stringArgument, toReplace, replacement);
         }
-                
+
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'Reverse' function with the
         /// specified argument, which must have a string result type. The result type of the expression is
@@ -362,13 +409,16 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the the rightmost substring of length <paramref name="length"/> from <paramref name="stringArgument"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="stringArgument"/> or <paramref name="length"/>is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'Right' function accepts arguments with the result types of <paramref name="stringArgument"/>.</exception>
-        public static DbFunctionExpression Right(this DbExpression stringArgument, DbExpression length)
+        public static DbFunctionExpression Right(
+            this DbExpression stringArgument,
+            DbExpression length
+        )
         {
             EntityUtil.CheckArgumentNull(stringArgument, "stringArgument");
             EntityUtil.CheckArgumentNull(length, "length");
             return InvokeCanonicalFunction("Right", stringArgument, length);
         }
-                
+
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'StartsWith' function with the
         /// specified arguments, which must each have a string result type. The result type of the expression is
@@ -379,14 +429,17 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that indicates whether <paramref name="stringArgument"/> starts with <paramref name="prefix"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="stringArgument"/> or <paramref name="prefix"/>is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'StartsWith' function accepts arguments with the result types of <paramref name="stringArgument"/> and <paramref name="prefix"/>.</exception>
-        public static DbFunctionExpression StartsWith(this DbExpression stringArgument, DbExpression prefix)
+        public static DbFunctionExpression StartsWith(
+            this DbExpression stringArgument,
+            DbExpression prefix
+        )
         {
             EntityUtil.CheckArgumentNull(stringArgument, "stringArgument");
             EntityUtil.CheckArgumentNull(prefix, "prefix");
             return InvokeCanonicalFunction("StartsWith", stringArgument, prefix);
         }
 
-        // 
+        //
 
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'Substring' function with the
@@ -400,7 +453,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the substring of length <paramref name="length"/> from <paramref name="stringArgument"/> starting at <paramref name="start"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="stringArgument"/>, <paramref name="start"/> or <paramref name="length"/>is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'Substring' function accepts arguments with the result types of <paramref name="stringArgument"/>, <paramref name="start"/> and <paramref name="length"/>.</exception>
-        public static DbFunctionExpression Substring(this DbExpression stringArgument, DbExpression start, DbExpression length)
+        public static DbFunctionExpression Substring(
+            this DbExpression stringArgument,
+            DbExpression start,
+            DbExpression length
+        )
         {
             EntityUtil.CheckArgumentNull(stringArgument, "stringArgument");
             EntityUtil.CheckArgumentNull(start, "start");
@@ -437,7 +494,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             EntityUtil.CheckArgumentNull(stringArgument, "stringArgument");
             return InvokeCanonicalFunction("ToUpper", stringArgument);
         }
-                        
+
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'Trim' function with the
         /// specified argument, which must have a string result type. The result type of the expression is
@@ -486,7 +543,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         #endregion
 
         #region Date/Time member access methods - Year, Month, Day, DayOfYear, Hour, Minute, Second, Millisecond, GetTotalOffsetMinutes
-        
+
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'Year' function with the
         /// specified argument, which must have a DateTime or DateTimeOffset result type. The result type of
@@ -615,7 +672,9 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the number of minutes <paramref name="dateTimeOffsetArgument"/> is offset from GMT.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="dateTimeOffsetArgument"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'GetTotalOffsetMinutes' function accepts an argument with the result type of <paramref name="dateTimeOffsetArgument"/>.</exception>
-        public static DbFunctionExpression GetTotalOffsetMinutes(this DbExpression dateTimeOffsetArgument)
+        public static DbFunctionExpression GetTotalOffsetMinutes(
+            this DbExpression dateTimeOffsetArgument
+        )
         {
             EntityUtil.CheckArgumentNull(dateTimeOffsetArgument, "dateTimeOffsetArgument");
             return InvokeCanonicalFunction("GetTotalOffsetMinutes", dateTimeOffsetArgument);
@@ -681,7 +740,14 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns a new DateTime based on the specified values.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="year"/>, <paramref name="month"/>, <paramref name="day"/>, <paramref name="hour"/>, <paramref name="minute"/>, or <paramref name="second"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'CreateDateTime' function accepts arguments with the result types of <paramref name="year"/>, <paramref name="month"/>, <paramref name="day"/>, <paramref name="hour"/>, <paramref name="minute"/>, and <paramref name="second"/>.</exception>
-        public static DbFunctionExpression CreateDateTime(DbExpression year, DbExpression month, DbExpression day, DbExpression hour, DbExpression minute, DbExpression second)
+        public static DbFunctionExpression CreateDateTime(
+            DbExpression year,
+            DbExpression month,
+            DbExpression day,
+            DbExpression hour,
+            DbExpression minute,
+            DbExpression second
+        )
         {
             EntityUtil.CheckArgumentNull(year, "year");
             EntityUtil.CheckArgumentNull(month, "month");
@@ -689,7 +755,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             EntityUtil.CheckArgumentNull(hour, "hour");
             EntityUtil.CheckArgumentNull(minute, "minute");
             EntityUtil.CheckArgumentNull(second, "second");
-            return InvokeCanonicalFunction("CreateDateTime", year, month, day, hour, minute, second);
+            return InvokeCanonicalFunction(
+                "CreateDateTime",
+                year,
+                month,
+                day,
+                hour,
+                minute,
+                second
+            );
         }
 
         /// <summary>
@@ -707,7 +781,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns a new DateTimeOffset based on the specified values.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="year"/>, <paramref name="month"/>, <paramref name="day"/>, <paramref name="hour"/>, <paramref name="minute"/>, <paramref name="second"/> or <paramref name="timeZoneOffset"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'CreateDateTimeOffset' function accepts arguments with the result types of <paramref name="year"/>, <paramref name="month"/>, <paramref name="day"/>, <paramref name="hour"/>, <paramref name="minute"/>, <paramref name="second"/> and <paramref name="timeZoneOffset"/>.</exception>
-        public static DbFunctionExpression CreateDateTimeOffset(DbExpression year, DbExpression month, DbExpression day, DbExpression hour, DbExpression minute, DbExpression second, DbExpression timeZoneOffset)
+        public static DbFunctionExpression CreateDateTimeOffset(
+            DbExpression year,
+            DbExpression month,
+            DbExpression day,
+            DbExpression hour,
+            DbExpression minute,
+            DbExpression second,
+            DbExpression timeZoneOffset
+        )
         {
             EntityUtil.CheckArgumentNull(year, "year");
             EntityUtil.CheckArgumentNull(month, "month");
@@ -716,7 +798,16 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             EntityUtil.CheckArgumentNull(minute, "minute");
             EntityUtil.CheckArgumentNull(second, "second");
             EntityUtil.CheckArgumentNull(timeZoneOffset, "timeZoneOffset");
-            return InvokeCanonicalFunction("CreateDateTimeOffset", year, month, day, hour, minute, second, timeZoneOffset);
+            return InvokeCanonicalFunction(
+                "CreateDateTimeOffset",
+                year,
+                month,
+                day,
+                hour,
+                minute,
+                second,
+                timeZoneOffset
+            );
         }
 
         /// <summary>
@@ -730,16 +821,20 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns a new Time based on the specified values.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="hour"/>, <paramref name="minute"/>, or <paramref name="second"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'CreateTime' function accepts arguments with the result types of <paramref name="hour"/>, <paramref name="minute"/>, and <paramref name="second"/>.</exception>
-        public static DbFunctionExpression CreateTime(DbExpression hour, DbExpression minute, DbExpression second)
+        public static DbFunctionExpression CreateTime(
+            DbExpression hour,
+            DbExpression minute,
+            DbExpression second
+        )
         {
             EntityUtil.CheckArgumentNull(hour, "hour");
             EntityUtil.CheckArgumentNull(minute, "minute");
             EntityUtil.CheckArgumentNull(second, "second");
             return InvokeCanonicalFunction("CreateTime", hour, minute, second);
         }
-                
+
         #endregion
-        
+
         #region Date/Time addition - AddYears, AddMonths, AddDays, AddHours, AddMinutes, AddSeconds, AddMilliseconds, AddMicroseconds, AddNanoseconds
 
         /// <summary>
@@ -752,7 +847,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that adds the number of years specified by <paramref name="addValue"/> to the value specified by <paramref name="dateValue"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="dateValue"/> or <paramref name="addValue"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'AddYears' function accepts arguments with the result types of <paramref name="dateValue"/> and <paramref name="addValue"/>.</exception>
-        public static DbFunctionExpression AddYears(this DbExpression dateValue, DbExpression addValue)
+        public static DbFunctionExpression AddYears(
+            this DbExpression dateValue,
+            DbExpression addValue
+        )
         {
             EntityUtil.CheckArgumentNull(dateValue, "dateValue");
             EntityUtil.CheckArgumentNull(addValue, "addValue");
@@ -769,7 +867,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that adds the number of months specified by <paramref name="addValue"/> to the value specified by <paramref name="dateValue"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="dateValue"/> or <paramref name="addValue"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'AddMonths' function accepts arguments with the result types of <paramref name="dateValue"/> and <paramref name="addValue"/>.</exception>
-        public static DbFunctionExpression AddMonths(this DbExpression dateValue, DbExpression addValue)
+        public static DbFunctionExpression AddMonths(
+            this DbExpression dateValue,
+            DbExpression addValue
+        )
         {
             EntityUtil.CheckArgumentNull(dateValue, "dateValue");
             EntityUtil.CheckArgumentNull(addValue, "addValue");
@@ -786,7 +887,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that adds the number of days specified by <paramref name="addValue"/> to the value specified by <paramref name="dateValue"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="dateValue"/> or <paramref name="addValue"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'AddDays' function accepts arguments with the result types of <paramref name="dateValue"/> and <paramref name="addValue"/>.</exception>
-        public static DbFunctionExpression AddDays(this DbExpression dateValue, DbExpression addValue)
+        public static DbFunctionExpression AddDays(
+            this DbExpression dateValue,
+            DbExpression addValue
+        )
         {
             EntityUtil.CheckArgumentNull(dateValue, "dateValue");
             EntityUtil.CheckArgumentNull(addValue, "addValue");
@@ -803,7 +907,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that adds the number of hours specified by <paramref name="addValue"/> to the value specified by <paramref name="timeValue"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue"/> or <paramref name="addValue"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'AddHours' function accepts arguments with the result types of <paramref name="timeValue"/> and <paramref name="addValue"/>.</exception>
-        public static DbFunctionExpression AddHours(this DbExpression timeValue, DbExpression addValue)
+        public static DbFunctionExpression AddHours(
+            this DbExpression timeValue,
+            DbExpression addValue
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue, "timeValue");
             EntityUtil.CheckArgumentNull(addValue, "addValue");
@@ -820,7 +927,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that adds the number of minutes specified by <paramref name="addValue"/> to the value specified by <paramref name="timeValue"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue"/> or <paramref name="addValue"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'AddMinutes' function accepts arguments with the result types of <paramref name="timeValue"/> and <paramref name="addValue"/>.</exception>
-        public static DbFunctionExpression AddMinutes(this DbExpression timeValue, DbExpression addValue)
+        public static DbFunctionExpression AddMinutes(
+            this DbExpression timeValue,
+            DbExpression addValue
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue, "timeValue");
             EntityUtil.CheckArgumentNull(addValue, "addValue");
@@ -837,7 +947,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that adds the number of seconds specified by <paramref name="addValue"/> to the value specified by <paramref name="timeValue"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue"/> or <paramref name="addValue"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'AddSeconds' function accepts arguments with the result types of <paramref name="timeValue"/> and <paramref name="addValue"/>.</exception>
-        public static DbFunctionExpression AddSeconds(this DbExpression timeValue, DbExpression addValue)
+        public static DbFunctionExpression AddSeconds(
+            this DbExpression timeValue,
+            DbExpression addValue
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue, "timeValue");
             EntityUtil.CheckArgumentNull(addValue, "addValue");
@@ -854,7 +967,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that adds the number of milliseconds specified by <paramref name="addValue"/> to the value specified by <paramref name="timeValue"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue"/> or <paramref name="addValue"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'AddMilliseconds' function accepts arguments with the result types of <paramref name="timeValue"/> and <paramref name="addValue"/>.</exception>
-        public static DbFunctionExpression AddMilliseconds(this DbExpression timeValue, DbExpression addValue)
+        public static DbFunctionExpression AddMilliseconds(
+            this DbExpression timeValue,
+            DbExpression addValue
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue, "timeValue");
             EntityUtil.CheckArgumentNull(addValue, "addValue");
@@ -871,7 +987,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that adds the number of microseconds specified by <paramref name="addValue"/> to the value specified by <paramref name="timeValue"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue"/> or <paramref name="addValue"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'AddMicroseconds' function accepts arguments with the result types of <paramref name="timeValue"/> and <paramref name="addValue"/>.</exception>
-        public static DbFunctionExpression AddMicroseconds(this DbExpression timeValue, DbExpression addValue)
+        public static DbFunctionExpression AddMicroseconds(
+            this DbExpression timeValue,
+            DbExpression addValue
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue, "timeValue");
             EntityUtil.CheckArgumentNull(addValue, "addValue");
@@ -888,7 +1007,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that adds the number of nanoseconds specified by <paramref name="addValue"/> to the value specified by <paramref name="timeValue"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue"/> or <paramref name="addValue"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'AddNanoseconds' function accepts arguments with the result types of <paramref name="timeValue"/> and <paramref name="addValue"/>.</exception>
-        public static DbFunctionExpression AddNanoseconds(this DbExpression timeValue, DbExpression addValue)
+        public static DbFunctionExpression AddNanoseconds(
+            this DbExpression timeValue,
+            DbExpression addValue
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue, "timeValue");
             EntityUtil.CheckArgumentNull(addValue, "addValue");
@@ -896,13 +1018,13 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         }
 
         #endregion
-        
+
         #region Date/Time difference - DiffYears, DiffMonths, DiffDays, DiffHours, DiffMinutes, DiffSeconds, DiffMilliseconds, DiffMicroseconds, DiffNanoseconds
 
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'DiffYears' function with the
         /// specified arguments, which must each have a DateTime or DateTimeOffset result type. The result type of
-        /// <paramref name="dateValue1"/> must match the result type of <paramref name="dateValue2"/>. 
+        /// <paramref name="dateValue1"/> must match the result type of <paramref name="dateValue2"/>.
         /// The result type of the expression is Edm.Int32.
         /// </summary>
         /// <param name="dateValue1">An expression that specifies the first DateTime or DateTimeOffset value.</param>
@@ -910,7 +1032,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the year difference between <param name="dateValue1"> and <param name="dateValue2">.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="dateValue1"/> or <paramref name="dateValue2"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'DiffYears' function accepts arguments with the result types of <paramref name="dateValue1"/> and <paramref name="dateValue2"/>.</exception>
-        public static DbFunctionExpression DiffYears(this DbExpression dateValue1, DbExpression dateValue2)
+        public static DbFunctionExpression DiffYears(
+            this DbExpression dateValue1,
+            DbExpression dateValue2
+        )
         {
             EntityUtil.CheckArgumentNull(dateValue1, "dateValue1");
             EntityUtil.CheckArgumentNull(dateValue2, "dateValue2");
@@ -920,7 +1045,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'DiffMonths' function with the
         /// specified arguments, which must each have a DateTime or DateTimeOffset result type. The result type of
-        /// <paramref name="dateValue1"/> must match the result type of <paramref name="dateValue2"/>. 
+        /// <paramref name="dateValue1"/> must match the result type of <paramref name="dateValue2"/>.
         /// The result type of the expression is Edm.Int32.
         /// </summary>
         /// <param name="dateValue1">An expression that specifies the first DateTime or DateTimeOffset value.</param>
@@ -928,7 +1053,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the month difference between <param name="dateValue1"> and <param name="dateValue2">.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="dateValue1"/> or <paramref name="dateValue2"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'DiffMonths' function accepts arguments with the result types of <paramref name="dateValue1"/> and <paramref name="dateValue2"/>.</exception>
-        public static DbFunctionExpression DiffMonths(this DbExpression dateValue1, DbExpression dateValue2)
+        public static DbFunctionExpression DiffMonths(
+            this DbExpression dateValue1,
+            DbExpression dateValue2
+        )
         {
             EntityUtil.CheckArgumentNull(dateValue1, "dateValue1");
             EntityUtil.CheckArgumentNull(dateValue2, "dateValue2");
@@ -938,7 +1066,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'DiffDays' function with the
         /// specified arguments, which must each have a DateTime or DateTimeOffset result type. The result type of
-        /// <paramref name="dateValue1"/> must match the result type of <paramref name="dateValue2"/>. 
+        /// <paramref name="dateValue1"/> must match the result type of <paramref name="dateValue2"/>.
         /// The result type of the expression is Edm.Int32.
         /// </summary>
         /// <param name="dateValue1">An expression that specifies the first DateTime or DateTimeOffset value.</param>
@@ -946,7 +1074,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the day difference between <param name="dateValue1"> and <param name="dateValue2">.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="dateValue1"/> or <paramref name="dateValue2"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'DiffDays' function accepts arguments with the result types of <paramref name="dateValue1"/> and <paramref name="dateValue2"/>.</exception>
-        public static DbFunctionExpression DiffDays(this DbExpression dateValue1, DbExpression dateValue2)
+        public static DbFunctionExpression DiffDays(
+            this DbExpression dateValue1,
+            DbExpression dateValue2
+        )
         {
             EntityUtil.CheckArgumentNull(dateValue1, "dateValue1");
             EntityUtil.CheckArgumentNull(dateValue2, "dateValue2");
@@ -956,7 +1087,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'DiffHours' function with the
         /// specified arguments, which must each have a DateTime, DateTimeOffset or Time result type. The result type of
-        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>. 
+        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>.
         /// The result type of the expression is Edm.Int32.
         /// </summary>
         /// <param name="timeValue1">An expression that specifies the first DateTime, DateTimeOffset or Time value.</param>
@@ -964,7 +1095,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the hour difference between <param name="timeValue1"> and <param name="timeValue2">.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue1"/> or <paramref name="timeValue2"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'DiffHours' function accepts arguments with the result types of <paramref name="timeValue1"/> and <paramref name="timeValue2"/>.</exception>
-        public static DbFunctionExpression DiffHours(this DbExpression timeValue1, DbExpression timeValue2)
+        public static DbFunctionExpression DiffHours(
+            this DbExpression timeValue1,
+            DbExpression timeValue2
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue1, "timeValue1");
             EntityUtil.CheckArgumentNull(timeValue2, "timeValue2");
@@ -974,7 +1108,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'DiffMinutes' function with the
         /// specified arguments, which must each have a DateTime, DateTimeOffset or Time result type. The result type of
-        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>. 
+        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>.
         /// The result type of the expression is Edm.Int32.
         /// </summary>
         /// <param name="timeValue1">An expression that specifies the first DateTime, DateTimeOffset or Time value.</param>
@@ -982,7 +1116,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the minute difference between <param name="timeValue1"> and <param name="timeValue2">.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue1"/> or <paramref name="timeValue2"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'DiffMinutes' function accepts arguments with the result types of <paramref name="timeValue1"/> and <paramref name="timeValue2"/>.</exception>
-        public static DbFunctionExpression DiffMinutes(this DbExpression timeValue1, DbExpression timeValue2)
+        public static DbFunctionExpression DiffMinutes(
+            this DbExpression timeValue1,
+            DbExpression timeValue2
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue1, "timeValue1");
             EntityUtil.CheckArgumentNull(timeValue2, "timeValue2");
@@ -992,7 +1129,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'DiffSeconds' function with the
         /// specified arguments, which must each have a DateTime, DateTimeOffset or Time result type. The result type of
-        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>. 
+        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>.
         /// The result type of the expression is Edm.Int32.
         /// </summary>
         /// <param name="timeValue1">An expression that specifies the first DateTime, DateTimeOffset or Time value.</param>
@@ -1000,7 +1137,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the second difference between <param name="timeValue1"> and <param name="timeValue2">.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue1"/> or <paramref name="timeValue2"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'DiffSeconds' function accepts arguments with the result types of <paramref name="timeValue1"/> and <paramref name="timeValue2"/>.</exception>
-        public static DbFunctionExpression DiffSeconds(this DbExpression timeValue1, DbExpression timeValue2)
+        public static DbFunctionExpression DiffSeconds(
+            this DbExpression timeValue1,
+            DbExpression timeValue2
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue1, "timeValue1");
             EntityUtil.CheckArgumentNull(timeValue2, "timeValue2");
@@ -1010,7 +1150,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'DiffMilliseconds' function with the
         /// specified arguments, which must each have a DateTime, DateTimeOffset or Time result type. The result type of
-        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>. 
+        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>.
         /// The result type of the expression is Edm.Int32.
         /// </summary>
         /// <param name="timeValue1">An expression that specifies the first DateTime, DateTimeOffset or Time value.</param>
@@ -1018,7 +1158,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the millisecond difference between <param name="timeValue1"> and <param name="timeValue2">.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue1"/> or <paramref name="timeValue2"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'DiffMilliseconds' function accepts arguments with the result types of <paramref name="timeValue1"/> and <paramref name="timeValue2"/>.</exception>
-        public static DbFunctionExpression DiffMilliseconds(this DbExpression timeValue1, DbExpression timeValue2)
+        public static DbFunctionExpression DiffMilliseconds(
+            this DbExpression timeValue1,
+            DbExpression timeValue2
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue1, "timeValue1");
             EntityUtil.CheckArgumentNull(timeValue2, "timeValue2");
@@ -1028,7 +1171,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'DiffMicroseconds' function with the
         /// specified arguments, which must each have a DateTime, DateTimeOffset or Time result type. The result type of
-        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>. 
+        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>.
         /// The result type of the expression is Edm.Int32.
         /// </summary>
         /// <param name="timeValue1">An expression that specifies the first DateTime, DateTimeOffset or Time value.</param>
@@ -1036,7 +1179,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the microsecond difference between <param name="timeValue1"> and <param name="timeValue2">.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue1"/> or <paramref name="timeValue2"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'DiffMicroseconds' function accepts arguments with the result types of <paramref name="timeValue1"/> and <paramref name="timeValue2"/>.</exception>
-        public static DbFunctionExpression DiffMicroseconds(this DbExpression timeValue1, DbExpression timeValue2)
+        public static DbFunctionExpression DiffMicroseconds(
+            this DbExpression timeValue1,
+            DbExpression timeValue2
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue1, "timeValue1");
             EntityUtil.CheckArgumentNull(timeValue2, "timeValue2");
@@ -1046,7 +1192,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'DiffNanoseconds' function with the
         /// specified arguments, which must each have a DateTime, DateTimeOffset or Time result type. The result type of
-        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>. 
+        /// <paramref name="timeValue1"/> must match the result type of <paramref name="timeValue2"/>.
         /// The result type of the expression is Edm.Int32.
         /// </summary>
         /// <param name="timeValue1">An expression that specifies the first DateTime, DateTimeOffset or Time value.</param>
@@ -1054,7 +1200,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the nanosecond difference between <param name="timeValue1"> and <param name="timeValue2">.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="timeValue1"/> or <paramref name="timeValue2"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'DiffNanoseconds' function accepts arguments with the result types of <paramref name="timeValue1"/> and <paramref name="timeValue2"/>.</exception>
-        public static DbFunctionExpression DiffNanoseconds(this DbExpression timeValue1, DbExpression timeValue2)
+        public static DbFunctionExpression DiffNanoseconds(
+            this DbExpression timeValue1,
+            DbExpression timeValue2
+        )
         {
             EntityUtil.CheckArgumentNull(timeValue1, "timeValue1");
             EntityUtil.CheckArgumentNull(timeValue2, "timeValue2");
@@ -1169,7 +1318,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbFunctionExpression that returns the value of <paramref name="baseArgument"/> raised to the power specified by <paramref name="exponent"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="baseArgument"/> <paramref name="exponent"/> is null.</exception>
         /// <exception cref="ArgumentException">No overload of the canonical 'Power' function accepts arguments with the result types of <paramref name="baseArgument"/> and <paramref name="exponent"/>.</exception>
-        public static DbFunctionExpression Power(this DbExpression baseArgument, DbExpression exponent)
+        public static DbFunctionExpression Power(
+            this DbExpression baseArgument,
+            DbExpression exponent
+        )
         {
             EntityUtil.CheckArgumentNull(baseArgument, "baseArgument");
             EntityUtil.CheckArgumentNull(exponent, "exponent");
@@ -1216,7 +1368,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
 
         /// <summary>
         /// Creates a <see cref="DbFunctionExpression"/> that invokes the canonical 'BitwiseNot' function with the
-        /// specified argument, which must have an integer numeric result type. The result type of the expression 
+        /// specified argument, which must have an integer numeric result type. The result type of the expression
         /// is this same type.
         /// </summary>
         /// <param name="value">An expression that specifies the first operand.</param>

@@ -5,6 +5,7 @@ using System.Threading;
 public class Program
 {
     private static int s_result;
+
     public static int Main()
     {
         C c = new();
@@ -57,7 +58,5 @@ public interface Base
 
 public class C : Base
 {
-    public void Test(long arg)
-    {
-    }
+    public void Test(long arg) { }
 }

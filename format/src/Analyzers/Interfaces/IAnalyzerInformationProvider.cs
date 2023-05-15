@@ -12,6 +12,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
         ImmutableDictionary<ProjectId, AnalyzersAndFixers> GetAnalyzersAndFixers(
             Solution solution,
             FormatOptions formatOptions,
-            ILogger logger);
+            ILogger logger
+        );
     }
 }

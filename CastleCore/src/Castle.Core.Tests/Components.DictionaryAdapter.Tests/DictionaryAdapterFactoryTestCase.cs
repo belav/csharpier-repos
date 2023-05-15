@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -70,8 +70,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
         [Test]
         public void CreateAdapter_NoPrefixWithMethod_ThrowsException()
         {
-            Assert.Throws<TypeLoadException>(() =>
-                factory.GetAdapter<IPersonWithMethod>(dictionary)
+            Assert.Throws<TypeLoadException>(
+                () => factory.GetAdapter<IPersonWithMethod>(dictionary)
             );
         }
 
@@ -157,7 +157,12 @@ namespace Castle.Components.DictionaryAdapter.Tests
             person.Height = 72;
 
             Assert.AreEqual(72, person.Height);
-            Assert.AreEqual(72, dictionary["Castle.Components.DictionaryAdapter.Tests.IPersonWithTypePrefixOverride#Height"]);
+            Assert.AreEqual(
+                72,
+                dictionary[
+                    "Castle.Components.DictionaryAdapter.Tests.IPersonWithTypePrefixOverride#Height"
+                ]
+            );
         }
 
         [Test]
@@ -437,28 +442,31 @@ namespace Castle.Components.DictionaryAdapter.Tests
         [Test]
         public void UpdateAdapter_WithDefaultConversions_WorksFine()
         {
-            UsingCulture(CultureInfo.InvariantCulture, () =>
-            {
-                var today = DateTime.Today;
-                var guid = Guid.NewGuid();
+            UsingCulture(
+                CultureInfo.InvariantCulture,
+                () =>
+                {
+                    var today = DateTime.Today;
+                    var guid = Guid.NewGuid();
 
-                var conversions = factory.GetAdapter<IConversionsToString>(dictionary);
-                conversions.Int = 22;
-                conversions.Float = 98.6F;
-                conversions.Double = 3.14;
-                conversions.Decimal = 100;
-                conversions.DateTime = today;
-                conversions.Guid = guid;
-                conversions.Phone = new Phone("2124751012", "22");
+                    var conversions = factory.GetAdapter<IConversionsToString>(dictionary);
+                    conversions.Int = 22;
+                    conversions.Float = 98.6F;
+                    conversions.Double = 3.14;
+                    conversions.Decimal = 100;
+                    conversions.DateTime = today;
+                    conversions.Guid = guid;
+                    conversions.Phone = new Phone("2124751012", "22");
 
-                Assert.AreEqual(string.Format("{0}", 22), dictionary["Int"]);
-                Assert.AreEqual(string.Format("{0}", 98.6), dictionary["Float"]);
-                Assert.AreEqual(string.Format("{0}", 3.14D), dictionary["Double"]);
-                Assert.AreEqual(string.Format("{0}", 100M), dictionary["Decimal"]);
-                Assert.AreEqual(today.ToString("yyyy-MM-dd"), dictionary["DateTime"]);
-                Assert.AreEqual(guid.ToString(), dictionary["Guid"]);
-                Assert.AreEqual("2124751012,22", dictionary["Phone"]);
-            });
+                    Assert.AreEqual(string.Format("{0}", 22), dictionary["Int"]);
+                    Assert.AreEqual(string.Format("{0}", 98.6), dictionary["Float"]);
+                    Assert.AreEqual(string.Format("{0}", 3.14D), dictionary["Double"]);
+                    Assert.AreEqual(string.Format("{0}", 100M), dictionary["Decimal"]);
+                    Assert.AreEqual(today.ToString("yyyy-MM-dd"), dictionary["DateTime"]);
+                    Assert.AreEqual(guid.ToString(), dictionary["Guid"]);
+                    Assert.AreEqual("2124751012,22", dictionary["Phone"]);
+                }
+            );
         }
 
         [Test]
@@ -486,26 +494,29 @@ namespace Castle.Components.DictionaryAdapter.Tests
         [Test]
         public void UpdateAdapter_WithDefaultNullableConversions_WorksFine()
         {
-            UsingCulture(CultureInfo.InvariantCulture, () =>
-            {
-                DateTime? today = DateTime.Today;
-                Guid? guid = Guid.NewGuid();
+            UsingCulture(
+                CultureInfo.InvariantCulture,
+                () =>
+                {
+                    DateTime? today = DateTime.Today;
+                    Guid? guid = Guid.NewGuid();
 
-                var conversions = factory.GetAdapter<IConversionsToString>(dictionary);
-                conversions.NullInt = 22;
-                conversions.NullFloat = 98.6F;
-                conversions.NullDouble = 3.14;
-                conversions.NullDecimal = 100;
-                conversions.NullDateTime = today;
-                conversions.NullGuid = guid;
+                    var conversions = factory.GetAdapter<IConversionsToString>(dictionary);
+                    conversions.NullInt = 22;
+                    conversions.NullFloat = 98.6F;
+                    conversions.NullDouble = 3.14;
+                    conversions.NullDecimal = 100;
+                    conversions.NullDateTime = today;
+                    conversions.NullGuid = guid;
 
-                Assert.AreEqual(string.Format("{0}", 22), dictionary["NullInt"]);
-                Assert.AreEqual(string.Format("{0}", 98.6), dictionary["NullFloat"]);
-                Assert.AreEqual(string.Format("{0}", 3.14D), dictionary["NullDouble"]);
-                Assert.AreEqual(string.Format("{0}", 100M), dictionary["NullDecimal"]);
-                Assert.AreEqual(today.Value.ToString("yyyy-MM-dd"), dictionary["NullDateTime"]);
-                Assert.AreEqual(guid.ToString(), dictionary["NullGuid"]);
-            });
+                    Assert.AreEqual(string.Format("{0}", 22), dictionary["NullInt"]);
+                    Assert.AreEqual(string.Format("{0}", 98.6), dictionary["NullFloat"]);
+                    Assert.AreEqual(string.Format("{0}", 3.14D), dictionary["NullDouble"]);
+                    Assert.AreEqual(string.Format("{0}", 100M), dictionary["NullDecimal"]);
+                    Assert.AreEqual(today.Value.ToString("yyyy-MM-dd"), dictionary["NullDateTime"]);
+                    Assert.AreEqual(guid.ToString(), dictionary["NullGuid"]);
+                }
+            );
         }
 
         [Test]
@@ -710,7 +721,10 @@ namespace Castle.Components.DictionaryAdapter.Tests
         public void CanCancelPropertyChanges()
         {
             var person = factory.GetAdapter<IPerson>(dictionary);
-            person.PropertyChanging += (s, e) => { ((PropertyChangingEventArgsEx)e).Cancel = true; };
+            person.PropertyChanging += (s, e) =>
+            {
+                ((PropertyChangingEventArgsEx)e).Cancel = true;
+            };
 
             person.Name = "Craig";
             Assert.AreEqual(null, person.Name);
@@ -738,7 +752,10 @@ namespace Castle.Components.DictionaryAdapter.Tests
         public void WillNotPropagatePropertyChangedEventWhenNestedPropertyChanged()
         {
             var container = factory.GetAdapter<IItemContainerWithComponent<IPerson>>(dictionary);
-            container.PropertyChanged += (s, e) => { Assert.Fail("Property change event was raised from wrong object."); };
+            container.PropertyChanged += (s, e) =>
+            {
+                Assert.Fail("Property change event was raised from wrong object.");
+            };
 
             container.Item.Name = "Craig";
         }
@@ -1124,7 +1141,9 @@ namespace Castle.Components.DictionaryAdapter.Tests
         public void CanInitializeTheDictionaryAdapterWithAttributes()
         {
             var name = factory.GetAdapter<IMutableName>(dictionary);
-            Assert.IsTrue(((IDictionaryAdapter)name).Validators.OfType<TestDictionaryValidator>().Any());
+            Assert.IsTrue(
+                ((IDictionaryAdapter)name).Validators.OfType<TestDictionaryValidator>().Any()
+            );
         }
 
         [Test]
@@ -1135,8 +1154,12 @@ namespace Castle.Components.DictionaryAdapter.Tests
             name.LastName = "Tex";
 
             Assert.IsFalse(name.IsValid);
-            Assert.AreEqual("Property FirstName must be at least 10 characters long" + Environment.NewLine +
-                            "Property LastName must be at least 15 characters long", name.Error);
+            Assert.AreEqual(
+                "Property FirstName must be at least 10 characters long"
+                    + Environment.NewLine
+                    + "Property LastName must be at least 15 characters long",
+                name.Error
+            );
         }
 
         [Test]
@@ -1168,8 +1191,12 @@ namespace Castle.Components.DictionaryAdapter.Tests
             var groupAandB = groupA.ValidateGroups("B");
 
             Assert.IsFalse(groupAandB.IsValid);
-            Assert.AreEqual("Property FirstName must be at least 10 characters long" + Environment.NewLine +
-                            "Property LastName must be at least 15 characters long", groupAandB.Error);
+            Assert.AreEqual(
+                "Property FirstName must be at least 10 characters long"
+                    + Environment.NewLine
+                    + "Property LastName must be at least 15 characters long",
+                groupAandB.Error
+            );
         }
 
         [Test]
@@ -1281,7 +1308,9 @@ namespace Castle.Components.DictionaryAdapter.Tests
         {
             var container = factory.GetAdapter<IItemContainer<IPerson>>(dictionary);
             container.Positions = new[] { 2, 4, 6, 8 };
-            container.ReducePositions = new DynamicValueDelegate<int>(() => container.Positions.Sum());
+            container.ReducePositions = new DynamicValueDelegate<int>(
+                () => container.Positions.Sum()
+            );
             Assert.AreEqual(20, container.ReducePositions.Value);
 
             container.Positions = new[] { 1, 2, 3, 4 };
@@ -1293,7 +1322,9 @@ namespace Castle.Components.DictionaryAdapter.Tests
         {
             var notifyCalled = false;
             var container = factory.GetAdapter<IItemContainer<IPerson>>(dictionary);
-            container.ReducePositions = new DynamicValueDelegate<int>(() => container.Positions.Sum());
+            container.ReducePositions = new DynamicValueDelegate<int>(
+                () => container.Positions.Sum()
+            );
 
             container.PropertyChanged += (s, e) =>
             {
@@ -1322,8 +1353,10 @@ namespace Castle.Components.DictionaryAdapter.Tests
         public void CanDetermineTheAdaptedInterface()
         {
             var person = factory.GetAdapter<IPerson>(dictionary);
-            var type = person.GetType().GetCustomAttributes(
-                typeof(DictionaryAdapterAttribute), false).Cast<DictionaryAdapterAttribute>()
+            var type = person
+                .GetType()
+                .GetCustomAttributes(typeof(DictionaryAdapterAttribute), false)
+                .Cast<DictionaryAdapterAttribute>()
                 .FirstOrDefault();
             Assert.IsNotNull(type);
             Assert.AreEqual(typeof(IPerson), type.InterfaceType);
@@ -1340,12 +1373,20 @@ namespace Castle.Components.DictionaryAdapter.Tests
         [Test]
         public void CanDetermineEqualityBetweenAdapters()
         {
-            var container1 = (IItemContainer<IPerson>)
-                factory.GetAdapter(typeof(IItemContainer<IPerson>), dictionary,
-                    new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy()));
-            var container2 = (IItemContainer<IPerson>)
-                factory.GetAdapter(typeof(IItemContainer<IPerson>), new Hashtable(),
-                    new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy()));
+            var container1 =
+                (IItemContainer<IPerson>)
+                    factory.GetAdapter(
+                        typeof(IItemContainer<IPerson>),
+                        dictionary,
+                        new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy())
+                    );
+            var container2 =
+                (IItemContainer<IPerson>)
+                    factory.GetAdapter(
+                        typeof(IItemContainer<IPerson>),
+                        new Hashtable(),
+                        new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy())
+                    );
             Assert.AreEqual(container1, container1);
             Assert.AreNotEqual(container1, container2);
 
@@ -1359,12 +1400,20 @@ namespace Castle.Components.DictionaryAdapter.Tests
         [Test]
         public void CanCalculateHashCodeBetweenAdapters()
         {
-            var container1 = (IItemContainer<IPerson>)
-                factory.GetAdapter(typeof(IItemContainer<IPerson>), dictionary,
-                    new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy()));
-            var container2 = (IItemContainer<IPerson>)
-                factory.GetAdapter(typeof(IItemContainer<IPerson>), new Hashtable(),
-                    new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy()));
+            var container1 =
+                (IItemContainer<IPerson>)
+                    factory.GetAdapter(
+                        typeof(IItemContainer<IPerson>),
+                        dictionary,
+                        new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy())
+                    );
+            var container2 =
+                (IItemContainer<IPerson>)
+                    factory.GetAdapter(
+                        typeof(IItemContainer<IPerson>),
+                        new Hashtable(),
+                        new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy())
+                    );
 
             container1.Id = Guid.NewGuid();
             container2.Id = container1.Id;
@@ -1374,12 +1423,20 @@ namespace Castle.Components.DictionaryAdapter.Tests
         [Test]
         public void HashCodesAreImmuatable()
         {
-            var container1 = (IItemContainer<IPerson>)
-                factory.GetAdapter(typeof(IItemContainer<IPerson>), dictionary,
-                    new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy()));
-            var container2 = (IItemContainer<IPerson>)
-                factory.GetAdapter(typeof(IItemContainer<IPerson>), new Hashtable(),
-                    new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy()));
+            var container1 =
+                (IItemContainer<IPerson>)
+                    factory.GetAdapter(
+                        typeof(IItemContainer<IPerson>),
+                        dictionary,
+                        new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy())
+                    );
+            var container2 =
+                (IItemContainer<IPerson>)
+                    factory.GetAdapter(
+                        typeof(IItemContainer<IPerson>),
+                        new Hashtable(),
+                        new PropertyDescriptor().AddBehaviors(new IdEqualityHashCodeStrategy())
+                    );
             Assert.AreNotEqual(container1.GetHashCode(), container2.GetHashCode());
             container1.Id = Guid.NewGuid();
             container2.Id = container1.Id;
@@ -1389,9 +1446,13 @@ namespace Castle.Components.DictionaryAdapter.Tests
         [Test]
         public void CanSupplyCustomCreationStrategy()
         {
-            var container = (IItemContainer<IPerson>)
-                factory.GetAdapter(typeof(IItemContainer<IPerson>), dictionary,
-                    new PropertyDescriptor().AddBehaviors(new CreateHashtableStrategy()));
+            var container =
+                (IItemContainer<IPerson>)
+                    factory.GetAdapter(
+                        typeof(IItemContainer<IPerson>),
+                        dictionary,
+                        new PropertyDescriptor().AddBehaviors(new CreateHashtableStrategy())
+                    );
 
             Assert.IsNotNull(container.Address);
             Assert.IsInstanceOf<Hashtable>(container.This.Dictionary);

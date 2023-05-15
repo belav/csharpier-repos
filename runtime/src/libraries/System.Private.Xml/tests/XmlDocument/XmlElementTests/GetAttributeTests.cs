@@ -11,7 +11,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetOneAttribute()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>"
+            );
 
             Assert.Equal("duu", xmlDocument.DocumentElement.GetAttribute("child2"));
         }
@@ -20,7 +22,9 @@ namespace System.Xml.XmlDocumentTests
         public static void GetEmptyAttribute()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>"
+            );
 
             Assert.Equal(string.Empty, xmlDocument.DocumentElement.GetAttribute("child1"));
         }
@@ -29,7 +33,9 @@ namespace System.Xml.XmlDocumentTests
         public static void WrongName()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>"
+            );
 
             Assert.Equal(string.Empty, xmlDocument.DocumentElement.GetAttribute("child7"));
         }
@@ -38,7 +44,9 @@ namespace System.Xml.XmlDocumentTests
         public static void WrongNamespace()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 child1=\"\" child2=\"duu\" child3=\"e1;e2;\" child4=\"a1\" child5=\"goody\"> text node two e1; text node three </elem1>"
+            );
 
             Assert.Equal(string.Empty, xmlDocument.DocumentElement.GetAttribute("child1", "ns2"));
         }
@@ -69,7 +77,9 @@ namespace System.Xml.XmlDocumentTests
         public static void RemoveFirstOfThreeAttributeAndGetIt()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<elem1 attr1=\"attr1\" attr2=\"bar\" attr3=\"foo\">This is a test</elem1>");
+            xmlDocument.LoadXml(
+                "<elem1 attr1=\"attr1\" attr2=\"bar\" attr3=\"foo\">This is a test</elem1>"
+            );
 
             xmlDocument.DocumentElement.RemoveAttribute("attr1");
 

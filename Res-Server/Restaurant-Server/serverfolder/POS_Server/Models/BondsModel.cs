@@ -7,7 +7,6 @@ namespace POS_Server.Models
 {
     public class BondsModel
     {
-
         public long bondId { get; set; }
         public string number { get; set; }
         public decimal amount { get; set; }
@@ -22,9 +21,8 @@ namespace POS_Server.Models
         public byte isActive { get; set; }
         public Nullable<long> cashTransId { get; set; }
 
-      
         public Boolean canDelete { get; set; }
-       
+
         // cash trans
 
         public long ctcashTransId { get; set; }

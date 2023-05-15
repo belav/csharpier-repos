@@ -23,7 +23,9 @@ namespace JIT.HardwareIntrinsics.General
 
             try
             {
-                Vector256<bool> result = default(Vector256<bool>).WithLower(default(Vector128<bool>));
+                Vector256<bool> result = default(Vector256<bool>).WithLower(
+                    default(Vector128<bool>)
+                );
             }
             catch (NotSupportedException)
             {
@@ -32,7 +34,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256WithLower: RunNotSupportedScenario failed to throw NotSupportedException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256WithLower: RunNotSupportedScenario failed to throw NotSupportedException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 throw new Exception("One or more scenarios did not complete as expected.");

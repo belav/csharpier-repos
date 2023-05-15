@@ -5,12 +5,14 @@
 //------------------------------------------------------------------------------
 
 
-namespace System.Net {
+namespace System.Net
+{
     /// <devdoc>
     ///    <para>Provides the base authentication interface for Web client authentication
     ///       modules.</para>
     /// </devdoc>
-    public interface IAuthenticationModule {
+    public interface IAuthenticationModule
+    {
         /// <devdoc>
         /// <para>Returns an instance of the <see cref='System.Net.Authorization'/>
         /// class in response to the
@@ -30,7 +32,7 @@ namespace System.Net {
         ///       pre-authentication.
         ///    </para>
         /// </devdoc>
-        bool CanPreAuthenticate { get;}
+        bool CanPreAuthenticate { get; }
 
         /// <devdoc>
         ///    <para>
@@ -38,9 +40,6 @@ namespace System.Net {
         ///       .
         ///    </para>
         /// </devdoc>
-        string AuthenticationType { get;}
-
+        string AuthenticationType { get; }
     } // interface IAuthenticationModule
-
-
 } // namespace System.Net

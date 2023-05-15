@@ -17,7 +17,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
 
     private const string DesignTimeVariable = "__o";
 
-    public override void WriteMarkupBlock(CodeRenderingContext context, MarkupBlockIntermediateNode node)
+    public override void WriteMarkupBlock(
+        CodeRenderingContext context,
+        MarkupBlockIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -32,7 +35,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         // Do nothing
     }
 
-    public override void WriteMarkupElement(CodeRenderingContext context, MarkupElementIntermediateNode node)
+    public override void WriteMarkupElement(
+        CodeRenderingContext context,
+        MarkupElementIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -47,7 +53,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         context.RenderChildren(node);
     }
 
-    public override void WriteUsingDirective(CodeRenderingContext context, UsingDirectiveIntermediateNode node)
+    public override void WriteUsingDirective(
+        CodeRenderingContext context,
+        UsingDirectiveIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -73,7 +82,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         }
     }
 
-    public override void WriteCSharpExpression(CodeRenderingContext context, CSharpExpressionIntermediateNode node)
+    public override void WriteCSharpExpression(
+        CodeRenderingContext context,
+        CSharpExpressionIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -88,7 +100,11 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         WriteCSharpExpressionInnards(context, node);
     }
 
-    private void WriteCSharpExpressionInnards(CodeRenderingContext context, CSharpExpressionIntermediateNode node, string type = null)
+    private void WriteCSharpExpressionInnards(
+        CodeRenderingContext context,
+        CSharpExpressionIntermediateNode node,
+        string type = null
+    )
     {
         if (node.Children.Count == 0)
         {
@@ -152,7 +168,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         }
     }
 
-    public override void WriteCSharpCode(CodeRenderingContext context, CSharpCodeIntermediateNode node)
+    public override void WriteCSharpCode(
+        CodeRenderingContext context,
+        CSharpCodeIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -215,7 +234,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         }
     }
 
-    public override void WriteHtmlAttribute(CodeRenderingContext context, HtmlAttributeIntermediateNode node)
+    public override void WriteHtmlAttribute(
+        CodeRenderingContext context,
+        HtmlAttributeIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -237,7 +259,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         context.RenderChildren(node);
     }
 
-    public override void WriteHtmlAttributeValue(CodeRenderingContext context, HtmlAttributeValueIntermediateNode node)
+    public override void WriteHtmlAttributeValue(
+        CodeRenderingContext context,
+        HtmlAttributeValueIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -252,7 +277,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         // Do nothing, this can't contain code.
     }
 
-    public override void WriteCSharpExpressionAttributeValue(CodeRenderingContext context, CSharpExpressionAttributeValueIntermediateNode node)
+    public override void WriteCSharpExpressionAttributeValue(
+        CodeRenderingContext context,
+        CSharpExpressionAttributeValueIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -285,7 +313,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         context.CodeWriter.WriteLine(";");
     }
 
-    public override void WriteHtmlContent(CodeRenderingContext context, HtmlContentIntermediateNode node)
+    public override void WriteHtmlContent(
+        CodeRenderingContext context,
+        HtmlContentIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -313,13 +344,18 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         }
 
         context.CodeWriter
-            .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{nameof(ComponentsApi.RenderTreeBuilder.AddAttribute)}")
+            .WriteStartMethodInvocation(
+                $"{_scopeStack.BuilderVarName}.{nameof(ComponentsApi.RenderTreeBuilder.AddAttribute)}"
+            )
             .Write("-1")
             .WriteParameterSeparator()
             .WriteStringLiteral(key);
     }
 
-    protected override void BeginWriteAttribute(CodeRenderingContext context, IntermediateNode expression)
+    protected override void BeginWriteAttribute(
+        CodeRenderingContext context,
+        IntermediateNode expression
+    )
     {
         if (context == null)
         {
@@ -331,7 +367,9 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
             throw new ArgumentNullException(nameof(expression));
         }
 
-        context.CodeWriter.WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}");
+        context.CodeWriter.WriteStartMethodInvocation(
+            $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddAttribute}"
+        );
         context.CodeWriter.Write("-1");
         context.CodeWriter.WriteParameterSeparator();
 
@@ -342,7 +380,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         }
     }
 
-    public override void WriteComponent(CodeRenderingContext context, ComponentIntermediateNode node)
+    public override void WriteComponent(
+        CodeRenderingContext context,
+        ComponentIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -400,10 +441,12 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
                 // Consider what would happen if the user's cursor was inside the element. At
                 // design -time we want to render an empty lambda to provide proper scoping
                 // for any code that the user types.
-                context.RenderNode(new ComponentChildContentIntermediateNode()
-                {
-                    TypeName = ComponentsApi.RenderFragment.FullTypeName,
-                });
+                context.RenderNode(
+                    new ComponentChildContentIntermediateNode()
+                    {
+                        TypeName = ComponentsApi.RenderFragment.FullTypeName,
+                    }
+                );
             }
 
             foreach (var setKey in node.SetKeys)
@@ -447,7 +490,8 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
                     WriteTypeInferenceMethodParameterInnards(context, parameter);
                     context.CodeWriter.Write(", out var ");
 
-                    var variableName = $"__typeInferenceArg_{_scopeStack.Depth}_{parameter.ParameterName}";
+                    var variableName =
+                        $"__typeInferenceArg_{_scopeStack.Depth}_{parameter.ParameterName}";
                     context.CodeWriter.Write(variableName);
 
                     UseCapturedCascadingGenericParameterVariable(node, parameter, variableName);
@@ -518,7 +562,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         }
     }
 
-    private void WriteTypeInferenceMethodParameterInnards(CodeRenderingContext context, TypeInferenceMethodParameter parameter)
+    private void WriteTypeInferenceMethodParameterInnards(
+        CodeRenderingContext context,
+        TypeInferenceMethodParameter parameter
+    )
     {
         switch (parameter.Source)
         {
@@ -550,11 +597,16 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
                 context.CodeWriter.Write(capturedVariable.VariableName);
                 break;
             default:
-                throw new InvalidOperationException($"Not implemented: type inference method parameter from source {parameter.Source}");
+                throw new InvalidOperationException(
+                    $"Not implemented: type inference method parameter from source {parameter.Source}"
+                );
         }
     }
 
-    public override void WriteComponentAttribute(CodeRenderingContext context, ComponentAttributeIntermediateNode node)
+    public override void WriteComponentAttribute(
+        CodeRenderingContext context,
+        ComponentAttributeIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -578,7 +630,11 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         context.CodeWriter.WriteLine();
     }
 
-    private void WriteComponentAttributeInnards(CodeRenderingContext context, ComponentAttributeIntermediateNode node, bool canTypeCheck)
+    private void WriteComponentAttributeInnards(
+        CodeRenderingContext context,
+        ComponentAttributeIntermediateNode node,
+        bool canTypeCheck
+    )
     {
         // We limit component attributes to simple cases. However there is still a lot of complexity
         // to handle here, since there are a few different cases for how an attribute might be structured.
@@ -592,7 +648,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         else if (node.Children.Count > 1)
         {
             // We don't expect this to happen, we just want to know if it can.
-            throw new InvalidOperationException("Attribute nodes should either be minimized or a single type of content." + string.Join(", ", node.Children));
+            throw new InvalidOperationException(
+                "Attribute nodes should either be minimized or a single type of content."
+                    + string.Join(", ", node.Children)
+            );
         }
         else if (node.Children.Count == 1 && node.Children[0] is HtmlContentIntermediateNode)
         {
@@ -613,8 +672,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
             // Of a list of tokens directly in the attribute.
             var tokens = GetCSharpTokens(node);
 
-            if ((node.BoundAttribute?.IsDelegateProperty() ?? false) ||
-                (node.BoundAttribute?.IsChildContentProperty() ?? false))
+            if (
+                (node.BoundAttribute?.IsDelegateProperty() ?? false)
+                || (node.BoundAttribute?.IsChildContentProperty() ?? false)
+            )
             {
                 // We always surround the expression with the delegate constructor. This makes type
                 // inference inside lambdas, and method group conversion do the right thing.
@@ -724,7 +785,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         return node.FindDescendantNodes<IntermediateToken>().Where(t => t.IsCSharp).ToArray();
     }
 
-    public override void WriteComponentChildContent(CodeRenderingContext context, ComponentChildContentIntermediateNode node)
+    public override void WriteComponentChildContent(
+        CodeRenderingContext context,
+        ComponentChildContentIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -751,7 +815,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         context.CodeWriter.WriteEndMethodInvocation();
     }
 
-    private void WriteComponentChildContentInnards(CodeRenderingContext context, ComponentChildContentIntermediateNode node)
+    private void WriteComponentChildContentInnards(
+        CodeRenderingContext context,
+        ComponentChildContentIntermediateNode node
+    )
     {
         // Writes something like:
         //
@@ -761,7 +828,8 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         _scopeStack.OpenComponentScope(
             context,
             node.AttributeName,
-            node.IsParameterized ? node.ParameterName : null);
+            node.IsParameterized ? node.ParameterName : null
+        );
         for (var i = 0; i < node.Children.Count; i++)
         {
             context.RenderNode(node.Children[i]);
@@ -769,7 +837,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         _scopeStack.CloseScope(context);
     }
 
-    public override void WriteComponentTypeArgument(CodeRenderingContext context, ComponentTypeArgumentIntermediateNode node)
+    public override void WriteComponentTypeArgument(
+        CodeRenderingContext context,
+        ComponentTypeArgumentIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -842,22 +913,23 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
 
         var codeWriter = context.CodeWriter;
 
-        codeWriter
-            .WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.SetKey}");
+        codeWriter.WriteStartMethodInvocation(
+            $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.SetKey}"
+        );
         WriteSetKeyInnards(context, node);
         codeWriter.WriteEndMethodInvocation();
     }
 
     private void WriteSetKeyInnards(CodeRenderingContext context, SetKeyIntermediateNode node)
     {
-        WriteCSharpCode(context, new CSharpCodeIntermediateNode
-        {
-            Source = node.Source,
-            Children =
-                    {
-                        node.KeyValueToken
-                    }
-        });
+        WriteCSharpCode(
+            context,
+            new CSharpCodeIntermediateNode
+            {
+                Source = node.Source,
+                Children = { node.KeyValueToken }
+            }
+        );
     }
 
     public override void WriteSplat(CodeRenderingContext context, SplatIntermediateNode node)
@@ -875,7 +947,9 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         // Looks like:
         //
         // __builder.AddMultipleAttributes(2, ...);
-        context.CodeWriter.WriteStartMethodInvocation($"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMultipleAttributes}");
+        context.CodeWriter.WriteStartMethodInvocation(
+            $"{_scopeStack.BuilderVarName}.{ComponentsApi.RenderTreeBuilder.AddMultipleAttributes}"
+        );
         context.CodeWriter.Write("-1");
         context.CodeWriter.WriteParameterSeparator();
 
@@ -884,7 +958,11 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         context.CodeWriter.WriteEndMethodInvocation();
     }
 
-    private void WriteSplatInnards(CodeRenderingContext context, SplatIntermediateNode node, bool canTypeCheck)
+    private void WriteSplatInnards(
+        CodeRenderingContext context,
+        SplatIntermediateNode node,
+        bool canTypeCheck
+    )
     {
         var tokens = GetCSharpTokens(node);
 
@@ -908,7 +986,10 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         }
     }
 
-    public override void WriteReferenceCapture(CodeRenderingContext context, ReferenceCaptureIntermediateNode node)
+    public override void WriteReferenceCapture(
+        CodeRenderingContext context,
+        ReferenceCaptureIntermediateNode node
+    )
     {
         if (context == null)
         {
@@ -926,7 +1007,11 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
         WriteReferenceCaptureInnards(context, node, shouldTypeCheck: true);
     }
 
-    protected override void WriteReferenceCaptureInnards(CodeRenderingContext context, ReferenceCaptureIntermediateNode node, bool shouldTypeCheck)
+    protected override void WriteReferenceCaptureInnards(
+        CodeRenderingContext context,
+        ReferenceCaptureIntermediateNode node,
+        bool shouldTypeCheck
+    )
     {
         // We specialize this code based on whether or not we can type check. When we're calling into
         // a type-inferenced component, we can't do the type check. See the comments in WriteTypeInferenceMethod.
@@ -938,10 +1023,12 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
             var captureTypeName = node.IsComponentCapture
                 ? node.ComponentCaptureTypeName
                 : ComponentsApi.ElementReference.FullTypeName;
-            WriteCSharpCode(context, new CSharpCodeIntermediateNode
-            {
-                Source = node.Source,
-                Children =
+            WriteCSharpCode(
+                context,
+                new CSharpCodeIntermediateNode
+                {
+                    Source = node.Source,
+                    Children =
                     {
                         node.IdentifierToken,
                         new IntermediateToken
@@ -950,7 +1037,8 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
                             Content = $" = default({captureTypeName});"
                         }
                     }
-            });
+                }
+            );
         }
         else
         {
@@ -962,10 +1050,12 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
             const string refCaptureParamName = "__value";
             using (var lambdaScope = context.CodeWriter.BuildLambda(refCaptureParamName))
             {
-                WriteCSharpCode(context, new CSharpCodeIntermediateNode
-                {
-                    Source = node.Source,
-                    Children =
+                WriteCSharpCode(
+                    context,
+                    new CSharpCodeIntermediateNode
+                    {
+                        Source = node.Source,
+                        Children =
                         {
                             node.IdentifierToken,
                             new IntermediateToken
@@ -974,7 +1064,8 @@ internal class ComponentDesignTimeNodeWriter : ComponentNodeWriter
                                 Content = $" = {refCaptureParamName};"
                             }
                         }
-                });
+                    }
+                );
             }
         }
     }

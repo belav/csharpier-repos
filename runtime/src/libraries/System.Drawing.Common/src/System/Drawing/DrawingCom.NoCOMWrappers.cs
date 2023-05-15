@@ -10,7 +10,9 @@ namespace System.Drawing
     {
         internal static IStreamWrapper GetComWrapper(GPStream stream)
         {
-            return new IStreamWrapper(Marshal.GetComInterfaceForObject<GPStream, Interop.Ole32.IStream>(stream));
+            return new IStreamWrapper(
+                Marshal.GetComInterfaceForObject<GPStream, Interop.Ole32.IStream>(stream)
+            );
         }
     }
 }

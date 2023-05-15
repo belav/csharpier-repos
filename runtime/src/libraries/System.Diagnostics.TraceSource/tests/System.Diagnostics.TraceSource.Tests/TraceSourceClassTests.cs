@@ -63,7 +63,9 @@ namespace System.Diagnostics.TraceSourceTests
             trace.TraceEvent(TraceEventType.Critical, 0);
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         static WeakReference PruneMakeRef()
         {
             return new WeakReference(new TraceSource("TestTraceSource"));
@@ -112,7 +114,11 @@ namespace System.Diagnostics.TraceSourceTests
         // NOTE: tests to cover a TraceEventType value that is not in CoreFX (0x20 == TraceEventType.Start in 4.5)
         [InlineData(SourceLevels.Verbose, (TraceEventType)0x20, 0)]
         [InlineData(SourceLevels.All, (TraceEventType)0x20, 1)]
-        public void SwitchLevelTest(SourceLevels sourceLevel, TraceEventType messageLevel, int expected)
+        public void SwitchLevelTest(
+            SourceLevels sourceLevel,
+            TraceEventType messageLevel,
+            int expected
+        )
         {
             var trace = new TraceSource("TestTraceSource");
             var listener = new TestTraceListener();
@@ -126,14 +132,25 @@ namespace System.Diagnostics.TraceSourceTests
         public void NullSourceName()
         {
             AssertExtensions.Throws<ArgumentNullException>("name", () => new TraceSource(null));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => new TraceSource(null, SourceLevels.All));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => new TraceSource(null, SourceLevels.All)
+            );
         }
 
         [Fact]
         public void EmptySourceName()
         {
-            AssertExtensions.Throws<ArgumentException>("name", null, () => new TraceSource(string.Empty));
-            AssertExtensions.Throws<ArgumentException>("name", null, () => new TraceSource(string.Empty, SourceLevels.All));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () => new TraceSource(string.Empty)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () => new TraceSource(string.Empty, SourceLevels.All)
+            );
         }
     }
 
@@ -195,7 +212,6 @@ namespace System.Diagnostics.TraceSourceTests
     // Defines abstract tests that will be executed in different modes via the above concrete classes.
     public abstract class TraceSourceTestsBase : IDisposable
     {
-
         void IDisposable.Dispose()
         {
             TraceTestHelper.ResetState();
@@ -307,7 +323,11 @@ namespace System.Diagnostics.TraceSourceTests
             var trace = new TraceSource("TestTraceSource", SourceLevels.All);
             var listener = GetTraceListener();
             trace.Listeners.Add(listener);
-            trace.TraceTransfer(1, "Trace transfer test message", Trace.CorrelationManager.ActivityId);
+            trace.TraceTransfer(
+                1,
+                "Trace transfer test message",
+                Trace.CorrelationManager.ActivityId
+            );
             Assert.Equal(1, listener.GetCallCount(Method.TraceTransfer));
             var flushExpected = AutoFlush ? 1 : 0;
             Assert.Equal(flushExpected, listener.GetCallCount(Method.Flush));

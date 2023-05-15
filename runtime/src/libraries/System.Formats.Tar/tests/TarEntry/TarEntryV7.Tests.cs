@@ -12,35 +12,72 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void Constructor_InvalidEntryName()
         {
-            Assert.Throws<ArgumentNullException>(() => new V7TarEntry(TarEntryType.V7RegularFile, entryName: null));
-            Assert.Throws<ArgumentException>(() => new V7TarEntry(TarEntryType.V7RegularFile, entryName: string.Empty));
+            Assert.Throws<ArgumentNullException>(
+                () => new V7TarEntry(TarEntryType.V7RegularFile, entryName: null)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new V7TarEntry(TarEntryType.V7RegularFile, entryName: string.Empty)
+            );
         }
 
         [Fact]
         public void Constructor_UnsupportedEntryTypes()
         {
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry((TarEntryType)byte.MaxValue, InitialEntryName));
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry((TarEntryType)byte.MaxValue, InitialEntryName)
+            );
 
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.BlockDevice, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.CharacterDevice, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.ContiguousFile, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.DirectoryList, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.ExtendedAttributes, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.Fifo, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.GlobalExtendedAttributes, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.LongLink, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.LongPath, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.MultiVolume, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.RegularFile, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.RenamedOrSymlinked, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.SparseFile, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new V7TarEntry(TarEntryType.TapeVolume, InitialEntryName));
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.BlockDevice, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.CharacterDevice, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.ContiguousFile, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.DirectoryList, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.ExtendedAttributes, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.Fifo, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.GlobalExtendedAttributes, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.LongLink, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.LongPath, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.MultiVolume, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.RegularFile, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.RenamedOrSymlinked, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.SparseFile, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new V7TarEntry(TarEntryType.TapeVolume, InitialEntryName)
+            );
         }
 
         [Fact]
         public void SupportedEntryType_V7RegularFile()
         {
-            V7TarEntry oldRegularFile = new V7TarEntry(TarEntryType.V7RegularFile, InitialEntryName);
+            V7TarEntry oldRegularFile = new V7TarEntry(
+                TarEntryType.V7RegularFile,
+                InitialEntryName
+            );
             SetRegularFile(oldRegularFile);
             VerifyRegularFile(oldRegularFile, isWritable: true);
         }
@@ -132,12 +169,16 @@ namespace System.Formats.Tar.Tests
             string fileName = "mylink";
             string fullPath = Path.Join(root.Path, fileName);
 
-            string linkTarget = PlatformDetection.IsWindows ? @"C:\Windows\system32\notepad.exe" : "/usr/bin/nano";
+            string linkTarget = PlatformDetection.IsWindows
+                ? @"C:\Windows\system32\notepad.exe"
+                : "/usr/bin/nano";
 
             V7TarEntry entry = new V7TarEntry(entryType, fileName);
             entry.LinkName = linkTarget;
 
-            Assert.Throws<InvalidOperationException>(() => entry.ExtractToFile(fileName, overwrite: false));
+            Assert.Throws<InvalidOperationException>(
+                () => entry.ExtractToFile(fileName, overwrite: false)
+            );
 
             Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
         }

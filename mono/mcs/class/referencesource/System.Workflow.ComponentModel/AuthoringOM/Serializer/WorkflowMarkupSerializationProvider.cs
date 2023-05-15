@@ -24,7 +24,12 @@ namespace System.Workflow.ComponentModel.Serialization
     #region Class WorkflowMarkupSerializationProvider
     internal class WorkflowMarkupSerializationProvider : IDesignerSerializationProvider
     {
-        public virtual object GetSerializer(IDesignerSerializationManager manager, object currentSerializer, Type objectType, Type serializerType)
+        public virtual object GetSerializer(
+            IDesignerSerializationManager manager,
+            object currentSerializer,
+            Type objectType,
+            Type serializerType
+        )
         {
             // If this isn't a serializer type we recognize, do nothing.  Also, if metadata specified
             // a custom serializer, then use it.
@@ -43,4 +48,3 @@ namespace System.Workflow.ComponentModel.Serialization
     }
     #endregion
 }
-

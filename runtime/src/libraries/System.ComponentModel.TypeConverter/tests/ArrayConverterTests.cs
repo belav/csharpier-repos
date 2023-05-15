@@ -15,7 +15,9 @@ namespace System.ComponentModel.Tests
 
         public override IEnumerable<ConvertTest> ConvertToTestData()
         {
-            yield return ConvertTest.Valid(new int[] { 1, 2 }, "Int32[] Array").WithInvariantRemoteInvokeCulture();
+            yield return ConvertTest
+                .Valid(new int[] { 1, 2 }, "Int32[] Array")
+                .WithInvariantRemoteInvokeCulture();
             yield return ConvertTest.Valid(1, "1");
 
             yield return ConvertTest.CantConvertTo(new int[] { 1, 2 }, typeof(int[]));

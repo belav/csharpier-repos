@@ -32,7 +32,9 @@ namespace Castle.DynamicProxy.Tests
             var original = new ReadOnlyStruct(x.Value);
 
             var different = new ReadOnlyStruct(x.Value + 100);
-            var proxy = generator.CreateInterfaceProxyWithoutTarget<IByValue>(new SetArgumentValueInterceptor(0, different));
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IByValue>(
+                new SetArgumentValueInterceptor(0, different)
+            );
             proxy.Method(x);
 
             Assert.AreEqual(original.Value, x.Value);
@@ -45,7 +47,9 @@ namespace Castle.DynamicProxy.Tests
             var original = new ReadOnlyStruct(x.Value);
 
             var different = new ReadOnlyStruct(x.Value + 100);
-            var proxy = generator.CreateInterfaceProxyWithoutTarget<IByReadOnlyRef>(new SetArgumentValueInterceptor(0, different));
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IByReadOnlyRef>(
+                new SetArgumentValueInterceptor(0, different)
+            );
             proxy.Method(in x);
 
             Assert.AreEqual(original.Value, x.Value);
@@ -58,7 +62,9 @@ namespace Castle.DynamicProxy.Tests
             var original = new ReadOnlyStruct(x.Value);
 
             var different = new ReadOnlyStruct(x.Value + 100);
-            var proxy = generator.CreateInterfaceProxyWithoutTarget<IByRef>(new SetArgumentValueInterceptor(0, different));
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IByRef>(
+                new SetArgumentValueInterceptor(0, different)
+            );
             proxy.Method(ref x);
 
             Assert.AreNotEqual(original.Value, x.Value);
@@ -71,7 +77,9 @@ namespace Castle.DynamicProxy.Tests
             var original = new ReadOnlyStruct(x.Value);
 
             var different = new ReadOnlyStruct(x.Value + 100);
-            var proxy = generator.CreateInterfaceProxyWithoutTarget<IOut>(new SetArgumentValueInterceptor(0, different));
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IOut>(
+                new SetArgumentValueInterceptor(0, different)
+            );
             proxy.Method(out x);
 
             Assert.AreNotEqual(original.Value, x.Value);
@@ -94,7 +102,9 @@ namespace Castle.DynamicProxy.Tests
         [TestCase(typeof(IByValue))]
         [TestCase(typeof(IByRef))]
         [TestCase(typeof(IOut))]
-        public void Parameter_other_than_by_reference_In_does_not_have_ParameterAttributes_In_set(Type type)
+        public void Parameter_other_than_by_reference_In_does_not_have_ParameterAttributes_In_set(
+            Type type
+        )
         {
             var parameter = type.GetMethod("Method").GetParameters()[0];
 
@@ -107,18 +117,36 @@ namespace Castle.DynamicProxy.Tests
         {
             var parameter = type.GetMethod("Method").GetParameters()[0];
 
-            Assert.True(parameter.GetCustomAttributes().Any(a => a.GetType().FullName == "System.Runtime.CompilerServices.IsReadOnlyAttribute"));
+            Assert.True(
+                parameter
+                    .GetCustomAttributes()
+                    .Any(
+                        a =>
+                            a.GetType().FullName
+                            == "System.Runtime.CompilerServices.IsReadOnlyAttribute"
+                    )
+            );
         }
 
         [Test]
         [TestCase(typeof(IByValue))]
         [TestCase(typeof(IByRef))]
         [TestCase(typeof(IOut))]
-        public void Parameter_other_than_by_reference_In_does_not_have_IsReadOnlyAttribute(Type type)
+        public void Parameter_other_than_by_reference_In_does_not_have_IsReadOnlyAttribute(
+            Type type
+        )
         {
             var parameter = type.GetMethod("Method").GetParameters()[0];
 
-            Assert.False(parameter.GetCustomAttributes().Any(a => a.GetType().FullName == "System.Runtime.CompilerServices.IsReadOnlyAttribute"));
+            Assert.False(
+                parameter
+                    .GetCustomAttributes()
+                    .Any(
+                        a =>
+                            a.GetType().FullName
+                            == "System.Runtime.CompilerServices.IsReadOnlyAttribute"
+                    )
+            );
         }
 
         public readonly struct ReadOnlyStruct

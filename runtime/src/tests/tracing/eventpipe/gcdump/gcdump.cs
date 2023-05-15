@@ -17,7 +17,7 @@ using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 
 namespace Tracing.Tests.EventSourceError
 {
-    // Regression test for https://github.com/dotnet/runtime/issues/38639 
+    // Regression test for https://github.com/dotnet/runtime/issues/38639
     public class GCDumpTest
     {
         private static int _bulkTypeCount = 0;
@@ -35,30 +35,44 @@ namespace Tracing.Tests.EventSourceError
 
             List<EventPipeProvider> providers = new List<EventPipeProvider>
             {
-                new EventPipeProvider("Microsoft-Windows-DotNETRuntime", eventLevel: EventLevel.Verbose, keywords: (long)ClrTraceEventParser.Keywords.GCHeapSnapshot)
+                new EventPipeProvider(
+                    "Microsoft-Windows-DotNETRuntime",
+                    eventLevel: EventLevel.Verbose,
+                    keywords: (long)ClrTraceEventParser.Keywords.GCHeapSnapshot
+                )
             };
 
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024, _DoesRundownContainMethodEvents);
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024,
+                _DoesRundownContainMethodEvents
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
             // This space intentionally left blank
         };
 
-        private static Action _eventGeneratingAction = () =>
-        {
+        private static Action _eventGeneratingAction = () => {
             // This space intentionally left blank
         };
 
-        private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (source) =>
+        private static Func<EventPipeEventSource, Func<int>> _DoesRundownContainMethodEvents = (
+            source
+        ) =>
         {
             source.Clr.TypeBulkType += (GCBulkTypeTraceData data) =>
             {
                 _bulkTypeCount += data.Count;
             };
 
-            source.Clr.GCBulkNode += delegate (GCBulkNodeTraceData data)
+            source.Clr.GCBulkNode += delegate(GCBulkNodeTraceData data)
             {
                 _bulkNodeCount += data.Count;
             };
@@ -78,21 +92,22 @@ namespace Tracing.Tests.EventSourceError
                 _bulkRootStaticVarCount += data.Count;
             };
 
-            return () => 
+            return () =>
             {
                 // Hopefully it is low enough to be resilient to changes in the runtime
                 // and high enough to catch issues. There should be between hundreds and thousands
                 // for each, but the number is variable and the point of the test is to verify
                 // that we get any events at all.
-                if (_bulkTypeCount > 50
-                     && _bulkNodeCount > 50
-                     && _bulkEdgeCount > 50
-                     && _bulkRootEdgeCount > 50
-                     && _bulkRootStaticVarCount > 50)
+                if (
+                    _bulkTypeCount > 50
+                    && _bulkNodeCount > 50
+                    && _bulkEdgeCount > 50
+                    && _bulkRootEdgeCount > 50
+                    && _bulkRootStaticVarCount > 50
+                )
                 {
                     return 100;
                 }
-
 
                 Console.WriteLine($"Test failed due to missing GC heap events.");
                 Console.WriteLine($"_bulkTypeCount =          {_bulkTypeCount}");

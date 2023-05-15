@@ -27,7 +27,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
         private readonly ILegacyGlobalOptionService _optionService;
 
         // maps config name to a read fallback:
-        private readonly ImmutableDictionary<string, Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>> _readFallbacks;
+        private readonly ImmutableDictionary<
+            string,
+            Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>
+        > _readFallbacks;
 
         private VisualStudioOptionPersister? _lazyPersister;
 
@@ -35,23 +38,43 @@ namespace Microsoft.VisualStudio.LanguageServices.Options
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioOptionPersisterProvider(
             [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider serviceProvider,
-            [ImportMany] IEnumerable<Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>> readFallbacks,
+            [ImportMany]
+                IEnumerable<
+                Lazy<IVisualStudioStorageReadFallback, OptionNameMetadata>
+            > readFallbacks,
             IThreadingContext threadingContext,
-            ILegacyGlobalOptionService optionService)
+            ILegacyGlobalOptionService optionService
+        )
         {
             _serviceProvider = serviceProvider;
             _optionService = optionService;
-            _readFallbacks = readFallbacks.ToImmutableDictionary(item => item.Metadata.ConfigName, item => item);
+            _readFallbacks = readFallbacks.ToImmutableDictionary(
+                item => item.Metadata.ConfigName,
+                item => item
+            );
         }
 
-        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(CancellationToken cancellationToken)
-            => _lazyPersister ??=
-                new VisualStudioOptionPersister(
-                    new VisualStudioSettingsOptionPersister(_optionService, _readFallbacks, await TryGetServiceAsync<SVsSettingsPersistenceManager, ISettingsManager>().ConfigureAwait(true)),
-                    await LocalUserRegistryOptionPersister.CreateAsync(_serviceProvider).ConfigureAwait(false),
-                    new FeatureFlagPersister(await TryGetServiceAsync<SVsFeatureFlags, IVsFeatureFlags>().ConfigureAwait(false)));
+        public async ValueTask<IOptionPersister> GetOrCreatePersisterAsync(
+            CancellationToken cancellationToken
+        ) =>
+            _lazyPersister ??= new VisualStudioOptionPersister(
+                new VisualStudioSettingsOptionPersister(
+                    _optionService,
+                    _readFallbacks,
+                    await TryGetServiceAsync<SVsSettingsPersistenceManager, ISettingsManager>()
+                        .ConfigureAwait(true)
+                ),
+                await LocalUserRegistryOptionPersister
+                    .CreateAsync(_serviceProvider)
+                    .ConfigureAwait(false),
+                new FeatureFlagPersister(
+                    await TryGetServiceAsync<SVsFeatureFlags, IVsFeatureFlags>()
+                        .ConfigureAwait(false)
+                )
+            );
 
-        private async ValueTask<I?> TryGetServiceAsync<T, I>() where I : class
+        private async ValueTask<I?> TryGetServiceAsync<T, I>()
+            where I : class
         {
             try
             {

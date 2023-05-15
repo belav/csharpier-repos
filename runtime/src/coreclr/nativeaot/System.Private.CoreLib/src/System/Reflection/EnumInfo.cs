@@ -29,8 +29,13 @@ namespace System.Reflection
     public sealed class EnumInfo<TUnderlyingValue> : EnumInfo
         where TUnderlyingValue : struct, INumber<TUnderlyingValue>
     {
-        public EnumInfo(Type underlyingType, TUnderlyingValue[] values, string[] names, bool isFlags) :
-            base(underlyingType, names, isFlags)
+        public EnumInfo(
+            Type underlyingType,
+            TUnderlyingValue[] values,
+            string[] names,
+            bool isFlags
+        )
+            : base(underlyingType, names, isFlags)
         {
             Debug.Assert(values.Length == names.Length);
             Debug.Assert(Enum.AreSorted(values));

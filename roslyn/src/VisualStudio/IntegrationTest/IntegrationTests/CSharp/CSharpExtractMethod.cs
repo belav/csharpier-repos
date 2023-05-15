@@ -21,7 +21,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     [Trait(Traits.Feature, Traits.Features.ExtractMethod)]
     public class CSharpExtractMethod : AbstractEditorTest
     {
-        private const string TestSource = @"
+        private const string TestSource =
+            @"
 using System;
 public class Program
 {
@@ -40,9 +41,7 @@ public class Program
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpExtractMethod(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpExtractMethod))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpExtractMethod)) { }
 
         [WpfFact]
         public void SimpleExtractMethod()
@@ -51,9 +50,13 @@ public class Program
             VisualStudio.Editor.PlaceCaret("Console", charsOffset: -1);
             VisualStudio.Editor.PlaceCaret("World", charsOffset: 4, extendSelection: true);
             VisualStudio.ExecuteCommand(WellKnownCommandNames.Refactor_ExtractMethod);
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.ExtractMethod);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ExtractMethod
+            );
 
-            var expectedMarkup = @"
+            var expectedMarkup =
+                @"
 using System;
 public class Program
 {
@@ -74,15 +77,24 @@ public class Program
     }
 }";
 
-            MarkupTestFile.GetSpans(expectedMarkup, out var expectedText, out ImmutableArray<TextSpan> spans);
+            MarkupTestFile.GetSpans(
+                expectedMarkup,
+                out var expectedText,
+                out ImmutableArray<TextSpan> spans
+            );
             VisualStudio.Editor.Verify.TextContains(expectedText);
-            AssertEx.SetEqual(spans, VisualStudio.Editor.GetTagSpans(VisualStudio.InlineRenameDialog.ValidRenameTag));
+            AssertEx.SetEqual(
+                spans,
+                VisualStudio.Editor.GetTagSpans(VisualStudio.InlineRenameDialog.ValidRenameTag)
+            );
 
             VisualStudio.Editor.SendKeys("SayHello", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(@"private static void SayHello()
+            VisualStudio.Editor.Verify.TextContains(
+                @"private static void SayHello()
     {
         Console.WriteLine(""Hello World"");
-    }");
+    }"
+            );
         }
 
         [WpfFact, WorkItem(61369, "https://github.com/dotnet/roslyn/pull/61369")]
@@ -92,9 +104,13 @@ public class Program
             VisualStudio.Editor.PlaceCaret("int result", charsOffset: -8);
             VisualStudio.Editor.PlaceCaret("result;", charsOffset: 4, extendSelection: true);
             VisualStudio.ExecuteCommand(WellKnownCommandNames.Refactor_ExtractMethod);
-            VisualStudio.Workspace.WaitForAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.ExtractMethod);
+            VisualStudio.Workspace.WaitForAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.ExtractMethod
+            );
 
-            var expectedMarkup = @"
+            var expectedMarkup =
+                @"
 using System;
 public class Program
 {
@@ -114,15 +130,24 @@ public class Program
     }
 }";
 
-            MarkupTestFile.GetSpans(expectedMarkup, out var expectedText, out ImmutableArray<TextSpan> spans);
+            MarkupTestFile.GetSpans(
+                expectedMarkup,
+                out var expectedText,
+                out ImmutableArray<TextSpan> spans
+            );
             Assert.Equal(expectedText, VisualStudio.Editor.GetText());
-            AssertEx.SetEqual(spans, VisualStudio.Editor.GetTagSpans(VisualStudio.InlineRenameDialog.ValidRenameTag));
+            AssertEx.SetEqual(
+                spans,
+                VisualStudio.Editor.GetTagSpans(VisualStudio.InlineRenameDialog.ValidRenameTag)
+            );
 
             VisualStudio.Editor.SendKeys("SayHello", VirtualKey.Enter);
-            VisualStudio.Editor.Verify.TextContains(@"private static int SayHello(int a, int b)
+            VisualStudio.Editor.Verify.TextContains(
+                @"private static int SayHello(int a, int b)
     {
         return a * b;
-    }");
+    }"
+            );
         }
 
         [WpfFact]
@@ -131,9 +156,14 @@ public class Program
             VisualStudio.Editor.SetText(TestSource);
             VisualStudio.Editor.PlaceCaret("a = 5", charsOffset: -1);
             VisualStudio.Editor.PlaceCaret("a * b", charsOffset: 1, extendSelection: true);
-            VisualStudio.Editor.Verify.CodeAction("Extract method", applyFix: true, blockUntilComplete: true);
+            VisualStudio.Editor.Verify.CodeAction(
+                "Extract method",
+                applyFix: true,
+                blockUntilComplete: true
+            );
 
-            var expectedMarkup = @"
+            var expectedMarkup =
+                @"
 using System;
 public class Program
 {
@@ -155,9 +185,16 @@ public class Program
     }
 }";
 
-            MarkupTestFile.GetSpans(expectedMarkup, out var expectedText, out ImmutableArray<TextSpan> spans);
+            MarkupTestFile.GetSpans(
+                expectedMarkup,
+                out var expectedText,
+                out ImmutableArray<TextSpan> spans
+            );
             Assert.Equal(expectedText, VisualStudio.Editor.GetText());
-            AssertEx.SetEqual(spans, VisualStudio.Editor.GetTagSpans(VisualStudio.InlineRenameDialog.ValidRenameTag));
+            AssertEx.SetEqual(
+                spans,
+                VisualStudio.Editor.GetTagSpans(VisualStudio.InlineRenameDialog.ValidRenameTag)
+            );
         }
     }
 }

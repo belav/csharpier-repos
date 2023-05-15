@@ -14,37 +14,40 @@ using System.Net.Mime;
 
 namespace MonoTests.System.Net.Mail
 {
-	[TestFixture]
-	public class LinkedResourceTest
-	{
-		LinkedResource lr;
-		
-		[SetUp]
-		public void GetReady ()
-		{
-			lr = LinkedResource.CreateLinkedResourceFromString ("test", new ContentType ("text/plain"));
-		}
+    [TestFixture]
+    public class LinkedResourceTest
+    {
+        LinkedResource lr;
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ArgumentNullException ()
-		{
-			string s = null;
-			new LinkedResource (s);
-		}
+        [SetUp]
+        public void GetReady()
+        {
+            lr = LinkedResource.CreateLinkedResourceFromString(
+                "test",
+                new ContentType("text/plain")
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ArgumentNullException2 ()
-		{
-			Stream s = null;
-			new LinkedResource (s);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ArgumentNullException()
+        {
+            string s = null;
+            new LinkedResource(s);
+        }
 
-		[Test]
-		public void TransferEncodingTest ()
-		{
-			Assert.AreEqual (TransferEncoding.QuotedPrintable, lr.TransferEncoding);
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ArgumentNullException2()
+        {
+            Stream s = null;
+            new LinkedResource(s);
+        }
+
+        [Test]
+        public void TransferEncodingTest()
+        {
+            Assert.AreEqual(TransferEncoding.QuotedPrintable, lr.TransferEncoding);
+        }
+    }
 }

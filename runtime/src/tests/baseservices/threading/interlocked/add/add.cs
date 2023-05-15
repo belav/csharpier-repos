@@ -6,13 +6,12 @@ using System.Threading;
 
 public class Test
 {
-
     public static int Main()
     {
         int retVal = 100;
-        
-        int val  = 20;
-        int adder= 5;
+
+        int val = 20;
+        int adder = 5;
         int foo = Interlocked.Add(ref val, adder);
         Console.WriteLine("NewValue: " + val);
         Console.WriteLine("OldValue: " + foo);
@@ -20,8 +19,8 @@ public class Test
         if ((val != 25) || (foo != val))
             retVal = -1;
 
-        long val1  = 20;
-        long adder1= 5;
+        long val1 = 20;
+        long adder1 = 5;
         long foo1 = Interlocked.Add(ref val1, adder1);
         Console.WriteLine("NewValue: " + val1);
         Console.WriteLine("OldValue: " + foo1);
@@ -33,8 +32,7 @@ public class Test
             Console.WriteLine("Test passed");
         else
             Console.WriteLine("Test failed");
-        
+
         return retVal;
-        
     }
 }

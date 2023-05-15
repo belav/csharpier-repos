@@ -13,9 +13,7 @@ namespace System.CommandLine.Tests.Invocation
         public void InvocationContext_with_cancellation_token_returns_it()
         {
             using CancellationTokenSource cts = new();
-            var parseResult = new CommandLineBuilder(new RootCommand())
-                .Build()
-                .Parse("");
+            var parseResult = new CommandLineBuilder(new RootCommand()).Build().Parse("");
             using InvocationContext context = new(parseResult, cancellationToken: cts.Token);
 
             var token = context.GetCancellationToken();
@@ -30,9 +28,7 @@ namespace System.CommandLine.Tests.Invocation
         {
             using CancellationTokenSource cts1 = new();
             using CancellationTokenSource cts2 = new();
-            var parseResult = new CommandLineBuilder(new RootCommand())
-                .Build()
-                .Parse("");
+            var parseResult = new CommandLineBuilder(new RootCommand()).Build().Parse("");
             using InvocationContext context = new(parseResult, cancellationToken: cts1.Token);
             context.LinkToken(cts2.Token);
 
@@ -48,9 +44,7 @@ namespace System.CommandLine.Tests.Invocation
         {
             using CancellationTokenSource cts1 = new();
             using CancellationTokenSource cts2 = new();
-            var parseResult = new CommandLineBuilder(new RootCommand())
-                .Build()
-                .Parse("");
+            var parseResult = new CommandLineBuilder(new RootCommand()).Build().Parse("");
             using InvocationContext context = new(parseResult, cancellationToken: cts1.Token);
             context.LinkToken(cts2.Token);
 

@@ -15,21 +15,21 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.RemoveInKeyword
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveInKeyword)]
-    public class RemoveInKeywordCodeFixProviderTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class RemoveInKeywordCodeFixProviderTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public RemoveInKeywordCodeFixProviderTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new RemoveInKeywordCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new RemoveInKeywordCodeFixProvider());
 
         [Fact]
         public async Task TestRemoveInKeyword()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     void M(int i) { }
     void N(int i)
@@ -37,21 +37,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.RemoveInKey
         M(in [|i|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     void M(int i) { }
     void N(int i)
     {
         M(i);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveInKeywordMultipleArguments1()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     void M(int i, string s) { }
     void N(int i, string s)
@@ -59,21 +60,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.RemoveInKey
         M(in [|i|], s);
     }
 }",
-@"class Class
+                @"class Class
 {
     void M(int i, string s) { }
     void N(int i, string s)
     {
         M(i, s);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveInKeywordMultipleArguments2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     void M(int i, int j) { }
     void N(int i, int j)
@@ -81,21 +83,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.RemoveInKey
         M(in [|i|], in j);
     }
 }",
-@"class Class
+                @"class Class
 {
     void M(int i, int j) { }
     void N(int i, int j)
     {
         M(i, in j);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveInKeywordMultipleArgumentsWithDifferentRefKinds()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     void M(in int i, string s) { }
     void N(int i, string s)
@@ -103,28 +106,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.RemoveInKey
         M(in i, in [|s|]);
     }
 }",
-@"class Class
+                @"class Class
 {
     void M(in int i, string s) { }
     void N(int i, string s)
     {
         M(in i, s);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDontRemoveInKeyword()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     void M(in int i) { }
     void N(int i)
     {
         M(in [|i|]);
     }
-}");
+}"
+            );
         }
 
         [Theory]
@@ -132,22 +137,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.RemoveInKey
         [InlineData("  in  [|i|]", "  i")]
         [InlineData("/* start */in [|i|]", "/* start */i")]
         [InlineData("/* start */ in [|i|]", "/* start */ i")]
-        [InlineData(
-            "/* start */ in [|i|] /* end */",
-            "/* start */ i /* end */")]
-        [InlineData(
-            "/* start */ in /* middle */ [|i|] /* end */",
-            "/* start */ i /* end */")]
-        [InlineData(
-            "/* start */ in    /* middle */ [|i|] /* end */",
-            "/* start */ i /* end */")]
-        [InlineData(
-            "/* start */in /* middle */ [|i|] /* end */",
-            "/* start */i /* end */")]
+        [InlineData("/* start */ in [|i|] /* end */", "/* start */ i /* end */")]
+        [InlineData("/* start */ in /* middle */ [|i|] /* end */", "/* start */ i /* end */")]
+        [InlineData("/* start */ in    /* middle */ [|i|] /* end */", "/* start */ i /* end */")]
+        [InlineData("/* start */in /* middle */ [|i|] /* end */", "/* start */i /* end */")]
         public async Task TestRemoveInKeywordWithTrivia(string original, string expected)
         {
             await TestInRegularAndScript1Async(
-$@"class App
+                $@"class App
 {{
     void M(int i) {{ }}
     void N(int i)
@@ -156,7 +153,7 @@ $@"class App
     }}
 
 }}",
-$@"class App
+                $@"class App
 {{
     void M(int i) {{ }}
     void N(int i)
@@ -164,14 +161,15 @@ $@"class App
         M({expected});
     }}
 
-}}");
+}}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveInKeywordFixAllInDocument1()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     void M1(int i) { }
     void M2(int i, string s) { }
@@ -192,7 +190,7 @@ $@"class App
         M2(in i, in s);
     }
 }",
-@"class Class
+                @"class Class
 {
     void M1(int i) { }
     void M2(int i, string s) { }
@@ -212,14 +210,15 @@ $@"class App
         M1(i);
         M2(i, s);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestRemoveInKeywordFixAllInDocument2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     void M1(int i) { }
     void M2(in int i, string s) { }
@@ -240,7 +239,7 @@ $@"class App
         M2(in i, in s);
     }
 }",
-@"class Class
+                @"class Class
 {
     void M1(int i) { }
     void M2(in int i, string s) { }
@@ -260,7 +259,8 @@ $@"class App
         M1(i);
         M2(in i, s);
     }
-}");
+}"
+            );
         }
     }
 }

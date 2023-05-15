@@ -17,11 +17,14 @@ namespace System.Activities.Presentation
     using System.Collections.ObjectModel;
     using System.Windows.Controls;
 
-    sealed class ArgumentCollectionPropertyEditor : DialogPropertyValueEditor 
+    sealed class ArgumentCollectionPropertyEditor : DialogPropertyValueEditor
     {
         public ArgumentCollectionPropertyEditor()
         {
-            this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate("ArgumentCollection_InlineTemplate");
+            this.InlineEditorTemplate =
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
+                    "ArgumentCollection_InlineTemplate"
+                );
         }
 
         public override void ShowDialog(PropertyValue propertyValue, IInputElement commandSource)
@@ -29,24 +32,51 @@ namespace System.Activities.Presentation
             ModelPropertyEntryToOwnerActivityConverter propertyEntryConverter =
                 new ModelPropertyEntryToOwnerActivityConverter();
 
-            ModelItem activityModelItem =
-                (ModelItem)propertyEntryConverter.Convert(propertyValue.ParentProperty, typeof(ModelItem), false, null);
+            ModelItem activityModelItem = (ModelItem)
+                propertyEntryConverter.Convert(
+                    propertyValue.ParentProperty,
+                    typeof(ModelItem),
+                    false,
+                    null
+                );
 
-            ModelItem parentModelItem =
-                (ModelItem)propertyEntryConverter.Convert(propertyValue.ParentProperty, typeof(ModelItem), true, null);
+            ModelItem parentModelItem = (ModelItem)
+                propertyEntryConverter.Convert(
+                    propertyValue.ParentProperty,
+                    typeof(ModelItem),
+                    true,
+                    null
+                );
 
             EditingContext context = ((IModelTreeItem)activityModelItem).ModelTreeManager.Context;
 
-            var inputData = parentModelItem.Properties[propertyValue.ParentProperty.PropertyName].Collection;            
+            var inputData = parentModelItem.Properties[
+                propertyValue.ParentProperty.PropertyName
+            ].Collection;
 
             DynamicArgumentDesignerOptions options = new DynamicArgumentDesignerOptions
-            { 
-                Title = propertyValue.ParentProperty.DisplayName, 
+            {
+                Title = propertyValue.ParentProperty.DisplayName,
             };
 
-            using (EditingScope scope = context.Services.GetRequiredService<ModelTreeManager>().CreateEditingScope(StringResourceDictionary.Instance.GetString("InvokeMethodParameterEditing"), true))
+            using (
+                EditingScope scope = context.Services
+                    .GetRequiredService<ModelTreeManager>()
+                    .CreateEditingScope(
+                        StringResourceDictionary.Instance.GetString("InvokeMethodParameterEditing"),
+                        true
+                    )
+            )
             {
-                if (DynamicArgumentDialog.ShowDialog(activityModelItem, inputData, context, activityModelItem.View, options))
+                if (
+                    DynamicArgumentDialog.ShowDialog(
+                        activityModelItem,
+                        inputData,
+                        context,
+                        activityModelItem.View,
+                        options
+                    )
+                )
                 {
                     scope.Complete();
                 }

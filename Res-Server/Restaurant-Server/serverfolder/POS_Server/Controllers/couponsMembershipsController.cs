@@ -10,18 +10,20 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web;
+
 namespace POS_Server.Controllers
 {
     [RoutePrefix("api/couponsMemberships")]
     public class couponsMembershipsController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("GetAll")]
         public string GetAll(string token)
         {
             token = TokenManager.readToken(HttpContext.Current.Request);
-     
+
             var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
@@ -31,37 +33,36 @@ namespace POS_Server.Controllers
             {
                 try
                 {
-
-              
-                using (incposdbEntities entity = new incposdbEntities())
-                {
-                        var List1 = entity.couponsMemberships.ToList();
-                    var List = List1.Select(S => new couponsMemberships
+                    using (incposdbEntities entity = new incposdbEntities())
                     {
-                     
-                        couponMembershipId = S.couponMembershipId,
-                        cId = S.cId,
-                        membershipId = S.membershipId,
-                        notes = S.notes,
-                        createDate = S.createDate,
-                        updateDate = S.updateDate,
-                        createUserId = S.createUserId,
-                        updateUserId = S.updateUserId,
+                        var List1 = entity.couponsMemberships.ToList();
+                        var List = List1
+                            .Select(
+                                S =>
+                                    new couponsMemberships
+                                    {
+                                        couponMembershipId = S.couponMembershipId,
+                                        cId = S.cId,
+                                        membershipId = S.membershipId,
+                                        notes = S.notes,
+                                        createDate = S.createDate,
+                                        updateDate = S.updateDate,
+                                        createUserId = S.createUserId,
+                                        updateUserId = S.updateUserId,
+                                    }
+                            )
+                            .ToList();
 
-
-                    })
-                    .ToList();
-
-                    return TokenManager.GenerateToken(List);
-
+                        return TokenManager.GenerateToken(List);
+                    }
                 }
-                }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return TokenManager.GenerateToken(ex.ToString());
                 }
             }
         }
+
         /*
        public int couponMembershipId { get; set; }
         public Nullable<long> membershipId { get; set; }
@@ -96,25 +97,23 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var bank = entity.couponsMemberships
-                   .Where(S => S.couponMembershipId == couponMembershipId)
-                   .Select(S => new
-                   {
-                       S.couponMembershipId,
-                       S.cId,
-                       S.membershipId,
-                       S.notes,
-                       S.createDate,
-                       S.updateDate,
-                       S.createUserId,
-                       S.updateUserId,
-
-
-
-
-                   })
-                   .FirstOrDefault();
+                        .Where(S => S.couponMembershipId == couponMembershipId)
+                        .Select(
+                            S =>
+                                new
+                                {
+                                    S.couponMembershipId,
+                                    S.cId,
+                                    S.membershipId,
+                                    S.notes,
+                                    S.createDate,
+                                    S.updateDate,
+                                    S.createUserId,
+                                    S.updateUserId,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(bank);
-
                 }
             }
         }
@@ -141,7 +140,10 @@ namespace POS_Server.Controllers
                     {
                         couponMembershipId = c.Value.Replace("\\", string.Empty);
                         couponMembershipId = couponMembershipId.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<couponsMemberships>(couponMembershipId, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<couponsMemberships>(
+                            couponMembershipId,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -173,18 +175,21 @@ namespace POS_Server.Controllers
                         var bankEntity = entity.Set<couponsMemberships>();
                         if (newObject.couponMembershipId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject.updateUserId = newObject.createUserId;
                             tmpObject = bankEntity.Add(newObject);
                             entity.SaveChanges();
-                            message = tmpObject.couponMembershipId.ToString(); ;
+                            message = tmpObject.couponMembershipId.ToString();
+                            ;
                         }
                         else
                         {
-                            tmpObject = entity.couponsMemberships.Where(p => p.couponMembershipId == newObject.couponMembershipId).FirstOrDefault();
+                            tmpObject = entity.couponsMemberships
+                                .Where(p => p.couponMembershipId == newObject.couponMembershipId)
+                                .FirstOrDefault();
 
-                            tmpObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
 
                             tmpObject.couponMembershipId = newObject.couponMembershipId;
                             tmpObject.cId = newObject.cId;
@@ -195,18 +200,12 @@ namespace POS_Server.Controllers
                             tmpObject.createUserId = newObject.createUserId;
                             tmpObject.updateUserId = newObject.updateUserId;
 
-
-
-
-
                             entity.SaveChanges();
                             message = tmpObject.couponMembershipId.ToString();
-
                         }
                         return TokenManager.GenerateToken(message);
                     }
                 }
-
                 catch
                 {
                     message = "0";
@@ -253,8 +252,9 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
-                            couponsMemberships objDelete = entity.couponsMemberships.Find(couponMembershipId);
+                            couponsMemberships objDelete = entity.couponsMemberships.Find(
+                                couponMembershipId
+                            );
                             entity.couponsMemberships.Remove(objDelete);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
@@ -271,11 +271,12 @@ namespace POS_Server.Controllers
                     {
                         using (incposdbEntities entity = new incposdbEntities())
                         {
-
-                            couponsMemberships objDelete = entity.couponsMemberships.Find(couponMembershipId);
+                            couponsMemberships objDelete = entity.couponsMemberships.Find(
+                                couponMembershipId
+                            );
 
                             objDelete.updateUserId = userId;
-                            objDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            objDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }
@@ -287,7 +288,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
-        
+
         [HttpPost]
         [Route("UpdateCouponsByMembershipId")]
         public string UpdateCouponsByMembershipId(string token)
@@ -312,15 +313,16 @@ namespace POS_Server.Controllers
                     {
                         strObject = c.Value.Replace("\\", string.Empty);
                         strObject = strObject.Trim('"');
-                        newListObj = JsonConvert.DeserializeObject<List<couponsMemberships>>(strObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-
+                        newListObj = JsonConvert.DeserializeObject<List<couponsMemberships>>(
+                            strObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "membershipId")
                     {
                         membershipId = long.Parse(c.Value);
                     }
-                    else
-                  if (c.Type == "updateUserId")
+                    else if (c.Type == "updateUserId")
                     {
                         updateUserId = long.Parse(c.Value);
                     }
@@ -330,20 +332,22 @@ namespace POS_Server.Controllers
                 // delete old invoice items
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    items = entity.couponsMemberships.Where(x => x.membershipId == membershipId).ToList();
+                    items = entity.couponsMemberships
+                        .Where(x => x.membershipId == membershipId)
+                        .ToList();
                     if (items != null)
                     {
                         entity.couponsMemberships.RemoveRange(items);
                         try
-                        { entity.SaveChanges(); }
+                        {
+                            entity.SaveChanges();
+                        }
                         catch (Exception ex)
                         {
                             message = "-2";
                             return TokenManager.GenerateToken(message);
                         }
                     }
-
-
                 }
                 try
                 {
@@ -351,17 +355,26 @@ namespace POS_Server.Controllers
                     {
                         for (int i = 0; i < newListObj.Count; i++)
                         {
-                            if (newListObj[i].updateUserId == 0 || newListObj[i].updateUserId == null)
+                            if (
+                                newListObj[i].updateUserId == 0
+                                || newListObj[i].updateUserId == null
+                            )
                             {
                                 Nullable<long> id = null;
                                 newListObj[i].updateUserId = id;
                             }
-                            if (newListObj[i].createUserId == 0 || newListObj[i].createUserId == null)
+                            if (
+                                newListObj[i].createUserId == 0
+                                || newListObj[i].createUserId == null
+                            )
                             {
                                 Nullable<long> id = null;
                                 newListObj[i].createUserId = id;
                             }
-                            if (newListObj[i].membershipId == 0 || newListObj[i].membershipId == null)
+                            if (
+                                newListObj[i].membershipId == 0
+                                || newListObj[i].membershipId == null
+                            )
                             {
                                 Nullable<long> id = null;
                                 newListObj[i].membershipId = id;
@@ -373,7 +386,7 @@ namespace POS_Server.Controllers
                             }
                             var branchEntity = entity.Set<couponsMemberships>();
 
-                            newListObj[i].createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newListObj[i].createDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newListObj[i].updateDate = newListObj[i].createDate;
                             newListObj[i].updateUserId = updateUserId;
                             newListObj[i].membershipId = membershipId;
@@ -382,11 +395,7 @@ namespace POS_Server.Controllers
                         }
 
                         entity.SaveChanges();
-
-
                     }
-
-
 
                     message = "1";
                     return TokenManager.GenerateToken(message);
@@ -396,10 +405,7 @@ namespace POS_Server.Controllers
                     message = "0";
                     return TokenManager.GenerateToken(message);
                 }
-
             }
-
         }
-
     }
 }

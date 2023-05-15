@@ -6,16 +6,14 @@ using System.Runtime.CompilerServices;
 public class Runtime_78554
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Consume(uint op)
-    {
-    }
+    static void Consume(uint op) { }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void ArrayIndexConsume(uint[] a, uint i)
     {
         if (i < a.Length)
         {
-           i = a[i];
+            i = a[i];
         }
         Consume(i);
     }

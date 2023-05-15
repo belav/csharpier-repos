@@ -14,7 +14,11 @@ namespace System.IO.Tests
         public static void ThrowsSharingViolation(Action testCode)
         {
             Exception e = Assert.ThrowsAny<Exception>(testCode);
-            Assert.True(e is UnauthorizedAccessException || e is IOException, "Exception should be either UnauthorizedAccessException or IOException: " + e.ToString());
+            Assert.True(
+                e is UnauthorizedAccessException || e is IOException,
+                "Exception should be either UnauthorizedAccessException or IOException: "
+                    + e.ToString()
+            );
         }
 
         public static void CompletesSynchronously(Task task)
@@ -60,14 +64,19 @@ namespace System.IO.Tests
         public static void IsCancelled(Task task, CancellationToken ct)
         {
             Assert.True(task.IsCanceled);
-            OperationCanceledException tce = Assert.ThrowsAny<OperationCanceledException>(() => task.GetAwaiter().GetResult());
+            OperationCanceledException tce = Assert.ThrowsAny<OperationCanceledException>(
+                () => task.GetAwaiter().GetResult()
+            );
             Assert.NotNull(tce);
             Assert.Equal(ct, tce.CancellationToken);
         }
 
         public static void EqualWhenOrdered<T>(IEnumerable<T> expected, IEnumerable<T> actual)
         {
-            Assert.Equal(expected.OrderBy(e => e).Select(o => o), actual.OrderBy(a => a).Select(o => o));
+            Assert.Equal(
+                expected.OrderBy(e => e).Select(o => o),
+                actual.OrderBy(a => a).Select(o => o)
+            );
         }
     }
 }

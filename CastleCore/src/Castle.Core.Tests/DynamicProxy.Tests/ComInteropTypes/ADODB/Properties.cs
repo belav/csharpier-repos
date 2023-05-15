@@ -18,7 +18,9 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
 
     [ComImport]
     [Guid("00000504-0000-0010-8000-00aa006d2ea4")]
-    [TypeLibType(TypeLibTypeFlags.FDispatchable | TypeLibTypeFlags.FDual | TypeLibTypeFlags.FNonExtensible)]
+    [TypeLibType(
+        TypeLibTypeFlags.FDispatchable | TypeLibTypeFlags.FDual | TypeLibTypeFlags.FNonExtensible
+    )]
     public interface Properties // : (list of inherited interfaces omitted)
     {
         // (member definitions omitted)

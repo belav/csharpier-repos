@@ -68,7 +68,12 @@ public abstract class RazorSourceDocument
     /// <param name="destination">The destination buffer.</param>
     /// <param name="destinationIndex">The index in destination at which the copy operation begins.</param>
     /// <param name="count">The number of characters in this instance to copy to destination.</param>
-    public abstract void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count);
+    public abstract void CopyTo(
+        int sourceIndex,
+        char[] destination,
+        int destinationIndex,
+        int count
+    );
 
     /// <summary>
     /// Calculates the checksum for the <see cref="RazorSourceDocument"/>.
@@ -146,7 +151,11 @@ public abstract class RazorSourceDocument
     /// <param name="encoding">The <see cref="System.Text.Encoding"/> to use to read the <paramref name="stream"/>.</param>
     /// <param name="properties">Properties to configure the <see cref="RazorSourceDocument"/>.</param>
     /// <returns>The <see cref="RazorSourceDocument"/>.</returns>
-    public static RazorSourceDocument ReadFrom(Stream stream, Encoding encoding, RazorSourceDocumentProperties properties)
+    public static RazorSourceDocument ReadFrom(
+        Stream stream,
+        Encoding encoding,
+        RazorSourceDocumentProperties properties
+    )
     {
         if (stream == null)
         {
@@ -202,7 +211,11 @@ public abstract class RazorSourceDocument
         {
             // Autodetect the encoding.
             var relativePath = projectItem.RelativePhysicalPath ?? projectItem.FilePath;
-            return new StreamSourceDocument(stream, null, new RazorSourceDocumentProperties(filePath, relativePath));
+            return new StreamSourceDocument(
+                stream,
+                null,
+                new RazorSourceDocumentProperties(filePath, relativePath)
+            );
         }
     }
 
@@ -223,7 +236,6 @@ public abstract class RazorSourceDocument
         return Create(content, fileName, Encoding.UTF8);
     }
 
-
     /// <summary>
     /// Creates a <see cref="RazorSourceDocument"/> from the specified <paramref name="content"/>.
     /// </summary>
@@ -231,7 +243,10 @@ public abstract class RazorSourceDocument
     /// <param name="properties">Properties to configure the <see cref="RazorSourceDocument"/>.</param>
     /// <returns>The <see cref="RazorSourceDocument"/>.</returns>
     /// <remarks>Uses <see cref="System.Text.Encoding.UTF8" /></remarks>
-    public static RazorSourceDocument Create(string content, RazorSourceDocumentProperties properties)
+    public static RazorSourceDocument Create(
+        string content,
+        RazorSourceDocumentProperties properties
+    )
     {
         if (content == null)
         {
@@ -276,7 +291,11 @@ public abstract class RazorSourceDocument
     /// <param name="encoding">The encoding of the source document.</param>
     /// <param name="properties">Properties to configure the <see cref="RazorSourceDocument"/>.</param>
     /// <returns>The <see cref="RazorSourceDocument"/>.</returns>
-    public static RazorSourceDocument Create(string content, Encoding encoding, RazorSourceDocumentProperties properties)
+    public static RazorSourceDocument Create(
+        string content,
+        Encoding encoding,
+        RazorSourceDocumentProperties properties
+    )
     {
         if (content == null)
         {

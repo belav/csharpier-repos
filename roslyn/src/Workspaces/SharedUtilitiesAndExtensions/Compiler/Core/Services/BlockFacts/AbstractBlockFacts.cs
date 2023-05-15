@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.LanguageService
         public abstract bool IsScopeBlock([NotNullWhen(true)] SyntaxNode? node);
         public abstract bool IsExecutableBlock([NotNullWhen(true)] SyntaxNode? node);
         public abstract IReadOnlyList<SyntaxNode> GetExecutableBlockStatements(SyntaxNode? node);
-        public abstract SyntaxNode? FindInnermostCommonExecutableBlock(IEnumerable<SyntaxNode> nodes);
+        public abstract SyntaxNode? FindInnermostCommonExecutableBlock(
+            IEnumerable<SyntaxNode> nodes
+        );
         public abstract bool IsStatementContainer([NotNullWhen(true)] SyntaxNode? node);
         public abstract IReadOnlyList<SyntaxNode> GetStatementContainerStatements(SyntaxNode? node);
     }

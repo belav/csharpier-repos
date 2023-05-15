@@ -18,20 +18,20 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CompletionOptionsProvider()
-        {
-        }
+        public CompletionOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            CompletionOptions.HideAdvancedMembers,
-            CompletionOptions.TriggerOnTyping,
-            CompletionOptions.TriggerOnTypingLetters2,
-            CompletionOptions.ShowCompletionItemFilters,
-            CompletionOptions.HighlightMatchingPortionsOfCompletionListItems,
-            CompletionOptions.EnterKeyBehavior,
-            CompletionOptions.SnippetsBehavior,
-            CompletionOptions.ShowItemsFromUnimportedNamespaces,
-            CompletionOptions.TriggerInArgumentLists,
-            CompletionOptions.EnableArgumentCompletionSnippets);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(
+                CompletionOptions.HideAdvancedMembers,
+                CompletionOptions.TriggerOnTyping,
+                CompletionOptions.TriggerOnTypingLetters2,
+                CompletionOptions.ShowCompletionItemFilters,
+                CompletionOptions.HighlightMatchingPortionsOfCompletionListItems,
+                CompletionOptions.EnterKeyBehavior,
+                CompletionOptions.SnippetsBehavior,
+                CompletionOptions.ShowItemsFromUnimportedNamespaces,
+                CompletionOptions.TriggerInArgumentLists,
+                CompletionOptions.EnableArgumentCompletionSnippets
+            );
     }
 }

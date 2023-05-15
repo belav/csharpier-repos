@@ -18,38 +18,30 @@ namespace System.Net.NetworkInformation
         [UnsupportedOSPlatform("solaris")]
         public static event NetworkAvailabilityChangedEventHandler? NetworkAvailabilityChanged
         {
-            add
-            {
-                AvailabilityChangeListener.Start(value);
-            }
-            remove
-            {
-                AvailabilityChangeListener.Stop(value);
-            }
+            add { AvailabilityChangeListener.Start(value); }
+            remove { AvailabilityChangeListener.Stop(value); }
         }
 
         [UnsupportedOSPlatform("illumos")]
         [UnsupportedOSPlatform("solaris")]
         public static event NetworkAddressChangedEventHandler? NetworkAddressChanged
         {
-            add
-            {
-                AddressChangeListener.Start(value);
-            }
-            remove
-            {
-                AddressChangeListener.Stop(value);
-            }
+            add { AddressChangeListener.Start(value); }
+            remove { AddressChangeListener.Stop(value); }
         }
 
         internal static class AvailabilityChangeListener
         {
-            private static readonly NetworkAddressChangedEventHandler s_addressChange = ChangedAddress;
+            private static readonly NetworkAddressChangedEventHandler s_addressChange =
+                ChangedAddress;
             private static volatile bool s_isAvailable;
 
             private static void ChangedAddress(object? sender, EventArgs eventArgs)
             {
-                Dictionary<NetworkAvailabilityChangedEventHandler, ExecutionContext?>? availabilityChangedSubscribers = null;
+                Dictionary<
+                    NetworkAvailabilityChangedEventHandler,
+                    ExecutionContext?
+                >? availabilityChangedSubscribers = null;
 
                 lock (s_globalLock)
                 {
@@ -62,7 +54,10 @@ namespace System.Net.NetworkInformation
 
                         if (s_availabilityChangedSubscribers.Count > 0)
                         {
-                            availabilityChangedSubscribers = new Dictionary<NetworkAvailabilityChangedEventHandler, ExecutionContext?>(s_availabilityChangedSubscribers);
+                            availabilityChangedSubscribers = new Dictionary<
+                                NetworkAvailabilityChangedEventHandler,
+                                ExecutionContext?
+                            >(s_availabilityChangedSubscribers);
                         }
                     }
                 }
@@ -71,11 +66,19 @@ namespace System.Net.NetworkInformation
                 if (availabilityChangedSubscribers != null)
                 {
                     bool isAvailable = s_isAvailable;
-                    NetworkAvailabilityEventArgs args = isAvailable ? s_availableEventArgs : s_notAvailableEventArgs;
-                    ContextCallback callbackContext = isAvailable ? s_runHandlerAvailable : s_runHandlerNotAvailable;
+                    NetworkAvailabilityEventArgs args = isAvailable
+                        ? s_availableEventArgs
+                        : s_notAvailableEventArgs;
+                    ContextCallback callbackContext = isAvailable
+                        ? s_runHandlerAvailable
+                        : s_runHandlerNotAvailable;
 
-                    foreach (KeyValuePair<NetworkAvailabilityChangedEventHandler, ExecutionContext?>
-                        subscriber in availabilityChangedSubscribers)
+                    foreach (
+                        KeyValuePair<
+                            NetworkAvailabilityChangedEventHandler,
+                            ExecutionContext?
+                        > subscriber in availabilityChangedSubscribers
+                    )
                     {
                         NetworkAvailabilityChangedEventHandler handler = subscriber.Key;
                         ExecutionContext? ec = subscriber.Value;
@@ -139,7 +142,10 @@ namespace System.Net.NetworkInformation
             // Callback fired when an address change occurs.
             private static void AddressChangedCallback(object? stateObject, bool signaled)
             {
-                Dictionary<NetworkAddressChangedEventHandler, ExecutionContext?>? addressChangedSubscribers = null;
+                Dictionary<
+                    NetworkAddressChangedEventHandler,
+                    ExecutionContext?
+                >? addressChangedSubscribers = null;
 
                 lock (s_globalLock)
                 {
@@ -156,7 +162,10 @@ namespace System.Net.NetworkInformation
                     // Need to copy the array so the callback can call start and stop
                     if (s_addressChangedSubscribers.Count > 0)
                     {
-                        addressChangedSubscribers = new Dictionary<NetworkAddressChangedEventHandler, ExecutionContext?>(s_addressChangedSubscribers);
+                        addressChangedSubscribers = new Dictionary<
+                            NetworkAddressChangedEventHandler,
+                            ExecutionContext?
+                        >(s_addressChangedSubscribers);
                     }
 
                     try
@@ -166,15 +175,20 @@ namespace System.Net.NetworkInformation
                     }
                     catch (NetworkInformationException nie)
                     {
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(nie);
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.Error(nie);
                     }
                 }
 
                 // Release the lock before calling into user callback.
                 if (addressChangedSubscribers != null)
                 {
-                    foreach (KeyValuePair<NetworkAddressChangedEventHandler, ExecutionContext?>
-                        subscriber in addressChangedSubscribers)
+                    foreach (
+                        KeyValuePair<
+                            NetworkAddressChangedEventHandler,
+                            ExecutionContext?
+                        > subscriber in addressChangedSubscribers
+                    )
                     {
                         NetworkAddressChangedEventHandler handler = subscriber.Key;
                         ExecutionContext? ec = subscriber.Value;
@@ -201,7 +215,11 @@ namespace System.Net.NetworkInformation
                 StartHelper(caller, false, StartIPOptions.Both);
             }
 
-            private static void StartHelper(NetworkAddressChangedEventHandler? caller, bool captureContext, StartIPOptions startIPOptions)
+            private static void StartHelper(
+                NetworkAddressChangedEventHandler? caller,
+                bool captureContext,
+                StartIPOptions startIPOptions
+            )
             {
                 lock (s_globalLock)
                 {
@@ -211,20 +229,37 @@ namespace System.Net.NetworkInformation
                         // Sockets will be initialized by the call to OSSupportsIP*.
                         if (Socket.OSSupportsIPv4)
                         {
-                            s_ipv4Socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0) { Blocking = false };
+                            s_ipv4Socket = new Socket(
+                                AddressFamily.InterNetwork,
+                                SocketType.Dgram,
+                                0
+                            )
+                            {
+                                Blocking = false
+                            };
                             s_ipv4WaitHandle = new AutoResetEvent(false);
                         }
 
                         if (Socket.OSSupportsIPv6)
                         {
-                            s_ipv6Socket = new Socket(AddressFamily.InterNetworkV6, SocketType.Dgram, 0) { Blocking = false };
+                            s_ipv6Socket = new Socket(
+                                AddressFamily.InterNetworkV6,
+                                SocketType.Dgram,
+                                0
+                            )
+                            {
+                                Blocking = false
+                            };
                             s_ipv6WaitHandle = new AutoResetEvent(false);
                         }
                     }
 
                     if (caller != null)
                     {
-                        s_addressChangedSubscribers.TryAdd(caller, captureContext ? ExecutionContext.Capture() : null);
+                        s_addressChangedSubscribers.TryAdd(
+                            caller,
+                            captureContext ? ExecutionContext.Capture() : null
+                        );
                     }
 
                     if (s_isListening || s_addressChangedSubscribers.Count == 0)
@@ -234,25 +269,35 @@ namespace System.Net.NetworkInformation
 
                     if (!s_isPending)
                     {
-                        if (Socket.OSSupportsIPv4 && (startIPOptions & StartIPOptions.StartIPv4) != 0)
+                        if (
+                            Socket.OSSupportsIPv4
+                            && (startIPOptions & StartIPOptions.StartIPv4) != 0
+                        )
                         {
                             ThreadPool.RegisterWaitForSingleObject(
                                 s_ipv4WaitHandle!,
                                 new WaitOrTimerCallback(AddressChangedCallback),
                                 StartIPOptions.StartIPv4,
                                 -1,
-                                true);
+                                true
+                            );
 
                             SocketError errorCode = Interop.Winsock.WSAIoctl_Blocking(
                                 s_ipv4Socket!.SafeHandle,
                                 (int)IOControlCode.AddressListChange,
-                                null, 0, null, 0,
+                                null,
+                                0,
+                                null,
+                                0,
                                 out int length,
-                                IntPtr.Zero, IntPtr.Zero);
+                                IntPtr.Zero,
+                                IntPtr.Zero
+                            );
 
                             if (errorCode != SocketError.Success)
                             {
-                                NetworkInformationException exception = new NetworkInformationException();
+                                NetworkInformationException exception =
+                                    new NetworkInformationException();
                                 if (exception.ErrorCode != (uint)SocketError.WouldBlock)
                                 {
                                     throw exception;
@@ -262,7 +307,8 @@ namespace System.Net.NetworkInformation
                             errorCode = Interop.Winsock.WSAEventSelect(
                                 s_ipv4Socket.SafeHandle,
                                 s_ipv4WaitHandle!.GetSafeWaitHandle(),
-                                Interop.Winsock.AsyncEventBits.FdAddressListChange);
+                                Interop.Winsock.AsyncEventBits.FdAddressListChange
+                            );
 
                             if (errorCode != SocketError.Success)
                             {
@@ -270,25 +316,35 @@ namespace System.Net.NetworkInformation
                             }
                         }
 
-                        if (Socket.OSSupportsIPv6 && (startIPOptions & StartIPOptions.StartIPv6) != 0)
+                        if (
+                            Socket.OSSupportsIPv6
+                            && (startIPOptions & StartIPOptions.StartIPv6) != 0
+                        )
                         {
                             ThreadPool.RegisterWaitForSingleObject(
                                 s_ipv6WaitHandle!,
                                 new WaitOrTimerCallback(AddressChangedCallback),
                                 StartIPOptions.StartIPv6,
                                 -1,
-                                true);
+                                true
+                            );
 
                             SocketError errorCode = Interop.Winsock.WSAIoctl_Blocking(
                                 s_ipv6Socket!.SafeHandle,
                                 (int)IOControlCode.AddressListChange,
-                                null, 0, null, 0,
+                                null,
+                                0,
+                                null,
+                                0,
                                 out int length,
-                                IntPtr.Zero, IntPtr.Zero);
+                                IntPtr.Zero,
+                                IntPtr.Zero
+                            );
 
                             if (errorCode != SocketError.Success)
                             {
-                                NetworkInformationException exception = new NetworkInformationException();
+                                NetworkInformationException exception =
+                                    new NetworkInformationException();
                                 if (exception.ErrorCode != (uint)SocketError.WouldBlock)
                                 {
                                     throw exception;
@@ -298,7 +354,8 @@ namespace System.Net.NetworkInformation
                             errorCode = Interop.Winsock.WSAEventSelect(
                                 s_ipv6Socket.SafeHandle,
                                 s_ipv6WaitHandle!.GetSafeWaitHandle(),
-                                Interop.Winsock.AsyncEventBits.FdAddressListChange);
+                                Interop.Winsock.AsyncEventBits.FdAddressListChange
+                            );
 
                             if (errorCode != SocketError.Success)
                             {

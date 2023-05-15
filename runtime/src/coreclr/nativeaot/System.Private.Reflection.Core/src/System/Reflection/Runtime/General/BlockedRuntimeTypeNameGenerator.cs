@@ -23,7 +23,8 @@ namespace System.Reflection.Runtime.General
             return name;
         }
 
-        private sealed class BlockedRuntimeTypeNameTable : ConcurrentUnifier<RuntimeTypeHandleKey, string>
+        private sealed class BlockedRuntimeTypeNameTable
+            : ConcurrentUnifier<RuntimeTypeHandleKey, string>
         {
             protected sealed override string Factory(RuntimeTypeHandleKey key)
             {
@@ -34,6 +35,7 @@ namespace System.Reflection.Runtime.General
             private static uint s_counter;
         }
 
-        private static readonly BlockedRuntimeTypeNameTable s_blockedNameTable = new BlockedRuntimeTypeNameTable();
+        private static readonly BlockedRuntimeTypeNameTable s_blockedNameTable =
+            new BlockedRuntimeTypeNameTable();
     }
 }

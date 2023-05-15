@@ -42,7 +42,12 @@ public static class RewriteOptionsExtensions
     /// <param name="replacement">If the regex matches, what to replace the uri with.</param>
     /// <param name="skipRemainingRules">If the regex matches, conditionally stop processing other rules.</param>
     /// <returns>The Rewrite options.</returns>
-    public static RewriteOptions AddRewrite(this RewriteOptions options, string regex, string replacement, bool skipRemainingRules)
+    public static RewriteOptions AddRewrite(
+        this RewriteOptions options,
+        string regex,
+        string replacement,
+        bool skipRemainingRules
+    )
     {
         options.Rules.Add(new RewriteRule(regex, replacement, skipRemainingRules));
         return options;
@@ -55,7 +60,11 @@ public static class RewriteOptionsExtensions
     /// <param name="regex">The regex string to compare with.</param>
     /// <param name="replacement">If the regex matches, what to replace the uri with.</param>
     /// <returns>The Rewrite options.</returns>
-    public static RewriteOptions AddRedirect(this RewriteOptions options, string regex, string replacement)
+    public static RewriteOptions AddRedirect(
+        this RewriteOptions options,
+        string regex,
+        string replacement
+    )
     {
         return AddRedirect(options, regex, replacement, statusCode: StatusCodes.Status302Found);
     }
@@ -68,7 +77,12 @@ public static class RewriteOptionsExtensions
     /// <param name="replacement">If the regex matches, what to replace the uri with.</param>
     /// <param name="statusCode">The status code to add to the response.</param>
     /// <returns>The Rewrite options.</returns>
-    public static RewriteOptions AddRedirect(this RewriteOptions options, string regex, string replacement, int statusCode)
+    public static RewriteOptions AddRedirect(
+        this RewriteOptions options,
+        string regex,
+        string replacement,
+        int statusCode
+    )
     {
         options.Rules.Add(new RedirectRule(regex, replacement, statusCode));
         return options;
@@ -82,7 +96,11 @@ public static class RewriteOptionsExtensions
     /// <returns></returns>
     public static RewriteOptions AddRedirectToHttpsPermanent(this RewriteOptions options)
     {
-        return AddRedirectToHttps(options, statusCode: StatusCodes.Status301MovedPermanently, sslPort: null);
+        return AddRedirectToHttps(
+            options,
+            statusCode: StatusCodes.Status301MovedPermanently,
+            sslPort: null
+        );
     }
 
     /// <summary>
@@ -110,7 +128,11 @@ public static class RewriteOptionsExtensions
     /// <param name="options">The <see cref="RewriteOptions"/>.</param>
     /// <param name="statusCode">The status code to add to the response.</param>
     /// <param name="sslPort">The SSL port to add to the response.</param>
-    public static RewriteOptions AddRedirectToHttps(this RewriteOptions options, int statusCode, int? sslPort)
+    public static RewriteOptions AddRedirectToHttps(
+        this RewriteOptions options,
+        int statusCode,
+        int? sslPort
+    )
     {
         options.Rules.Add(new RedirectToHttpsRule { StatusCode = statusCode, SSLPort = sslPort });
         return options;
@@ -132,9 +154,16 @@ public static class RewriteOptionsExtensions
     /// <param name="options">The <see cref="RewriteOptions"/>.</param>
     /// <param name="domains">Limit the rule to apply only on the specified domain(s).</param>
     /// <returns></returns>
-    public static RewriteOptions AddRedirectToWwwPermanent(this RewriteOptions options, params string[] domains)
+    public static RewriteOptions AddRedirectToWwwPermanent(
+        this RewriteOptions options,
+        params string[] domains
+    )
     {
-        return AddRedirectToWww(options, statusCode: StatusCodes.Status308PermanentRedirect, domains);
+        return AddRedirectToWww(
+            options,
+            statusCode: StatusCodes.Status308PermanentRedirect,
+            domains
+        );
     }
 
     /// <summary>
@@ -151,9 +180,16 @@ public static class RewriteOptionsExtensions
     /// </summary>
     /// <param name="options">The <see cref="RewriteOptions"/>.</param>
     /// <param name="domains">Limit the rule to apply only on the specified domain(s).</param>
-    public static RewriteOptions AddRedirectToWww(this RewriteOptions options, params string[] domains)
+    public static RewriteOptions AddRedirectToWww(
+        this RewriteOptions options,
+        params string[] domains
+    )
     {
-        return AddRedirectToWww(options, statusCode: StatusCodes.Status307TemporaryRedirect, domains);
+        return AddRedirectToWww(
+            options,
+            statusCode: StatusCodes.Status307TemporaryRedirect,
+            domains
+        );
     }
 
     /// <summary>
@@ -173,7 +209,11 @@ public static class RewriteOptionsExtensions
     /// <param name="options">The <see cref="RewriteOptions"/>.</param>
     /// <param name="statusCode">The status code to add to the response.</param>
     /// <param name="domains">Limit the rule to apply only on the specified domain(s).</param>
-    public static RewriteOptions AddRedirectToWww(this RewriteOptions options, int statusCode, params string[] domains)
+    public static RewriteOptions AddRedirectToWww(
+        this RewriteOptions options,
+        int statusCode,
+        params string[] domains
+    )
     {
         options.Rules.Add(new RedirectToWwwRule(statusCode, domains));
         return options;
@@ -195,9 +235,16 @@ public static class RewriteOptionsExtensions
     /// <param name="options">The <see cref="RewriteOptions"/>.</param>
     /// <param name="domains">Limit the rule to apply only on the specified domain(s).</param>
     /// <returns></returns>
-    public static RewriteOptions AddRedirectToNonWwwPermanent(this RewriteOptions options, params string[] domains)
+    public static RewriteOptions AddRedirectToNonWwwPermanent(
+        this RewriteOptions options,
+        params string[] domains
+    )
     {
-        return AddRedirectToNonWww(options, statusCode: StatusCodes.Status308PermanentRedirect, domains);
+        return AddRedirectToNonWww(
+            options,
+            statusCode: StatusCodes.Status308PermanentRedirect,
+            domains
+        );
     }
 
     /// <summary>
@@ -214,9 +261,16 @@ public static class RewriteOptionsExtensions
     /// </summary>
     /// <param name="options">The <see cref="RewriteOptions"/>.</param>
     /// <param name="domains">Limit the rule to apply only on the specified domain(s).</param>
-    public static RewriteOptions AddRedirectToNonWww(this RewriteOptions options, params string[] domains)
+    public static RewriteOptions AddRedirectToNonWww(
+        this RewriteOptions options,
+        params string[] domains
+    )
     {
-        return AddRedirectToNonWww(options, statusCode: StatusCodes.Status307TemporaryRedirect, domains);
+        return AddRedirectToNonWww(
+            options,
+            statusCode: StatusCodes.Status307TemporaryRedirect,
+            domains
+        );
     }
 
     /// <summary>
@@ -236,7 +290,11 @@ public static class RewriteOptionsExtensions
     /// <param name="options">The <see cref="RewriteOptions"/>.</param>
     /// <param name="statusCode">The status code to add to the response.</param>
     /// <param name="domains">Limit the rule to apply only on the specified domain(s).</param>
-    public static RewriteOptions AddRedirectToNonWww(this RewriteOptions options, int statusCode, params string[] domains)
+    public static RewriteOptions AddRedirectToNonWww(
+        this RewriteOptions options,
+        int statusCode,
+        params string[] domains
+    )
     {
         options.Rules.Add(new RedirectToNonWwwRule(statusCode, domains));
         return options;

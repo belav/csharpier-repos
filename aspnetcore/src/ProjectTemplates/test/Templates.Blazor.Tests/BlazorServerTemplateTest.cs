@@ -19,9 +19,7 @@ namespace BlazorTemplates.Tests;
 public class BlazorServerTemplateTest : BlazorTemplateTest
 {
     public BlazorServerTemplateTest(ProjectFactoryFixture projectFactory)
-        : base(projectFactory)
-    {
-    }
+        : base(projectFactory) { }
 
     public override string ProjectType { get; } = "blazorserver";
 
@@ -31,15 +29,20 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
     {
         var project = await CreateBuildPublishAsync();
 
-        await using var browser = BrowserManager.IsAvailable(browserKind) ?
-            await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo) :
-            null;
+        await using var browser = BrowserManager.IsAvailable(browserKind)
+            ? await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo)
+            : null;
 
         using (var aspNetProcess = project.StartBuiltProjectAsync())
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
 
@@ -60,7 +63,12 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
             if (BrowserManager.IsAvailable(browserKind))
@@ -78,7 +86,7 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
     }
 
     public static IEnumerable<object[]> BlazorServerTemplateWorks_IndividualAuthData =>
-            BrowserManager.WithBrowsers(new[] { BrowserKind.Chromium }, true, false);
+        BrowserManager.WithBrowsers(new[] { BrowserKind.Chromium }, true, false);
 
     [Theory(Skip = "https://github.com/dotnet/aspnetcore/issues/30882")]
     [MemberData(nameof(BlazorServerTemplateWorks_IndividualAuthData))]
@@ -87,15 +95,20 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
     {
         var project = await CreateBuildPublishAsync();
 
-        var browser = !BrowserManager.IsAvailable(browserKind) ?
-            null :
-            await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo);
+        var browser = !BrowserManager.IsAvailable(browserKind)
+            ? null
+            : await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo);
 
         using (var aspNetProcess = project.StartBuiltProjectAsync())
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
             if (BrowserManager.IsAvailable(browserKind))
@@ -115,7 +128,12 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertStatusCode("/", HttpStatusCode.OK, "text/html");
             if (BrowserManager.IsAvailable(browserKind))
@@ -139,8 +157,14 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
         var framesReceived = 0;
         var framesSent = 0;
 
-        void FrameReceived(object sender, IWebSocketFrame frame) { framesReceived++; }
-        void FrameSent(object sender, IWebSocketFrame frame) { framesSent++; }
+        void FrameReceived(object sender, IWebSocketFrame frame)
+        {
+            framesReceived++;
+        }
+        void FrameSent(object sender, IWebSocketFrame frame)
+        {
+            framesSent++;
+        }
 
         socket.FrameReceived += FrameReceived;
         socket.FrameSent += FrameSent;
@@ -182,10 +206,24 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
 
     [Theory(Skip = "https://github.com/dotnet/aspnetcore/issues/30882")]
     [InlineData("IndividualB2C", null)]
-    [InlineData("IndividualB2C", new [] { "--called-api-url \"https://graph.microsoft.com\"", "--called-api-scopes user.readwrite" })]
+    [InlineData(
+        "IndividualB2C",
+        new[]
+        {
+            "--called-api-url \"https://graph.microsoft.com\"",
+            "--called-api-scopes user.readwrite"
+        }
+    )]
     [InlineData("SingleOrg", null)]
-    [InlineData("SingleOrg", new [] { "--called-api-url \"https://graph.microsoft.com\"", "--called-api-scopes user.readwrite" })]
-    [InlineData("SingleOrg", new [] { "--calls-graph" })]
-    public Task BlazorServerTemplate_IdentityWeb_BuildAndPublish(string auth, string[] args)
-        => CreateBuildPublishAsync(auth, args);
+    [InlineData(
+        "SingleOrg",
+        new[]
+        {
+            "--called-api-url \"https://graph.microsoft.com\"",
+            "--called-api-scopes user.readwrite"
+        }
+    )]
+    [InlineData("SingleOrg", new[] { "--calls-graph" })]
+    public Task BlazorServerTemplate_IdentityWeb_BuildAndPublish(string auth, string[] args) =>
+        CreateBuildPublishAsync(auth, args);
 }

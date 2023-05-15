@@ -13,21 +13,34 @@ namespace System.Reflection.Runtime.BindingFlagSupport
     //==========================================================================================================================
     internal sealed class FieldPolicies : MemberPolicies<FieldInfo>
     {
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Reflection implementation")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Reflection implementation"
+        )]
         public sealed override IEnumerable<FieldInfo> GetDeclaredMembers(TypeInfo typeInfo)
         {
             return typeInfo.DeclaredFields;
         }
 
-        public sealed override IEnumerable<FieldInfo> CoreGetDeclaredMembers(RuntimeTypeInfo type, NameFilter? optionalNameFilter, RuntimeTypeInfo reflectedType)
+        public sealed override IEnumerable<FieldInfo> CoreGetDeclaredMembers(
+            RuntimeTypeInfo type,
+            NameFilter? optionalNameFilter,
+            RuntimeTypeInfo reflectedType
+        )
         {
             return type.CoreGetDeclaredFields(optionalNameFilter, reflectedType);
         }
 
         public sealed override bool AlwaysTreatAsDeclaredOnly => false;
 
-        public sealed override void GetMemberAttributes(FieldInfo member, out MethodAttributes visibility, out bool isStatic, out bool isVirtual, out bool isNewSlot)
+        public sealed override void GetMemberAttributes(
+            FieldInfo member,
+            out MethodAttributes visibility,
+            out bool isStatic,
+            out bool isVirtual,
+            out bool isNewSlot
+        )
         {
             FieldAttributes fieldAttributes = member.Attributes;
             visibility = (MethodAttributes)(fieldAttributes & FieldAttributes.FieldAccessMask);
@@ -36,9 +49,17 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             isNewSlot = false;
         }
 
-        public sealed override bool ImplicitlyOverrides(FieldInfo baseMember, FieldInfo derivedMember) => false;
+        public sealed override bool ImplicitlyOverrides(
+            FieldInfo baseMember,
+            FieldInfo derivedMember
+        ) => false;
 
-        public sealed override bool IsSuppressedByMoreDerivedMember(FieldInfo member, FieldInfo[] priorMembers, int startIndex, int endIndex)
+        public sealed override bool IsSuppressedByMoreDerivedMember(
+            FieldInfo member,
+            FieldInfo[] priorMembers,
+            int startIndex,
+            int endIndex
+        )
         {
             return false;
         }

@@ -25,7 +25,8 @@ namespace System.Reflection.Metadata.Ecma335
             int guidHeapRefSize,
             int blobHeapRefSize,
             MemoryBlock containingBlock,
-            int containingBlockOffset)
+            int containingBlockOffset
+        )
         {
             NumberOfRows = numberOfRows;
             _isGuidHeapRefSizeSmall = guidHeapRefSize == 2;
@@ -42,25 +43,33 @@ namespace System.Reflection.Metadata.Ecma335
         internal DocumentNameBlobHandle GetName(DocumentHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return DocumentNameBlobHandle.FromOffset(Block.PeekHeapReference(rowOffset + NameOffset, _isBlobHeapRefSizeSmall));
+            return DocumentNameBlobHandle.FromOffset(
+                Block.PeekHeapReference(rowOffset + NameOffset, _isBlobHeapRefSizeSmall)
+            );
         }
 
         internal GuidHandle GetHashAlgorithm(DocumentHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return GuidHandle.FromIndex(Block.PeekHeapReference(rowOffset + _hashAlgorithmOffset, _isGuidHeapRefSizeSmall));
+            return GuidHandle.FromIndex(
+                Block.PeekHeapReference(rowOffset + _hashAlgorithmOffset, _isGuidHeapRefSizeSmall)
+            );
         }
 
         internal BlobHandle GetHash(DocumentHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return BlobHandle.FromOffset(Block.PeekHeapReference(rowOffset + _hashOffset, _isBlobHeapRefSizeSmall));
+            return BlobHandle.FromOffset(
+                Block.PeekHeapReference(rowOffset + _hashOffset, _isBlobHeapRefSizeSmall)
+            );
         }
 
         internal GuidHandle GetLanguage(DocumentHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return GuidHandle.FromIndex(Block.PeekHeapReference(rowOffset + _languageOffset, _isGuidHeapRefSizeSmall));
+            return GuidHandle.FromIndex(
+                Block.PeekHeapReference(rowOffset + _languageOffset, _isGuidHeapRefSizeSmall)
+            );
         }
     }
 
@@ -82,7 +91,8 @@ namespace System.Reflection.Metadata.Ecma335
             int documentRefSize,
             int blobHeapRefSize,
             MemoryBlock containingBlock,
-            int containingBlockOffset)
+            int containingBlockOffset
+        )
         {
             NumberOfRows = numberOfRows;
             _isDocumentRefSmall = documentRefSize == 2;
@@ -97,13 +107,17 @@ namespace System.Reflection.Metadata.Ecma335
         internal DocumentHandle GetDocument(MethodDebugInformationHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return DocumentHandle.FromRowId(Block.PeekReference(rowOffset + DocumentOffset, _isDocumentRefSmall));
+            return DocumentHandle.FromRowId(
+                Block.PeekReference(rowOffset + DocumentOffset, _isDocumentRefSmall)
+            );
         }
 
         internal BlobHandle GetSequencePoints(MethodDebugInformationHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return BlobHandle.FromOffset(Block.PeekHeapReference(rowOffset + _sequencePointsOffset, _isBlobHeapRefSizeSmall));
+            return BlobHandle.FromOffset(
+                Block.PeekHeapReference(rowOffset + _sequencePointsOffset, _isBlobHeapRefSizeSmall)
+            );
         }
     }
 
@@ -134,7 +148,8 @@ namespace System.Reflection.Metadata.Ecma335
             int localVariableRefSize,
             int localConstantRefSize,
             MemoryBlock containingBlock,
-            int containingBlockOffset)
+            int containingBlockOffset
+        )
         {
             NumberOfRows = numberOfRows;
             _isMethodRefSmall = methodRefSize == 2;
@@ -160,13 +175,17 @@ namespace System.Reflection.Metadata.Ecma335
         internal MethodDefinitionHandle GetMethod(int rowId)
         {
             int rowOffset = (rowId - 1) * RowSize;
-            return MethodDefinitionHandle.FromRowId(Block.PeekReference(rowOffset + MethodOffset, _isMethodRefSmall));
+            return MethodDefinitionHandle.FromRowId(
+                Block.PeekReference(rowOffset + MethodOffset, _isMethodRefSmall)
+            );
         }
 
         internal ImportScopeHandle GetImportScope(LocalScopeHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return ImportScopeHandle.FromRowId(Block.PeekReference(rowOffset + _importScopeOffset, _isImportScopeRefSmall));
+            return ImportScopeHandle.FromRowId(
+                Block.PeekReference(rowOffset + _importScopeOffset, _isImportScopeRefSmall)
+            );
         }
 
         internal int GetVariableStart(int rowId)
@@ -198,8 +217,8 @@ namespace System.Reflection.Metadata.Ecma335
             int rowOffset = (rowId - 1) * RowSize;
 
             long result =
-                Block.PeekUInt32(rowOffset + _startOffsetOffset) +
-                Block.PeekUInt32(rowOffset + _lengthOffset);
+                Block.PeekUInt32(rowOffset + _startOffsetOffset)
+                + Block.PeekUInt32(rowOffset + _lengthOffset);
 
             if (unchecked((int)result) != result)
             {
@@ -209,9 +228,14 @@ namespace System.Reflection.Metadata.Ecma335
             return (int)result;
         }
 
-        internal void GetLocalScopeRange(int methodDefRid, out int firstScopeRowId, out int lastScopeRowId)
+        internal void GetLocalScopeRange(
+            int methodDefRid,
+            out int firstScopeRowId,
+            out int lastScopeRowId
+        )
         {
-            int startRowNumber, endRowNumber;
+            int startRowNumber,
+                endRowNumber;
             Block.BinarySearchReferenceRange(
                 NumberOfRows,
                 RowSize,
@@ -278,7 +302,9 @@ namespace System.Reflection.Metadata.Ecma335
         internal StringHandle GetName(LocalVariableHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return StringHandle.FromOffset(Block.PeekHeapReference(rowOffset + _nameOffset, _isStringHeapRefSizeSmall));
+            return StringHandle.FromOffset(
+                Block.PeekHeapReference(rowOffset + _nameOffset, _isStringHeapRefSizeSmall)
+            );
         }
     }
 
@@ -299,7 +325,8 @@ namespace System.Reflection.Metadata.Ecma335
             int stringHeapRefSize,
             int blobHeapRefSize,
             MemoryBlock containingBlock,
-            int containingBlockOffset)
+            int containingBlockOffset
+        )
         {
             NumberOfRows = numberOfRows;
             _isStringHeapRefSizeSmall = stringHeapRefSize == 2;
@@ -314,13 +341,17 @@ namespace System.Reflection.Metadata.Ecma335
         internal StringHandle GetName(LocalConstantHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return StringHandle.FromOffset(Block.PeekHeapReference(rowOffset + NameOffset, _isStringHeapRefSizeSmall));
+            return StringHandle.FromOffset(
+                Block.PeekHeapReference(rowOffset + NameOffset, _isStringHeapRefSizeSmall)
+            );
         }
 
         internal BlobHandle GetSignature(LocalConstantHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return BlobHandle.FromOffset(Block.PeekHeapReference(rowOffset + _signatureOffset, _isBlobHeapRefSizeSmall));
+            return BlobHandle.FromOffset(
+                Block.PeekHeapReference(rowOffset + _signatureOffset, _isBlobHeapRefSizeSmall)
+            );
         }
     }
 
@@ -341,7 +372,8 @@ namespace System.Reflection.Metadata.Ecma335
             bool declaredSorted,
             int methodRefSize,
             MemoryBlock containingBlock,
-            int containingBlockOffset)
+            int containingBlockOffset
+        )
         {
             NumberOfRows = numberOfRows;
             _isMethodRefSizeSmall = methodRefSize == 2;
@@ -359,13 +391,13 @@ namespace System.Reflection.Metadata.Ecma335
 
         internal MethodDefinitionHandle FindKickoffMethod(int moveNextMethodRowId)
         {
-            int foundRowNumber =
-              this.Block.BinarySearchReference(
+            int foundRowNumber = this.Block.BinarySearchReference(
                 this.NumberOfRows,
                 this.RowSize,
                 MoveNextMethodOffset,
                 (uint)moveNextMethodRowId,
-                _isMethodRefSizeSmall);
+                _isMethodRefSizeSmall
+            );
 
             if (foundRowNumber < 0)
             {
@@ -378,7 +410,9 @@ namespace System.Reflection.Metadata.Ecma335
         private MethodDefinitionHandle GetKickoffMethod(int rowId)
         {
             int rowOffset = (rowId - 1) * RowSize;
-            return MethodDefinitionHandle.FromRowId(Block.PeekReference(rowOffset + _kickoffMethodOffset, _isMethodRefSizeSmall));
+            return MethodDefinitionHandle.FromRowId(
+                Block.PeekReference(rowOffset + _kickoffMethodOffset, _isMethodRefSizeSmall)
+            );
         }
     }
 
@@ -400,7 +434,8 @@ namespace System.Reflection.Metadata.Ecma335
             int importScopeRefSize,
             int blobHeapRefSize,
             MemoryBlock containingBlock,
-            int containingBlockOffset)
+            int containingBlockOffset
+        )
         {
             NumberOfRows = numberOfRows;
             _isImportScopeRefSizeSmall = importScopeRefSize == 2;
@@ -415,13 +450,17 @@ namespace System.Reflection.Metadata.Ecma335
         internal ImportScopeHandle GetParent(ImportScopeHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return ImportScopeHandle.FromRowId(Block.PeekReference(rowOffset + ParentOffset, _isImportScopeRefSizeSmall));
+            return ImportScopeHandle.FromRowId(
+                Block.PeekReference(rowOffset + ParentOffset, _isImportScopeRefSizeSmall)
+            );
         }
 
         internal BlobHandle GetImports(ImportScopeHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return BlobHandle.FromOffset(Block.PeekHeapReference(rowOffset + _importsOffset, _isBlobHeapRefSizeSmall));
+            return BlobHandle.FromOffset(
+                Block.PeekHeapReference(rowOffset + _importsOffset, _isBlobHeapRefSizeSmall)
+            );
         }
     }
 
@@ -447,7 +486,8 @@ namespace System.Reflection.Metadata.Ecma335
             int guidHeapRefSize,
             int blobHeapRefSize,
             MemoryBlock containingBlock,
-            int containingBlockOffset)
+            int containingBlockOffset
+        )
         {
             NumberOfRows = numberOfRows;
             _isHasCustomDebugInformationRefSizeSmall = hasCustomDebugInformationRefSize == 2;
@@ -469,24 +509,38 @@ namespace System.Reflection.Metadata.Ecma335
         internal EntityHandle GetParent(CustomDebugInformationHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return HasCustomDebugInformationTag.ConvertToHandle(Block.PeekTaggedReference(rowOffset + ParentOffset, _isHasCustomDebugInformationRefSizeSmall));
+            return HasCustomDebugInformationTag.ConvertToHandle(
+                Block.PeekTaggedReference(
+                    rowOffset + ParentOffset,
+                    _isHasCustomDebugInformationRefSizeSmall
+                )
+            );
         }
 
         internal GuidHandle GetKind(CustomDebugInformationHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return GuidHandle.FromIndex(Block.PeekHeapReference(rowOffset + _kindOffset, _isGuidHeapRefSizeSmall));
+            return GuidHandle.FromIndex(
+                Block.PeekHeapReference(rowOffset + _kindOffset, _isGuidHeapRefSizeSmall)
+            );
         }
 
         internal BlobHandle GetValue(CustomDebugInformationHandle handle)
         {
             int rowOffset = (handle.RowId - 1) * RowSize;
-            return BlobHandle.FromOffset(Block.PeekHeapReference(rowOffset + _valueOffset, _isBlobHeapRefSizeSmall));
+            return BlobHandle.FromOffset(
+                Block.PeekHeapReference(rowOffset + _valueOffset, _isBlobHeapRefSizeSmall)
+            );
         }
 
-        internal void GetRange(EntityHandle parentHandle, out int firstImplRowId, out int lastImplRowId)
+        internal void GetRange(
+            EntityHandle parentHandle,
+            out int firstImplRowId,
+            out int lastImplRowId
+        )
         {
-            int startRowNumber, endRowNumber;
+            int startRowNumber,
+                endRowNumber;
 
             Block.BinarySearchReferenceRange(
                 NumberOfRows,

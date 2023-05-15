@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="BitmapSelector.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Drawing {
+namespace System.Drawing
+{
     using System;
     using System.Configuration;
     using System.Drawing.Configuration;
@@ -14,8 +15,8 @@ namespace System.Drawing {
     /// <summary>
     /// Provides methods to select from multiple bitmaps depending on a "bitmapSuffix" config setting.
     /// </summary>
-    internal static class BitmapSelector {
-
+    internal static class BitmapSelector
+    {
         /// <summary>
         /// Gets the bitmap ID suffix defined in the application configuration, or string.Empty if
         /// the suffix is not specified.  Internal for unit tests
@@ -25,21 +26,28 @@ namespace System.Drawing {
         /// once per appdomain.
         /// </remarks>
         private static string _suffix;
-        internal static string Suffix {
-            get {
-                if (_suffix == null) {
+        internal static string Suffix
+        {
+            get
+            {
+                if (_suffix == null)
+                {
                     _suffix = string.Empty;
-                    var section = ConfigurationManager.GetSection("system.drawing") as SystemDrawingSection;
-                    if (section != null) {
+                    var section =
+                        ConfigurationManager.GetSection("system.drawing") as SystemDrawingSection;
+                    if (section != null)
+                    {
                         var value = section.BitmapSuffix;
-                        if (value != null && value is string) {
+                        if (value != null && value is string)
+                        {
                             _suffix = (string)value;
                         }
                     }
                 }
                 return _suffix;
             }
-            set {
+            set
+            {
                 // So unit tests can clear the cached suffix
                 _suffix = value;
             }
@@ -53,11 +61,14 @@ namespace System.Drawing {
         /// The new path with the suffix included.  If there is no suffix defined or there are
         /// invalid characters in the original path, the original path is returned.
         /// </returns>
-        internal static string AppendSuffix(string filePath) {
-            try {
+        internal static string AppendSuffix(string filePath)
+        {
+            try
+            {
                 return Path.ChangeExtension(filePath, Suffix + Path.GetExtension(filePath));
             }
-            catch (ArgumentException) { // there are invalid characters in the path
+            catch (ArgumentException)
+            { // there are invalid characters in the path
                 return filePath;
             }
         }
@@ -67,7 +78,8 @@ namespace System.Drawing {
         /// existing extension) if the resulting file path exists; otherwise the original path is
         /// returned.
         /// </summary>
-        public static string GetFileName(string originalPath) {
+        public static string GetFileName(string originalPath)
+        {
             if (Suffix == string.Empty)
                 return originalPath;
 
@@ -76,24 +88,29 @@ namespace System.Drawing {
         }
 
         // Calls assembly.GetManifestResourceStream in a try/catch and returns null if not found
-        private static Stream GetResourceStreamHelper(Assembly assembly, Type type, string name) {
+        private static Stream GetResourceStreamHelper(Assembly assembly, Type type, string name)
+        {
             Stream stream = null;
-            try {
+            try
+            {
                 stream = assembly.GetManifestResourceStream(type, name);
             }
-            catch (FileNotFoundException) {
-            }
+            catch (FileNotFoundException) { }
             return stream;
         }
 
-        private static bool DoesAssemblyHaveCustomAttribute(Assembly assembly, string typeName) {
+        private static bool DoesAssemblyHaveCustomAttribute(Assembly assembly, string typeName)
+        {
             return DoesAssemblyHaveCustomAttribute(assembly, assembly.GetType(typeName));
         }
 
-        private static bool DoesAssemblyHaveCustomAttribute(Assembly assembly, Type attrType) {
-            if (attrType != null) {
+        private static bool DoesAssemblyHaveCustomAttribute(Assembly assembly, Type attrType)
+        {
+            if (attrType != null)
+            {
                 var attr = assembly.GetCustomAttributes(attrType, false);
-                if (attr.Length > 0) {
+                if (attr.Length > 0)
+                {
                     return true;
                 }
             }
@@ -101,25 +118,45 @@ namespace System.Drawing {
         }
 
         // internal for unit tests
-        internal static bool SatelliteAssemblyOptIn(Assembly assembly) {
+        internal static bool SatelliteAssemblyOptIn(Assembly assembly)
+        {
             // Try 4.5 public attribute type first
-            if (DoesAssemblyHaveCustomAttribute(assembly, typeof(BitmapSuffixInSatelliteAssemblyAttribute))) {
+            if (
+                DoesAssemblyHaveCustomAttribute(
+                    assembly,
+                    typeof(BitmapSuffixInSatelliteAssemblyAttribute)
+                )
+            )
+            {
                 return true;
             }
 
             // Also load attribute type by name for dlls compiled against older frameworks
-            return DoesAssemblyHaveCustomAttribute(assembly, "System.Drawing.BitmapSuffixInSatelliteAssemblyAttribute");
+            return DoesAssemblyHaveCustomAttribute(
+                assembly,
+                "System.Drawing.BitmapSuffixInSatelliteAssemblyAttribute"
+            );
         }
 
         // internal for unit tests
-        internal static bool SameAssemblyOptIn(Assembly assembly) {
+        internal static bool SameAssemblyOptIn(Assembly assembly)
+        {
             // Try 4.5 public attribute type first
-            if (DoesAssemblyHaveCustomAttribute(assembly, typeof(BitmapSuffixInSameAssemblyAttribute))) {
+            if (
+                DoesAssemblyHaveCustomAttribute(
+                    assembly,
+                    typeof(BitmapSuffixInSameAssemblyAttribute)
+                )
+            )
+            {
                 return true;
             }
 
             // Also load attribute type by name for dlls compiled against older frameworks
-            return DoesAssemblyHaveCustomAttribute(assembly, "System.Drawing.BitmapSuffixInSameAssemblyAttribute");
+            return DoesAssemblyHaveCustomAttribute(
+                assembly,
+                "System.Drawing.BitmapSuffixInSameAssemblyAttribute"
+            );
         }
 
         /// <summary>
@@ -133,38 +170,49 @@ namespace System.Drawing {
         /// The manifest resource stream corresponding to <paramref name="originalName"/> with the
         /// current suffix applied; or if that is not found, the stream corresponding to <paramref name="originalName"/>.
         /// </returns>
-        public static Stream GetResourceStream(Assembly assembly, Type type, string originalName) {
-            if (Suffix != string.Empty) {
-                try {
+        public static Stream GetResourceStream(Assembly assembly, Type type, string originalName)
+        {
+            if (Suffix != string.Empty)
+            {
+                try
+                {
                     // Resource with suffix has highest priority
-                    if (SameAssemblyOptIn(assembly)) {
+                    if (SameAssemblyOptIn(assembly))
+                    {
                         string newName = AppendSuffix(originalName);
                         Stream stream = GetResourceStreamHelper(assembly, type, newName);
-                        if (stream != null) {
+                        if (stream != null)
+                        {
                             return stream;
                         }
                     }
                 }
-                catch {
+                catch
+                {
                     // Ignore failures and continue to try other options
                 }
 
-                try {
+                try
+                {
                     // Satellite assembly has second priority, using the original name
-                    if (SatelliteAssemblyOptIn(assembly)) {
+                    if (SatelliteAssemblyOptIn(assembly))
+                    {
                         AssemblyName assemblyName = assembly.GetName();
                         assemblyName.Name += Suffix;
                         assemblyName.ProcessorArchitecture = ProcessorArchitecture.None;
                         Assembly satellite = Assembly.Load(assemblyName);
-                        if (satellite != null) {
+                        if (satellite != null)
+                        {
                             Stream stream = GetResourceStreamHelper(satellite, type, originalName);
-                            if (stream != null) {
+                            if (stream != null)
+                            {
                                 return stream;
                             }
                         }
                     }
                 }
-                catch {
+                catch
+                {
                     // Ignore failures and continue to try other options
                 }
             }
@@ -183,7 +231,8 @@ namespace System.Drawing {
         /// The manifest resource stream corresponding to <paramref name="originalName"/> with the
         /// current suffix applied; or if that is not found, the stream corresponding to <paramref name="originalName"/>.
         /// </returns>
-        public static Stream GetResourceStream(Type type, string originalName) {
+        public static Stream GetResourceStream(Type type, string originalName)
+        {
             return GetResourceStream(type.Module.Assembly, type, originalName);
         }
 
@@ -197,7 +246,8 @@ namespace System.Drawing {
         /// The icon created from a manifest resource stream corresponding to <paramref name="originalName"/> with the
         /// current suffix applied; or if that is not found, the stream corresponding to <paramref name="originalName"/>.
         /// </returns>
-        public static Icon CreateIcon(Type type, string originalName) {
+        public static Icon CreateIcon(Type type, string originalName)
+        {
             return new Icon(GetResourceStream(type, originalName));
         }
 
@@ -211,9 +261,9 @@ namespace System.Drawing {
         /// The bitmap created from a manifest resource stream corresponding to <paramref name="originalName"/> with the
         /// current suffix applied; or if that is not found, the stream corresponding to <paramref name="originalName"/>.
         /// </returns>
-        public static Bitmap CreateBitmap(Type type, string originalName) {
+        public static Bitmap CreateBitmap(Type type, string originalName)
+        {
             return new Bitmap(GetResourceStream(type, originalName));
         }
-
     }
 }

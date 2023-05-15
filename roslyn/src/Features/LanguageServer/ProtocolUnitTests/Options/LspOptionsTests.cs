@@ -19,22 +19,24 @@ using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.References;
+
 public class LspOptionsTests : AbstractLanguageServerProtocolTests
 {
-    public LspOptionsTests(ITestOutputHelper? testOutputHelper) : base(testOutputHelper)
-    {
-    }
+    public LspOptionsTests(ITestOutputHelper? testOutputHelper)
+        : base(testOutputHelper) { }
 
-    protected override TestComposition Composition => EditorTestCompositions.LanguageServerProtocol
-        .AddParts(typeof(TestDocumentTrackingService))
-        .AddParts(typeof(TestWorkspaceRegistrationService));
+    protected override TestComposition Composition =>
+        EditorTestCompositions.LanguageServerProtocol
+            .AddParts(typeof(TestDocumentTrackingService))
+            .AddParts(typeof(TestWorkspaceRegistrationService));
 
     [Fact]
     public async Task TestCanRetrieveCSharpOptionsWithOnlyLspLayer()
     {
         var markup = "";
         await using var testLspServer = await CreateTestLspServerAsync(markup);
-        var globalOptions = testLspServer.TestWorkspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
+        var globalOptions =
+            testLspServer.TestWorkspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
         var project = testLspServer.GetCurrentSolution().Projects.Single().Services;
         Assert.NotNull(globalOptions.GetAddImportPlacementOptions(project));
         Assert.NotNull(globalOptions.GetCodeGenerationOptions(project));
@@ -48,7 +50,8 @@ public class LspOptionsTests : AbstractLanguageServerProtocolTests
     {
         var markup = "";
         await using var testLspServer = await CreateVisualBasicTestLspServerAsync(markup);
-        var globalOptions = testLspServer.TestWorkspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
+        var globalOptions =
+            testLspServer.TestWorkspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
         var project = testLspServer.GetCurrentSolution().Projects.Single().Services;
         Assert.NotNull(globalOptions.GetAddImportPlacementOptions(project));
         Assert.NotNull(globalOptions.GetCodeGenerationOptions(project));

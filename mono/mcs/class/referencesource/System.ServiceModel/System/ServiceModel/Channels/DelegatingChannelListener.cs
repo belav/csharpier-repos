@@ -6,32 +6,32 @@ namespace System.ServiceModel.Channels
 {
     using System.Runtime;
 
-    abstract class DelegatingChannelListener<TChannel>
-        : LayeredChannelListener<TChannel>
+    abstract class DelegatingChannelListener<TChannel> : LayeredChannelListener<TChannel>
         where TChannel : class, IChannel
     {
         IChannelAcceptor<TChannel> channelAcceptor;
 
-        protected DelegatingChannelListener(IDefaultCommunicationTimeouts timeouts, IChannelListener innerChannelListener)
-            : base(timeouts, innerChannelListener)
-        {
-        }
+        protected DelegatingChannelListener(
+            IDefaultCommunicationTimeouts timeouts,
+            IChannelListener innerChannelListener
+        )
+            : base(timeouts, innerChannelListener) { }
 
         protected DelegatingChannelListener(bool sharedInnerListener)
-            : base(sharedInnerListener)
-        {
-        }
+            : base(sharedInnerListener) { }
 
-        protected DelegatingChannelListener(bool sharedInnerListener, IDefaultCommunicationTimeouts timeouts)
-            : base(sharedInnerListener, timeouts)
-        {
-        }
+        protected DelegatingChannelListener(
+            bool sharedInnerListener,
+            IDefaultCommunicationTimeouts timeouts
+        )
+            : base(sharedInnerListener, timeouts) { }
 
-        protected DelegatingChannelListener(bool sharedInnerListener, IDefaultCommunicationTimeouts timeouts, IChannelListener innerChannelListener)
-            : base(sharedInnerListener, timeouts, innerChannelListener)
-        {
-        }
-
+        protected DelegatingChannelListener(
+            bool sharedInnerListener,
+            IDefaultCommunicationTimeouts timeouts,
+            IChannelListener innerChannelListener
+        )
+            : base(sharedInnerListener, timeouts, innerChannelListener) { }
 
         public IChannelAcceptor<TChannel> Acceptor
         {
@@ -44,7 +44,11 @@ namespace System.ServiceModel.Channels
             return this.channelAcceptor.AcceptChannel(timeout);
         }
 
-        protected override IAsyncResult OnBeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channelAcceptor.BeginAcceptChannel(timeout, callback, state);
         }
@@ -59,7 +63,11 @@ namespace System.ServiceModel.Channels
             return this.channelAcceptor.WaitForChannel(timeout);
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channelAcceptor.BeginWaitForChannel(timeout, callback, state);
         }
@@ -78,9 +86,20 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, this.channelAcceptor);
+            return new ChainedCloseAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginClose,
+                base.OnEndClose,
+                this.channelAcceptor
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -95,9 +114,20 @@ namespace System.ServiceModel.Channels
             this.channelAcceptor.Close(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedOpenAsyncResult(timeout, callback, state, base.OnBeginOpen, base.OnEndOpen, this.channelAcceptor);
+            return new ChainedOpenAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginOpen,
+                base.OnEndOpen,
+                this.channelAcceptor
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)

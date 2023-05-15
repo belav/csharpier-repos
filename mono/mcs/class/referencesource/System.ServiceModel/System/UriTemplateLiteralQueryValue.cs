@@ -11,7 +11,9 @@ namespace System
 
     // thin wrapper around string; use type system to help ensure we
     // are doing canonicalization right/consistently
-    class UriTemplateLiteralQueryValue : UriTemplateQueryValue, IComparable<UriTemplateLiteralQueryValue>
+    class UriTemplateLiteralQueryValue
+        : UriTemplateQueryValue,
+            IComparable<UriTemplateLiteralQueryValue>
     {
         readonly string value; // an unescaped representation
 
@@ -21,6 +23,7 @@ namespace System
             Fx.Assert(value != null, "bad literal value");
             this.value = value;
         }
+
         public static UriTemplateLiteralQueryValue CreateFromUriTemplate(string value)
         {
             return new UriTemplateLiteralQueryValue(UrlUtility.UrlDecode(value, Encoding.UTF8));
@@ -30,13 +33,24 @@ namespace System
         {
             return UrlUtility.UrlEncode(this.value, Encoding.UTF8);
         }
+
         public string AsRawUnescapedString()
         {
             return this.value;
         }
-        public override void Bind(string keyName, string[] values, ref int valueIndex, StringBuilder query)
+
+        public override void Bind(
+            string keyName,
+            string[] values,
+            ref int valueIndex,
+            StringBuilder query
+        )
         {
-            query.AppendFormat("&{0}={1}", UrlUtility.UrlEncode(keyName, Encoding.UTF8), AsEscapedString());
+            query.AppendFormat(
+                "&{0}={1}",
+                UrlUtility.UrlEncode(keyName, Encoding.UTF8),
+                AsEscapedString()
+            );
         }
 
         public int CompareTo(UriTemplateLiteralQueryValue other)
@@ -57,6 +71,7 @@ namespace System
                 return this.value == lqv.value;
             }
         }
+
         public override int GetHashCode()
         {
             return this.value.GetHashCode();
@@ -77,9 +92,13 @@ namespace System
             Fx.Assert(otherAsLiteral != null, "The nature requires that this will be OK");
             return (CompareTo(otherAsLiteral) == 0);
         }
+
         public override void Lookup(string value, NameValueCollection boundParameters)
         {
-            Fx.Assert(string.Compare(this.value, value, StringComparison.Ordinal) == 0, "How can that be?");
+            Fx.Assert(
+                string.Compare(this.value, value, StringComparison.Ordinal) == 0,
+                "How can that be?"
+            );
         }
     }
 }

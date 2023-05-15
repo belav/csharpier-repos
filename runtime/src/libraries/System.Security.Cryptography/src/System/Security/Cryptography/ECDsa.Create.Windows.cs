@@ -22,7 +22,6 @@ namespace System.Security.Cryptography
         public static partial ECDsa Create(ECCurve curve)
         {
             return new ECDsaWrapper(new ECDsaCng(curve));
-
         }
 
         /// <summary>

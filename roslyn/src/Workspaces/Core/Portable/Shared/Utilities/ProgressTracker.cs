@@ -21,12 +21,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private readonly Action<string, int, int> _updateActionOpt;
 
         public ProgressTracker()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
-        public ProgressTracker(Action<string, int, int> updateActionOpt)
-            => _updateActionOpt = updateActionOpt;
+        public ProgressTracker(Action<string, int, int> updateActionOpt) =>
+            _updateActionOpt = updateActionOpt;
 
         public string Description
         {
@@ -62,7 +60,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             Update();
         }
 
-        private void Update()
-            => _updateActionOpt?.Invoke(_description, _completedItems, _totalItems);
+        private void Update() =>
+            _updateActionOpt?.Invoke(_description, _completedItems, _totalItems);
     }
 }

@@ -15,7 +15,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class NamedPipeTransportSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.ProtectionLevel, DefaultValue = NamedPipeTransportSecurity.DefaultProtectionLevel)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ProtectionLevel,
+            DefaultValue = NamedPipeTransportSecurity.DefaultProtectionLevel
+        )]
         [ServiceModelEnumValidator(typeof(ProtectionLevelHelper))]
         public ProtectionLevel ProtectionLevel
         {
@@ -38,7 +41,10 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("security");
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ProtectionLevel, security.ProtectionLevel);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ProtectionLevel,
+                security.ProtectionLevel
+            );
         }
     }
 }

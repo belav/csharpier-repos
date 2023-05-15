@@ -24,7 +24,7 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
 
             using StreamWriter sw = new StreamWriter($"{Path.Combine(path, classname)}.cs");
             sw.WriteLine(
-$@"// Licensed to the .NET Foundation under one or more agreements.
+                $@"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // This is a programmatically generated file from Regex.GenerateUnicodeTables.
@@ -33,10 +33,13 @@ $@"// Licensed to the .NET Foundation under one or more agreements.
 namespace {namespacename}
 {{
     internal static class {classname}
-    {{");
+    {{"
+            );
             WriteSerializedBDDs(sw);
-            sw.WriteLine($@"    }}
-}}");
+            sw.WriteLine(
+                $@"    }}
+}}"
+            );
         }
 
         private static void WriteSerializedBDDs(StreamWriter sw)
@@ -67,8 +70,12 @@ namespace {namespacename}
 
             BDD whitespaceBdd = bddb.CreateBddForIntRanges(whitespace.ranges);
 
-            sw.WriteLine("        /// <summary>Serialized BDD representations of all the Unicode categories.</summary>");
-            sw.WriteLine("        public static readonly byte[][] AllCategoriesSerializedBDD = new byte[][]");
+            sw.WriteLine(
+                "        /// <summary>Serialized BDD representations of all the Unicode categories.</summary>"
+            );
+            sw.WriteLine(
+                "        public static readonly byte[][] AllCategoriesSerializedBDD = new byte[][]"
+            );
             sw.WriteLine("        {");
             for (int i = 0; i < catBDDs.Length; i++)
             {
@@ -80,7 +87,9 @@ namespace {namespacename}
             sw.WriteLine("        };");
             sw.WriteLine();
 
-            sw.WriteLine("        /// <summary>Serialized BDD representation of the set of all whitespace characters.</summary>");
+            sw.WriteLine(
+                "        /// <summary>Serialized BDD representation of the set of all whitespace characters.</summary>"
+            );
             sw.Write($"        public static readonly byte[] WhitespaceSerializedBDD = ");
             GeneratorHelper.WriteByteArrayInitSyntax(sw, whitespaceBdd.SerializeToBytes());
             sw.WriteLine(";");

@@ -26,26 +26,27 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
 
                     var jObjectVariable = Expression.Variable(
                         typeof(JObject),
-                        "jObject" + _currentEntityIndex);
+                        "jObject" + _currentEntityIndex
+                    );
                     var variables = new List<ParameterExpression> { jObjectVariable };
 
                     var expressions = new List<Expression>
                     {
                         Expression.Assign(
                             jObjectVariable,
-                            Expression.TypeAs(
-                                valueBufferExpression,
-                                typeof(JObject))),
+                            Expression.TypeAs(valueBufferExpression, typeof(JObject))
+                        ),
                         Expression.Condition(
-                            Expression.Equal(jObjectVariable, Expression.Constant(null, jObjectVariable.Type)),
+                            Expression.Equal(
+                                jObjectVariable,
+                                Expression.Constant(null, jObjectVariable.Type)
+                            ),
                             Expression.Constant(null, shaperExpression.Type),
-                            shaperExpression)
+                            shaperExpression
+                        )
                     };
 
-                    return Expression.Block(
-                        shaperExpression.Type,
-                        variables,
-                        expressions);
+                    return Expression.Block(shaperExpression.Type, variables, expressions);
                 }
 
                 case CollectionShaperExpression collectionShaperExpression:
@@ -54,26 +55,31 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
 
                     var jArrayVariable = Expression.Variable(
                         typeof(JArray),
-                        "jArray" + _currentEntityIndex);
+                        "jArray" + _currentEntityIndex
+                    );
                     var variables = new List<ParameterExpression> { jArrayVariable };
 
                     var expressions = new List<Expression>
                     {
                         Expression.Assign(
                             jArrayVariable,
-                            Expression.TypeAs(
-                                collectionShaperExpression.Projection,
-                                typeof(JArray))),
+                            Expression.TypeAs(collectionShaperExpression.Projection, typeof(JArray))
+                        ),
                         Expression.Condition(
-                            Expression.Equal(jArrayVariable, Expression.Constant(null, jArrayVariable.Type)),
+                            Expression.Equal(
+                                jArrayVariable,
+                                Expression.Constant(null, jArrayVariable.Type)
+                            ),
                             Expression.Constant(null, collectionShaperExpression.Type),
-                            collectionShaperExpression)
+                            collectionShaperExpression
+                        )
                     };
 
                     return Expression.Block(
                         collectionShaperExpression.Type,
                         variables,
-                        expressions);
+                        expressions
+                    );
                 }
             }
 

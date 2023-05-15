@@ -52,11 +52,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
         /// Keeps track of definitions that cannot be reported without references and which we have
         /// not yet found a reference for.
         /// </summary>
-        private readonly Dictionary<int, VSInternalReferenceItem> _definitionsWithoutReference = new();
+        private readonly Dictionary<int, VSInternalReferenceItem> _definitionsWithoutReference =
+            new();
 
         /// <summary>
         /// Set of the locations we've found references at.  We may end up with multiple references
-        /// being reported for the same location.  For example, this can happen in multi-targetting 
+        /// being reported for the same location.  For example, this can happen in multi-targetting
         /// scenarios when there are symbols in files linked into multiple projects.  Those symbols
         /// may have references that themselves are in linked locations, leading to multiple references
         /// found at different virtual locations that the user considers at the same physical location.
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
             IMetadataAsSourceFileService metadataAsSourceFileService,
             IAsynchronousOperationListener asyncListener,
             IGlobalOptionService globalOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             _progress = progress;
             _workspace = workspace;
@@ -91,17 +93,26 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
             _metadataAsSourceFileService = metadataAsSourceFileService;
             _globalOptions = globalOptions;
             _workQueue = new AsyncBatchingWorkQueue<VSInternalReferenceItem>(
-                TimeSpan.FromMilliseconds(500), ReportReferencesAsync, asyncListener, cancellationToken);
+                TimeSpan.FromMilliseconds(500),
+                ReportReferencesAsync,
+                asyncListener,
+                cancellationToken
+            );
         }
 
-        public override ValueTask<FindUsagesOptions> GetOptionsAsync(string language, CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetFindUsagesOptions(language));
+        public override ValueTask<FindUsagesOptions> GetOptionsAsync(
+            string language,
+            CancellationToken cancellationToken
+        ) => ValueTaskFactory.FromResult(_globalOptions.GetFindUsagesOptions(language));
 
         // After all definitions/references have been found, wait here until all results have been reported.
-        public override async ValueTask OnCompletedAsync(CancellationToken cancellationToken)
-            => await _workQueue.WaitUntilCurrentBatchCompletesAsync().ConfigureAwait(false);
+        public override async ValueTask OnCompletedAsync(CancellationToken cancellationToken) =>
+            await _workQueue.WaitUntilCurrentBatchCompletesAsync().ConfigureAwait(false);
 
-        public override async ValueTask OnDefinitionFoundAsync(DefinitionItem definition, CancellationToken cancellationToken)
+        public override async ValueTask OnDefinitionFoundAsync(
+            DefinitionItem definition,
+            CancellationToken cancellationToken
+        )
         {
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
@@ -116,9 +127,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
 
                 // Creating a new VSReferenceItem for the definition
                 var definitionItem = await GenerateVSReferenceItemAsync(
-                    definitionId: _id, definition.SourceSpans.FirstOrNull(),
-                    definition.DisplayableProperties, definition.GetClassifiedText(),
-                    definition.Tags.GetFirstGlyph(), symbolUsageInfo: null, isWrittenTo: false, cancellationToken).ConfigureAwait(false);
+                        definitionId: _id,
+                        definition.SourceSpans.FirstOrNull(),
+                        definition.DisplayableProperties,
+                        definition.GetClassifiedText(),
+                        definition.Tags.GetFirstGlyph(),
+                        symbolUsageInfo: null,
+                        isWrittenTo: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (definitionItem != null)
                 {
@@ -136,7 +154,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
             }
         }
 
-        public override async ValueTask OnReferenceFoundAsync(SourceReferenceItem reference, CancellationToken cancellationToken)
+        public override async ValueTask OnReferenceFoundAsync(
+            SourceReferenceItem reference,
+            CancellationToken cancellationToken
+        )
         {
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
@@ -164,9 +185,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
 
                 // Creating a new VSReferenceItem for the reference
                 var referenceItem = await GenerateVSReferenceItemAsync(
-                    definitionId, reference.SourceSpan,
-                    reference.AdditionalProperties, definitionText: null,
-                    definitionGlyph: Glyph.None, reference.SymbolUsageInfo, reference.IsWrittenTo, cancellationToken).ConfigureAwait(false);
+                        definitionId,
+                        reference.SourceSpan,
+                        reference.AdditionalProperties,
+                        definitionText: null,
+                        definitionGlyph: Glyph.None,
+                        reference.SymbolUsageInfo,
+                        reference.IsWrittenTo,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (referenceItem != null)
                 {
@@ -183,13 +211,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
             Glyph definitionGlyph,
             SymbolUsageInfo? symbolUsageInfo,
             bool isWrittenTo,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var location = await ComputeLocationAsync(documentSpan, cancellationToken).ConfigureAwait(false);
+            var location = await ComputeLocationAsync(documentSpan, cancellationToken)
+                .ConfigureAwait(false);
 
             // Getting the text for the Text property. If we somehow can't compute the text, that means we're probably dealing with a metadata
             // reference, and those don't show up in the results list in Roslyn FAR anyway.
-            var text = await ComputeTextAsync(definitionId, documentSpan, definitionText, isWrittenTo, cancellationToken).ConfigureAwait(false);
+            var text = await ComputeTextAsync(
+                    definitionId,
+                    documentSpan,
+                    definitionText,
+                    isWrittenTo,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (text == null)
             {
                 return null;
@@ -200,11 +237,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
             var result = new VSInternalReferenceItem
             {
                 DefinitionId = definitionId,
-                DefinitionText = definitionText,    // Only definitions should have a non-null DefinitionText
+                DefinitionText = definitionText, // Only definitions should have a non-null DefinitionText
                 DefinitionIcon = definitionGlyph.GetImageElement(),
                 DisplayPath = location?.Uri.LocalPath,
                 Id = _id,
-                Kind = symbolUsageInfo.HasValue ? ProtocolConversions.SymbolUsageInfoToReferenceKinds(symbolUsageInfo.Value) : Array.Empty<VSInternalReferenceKind>(),
+                Kind = symbolUsageInfo.HasValue
+                    ? ProtocolConversions.SymbolUsageInfoToReferenceKinds(symbolUsageInfo.Value)
+                    : Array.Empty<VSInternalReferenceKind>(),
                 ResolutionStatus = VSInternalResolutionStatusKind.ConfirmedAsReference,
                 Text = text,
             };
@@ -221,26 +260,43 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                 result.ProjectName = documentSpan.Value.Document.Project.Name;
             }
 
-            if (properties.TryGetValue(AbstractReferenceFinder.ContainingMemberInfoPropertyName, out var referenceContainingMember))
+            if (
+                properties.TryGetValue(
+                    AbstractReferenceFinder.ContainingMemberInfoPropertyName,
+                    out var referenceContainingMember
+                )
+            )
                 result.ContainingMember = referenceContainingMember;
 
-            if (properties.TryGetValue(AbstractReferenceFinder.ContainingTypeInfoPropertyName, out var referenceContainingType))
+            if (
+                properties.TryGetValue(
+                    AbstractReferenceFinder.ContainingTypeInfoPropertyName,
+                    out var referenceContainingType
+                )
+            )
                 result.ContainingType = referenceContainingType;
 
             return result;
         }
 
-        private async Task<LSP.Location?> ComputeLocationAsync(DocumentSpan? documentSpan, CancellationToken cancellationToken)
+        private async Task<LSP.Location?> ComputeLocationAsync(
+            DocumentSpan? documentSpan,
+            CancellationToken cancellationToken
+        )
         {
             // If we have no document span, our location may be in metadata.
             if (documentSpan != null)
             {
                 // We do have a document span, so compute location normally.
-                return await ProtocolConversions.DocumentSpanToLocationAsync(documentSpan.Value, cancellationToken).ConfigureAwait(false);
+                return await ProtocolConversions
+                    .DocumentSpanToLocationAsync(documentSpan.Value, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             // If we have no document span, our location may be in metadata or may be a namespace.
-            var symbol = await SymbolFinder.FindSymbolAtPositionAsync(_document, _position, cancellationToken).ConfigureAwait(false);
+            var symbol = await SymbolFinder
+                .FindSymbolAtPositionAsync(_document, _position, cancellationToken)
+                .ConfigureAwait(false);
             if (symbol == null || symbol.Locations.IsEmpty || symbol.Kind == SymbolKind.Namespace)
             {
                 // Either:
@@ -250,8 +306,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
             }
 
             var options = _globalOptions.GetMetadataAsSourceOptions(_document.Project.Services);
-            var declarationFile = await _metadataAsSourceFileService.GetGeneratedFileAsync(
-                _workspace, _document.Project, symbol, signaturesOnly: true, options, cancellationToken).ConfigureAwait(false);
+            var declarationFile = await _metadataAsSourceFileService
+                .GetGeneratedFileAsync(
+                    _workspace,
+                    _document.Project,
+                    symbol,
+                    signaturesOnly: true,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var linePosSpan = declarationFile.IdentifierLocation.GetLineSpan().Span;
 
@@ -280,20 +344,34 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
             DocumentSpan? documentSpan,
             ClassifiedTextElement? definitionText,
             bool isWrittenTo,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // General case
             if (documentSpan != null)
             {
                 var document = documentSpan.Value.Document;
-                var options = await GetOptionsAsync(document.Project.Language, cancellationToken).ConfigureAwait(false);
+                var options = await GetOptionsAsync(document.Project.Language, cancellationToken)
+                    .ConfigureAwait(false);
 
-                var classifiedSpansAndHighlightSpan = await ClassifiedSpansAndHighlightSpanFactory.ClassifyAsync(
-                    documentSpan.Value, options.ClassificationOptions, cancellationToken).ConfigureAwait(false);
+                var classifiedSpansAndHighlightSpan = await ClassifiedSpansAndHighlightSpanFactory
+                    .ClassifyAsync(
+                        documentSpan.Value,
+                        options.ClassificationOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 var classifiedSpans = classifiedSpansAndHighlightSpan.ClassifiedSpans;
                 var docText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                var classifiedTextRuns = GetClassifiedTextRuns(_id, definitionId, documentSpan.Value, isWrittenTo, classifiedSpans, docText);
+                var classifiedTextRuns = GetClassifiedTextRuns(
+                    _id,
+                    definitionId,
+                    documentSpan.Value,
+                    isWrittenTo,
+                    classifiedSpans,
+                    docText
+                );
 
                 return new ClassifiedTextElement(classifiedTextRuns.ToArray());
             }
@@ -313,7 +391,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
             DocumentSpan documentSpan,
             bool isWrittenTo,
             ImmutableArray<ClassifiedSpan> classifiedSpans,
-            SourceText docText)
+            SourceText docText
+        )
         {
             using var _ = ArrayBuilder<ClassifiedTextRun>.GetInstance(out var classifiedTextRuns);
             foreach (var span in classifiedSpans)
@@ -343,14 +422,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.CustomProtocol
                     }
                 }
 
-                classifiedTextRuns.Add(new ClassifiedTextRun(
-                    span.ClassificationType, docText.ToString(span.TextSpan), ClassifiedTextRunStyle.Plain, markerTagType));
+                classifiedTextRuns.Add(
+                    new ClassifiedTextRun(
+                        span.ClassificationType,
+                        docText.ToString(span.TextSpan),
+                        ClassifiedTextRunStyle.Plain,
+                        markerTagType
+                    )
+                );
             }
 
             return classifiedTextRuns.ToArray();
         }
 
-        private ValueTask ReportReferencesAsync(ImmutableSegmentedList<VSInternalReferenceItem> referencesToReport, CancellationToken cancellationToken)
+        private ValueTask ReportReferencesAsync(
+            ImmutableSegmentedList<VSInternalReferenceItem> referencesToReport,
+            CancellationToken cancellationToken
+        )
         {
             // We can report outside of the lock here since _progress is thread-safe.
             _progress.Report(referencesToReport.ToArray());

@@ -6,20 +6,24 @@ using System.Reflection;
 using System.Web.DynamicData;
 using System.Web.DynamicData.Util;
 
-namespace System.Web.DynamicData.ModelProviders {
+namespace System.Web.DynamicData.ModelProviders
+{
     /// <summary>
     /// Base provider class for columns.
     /// Each provider type (e.g. Linq To Sql, Entity Framework, 3rd party) extends this class.
     /// </summary>
-    public abstract class ColumnProvider {
+    public abstract class ColumnProvider
+    {
         private bool? _isReadOnly;
-    
+
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="table">the table this column belongs to</param>
-        protected ColumnProvider(TableProvider table) {
-            if (table == null) {
+        protected ColumnProvider(TableProvider table)
+        {
+            if (table == null)
+            {
                 throw new ArgumentNullException("table");
             }
 
@@ -31,44 +35,72 @@ namespace System.Web.DynamicData.ModelProviders {
         /// </summary>
         /// <returns></returns>
         [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
-        public override string ToString() {
+        public override string ToString()
+        {
             // To help identifying objects in debugger
             return Name ?? base.ToString();
         }
 
-        internal virtual PropertyDescriptor PropertyDescriptor {
-            get {
-                return Table.GetTypeDescriptor().GetProperties().Find(Name, true/*ignoreCase*/);
+        internal virtual PropertyDescriptor PropertyDescriptor
+        {
+            get
+            {
+                return Table
+                    .GetTypeDescriptor()
+                    .GetProperties()
+                    .Find(
+                        Name,
+                        true /*ignoreCase*/
+                    );
             }
         }
 
-        public virtual AttributeCollection Attributes {
-            get {
+        public virtual AttributeCollection Attributes
+        {
+            get
+            {
                 var propertyDescriptor = PropertyDescriptor;
-                var attributes = propertyDescriptor != null ? propertyDescriptor.Attributes : AttributeCollection.Empty;
+                var attributes =
+                    propertyDescriptor != null
+                        ? propertyDescriptor.Attributes
+                        : AttributeCollection.Empty;
                 return AddDefaultAttributes(this, attributes);
             }
         }
 
-        protected static AttributeCollection AddDefaultAttributes(ColumnProvider columnProvider, AttributeCollection attributes) {
+        protected static AttributeCollection AddDefaultAttributes(
+            ColumnProvider columnProvider,
+            AttributeCollection attributes
+        )
+        {
             List<Attribute> extraAttributes = new List<Attribute>();
 
             // If there is no required attribute and the Provider says required, add one
             var requiredAttribute = attributes.FirstOrDefault<RequiredAttribute>();
-            if (requiredAttribute == null && !columnProvider.Nullable) {
+            if (requiredAttribute == null && !columnProvider.Nullable)
+            {
                 extraAttributes.Add(new RequiredAttribute());
             }
 
             // If there is no StringLength attribute and it's a string, add one
             var stringLengthAttribute = attributes.FirstOrDefault<StringLengthAttribute>();
             int maxLength = columnProvider.MaxLength;
-            if (stringLengthAttribute == null && columnProvider.ColumnType == typeof(String) && maxLength > 0) {
+            if (
+                stringLengthAttribute == null
+                && columnProvider.ColumnType == typeof(String)
+                && maxLength > 0
+            )
+            {
                 extraAttributes.Add(new StringLengthAttribute(maxLength));
             }
 
             // If we need any extra attributes, create a new collection
-            if (extraAttributes.Count > 0) {
-                attributes = AttributeCollection.FromExisting(attributes, extraAttributes.ToArray());
+            if (extraAttributes.Count > 0)
+            {
+                attributes = AttributeCollection.FromExisting(
+                    attributes,
+                    extraAttributes.ToArray()
+                );
             }
 
             return attributes;
@@ -92,17 +124,19 @@ namespace System.Web.DynamicData.ModelProviders {
         /// <summary>
         /// Specifies if this column is read only
         /// </summary>
-        public virtual bool IsReadOnly {
-            get {
-                if (_isReadOnly == null) {
+        public virtual bool IsReadOnly
+        {
+            get
+            {
+                if (_isReadOnly == null)
+                {
                     var propertyDescriptor = PropertyDescriptor;
-                    _isReadOnly = propertyDescriptor != null ? propertyDescriptor.IsReadOnly : false;
+                    _isReadOnly =
+                        propertyDescriptor != null ? propertyDescriptor.IsReadOnly : false;
                 }
                 return _isReadOnly.Value;
             }
-            protected set {
-                _isReadOnly = value;
-            }
+            protected set { _isReadOnly = value; }
         }
 
         /// <summary>
@@ -113,7 +147,12 @@ namespace System.Web.DynamicData.ModelProviders {
         /// <summary>
         /// Returns whether the underlying model supports sorting of the table on this column
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sortable", Justification="It's a valid word")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Sortable",
+            Justification = "It's a valid word"
+        )]
         public virtual bool IsSortable { get; protected set; }
 
         /// <summary>

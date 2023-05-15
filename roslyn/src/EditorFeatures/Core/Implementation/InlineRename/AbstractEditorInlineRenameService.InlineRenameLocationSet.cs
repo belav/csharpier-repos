@@ -22,25 +22,40 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
             public IList<InlineRenameLocation> Locations { get; }
 
-            public InlineRenameLocationSet(SymbolInlineRenameInfo renameInfo, RenameLocations renameLocationSet)
+            public InlineRenameLocationSet(
+                SymbolInlineRenameInfo renameInfo,
+                RenameLocations renameLocationSet
+            )
             {
                 _renameInfo = renameInfo;
                 _renameLocationSet = renameLocationSet;
-                this.Locations = renameLocationSet.Locations.Where(RenameLocation.ShouldRename)
-                                                            .Select(ConvertLocation)
-                                                            .ToImmutableArray();
+                this.Locations = renameLocationSet.Locations
+                    .Where(RenameLocation.ShouldRename)
+                    .Select(ConvertLocation)
+                    .ToImmutableArray();
             }
 
             private InlineRenameLocation ConvertLocation(RenameLocation location)
             {
                 return new InlineRenameLocation(
-                    _renameLocationSet.Solution.GetDocument(location.DocumentId), location.Location.SourceSpan);
+                    _renameLocationSet.Solution.GetDocument(location.DocumentId),
+                    location.Location.SourceSpan
+                );
             }
 
-            public async Task<IInlineRenameReplacementInfo> GetReplacementsAsync(string replacementText, OptionSet optionSet, CancellationToken cancellationToken)
+            public async Task<IInlineRenameReplacementInfo> GetReplacementsAsync(
+                string replacementText,
+                OptionSet optionSet,
+                CancellationToken cancellationToken
+            )
             {
-                var conflicts = await _renameLocationSet.ResolveConflictsAsync(
-                    _renameInfo.GetFinalSymbolName(replacementText), nonConflictSymbols: null, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var conflicts = await _renameLocationSet
+                    .ResolveConflictsAsync(
+                        _renameInfo.GetFinalSymbolName(replacementText),
+                        nonConflictSymbols: null,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 Contract.ThrowIfTrue(conflicts.ErrorMessage != null);
 

@@ -23,26 +23,25 @@ namespace System.ServiceModel.Security
         bool isReplay = false;
 
         public MessageSecurityException()
-            : base()
-        {
-        }
+            : base() { }
 
         public MessageSecurityException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public MessageSecurityException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
-        protected MessageSecurityException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
-            : base(info, context)
-        {
-        }
+        protected MessageSecurityException(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        )
+            : base(info, context) { }
 
-        internal MessageSecurityException(string message, Exception innerException, MessageFault fault)
+        internal MessageSecurityException(
+            string message,
+            Exception innerException,
+            MessageFault fault
+        )
             : base(message, innerException)
         {
             this.fault = fault;
@@ -56,10 +55,7 @@ namespace System.ServiceModel.Security
 
         internal bool ReplayDetected
         {
-            get
-            {
-                return this.isReplay;
-            }
+            get { return this.isReplay; }
         }
 
         internal MessageFault Fault

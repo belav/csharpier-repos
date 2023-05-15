@@ -22,13 +22,16 @@ namespace System.Text.Json
             ref ReadStack state,
             JsonSerializerOptions options,
             out bool useExtensionProperty,
-            bool createExtensionProperty = true)
+            bool createExtensionProperty = true
+        )
         {
 #if DEBUG
             if (state.Current.JsonTypeInfo.Kind != JsonTypeInfoKind.Object)
             {
                 string objTypeName = obj?.GetType().FullName ?? "<null>";
-                Debug.Fail($"obj.GetType() => {objTypeName}; {state.Current.JsonTypeInfo.GetPropertyDebugInfo(unescapedPropertyName)}");
+                Debug.Fail(
+                    $"obj.GetType() => {objTypeName}; {state.Current.JsonTypeInfo.GetPropertyDebugInfo(unescapedPropertyName)}"
+                );
             }
 #endif
 
@@ -37,7 +40,8 @@ namespace System.Text.Json
             JsonPropertyInfo jsonPropertyInfo = state.Current.JsonTypeInfo.GetProperty(
                 unescapedPropertyName,
                 ref state.Current,
-                out byte[] utf8PropertyName);
+                out byte[] utf8PropertyName
+            );
 
             // Increment PropertyIndex so GetProperty() checks the next property first when called again.
             state.Current.PropertyIndex++;
@@ -48,10 +52,19 @@ namespace System.Text.Json
             // Determine if we should use the extension property.
             if (jsonPropertyInfo == JsonPropertyInfo.s_missingProperty)
             {
-                JsonPropertyInfo? dataExtProperty = state.Current.JsonTypeInfo.ExtensionDataProperty;
-                if (dataExtProperty != null && dataExtProperty.HasGetter && dataExtProperty.HasSetter)
+                JsonPropertyInfo? dataExtProperty = state
+                    .Current
+                    .JsonTypeInfo
+                    .ExtensionDataProperty;
+                if (
+                    dataExtProperty != null
+                    && dataExtProperty.HasGetter
+                    && dataExtProperty.HasSetter
+                )
                 {
-                    state.Current.JsonPropertyNameAsString = JsonHelpers.Utf8GetString(unescapedPropertyName);
+                    state.Current.JsonPropertyNameAsString = JsonHelpers.Utf8GetString(
+                        unescapedPropertyName
+                    );
 
                     if (createExtensionProperty)
                     {
@@ -72,7 +85,8 @@ namespace System.Text.Json
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static ReadOnlySpan<byte> GetPropertyName(
             scoped ref ReadStack state,
-            ref Utf8JsonReader reader)
+            ref Utf8JsonReader reader
+        )
         {
             ReadOnlySpan<byte> unescapedPropertyName;
             ReadOnlySpan<byte> propertyName = reader.GetSpan();
@@ -88,9 +102,18 @@ namespace System.Text.Json
 
             if (state.Current.CanContainMetadata)
             {
-                if (IsMetadataPropertyName(propertyName, state.Current.BaseJsonTypeInfo.PolymorphicTypeResolver))
+                if (
+                    IsMetadataPropertyName(
+                        propertyName,
+                        state.Current.BaseJsonTypeInfo.PolymorphicTypeResolver
+                    )
+                )
                 {
-                    ThrowHelper.ThrowUnexpectedMetadataException(propertyName, ref reader, ref state);
+                    ThrowHelper.ThrowUnexpectedMetadataException(
+                        propertyName,
+                        ref reader,
+                        ref state
+                    );
                 }
             }
 
@@ -100,7 +123,8 @@ namespace System.Text.Json
         internal static void CreateExtensionDataProperty(
             object obj,
             JsonPropertyInfo jsonPropertyInfo,
-            JsonSerializerOptions options)
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(jsonPropertyInfo != null);
 
@@ -109,19 +133,24 @@ namespace System.Text.Json
             {
                 // Create the appropriate dictionary type. We already verified the types.
 #if DEBUG
-                Type underlyingIDictionaryType = jsonPropertyInfo.PropertyType.GetCompatibleGenericInterface(typeof(IDictionary<,>))!;
+                Type underlyingIDictionaryType =
+                    jsonPropertyInfo.PropertyType.GetCompatibleGenericInterface(
+                        typeof(IDictionary<,>)
+                    )!;
                 Type[] genericArgs = underlyingIDictionaryType.GetGenericArguments();
 
                 Debug.Assert(underlyingIDictionaryType.IsGenericType);
                 Debug.Assert(genericArgs.Length == 2);
                 Debug.Assert(genericArgs[0].UnderlyingSystemType == typeof(string));
                 Debug.Assert(
-                    genericArgs[1].UnderlyingSystemType == JsonTypeInfo.ObjectType ||
-                    genericArgs[1].UnderlyingSystemType == typeof(JsonElement) ||
-                    genericArgs[1].UnderlyingSystemType == typeof(Nodes.JsonNode));
+                    genericArgs[1].UnderlyingSystemType == JsonTypeInfo.ObjectType
+                        || genericArgs[1].UnderlyingSystemType == typeof(JsonElement)
+                        || genericArgs[1].UnderlyingSystemType == typeof(Nodes.JsonNode)
+                );
 #endif
 
-                Func<object>? createObjectForExtensionDataProp = jsonPropertyInfo.JsonTypeInfo.CreateObject
+                Func<object>? createObjectForExtensionDataProp =
+                    jsonPropertyInfo.JsonTypeInfo.CreateObject
                     ?? jsonPropertyInfo.JsonTypeInfo.CreateObjectForExtensionDataProperty;
 
                 if (createObjectForExtensionDataProp == null)
@@ -133,7 +162,9 @@ namespace System.Text.Json
                     }
                     else
                     {
-                        ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(jsonPropertyInfo.PropertyType);
+                        ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(
+                            jsonPropertyInfo.PropertyType
+                        );
                     }
                 }
 

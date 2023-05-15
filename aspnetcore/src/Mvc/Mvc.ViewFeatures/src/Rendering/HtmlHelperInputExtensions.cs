@@ -60,7 +60,8 @@ public static class HtmlHelperInputExtensions
     public static IHtmlContent CheckBox(
         this IHtmlHelper htmlHelper,
         string expression,
-        bool isChecked)
+        bool isChecked
+    )
     {
         if (htmlHelper == null)
         {
@@ -96,7 +97,8 @@ public static class HtmlHelperInputExtensions
     public static IHtmlContent CheckBox(
         this IHtmlHelper htmlHelper,
         string expression,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -124,7 +126,8 @@ public static class HtmlHelperInputExtensions
     /// </remarks>
     public static IHtmlContent CheckBoxFor<TModel>(
         this IHtmlHelper<TModel> htmlHelper,
-        Expression<Func<TModel, bool>> expression)
+        Expression<Func<TModel, bool>> expression
+    )
     {
         if (htmlHelper == null)
         {
@@ -183,10 +186,7 @@ public static class HtmlHelperInputExtensions
     /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
     /// attribute.
     /// </remarks>
-    public static IHtmlContent Hidden(
-        this IHtmlHelper htmlHelper,
-        string expression,
-        object value)
+    public static IHtmlContent Hidden(this IHtmlHelper htmlHelper, string expression, object value)
     {
         if (htmlHelper == null)
         {
@@ -215,7 +215,8 @@ public static class HtmlHelperInputExtensions
     /// </remarks>
     public static IHtmlContent HiddenFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
-        Expression<Func<TModel, TResult>> expression)
+        Expression<Func<TModel, TResult>> expression
+    )
     {
         if (htmlHelper == null)
         {
@@ -268,7 +269,8 @@ public static class HtmlHelperInputExtensions
     public static IHtmlContent Password(
         this IHtmlHelper htmlHelper,
         string expression,
-        object value)
+        object value
+    )
     {
         if (htmlHelper == null)
         {
@@ -294,7 +296,8 @@ public static class HtmlHelperInputExtensions
     /// </remarks>
     public static IHtmlContent PasswordFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
-        Expression<Func<TModel, TResult>> expression)
+        Expression<Func<TModel, TResult>> expression
+    )
     {
         if (htmlHelper == null)
         {
@@ -332,7 +335,8 @@ public static class HtmlHelperInputExtensions
     public static IHtmlContent RadioButton(
         this IHtmlHelper htmlHelper,
         string expression,
-        object value)
+        object value
+    )
     {
         if (htmlHelper == null)
         {
@@ -376,14 +380,20 @@ public static class HtmlHelperInputExtensions
         this IHtmlHelper htmlHelper,
         string expression,
         object value,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
             throw new ArgumentNullException(nameof(htmlHelper));
         }
 
-        return htmlHelper.RadioButton(expression, value, isChecked: null, htmlAttributes: htmlAttributes);
+        return htmlHelper.RadioButton(
+            expression,
+            value,
+            isChecked: null,
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -418,7 +428,8 @@ public static class HtmlHelperInputExtensions
         this IHtmlHelper htmlHelper,
         string expression,
         object value,
-        bool isChecked)
+        bool isChecked
+    )
     {
         if (htmlHelper == null)
         {
@@ -452,7 +463,8 @@ public static class HtmlHelperInputExtensions
     public static IHtmlContent RadioButtonFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
-        object value)
+        object value
+    )
     {
         if (htmlHelper == null)
         {
@@ -516,10 +528,7 @@ public static class HtmlHelperInputExtensions
     /// &lt;input&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
     /// attribute.
     /// </remarks>
-    public static IHtmlContent TextBox(
-        this IHtmlHelper htmlHelper,
-        string expression,
-        object value)
+    public static IHtmlContent TextBox(this IHtmlHelper htmlHelper, string expression, object value)
     {
         if (htmlHelper == null)
         {
@@ -555,7 +564,8 @@ public static class HtmlHelperInputExtensions
         this IHtmlHelper htmlHelper,
         string expression,
         object value,
-        string format)
+        string format
+    )
     {
         if (htmlHelper == null)
         {
@@ -593,7 +603,8 @@ public static class HtmlHelperInputExtensions
         this IHtmlHelper htmlHelper,
         string expression,
         object value,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -622,7 +633,8 @@ public static class HtmlHelperInputExtensions
     /// </remarks>
     public static IHtmlContent TextBoxFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
-        Expression<Func<TModel, TResult>> expression)
+        Expression<Func<TModel, TResult>> expression
+    )
     {
         if (htmlHelper == null)
         {
@@ -661,7 +673,8 @@ public static class HtmlHelperInputExtensions
     public static IHtmlContent TextBoxFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
-        string format)
+        string format
+    )
     {
         if (htmlHelper == null)
         {
@@ -702,7 +715,8 @@ public static class HtmlHelperInputExtensions
     public static IHtmlContent TextBoxFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -733,16 +747,20 @@ public static class HtmlHelperInputExtensions
     /// &lt;textarea&gt; element's "name" attribute. Sanitizes <paramref name="expression"/> to set element's "id"
     /// attribute.
     /// </remarks>
-    public static IHtmlContent TextArea(
-        this IHtmlHelper htmlHelper,
-        string expression)
+    public static IHtmlContent TextArea(this IHtmlHelper htmlHelper, string expression)
     {
         if (htmlHelper == null)
         {
             throw new ArgumentNullException(nameof(htmlHelper));
         }
 
-        return htmlHelper.TextArea(expression, value: null, rows: 0, columns: 0, htmlAttributes: null);
+        return htmlHelper.TextArea(
+            expression,
+            value: null,
+            rows: 0,
+            columns: 0,
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -769,14 +787,21 @@ public static class HtmlHelperInputExtensions
     public static IHtmlContent TextArea(
         this IHtmlHelper htmlHelper,
         string expression,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
             throw new ArgumentNullException(nameof(htmlHelper));
         }
 
-        return htmlHelper.TextArea(expression, value: null, rows: 0, columns: 0, htmlAttributes: htmlAttributes);
+        return htmlHelper.TextArea(
+            expression,
+            value: null,
+            rows: 0,
+            columns: 0,
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -800,7 +825,8 @@ public static class HtmlHelperInputExtensions
     public static IHtmlContent TextArea(
         this IHtmlHelper htmlHelper,
         string expression,
-        string value)
+        string value
+    )
     {
         if (htmlHelper == null)
         {
@@ -837,14 +863,21 @@ public static class HtmlHelperInputExtensions
         this IHtmlHelper htmlHelper,
         string expression,
         string value,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
             throw new ArgumentNullException(nameof(htmlHelper));
         }
 
-        return htmlHelper.TextArea(expression, value, rows: 0, columns: 0, htmlAttributes: htmlAttributes);
+        return htmlHelper.TextArea(
+            expression,
+            value,
+            rows: 0,
+            columns: 0,
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -866,7 +899,8 @@ public static class HtmlHelperInputExtensions
     /// </remarks>
     public static IHtmlContent TextAreaFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
-        Expression<Func<TModel, TResult>> expression)
+        Expression<Func<TModel, TResult>> expression
+    )
     {
         if (htmlHelper == null)
         {
@@ -906,7 +940,8 @@ public static class HtmlHelperInputExtensions
     public static IHtmlContent TextAreaFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
         Expression<Func<TModel, TResult>> expression,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -918,6 +953,11 @@ public static class HtmlHelperInputExtensions
             throw new ArgumentNullException(nameof(expression));
         }
 
-        return htmlHelper.TextAreaFor(expression, rows: 0, columns: 0, htmlAttributes: htmlAttributes);
+        return htmlHelper.TextAreaFor(
+            expression,
+            rows: 0,
+            columns: 0,
+            htmlAttributes: htmlAttributes
+        );
     }
 }

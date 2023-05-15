@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     using System;
     using System.Configuration;
     using System.Collections;
@@ -69,27 +69,33 @@ namespace System.Web.Configuration {
         </webParts>
 
 */
-    public sealed class WebPartsSection : ConfigurationSection {
+    public sealed class WebPartsSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
 
-        private static readonly ConfigurationProperty _propEnableExport =
-            new ConfigurationProperty("enableExport",
-                                        typeof(bool),
-                                        false,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propEnableExport = new ConfigurationProperty(
+            "enableExport",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
 
         private static readonly ConfigurationProperty _propPersonalization =
-            new ConfigurationProperty("personalization",
-                                        typeof(WebPartsPersonalization),
-                                        null,
-                                        ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propTransformers =
-            new ConfigurationProperty("transformers",
-                                        typeof(TransformerInfoCollection),
-                                        null,
-                                        ConfigurationPropertyOptions.IsDefaultCollection);
+            new ConfigurationProperty(
+                "personalization",
+                typeof(WebPartsPersonalization),
+                null,
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty _propTransformers = new ConfigurationProperty(
+            "transformers",
+            typeof(TransformerInfoCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
 
-        static WebPartsSection() {
+        static WebPartsSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
 
@@ -98,8 +104,8 @@ namespace System.Web.Configuration {
             _properties.Add(_propTransformers);
         }
 
-        public WebPartsSection() {
-        }
+        public WebPartsSection() { }
+
         /*
                 protected override void InitializeDefault()
                 {
@@ -118,37 +124,32 @@ namespace System.Web.Configuration {
         */
 
         [ConfigurationProperty("enableExport", DefaultValue = false)]
-        public bool EnableExport {
-            get {
-                return (bool)base[_propEnableExport];
-            }
-            set {
-                base[_propEnableExport] = value;
-            }
+        public bool EnableExport
+        {
+            get { return (bool)base[_propEnableExport]; }
+            set { base[_propEnableExport] = value; }
         }
 
         [ConfigurationProperty("personalization")]
-        public WebPartsPersonalization Personalization {
-            get {
-                return (WebPartsPersonalization)base[_propPersonalization];
-            }
+        public WebPartsPersonalization Personalization
+        {
+            get { return (WebPartsPersonalization)base[_propPersonalization]; }
         }
 
         /// <internalonly />
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("transformers")]
-        public TransformerInfoCollection Transformers {
-            get {
-                return (TransformerInfoCollection)base[_propTransformers];
-            }
+        public TransformerInfoCollection Transformers
+        {
+            get { return (TransformerInfoCollection)base[_propTransformers]; }
         }
 
-        protected override object GetRuntimeObject() {
+        protected override object GetRuntimeObject()
+        {
             Personalization.ValidateAuthorization();
             return base.GetRuntimeObject();
         }

@@ -10,13 +10,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
 {
     internal static class DebuggerIntelliSenseHelpers
     {
-        public static ITrackingSpan CreateTrackingSpanFromIndexToEnd(this ITextSnapshot textSnapshot, int index, SpanTrackingMode trackingMode)
-            => textSnapshot.CreateTrackingSpan(Span.FromBounds(index, textSnapshot.Length), trackingMode);
+        public static ITrackingSpan CreateTrackingSpanFromIndexToEnd(
+            this ITextSnapshot textSnapshot,
+            int index,
+            SpanTrackingMode trackingMode
+        ) =>
+            textSnapshot.CreateTrackingSpan(
+                Span.FromBounds(index, textSnapshot.Length),
+                trackingMode
+            );
 
-        public static ITrackingSpan CreateTrackingSpanFromStartToIndex(this ITextSnapshot textSnapshot, int index, SpanTrackingMode trackingMode)
-            => textSnapshot.CreateTrackingSpan(Span.FromBounds(0, index), trackingMode);
+        public static ITrackingSpan CreateTrackingSpanFromStartToIndex(
+            this ITextSnapshot textSnapshot,
+            int index,
+            SpanTrackingMode trackingMode
+        ) => textSnapshot.CreateTrackingSpan(Span.FromBounds(0, index), trackingMode);
 
-        public static ITrackingSpan CreateFullTrackingSpan(this ITextSnapshot textSnapshot, SpanTrackingMode trackingMode)
-            => textSnapshot.CreateTrackingSpan(Span.FromBounds(0, textSnapshot.Length), trackingMode);
+        public static ITrackingSpan CreateFullTrackingSpan(
+            this ITextSnapshot textSnapshot,
+            SpanTrackingMode trackingMode
+        ) => textSnapshot.CreateTrackingSpan(Span.FromBounds(0, textSnapshot.Length), trackingMode);
     }
 }

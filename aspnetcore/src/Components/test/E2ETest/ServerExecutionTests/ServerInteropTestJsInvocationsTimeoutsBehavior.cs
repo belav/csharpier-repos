@@ -11,15 +11,15 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-public class ServerInteropTestJsInvocationsTimeoutsBehavior : ServerTestBase<BasicTestAppServerSiteFixture<ServerStartup>>
+public class ServerInteropTestJsInvocationsTimeoutsBehavior
+    : ServerTestBase<BasicTestAppServerSiteFixture<ServerStartup>>
 {
     public ServerInteropTestJsInvocationsTimeoutsBehavior(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {

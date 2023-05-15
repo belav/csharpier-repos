@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,35 +36,38 @@ using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class SecureConversationServiceCredential
-	{
-		Collection<Type> ctx_claim_types = new Collection<Type> (new Type [] {
-			typeof (SamlAuthorizationDecisionClaimResource),
-			typeof (SamlAuthenticationClaimResource),
-			typeof (SamlAccessDecision),
-			typeof (SamlAuthorityBinding),
-			typeof (SamlNameIdentifierClaimResource)});
-		SecurityStateEncoder encoder =
-			new DataProtectionSecurityStateEncoder ();
+    public sealed class SecureConversationServiceCredential
+    {
+        Collection<Type> ctx_claim_types = new Collection<Type>(
+            new Type[]
+            {
+                typeof(SamlAuthorizationDecisionClaimResource),
+                typeof(SamlAuthenticationClaimResource),
+                typeof(SamlAccessDecision),
+                typeof(SamlAuthorityBinding),
+                typeof(SamlNameIdentifierClaimResource)
+            }
+        );
+        SecurityStateEncoder encoder = new DataProtectionSecurityStateEncoder();
 
-		internal SecureConversationServiceCredential ()
-		{
-		}
+        internal SecureConversationServiceCredential() { }
 
-		internal SecureConversationServiceCredential Clone ()
-		{
-			var ret = (SecureConversationServiceCredential) MemberwiseClone ();
-			ret.ctx_claim_types = new Collection<Type> (ctx_claim_types);
-			return ret;
-		}
+        internal SecureConversationServiceCredential Clone()
+        {
+            var ret = (SecureConversationServiceCredential)MemberwiseClone();
+            ret.ctx_claim_types = new Collection<Type>(ctx_claim_types);
+            return ret;
+        }
 
-		public Collection<Type> SecurityContextClaimTypes {
-			get { return ctx_claim_types; }
-		}
+        public Collection<Type> SecurityContextClaimTypes
+        {
+            get { return ctx_claim_types; }
+        }
 
-		public SecurityStateEncoder SecurityStateEncoder {
-			get { return encoder; }
-			set { encoder = value; }
-		}
-	}
+        public SecurityStateEncoder SecurityStateEncoder
+        {
+            get { return encoder; }
+            set { encoder = value; }
+        }
+    }
 }

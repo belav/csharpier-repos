@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -32,11 +32,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (context == null)
                 throw Error.ArgumentNull(nameof(context));
 
-            clrType         = clrType.NonNullable();
-            this.clrType    = clrType;
-            this.xsiType    = context.GetDefaultXsiType(clrType);
+            clrType = clrType.NonNullable();
+            this.clrType = clrType;
+            this.xsiType = context.GetDefaultXsiType(clrType);
             this.serializer = XmlTypeSerializer.For(clrType);
-            this.context    = context;
+            this.context = context;
         }
 
         public Type ClrType
@@ -130,23 +130,35 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var cursor = IsCollection
                 ? SelectCollectionNode(parentNode, false)
-                : SelectPropertyNode  (parentNode, false);
+                : SelectPropertyNode(parentNode, false);
 
             return cursor.MoveNext();
         }
 
-        public virtual object GetPropertyValue(IXmlNode parentNode, IDictionaryAdapter parentObject, XmlReferenceManager references, bool orStub)
+        public virtual object GetPropertyValue(
+            IXmlNode parentNode,
+            IDictionaryAdapter parentObject,
+            XmlReferenceManager references,
+            bool orStub
+        )
         {
-            if (orStub) orStub &= serializer.CanGetStub;
+            if (orStub)
+                orStub &= serializer.CanGetStub;
 
             var cursor = IsCollection
                 ? SelectCollectionNode(parentNode, orStub)
-                : SelectPropertyNode  (parentNode, orStub);
+                : SelectPropertyNode(parentNode, orStub);
 
             return GetValue(cursor, parentObject, references, cursor.MoveNext(), orStub);
         }
 
-        public object GetValue(IXmlNode node, IDictionaryAdapter parentObject, XmlReferenceManager references, bool nodeExists, bool orStub)
+        public object GetValue(
+            IXmlNode node,
+            IDictionaryAdapter parentObject,
+            XmlReferenceManager references,
+            bool nodeExists,
+            bool orStub
+        )
         {
             object value;
 
@@ -168,7 +180,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return value;
         }
 
-        private object GetValueCore(IXmlNode node, IDictionaryAdapter parentObject, bool nodeExists, bool orStub)
+        private object GetValueCore(
+            IXmlNode node,
+            IDictionaryAdapter parentObject,
+            bool nodeExists,
+            bool orStub
+        )
         {
             if (nodeExists)
                 if (!node.IsNil)
@@ -176,31 +193,38 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 else if (IsNillable)
                     return null;
 
-            return orStub
-                ? serializer.GetStub(node, parentObject, this)
-                : null;
+            return orStub ? serializer.GetStub(node, parentObject, this) : null;
         }
 
-        public virtual void SetPropertyValue(IXmlNode parentNode, IDictionaryAdapter parentObject, XmlReferenceManager references,
-            object oldValue, ref object value)
+        public virtual void SetPropertyValue(
+            IXmlNode parentNode,
+            IDictionaryAdapter parentObject,
+            XmlReferenceManager references,
+            object oldValue,
+            ref object value
+        )
         {
             var cursor = IsCollection
                 ? SelectCollectionNode(parentNode, true)
-                : SelectPropertyNode  (parentNode, true);
-                
+                : SelectPropertyNode(parentNode, true);
+
             SetValue(cursor, parentObject, references, cursor.MoveNext(), oldValue, ref value);
         }
 
-        public virtual void SetValue(IXmlCursor cursor, IDictionaryAdapter parentObject, XmlReferenceManager references,
-            bool hasCurrent, object oldValue, ref object newValue)
+        public virtual void SetValue(
+            IXmlCursor cursor,
+            IDictionaryAdapter parentObject,
+            XmlReferenceManager references,
+            bool hasCurrent,
+            object oldValue,
+            ref object newValue
+        )
         {
-            var hasValue    = null != newValue;
-            var isNillable  = this.IsNillable;
+            var hasValue = null != newValue;
+            var isNillable = this.IsNillable;
             var isReference = this.IsReference;
 
-            var clrType = hasValue
-                ? newValue.GetComponentType()
-                : this.clrType;
+            var clrType = hasValue ? newValue.GetComponentType() : this.clrType;
 
             if (hasValue || isNillable)
             {
@@ -227,7 +251,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
             else if (isNillable)
                 cursor.IsNil = true;
             else
-                { cursor.Remove(); cursor.RemoveAllNext(); }
+            {
+                cursor.Remove();
+                cursor.RemoveAllNext();
+            }
 
             if (isReference)
                 references.OnAssignedValue(cursor, givenValue, newValue, token);
@@ -241,10 +268,16 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 cursor.MoveNext();
                 cursor.Create(ClrType);
             }
-            else cursor.Coerce(clrType);
+            else
+                cursor.Coerce(clrType);
         }
 
-        public void GetCollectionItems(IXmlNode parentNode, IDictionaryAdapter parentObject, XmlReferenceManager references, IList values)
+        public void GetCollectionItems(
+            IXmlNode parentNode,
+            IDictionaryAdapter parentObject,
+            XmlReferenceManager references,
+            IList values
+        )
         {
             var cursor = SelectCollectionItems(parentNode, false);
 
@@ -272,7 +305,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
             }
         }
 
-        protected void RemoveCollectionItems(IXmlNode parentNode, XmlReferenceManager references, object value)
+        protected void RemoveCollectionItems(
+            IXmlNode parentNode,
+            XmlReferenceManager references,
+            object value
+        )
         {
             var collection = value as ICollectionProjection;
             if (collection != null)
@@ -281,9 +318,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 return;
             }
 
-            var itemType    = clrType.GetCollectionItemType();
-            var accessor    = GetCollectionAccessor(itemType);
-            var cursor      = accessor.SelectCollectionItems(parentNode, true);
+            var itemType = clrType.GetCollectionItemType();
+            var accessor = GetCollectionAccessor(itemType);
+            var cursor = accessor.SelectCollectionItems(parentNode, true);
             var isReference = IsReference;
 
             var items = value as IEnumerable;
@@ -310,7 +347,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         protected IXmlCollectionAccessor GetDefaultCollectionAccessor(Type itemType)
         {
             var accessor = new XmlDefaultBehaviorAccessor(itemType, Context);
-            accessor.ConfigureNillable (true);
+            accessor.ConfigureNillable(true);
             accessor.ConfigureReference(IsReference);
             return accessor;
         }
@@ -333,13 +370,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
         [Flags]
         protected enum States
         {
-            Nillable               = 0x01, // Set a null value as xsi:nil='true'
-            Volatile               = 0x02, // Always get value from XML store; don't cache it
-            Reference              = 0x04, // Participate in reference tracking
-            ConfiguredContext      = 0x08, // Have created our own IXmlContext instance
-            ConfiguredLocalName    = 0x10, // The local name    has been configured
+            Nillable = 0x01, // Set a null value as xsi:nil='true'
+            Volatile = 0x02, // Always get value from XML store; don't cache it
+            Reference = 0x04, // Participate in reference tracking
+            ConfiguredContext = 0x08, // Have created our own IXmlContext instance
+            ConfiguredLocalName = 0x10, // The local name    has been configured
             ConfiguredNamespaceUri = 0x20, // The namespace URI has been configured
-            ConfiguredKnownTypes   = 0x40, // Known types have been configured from attributes
+            ConfiguredKnownTypes = 0x40, // Known types have been configured from attributes
         }
     }
 }

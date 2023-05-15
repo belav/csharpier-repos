@@ -23,20 +23,38 @@ namespace Microsoft.CodeAnalysis.Snippets
 {
     internal abstract class AbstractForEachLoopSnippetProvider : AbstractStatementSnippetProvider
     {
-        protected abstract Task<SyntaxNode> CreateForEachLoopStatementSyntaxAsync(Document document, int position, CancellationToken cancellationToken);
+        protected abstract Task<SyntaxNode> CreateForEachLoopStatementSyntaxAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
 
         public override string Identifier => "foreach";
 
         public override string Description => FeaturesResources.foreach_loop;
 
-        protected override async Task<ImmutableArray<TextChange>> GenerateSnippetTextChangesAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<ImmutableArray<TextChange>> GenerateSnippetTextChangesAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var forEachStatementSyntax = await CreateForEachLoopStatementSyntaxAsync(document, position, cancellationToken).ConfigureAwait(false);
-            var snippetTextChange = new TextChange(TextSpan.FromBounds(position, position), forEachStatementSyntax.NormalizeWhitespace().ToFullString());
+            var forEachStatementSyntax = await CreateForEachLoopStatementSyntaxAsync(
+                    document,
+                    position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var snippetTextChange = new TextChange(
+                TextSpan.FromBounds(position, position),
+                forEachStatementSyntax.NormalizeWhitespace().ToFullString()
+            );
             return ImmutableArray.Create(snippetTextChange);
         }
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts)
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        )
         {
             return syntaxFacts.IsForEachStatement;
         }

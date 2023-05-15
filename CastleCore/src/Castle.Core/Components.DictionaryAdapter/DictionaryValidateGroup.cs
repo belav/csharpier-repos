@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,10 +31,14 @@ namespace Castle.Components.DictionaryAdapter
             this.groups = groups;
             this.adapter = adapter;
 
-            propertyNames = (from property in this.adapter.This.Properties.Values
-                      from groupings in property.Annotations.OfType<GroupAttribute>()
-                      where this.groups.Intersect(groupings.Group).Any() 
-                      select property.PropertyName).Distinct().ToArray();
+            propertyNames = (
+                from property in this.adapter.This.Properties.Values
+                from groupings in property.Annotations.OfType<GroupAttribute>()
+                where this.groups.Intersect(groupings.Group).Any()
+                select property.PropertyName
+            )
+                .Distinct()
+                .ToArray();
 
             if (propertyNames.Length > 0 && adapter.CanNotify)
             {
@@ -64,9 +68,13 @@ namespace Castle.Components.DictionaryAdapter
         {
             get
             {
-                return string.Join(Environment.NewLine,
-                    propertyNames.Select(propertyName => adapter[propertyName])
-                    .Where(errors => !string.IsNullOrEmpty(errors)).ToArray());
+                return string.Join(
+                    Environment.NewLine,
+                    propertyNames
+                        .Select(propertyName => adapter[propertyName])
+                        .Where(errors => !string.IsNullOrEmpty(errors))
+                        .ToArray()
+                );
             }
         }
 

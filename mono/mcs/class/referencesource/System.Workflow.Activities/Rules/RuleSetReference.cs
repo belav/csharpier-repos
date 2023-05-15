@@ -22,7 +22,9 @@ namespace System.Workflow.Activities.Rules
     [Editor(typeof(RuleSetNameEditor), typeof(UITypeEditor))]
     [TypeConverter(typeof(RuleSetReferenceTypeConverter))]
     [Browsable(true)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     sealed public class RuleSetReference : DependencyObject
     {
         #region members and constructors
@@ -30,9 +32,7 @@ namespace System.Workflow.Activities.Rules
         private bool _runtimeInitialized;
         private string _name;
 
-        public RuleSetReference()
-        {
-        }
+        public RuleSetReference() { }
 
         public RuleSetReference(string ruleSetName)
         {
@@ -44,14 +44,8 @@ namespace System.Workflow.Activities.Rules
 
         public string RuleSetName
         {
-            get
-            {
-                return this._name;
-            }
-            set
-            {
-                this._name = value;
-            }
+            get { return this._name; }
+            set { this._name = value; }
         }
 
         #endregion
@@ -99,19 +93,33 @@ namespace System.Workflow.Activities.Rules
             RuleSetReference ruleSetReference = obj as RuleSetReference;
             if (ruleSetReference == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.UnexpectedArgumentType, typeof(RuleSetReference).FullName, "obj");
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnexpectedArgumentType,
+                    typeof(RuleSetReference).FullName,
+                    "obj"
+                );
                 throw new ArgumentException(message, "obj");
             }
             Activity activity = manager.Context[typeof(Activity)] as Activity;
             if (activity == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.ContextStackItemMissing, typeof(Activity).Name);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ContextStackItemMissing,
+                    typeof(Activity).Name
+                );
                 throw new InvalidOperationException(message);
             }
-            PropertyValidationContext validationContext = manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
+            PropertyValidationContext validationContext =
+                manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
             if (validationContext == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.ContextStackItemMissing, typeof(PropertyValidationContext).Name);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ContextStackItemMissing,
+                    typeof(PropertyValidationContext).Name
+                );
                 throw new InvalidOperationException(message);
             }
             if (!string.IsNullOrEmpty(ruleSetReference.RuleSetName))
@@ -132,39 +140,66 @@ namespace System.Workflow.Activities.Rules
                 if (rules != null)
                     ruleSetCollection = rules.RuleSets;
 
-                if (ruleSetCollection == null || !ruleSetCollection.Contains(ruleSetReference.RuleSetName))
+                if (
+                    ruleSetCollection == null
+                    || !ruleSetCollection.Contains(ruleSetReference.RuleSetName)
+                )
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.RuleSetNotFound, ruleSetReference.RuleSetName);
-                    ValidationError validationError = new ValidationError(message, ErrorNumbers.Error_RuleSetNotFound);
-                    validationError.PropertyName = GetFullPropertyName(manager) + "." + "RuleSetName";
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.RuleSetNotFound,
+                        ruleSetReference.RuleSetName
+                    );
+                    ValidationError validationError = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_RuleSetNotFound
+                    );
+                    validationError.PropertyName =
+                        GetFullPropertyName(manager) + "." + "RuleSetName";
                     validationErrors.Add(validationError);
                 }
                 else
                 {
                     RuleSet actualRuleSet = ruleSetCollection[ruleSetReference.RuleSetName];
 
-                    ITypeProvider typeProvider = (ITypeProvider)manager.GetService(typeof(ITypeProvider));
+                    ITypeProvider typeProvider = (ITypeProvider)
+                        manager.GetService(typeof(ITypeProvider));
 
-                    IDisposable localContextScope = (WorkflowCompilationContext.Current == null ? WorkflowCompilationContext.CreateScope(manager) : null);
+                    IDisposable localContextScope = (
+                        WorkflowCompilationContext.Current == null
+                            ? WorkflowCompilationContext.CreateScope(manager)
+                            : null
+                    );
                     try
                     {
-
-                        RuleValidation validation = new RuleValidation(activity, typeProvider, WorkflowCompilationContext.Current.CheckTypes);
+                        RuleValidation validation = new RuleValidation(
+                            activity,
+                            typeProvider,
+                            WorkflowCompilationContext.Current.CheckTypes
+                        );
                         actualRuleSet.Validate(validation);
                         ValidationErrorCollection actualRuleSetErrors = validation.Errors;
 
                         if (actualRuleSetErrors.Count > 0)
                         {
                             string expressionPropertyName = GetFullPropertyName(manager);
-                            string genericErrorMsg = string.Format(CultureInfo.CurrentCulture, Messages.InvalidRuleSetExpression, expressionPropertyName);
+                            string genericErrorMsg = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.InvalidRuleSetExpression,
+                                expressionPropertyName
+                            );
                             int errorNumber = ErrorNumbers.Error_InvalidRuleSetExpression;
 
                             if (activity.Site != null)
                             {
                                 foreach (ValidationError actualError in actualRuleSetErrors)
                                 {
-                                    ValidationError validationError = new ValidationError(actualError.ErrorText, errorNumber);
-                                    validationError.PropertyName = expressionPropertyName + "." + "RuleSet Definition";
+                                    ValidationError validationError = new ValidationError(
+                                        actualError.ErrorText,
+                                        errorNumber
+                                    );
+                                    validationError.PropertyName =
+                                        expressionPropertyName + "." + "RuleSet Definition";
                                     validationErrors.Add(validationError);
                                 }
                             }
@@ -172,24 +207,16 @@ namespace System.Workflow.Activities.Rules
                             {
                                 foreach (ValidationError actualError in actualRuleSetErrors)
                                 {
-                                    ValidationError validationError = new ValidationError(genericErrorMsg + " " + actualError.ErrorText, errorNumber);
+                                    ValidationError validationError = new ValidationError(
+                                        genericErrorMsg + " " + actualError.ErrorText,
+                                        errorNumber
+                                    );
                                     validationError.PropertyName = expressionPropertyName;
                                     validationErrors.Add(validationError);
                                 }
                             }
                         }
-                        // 
-
-
-
-
-
-
-
-
-
-
-
+                        //
                     }
                     finally
                     {
@@ -202,8 +229,15 @@ namespace System.Workflow.Activities.Rules
             }
             else
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.InvalidRuleSetName, "RuleSetReference");
-                ValidationError validationError = new ValidationError(message, ErrorNumbers.Error_InvalidRuleSetName);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.InvalidRuleSetName,
+                    "RuleSetReference"
+                );
+                ValidationError validationError = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_InvalidRuleSetName
+                );
                 validationError.PropertyName = GetFullPropertyName(manager) + "." + "RuleSetName";
                 validationErrors.Add(validationError);
             }
@@ -212,5 +246,4 @@ namespace System.Workflow.Activities.Rules
     }
 
     #endregion
-
 }

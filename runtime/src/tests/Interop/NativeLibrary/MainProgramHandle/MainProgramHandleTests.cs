@@ -13,18 +13,21 @@ public static class MainProgramHandleTests
 {
     private static IntPtr s_handle;
 
-    static MainProgramHandleTests() => NativeLibrary.SetDllImportResolver(typeof(MainProgramHandleTests).Assembly,
-        (string libraryName, Assembly asm, DllImportSearchPath? dllImportSearchPath) =>
-        {
-            if (libraryName == "Self")
+    static MainProgramHandleTests() =>
+        NativeLibrary.SetDllImportResolver(
+            typeof(MainProgramHandleTests).Assembly,
+            (string libraryName, Assembly asm, DllImportSearchPath? dllImportSearchPath) =>
             {
-                s_handle = NativeLibrary.GetMainProgramHandle();
-                Assert.NotEqual(IntPtr.Zero, s_handle);
-                return s_handle;
-            }
+                if (libraryName == "Self")
+                {
+                    s_handle = NativeLibrary.GetMainProgramHandle();
+                    Assert.NotEqual(IntPtr.Zero, s_handle);
+                    return s_handle;
+                }
 
-            return IntPtr.Zero;
-        });
+                return IntPtr.Zero;
+            }
+        );
 
     public static int Main()
     {

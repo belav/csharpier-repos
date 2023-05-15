@@ -17,9 +17,18 @@ namespace Moq.Internals
     [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class InterfaceProxy
     {
-        private static MethodInfo equalsMethod = typeof(object).GetMethod("Equals", BindingFlags.Public | BindingFlags.Instance);
-        private static MethodInfo getHashCodeMethod = typeof(object).GetMethod("GetHashCode", BindingFlags.Public | BindingFlags.Instance);
-        private static MethodInfo toStringMethod = typeof(object).GetMethod("ToString", BindingFlags.Public | BindingFlags.Instance);
+        private static MethodInfo equalsMethod = typeof(object).GetMethod(
+            "Equals",
+            BindingFlags.Public | BindingFlags.Instance
+        );
+        private static MethodInfo getHashCodeMethod = typeof(object).GetMethod(
+            "GetHashCode",
+            BindingFlags.Public | BindingFlags.Instance
+        );
+        private static MethodInfo toStringMethod = typeof(object).GetMethod(
+            "ToString",
+            BindingFlags.Public | BindingFlags.Instance
+        );
 
         /// <summary/>
         [DebuggerHidden]
@@ -59,14 +68,10 @@ namespace Moq.Internals
             private static object[] noArguments = new object[0];
 
             public Invocation(Type proxyType, MethodInfo method, params object[] arguments)
-                : base(proxyType, method, arguments)
-            {
-            }
+                : base(proxyType, method, arguments) { }
 
             public Invocation(Type proxyType, MethodInfo method)
-                : base(proxyType, method, noArguments)
-            {
-            }
+                : base(proxyType, method, noArguments) { }
 
             protected internal override object CallBase()
             {

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,19 +35,27 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class MsmqTransportSecurityTest
-	{
-		[Test]
-		public void DefaultValues ()
-		{
-			MsmqTransportSecurity security = new MsmqTransportSecurity ();
+    [TestFixture]
+    public class MsmqTransportSecurityTest
+    {
+        [Test]
+        public void DefaultValues()
+        {
+            MsmqTransportSecurity security = new MsmqTransportSecurity();
 
-			Assert.AreEqual (MsmqAuthenticationMode.WindowsDomain, security.MsmqAuthenticationMode, "#A1");
-			Assert.AreEqual (MsmqEncryptionAlgorithm.RC4Stream, security.MsmqEncryptionAlgorithm, "#A2");
-			Assert.AreEqual (ProtectionLevel.Sign, security.MsmqProtectionLevel, "#A3");
-			Assert.AreEqual (MsmqSecureHashAlgorithm.Sha1, security.MsmqSecureHashAlgorithm, "#A4");
-		}
-	}
+            Assert.AreEqual(
+                MsmqAuthenticationMode.WindowsDomain,
+                security.MsmqAuthenticationMode,
+                "#A1"
+            );
+            Assert.AreEqual(
+                MsmqEncryptionAlgorithm.RC4Stream,
+                security.MsmqEncryptionAlgorithm,
+                "#A2"
+            );
+            Assert.AreEqual(ProtectionLevel.Sign, security.MsmqProtectionLevel, "#A3");
+            Assert.AreEqual(MsmqSecureHashAlgorithm.Sha1, security.MsmqSecureHashAlgorithm, "#A4");
+        }
+    }
 }
 #endif

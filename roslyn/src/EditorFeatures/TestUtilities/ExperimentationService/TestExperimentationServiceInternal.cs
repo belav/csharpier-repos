@@ -17,11 +17,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ExperimentationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestExperimentationServiceInternal()
-        {
-        }
+        public TestExperimentationServiceInternal() { }
 
-        public bool IsCachedFlightEnabled(string flightName)
-            => true;
+        public bool IsCachedFlightEnabled(string flightName) => true;
     }
 }

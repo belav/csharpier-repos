@@ -1,12 +1,13 @@
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // <copyright file="TypeConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using Microsoft.Win32;
     using System.Collections;
     using System.ComponentModel.Design.Serialization;
@@ -19,19 +20,18 @@ namespace System.ComponentModel {
 
     /// <devdoc>
     ///     An InstanceCreationEditor allows the user to create an instance of a particular type of property from a dropdown
-    ///     Within the PropertyGrid.  Usually, the text specified by InstanceCreationEditor.Text will be displayed on the 
+    ///     Within the PropertyGrid.  Usually, the text specified by InstanceCreationEditor.Text will be displayed on the
     ///     dropdown from the PropertyGrid as a link or button.  When clicked, the InstanceCreationEditor.CreateInstance
     ///     method will be called with the Type of the object to create.
     /// </devdoc>
     [HostProtection(SharedState = true)]
-    public abstract class InstanceCreationEditor {
-
+    public abstract class InstanceCreationEditor
+    {
         /// <devdoc>
         /// </devdoc>
-        public virtual string Text {
-            get {
-                return SR.GetString(SR.InstanceCreationEditorDefaultText);
-            }
+        public virtual string Text
+        {
+            get { return SR.GetString(SR.InstanceCreationEditorDefaultText); }
         }
 
         /// <devdoc>
@@ -42,8 +42,3 @@ namespace System.ComponentModel {
         public abstract object CreateInstance(ITypeDescriptorContext context, Type instanceType);
     }
 }
-
-
-
-
-

@@ -9,17 +9,16 @@ namespace System.Net.Configuration
     using System.Configuration;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.IO;    
+    using System.IO;
+
     public sealed class MailSettingsSectionGroup : ConfigurationSectionGroup
     {
-        public MailSettingsSectionGroup() 
-        {
-        }
+        public MailSettingsSectionGroup() { }
 
         public SmtpSection Smtp
         {
             get { return (SmtpSection)Sections["smtp"]; }
-	}
+        }
     }
 
     internal sealed class MailSettingsSectionGroupInternal

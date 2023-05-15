@@ -20,18 +20,19 @@ namespace POS_Server.Controllers
     public class setValuesController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller> get all setValues
         [HttpPost]
         [Route("Get")]
-       public string Get(string token)
+        public string Get(string token)
         {
             // public ResponseVM GetPurinv(string token)
 
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -58,42 +59,36 @@ namespace POS_Server.Controllers
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-
-
                         var list = entity.setValues
-
-                   .Select(c => new
-                   {
-                       c.valId,
-                       c.value,
-                       c.isDefault,
-                       c.isSystem,
-                       c.notes,
-                       c.settingId,
-
-                   })
-                               .ToList();
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        c.valId,
+                                        c.value,
+                                        c.isDefault,
+                                        c.isSystem,
+                                        c.notes,
+                                        c.settingId,
+                                    }
+                            )
+                            .ToList();
 
                         return TokenManager.GenerateToken(list);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
 
             //var re = Request;
             //
             //string token = "";
-          
+
             //if (headers.Contains("APIKey"))
             //{
             //    token = headers.GetValues("APIKey").First();
@@ -106,7 +101,7 @@ namespace POS_Server.Controllers
             //    using (incposdbEntities entity = new incposdbEntities())
             //    {
             //        var setValuesList = entity.setValues
-                  
+
             //       .Select(c => new  {
             //           c.valId,
             //          c.value,
@@ -119,13 +114,13 @@ namespace POS_Server.Controllers
             //       .ToList();
 
             //        /*
-            //         * 
-            //          valId 
-            //          value 
-            //          isDefault 
-            //          isSystem 
-            //          notes 
-            //          settingId 
+            //         *
+            //          valId
+            //          value
+            //          isDefault
+            //          isSystem
+            //          notes
+            //          settingId
             //         * */
 
             //        if (setValuesList == null)
@@ -137,27 +132,26 @@ namespace POS_Server.Controllers
             ////else
             //    return NotFound();
         }
+
         // email
         [HttpPost]
         [Route("GetBySetName")]
-      public string   GetBySetName(string token)
+        public string GetBySetName(string token)
         {
-
             // public ResponseVM GetPurinv(string token)name
 
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-               string name = "";
-               
+                string name = "";
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -166,42 +160,37 @@ namespace POS_Server.Controllers
                     {
                         name = c.Value;
                     }
-                  
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         setting sett = entity.setting.Where(s => s.name == name).FirstOrDefault();
-                        var list = entity.setValues.Where(x => sett.settingId == x.settingId)
-                             .Select(X => new
-                             {
-                                 X.valId,
-                                 X.value,
-                                 X.isDefault,
-                                 X.isSystem,
-                                 X.settingId,
-                                 X.notes,
-
-                             })
-                             .ToList();
+                        var list = entity.setValues
+                            .Where(x => sett.settingId == x.settingId)
+                            .Select(
+                                X =>
+                                    new
+                                    {
+                                        X.valId,
+                                        X.value,
+                                        X.isDefault,
+                                        X.isSystem,
+                                        X.settingId,
+                                        X.notes,
+                                    }
+                            )
+                            .ToList();
                         return TokenManager.GenerateToken(list);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
-
 
             //var re = Request;
             //
@@ -240,13 +229,11 @@ namespace POS_Server.Controllers
             //return NotFound();
         }
 
-      [HttpPost]
-      [Route("GetBySetNameAndUserId")]
-      public string GetBySetNameAndUserId(string token)
+        [HttpPost]
+        [Route("GetBySetNameAndUserId")]
+        public string GetBySetNameAndUserId(string token)
         {
-
-            
-            token = TokenManager.readToken(HttpContext.Current.Request); 
+            token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
@@ -254,7 +241,7 @@ namespace POS_Server.Controllers
             }
             else
             {
-               string name = "";
+                string name = "";
                 long userId = 0;
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
@@ -264,7 +251,7 @@ namespace POS_Server.Controllers
                     {
                         name = c.Value;
                     }
-                  else if(c.Type == "userId")
+                    else if (c.Type == "userId")
                     {
                         userId = long.Parse(c.Value);
                     }
@@ -275,75 +262,33 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         setting sett = entity.setting.Where(s => s.name == name).FirstOrDefault();
-                        var list = (from s in entity.setValues where sett.settingId == s.settingId
+                        var list = (
+                            from s in entity.setValues
+                            where sett.settingId == s.settingId
                             join us in entity.userSetValues on s.valId equals us.valId
                             where us.userId == userId
-                             select new setValuesModel()
-                             {
-                                valId= s.valId,
-                                value= s.value,
-                                isDefault= s.isDefault,
-                                 isSystem= s.isSystem,
+                            select new setValuesModel()
+                            {
+                                valId = s.valId,
+                                value = s.value,
+                                isDefault = s.isDefault,
+                                isSystem = s.isSystem,
                                 settingId = s.settingId,
-                                 notes =s.notes,
-
-                             })
-                             .FirstOrDefault();
+                                notes = s.notes,
+                            }
+                        ).FirstOrDefault();
                         return TokenManager.GenerateToken(list);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
         }
 
-
-
         public string GetBySettingName(string settingName)
         {
-
-            setValues sv = new setValues();
-          List<setValues> svl = new List<setValues>();
-
-                // DateTime cmpdate = DateTime.Now.AddDays(newdays);
-                try
-                {
-                    using (incposdbEntities entity = new incposdbEntities())
-                    {
-                        setting sett = entity.setting.Where(s => s.name == settingName).FirstOrDefault();
-
-                    var svlv = entity.setValues.ToList();
-                    svl=svlv.Where(x => sett.settingId == x.settingId)
-                         .Select(X => new setValues
-                         {
-                            valId= X.valId,
-                             value=  X.value,
-                             isDefault=   X.isDefault,
-                             isSystem=  X.isSystem,
-                             settingId=   X.settingId,
-                             notes= X.notes,
-
-                         }).ToList();
-                    sv = svl.FirstOrDefault();
-                    return sv.value;
-                    }
-
-                }
-                catch 
-                {
-               // return ex.ToString();
-              return "0";
-                }
-         
-        }
-        public setValues GetRowBySettingName(string settingName)
-        {
-
             setValues sv = new setValues();
             List<setValues> svl = new List<setValues>();
 
@@ -352,24 +297,68 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    setting sett = entity.setting.Where(s => s.name == settingName).FirstOrDefault();
+                    setting sett = entity.setting
+                        .Where(s => s.name == settingName)
+                        .FirstOrDefault();
 
                     var svlv = entity.setValues.ToList();
                     svl = svlv.Where(x => sett.settingId == x.settingId)
-                         .Select(X => new setValues
-                         {
-                             valId = X.valId,
-                             value = X.value,
-                             isDefault = X.isDefault,
-                             isSystem = X.isSystem,
-                             settingId = X.settingId,
-                             notes = X.notes,
-
-                         }).ToList();
+                        .Select(
+                            X =>
+                                new setValues
+                                {
+                                    valId = X.valId,
+                                    value = X.value,
+                                    isDefault = X.isDefault,
+                                    isSystem = X.isSystem,
+                                    settingId = X.settingId,
+                                    notes = X.notes,
+                                }
+                        )
+                        .ToList();
                     sv = svl.FirstOrDefault();
-                    return sv ;
+                    return sv.value;
                 }
+            }
+            catch
+            {
+                // return ex.ToString();
+                return "0";
+            }
+        }
 
+        public setValues GetRowBySettingName(string settingName)
+        {
+            setValues sv = new setValues();
+            List<setValues> svl = new List<setValues>();
+
+            // DateTime cmpdate = DateTime.Now.AddDays(newdays);
+            try
+            {
+                using (incposdbEntities entity = new incposdbEntities())
+                {
+                    setting sett = entity.setting
+                        .Where(s => s.name == settingName)
+                        .FirstOrDefault();
+
+                    var svlv = entity.setValues.ToList();
+                    svl = svlv.Where(x => sett.settingId == x.settingId)
+                        .Select(
+                            X =>
+                                new setValues
+                                {
+                                    valId = X.valId,
+                                    value = X.value,
+                                    isDefault = X.isDefault,
+                                    isSystem = X.isSystem,
+                                    settingId = X.settingId,
+                                    notes = X.notes,
+                                }
+                        )
+                        .ToList();
+                    sv = svl.FirstOrDefault();
+                    return sv;
+                }
             }
             catch
             {
@@ -377,22 +366,19 @@ namespace POS_Server.Controllers
                 // return ex.ToString();
                 return sv;
             }
-
         }
-
 
         [HttpPost]
         [Route("GetBySetvalNote")]
-      public string   GetBySetvalNote(string token)
+        public string GetBySetvalNote(string token)
         {
-
             // public ResponseVM GetPurinv(string token)setvalnote
 
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -401,7 +387,6 @@ namespace POS_Server.Controllers
             {
                 string setvalnote = "";
 
-
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
                 {
@@ -409,42 +394,43 @@ namespace POS_Server.Controllers
                     {
                         setvalnote = c.Value;
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                       // setting sett = entity.setting.Where(s => s.name == name).FirstOrDefault();
-                        var list = entity.setValues.ToList().Where(x => x.notes == setvalnote)
-                             .Select(X => new
-                             {
-                                 X.valId,
-                                 X.value,
-                                 X.isDefault,
-                                 X.isSystem,
-                                 X.settingId,
-                                 X.notes,
-                                 name = entity.setting.ToList().Where(s => s.settingId == X.settingId).FirstOrDefault().name,
-
-                             })
-                             .ToList();
+                        // setting sett = entity.setting.Where(s => s.name == name).FirstOrDefault();
+                        var list = entity.setValues
+                            .ToList()
+                            .Where(x => x.notes == setvalnote)
+                            .Select(
+                                X =>
+                                    new
+                                    {
+                                        X.valId,
+                                        X.value,
+                                        X.isDefault,
+                                        X.isSystem,
+                                        X.settingId,
+                                        X.notes,
+                                        name = entity.setting
+                                            .ToList()
+                                            .Where(s => s.settingId == X.settingId)
+                                            .FirstOrDefault()
+                                            .name,
+                                    }
+                            )
+                            .ToList();
 
                         return TokenManager.GenerateToken(list);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
 
             //var re = Request;
@@ -486,27 +472,25 @@ namespace POS_Server.Controllers
             //return NotFound();
         }
 
-
-        // GET api/<controller>  Get medal By ID 
+        // GET api/<controller>  Get medal By ID
         [HttpPost]
         [Route("GetByID")]
-      public string   GetByID(string token)
+        public string GetByID(string token)
         {
             // public ResponseVM GetPurinv(string token)Id
 
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
             }
             else
             {
-                long Id =0;
-
+                long Id = 0;
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -515,41 +499,35 @@ namespace POS_Server.Controllers
                     {
                         Id = long.Parse(c.Value);
                     }
-
-
                 }
 
                 // DateTime cmpdate = DateTime.Now.AddDays(newdays);
                 try
                 {
-
-
                     using (incposdbEntities entity = new incposdbEntities())
                     {
-                   
                         var item = entity.setValues
-                   .Where(c => c.valId == Id)
-                   .Select(c => new
-                   {
-                       c.valId,
-                       c.value,
-                       c.isDefault,
-                       c.isSystem,
-                       c.notes,
-                       c.settingId,
-
-
-                   }).FirstOrDefault();
+                            .Where(c => c.valId == Id)
+                            .Select(
+                                c =>
+                                    new
+                                    {
+                                        c.valId,
+                                        c.value,
+                                        c.isDefault,
+                                        c.isSystem,
+                                        c.notes,
+                                        c.settingId,
+                                    }
+                            )
+                            .FirstOrDefault();
                         return TokenManager.GenerateToken(item);
-
                     }
-
                 }
                 catch
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
             }
 
             //var re = Request;
@@ -595,19 +573,16 @@ namespace POS_Server.Controllers
             //    return NotFound();
         }
 
-
-        // add or update medal 
+        // add or update medal
         [HttpPost]
         [Route("Save")]
-      public string   Save(string token)
+        public string Save(string token)
         {
             //string Object string newObject
             string message = "";
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -623,16 +598,16 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<setValues>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<setValues>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
-                    setValues tmpObject=null;
-
+                    setValues tmpObject = null;
 
                     try
                     {
@@ -644,7 +619,9 @@ namespace POS_Server.Controllers
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             var sEntity = entity.Set<setValues>();
-                            setValues defItem = entity.setValues.Where(p => p.settingId == newObject.settingId && p.isDefault == 1).FirstOrDefault();
+                            setValues defItem = entity.setValues
+                                .Where(p => p.settingId == newObject.settingId && p.isDefault == 1)
+                                .FirstOrDefault();
 
                             if (newObject.valId == 0)
                             {
@@ -656,26 +633,26 @@ namespace POS_Server.Controllers
                                         entity.SaveChanges();
                                     }
                                 }
-                                else //Object.isDefault ==0 
+                                else //Object.isDefault ==0
                                 {
-                                    if (defItem == null)//other values isDefault not 1 
+                                    if (defItem == null) //other values isDefault not 1
                                     {
                                         newObject.isDefault = 1;
                                     }
-
                                 }
                                 sEntity.Add(newObject);
-                                 entity.SaveChanges();
+                                entity.SaveChanges();
                                 message = newObject.valId.ToString();
-                               
                             }
                             else
                             {
                                 if (newObject.isDefault == 1)
                                 {
-                                    defItem.isDefault = 0;//reset the other default to 0 if exist
+                                    defItem.isDefault = 0; //reset the other default to 0 if exist
                                 }
-                                tmpObject = entity.setValues.Where(p => p.valId == newObject.valId).FirstOrDefault();
+                                tmpObject = entity.setValues
+                                    .Where(p => p.valId == newObject.valId)
+                                    .FirstOrDefault();
                                 tmpObject.valId = newObject.valId;
                                 tmpObject.notes = newObject.notes;
                                 tmpObject.value = newObject.value;
@@ -686,24 +663,18 @@ namespace POS_Server.Controllers
                                 entity.SaveChanges();
                                 message = tmpObject.valId.ToString();
                             }
-
-
                         }
-                       
-                        return TokenManager.GenerateToken(message);
 
+                        return TokenManager.GenerateToken(message);
                     }
                     catch
                     {
                         message = "0";
-                      return TokenManager.GenerateToken(message);
+                        return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
-              return TokenManager.GenerateToken(message);
-
+                return TokenManager.GenerateToken(message);
             }
 
             //var re = Request;
@@ -735,7 +706,7 @@ namespace POS_Server.Controllers
             //            setValues defItem = entity.setValues.Where(p => p.settingId == Object.settingId && p.isDefault == 1).FirstOrDefault();
 
             //            if (Object.valId == 0)
-            //            {     
+            //            {
             //                if (Object.isDefault == 1 )
             //                { // get the row with same settingId of newObject
             //                     if (defItem != null)
@@ -744,9 +715,9 @@ namespace POS_Server.Controllers
             //                        entity.SaveChanges();
             //                    }
             //                }
-            //                else //Object.isDefault ==0 
+            //                else //Object.isDefault ==0
             //                {
-            //                    if (defItem == null)//other values isDefault not 1 
+            //                    if (defItem == null)//other values isDefault not 1
             //                    {
             //                        Object.isDefault =1;
             //                    }
@@ -763,7 +734,7 @@ namespace POS_Server.Controllers
             //                    defItem.isDefault = 0;//reset the other default to 0 if exist
             //                }
             //                var tmps = entity.setValues.Where(p => p.valId == Object.valId).FirstOrDefault();
-            //                tmps.valId = Object.valId;                          
+            //                tmps.valId = Object.valId;
             //                tmps.notes = Object.notes;
             //                tmps.value = Object.value;
             //                tmps.isDefault=Object.isDefault;
@@ -788,15 +759,12 @@ namespace POS_Server.Controllers
             //    return "-1";
         }
 
-
         [HttpPost]
         [Route("SaveList")]
         public string SaveList(string token)
         {
             //string Object string newObject
             string message = "";
-
-
 
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
@@ -815,17 +783,15 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<List<setValues>>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<List<setValues>>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
-
-
-
                     try
                     {
                         long res = 0;
@@ -838,38 +804,28 @@ namespace POS_Server.Controllers
                         }
 
                         return TokenManager.GenerateToken(res.ToString());
-
                     }
                     catch
                     {
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
                 return TokenManager.GenerateToken(message);
-
             }
-
-
         }
 
-
-        //email temp  
+        //email temp
         [HttpPost]
         [Route("SaveValueByNotes")]
-      public string   SaveValueByNotes(string token)
+        public string SaveValueByNotes(string token)
         {
-
             //string Object string newObject
             string message = "";
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -885,16 +841,16 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<setValues>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<setValues>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
                 if (newObject != null)
                 {
-
-
                     setValues tmpObject = null;
-
 
                     try
                     {
@@ -908,9 +864,9 @@ namespace POS_Server.Controllers
                             setValues defItem = new setValues();
                             var sEntity = entity.Set<setValues>();
 
-                            defItem = entity.setValues.Where(p => p.settingId == newObject.settingId).FirstOrDefault();
-
-
+                            defItem = entity.setValues
+                                .Where(p => p.settingId == newObject.settingId)
+                                .FirstOrDefault();
 
                             if (newObject.valId == 0)
                             {
@@ -923,13 +879,12 @@ namespace POS_Server.Controllers
                                         entity.SaveChanges();
                                     }
                                 }
-                                else //newObject.isDefault ==0 
+                                else //newObject.isDefault ==0
                                 {
-                                    if (defItem == null)//other values isDefault not 1 
+                                    if (defItem == null) //other values isDefault not 1
                                     {
                                         newObject.isDefault = 1;
                                     }
-
                                 }
                                 sEntity.Add(newObject);
                                 message = newObject.valId.ToString();
@@ -939,10 +894,17 @@ namespace POS_Server.Controllers
                             {
                                 if (newObject.isDefault == 1)
                                 {
-                                    defItem.isDefault = 0;//reset the other default to 0 if exist
+                                    defItem.isDefault = 0; //reset the other default to 0 if exist
                                 }
                                 var tmps1 = sEntity.ToList();
-                                tmpObject = tmps1.Where(p => p.notes == newObject.notes && p.settingId == newObject.settingId && p.valId == newObject.valId).FirstOrDefault();
+                                tmpObject = tmps1
+                                    .Where(
+                                        p =>
+                                            p.notes == newObject.notes
+                                            && p.settingId == newObject.settingId
+                                            && p.valId == newObject.valId
+                                    )
+                                    .FirstOrDefault();
                                 //   tmpObject.valId = newObject.valId;
                                 // tmpObject.notes = newObject.notes;
                                 tmpObject.value = newObject.value;
@@ -953,25 +915,18 @@ namespace POS_Server.Controllers
                                 entity.SaveChanges();
                                 message = tmpObject.valId.ToString();
                             }
-
-
                         }
-                       
 
                         return TokenManager.GenerateToken(message);
-
                     }
                     catch
                     {
                         message = "0";
-                      return TokenManager.GenerateToken(message);
+                        return TokenManager.GenerateToken(message);
                     }
-
-
                 }
 
-              return TokenManager.GenerateToken(message);
-
+                return TokenManager.GenerateToken(message);
             }
 
             //var re = Request;
@@ -1017,9 +972,9 @@ namespace POS_Server.Controllers
             //                        entity.SaveChanges();
             //                    }
             //                }
-            //                else //Object.isDefault ==0 
+            //                else //Object.isDefault ==0
             //                {
-            //                    if (defItem == null)//other values isDefault not 1 
+            //                    if (defItem == null)//other values isDefault not 1
             //                    {
             //                        Object.isDefault = 1;
             //                    }
@@ -1064,18 +1019,14 @@ namespace POS_Server.Controllers
 
         [HttpPost]
         [Route("Delete")]
-      public string   Delete(string token)
+        public string Delete(string token)
         {
-
-
             // public ResponseVM Delete(string token)long Id, long userId
             //long Id, long userId
             string message = "";
-           
-            
-            
-          token = TokenManager.readToken(HttpContext.Current.Request); 
- var strP = TokenManager.GetPrincipal(token);
+
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -1084,7 +1035,6 @@ namespace POS_Server.Controllers
             {
                 long Id = 0;
                 long userId = 0;
-
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -1097,7 +1047,6 @@ namespace POS_Server.Controllers
                     {
                         userId = long.Parse(c.Value);
                     }
-
                 }
 
                 try
@@ -1108,7 +1057,6 @@ namespace POS_Server.Controllers
 
                         entity.setValues.Remove(sObj);
                         message = entity.SaveChanges().ToString();
-
                     }
                     return TokenManager.GenerateToken(message);
                 }
@@ -1116,10 +1064,7 @@ namespace POS_Server.Controllers
                 {
                     return TokenManager.GenerateToken("0");
                 }
-
-
             }
-
 
             //var re = Request;
             //
@@ -1133,13 +1078,13 @@ namespace POS_Server.Controllers
             //bool valid = validation.CheckApiKey(token);
             //if (valid)
             //{
-               
+
             //        try
             //        {
             //            using (incposdbEntities entity = new incposdbEntities())
             //            {
             //                setValues sObj = entity.setValues.Find(Id);
-                       
+
             //                entity.setValues.Remove(sObj);
             //                entity.SaveChanges();
 
@@ -1150,28 +1095,27 @@ namespace POS_Server.Controllers
             //        {
             //            return NotFound();
             //        }
-                
-                
 
-               
+
+
+
             //}
             //else
             //    return NotFound();
         }
+
         // image
         #region Image
 
         [Route("PostImage")]
         public IHttpActionResult PostUserImage()
         {
-
             try
             {
                 var httpRequest = HttpContext.Current.Request;
 
                 foreach (string file in httpRequest.Files)
                 {
-
                     HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
 
                     var postedFile = httpRequest.Files[file];
@@ -1180,22 +1124,32 @@ namespace POS_Server.Controllers
 
                     if (postedFile != null && postedFile.ContentLength > 0)
                     {
-
                         int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB
 
-                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png", ".bmp", ".jpeg", ".tiff", ".jfif" };
-                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                        IList<string> AllowedFileExtensions = new List<string>
+                        {
+                            ".jpg",
+                            ".gif",
+                            ".png",
+                            ".bmp",
+                            ".jpeg",
+                            ".tiff",
+                            ".jfif"
+                        };
+                        var ext = postedFile.FileName.Substring(
+                            postedFile.FileName.LastIndexOf('.')
+                        );
                         var extension = ext.ToLower();
 
                         if (!AllowedFileExtensions.Contains(extension))
                         {
-
-                            var message = string.Format("Please Upload image of type .jpg,.gif,.png, .jfif, .bmp , .jpeg ,.tiff");
+                            var message = string.Format(
+                                "Please Upload image of type .jpg,.gif,.png, .jfif, .bmp , .jpeg ,.tiff"
+                            );
                             return Ok(message);
                         }
                         else if (postedFile.ContentLength > MaxContentLength)
                         {
-
                             var message = string.Format("Please Upload a file upto 1 mb.");
 
                             return Ok(message);
@@ -1203,17 +1157,31 @@ namespace POS_Server.Controllers
                         else
                         {
                             //  check if image exist
-                            var pathCheck = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\setvalues"), imageWithNoExt);
-                            var files = Directory.GetFiles(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\setvalues"), imageWithNoExt + ".*");
+                            var pathCheck = Path.Combine(
+                                System.Web.Hosting.HostingEnvironment.MapPath(
+                                    "~\\images\\setvalues"
+                                ),
+                                imageWithNoExt
+                            );
+                            var files = Directory.GetFiles(
+                                System.Web.Hosting.HostingEnvironment.MapPath(
+                                    "~\\images\\setvalues"
+                                ),
+                                imageWithNoExt + ".*"
+                            );
                             if (files.Length > 0)
                             {
                                 File.Delete(files[0]);
                             }
 
                             //Userimage myfolder name where i want to save my image
-                            var filePath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\setvalues"), imageName);
+                            var filePath = Path.Combine(
+                                System.Web.Hosting.HostingEnvironment.MapPath(
+                                    "~\\images\\setvalues"
+                                ),
+                                imageName
+                            );
                             postedFile.SaveAs(filePath);
-
                         }
                     }
 
@@ -1258,8 +1226,12 @@ namespace POS_Server.Controllers
 
                 string localFilePath;
 
-                try { 
-                    localFilePath = Path.Combine(System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\setValues"), imageName);
+                try
+                {
+                    localFilePath = Path.Combine(
+                        System.Web.Hosting.HostingEnvironment.MapPath("~\\images\\setValues"),
+                        imageName
+                    );
 
                     byte[] b = System.IO.File.ReadAllBytes(localFilePath);
                     return TokenManager.GenerateToken(Convert.ToBase64String(b));
@@ -1267,10 +1239,10 @@ namespace POS_Server.Controllers
                 catch
                 {
                     return TokenManager.GenerateToken(null);
-
                 }
             }
         }
+
         // update database record
         [HttpPost]
         [Route("UpdateImage")]
@@ -1295,47 +1267,43 @@ namespace POS_Server.Controllers
                     {
                         Object = c.Value.Replace("\\", string.Empty);
                         Object = Object.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<setValues>(Object, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
-                      
+                        newObject = JsonConvert.DeserializeObject<setValues>(
+                            Object,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                 }
                 if (newObject != null)
                 {
-
                     try
                     {
                         setValues Setvalue;
                         using (incposdbEntities entity = new incposdbEntities())
                         {
                             var Entity = entity.Set<setValues>();
-                            Setvalue = entity.setValues.Where(p => p.valId == newObject.valId).First();
+                            Setvalue = entity.setValues
+                                .Where(p => p.valId == newObject.valId)
+                                .First();
                             Setvalue.value = newObject.value;
                             entity.SaveChanges();
                         }
-                       // return Setvalue.valId;
+                        // return Setvalue.valId;
                         return TokenManager.GenerateToken(Setvalue.valId.ToString());
                     }
-
-
                     catch
                     {
                         message = "0";
                         return TokenManager.GenerateToken(message);
                     }
-
-
-
                 }
                 else
                 {
                     return TokenManager.GenerateToken(message);
                 }
-
             }
-  
         }
 
-        #endregion 
+        #endregion
         public long Save(setValues newObject)
         {
             string message = "";
@@ -1343,10 +1311,7 @@ namespace POS_Server.Controllers
 
             if (newObject != null)
             {
-
-
                 setValues tmpObject = null;
-
 
                 try
                 {
@@ -1358,7 +1323,9 @@ namespace POS_Server.Controllers
                     using (incposdbEntities entity = new incposdbEntities())
                     {
                         var sEntity = entity.Set<setValues>();
-                        setValues defItem = entity.setValues.Where(p => p.settingId == newObject.settingId && p.isDefault == 1).FirstOrDefault();
+                        setValues defItem = entity.setValues
+                            .Where(p => p.settingId == newObject.settingId && p.isDefault == 1)
+                            .FirstOrDefault();
 
                         if (newObject.valId == 0)
                         {
@@ -1370,13 +1337,12 @@ namespace POS_Server.Controllers
                                     entity.SaveChanges();
                                 }
                             }
-                            else //Object.isDefault ==0 
+                            else //Object.isDefault ==0
                             {
-                                if (defItem == null)//other values isDefault not 1 
+                                if (defItem == null) //other values isDefault not 1
                                 {
                                     newObject.isDefault = 1;
                                 }
-
                             }
                             sEntity.Add(newObject);
                             res = newObject.valId;
@@ -1389,9 +1355,11 @@ namespace POS_Server.Controllers
                             //update
                             if (newObject.isDefault == 1)
                             {
-                                defItem.isDefault = 0;//reset the other default to 0 if exist
+                                defItem.isDefault = 0; //reset the other default to 0 if exist
                             }
-                            tmpObject = entity.setValues.Where(p => p.valId == newObject.valId).FirstOrDefault();
+                            tmpObject = entity.setValues
+                                .Where(p => p.valId == newObject.valId)
+                                .FirstOrDefault();
                             tmpObject.valId = newObject.valId;
                             tmpObject.notes = newObject.notes;
                             tmpObject.value = newObject.value;
@@ -1403,25 +1371,18 @@ namespace POS_Server.Controllers
                             res = tmpObject.valId;
                             message = res.ToString();
                         }
-
-
                     }
 
                     return (res);
-
                 }
                 catch
                 {
                     message = "0";
                     return 0;
                 }
-
-
             }
 
             return res;
-
         }
-
     }
 }

@@ -89,25 +89,44 @@ namespace System.Diagnostics.Tests
                 }
                 catch
                 {
-                    if (++attempt < MaxAttempts) continue;
+                    if (++attempt < MaxAttempts)
+                        continue;
                     throw;
                 }
                 break;
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void DebuggerAttributesValid()
         {
             Stopwatch watch = new Stopwatch();
-            Assert.Equal("00:00:00 (IsRunning = False)", DebuggerAttributes.ValidateDebuggerDisplayReferences(watch));
+            Assert.Equal(
+                "00:00:00 (IsRunning = False)",
+                DebuggerAttributes.ValidateDebuggerDisplayReferences(watch)
+            );
             watch.Start();
             Thread.Sleep(10);
-            Assert.Contains("(IsRunning = True)", DebuggerAttributes.ValidateDebuggerDisplayReferences(watch));
-            Assert.DoesNotContain("00:00:00 ", DebuggerAttributes.ValidateDebuggerDisplayReferences(watch));
+            Assert.Contains(
+                "(IsRunning = True)",
+                DebuggerAttributes.ValidateDebuggerDisplayReferences(watch)
+            );
+            Assert.DoesNotContain(
+                "00:00:00 ",
+                DebuggerAttributes.ValidateDebuggerDisplayReferences(watch)
+            );
             watch.Stop();
-            Assert.Contains("(IsRunning = False)", DebuggerAttributes.ValidateDebuggerDisplayReferences(watch));
-            Assert.DoesNotContain("00:00:00 ", DebuggerAttributes.ValidateDebuggerDisplayReferences(watch));
+            Assert.Contains(
+                "(IsRunning = False)",
+                DebuggerAttributes.ValidateDebuggerDisplayReferences(watch)
+            );
+            Assert.DoesNotContain(
+                "00:00:00 ",
+                DebuggerAttributes.ValidateDebuggerDisplayReferences(watch)
+            );
         }
 
         [OuterLoop("Sleeps for relatively long periods of time")]
@@ -127,8 +146,10 @@ namespace System.Diagnostics.Tests
                 Thread.Sleep(SleepTime);
                 sw.Stop();
 
-                if (sw.ElapsedMilliseconds >= (SleepTime / WindowFactor) &&
-                    sw.ElapsedMilliseconds <= (SleepTime * WindowFactor))
+                if (
+                    sw.ElapsedMilliseconds >= (SleepTime / WindowFactor)
+                    && sw.ElapsedMilliseconds <= (SleepTime * WindowFactor)
+                )
                 {
                     return;
                 }
@@ -136,7 +157,10 @@ namespace System.Diagnostics.Tests
                 results.Add(sw.ElapsedMilliseconds);
             }
 
-            Assert.True(false, $"All {AllowedTries} fell outside of {WindowFactor} window of {SleepTime} sleep time: {string.Join(", ", results)}");
+            Assert.True(
+                false,
+                $"All {AllowedTries} fell outside of {WindowFactor} window of {SleepTime} sleep time: {string.Join(", ", results)}"
+            );
         }
 
         private static void Sleep(int milliseconds)

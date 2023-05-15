@@ -13,7 +13,9 @@ namespace GitHub_19910
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static void SwapNonGeneric(ref Vector128<uint> a, ref Vector128<uint> b)
         {
-            Vector128<uint> tmp = a; a = b; b = tmp;
+            Vector128<uint> tmp = a;
+            a = b;
+            b = tmp;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -24,12 +26,18 @@ namespace GitHub_19910
                 Vector128<uint> a = Sse2.ConvertScalarToVector128UInt32(0xA);
                 Vector128<uint> b = Sse2.ConvertScalarToVector128UInt32(0xB);
 
-                Vector128<uint> tmp = a; a = b; b = tmp;    // in-place version
-                SwapNonGeneric(ref a, ref b);               // inlined version
+                Vector128<uint> tmp = a;
+                a = b;
+                b = tmp; // in-place version
+                SwapNonGeneric(ref a, ref b); // inlined version
 
                 if ((Sse2.ConvertToUInt32(a) != 0xA) || (Sse2.ConvertToUInt32(b) != 0xB))
                 {
-                    Console.WriteLine("A={0}, B={1}", Sse2.ConvertToUInt32(a), Sse2.ConvertToUInt32(b));
+                    Console.WriteLine(
+                        "A={0}, B={1}",
+                        Sse2.ConvertToUInt32(a),
+                        Sse2.ConvertToUInt32(b)
+                    );
                     return -1;
                 }
             }

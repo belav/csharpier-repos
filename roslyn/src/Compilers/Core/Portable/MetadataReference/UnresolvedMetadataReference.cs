@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis
     {
         public string Reference { get; }
 
-        internal UnresolvedMetadataReference(string reference, MetadataReferenceProperties properties)
+        internal UnresolvedMetadataReference(
+            string reference,
+            MetadataReferenceProperties properties
+        )
             : base(properties)
         {
             this.Reference = reference;
@@ -22,10 +25,7 @@ namespace Microsoft.CodeAnalysis
 
         public override string Display
         {
-            get
-            {
-                return CodeAnalysisResources.Unresolved + Reference;
-            }
+            get { return CodeAnalysisResources.Unresolved + Reference; }
         }
 
         internal override bool IsUnresolved
@@ -33,7 +33,9 @@ namespace Microsoft.CodeAnalysis
             get { return true; }
         }
 
-        internal override MetadataReference WithPropertiesImplReturningMetadataReference(MetadataReferenceProperties properties)
+        internal override MetadataReference WithPropertiesImplReturningMetadataReference(
+            MetadataReferenceProperties properties
+        )
         {
             return new UnresolvedMetadataReference(this.Reference, properties);
         }

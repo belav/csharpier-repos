@@ -21,7 +21,8 @@ namespace System
             Func<Assembly, string, bool, Type?>? typeResolver,
             bool throwOnError,
             bool ignoreCase,
-            ref StackCrawlMark stackMark)
+            ref StackCrawlMark stackMark
+        )
         {
             ArgumentNullException.ThrowIfNull(typeName);
 
@@ -33,7 +34,14 @@ namespace System
                 return null;
             }
 
-            return ConstructType(pname, assemblyResolver, typeResolver, throwOnError, ignoreCase, ref stackMark);
+            return ConstructType(
+                pname,
+                assemblyResolver,
+                typeResolver,
+                throwOnError,
+                ignoreCase,
+                ref stackMark
+            );
         }
 
         [RequiresUnreferencedCode("Types might be removed")]
@@ -43,20 +51,33 @@ namespace System
             Func<Assembly, string, bool, Type?>? typeResolver,
             bool throwOnError,
             bool ignoreCase,
-            ref StackCrawlMark stackMark)
+            ref StackCrawlMark stackMark
+        )
         {
             // Resolve assembly
             Assembly? assembly = null;
             if (pname.AssemblyName != null)
             {
-                assembly = ResolveAssembly(pname.AssemblyName, assemblyResolver, throwOnError, ref stackMark);
+                assembly = ResolveAssembly(
+                    pname.AssemblyName,
+                    assemblyResolver,
+                    throwOnError,
+                    ref stackMark
+                );
                 if (assembly == null)
                     // If throwOnError is true, an exception was already thrown
                     return null;
             }
 
             // Resolve base type
-            Type? type = ResolveType(assembly!, pname.Names!, typeResolver, throwOnError, ignoreCase, ref stackMark);
+            Type? type = ResolveType(
+                assembly!,
+                pname.Names!,
+                typeResolver,
+                throwOnError,
+                ignoreCase,
+                ref stackMark
+            );
             if (type == null)
                 return null;
 
@@ -66,7 +87,14 @@ namespace System
                 var args = new Type?[pname.TypeArguments.Count];
                 for (int i = 0; i < pname.TypeArguments.Count; ++i)
                 {
-                    args[i] = ConstructType(pname.TypeArguments[i], assemblyResolver, typeResolver, throwOnError, ignoreCase, ref stackMark);
+                    args[i] = ConstructType(
+                        pname.TypeArguments[i],
+                        assemblyResolver,
+                        typeResolver,
+                        throwOnError,
+                        ignoreCase,
+                        ref stackMark
+                    );
                     if (args[i] == null)
                         return null;
                 }
@@ -106,8 +134,12 @@ namespace System
             return type;
         }
 
-        private static Assembly? ResolveAssembly(string name, Func<AssemblyName, Assembly?>? assemblyResolver, bool throwOnError,
-                                         ref StackCrawlMark stackMark)
+        private static Assembly? ResolveAssembly(
+            string name,
+            Func<AssemblyName, Assembly?>? assemblyResolver,
+            bool throwOnError,
+            ref StackCrawlMark stackMark
+        )
         {
             var aname = new AssemblyName(name);
 
@@ -139,7 +171,14 @@ namespace System
         }
 
         [RequiresUnreferencedCode("Types might be removed")]
-        private static Type? ResolveType(Assembly assembly, List<string> names, Func<Assembly, string, bool, Type?>? typeResolver, bool throwOnError, bool ignoreCase, ref StackCrawlMark stackMark)
+        private static Type? ResolveType(
+            Assembly assembly,
+            List<string> names,
+            Func<Assembly, string, bool, Type?>? typeResolver,
+            bool throwOnError,
+            bool ignoreCase,
+            ref StackCrawlMark stackMark
+        )
         {
             Type? type;
 
@@ -153,7 +192,9 @@ namespace System
                     if (assembly == null)
                         throw new TypeLoadException(SR.Format(SR.TypeLoad_ResolveType, name));
                     else
-                        throw new TypeLoadException(SR.Format(SR.TypeLoad_ResolveTypeFromAssembly, name, assembly.FullName));
+                        throw new TypeLoadException(
+                            SR.Format(SR.TypeLoad_ResolveTypeFromAssembly, name, assembly.FullName)
+                        );
                 }
             }
             else
@@ -178,7 +219,9 @@ namespace System
                 if (type == null)
                 {
                     if (throwOnError)
-                        throw new TypeLoadException(SR.Format(SR.TypeLoad_ResolveNestedType, names[i], names[i - 1]));
+                        throw new TypeLoadException(
+                            SR.Format(SR.TypeLoad_ResolveNestedType, names[i], names[i - 1])
+                        );
                     else
                         break;
                 }
@@ -269,7 +312,9 @@ namespace System
                 switch (name[pos])
                 {
                     case '+':
-                        res.Names.Add(UnescapeTypeName(name.Substring(name_start, pos - name_start)));
+                        res.Names.Add(
+                            UnescapeTypeName(name.Substring(name_start, pos - name_start))
+                        );
                         name_start = pos + 1;
                         break;
                     case '\\':
@@ -396,7 +441,10 @@ namespace System
                                         aname_start++;
                                     if (aname_start == pos)
                                         return null;
-                                    arg.AssemblyName = name.Substring(aname_start, pos - aname_start);
+                                    arg.AssemblyName = name.Substring(
+                                        aname_start,
+                                        pos - aname_start
+                                    );
                                     pos++;
                                 }
                                 else if (fqname && pos < name.Length && name[pos] == ']')

@@ -23,9 +23,23 @@ namespace System.Workflow.Activities
             if (parentActivityDesigner == null)
                 throw new ArgumentNullException("parentActivity");
 
-            if (!(Type.GetType("System.Workflow.Activities.ListenActivity," + AssemblyRef.ActivitiesAssemblyRef).IsAssignableFrom(parentActivityDesigner.Activity.GetType())) &&
-                !(parentActivityDesigner.Activity is EventHandlersActivity) &&
-                !(Type.GetType("System.Workflow.Activities.StateActivity," + AssemblyRef.ActivitiesAssemblyRef).IsAssignableFrom(parentActivityDesigner.Activity.GetType())))
+            if (
+                !(
+                    Type.GetType(
+                            "System.Workflow.Activities.ListenActivity,"
+                                + AssemblyRef.ActivitiesAssemblyRef
+                        )
+                        .IsAssignableFrom(parentActivityDesigner.Activity.GetType())
+                )
+                && !(parentActivityDesigner.Activity is EventHandlersActivity)
+                && !(
+                    Type.GetType(
+                            "System.Workflow.Activities.StateActivity,"
+                                + AssemblyRef.ActivitiesAssemblyRef
+                        )
+                        .IsAssignableFrom(parentActivityDesigner.Activity.GetType())
+                )
+            )
                 return false;
 
             return base.CanBeParentedTo(parentActivityDesigner);

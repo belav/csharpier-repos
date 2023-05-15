@@ -4,21 +4,20 @@ using System.Collections;
 
 public class Temp<T> : IEnumerable<Temp<T>.Foo>
 {
-	public class Foo { }
+    public class Foo { }
 
-	public IEnumerator<Temp<T>.Foo> GetEnumerator()
-	{
-		yield return new Foo ();
-	}
+    public IEnumerator<Temp<T>.Foo> GetEnumerator()
+    {
+        yield return new Foo();
+    }
 
-	IEnumerator IEnumerable.GetEnumerator()
-	{
-		return GetEnumerator();
-	}
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

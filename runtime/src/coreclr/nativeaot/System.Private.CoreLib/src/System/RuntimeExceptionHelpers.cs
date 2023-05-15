@@ -18,7 +18,7 @@ namespace System
         // Eagerly preallocate instance of out of memory exception to avoid infinite recursion once we run out of memory
         internal static void Initialize()
         {
-            Instance = new OutOfMemoryException(message: null);  // Cannot call the nullary constructor as that triggers non-trivial resource manager logic.
+            Instance = new OutOfMemoryException(message: null); // Cannot call the nullary constructor as that triggers non-trivial resource manager logic.
         }
     }
 
@@ -65,9 +65,7 @@ namespace System
                             {
                                 outOfMemoryException = new OutOfMemoryException();
                             }
-                            catch
-                            {
-                            }
+                            catch { }
                             t_allocatingOutOfMemoryException = false;
                         }
 
@@ -95,7 +93,9 @@ namespace System
                         return new NullReferenceException();
 
                     case ExceptionIDs.AccessViolation:
-                        FailFast("Access Violation: Attempted to read or write protected memory. This is often an indication that other memory is corrupt. The application will be terminated since this platform does not support throwing an AccessViolationException.");
+                        FailFast(
+                            "Access Violation: Attempted to read or write protected memory. This is often an indication that other memory is corrupt. The application will be terminated since this platform does not support throwing an AccessViolationException."
+                        );
                         return null;
 
                     case ExceptionIDs.DataMisaligned:
@@ -108,7 +108,9 @@ namespace System
                         return new AmbiguousImplementationException();
 
                     default:
-                        FailFast("The runtime requires an exception for a case that this class library does not understand.");
+                        FailFast(
+                            "The runtime requires an exception for a case that this class library does not understand."
+                        );
                         return null;
                 }
             }
@@ -121,12 +123,12 @@ namespace System
         public enum RhFailFastReason
         {
             Unknown = 0,
-            InternalError = 1,                                   // "Runtime internal error"
-            UnhandledException_ExceptionDispatchNotAllowed = 2,  // "Unhandled exception: no handler found before escaping a finally clause or other fail-fast scope."
-            UnhandledException_CallerDidNotHandle = 3,           // "Unhandled exception: no handler found in calling method."
-            ClassLibDidNotTranslateExceptionID = 4,              // "Unable to translate failure into a classlib-specific exception object."
-            UnhandledException = 5,                              // "Unhandled exception: a managed exception was not handled before reaching unmanaged code"
-            UnhandledExceptionFromPInvoke = 6,                   // "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition."
+            InternalError = 1, // "Runtime internal error"
+            UnhandledException_ExceptionDispatchNotAllowed = 2, // "Unhandled exception: no handler found before escaping a finally clause or other fail-fast scope."
+            UnhandledException_CallerDidNotHandle = 3, // "Unhandled exception: no handler found in calling method."
+            ClassLibDidNotTranslateExceptionID = 4, // "Unable to translate failure into a classlib-specific exception object."
+            UnhandledException = 5, // "Unhandled exception: a managed exception was not handled before reaching unmanaged code"
+            UnhandledExceptionFromPInvoke = 6, // "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition."
         }
 
         private static string GetStringForFailFastReason(RhFailFastReason reason)
@@ -149,7 +151,6 @@ namespace System
                     return "Unknown reason.";
             }
         }
-
 
         [DoesNotReturn]
         public static void FailFast(string message)
@@ -178,7 +179,10 @@ namespace System
             // If possible report the exception to GEH, if not fail fast.
             WinRTInteropCallbacks callbacks = WinRTInterop.UnsafeCallbacks;
             if (callbacks == null || !callbacks.ReportUnhandledError(exception))
-                FailFast(GetStringForFailFastReason(RhFailFastReason.UnhandledException), exception);
+                FailFast(
+                    GetStringForFailFastReason(RhFailFastReason.UnhandledException),
+                    exception
+                );
 #else
             FailFast(GetStringForFailFastReason(RhFailFastReason.UnhandledException), exception);
 #endif
@@ -188,7 +192,12 @@ namespace System
         // needs to cause the process to exit. It is the classlib's opportunity to customize the
         // termination behavior in whatever way necessary.
         [RuntimeExport("FailFast")]
-        public static void RuntimeFailFast(RhFailFastReason reason, Exception? exception, IntPtr pExAddress, IntPtr pExContext)
+        public static void RuntimeFailFast(
+            RhFailFastReason reason,
+            Exception? exception,
+            IntPtr pExAddress,
+            IntPtr pExContext
+        )
         {
             if (!SafeToPerformRichExceptionSupport)
                 return;
@@ -200,7 +209,8 @@ namespace System
                 // Avoid complex processing and allocations if we are already in failfast or recursive out of memory.
                 // We do not set InFailFast.Value here, because we want rich diagnostics in the FailFast
                 // call below and reentrancy is not possible for this method (all exceptions are ignored).
-                bool minimalFailFast = InFailFast.Value || (exception == PreallocatedOutOfMemoryException.Instance);
+                bool minimalFailFast =
+                    InFailFast.Value || (exception == PreallocatedOutOfMemoryException.Instance);
                 string failFastMessage = "";
 
                 if (!minimalFailFast)
@@ -210,10 +220,12 @@ namespace System
                         Debug.WriteLine("Unhandled Exception: " + exception.ToString());
                     }
 
-                    failFastMessage = string.Format("Runtime-generated FailFast: ({0}): {1}{2}",
-                        reason.ToString(),  // Explicit call to ToString() to avoid missing metadata exception inside String.Format()
+                    failFastMessage = string.Format(
+                        "Runtime-generated FailFast: ({0}): {1}{2}",
+                        reason.ToString(), // Explicit call to ToString() to avoid missing metadata exception inside String.Format()
                         GetStringForFailFastReason(reason),
-                        exception != null ? " [exception object available]" : "");
+                        exception != null ? " [exception object available]" : ""
+                    );
                 }
 
                 FailFast(failFastMessage, exception, reason, pExAddress, pExContext);
@@ -226,11 +238,18 @@ namespace System
         }
 
         [DoesNotReturn]
-        internal static void FailFast(string message, Exception? exception, RhFailFastReason reason, IntPtr pExAddress, IntPtr pExContext)
+        internal static void FailFast(
+            string message,
+            Exception? exception,
+            RhFailFastReason reason,
+            IntPtr pExAddress,
+            IntPtr pExContext
+        )
         {
             // If this a recursive call to FailFast, avoid all unnecessary and complex activity the second time around to avoid the recursion
             // that got us here the first time (Some judgement is required as to what activity is "unnecessary and complex".)
-            bool minimalFailFast = InFailFast.Value || (exception == PreallocatedOutOfMemoryException.Instance);
+            bool minimalFailFast =
+                InFailFast.Value || (exception == PreallocatedOutOfMemoryException.Instance);
             InFailFast.Value = true;
 
             if (!minimalFailFast)
@@ -323,7 +342,7 @@ namespace System
 
             public void WriteHeader(int cbBuffer)
             {
-                _headerSignature = 0x31304244;   // 'DB01'
+                _headerSignature = 0x31304244; // 'DB01'
                 _bufferByteCount = cbBuffer;
             }
         }
@@ -337,19 +356,21 @@ namespace System
         [StructLayout(LayoutKind.Sequential)]
         private struct SERIALIZED_ERROR_REPORT_HEADER
         {
-            private int _errorReportSignature;           // This is the version of the 'container format'.
-            private int _exceptionSerializationVersion;  // This is the version of the Exception format.  It is
-                                                         // separate from the 'container format' version since the
-                                                         // implementation of the Exception serialization is owned by
-                                                         // the Exception class.
-            private int _exceptionCount;                 // We just contain a logical array of exceptions.
-            private int _loadedModuleCount;              // Number of loaded modules. present when signature >= ER02.
+            private int _errorReportSignature; // This is the version of the 'container format'.
+            private int _exceptionSerializationVersion; // This is the version of the Exception format.  It is
+
+            // separate from the 'container format' version since the
+            // implementation of the Exception serialization is owned by
+            // the Exception class.
+            private int _exceptionCount; // We just contain a logical array of exceptions.
+            private int _loadedModuleCount; // Number of loaded modules. present when signature >= ER02.
+
             // {ExceptionCount} serialized Exceptions follow.
             // {LoadedModuleCount} module handles follow. present when signature >= ER02.
 
             public void WriteHeader(int nExceptions, int nLoadedModules)
             {
-                _errorReportSignature = 0x32305245;  // 'ER02'
+                _errorReportSignature = 0x32305245; // 'ER02'
                 _exceptionSerializationVersion = Exception.CurrentSerializationSignature;
                 _exceptionCount = nExceptions;
                 _loadedModuleCount = nLoadedModules;
@@ -374,8 +395,9 @@ namespace System
                 public uint InnerExceptionId { get; set; } // ID of the inner exception or 0xFFFFFFFF for 'no inner exception'
                 public uint ThreadId { get; set; } // Managed thread ID the eception was thrown on
                 public int NestingLevel { get; set; } // If multiple exceptions are currently active on a thread, this gives the ordering for them.
-                                                        // The highest number is the most recent exception. -1 means the exception is not currently in flight
-                                                        // (but it may still be an InnerException).
+
+                // The highest number is the most recent exception. -1 means the exception is not currently in flight
+                // (but it may still be an InnerException).
                 public IntPtr ExceptionCCWPtr { get; set; } // If the exception was thrown in an interop scenario, this contains the CCW pointer, otherwise, IntPtr.Zero
             }
 
@@ -393,17 +415,27 @@ namespace System
             {
                 checked
                 {
-                    byte[] serializedData = new byte[sizeof(ExceptionMetadataStruct) + SerializedExceptionData.Length];
+                    byte[] serializedData = new byte[
+                        sizeof(ExceptionMetadataStruct) + SerializedExceptionData.Length
+                    ];
                     fixed (byte* pSerializedData = &serializedData[0])
                     {
-                        ExceptionMetadataStruct* pMetadata = (ExceptionMetadataStruct*)pSerializedData;
+                        ExceptionMetadataStruct* pMetadata =
+                            (ExceptionMetadataStruct*)pSerializedData;
                         pMetadata->ExceptionId = ExceptionMetadata.ExceptionId;
                         pMetadata->InnerExceptionId = ExceptionMetadata.InnerExceptionId;
                         pMetadata->ThreadId = ExceptionMetadata.ThreadId;
                         pMetadata->NestingLevel = ExceptionMetadata.NestingLevel;
                         pMetadata->ExceptionCCWPtr = ExceptionMetadata.ExceptionCCWPtr;
 
-                        SerializedExceptionData.AsSpan().CopyTo(new Span<byte>(pSerializedData + sizeof(ExceptionMetadataStruct), SerializedExceptionData.Length));
+                        SerializedExceptionData
+                            .AsSpan()
+                            .CopyTo(
+                                new Span<byte>(
+                                    pSerializedData + sizeof(ExceptionMetadataStruct),
+                                    SerializedExceptionData.Length
+                                )
+                            );
                     }
                     return serializedData;
                 }
@@ -413,7 +445,10 @@ namespace System
         /// <summary>
         /// Table of exceptions that were on stacks triggering GenerateExceptionInformationForDump
         /// </summary>
-        private static readonly ConditionalWeakTable<Exception, ExceptionData> s_exceptionDataTable = new ConditionalWeakTable<Exception, ExceptionData>();
+        private static readonly ConditionalWeakTable<
+            Exception,
+            ExceptionData
+        > s_exceptionDataTable = new ConditionalWeakTable<Exception, ExceptionData>();
 
         /// <summary>
         /// Counter for exception ID assignment
@@ -436,7 +471,10 @@ namespace System
         ///    exception data should stay stable
         /// 3. There is a dependency on the fact that ConditionalWeakTable's members are all threadsafe and that .Values returns a snapshot
         /// </summary>
-        public static void GenerateExceptionInformationForDump(Exception currentException, IntPtr exceptionCCWPtr)
+        public static void GenerateExceptionInformationForDump(
+            Exception currentException,
+            IntPtr exceptionCCWPtr
+        )
         {
             LowLevelList<byte[]> serializedExceptions = new LowLevelList<byte[]>();
 
@@ -449,7 +487,11 @@ namespace System
             GenerateErrorReportForDump(serializedExceptions);
         }
 
-        private static void SerializeExceptionsForDump(Exception currentException, IntPtr exceptionCCWPtr, LowLevelList<byte[]> serializedExceptions)
+        private static void SerializeExceptionsForDump(
+            Exception currentException,
+            IntPtr exceptionCCWPtr,
+            LowLevelList<byte[]> serializedExceptions
+        )
         {
             const uint NoInnerExceptionValue = 0xFFFFFFFF;
 
@@ -479,7 +521,10 @@ namespace System
             // Find all inner exceptions, even if they're not currently being handled
             for (int i = 0; i < exceptions.Count; i++)
             {
-                if (exceptions[i].InnerException != null && !exceptions.Contains(exceptions[i].InnerException))
+                if (
+                    exceptions[i].InnerException != null
+                    && !exceptions.Contains(exceptions[i].InnerException)
+                )
                 {
                     exceptions.Add(exceptions[i].InnerException);
                     nonThrownInnerExceptions.Add(exceptions[i].InnerException);
@@ -503,10 +548,12 @@ namespace System
             {
                 ExceptionData exceptionData = s_exceptionDataTable.GetOrCreateValue(exceptions[i]);
 
-                exceptionData.ExceptionMetadata.ExceptionId = (uint)System.Threading.Interlocked.Increment(ref s_currentExceptionId);
+                exceptionData.ExceptionMetadata.ExceptionId = (uint)
+                    System.Threading.Interlocked.Increment(ref s_currentExceptionId);
                 if (exceptionData.ExceptionMetadata.ExceptionId == NoInnerExceptionValue)
                 {
-                    exceptionData.ExceptionMetadata.ExceptionId = (uint)System.Threading.Interlocked.Increment(ref s_currentExceptionId);
+                    exceptionData.ExceptionMetadata.ExceptionId = (uint)
+                        System.Threading.Interlocked.Increment(ref s_currentExceptionId);
                 }
 
                 exceptionData.ExceptionMetadata.ThreadId = currentThreadId;
@@ -545,9 +592,16 @@ namespace System
                 if (exceptions[i].InnerException != null)
                 {
                     ExceptionData innerExceptionData;
-                    if (s_exceptionDataTable.TryGetValue(exceptions[i].InnerException, out innerExceptionData))
+                    if (
+                        s_exceptionDataTable.TryGetValue(
+                            exceptions[i].InnerException,
+                            out innerExceptionData
+                        )
+                    )
                     {
-                        exceptionData.ExceptionMetadata.InnerExceptionId = innerExceptionData.ExceptionMetadata.ExceptionId;
+                        exceptionData.ExceptionMetadata.InnerExceptionId = innerExceptionData
+                            .ExceptionMetadata
+                            .ExceptionId;
                     }
                 }
                 else
@@ -565,7 +619,6 @@ namespace System
                 serializedExceptions.Add(serializedExceptionData);
                 totalSerializedExceptionSize = serializedExceptionData.Length;
             }
-
             checked
             {
                 foreach (KeyValuePair<Exception, ExceptionData> item in s_exceptionDataTable)
@@ -573,13 +626,20 @@ namespace System
                     ExceptionData exceptionData = item.Value;
 
                     // Already serialized currentException
-                    if (currentExceptionData != null && exceptionData.ExceptionMetadata.ExceptionId == currentExceptionData.ExceptionMetadata.ExceptionId)
+                    if (
+                        currentExceptionData != null
+                        && exceptionData.ExceptionMetadata.ExceptionId
+                            == currentExceptionData.ExceptionMetadata.ExceptionId
+                    )
                     {
                         continue;
                     }
 
                     byte[] serializedExceptionData = exceptionData.Serialize();
-                    if (totalSerializedExceptionSize + serializedExceptionData.Length >= MaxBufferSize)
+                    if (
+                        totalSerializedExceptionSize + serializedExceptionData.Length
+                        >= MaxBufferSize
+                    )
                     {
                         break;
                     }
@@ -590,13 +650,18 @@ namespace System
             }
         }
 
-        private static unsafe void GenerateErrorReportForDump(LowLevelList<byte[]> serializedExceptions)
+        private static unsafe void GenerateErrorReportForDump(
+            LowLevelList<byte[]> serializedExceptions
+        )
         {
             checked
             {
                 int loadedModuleCount = (int)RuntimeImports.RhGetLoadedOSModules(null);
                 int cbModuleHandles = sizeof(System.IntPtr) * loadedModuleCount;
-                int cbFinalBuffer = sizeof(ERROR_REPORT_BUFFER_HEADER) + sizeof(SERIALIZED_ERROR_REPORT_HEADER) + cbModuleHandles;
+                int cbFinalBuffer =
+                    sizeof(ERROR_REPORT_BUFFER_HEADER)
+                    + sizeof(SERIALIZED_ERROR_REPORT_HEADER)
+                    + cbModuleHandles;
                 for (int i = 0; i < serializedExceptions.Count; i++)
                 {
                     cbFinalBuffer += serializedExceptions[i].Length;
@@ -613,7 +678,8 @@ namespace System
                     pCursor += sizeof(ERROR_REPORT_BUFFER_HEADER);
                     cbRemaining -= sizeof(ERROR_REPORT_BUFFER_HEADER);
 
-                    SERIALIZED_ERROR_REPORT_HEADER* pPayloadHeader = (SERIALIZED_ERROR_REPORT_HEADER*)pCursor;
+                    SERIALIZED_ERROR_REPORT_HEADER* pPayloadHeader =
+                        (SERIALIZED_ERROR_REPORT_HEADER*)pCursor;
                     pPayloadHeader->WriteHeader(serializedExceptions.Count, loadedModuleCount);
                     pCursor += sizeof(SERIALIZED_ERROR_REPORT_HEADER);
                     cbRemaining -= sizeof(SERIALIZED_ERROR_REPORT_HEADER);
@@ -630,7 +696,9 @@ namespace System
                     // copy the module-handle array to report buffer
                     IntPtr[] loadedModuleHandles = new IntPtr[loadedModuleCount];
                     RuntimeImports.RhGetLoadedOSModules(loadedModuleHandles);
-                    loadedModuleHandles.AsSpan().CopyTo(new Span<IntPtr>(pCursor, loadedModuleHandles.Length));
+                    loadedModuleHandles
+                        .AsSpan()
+                        .CopyTo(new Span<IntPtr>(pCursor, loadedModuleHandles.Length));
                     cbRemaining -= cbModuleHandles;
                     pCursor += cbModuleHandles;
 
@@ -652,10 +720,13 @@ namespace System
                 fixed (byte* pBuffer = &finalBuffer[0])
                 {
                     byte* pPrevBuffer = (byte*)RuntimeImports.RhSetErrorInfoBuffer(pBuffer);
-                    Debug.Assert(s_ExceptionInfoBufferPinningHandle.IsAllocated == (pPrevBuffer != null));
+                    Debug.Assert(
+                        s_ExceptionInfoBufferPinningHandle.IsAllocated == (pPrevBuffer != null)
+                    );
                     if (pPrevBuffer != null)
                     {
-                        byte[] currentExceptionInfoBuffer = (byte[])s_ExceptionInfoBufferPinningHandle.Target;
+                        byte[] currentExceptionInfoBuffer = (byte[])
+                            s_ExceptionInfoBufferPinningHandle.Target;
                         Debug.Assert(currentExceptionInfoBuffer?.Length > 0);
                         fixed (byte* pPrev = &currentExceptionInfoBuffer[0])
                             Debug.Assert(pPrev == pPrevBuffer);
@@ -663,7 +734,10 @@ namespace System
                     if (!s_ExceptionInfoBufferPinningHandle.IsAllocated)
                     {
                         // We allocate a pinning GC handle because we are logically giving the runtime 'unmanaged memory'.
-                        s_ExceptionInfoBufferPinningHandle = GCHandle.Alloc(finalBuffer, GCHandleType.Pinned);
+                        s_ExceptionInfoBufferPinningHandle = GCHandle.Alloc(
+                            finalBuffer,
+                            GCHandleType.Pinned
+                        );
                     }
                     else
                     {

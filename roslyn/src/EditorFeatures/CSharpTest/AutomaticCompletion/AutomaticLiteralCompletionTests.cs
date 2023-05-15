@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void String_String()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void String_VerbatimString()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -95,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void String_Char()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -110,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Method_String()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -125,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Method_String_Delete()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -141,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Method_String_Tab()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -157,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Method_String_Quotation()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -173,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void VerbatimMethod_String()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -188,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void VerbatimMethod_String_Delete()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -204,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void VerbatimMethod_String_Tab()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -220,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void VerbatimMethod_String_Quotation()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -236,7 +247,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Method_InterpolatedString()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -251,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Method_InterpolatedString_Delete()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -267,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Method_InterpolatedString_Tab()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -283,7 +297,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Method_InterpolatedString_Quotation()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -299,7 +314,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void VerbatimMethod_InterpolatedString()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -314,7 +330,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void VerbatimMethod_InterpolatedString_Delete()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -330,7 +347,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void VerbatimMethod_InterpolatedString_Tab()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -346,7 +364,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void VerbatimMethod_InterpolatedString_Quotation()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -362,7 +381,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Preprocessor1()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -378,7 +398,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Preprocessor2()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -394,7 +415,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void Preprocessor3()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -411,7 +433,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact]
         public void VerbatimStringDoubleQuote()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -426,7 +449,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact, WorkItem(59178, "https://github.com/dotnet/roslyn/issues/59178")]
         public void String_CompleteLiteral()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -441,7 +465,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact, WorkItem(59178, "https://github.com/dotnet/roslyn/issues/59178")]
         public void String_BeforeOtherString1()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -456,7 +481,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact, WorkItem(59178, "https://github.com/dotnet/roslyn/issues/59178")]
         public void String_BeforeOtherString2()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -471,7 +497,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact, WorkItem(59178, "https://github.com/dotnet/roslyn/issues/59178")]
         public void String_DontCompleteVerbatim()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -487,7 +514,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact, WorkItem(59178, "https://github.com/dotnet/roslyn/issues/59178")]
         public void String_CompleteLiteral_EndOfFile()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -501,14 +529,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                SingleQuote.OpenCharacter, SingleQuote.CloseCharacter);
+                SingleQuote.OpenCharacter,
+                SingleQuote.CloseCharacter
+            );
         }
 
         internal static Holder CreateSessionDoubleQuote(string code)
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                DoubleQuote.OpenCharacter, DoubleQuote.CloseCharacter);
+                DoubleQuote.OpenCharacter,
+                DoubleQuote.CloseCharacter
+            );
         }
     }
 }

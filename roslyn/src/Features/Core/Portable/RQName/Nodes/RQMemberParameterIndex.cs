@@ -12,9 +12,7 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         public readonly RQMember ContainingMember;
         public readonly int ParameterIndex;
 
-        public RQMemberParameterIndex(
-            RQMember containingMember,
-            int parameterIndex)
+        public RQMemberParameterIndex(RQMember containingMember, int parameterIndex)
         {
             ContainingMember = containingMember;
             ParameterIndex = parameterIndex;

@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ComponentEvent.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using Microsoft.Win32;
     using System;
     using System.ComponentModel;
@@ -19,10 +20,16 @@ namespace System.ComponentModel.Design {
     /// </devdoc>
     [HostProtection(SharedState = true)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.InheritanceDemand, Name="FullTrust")]
-    [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Name="FullTrust")]
-    public class ComponentEventArgs : EventArgs {
-
+    [System.Security.Permissions.PermissionSetAttribute(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Name = "FullTrust"
+    )]
+    [System.Security.Permissions.PermissionSetAttribute(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Name = "FullTrust"
+    )]
+    public class ComponentEventArgs : EventArgs
+    {
         private IComponent component;
 
         /// <devdoc>
@@ -30,10 +37,9 @@ namespace System.ComponentModel.Design {
         ///       Gets or sets the component associated with the event.
         ///    </para>
         /// </devdoc>
-        public virtual IComponent Component {
-            get {
-                return component;
-            }
+        public virtual IComponent Component
+        {
+            get { return component; }
         }
 
         /// <devdoc>
@@ -41,7 +47,8 @@ namespace System.ComponentModel.Design {
         ///       Initializes a new instance of the System.ComponentModel.Design.ComponentEventArgs class.
         ///    </para>
         /// </devdoc>
-        public ComponentEventArgs(IComponent component) {
+        public ComponentEventArgs(IComponent component)
+        {
             this.component = component;
         }
     }

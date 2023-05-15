@@ -9,11 +9,10 @@ public class StartupWithCustomValueProvider
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services
-            .AddMvc(o =>
-            {
-                o.ValueProviderFactories.Add(new CustomValueProviderFactory());
-            });
+        services.AddMvc(o =>
+        {
+            o.ValueProviderFactories.Add(new CustomValueProviderFactory());
+        });
     }
 
     public void Configure(IApplicationBuilder app)

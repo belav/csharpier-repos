@@ -19,9 +19,15 @@ public static class ConnectionBuilderExtensions
     /// <typeparam name="TConnectionHandler">The <see cref="Type"/> of the <see cref="ConnectionHandler"/>.</typeparam>
     /// <param name="connectionBuilder">The <see cref="IConnectionBuilder"/>.</param>
     /// <returns>The <see cref="IConnectionBuilder"/>.</returns>
-    public static IConnectionBuilder UseConnectionHandler<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TConnectionHandler>(this IConnectionBuilder connectionBuilder) where TConnectionHandler : ConnectionHandler
+    public static IConnectionBuilder UseConnectionHandler<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            TConnectionHandler
+    >(this IConnectionBuilder connectionBuilder)
+        where TConnectionHandler : ConnectionHandler
     {
-        var handler = ActivatorUtilities.GetServiceOrCreateInstance<TConnectionHandler>(connectionBuilder.ApplicationServices);
+        var handler = ActivatorUtilities.GetServiceOrCreateInstance<TConnectionHandler>(
+            connectionBuilder.ApplicationServices
+        );
 
         // This is a terminal middleware, so there's no need to use the 'next' parameter
         return connectionBuilder.Run(handler.OnConnectedAsync);
@@ -33,7 +39,10 @@ public static class ConnectionBuilderExtensions
     /// <param name="connectionBuilder">The <see cref="IConnectionBuilder"/>.</param>
     /// <param name="middleware">The middleware to add to the <see cref="IConnectionBuilder"/>.</param>
     /// <returns>The <see cref="IConnectionBuilder"/>.</returns>
-    public static IConnectionBuilder Use(this IConnectionBuilder connectionBuilder, Func<ConnectionContext, Func<Task>, Task> middleware)
+    public static IConnectionBuilder Use(
+        this IConnectionBuilder connectionBuilder,
+        Func<ConnectionContext, Func<Task>, Task> middleware
+    )
     {
         return connectionBuilder.Use(next =>
         {
@@ -51,7 +60,10 @@ public static class ConnectionBuilderExtensions
     /// <param name="connectionBuilder">The <see cref="IConnectionBuilder"/>.</param>
     /// <param name="middleware">The middleware to add to the <see cref="IConnectionBuilder"/>.</param>
     /// <returns>The <see cref="IConnectionBuilder"/>.</returns>
-    public static IConnectionBuilder Run(this IConnectionBuilder connectionBuilder, Func<ConnectionContext, Task> middleware)
+    public static IConnectionBuilder Run(
+        this IConnectionBuilder connectionBuilder,
+        Func<ConnectionContext, Task> middleware
+    )
     {
         return connectionBuilder.Use(next =>
         {

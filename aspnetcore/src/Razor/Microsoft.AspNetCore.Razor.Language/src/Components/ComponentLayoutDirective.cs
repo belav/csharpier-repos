@@ -12,10 +12,14 @@ internal static class ComponentLayoutDirective
         DirectiveKind.SingleLine,
         builder =>
         {
-            builder.AddTypeToken(ComponentResources.LayoutDirective_TypeToken_Name, ComponentResources.LayoutDirective_TypeToken_Description);
+            builder.AddTypeToken(
+                ComponentResources.LayoutDirective_TypeToken_Name,
+                ComponentResources.LayoutDirective_TypeToken_Description
+            );
             builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
             builder.Description = ComponentResources.LayoutDirective_Description;
-        });
+        }
+    );
 
     public static void Register(RazorProjectEngineBuilder builder)
     {

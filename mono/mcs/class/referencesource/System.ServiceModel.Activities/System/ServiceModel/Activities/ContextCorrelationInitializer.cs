@@ -4,13 +4,10 @@
 
 namespace System.ServiceModel.Activities
 {
-
     public sealed class ContextCorrelationInitializer : CorrelationInitializer
     {
         public ContextCorrelationInitializer()
-            : base()
-        {
-        }
+            : base() { }
 
         internal override CorrelationInitializer CloneCore()
         {

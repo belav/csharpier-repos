@@ -52,7 +52,10 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(index);
             ArgumentOutOfRangeException.ThrowIfNegative(count);
             if (bytes.Length - index < count)
-                throw new ArgumentOutOfRangeException(nameof(bytes), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytes),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (count == 0 && (_leftOverLeadByte == 0 || !flush))
                 return 0;
@@ -66,7 +69,12 @@ namespace System.Text
             }
         }
 
-        private unsafe int ConvertWithLeftOverByte(byte* bytes, int count, char* chars, int charCount)
+        private unsafe int ConvertWithLeftOverByte(
+            byte* bytes,
+            int count,
+            char* chars,
+            int charCount
+        )
         {
             Debug.Assert(_leftOverLeadByte != 0);
             byte* pTempBuffer = stackalloc byte[2];
@@ -80,14 +88,22 @@ namespace System.Text
                 index++;
             }
 
-            int result = OSEncoding.MultiByteToWideChar(_encoding.CodePage, pTempBuffer, index + 1, chars, charCount);
+            int result = OSEncoding.MultiByteToWideChar(
+                _encoding.CodePage,
+                pTempBuffer,
+                index + 1,
+                chars,
+                charCount
+            );
 
             if (count - index > 0)
                 result += OSEncoding.MultiByteToWideChar(
-                                        _encoding.CodePage, bytes + index,
-                                        count - index,
-                                        chars == null ? null : chars + result,
-                                        chars == null ? 0 : charCount - result);
+                    _encoding.CodePage,
+                    bytes + index,
+                    count - index,
+                    chars == null ? null : chars + result,
+                    chars == null ? 0 : charCount - result
+                );
 
             return result;
         }
@@ -117,14 +133,25 @@ namespace System.Text
             return ConvertWithLeftOverByte(bytes, count, null, 0);
         }
 
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount,
-                                             char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             return GetChars(bytes, byteIndex, byteCount, chars, charIndex, false);
         }
 
-        public override unsafe int GetChars(byte[] bytes, int byteIndex, int byteCount,
-                                             char[] chars, int charIndex, bool flush)
+        public override unsafe int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex,
+            bool flush
+        )
         {
             ArgumentNullException.ThrowIfNull(bytes);
             ArgumentNullException.ThrowIfNull(chars);
@@ -133,10 +160,16 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(byteCount);
 
             if (bytes.Length - byteIndex < byteCount)
-                throw new ArgumentOutOfRangeException(nameof(bytes), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytes),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (charIndex < 0 || charIndex > chars.Length)
-                throw new ArgumentOutOfRangeException(nameof(charIndex), SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                throw new ArgumentOutOfRangeException(
+                    nameof(charIndex),
+                    SR.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                );
 
             if (chars.Length == 0)
                 return 0;
@@ -150,11 +183,23 @@ namespace System.Text
                 byte dummyByte;
                 byte* pBuffer = pBytes == null ? &dummyByte : pBytes + byteIndex;
 
-                return GetChars(pBuffer, byteCount, pChars + charIndex, chars.Length - charIndex, flush);
+                return GetChars(
+                    pBuffer,
+                    byteCount,
+                    pChars + charIndex,
+                    chars.Length - charIndex,
+                    flush
+                );
             }
         }
 
-        public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount, bool flush)
+        public override unsafe int GetChars(
+            byte* bytes,
+            int byteCount,
+            char* chars,
+            int charCount,
+            bool flush
+        )
         {
             ArgumentNullException.ThrowIfNull(bytes);
             ArgumentNullException.ThrowIfNull(chars);
@@ -165,7 +210,10 @@ namespace System.Text
             if (charCount == 0)
                 return 0;
 
-            byte lastByte = byteCount > 0 && !flush && IsLastByteALeadByte(bytes, byteCount) ? bytes[byteCount - 1] : (byte)0;
+            byte lastByte =
+                byteCount > 0 && !flush && IsLastByteALeadByte(bytes, byteCount)
+                    ? bytes[byteCount - 1]
+                    : (byte)0;
 
             if (lastByte != 0)
                 byteCount--;
@@ -178,7 +226,13 @@ namespace System.Text
                     return 0;
                 }
 
-                int result = OSEncoding.MultiByteToWideChar(_encoding.CodePage, bytes, byteCount, chars, charCount);
+                int result = OSEncoding.MultiByteToWideChar(
+                    _encoding.CodePage,
+                    bytes,
+                    byteCount,
+                    chars,
+                    charCount
+                );
                 _leftOverLeadByte = lastByte;
                 return result;
             }
@@ -192,9 +246,18 @@ namespace System.Text
             return res;
         }
 
-        public override unsafe void Convert(byte[] bytes, int byteIndex, int byteCount,
-                                              char[] chars, int charIndex, int charCount, bool flush,
-                                              out int bytesUsed, out int charsUsed, out bool completed)
+        public override unsafe void Convert(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex,
+            int charCount,
+            bool flush,
+            out int bytesUsed,
+            out int charsUsed,
+            out bool completed
+        )
         {
             ArgumentNullException.ThrowIfNull(bytes);
             ArgumentNullException.ThrowIfNull(chars);
@@ -206,10 +269,16 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(charCount);
 
             if (bytes.Length - byteIndex < byteCount)
-                throw new ArgumentOutOfRangeException(nameof(bytes), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bytes),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (chars.Length - charIndex < charCount)
-                throw new ArgumentOutOfRangeException(nameof(chars), SR.ArgumentOutOfRange_IndexCountBuffer);
+                throw new ArgumentOutOfRangeException(
+                    nameof(chars),
+                    SR.ArgumentOutOfRange_IndexCountBuffer
+                );
 
             if (charCount == 0 || (bytes.Length == 0 && (_leftOverLeadByte == 0 || !flush)))
             {
@@ -225,13 +294,29 @@ namespace System.Text
                 byte dummyByte;
                 byte* pBuffer = pBytes == null ? &dummyByte : pBytes + byteIndex;
 
-                Convert(pBuffer, byteCount, pChars + charIndex, charCount, flush, out bytesUsed, out charsUsed, out completed);
+                Convert(
+                    pBuffer,
+                    byteCount,
+                    pChars + charIndex,
+                    charCount,
+                    flush,
+                    out bytesUsed,
+                    out charsUsed,
+                    out completed
+                );
             }
         }
 
-        public override unsafe void Convert(byte* bytes, int byteCount,
-                                              char* chars, int charCount, bool flush,
-                                              out int bytesUsed, out int charsUsed, out bool completed)
+        public override unsafe void Convert(
+            byte* bytes,
+            int byteCount,
+            char* chars,
+            int charCount,
+            bool flush,
+            out int bytesUsed,
+            out int charsUsed,
+            out bool completed
+        )
         {
             ArgumentNullException.ThrowIfNull(bytes);
             ArgumentNullException.ThrowIfNull(chars);

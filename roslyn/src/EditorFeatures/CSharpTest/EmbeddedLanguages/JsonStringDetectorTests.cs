@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpJsonDetectionAnalyzer,
-        CSharpJsonDetectionCodeFixProvider>;
+        CSharpJsonDetectionCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsDetectJsonString)]
     public class JsonStringDetectorTests
@@ -24,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void Goo()
@@ -33,7 +34,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     void Goo()
@@ -50,7 +51,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void Goo()
@@ -59,7 +60,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     void Goo()
@@ -76,7 +77,7 @@ class C
             await new VerifyCS.Test
             {
                 TestCode =
-@"
+                    @"
 class C
 {
     void Goo()
@@ -85,7 +86,7 @@ class C
     }
 }",
                 FixedCode =
-@"
+                    @"
 class C
 {
     void Goo()
@@ -100,7 +101,8 @@ class C
         [Fact]
         public async Task TestNotWithExistingComment()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Goo()
@@ -108,17 +110,14 @@ class C
         var j = /*lang=json,strict*/ ""{ \""a\"": 0 }"";
     }
 }";
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotOnUnlikelyJson()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Goo()
@@ -126,11 +125,7 @@ class C
         var j = ""[1, 2, 3]"";
     }
 }";
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
     }
 }

@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -17,8 +17,8 @@ namespace System.Web.UI.WebControls {
     /// <devdoc>
     ///    <para>Specifies the style of the table.</para>
     /// </devdoc>
-    public class TableStyle : Style {
-
+    public class TableStyle : Style
+    {
         // The following are marked internal so that WebPartMenuStyle (or other derived types) can access IsSet on them
         internal const int PROP_BACKIMAGEURL = 0x00010000;
         internal const int PROP_CELLPADDING = 0x00020000;
@@ -26,13 +26,11 @@ namespace System.Web.UI.WebControls {
         internal const int PROP_GRIDLINES = 0x00080000;
         internal const int PROP_HORZALIGN = 0x00100000;
 
-
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.TableStyle'/> class.</para>
         /// </devdoc>
-        public TableStyle() : base() {
-        }
-
+        public TableStyle()
+            : base() { }
 
         /// <devdoc>
         ///    <para>
@@ -40,30 +38,34 @@ namespace System.Web.UI.WebControls {
         ///       specified state bag information.
         ///    </para>
         /// </devdoc>
-        public TableStyle(StateBag bag) : base(bag) {
-        }
-
+        public TableStyle(StateBag bag)
+            : base(bag) { }
 
         /// <devdoc>
         ///    <para>Gets or sets the URL of the background image for the
         ///       table. The image will be tiled if it is smaller than the table.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        UrlProperty(),
-        WebSysDescription(SR.TableStyle_BackImageUrl),
-        NotifyParentProperty(true)
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            UrlProperty(),
+            WebSysDescription(SR.TableStyle_BackImageUrl),
+            NotifyParentProperty(true)
         ]
-        public virtual string BackImageUrl {
-            get {
-                if (IsSet(PROP_BACKIMAGEURL)) {
-                    return(string)(ViewState["BackImageUrl"]);
+        public virtual string BackImageUrl
+        {
+            get
+            {
+                if (IsSet(PROP_BACKIMAGEURL))
+                {
+                    return (string)(ViewState["BackImageUrl"]);
                 }
                 return String.Empty;
             }
-            set {
-                if (value == null) {
+            set
+            {
+                if (value == null)
+                {
                     throw new ArgumentNullException("value");
                 }
                 ViewState["BackImageUrl"] = value;
@@ -76,72 +78,91 @@ namespace System.Web.UI.WebControls {
         ///       contents of the table cell.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(-1),
-        WebSysDescription(SR.TableStyle_CellPadding),
-        NotifyParentProperty(true)
+            WebCategory("Appearance"),
+            DefaultValue(-1),
+            WebSysDescription(SR.TableStyle_CellPadding),
+            NotifyParentProperty(true)
         ]
-        public virtual int CellPadding {
-            get {
-                if (IsSet(PROP_CELLPADDING)) {
-                    return(int)(ViewState["CellPadding"]);
+        public virtual int CellPadding
+        {
+            get
+            {
+                if (IsSet(PROP_CELLPADDING))
+                {
+                    return (int)(ViewState["CellPadding"]);
                 }
                 return -1;
             }
-            set {
-                if (value < -1) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.TableStyle_InvalidCellPadding));
+            set
+            {
+                if (value < -1)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.TableStyle_InvalidCellPadding)
+                    );
                 }
                 ViewState["CellPadding"] = value;
                 SetBit(PROP_CELLPADDING);
             }
         }
 
-
         /// <devdoc>
         ///    <para>Gets or sets the distance between table cells.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(-1),
-        WebSysDescription(SR.TableStyle_CellSpacing),
-        NotifyParentProperty(true)
+            WebCategory("Appearance"),
+            DefaultValue(-1),
+            WebSysDescription(SR.TableStyle_CellSpacing),
+            NotifyParentProperty(true)
         ]
-        public virtual int CellSpacing {
-            get {
-                if (IsSet(PROP_CELLSPACING)) {
-                    return(int)(ViewState["CellSpacing"]);
+        public virtual int CellSpacing
+        {
+            get
+            {
+                if (IsSet(PROP_CELLSPACING))
+                {
+                    return (int)(ViewState["CellSpacing"]);
                 }
                 return -1;
             }
-            set {
-                if (value < -1) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.TableStyle_InvalidCellSpacing));
+            set
+            {
+                if (value < -1)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.TableStyle_InvalidCellSpacing)
+                    );
                 }
                 ViewState["CellSpacing"] = value;
                 SetBit(PROP_CELLSPACING);
             }
         }
 
-
         /// <devdoc>
         ///    Gets or sets the gridlines property of the table.
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(GridLines.None),
-        WebSysDescription(SR.TableStyle_GridLines),
-        NotifyParentProperty(true)
+            WebCategory("Appearance"),
+            DefaultValue(GridLines.None),
+            WebSysDescription(SR.TableStyle_GridLines),
+            NotifyParentProperty(true)
         ]
-        public virtual GridLines GridLines {
-            get {
-                if (IsSet(PROP_GRIDLINES)) {
-                    return(GridLines)(ViewState["GridLines"]);
+        public virtual GridLines GridLines
+        {
+            get
+            {
+                if (IsSet(PROP_GRIDLINES))
+                {
+                    return (GridLines)(ViewState["GridLines"]);
                 }
                 return GridLines.None;
             }
-            set {
-                if (value < GridLines.None || value > GridLines.Both) {
+            set
+            {
+                if (value < GridLines.None || value > GridLines.Both)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["GridLines"] = value;
@@ -149,25 +170,29 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-
         /// <devdoc>
         ///    <para>Gets or sets the horizontal alignment of the table within the page.</para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(HorizontalAlign.NotSet),
-        WebSysDescription(SR.TableStyle_HorizontalAlign),
-        NotifyParentProperty(true)
+            WebCategory("Layout"),
+            DefaultValue(HorizontalAlign.NotSet),
+            WebSysDescription(SR.TableStyle_HorizontalAlign),
+            NotifyParentProperty(true)
         ]
-        public virtual HorizontalAlign HorizontalAlign {
-            get {
-                if (IsSet(PROP_HORZALIGN)) {
-                    return(HorizontalAlign)(ViewState["HorizontalAlign"]);
+        public virtual HorizontalAlign HorizontalAlign
+        {
+            get
+            {
+                if (IsSet(PROP_HORZALIGN))
+                {
+                    return (HorizontalAlign)(ViewState["HorizontalAlign"]);
                 }
                 return HorizontalAlign.NotSet;
             }
-            set {
-                if (value < HorizontalAlign.NotSet || value > HorizontalAlign.Justify) {
+            set
+            {
+                if (value < HorizontalAlign.NotSet || value > HorizontalAlign.Justify)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["HorizontalAlign"] = value;
@@ -175,34 +200,45 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         ///    <para> Adds information about the background
         ///       image, callspacing, cellpadding, gridlines, and alignment to the list of attributes
         ///       to render.</para>
         /// </devdoc>
-        public override void AddAttributesToRender(HtmlTextWriter writer, WebControl owner) {
+        public override void AddAttributesToRender(HtmlTextWriter writer, WebControl owner)
+        {
             base.AddAttributesToRender(writer, owner);
 
             int n = CellSpacing;
-            if (n >= 0) {
-                writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, n.ToString(NumberFormatInfo.InvariantInfo));
-                if (n == 0) {
+            if (n >= 0)
+            {
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Cellspacing,
+                    n.ToString(NumberFormatInfo.InvariantInfo)
+                );
+                if (n == 0)
+                {
                     writer.AddStyleAttribute(HtmlTextWriterStyle.BorderCollapse, "collapse");
                 }
             }
 
             n = CellPadding;
-            if (n >= 0) {
-                writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, n.ToString(NumberFormatInfo.InvariantInfo));
+            if (n >= 0)
+            {
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Cellpadding,
+                    n.ToString(NumberFormatInfo.InvariantInfo)
+                );
             }
 
             HorizontalAlign align = HorizontalAlign;
-            if (align != HorizontalAlign.NotSet) {
+            if (align != HorizontalAlign.NotSet)
+            {
                 string alignValue = "Justify";
 
-                switch (align) {
+                switch (align)
+                {
                     case HorizontalAlign.Left:
                         alignValue = "Left";
                         break;
@@ -220,9 +256,11 @@ namespace System.Web.UI.WebControls {
             }
 
             GridLines gridLines = GridLines;
-            if (gridLines != GridLines.None) {
+            if (gridLines != GridLines.None)
+            {
                 string rules = String.Empty;
-                switch (GridLines) {
+                switch (GridLines)
+                {
                     case GridLines.Both:
                         rules = "all";
                         break;
@@ -237,27 +275,31 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         ///    <para>Copies non-blank elements from the specified style, overwriting existing
         ///       style elements if necessary.</para>
         /// </devdoc>
-        public override void CopyFrom(Style s) {
-            if (s != null && !s.IsEmpty) {
+        public override void CopyFrom(Style s)
+        {
+            if (s != null && !s.IsEmpty)
+            {
                 base.CopyFrom(s);
 
                 TableStyle ts = s as TableStyle;
-                if (ts != null) {
-
+                if (ts != null)
+                {
                     // Only copy the BackImageUrl if it isn't in the source Style's registered CSS class
-                    if (s.RegisteredCssClass.Length != 0) {
-                        if (ts.IsSet(PROP_BACKIMAGEURL)) {
+                    if (s.RegisteredCssClass.Length != 0)
+                    {
+                        if (ts.IsSet(PROP_BACKIMAGEURL))
+                        {
                             ViewState.Remove("BackImageUrl");
                             ClearBit(PROP_BACKIMAGEURL);
                         }
                     }
-                    else {
+                    else
+                    {
                         if (ts.IsSet(PROP_BACKIMAGEURL))
                             this.BackImageUrl = ts.BackImageUrl;
                     }
@@ -274,29 +316,36 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-
         /// <internalonly/>
-        protected override void FillStyleAttributes(CssStyleCollection attributes, IUrlResolutionService urlResolver) {
+        protected override void FillStyleAttributes(
+            CssStyleCollection attributes,
+            IUrlResolutionService urlResolver
+        )
+        {
             base.FillStyleAttributes(attributes, urlResolver);
 
             string s = BackImageUrl;
-            if (s.Length != 0) {
-                if (urlResolver != null) {
+            if (s.Length != 0)
+            {
+                if (urlResolver != null)
+                {
                     s = urlResolver.ResolveClientUrl(s);
                 }
                 attributes.Add(HtmlTextWriterStyle.BackgroundImage, s);
             }
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         ///    <para>Copies non-blank elements from the specified style, but will not overwrite
         ///       any existing style elements.</para>
         /// </devdoc>
-        public override void MergeWith(Style s) {
-            if (s != null && !s.IsEmpty) {
-                if (IsEmpty) {
+        public override void MergeWith(Style s)
+        {
+            if (s != null && !s.IsEmpty)
+            {
+                if (IsEmpty)
+                {
                     // merge into an empty style is equivalent to a copy,
                     // which is more efficient
                     CopyFrom(s);
@@ -306,11 +355,12 @@ namespace System.Web.UI.WebControls {
                 base.MergeWith(s);
 
                 TableStyle ts = s as TableStyle;
-                if (ts != null) {
-
+                if (ts != null)
+                {
                     // Since we're already copying the registered CSS class in base.MergeWith, we don't
                     // need to any attributes that would be included in that class.
-                    if (s.RegisteredCssClass.Length == 0) {
+                    if (s.RegisteredCssClass.Length == 0)
+                    {
                         if (ts.IsSet(PROP_BACKIMAGEURL) && !this.IsSet(PROP_BACKIMAGEURL))
                             this.BackImageUrl = ts.BackImageUrl;
                     }
@@ -327,12 +377,12 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         ///    <para>Clears out any defined style elements from the state bag.</para>
         /// </devdoc>
-        public override void Reset() {
+        public override void Reset()
+        {
             if (IsSet(PROP_BACKIMAGEURL))
                 ViewState.Remove("BackImageUrl");
             if (IsSet(PROP_CELLPADDING))

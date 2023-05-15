@@ -12,17 +12,21 @@ namespace System.ServiceModel.Description
         MetadataSet metadataSet;
 
         internal GetResponse() { }
+
         internal GetResponse(MetadataSet metadataSet)
             : this()
         {
             this.metadataSet = metadataSet;
         }
 
-        [MessageBodyMember(Name = MetadataStrings.MetadataExchangeStrings.Metadata, Namespace = MetadataStrings.MetadataExchangeStrings.Namespace)]
+        [MessageBodyMember(
+            Name = MetadataStrings.MetadataExchangeStrings.Metadata,
+            Namespace = MetadataStrings.MetadataExchangeStrings.Namespace
+        )]
         internal MetadataSet Metadata
         {
             get { return this.metadataSet; }
             set { this.metadataSet = value; }
         }
     }
-} 
+}

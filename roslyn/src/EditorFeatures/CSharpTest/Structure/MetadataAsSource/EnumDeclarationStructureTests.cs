@@ -13,29 +13,36 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSource
 {
-    public class EnumDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<EnumDeclarationSyntax>
+    public class EnumDeclarationStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<EnumDeclarationSyntax>
     {
         protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new EnumDeclarationStructureProvider();
+
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new EnumDeclarationStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task NoCommentsOrAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:enum $$E{|textspan:
 {
     A,
     B
 }|}|}";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task WithAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:{|textspan:[Bar]
 |}{|#0:enum $$E|}{|textspan2:
 {
@@ -43,15 +50,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
     B
 }|}|#0}";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task WithCommentsAndAttributes()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:{|textspan:// Summary:
 //     This is a summary.
 [Bar]
@@ -61,15 +71,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
     B
 }|}|#0}";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task WithCommentsAttributesAndModifiers()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:{|textspan:// Summary:
 //     This is a summary.
 [Bar]
@@ -79,9 +92,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
     B
 }|}|#0}";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true),
-                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.Outlining)]
@@ -91,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
         [InlineData("interface")]
         public async Task TestEnum3(string typeKind)
         {
-            var code = $@"
+            var code =
+                $@"
 {{|#0:$$enum E{{|textspan:
 {{
 }}|#0}}
@@ -100,8 +116,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
 {{
 }}";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
     }
 }

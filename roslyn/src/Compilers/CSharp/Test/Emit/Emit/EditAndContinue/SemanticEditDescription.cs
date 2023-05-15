@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         public SemanticEditDescription(
             SemanticEditKind kind,
             Func<Compilation, ISymbol> symbolProvider,
-            Func<Compilation, ISymbol>? newSymbolProvider = null)
+            Func<Compilation, ISymbol>? newSymbolProvider = null
+        )
         {
             Kind = kind;
             SymbolProvider = symbolProvider;

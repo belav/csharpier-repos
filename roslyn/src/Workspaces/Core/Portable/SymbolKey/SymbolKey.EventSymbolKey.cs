@@ -14,19 +14,32 @@ namespace Microsoft.CodeAnalysis
                 visitor.WriteSymbolKey(symbol.ContainingType);
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
                 var metadataName = reader.ReadString();
-                var containingTypeResolution = reader.ReadSymbolKey(out var containingTypeFailureReason);
+                var containingTypeResolution = reader.ReadSymbolKey(
+                    out var containingTypeFailureReason
+                );
 
                 if (containingTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(EventSymbolKey)} {nameof(containingTypeResolution)} failed -> {containingTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(EventSymbolKey)} {nameof(containingTypeResolution)} failed -> {containingTypeFailureReason})";
                     return default;
                 }
 
-                using var result = GetMembersOfNamedType<IEventSymbol>(containingTypeResolution, metadataName);
-                return CreateResolution(result, $"({nameof(EventSymbolKey)} '{metadataName}' not found)", out failureReason);
+                using var result = GetMembersOfNamedType<IEventSymbol>(
+                    containingTypeResolution,
+                    metadataName
+                );
+                return CreateResolution(
+                    result,
+                    $"({nameof(EventSymbolKey)} '{metadataName}' not found)",
+                    out failureReason
+                );
             }
         }
     }

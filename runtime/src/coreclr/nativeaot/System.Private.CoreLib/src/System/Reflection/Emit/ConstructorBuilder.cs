@@ -14,72 +14,50 @@ namespace System.Reflection.Emit
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override CallingConventions CallingConvention
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public bool InitLocals
         {
-            get
-            {
-                return default;
-            }
-            set
-            {
-            }
+            get { return default; }
+            set { }
         }
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Module Module
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override string Name
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
-        public ParameterBuilder DefineParameter(int iSequence, ParameterAttributes attributes, string strParamName)
+        public ParameterBuilder DefineParameter(
+            int iSequence,
+            ParameterAttributes attributes,
+            string strParamName
+        )
         {
             return default;
         }
@@ -114,12 +92,23 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             return default;
         }
 
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             return default;
         }
@@ -129,17 +118,11 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute)
-        {
-        }
+        public void SetCustomAttribute(ConstructorInfo con, byte[] binaryAttribute) { }
 
-        public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
-        {
-        }
+        public void SetCustomAttribute(CustomAttributeBuilder customBuilder) { }
 
-        public void SetImplementationFlags(MethodImplAttributes attributes)
-        {
-        }
+        public void SetImplementationFlags(MethodImplAttributes attributes) { }
 
         public override string ToString()
         {

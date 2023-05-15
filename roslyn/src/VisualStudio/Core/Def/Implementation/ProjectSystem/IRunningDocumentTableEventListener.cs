@@ -19,7 +19,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         /// <param name="moniker">the moniker of the opened document.</param>
         /// <param name="textBuffer">the text buffer of the opened document)</param>
         /// <param name="hierarchy">the hierarchy of the text buffer if available.</param>
-        void OnOpenDocument(string moniker, ITextBuffer textBuffer, IVsHierarchy? hierarchy, IVsWindowFrame? windowFrame);
+        void OnOpenDocument(
+            string moniker,
+            ITextBuffer textBuffer,
+            IVsHierarchy? hierarchy,
+            IVsWindowFrame? windowFrame
+        );
 
         /// <summary>
         /// Triggered when a document is closed.

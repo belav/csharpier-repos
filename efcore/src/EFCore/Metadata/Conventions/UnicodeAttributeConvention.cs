@@ -16,9 +16,7 @@ public class UnicodeAttributeConvention : PropertyAttributeConventionBase<Unicod
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public UnicodeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -31,6 +29,6 @@ public class UnicodeAttributeConvention : PropertyAttributeConventionBase<Unicod
         IConventionPropertyBuilder propertyBuilder,
         UnicodeAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
-        => propertyBuilder.IsUnicode(attribute.IsUnicode, fromDataAnnotation: true);
+        IConventionContext context
+    ) => propertyBuilder.IsUnicode(attribute.IsUnicode, fromDataAnnotation: true);
 }

@@ -1,5 +1,5 @@
 //
-// OdbcTest.cs - Test for the ODBC ADO.NET Provider in System.Data.Odbc 
+// OdbcTest.cs - Test for the ODBC ADO.NET Provider in System.Data.Odbc
 //
 // The test works on Windows XP using Microsoft .NET Framework 1.1 Beta
 //
@@ -25,10 +25,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,40 +44,40 @@ using System.Data.Odbc;
 
 namespace Test.OdbcTest
 {
-	class OdbcTest
-	{
-		[STAThread]
-		static void Main(string[] args)
-		{
-			OdbcConnection dbcon = new OdbcConnection();
-			// connection string to a Microsoft SQL Server 2000 database
-			// that does not use a DSN
-			//dbcon.ConnectionString = 
-			//	"DRIVER={SQL Server};" + 
-			//	"SERVER=(local);" + 
-			//	"Trusted_connection=true;" +
-			//	"DATABASE=pubs;";
+    class OdbcTest
+    {
+        [STAThread]
+        static void Main(string[] args)
+        {
+            OdbcConnection dbcon = new OdbcConnection();
+            // connection string to a Microsoft SQL Server 2000 database
+            // that does not use a DSN
+            //dbcon.ConnectionString =
+            //	"DRIVER={SQL Server};" +
+            //	"SERVER=(local);" +
+            //	"Trusted_connection=true;" +
+            //	"DATABASE=pubs;";
 
-			// connection string that uses a DSN.
-			dbcon.ConnectionString = 
-				"DSN=LocalServer;UID=sa;PWD=";
-				
-			dbcon.Open();
+            // connection string that uses a DSN.
+            dbcon.ConnectionString = "DSN=LocalServer;UID=sa;PWD=";
 
-			OdbcCommand dbcmd = new OdbcCommand();
-			dbcmd.Connection = dbcon;
-			dbcmd.CommandType = CommandType.Text;
-			dbcmd.CommandText = "SELECT lname FROM employee";
-			
-			OdbcDataReader reader;
-			reader = (OdbcDataReader) dbcmd.ExecuteReader();
+            dbcon.Open();
 
-			while(reader.Read()) {
-				Console.WriteLine("Last Name: " + reader[0].ToString());
-			}
-			reader.Close();
-			dbcmd.Dispose();
-			dbcon.Close();
-		}
-	}
+            OdbcCommand dbcmd = new OdbcCommand();
+            dbcmd.Connection = dbcon;
+            dbcmd.CommandType = CommandType.Text;
+            dbcmd.CommandText = "SELECT lname FROM employee";
+
+            OdbcDataReader reader;
+            reader = (OdbcDataReader)dbcmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Console.WriteLine("Last Name: " + reader[0].ToString());
+            }
+            reader.Close();
+            dbcmd.Dispose();
+            dbcon.Close();
+        }
+    }
 }

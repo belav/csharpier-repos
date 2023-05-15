@@ -68,10 +68,12 @@ namespace System.Data.Mapping.ViewGeneration
         private ViewGenTraceLevel m_traceLevel;
         private readonly TimeSpan[] m_breakdownTimes;
         private Stopwatch m_watch;
+
         /// <summary>
         /// To measure a single thing at a time.
         /// </summary>
         private Stopwatch m_singleWatch;
+
         /// <summary>
         /// Perf op being measured.
         /// </summary>
@@ -105,7 +107,10 @@ namespace System.Data.Mapping.ViewGeneration
             set { m_traceLevel = value; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )]
         internal bool IsValidationEnabled
         {
             get { return m_enableValidation; }
@@ -157,7 +162,10 @@ namespace System.Data.Mapping.ViewGeneration
         /// </summary>
         internal void StopSingleWatch(PerfType perfType)
         {
-            Debug.Assert(m_singlePerfOp == perfType, "Started op for different activity " + m_singlePerfOp + " -- not " + perfType);
+            Debug.Assert(
+                m_singlePerfOp == perfType,
+                "Started op for different activity " + m_singlePerfOp + " -- not " + perfType
+            );
             TimeSpan timeElapsed = m_singleWatch.Elapsed;
             int index = (int)perfType;
             m_singleWatch.Stop();

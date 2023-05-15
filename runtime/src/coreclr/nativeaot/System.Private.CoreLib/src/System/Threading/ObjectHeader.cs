@@ -30,17 +30,18 @@ namespace System.Threading
         private const int IS_HASH_OR_SYNCBLKINDEX_BIT_NUMBER = 27;
         private const int BIT_SBLK_IS_HASHCODE = 1 << IS_HASHCODE_BIT_NUMBER;
         internal const int MASK_HASHCODE_INDEX = BIT_SBLK_IS_HASHCODE - 1;
-        private const int BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX = 1 << IS_HASH_OR_SYNCBLKINDEX_BIT_NUMBER;
+        private const int BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX =
+            1 << IS_HASH_OR_SYNCBLKINDEX_BIT_NUMBER;
 
         // if BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX is clear, the rest of the header dword is laid out as follows:
         // - lower sixteen bits (bits 0 thru 15) is thread id used for the thin locks
         //   value is zero if no thread is holding the lock
         // - following six bits (bits 16 thru 21) is recursion level used for the thin locks
         //   value is zero if lock is not taken or only taken once by the same thread
-        private const int SBLK_MASK_LOCK_THREADID = 0x0000FFFF;   // special value of 0 + 65535 thread ids
-        private const int SBLK_MASK_LOCK_RECLEVEL = 0x003F0000;   // 64 recursion levels
-        private const int SBLK_LOCK_RECLEVEL_INC = 0x00010000;    // each level is this much higher than the previous one
-        private const int SBLK_RECLEVEL_SHIFT = 16;               // shift right this much to get recursion level
+        private const int SBLK_MASK_LOCK_THREADID = 0x0000FFFF; // special value of 0 + 65535 thread ids
+        private const int SBLK_MASK_LOCK_RECLEVEL = 0x003F0000; // 64 recursion levels
+        private const int SBLK_LOCK_RECLEVEL_INC = 0x00010000; // each level is this much higher than the previous one
+        private const int SBLK_RECLEVEL_SHIFT = 16; // shift right this much to get recursion level
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static unsafe int* GetHeaderPtr(MethodTable** ppMethodTable)
@@ -118,7 +119,8 @@ namespace System.Threading
 
                 // there is nothing - try set hashcode inline
                 Debug.Assert((oldBits & BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX) == 0);
-                int newBits = BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX | BIT_SBLK_IS_HASHCODE | oldBits | newHash;
+                int newBits =
+                    BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX | BIT_SBLK_IS_HASHCODE | oldBits | newHash;
                 if (Interlocked.CompareExchange(ref *pHeader, newBits, oldBits) == oldBits)
                 {
                     return newHash;
@@ -140,7 +142,8 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool HasSyncEntryIndex(int header)
         {
-            return (header & (BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX | BIT_SBLK_IS_HASHCODE)) == BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX;
+            return (header & (BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX | BIT_SBLK_IS_HASHCODE))
+                == BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX;
         }
 
         /// <summary>
@@ -186,7 +189,8 @@ namespace System.Threading
             // Holding this lock implies there is at most one thread setting the sync entry index at
             // any given time.  We also require that the sync entry index has not been already set.
             Debug.Assert(SyncTable.s_lock.IsAcquired);
-            int oldBits, newBits;
+            int oldBits,
+                newBits;
 
             do
             {
@@ -207,14 +211,14 @@ namespace System.Threading
                     SyncTable.MoveThinLockToNewEntry(
                         syncIndex,
                         oldBits & SBLK_MASK_LOCK_THREADID,
-                        (oldBits & SBLK_MASK_LOCK_RECLEVEL) >> SBLK_RECLEVEL_SHIFT);
+                        (oldBits & SBLK_MASK_LOCK_RECLEVEL) >> SBLK_RECLEVEL_SHIFT
+                    );
                 }
 
                 // Store the sync entry index
                 newBits = oldBits & ~(BIT_SBLK_IS_HASHCODE | MASK_HASHCODE_INDEX);
                 newBits |= syncIndex | BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX;
-            }
-            while (Interlocked.CompareExchange(ref *pHeader, newBits, oldBits) != oldBits);
+            } while (Interlocked.CompareExchange(ref *pHeader, newBits, oldBits) != oldBits);
         }
 
         //
@@ -265,8 +269,10 @@ namespace System.Threading
         {
             ArgumentNullException.ThrowIfNull(obj);
 
-            Debug.Assert(!(obj is Lock),
-                "Do not use Monitor.Enter or TryEnter on a Lock instance; use Lock methods directly instead.");
+            Debug.Assert(
+                !(obj is Lock),
+                "Do not use Monitor.Enter or TryEnter on a Lock instance; use Lock methods directly instead."
+            );
 
             int currentThreadID = ManagedThreadId.CurrentManagedThreadIdUnchecked;
 
@@ -284,7 +290,13 @@ namespace System.Threading
                     // N.B. hashcode, thread ID and sync index are never 0, and hashcode is largest of all
                     if ((oldBits & MASK_HASHCODE_INDEX) == 0)
                     {
-                        if (Interlocked.CompareExchange(ref *pHeader, oldBits | currentThreadID, oldBits) == oldBits)
+                        if (
+                            Interlocked.CompareExchange(
+                                ref *pHeader,
+                                oldBits | currentThreadID,
+                                oldBits
+                            ) == oldBits
+                        )
                         {
                             return -1;
                         }
@@ -339,7 +351,10 @@ namespace System.Threading
                         if ((oldBits & MASK_HASHCODE_INDEX) == 0)
                         {
                             int newBits = oldBits | currentThreadID;
-                            if (Interlocked.CompareExchange(ref *pHeader, newBits, oldBits) == oldBits)
+                            if (
+                                Interlocked.CompareExchange(ref *pHeader, newBits, oldBits)
+                                == oldBits
+                            )
                             {
                                 return -1;
                             }
@@ -368,7 +383,10 @@ namespace System.Threading
                             int newBits = oldBits + SBLK_LOCK_RECLEVEL_INC;
                             if ((newBits & SBLK_MASK_LOCK_RECLEVEL) != 0)
                             {
-                                if (Interlocked.CompareExchange(ref *pHeader, newBits, oldBits) == oldBits)
+                                if (
+                                    Interlocked.CompareExchange(ref *pHeader, newBits, oldBits)
+                                    == oldBits
+                                )
                                 {
                                     return -1;
                                 }
@@ -404,8 +422,10 @@ namespace System.Threading
         {
             ArgumentNullException.ThrowIfNull(obj);
 
-            Debug.Assert(!(obj is Lock),
-                "Do not use Monitor.Enter or TryEnter on a Lock instance; use Lock methods directly instead.");
+            Debug.Assert(
+                !(obj is Lock),
+                "Do not use Monitor.Enter or TryEnter on a Lock instance; use Lock methods directly instead."
+            );
 
             int currentThreadID = ManagedThreadId.CurrentManagedThreadIdUnchecked;
             // transform uninitialized ID into -1, so it will not match any possible lock owner
@@ -420,13 +440,16 @@ namespace System.Threading
                     int oldBits = *pHeader;
 
                     // if we own the lock
-                    if ((oldBits & SBLK_MASK_LOCK_THREADID) == currentThreadID &&
-                        (oldBits & BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX) == 0)
+                    if (
+                        (oldBits & SBLK_MASK_LOCK_THREADID) == currentThreadID
+                        && (oldBits & BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX) == 0
+                    )
                     {
                         // decrement count or release entirely.
-                        int newBits = (oldBits & SBLK_MASK_LOCK_RECLEVEL) != 0 ?
-                            oldBits - SBLK_LOCK_RECLEVEL_INC :
-                            oldBits & ~SBLK_MASK_LOCK_THREADID;
+                        int newBits =
+                            (oldBits & SBLK_MASK_LOCK_RECLEVEL) != 0
+                                ? oldBits - SBLK_LOCK_RECLEVEL_INC
+                                : oldBits & ~SBLK_MASK_LOCK_THREADID;
 
                         if (Interlocked.CompareExchange(ref *pHeader, newBits, oldBits) == oldBits)
                         {
@@ -457,8 +480,10 @@ namespace System.Threading
         {
             ArgumentNullException.ThrowIfNull(obj);
 
-            Debug.Assert(!(obj is Lock),
-                "Do not use Monitor.Enter or TryEnter on a Lock instance; use Lock methods directly instead.");
+            Debug.Assert(
+                !(obj is Lock),
+                "Do not use Monitor.Enter or TryEnter on a Lock instance; use Lock methods directly instead."
+            );
 
             int currentThreadID = ManagedThreadId.CurrentManagedThreadIdUnchecked;
             // transform uninitialized ID into -1, so it will not match any possible lock owner
@@ -470,8 +495,10 @@ namespace System.Threading
                 int oldBits = *pHeader;
 
                 // if we own the lock
-                if ((oldBits & SBLK_MASK_LOCK_THREADID) == currentThreadID &&
-                   (oldBits & BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX) == 0)
+                if (
+                    (oldBits & SBLK_MASK_LOCK_THREADID) == currentThreadID
+                    && (oldBits & BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX) == 0
+                )
                 {
                     return true;
                 }

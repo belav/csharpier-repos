@@ -11,9 +11,10 @@ public class Runtime_57364
 {
     static short s_2;
     static bool s_7;
+
     public static int Main()
     {
-        var vr4 = new ulong[][][][]{new ulong[][][]{new ulong[][]{new ulong[]{0}}}};
+        var vr4 = new ulong[][][][] { new ulong[][][] { new ulong[][] { new ulong[] { 0 } } } };
         int vr9 = 866278096;
         // On ARM64, the following statement ends up with 2 separate CSEs in it.
         // The first CSE is the constant vr9 while the second is the address of s_2.
@@ -26,7 +27,7 @@ public class Runtime_57364
         }
 
         System.Console.WriteLine(vr9);
-        
+
         return 100;
     }
 }

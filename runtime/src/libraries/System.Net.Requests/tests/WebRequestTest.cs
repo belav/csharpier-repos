@@ -21,7 +21,11 @@ namespace System.Net.Tests
             initialDefaultWebProxyCredentials = initialDefaultWebProxy.Credentials;
         }
 
-        private readonly NetworkCredential _explicitCredentials = new NetworkCredential("user", "password", "domain");
+        private readonly NetworkCredential _explicitCredentials = new NetworkCredential(
+            "user",
+            "password",
+            "domain"
+        );
         private static IWebProxy initialDefaultWebProxy;
         private static ICredentials initialDefaultWebProxyCredentials;
 
@@ -36,13 +40,15 @@ namespace System.Net.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void DefaultWebProxy_SetThenGet_ValuesMatch()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                IWebProxy p = new WebProxy();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    IWebProxy p = new WebProxy();
 
-                WebRequest.DefaultWebProxy = p;
-                Assert.Same(p, WebRequest.DefaultWebProxy);
-            }).Dispose();
+                    WebRequest.DefaultWebProxy = p;
+                    Assert.Same(p, WebRequest.DefaultWebProxy);
+                })
+                .Dispose();
         }
 
         [Fact]
@@ -122,7 +128,9 @@ namespace System.Net.Tests
         [Fact]
         public void CreateHttp_InvalidScheme_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(() => WebRequest.CreateHttp(new Uri("ftp://microsoft.com")));
+            Assert.Throws<NotSupportedException>(
+                () => WebRequest.CreateHttp(new Uri("ftp://microsoft.com"))
+            );
         }
 
         [Fact]
@@ -169,7 +177,9 @@ namespace System.Net.Tests
         [Fact]
         public void RegisterPrefix_PrefixOrCreatorNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => WebRequest.RegisterPrefix(null, new FakeRequestFactory()));
+            Assert.Throws<ArgumentNullException>(
+                () => WebRequest.RegisterPrefix(null, new FakeRequestFactory())
+            );
             Assert.Throws<ArgumentNullException>(() => WebRequest.RegisterPrefix("http://", null));
         }
 
@@ -191,62 +201,89 @@ namespace System.Net.Tests
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [InlineData(RequestCacheLevel.NoCacheNoStore, new string[] { "Pragma: no-cache", "Cache-Control: no-store, no-cache" })]
-        [InlineData(RequestCacheLevel.Reload, new string[] { "Pragma: no-cache", "Cache-Control: no-cache" })]
+        [InlineData(
+            RequestCacheLevel.NoCacheNoStore,
+            new string[] { "Pragma: no-cache", "Cache-Control: no-store, no-cache" }
+        )]
+        [InlineData(
+            RequestCacheLevel.Reload,
+            new string[] { "Pragma: no-cache", "Cache-Control: no-cache" }
+        )]
         public void SendGetRequest_WithGlobalCachePolicy_AddCacheHeaders(
-            RequestCacheLevel requestCacheLevel, string[] expectedHeaders)
+            RequestCacheLevel requestCacheLevel,
+            string[] expectedHeaders
+        )
         {
-            RemoteExecutor.Invoke(async (reqCacheLevel, eh0, eh1) =>
-            {
-                await LoopbackServer.CreateServerAsync(async (server, uri) =>
-                {
-                    WebRequest.DefaultCachePolicy = new RequestCachePolicy(Enum.Parse<RequestCacheLevel>(reqCacheLevel));
-                    WebRequest request = WebRequest.Create(uri);
-                    Task<WebResponse> getResponse = request.GetResponseAsync();
-
-                    await server.AcceptConnectionAsync(async connection =>
+            RemoteExecutor
+                .Invoke(
+                    async (reqCacheLevel, eh0, eh1) =>
                     {
-                        List<string> headers = await connection.ReadRequestHeaderAndSendResponseAsync();
-                        Assert.Contains(eh0, headers);
-                        Assert.Contains(eh1, headers);
-                    });
+                        await LoopbackServer.CreateServerAsync(
+                            async (server, uri) =>
+                            {
+                                WebRequest.DefaultCachePolicy = new RequestCachePolicy(
+                                    Enum.Parse<RequestCacheLevel>(reqCacheLevel)
+                                );
+                                WebRequest request = WebRequest.Create(uri);
+                                Task<WebResponse> getResponse = request.GetResponseAsync();
 
-                    using (var response = (HttpWebResponse)await getResponse)
-                    {
-                        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                    }
-                });
-            }, requestCacheLevel.ToString(), expectedHeaders[0], expectedHeaders[1]).Dispose();
+                                await server.AcceptConnectionAsync(async connection =>
+                                {
+                                    List<string> headers =
+                                        await connection.ReadRequestHeaderAndSendResponseAsync();
+                                    Assert.Contains(eh0, headers);
+                                    Assert.Contains(eh1, headers);
+                                });
+
+                                using (var response = (HttpWebResponse)await getResponse)
+                                {
+                                    Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                                }
+                            }
+                        );
+                    },
+                    requestCacheLevel.ToString(),
+                    expectedHeaders[0],
+                    expectedHeaders[1]
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void SendGetRequest_WithGlobalCachePolicyBypassCache_DoNotAddCacheHeaders()
         {
-            RemoteExecutor.Invoke(async () =>
-            {
-                await LoopbackServer.CreateServerAsync(async (server, uri) =>
+            RemoteExecutor
+                .Invoke(async () =>
                 {
-                    WebRequest.DefaultCachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
-                    WebRequest request = WebRequest.Create(uri);
-                    Task<WebResponse> getResponse = request.GetResponseAsync();
-
-                    await server.AcceptConnectionAsync(async connection =>
-                    {
-                        List<string> headers = await connection.ReadRequestHeaderAndSendResponseAsync();
-
-                        foreach(string header in headers)
+                    await LoopbackServer.CreateServerAsync(
+                        async (server, uri) =>
                         {
-                            Assert.DoesNotContain("Pragma", header);
-                            Assert.DoesNotContain("Cache-Control", header);
-                        }
-                    });
+                            WebRequest.DefaultCachePolicy = new RequestCachePolicy(
+                                RequestCacheLevel.BypassCache
+                            );
+                            WebRequest request = WebRequest.Create(uri);
+                            Task<WebResponse> getResponse = request.GetResponseAsync();
 
-                    using (var response = (HttpWebResponse)await getResponse)
-                    {
-                        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                    }
-                });
-            }).Dispose();
+                            await server.AcceptConnectionAsync(async connection =>
+                            {
+                                List<string> headers =
+                                    await connection.ReadRequestHeaderAndSendResponseAsync();
+
+                                foreach (string header in headers)
+                                {
+                                    Assert.DoesNotContain("Pragma", header);
+                                    Assert.DoesNotContain("Cache-Control", header);
+                                }
+                            });
+
+                            using (var response = (HttpWebResponse)await getResponse)
+                            {
+                                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                            }
+                        }
+                    );
+                })
+                .Dispose();
         }
 
         private class FakeRequest : WebRequest
@@ -267,6 +304,5 @@ namespace System.Net.Tests
                 return new FakeRequest(uri);
             }
         }
-
     }
 }

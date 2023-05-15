@@ -14,7 +14,12 @@ class IjwHelper
     public static Assembly LoadIjwAssembly(string name)
     {
         // Load our mock ijwhost before we load the IJW assembly.
-        NativeLibrary.Load(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ijwHostName));
+        NativeLibrary.Load(
+            Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                ijwHostName
+            )
+        );
 
         return Assembly.Load(name);
     }

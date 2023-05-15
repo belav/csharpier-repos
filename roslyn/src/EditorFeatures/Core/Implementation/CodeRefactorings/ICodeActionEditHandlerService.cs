@@ -18,12 +18,18 @@ namespace Microsoft.CodeAnalysis.Editor
         ITextBufferAssociatedViewService AssociatedViewService { get; }
 
         SolutionPreviewResult GetPreviews(
-            Workspace workspace, ImmutableArray<CodeActionOperation> operations, CancellationToken cancellationToken);
+            Workspace workspace,
+            ImmutableArray<CodeActionOperation> operations,
+            CancellationToken cancellationToken
+        );
 
         bool Apply(
-            Workspace workspace, Document fromDocument,
+            Workspace workspace,
+            Document fromDocument,
             ImmutableArray<CodeActionOperation> operations,
-            string title, IProgressTracker progressTracker,
-            CancellationToken cancellationToken);
+            string title,
+            IProgressTracker progressTracker,
+            CancellationToken cancellationToken
+        );
     }
 }

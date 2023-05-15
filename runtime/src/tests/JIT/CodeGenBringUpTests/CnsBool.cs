@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_CnsBool
 {
     const int Pass = 100;
@@ -12,20 +13,22 @@ public class BringUpTest_CnsBool
 
     // Returns !b
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static bool CnsBool(bool b) 
-    { 
-       // Thisis just to exercise bool constants.
-       // Otherwise we could write this as "return !b"
-       if (b == true)
-          return false;
+    public static bool CnsBool(bool b)
+    {
+        // Thisis just to exercise bool constants.
+        // Otherwise we could write this as "return !b"
+        if (b == true)
+            return false;
 
-       return true;
+        return true;
     }
 
     public static int Main()
     {
         bool b = CnsBool(false);
-        if (b) return Pass;
-        else return Fail;
+        if (b)
+            return Pass;
+        else
+            return Fail;
     }
 }

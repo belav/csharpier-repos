@@ -15,17 +15,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
     /// </summary>
     internal partial class NewTypeDestinationSelection : UserControl
     {
-        // This allows for binding of the ViewModel as a property in XAML 
+        // This allows for binding of the ViewModel as a property in XAML
         // which can be useful if control is being hosted
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(
             nameof(ViewModel),
             typeof(NewTypeDestinationSelectionViewModel),
             typeof(NewTypeDestinationSelection),
-            new PropertyMetadata((s, a) =>
+            new PropertyMetadata(
+                (s, a) =>
                 {
                     var control = (NewTypeDestinationSelection)s;
                     control.DataContext = a.NewValue;
-                })
+                }
+            )
         );
 
         public NewTypeDestinationSelectionViewModel ViewModel
@@ -50,8 +52,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
 
         private void SelectAllInTextBox(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBox textbox
-                && Mouse.LeftButton == MouseButtonState.Released)
+            if (sender is TextBox textbox && Mouse.LeftButton == MouseButtonState.Released)
             {
                 textbox.SelectAll();
             }

@@ -22,7 +22,10 @@ internal class TagHelperSpanVisitor : SyntaxWalker
 
     public override void VisitMarkupTagHelperElement(MarkupTagHelperElementSyntax node)
     {
-        var span = new TagHelperSpanInternal(node.GetSourceSpan(_source), node.TagHelperInfo.BindingResult);
+        var span = new TagHelperSpanInternal(
+            node.GetSourceSpan(_source),
+            node.TagHelperInfo.BindingResult
+        );
         _spans.Add(span);
 
         base.VisitMarkupTagHelperElement(node);

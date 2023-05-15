@@ -8,9 +8,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 public sealed class ComponentAttributeIntermediateNode : IntermediateNode
 {
-    public ComponentAttributeIntermediateNode()
-    {
-    }
+    public ComponentAttributeIntermediateNode() { }
 
     public ComponentAttributeIntermediateNode(TagHelperHtmlAttributeIntermediateNode attributeNode)
     {
@@ -49,7 +47,9 @@ public sealed class ComponentAttributeIntermediateNode : IntermediateNode
         PropertyName = propertyNode.BoundAttribute.GetPropertyName();
         Source = propertyNode.Source;
         TagHelper = propertyNode.TagHelper;
-        TypeName = propertyNode.BoundAttribute.IsWeaklyTyped() ? null : propertyNode.BoundAttribute.TypeName;
+        TypeName = propertyNode.BoundAttribute.IsWeaklyTyped()
+            ? null
+            : propertyNode.BoundAttribute.TypeName;
 
         for (var i = 0; i < propertyNode.Children.Count; i++)
         {
@@ -62,7 +62,9 @@ public sealed class ComponentAttributeIntermediateNode : IntermediateNode
         }
     }
 
-    public ComponentAttributeIntermediateNode(TagHelperDirectiveAttributeIntermediateNode directiveAttributeNode)
+    public ComponentAttributeIntermediateNode(
+        TagHelperDirectiveAttributeIntermediateNode directiveAttributeNode
+    )
     {
         if (directiveAttributeNode == null)
         {
@@ -75,7 +77,9 @@ public sealed class ComponentAttributeIntermediateNode : IntermediateNode
         PropertyName = directiveAttributeNode.BoundAttribute.GetPropertyName();
         Source = directiveAttributeNode.Source;
         TagHelper = directiveAttributeNode.TagHelper;
-        TypeName = directiveAttributeNode.BoundAttribute.IsWeaklyTyped() ? null : directiveAttributeNode.BoundAttribute.TypeName;
+        TypeName = directiveAttributeNode.BoundAttribute.IsWeaklyTyped()
+            ? null
+            : directiveAttributeNode.BoundAttribute.TypeName;
 
         for (var i = 0; i < directiveAttributeNode.Children.Count; i++)
         {
@@ -88,7 +92,9 @@ public sealed class ComponentAttributeIntermediateNode : IntermediateNode
         }
     }
 
-    public ComponentAttributeIntermediateNode(TagHelperDirectiveAttributeParameterIntermediateNode directiveAttributeParameterNode)
+    public ComponentAttributeIntermediateNode(
+        TagHelperDirectiveAttributeParameterIntermediateNode directiveAttributeParameterNode
+    )
     {
         if (directiveAttributeParameterNode == null)
         {
@@ -178,26 +184,43 @@ public sealed class ComponentAttributeIntermediateNode : IntermediateNode
 
         if (BoundAttribute == null || !BoundAttribute.IsEventCallbackProperty())
         {
-            throw new InvalidOperationException("This attribute is not an EventCallback attribute.");
+            throw new InvalidOperationException(
+                "This attribute is not an EventCallback attribute."
+            );
         }
 
-        if (string.Equals(TypeName, ComponentsApi.EventCallback.FullTypeName, StringComparison.Ordinal))
+        if (
+            string.Equals(
+                TypeName,
+                ComponentsApi.EventCallback.FullTypeName,
+                StringComparison.Ordinal
+            )
+        )
         {
             // Non-Generic
             argument = default;
             return false;
         }
 
-        if (TypeName != null &&
-            TypeName.Length > ComponentsApi.EventCallback.FullTypeName.Length + "<>".Length &&
-            TypeName.StartsWith(ComponentsApi.EventCallback.FullTypeName, StringComparison.Ordinal) &&
-            TypeName[ComponentsApi.EventCallback.FullTypeName.Length] == '<' &&
-            TypeName[TypeName.Length - 1] == '>')
+        if (
+            TypeName != null
+            && TypeName.Length > ComponentsApi.EventCallback.FullTypeName.Length + "<>".Length
+            && TypeName.StartsWith(
+                ComponentsApi.EventCallback.FullTypeName,
+                StringComparison.Ordinal
+            )
+            && TypeName[ComponentsApi.EventCallback.FullTypeName.Length] == '<'
+            && TypeName[TypeName.Length - 1] == '>'
+        )
         {
             // OK this is promising.
             //
             // Chop off leading `...EventCallback<` and let the length so the ending `>` is cut off as well.
-            argument = new StringSegment(TypeName, ComponentsApi.EventCallback.FullTypeName.Length + 1, TypeName.Length - (ComponentsApi.EventCallback.FullTypeName.Length + "<>".Length));
+            argument = new StringSegment(
+                TypeName,
+                ComponentsApi.EventCallback.FullTypeName.Length + 1,
+                TypeName.Length - (ComponentsApi.EventCallback.FullTypeName.Length + "<>".Length)
+            );
             return true;
         }
 

@@ -30,7 +30,6 @@ namespace Internal.Runtime.TypeLoader
         {
             Handle = moduleHandle;
         }
-
     }
 
     public class NativeFormatModuleInfo : ModuleInfo
@@ -41,7 +40,8 @@ namespace Internal.Runtime.TypeLoader
         /// <param name="moduleHandle">Handle (address) of module to initialize</param>
         /// <param name="pBlob">Module blob start address</param>
         /// <param name="cbBlob">Module blob length</param>
-        internal NativeFormatModuleInfo(TypeManagerHandle moduleHandle, IntPtr pBlob, int cbBlob) : base(moduleHandle)
+        internal NativeFormatModuleInfo(TypeManagerHandle moduleHandle, IntPtr pBlob, int cbBlob)
+            : base(moduleHandle)
         {
             MetadataReader = new MetadataReader((IntPtr)pBlob, (int)cbBlob);
         }
@@ -59,7 +59,12 @@ namespace Internal.Runtime.TypeLoader
             {
                 fixed (uint* pcbBlob = &cbBlob)
                 {
-                    return RuntimeAugments.FindBlob(Handle, (int)blobId, new IntPtr(ppBlob), new IntPtr(pcbBlob));
+                    return RuntimeAugments.FindBlob(
+                        Handle,
+                        (int)blobId,
+                        new IntPtr(ppBlob),
+                        new IntPtr(pcbBlob)
+                    );
                 }
             }
         }
@@ -72,7 +77,12 @@ namespace Internal.Runtime.TypeLoader
             {
                 fixed (uint* pcbBlob = &cbBlob)
                 {
-                    return RuntimeAugments.FindBlob(Handle, (int)blobId, new IntPtr(ppBlob), new IntPtr(pcbBlob));
+                    return RuntimeAugments.FindBlob(
+                        Handle,
+                        (int)blobId,
+                        new IntPtr(ppBlob),
+                        new IntPtr(pcbBlob)
+                    );
                 }
             }
         }
@@ -146,10 +156,18 @@ namespace Internal.Runtime.TypeLoader
             _iterationIndex = -1;
             _currentModule = null;
 
-            if (!preferredModuleHandle.IsNull &&
-                !moduleMap.HandleToModuleIndex.TryGetValue(preferredModuleHandle, out _preferredIndex))
+            if (
+                !preferredModuleHandle.IsNull
+                && !moduleMap.HandleToModuleIndex.TryGetValue(
+                    preferredModuleHandle,
+                    out _preferredIndex
+                )
+            )
             {
-                Environment.FailFast("Invalid module requested in enumeration: " + preferredModuleHandle.LowLevelToString());
+                Environment.FailFast(
+                    "Invalid module requested in enumeration: "
+                        + preferredModuleHandle.LowLevelToString()
+                );
             }
         }
 
@@ -216,7 +234,10 @@ namespace Internal.Runtime.TypeLoader
         /// </summary>
         /// <param name="moduleMap">Module map to enumerate</param>
         /// <param name="preferredModuleHandle">Optional module handle to enumerate first</param>
-        internal NativeFormatModuleInfoEnumerable(ModuleMap moduleMap, TypeManagerHandle preferredModuleHandle)
+        internal NativeFormatModuleInfoEnumerable(
+            ModuleMap moduleMap,
+            TypeManagerHandle preferredModuleHandle
+        )
         {
             _moduleMap = moduleMap;
             _preferredModuleHandle = preferredModuleHandle;
@@ -263,17 +284,28 @@ namespace Internal.Runtime.TypeLoader
         /// </summary>
         /// <param name="moduleMap">Module map to enumerate</param>
         /// <param name="preferredModuleHandle">Optional module handle to enumerate first</param>
-        internal NativeFormatModuleInfoEnumerator(ModuleMap moduleMap, TypeManagerHandle preferredModuleHandle)
+        internal NativeFormatModuleInfoEnumerator(
+            ModuleMap moduleMap,
+            TypeManagerHandle preferredModuleHandle
+        )
         {
             _modules = moduleMap.Modules;
             _preferredIndex = -1;
             _iterationIndex = -1;
             _currentModule = null;
 
-            if (!preferredModuleHandle.IsNull &&
-                !moduleMap.HandleToModuleIndex.TryGetValue(preferredModuleHandle, out _preferredIndex))
+            if (
+                !preferredModuleHandle.IsNull
+                && !moduleMap.HandleToModuleIndex.TryGetValue(
+                    preferredModuleHandle,
+                    out _preferredIndex
+                )
+            )
             {
-                Environment.FailFast("Invalid module requested in enumeration: " + preferredModuleHandle.LowLevelToString());
+                Environment.FailFast(
+                    "Invalid module requested in enumeration: "
+                        + preferredModuleHandle.LowLevelToString()
+                );
             }
         }
 
@@ -343,7 +375,10 @@ namespace Internal.Runtime.TypeLoader
         /// </summary>
         /// <param name="moduleMap">Module map to enumerate</param>
         /// <param name="preferredModuleHandle">Optional module handle to enumerate first</param>
-        internal ModuleHandleEnumerable(ModuleMap moduleMap, TypeManagerHandle preferredModuleHandle)
+        internal ModuleHandleEnumerable(
+            ModuleMap moduleMap,
+            TypeManagerHandle preferredModuleHandle
+        )
         {
             _moduleMap = moduleMap;
             _preferredModuleHandle = preferredModuleHandle;
@@ -374,7 +409,10 @@ namespace Internal.Runtime.TypeLoader
         /// </summary>
         /// <param name="moduleMap">Module map to enumerate</param>
         /// <param name="preferredModuleHandle">Optional module handle to enumerate first</param>
-        internal ModuleHandleEnumerator(ModuleMap moduleMap, TypeManagerHandle preferredModuleHandle)
+        internal ModuleHandleEnumerator(
+            ModuleMap moduleMap,
+            TypeManagerHandle preferredModuleHandle
+        )
         {
             _moduleInfoEnumerator = new ModuleInfoEnumerator(moduleMap, preferredModuleHandle);
         }
@@ -410,7 +448,10 @@ namespace Internal.Runtime.TypeLoader
         /// </summary>
         private volatile ModuleMap _loadedModuleMap;
 
-        internal ModuleMap GetLoadedModuleMapInternal() { return _loadedModuleMap; }
+        internal ModuleMap GetLoadedModuleMapInternal()
+        {
+            return _loadedModuleMap;
+        }
 
         /// <summary>
         /// List of callbacks to execute when a module gets registered.
@@ -448,7 +489,9 @@ namespace Internal.Runtime.TypeLoader
         /// callbacks are never called concurrently.
         /// </summary>
         /// <param name="newModuleRegistrationCallback">Method to call whenever a new module is registered</param>
-        public static void AddModuleRegistrationCallback(Action<ModuleInfo> newModuleRegistrationCallback)
+        public static void AddModuleRegistrationCallback(
+            Action<ModuleInfo> newModuleRegistrationCallback
+        )
         {
             // Accumulate callbacks to be notified upon module registration
             Instance._moduleRegistrationCallbacks += newModuleRegistrationCallback;
@@ -471,10 +514,13 @@ namespace Internal.Runtime.TypeLoader
                 // Fetch modules that have already been registered with the runtime
                 int loadedModuleCount = RuntimeAugments.GetLoadedModules(null);
                 TypeManagerHandle[] loadedModuleHandles = new TypeManagerHandle[loadedModuleCount];
-                int loadedModuleCountUpdated = RuntimeAugments.GetLoadedModules(loadedModuleHandles);
+                int loadedModuleCountUpdated = RuntimeAugments.GetLoadedModules(
+                    loadedModuleHandles
+                );
                 Debug.Assert(loadedModuleCount == loadedModuleCountUpdated);
 
-                LowLevelList<TypeManagerHandle> newModuleHandles = new LowLevelList<TypeManagerHandle>(loadedModuleHandles.Length);
+                LowLevelList<TypeManagerHandle> newModuleHandles =
+                    new LowLevelList<TypeManagerHandle>(loadedModuleHandles.Length);
                 foreach (TypeManagerHandle moduleHandle in loadedModuleHandles)
                 {
                     // Skip already registered modules.
@@ -488,24 +534,40 @@ namespace Internal.Runtime.TypeLoader
 
                 // Copy existing modules to new dictionary
                 int oldModuleCount = _loadedModuleMap.Modules.Length;
-                ModuleInfo[] updatedModules = new ModuleInfo[oldModuleCount + newModuleHandles.Count];
+                ModuleInfo[] updatedModules = new ModuleInfo[
+                    oldModuleCount + newModuleHandles.Count
+                ];
                 if (oldModuleCount > 0)
                 {
                     Array.Copy(_loadedModuleMap.Modules, 0, updatedModules, 0, oldModuleCount);
                 }
 
-                for (int newModuleIndex = 0; newModuleIndex < newModuleHandles.Count; newModuleIndex++)
+                for (
+                    int newModuleIndex = 0;
+                    newModuleIndex < newModuleHandles.Count;
+                    newModuleIndex++
+                )
                 {
                     ModuleInfo newModuleInfo;
-
                     unsafe
                     {
                         byte* pBlob;
                         uint cbBlob;
 
-                        if (RuntimeAugments.FindBlob(newModuleHandles[newModuleIndex], (int)ReflectionMapBlob.EmbeddedMetadata, new IntPtr(&pBlob), new IntPtr(&cbBlob)))
+                        if (
+                            RuntimeAugments.FindBlob(
+                                newModuleHandles[newModuleIndex],
+                                (int)ReflectionMapBlob.EmbeddedMetadata,
+                                new IntPtr(&pBlob),
+                                new IntPtr(&cbBlob)
+                            )
+                        )
                         {
-                            newModuleInfo = new NativeFormatModuleInfo(newModuleHandles[newModuleIndex], (IntPtr)pBlob, (int)cbBlob);
+                            newModuleInfo = new NativeFormatModuleInfo(
+                                newModuleHandles[newModuleIndex],
+                                (IntPtr)pBlob,
+                                (int)cbBlob
+                            );
                         }
                         else
                         {
@@ -531,7 +593,8 @@ namespace Internal.Runtime.TypeLoader
         public NativeFormatModuleInfo GetModuleInfoByHandle(TypeManagerHandle moduleHandle)
         {
             ModuleMap moduleMap = _loadedModuleMap;
-            return (NativeFormatModuleInfo)moduleMap.Modules[moduleMap.HandleToModuleIndex[moduleHandle]];
+            return (NativeFormatModuleInfo)
+                moduleMap.Modules[moduleMap.HandleToModuleIndex[moduleHandle]];
         }
 
         /// <summary>
@@ -540,7 +603,10 @@ namespace Internal.Runtime.TypeLoader
         /// </summary>
         /// <param name="moduleHandle">Handle of module to look up</param>
         /// <param name="moduleInfo">Found module info</param>
-        public bool TryGetModuleInfoByHandle(TypeManagerHandle moduleHandle, out ModuleInfo moduleInfo)
+        public bool TryGetModuleInfoByHandle(
+            TypeManagerHandle moduleHandle,
+            out ModuleInfo moduleInfo
+        )
         {
             ModuleMap moduleMap = _loadedModuleMap;
             int moduleIndex;
@@ -564,7 +630,8 @@ namespace Internal.Runtime.TypeLoader
             int moduleIndex;
             if (moduleMap.HandleToModuleIndex.TryGetValue(moduleHandle, out moduleIndex))
             {
-                NativeFormatModuleInfo moduleInfo = moduleMap.Modules[moduleIndex] as NativeFormatModuleInfo;
+                NativeFormatModuleInfo moduleInfo =
+                    moduleMap.Modules[moduleIndex] as NativeFormatModuleInfo;
                 if (moduleInfo != null)
                     return moduleInfo.MetadataReader;
                 else
@@ -582,8 +649,12 @@ namespace Internal.Runtime.TypeLoader
         {
             foreach (ModuleInfo moduleInfo in _loadedModuleMap.Modules)
             {
-                NativeFormatModuleInfo nativeFormatModuleInfo = moduleInfo as NativeFormatModuleInfo;
-                if (nativeFormatModuleInfo != null && nativeFormatModuleInfo.MetadataReader == reader)
+                NativeFormatModuleInfo nativeFormatModuleInfo =
+                    moduleInfo as NativeFormatModuleInfo;
+                if (
+                    nativeFormatModuleInfo != null
+                    && nativeFormatModuleInfo.MetadataReader == reader
+                )
                 {
                     return nativeFormatModuleInfo;
                 }
@@ -603,8 +674,12 @@ namespace Internal.Runtime.TypeLoader
         {
             foreach (ModuleInfo moduleInfo in _loadedModuleMap.Modules)
             {
-                NativeFormatModuleInfo nativeFormatModuleInfo = moduleInfo as NativeFormatModuleInfo;
-                if (nativeFormatModuleInfo != null && nativeFormatModuleInfo.MetadataReader == reader)
+                NativeFormatModuleInfo nativeFormatModuleInfo =
+                    moduleInfo as NativeFormatModuleInfo;
+                if (
+                    nativeFormatModuleInfo != null
+                    && nativeFormatModuleInfo.MetadataReader == reader
+                )
                 {
                     return moduleInfo.Handle;
                 }
@@ -620,7 +695,10 @@ namespace Internal.Runtime.TypeLoader
         /// </summary>
         public static NativeFormatModuleInfoEnumerable EnumerateModules()
         {
-            return new NativeFormatModuleInfoEnumerable(Instance._loadedModuleMap, default(TypeManagerHandle));
+            return new NativeFormatModuleInfoEnumerable(
+                Instance._loadedModuleMap,
+                default(TypeManagerHandle)
+            );
         }
 
         /// <summary>
@@ -629,7 +707,9 @@ namespace Internal.Runtime.TypeLoader
         /// to contain a certain information.
         /// </summary>
         /// <param name="preferredModule">Handle to the module which should be enumerated first</param>
-        public static NativeFormatModuleInfoEnumerable EnumerateModules(TypeManagerHandle preferredModule)
+        public static NativeFormatModuleInfoEnumerable EnumerateModules(
+            TypeManagerHandle preferredModule
+        )
         {
             return new NativeFormatModuleInfoEnumerable(Instance._loadedModuleMap, preferredModule);
         }
@@ -639,7 +719,10 @@ namespace Internal.Runtime.TypeLoader
         /// </summary>
         public static ModuleHandleEnumerable Enumerate()
         {
-            return new ModuleHandleEnumerable(Instance._loadedModuleMap, default(TypeManagerHandle));
+            return new ModuleHandleEnumerable(
+                Instance._loadedModuleMap,
+                default(TypeManagerHandle)
+            );
         }
 
         /// <summary>
@@ -657,16 +740,23 @@ namespace Internal.Runtime.TypeLoader
 
     public static partial class RuntimeSignatureHelper
     {
-        public static ModuleInfo GetModuleInfo(this Internal.Runtime.CompilerServices.RuntimeSignature methodSignature)
+        public static ModuleInfo GetModuleInfo(
+            this Internal.Runtime.CompilerServices.RuntimeSignature methodSignature
+        )
         {
             if (methodSignature.IsNativeLayoutSignature)
             {
-                return ModuleList.Instance.GetModuleInfoByHandle(new TypeManagerHandle(methodSignature.ModuleHandle));
+                return ModuleList.Instance.GetModuleInfoByHandle(
+                    new TypeManagerHandle(methodSignature.ModuleHandle)
+                );
             }
             else
             {
                 ModuleInfo moduleInfo;
-                bool success = ModuleList.Instance.TryGetModuleInfoByHandle(new TypeManagerHandle(methodSignature.ModuleHandle), out moduleInfo);
+                bool success = ModuleList.Instance.TryGetModuleInfoByHandle(
+                    new TypeManagerHandle(methodSignature.ModuleHandle),
+                    out moduleInfo
+                );
                 Debug.Assert(success);
                 return moduleInfo;
             }

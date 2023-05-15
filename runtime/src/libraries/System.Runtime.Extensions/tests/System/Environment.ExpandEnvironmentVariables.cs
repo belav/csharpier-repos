@@ -10,7 +10,9 @@ namespace System.Tests
         [Fact]
         public void NullArgumentThrowsArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(() => Environment.ExpandEnvironmentVariables(null));
+            Assert.Throws<ArgumentNullException>(
+                () => Environment.ExpandEnvironmentVariables(null)
+            );
         }
 
         [Fact]
@@ -27,7 +29,8 @@ namespace System.Tests
             // envvar1=animal;
             // and we are going to check that the expanded %envvar1% is animal.
 
-            string envVar1 = "TestVariable_ExpansionOfVariableSucceeds_" + Random.Shared.Next().ToString();
+            string envVar1 =
+                "TestVariable_ExpansionOfVariableSucceeds_" + Random.Shared.Next().ToString();
             string expectedValue = "animal";
 
             try
@@ -54,7 +57,9 @@ namespace System.Tests
 
         [Theory]
         [InlineData("Hello World")]
-        [InlineData("C:\\J\\workspace\\debug_windows---bc3c3f12\\artifacts\\win81-x86\\stage2\\sdk\\2.0.0-preview1-005938\\Extensions")] // longer than 100 chars, a magic number in the impl
+        [InlineData(
+            "C:\\J\\workspace\\debug_windows---bc3c3f12\\artifacts\\win81-x86\\stage2\\sdk\\2.0.0-preview1-005938\\Extensions"
+        )] // longer than 100 chars, a magic number in the impl
         public void StringWithNoEnvironmentVariablesGoesThroughUnchanged(string value)
         {
             for (int i = 0; i < 2; i++) // invoke multiple times to exercise StringBuilder reuse path
@@ -82,64 +87,64 @@ namespace System.Tests
                 }
             }
 
-            string set1 = keys[0], set2 = keys[1], set3 = keys[2];
-            string unset1 = keys[3], unset2 = keys[4], unset3 = keys[5];
-            string value1, value2, value3;
+            string set1 = keys[0],
+                set2 = keys[1],
+                set3 = keys[2];
+            string unset1 = keys[3],
+                unset2 = keys[4],
+                unset3 = keys[5];
+            string value1,
+                value2,
+                value3;
 
             value1 = "value1";
             value2 = "value2";
             value3 = "value3";
 
-            Test("%",
-                  "%");
+            Test("%", "%");
 
-            Test("%%",
-                  "%%");
+            Test("%%", "%%");
 
-            Test("%%%",
-                  "%%%");
+            Test("%%%", "%%%");
 
-            Test(("%" + set1 + "%") + set2 + ("%" + set3 + "%"),
-                   value1 + set2 + value3);
+            Test(("%" + set1 + "%") + set2 + ("%" + set3 + "%"), value1 + set2 + value3);
 
-            Test("%" + ("%" + set1 + "%"),
-                  "%" + value1);
+            Test("%" + ("%" + set1 + "%"), "%" + value1);
 
-            Test("%%" + ("%" + set1 + "%") + "%%",
-                  "%%" + value1 + "%%");
+            Test("%%" + ("%" + set1 + "%") + "%%", "%%" + value1 + "%%");
 
-            Test("%%%" + ("%" + set1 + "%") + "%",
-                  "%%%" + value1 + "%");
+            Test("%%%" + ("%" + set1 + "%") + "%", "%%%" + value1 + "%");
 
-            Test(("%" + set1 + "%") + ("%" + set2 + "%"),
-                  value1 + value2);
+            Test(("%" + set1 + "%") + ("%" + set2 + "%"), value1 + value2);
 
-            Test(("%" + unset1 + "%") + ("%" + set1 + "%"),
-                  ("%" + unset1 + "%") + value1);
+            Test(("%" + unset1 + "%") + ("%" + set1 + "%"), ("%" + unset1 + "%") + value1);
 
-            Test(("%" + set2 + "%") + "hello" + ("%" + unset2 + "%"),
-                  value2 + "hello" + ("%" + unset2 + "%"));
+            Test(
+                ("%" + set2 + "%") + "hello" + ("%" + unset2 + "%"),
+                value2 + "hello" + ("%" + unset2 + "%")
+            );
 
-            Test(("%" + unset2 + "%") + ("%" + unset3 + "%"),
-                  ("%" + unset2 + "%") + ("%" + unset3 + "%"));
+            Test(
+                ("%" + unset2 + "%") + ("%" + unset3 + "%"),
+                ("%" + unset2 + "%") + ("%" + unset3 + "%")
+            );
 
-            Test("% " + set1 + "%",
-                  "% " + set1 + "%");
+            Test("% " + set1 + "%", "% " + set1 + "%");
 
-            Test("%  " + set1 + "  %",
-                  "%  " + set1 + "  %");
+            Test("%  " + set1 + "  %", "%  " + set1 + "  %");
 
-            Test("%\t" + set1 + "%",
-                  "%\t" + set1 + "%");
+            Test("%\t" + set1 + "%", "%\t" + set1 + "%");
 
-            Test("%%% " + set1 + "%",
-                  "%%% " + set1 + "%");
+            Test("%%% " + set1 + "%", "%%% " + set1 + "%");
         }
 
         private void Test(string toExpand, string expectedExpansion)
         {
             Assert.Equal(expectedExpansion, Environment.ExpandEnvironmentVariables(toExpand));
-            Assert.Equal("qq" + expectedExpansion + "rr", "qq" + Environment.ExpandEnvironmentVariables(toExpand) + "rr");
+            Assert.Equal(
+                "qq" + expectedExpansion + "rr",
+                "qq" + Environment.ExpandEnvironmentVariables(toExpand) + "rr"
+            );
         }
     }
 }

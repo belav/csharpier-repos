@@ -28,11 +28,18 @@ namespace System.IO
 
         public static bool IsDirEmpty(DirectoryInfo possiblyEmptyDir)
         {
-            using (IEnumerator<string> enumerator = Directory.EnumerateFileSystemEntries(possiblyEmptyDir.FullName).GetEnumerator())
+            using (
+                IEnumerator<string> enumerator = Directory
+                    .EnumerateFileSystemEntries(possiblyEmptyDir.FullName)
+                    .GetEnumerator()
+            )
                 return !enumerator.MoveNext();
         }
 
-        public static void AttemptSetLastWriteTime(string destinationFileName, DateTimeOffset lastWriteTime)
+        public static void AttemptSetLastWriteTime(
+            string destinationFileName,
+            DateTimeOffset lastWriteTime
+        )
         {
             try
             {

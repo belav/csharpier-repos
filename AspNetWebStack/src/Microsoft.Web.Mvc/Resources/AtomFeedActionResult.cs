@@ -27,9 +27,7 @@ namespace Microsoft.Web.Mvc.Resources
         /// </summary>
         /// <param name="feed"></param>
         public AtomFeedActionResult(SyndicationFeed feed)
-            : this(feed, new ContentType("application/atom+xml"))
-        {
-        }
+            : this(feed, new ContentType("application/atom+xml")) { }
 
         public AtomFeedActionResult(SyndicationFeed feed, ContentType contentType)
         {
@@ -66,13 +64,25 @@ namespace Microsoft.Web.Mvc.Resources
                 }
                 catch (ArgumentException)
                 {
-                    throw new HttpException((int)HttpStatusCode.NotAcceptable, String.Format(CultureInfo.CurrentCulture, MvcResources.Resources_UnsupportedFormat, this.ContentType));
+                    throw new HttpException(
+                        (int)HttpStatusCode.NotAcceptable,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.Resources_UnsupportedFormat,
+                            this.ContentType
+                        )
+                    );
                 }
             }
             XmlWriterSettings settings = new XmlWriterSettings { Encoding = encoding };
             this.ContentType.CharSet = settings.Encoding.HeaderName;
             context.HttpContext.Response.ContentType = this.ContentType.ToString();
-            using (XmlWriter writer = XmlWriter.Create(context.HttpContext.Response.OutputStream, settings))
+            using (
+                XmlWriter writer = XmlWriter.Create(
+                    context.HttpContext.Response.OutputStream,
+                    settings
+                )
+            )
             {
                 this.Feed.GetAtom10Formatter().WriteTo(writer);
                 writer.Flush();

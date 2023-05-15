@@ -58,14 +58,16 @@ public static class SqliteServiceCollectionExtensions
         this IServiceCollection serviceCollection,
         string? connectionString,
         Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null,
-        Action<DbContextOptionsBuilder>? optionsAction = null)
-        where TContext : DbContext
-        => serviceCollection.AddDbContext<TContext>(
+        Action<DbContextOptionsBuilder>? optionsAction = null
+    )
+        where TContext : DbContext =>
+        serviceCollection.AddDbContext<TContext>(
             (_, options) =>
             {
                 optionsAction?.Invoke(options);
                 options.UseSqlite(connectionString, sqliteOptionsAction);
-            });
+            }
+        );
 
     /// <summary>
     ///     <para>
@@ -89,7 +91,9 @@ public static class SqliteServiceCollectionExtensions
     ///     The same service collection so that multiple calls can be chained.
     /// </returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public static IServiceCollection AddEntityFrameworkSqlite(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddEntityFrameworkSqlite(
+        this IServiceCollection serviceCollection
+    )
     {
         var builder = new EntityFrameworkRelationalServicesBuilder(serviceCollection)
             .TryAdd<LoggingDefinitions, SqliteLoggingDefinitions>()
@@ -106,27 +110,42 @@ public static class SqliteServiceCollectionExtensions
             .TryAdd<IHistoryRepository, SqliteHistoryRepository>()
             .TryAdd<IRelationalQueryStringFactory, SqliteQueryStringFactory>()
             .TryAdd<IMethodCallTranslatorProvider, SqliteMethodCallTranslatorProvider>()
-            .TryAdd<IAggregateMethodCallTranslatorProvider, SqliteAggregateMethodCallTranslatorProvider>()
+            .TryAdd<
+                IAggregateMethodCallTranslatorProvider,
+                SqliteAggregateMethodCallTranslatorProvider
+            >()
             .TryAdd<IMemberTranslatorProvider, SqliteMemberTranslatorProvider>()
             .TryAdd<IQuerySqlGeneratorFactory, SqliteQuerySqlGeneratorFactory>()
-            .TryAdd<IQueryableMethodTranslatingExpressionVisitorFactory, SqliteQueryableMethodTranslatingExpressionVisitorFactory>()
-            .TryAdd<IRelationalSqlTranslatingExpressionVisitorFactory, SqliteSqlTranslatingExpressionVisitorFactory>()
-            .TryAdd<IQueryTranslationPostprocessorFactory, SqliteQueryTranslationPostprocessorFactory>()
-            .TryAdd<IUpdateSqlGenerator>(
-                sp =>
-                {
-                    // Support for the RETURNING clause on INSERT/UPDATE/DELETE was added in Sqlite 3.35.
-                    // Detect which version we're using, and fall back to the older INSERT/UPDATE+SELECT behavior on legacy versions.
-                    var dependencies = sp.GetRequiredService<UpdateSqlGeneratorDependencies>();
+            .TryAdd<
+                IQueryableMethodTranslatingExpressionVisitorFactory,
+                SqliteQueryableMethodTranslatingExpressionVisitorFactory
+            >()
+            .TryAdd<
+                IRelationalSqlTranslatingExpressionVisitorFactory,
+                SqliteSqlTranslatingExpressionVisitorFactory
+            >()
+            .TryAdd<
+                IQueryTranslationPostprocessorFactory,
+                SqliteQueryTranslationPostprocessorFactory
+            >()
+            .TryAdd<IUpdateSqlGenerator>(sp =>
+            {
+                // Support for the RETURNING clause on INSERT/UPDATE/DELETE was added in Sqlite 3.35.
+                // Detect which version we're using, and fall back to the older INSERT/UPDATE+SELECT behavior on legacy versions.
+                var dependencies = sp.GetRequiredService<UpdateSqlGeneratorDependencies>();
 
-                    return new Version(new SqliteConnection().ServerVersion) < new Version(3, 35)
-                        ? new SqliteLegacyUpdateSqlGenerator(dependencies)
-                        : new SqliteUpdateSqlGenerator(dependencies);
-                })
+                return new Version(new SqliteConnection().ServerVersion) < new Version(3, 35)
+                    ? new SqliteLegacyUpdateSqlGenerator(dependencies)
+                    : new SqliteUpdateSqlGenerator(dependencies);
+            })
             .TryAdd<ISqlExpressionFactory, SqliteSqlExpressionFactory>()
-            .TryAdd<IRelationalParameterBasedSqlProcessorFactory, SqliteParameterBasedSqlProcessorFactory>()
+            .TryAdd<
+                IRelationalParameterBasedSqlProcessorFactory,
+                SqliteParameterBasedSqlProcessorFactory
+            >()
             .TryAddProviderSpecificServices(
-                b => b.TryAddScoped<ISqliteRelationalConnection, SqliteRelationalConnection>());
+                b => b.TryAddScoped<ISqliteRelationalConnection, SqliteRelationalConnection>()
+            );
 
         builder.TryAddCoreServices();
 

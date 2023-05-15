@@ -13,7 +13,10 @@ namespace System.Runtime.ExceptionServices.Tests
         [Fact]
         public static void StaticThrow_NullArgument_ThrowArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ExceptionDispatchInfo.Throw(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ExceptionDispatchInfo.Throw(null)
+            );
         }
 
         [Fact]
@@ -23,7 +26,10 @@ namespace System.Runtime.ExceptionServices.Tests
             var e = new FormatException();
             for (int i = 0; i < 3; i++)
             {
-                Assert.Same(e, Assert.Throws<FormatException>(() => ExceptionDispatchInfo.Throw(e)));
+                Assert.Same(
+                    e,
+                    Assert.Throws<FormatException>(() => ExceptionDispatchInfo.Throw(e))
+                );
                 Assert.Equal(i, Regex.Count(e.StackTrace, RethrowMessageSubstring));
             }
         }
@@ -35,37 +41,75 @@ namespace System.Runtime.ExceptionServices.Tests
 
             // Null argument
             e = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ExceptionDispatchInfo.SetCurrentStackTrace(e));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello"));
-            AssertExtensions.Throws<ArgumentNullException>("stackTrace", () => ExceptionDispatchInfo.SetRemoteStackTrace(new Exception(), stackTrace: null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ExceptionDispatchInfo.SetCurrentStackTrace(e)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "stackTrace",
+                () => ExceptionDispatchInfo.SetRemoteStackTrace(new Exception(), stackTrace: null)
+            );
 
             // Previously set current stack
             e = new Exception();
             ExceptionDispatchInfo.SetCurrentStackTrace(e);
-            Assert.Throws<InvalidOperationException>(() => ExceptionDispatchInfo.SetCurrentStackTrace(e));
-            Assert.Throws<InvalidOperationException>(() => ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello"));
+            Assert.Throws<InvalidOperationException>(
+                () => ExceptionDispatchInfo.SetCurrentStackTrace(e)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello")
+            );
 
             // Previously thrown
             e = new Exception();
-            try { throw e; } catch { }
-            Assert.Throws<InvalidOperationException>(() => ExceptionDispatchInfo.SetCurrentStackTrace(e));
-            Assert.Throws<InvalidOperationException>(() => ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello"));
+            try
+            {
+                throw e;
+            }
+            catch { }
+            Assert.Throws<InvalidOperationException>(
+                () => ExceptionDispatchInfo.SetCurrentStackTrace(e)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ExceptionDispatchInfo.SetRemoteStackTrace(e, "Hello")
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/50957", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/50957",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBrowser),
+            nameof(PlatformDetection.IsMonoAOT)
+        )]
         public static void SetCurrentStackTrace_IncludedInExceptionStackTrace()
         {
             Exception e;
 
             e = new Exception();
             ABCDEFGHIJKLMNOPQRSTUVWXYZ(e);
-            Assert.Contains(nameof(ABCDEFGHIJKLMNOPQRSTUVWXYZ), e.StackTrace, StringComparison.Ordinal);
+            Assert.Contains(
+                nameof(ABCDEFGHIJKLMNOPQRSTUVWXYZ),
+                e.StackTrace,
+                StringComparison.Ordinal
+            );
 
             e = new Exception();
             ABCDEFGHIJKLMNOPQRSTUVWXYZ(e);
-            try { throw e; } catch { }
-            Assert.Contains(nameof(ABCDEFGHIJKLMNOPQRSTUVWXYZ), e.StackTrace, StringComparison.Ordinal);
+            try
+            {
+                throw e;
+            }
+            catch { }
+            Assert.Contains(
+                nameof(ABCDEFGHIJKLMNOPQRSTUVWXYZ),
+                e.StackTrace,
+                StringComparison.Ordinal
+            );
         }
 
         [Fact]
@@ -74,15 +118,33 @@ namespace System.Runtime.ExceptionServices.Tests
             Exception e;
 
             e = new Exception();
-            Assert.Same(e, ExceptionDispatchInfo.SetRemoteStackTrace(e, "pumpkin-anaconda-maritime")); // 3 randomly selected words
+            Assert.Same(
+                e,
+                ExceptionDispatchInfo.SetRemoteStackTrace(e, "pumpkin-anaconda-maritime")
+            ); // 3 randomly selected words
             Assert.Contains("pumpkin-anaconda-maritime", e.StackTrace, StringComparison.Ordinal);
-            Assert.DoesNotContain("pumpkin-anaconda-maritime", new StackTrace(e).ToString(), StringComparison.Ordinal); // we shouldn't attempt to parse it in a StackTrace object
+            Assert.DoesNotContain(
+                "pumpkin-anaconda-maritime",
+                new StackTrace(e).ToString(),
+                StringComparison.Ordinal
+            ); // we shouldn't attempt to parse it in a StackTrace object
 
             e = new Exception();
-            Assert.Same(e, ExceptionDispatchInfo.SetRemoteStackTrace(e, "pumpkin-anaconda-maritime"));
-            try { throw e; } catch { }
+            Assert.Same(
+                e,
+                ExceptionDispatchInfo.SetRemoteStackTrace(e, "pumpkin-anaconda-maritime")
+            );
+            try
+            {
+                throw e;
+            }
+            catch { }
             Assert.Contains("pumpkin-anaconda-maritime", e.StackTrace, StringComparison.Ordinal);
-            Assert.DoesNotContain("pumpkin-anaconda-maritime", new StackTrace(e).ToString(), StringComparison.Ordinal);
+            Assert.DoesNotContain(
+                "pumpkin-anaconda-maritime",
+                new StackTrace(e).ToString(),
+                StringComparison.Ordinal
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]

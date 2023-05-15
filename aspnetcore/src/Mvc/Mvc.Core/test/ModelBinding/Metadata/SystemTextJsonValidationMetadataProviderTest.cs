@@ -14,8 +14,16 @@ public class SystemTextJsonValidationMetadataProviderTest
         var metadataProvider = new SystemTextJsonValidationMetadataProvider();
         var propertyName = "sample-data";
 
-        var key = ModelMetadataIdentity.ForProperty(typeof(SampleTestClass).GetProperty(nameof(SampleTestClass.NoAttributesProperty)), typeof(int), typeof(SampleTestClass));
-        var modelAttributes = new ModelAttributes(Array.Empty<object>(), new[] { new JsonPropertyNameAttribute(propertyName) }, Array.Empty<object>());
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(SampleTestClass).GetProperty(nameof(SampleTestClass.NoAttributesProperty)),
+            typeof(int),
+            typeof(SampleTestClass)
+        );
+        var modelAttributes = new ModelAttributes(
+            Array.Empty<object>(),
+            new[] { new JsonPropertyNameAttribute(propertyName) },
+            Array.Empty<object>()
+        );
         var context = new ValidationMetadataProviderContext(key, modelAttributes);
 
         // Act
@@ -32,8 +40,16 @@ public class SystemTextJsonValidationMetadataProviderTest
         var metadataProvider = new SystemTextJsonValidationMetadataProvider();
         var propertyName = nameof(SampleTestClass.NoAttributesProperty);
 
-        var key = ModelMetadataIdentity.ForProperty(typeof(SampleTestClass).GetProperty(propertyName), typeof(int), typeof(SampleTestClass));
-        var modelAttributes = new ModelAttributes(Array.Empty<object>(), Array.Empty<object>(), Array.Empty<object>());
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(SampleTestClass).GetProperty(propertyName),
+            typeof(int),
+            typeof(SampleTestClass)
+        );
+        var modelAttributes = new ModelAttributes(
+            Array.Empty<object>(),
+            Array.Empty<object>(),
+            Array.Empty<object>()
+        );
         var context = new ValidationMetadataProviderContext(key, modelAttributes);
 
         // Act
@@ -41,18 +57,31 @@ public class SystemTextJsonValidationMetadataProviderTest
 
         // Assert
         Assert.NotNull(context.ValidationMetadata.ValidationModelName);
-        Assert.Equal(JsonNamingPolicy.CamelCase.ConvertName(propertyName), context.ValidationMetadata.ValidationModelName);
+        Assert.Equal(
+            JsonNamingPolicy.CamelCase.ConvertName(propertyName),
+            context.ValidationMetadata.ValidationModelName
+        );
     }
 
     [Theory]
     [MemberData(nameof(NamingPolicies))]
-    public void CreateValidationMetadata_SetValidationPropertyName_WithJsonNamingPolicy(JsonNamingPolicy namingPolicy)
+    public void CreateValidationMetadata_SetValidationPropertyName_WithJsonNamingPolicy(
+        JsonNamingPolicy namingPolicy
+    )
     {
         var metadataProvider = new SystemTextJsonValidationMetadataProvider(namingPolicy);
         var propertyName = nameof(SampleTestClass.NoAttributesProperty);
 
-        var key = ModelMetadataIdentity.ForProperty(typeof(SampleTestClass).GetProperty(propertyName), typeof(int), typeof(SampleTestClass));
-        var modelAttributes = new ModelAttributes(Array.Empty<object>(), Array.Empty<object>(), Array.Empty<object>());
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(SampleTestClass).GetProperty(propertyName),
+            typeof(int),
+            typeof(SampleTestClass)
+        );
+        var modelAttributes = new ModelAttributes(
+            Array.Empty<object>(),
+            Array.Empty<object>(),
+            Array.Empty<object>()
+        );
         var context = new ValidationMetadataProviderContext(key, modelAttributes);
 
         // Act
@@ -60,7 +89,10 @@ public class SystemTextJsonValidationMetadataProviderTest
 
         // Assert
         Assert.NotNull(context.ValidationMetadata.ValidationModelName);
-        Assert.Equal(namingPolicy.ConvertName(propertyName), context.ValidationMetadata.ValidationModelName);
+        Assert.Equal(
+            namingPolicy.ConvertName(propertyName),
+            context.ValidationMetadata.ValidationModelName
+        );
     }
 
     public static TheoryData<JsonNamingPolicy> NamingPolicies
@@ -68,10 +100,10 @@ public class SystemTextJsonValidationMetadataProviderTest
         get
         {
             return new TheoryData<JsonNamingPolicy>
-                {
-                    UpperCaseJsonNamingPolicy.Instance,
-                    JsonNamingPolicy.CamelCase
-                };
+            {
+                UpperCaseJsonNamingPolicy.Instance,
+                JsonNamingPolicy.CamelCase
+            };
         }
     }
 

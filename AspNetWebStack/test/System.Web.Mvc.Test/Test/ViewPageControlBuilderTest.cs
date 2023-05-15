@@ -21,7 +21,10 @@ namespace System.Web.Mvc.Test
             builder.ProcessGeneratedCode(null, null, derivedType, null, null);
 
             // Assert
-            Assert.Equal("basetype", derivedType.BaseTypes.Cast<CodeTypeReference>().Single().BaseType);
+            Assert.Equal(
+                "basetype",
+                derivedType.BaseTypes.Cast<CodeTypeReference>().Single().BaseType
+            );
         }
 
         [Fact]
@@ -36,7 +39,10 @@ namespace System.Web.Mvc.Test
             builder.ProcessGeneratedCode(null, null, derivedType, null, null);
 
             // Assert
-            Assert.Equal("inheritedtype", derivedType.BaseTypes.Cast<CodeTypeReference>().Single().BaseType);
+            Assert.Equal(
+                "inheritedtype",
+                derivedType.BaseTypes.Cast<CodeTypeReference>().Single().BaseType
+            );
         }
     }
 }

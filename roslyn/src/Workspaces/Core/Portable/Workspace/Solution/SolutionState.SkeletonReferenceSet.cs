@@ -34,19 +34,25 @@ internal partial class SolutionState
         /// AssemblyMetadata), this allows higher layers to see that reference instances are the same which allow
         /// reusing the same higher level objects (for example, the set of references a compilation has).
         /// </summary>
-        private readonly Dictionary<MetadataReferenceProperties, PortableExecutableReference> _referenceMap = new();
+        private readonly Dictionary<
+            MetadataReferenceProperties,
+            PortableExecutableReference
+        > _referenceMap = new();
 
         public SkeletonReferenceSet(
             AssemblyMetadata metadata,
             string? assemblyName,
-            DeferredDocumentationProvider documentationProvider)
+            DeferredDocumentationProvider documentationProvider
+        )
         {
             _metadata = metadata;
             _assemblyName = assemblyName;
             _documentationProvider = documentationProvider;
         }
 
-        public PortableExecutableReference GetOrCreateMetadataReference(MetadataReferenceProperties properties)
+        public PortableExecutableReference GetOrCreateMetadataReference(
+            MetadataReferenceProperties properties
+        )
         {
             lock (_referenceMap)
             {
@@ -56,7 +62,8 @@ internal partial class SolutionState
                         _documentationProvider,
                         aliases: properties.Aliases,
                         embedInteropTypes: properties.EmbedInteropTypes,
-                        display: _assemblyName);
+                        display: _assemblyName
+                    );
 
                     _referenceMap.Add(properties, value);
                 }

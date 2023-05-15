@@ -50,7 +50,11 @@ public class CSharpUniqueNamerTest
     public void Singularizes_names(string input, string output)
     {
         var pluralizer = new HumanizerPluralizer();
-        var namer = new CSharpUniqueNamer<DatabaseTable>(t => t.Name, new CSharpUtilities(), pluralizer.Singularize);
+        var namer = new CSharpUniqueNamer<DatabaseTable>(
+            t => t.Name,
+            new CSharpUtilities(),
+            pluralizer.Singularize
+        );
         var table = new DatabaseTable { Database = new DatabaseModel(), Name = input };
         Assert.Equal(output, namer.GetName(table));
     }
@@ -61,7 +65,11 @@ public class CSharpUniqueNamerTest
     public void Pluralizes_names(string input, string output)
     {
         var pluralizer = new HumanizerPluralizer();
-        var namer = new CSharpUniqueNamer<DatabaseTable>(t => t.Name, new CSharpUtilities(), pluralizer.Pluralize);
+        var namer = new CSharpUniqueNamer<DatabaseTable>(
+            t => t.Name,
+            new CSharpUtilities(),
+            pluralizer.Pluralize
+        );
         var table = new DatabaseTable { Database = new DatabaseModel(), Name = input };
         Assert.Equal(output, namer.GetName(table));
     }

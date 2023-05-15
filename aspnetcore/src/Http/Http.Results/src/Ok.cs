@@ -18,9 +18,7 @@ public sealed class Ok : IResult, IEndpointMetadataProvider, IStatusCodeHttpResu
     /// <summary>
     /// Initializes a new instance of the <see cref="Ok"/> class with the values.
     /// </summary>
-    internal Ok()
-    {
-    }
+    internal Ok() { }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status200OK"/>
@@ -45,7 +43,10 @@ public sealed class Ok : IResult, IEndpointMetadataProvider, IStatusCodeHttpResu
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);

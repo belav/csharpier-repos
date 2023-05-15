@@ -22,29 +22,17 @@ namespace System.Activities.Runtime
             this.Exception = exception;
             this.Source = sourceReference;
         }
-        
+
         public Exception Exception
         {
-            get
-            {
-                return this.exception;
-            }
-            private set
-            {
-                this.exception = value;
-            }
+            get { return this.exception; }
+            private set { this.exception = value; }
         }
-        
+
         public ActivityInstanceReference Source
         {
-            get
-            {
-                return this.source;
-            }
-            private set
-            {
-                this.source = value;
-            }
+            get { return this.source; }
+            private set { this.source = value; }
         }
 
         [DataMember(Name = "Exception")]
@@ -53,6 +41,7 @@ namespace System.Activities.Runtime
             get { return this.Exception; }
             set { this.Exception = value; }
         }
+
         [DataMember(Name = "Source")]
         internal ActivityInstanceReference SerializedSource
         {
@@ -61,5 +50,3 @@ namespace System.Activities.Runtime
         }
     }
 }
-
-

@@ -14,15 +14,18 @@ namespace System.ServiceModel.Activities.Presentation
     class MessagingContentPropertyEditorResources
     {
         private static ResourceDictionary resources;
+
         internal static ResourceDictionary GetResources()
         {
             if (resources == null)
             {
                 Uri resourceLocator = new Uri(
                     string.Concat(
-                    typeof(MessagingContentPropertyEditorResources).Assembly.GetName().Name,
-                    @";component/System/ServiceModel/Activities/Presentation/MessagingContentPropertyEditorResources.xaml"),
-                    UriKind.RelativeOrAbsolute);
+                        typeof(MessagingContentPropertyEditorResources).Assembly.GetName().Name,
+                        @";component/System/ServiceModel/Activities/Presentation/MessagingContentPropertyEditorResources.xaml"
+                    ),
+                    UriKind.RelativeOrAbsolute
+                );
                 resources = (ResourceDictionary)Application.LoadComponent(resourceLocator);
             }
             Fx.Assert(resources != null, "Could not load argument value editor resources.");

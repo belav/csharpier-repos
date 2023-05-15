@@ -57,7 +57,10 @@ namespace ILCompiler.DependencyAnalysis
                     return new VirtualDispatchCellGenericLookupResult(method);
                 });
 
-                _typeThreadStaticBaseIndexSymbols = new NodeCache<TypeDesc, GenericLookupResult>(type =>
+                _typeThreadStaticBaseIndexSymbols = new NodeCache<
+                    TypeDesc,
+                    GenericLookupResult
+                >(type =>
                 {
                     return new TypeThreadStaticBaseIndexGenericLookupResult(type);
                 });
@@ -82,9 +85,16 @@ namespace ILCompiler.DependencyAnalysis
                     return new DefaultConstructorLookupResult(type);
                 });
 
-                _constrainedMethodUses = new NodeCache<ConstrainedMethodUseKey, GenericLookupResult>(constrainedMethodUse =>
+                _constrainedMethodUses = new NodeCache<
+                    ConstrainedMethodUseKey,
+                    GenericLookupResult
+                >(constrainedMethodUse =>
                 {
-                    return new ConstrainedMethodUseLookupResult(constrainedMethodUse.ConstrainedMethod, constrainedMethodUse.ConstraintType, constrainedMethodUse.DirectCall);
+                    return new ConstrainedMethodUseLookupResult(
+                        constrainedMethodUse.ConstrainedMethod,
+                        constrainedMethodUse.ConstraintType,
+                        constrainedMethodUse.DirectCall
+                    );
                 });
             }
 
@@ -102,9 +112,14 @@ namespace ILCompiler.DependencyAnalysis
                 // An actual unwrap nullable lookup is only required if the type is exactly a runtime
                 // determined type associated with System.__UniversalCanon itself, or if it's
                 // a runtime determined instance of Nullable.
-                if (type.IsRuntimeDeterminedType && (
-                    ((RuntimeDeterminedType)type).CanonicalType.IsCanonicalDefinitionType(CanonicalFormKind.Universal) ||
-                    ((RuntimeDeterminedType)type).CanonicalType.IsNullable))
+                if (
+                    type.IsRuntimeDeterminedType
+                    && (
+                        ((RuntimeDeterminedType)type).CanonicalType.IsCanonicalDefinitionType(
+                            CanonicalFormKind.Universal
+                        ) || ((RuntimeDeterminedType)type).CanonicalType.IsNullable
+                    )
+                )
                     return _unwrapNullableSymbols.GetOrAdd(type);
                 else
                 {
@@ -187,9 +202,16 @@ namespace ILCompiler.DependencyAnalysis
             }
 
             private NodeCache<ConstrainedMethodUseKey, GenericLookupResult> _constrainedMethodUses;
-            public GenericLookupResult ConstrainedMethodUse(MethodDesc constrainedMethod, TypeDesc constraintType, bool directCall)
+
+            public GenericLookupResult ConstrainedMethodUse(
+                MethodDesc constrainedMethod,
+                TypeDesc constraintType,
+                bool directCall
+            )
             {
-                return _constrainedMethodUses.GetOrAdd(new ConstrainedMethodUseKey(constrainedMethod, constraintType, directCall));
+                return _constrainedMethodUses.GetOrAdd(
+                    new ConstrainedMethodUseKey(constrainedMethod, constraintType, directCall)
+                );
             }
         }
 
@@ -197,7 +219,11 @@ namespace ILCompiler.DependencyAnalysis
 
         private struct ConstrainedMethodUseKey : IEquatable<ConstrainedMethodUseKey>
         {
-            public ConstrainedMethodUseKey(MethodDesc constrainedMethod, TypeDesc constraintType, bool directCall)
+            public ConstrainedMethodUseKey(
+                MethodDesc constrainedMethod,
+                TypeDesc constraintType,
+                bool directCall
+            )
             {
                 ConstrainedMethod = constrainedMethod;
                 ConstraintType = constraintType;
@@ -210,7 +236,9 @@ namespace ILCompiler.DependencyAnalysis
 
             public override int GetHashCode()
             {
-                return ConstraintType.GetHashCode() ^ ConstrainedMethod.GetHashCode() ^ DirectCall.GetHashCode();
+                return ConstraintType.GetHashCode()
+                    ^ ConstrainedMethod.GetHashCode()
+                    ^ DirectCall.GetHashCode();
             }
 
             public override bool Equals(object obj)
@@ -230,6 +258,5 @@ namespace ILCompiler.DependencyAnalysis
                 return true;
             }
         }
-
     }
 }

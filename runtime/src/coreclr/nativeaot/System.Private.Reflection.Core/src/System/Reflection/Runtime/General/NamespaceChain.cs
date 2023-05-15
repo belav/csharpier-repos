@@ -17,13 +17,17 @@ namespace System.Reflection.Runtime.General
     //
     internal sealed class NamespaceChain
     {
-        internal NamespaceChain(MetadataReader reader, NamespaceDefinitionHandle innerMostNamespaceHandle)
+        internal NamespaceChain(
+            MetadataReader reader,
+            NamespaceDefinitionHandle innerMostNamespaceHandle
+        )
         {
-            NamespaceDefinition currentNamespaceDefinition = innerMostNamespaceHandle.GetNamespaceDefinition(reader);
+            NamespaceDefinition currentNamespaceDefinition =
+                innerMostNamespaceHandle.GetNamespaceDefinition(reader);
             ConstantStringValueHandle currentNameHandle = currentNamespaceDefinition.Name;
             Handle currentNamespaceHandle;
             LowLevelList<string> names = new LowLevelList<string>();
-            for (;;)
+            for (; ; )
             {
                 string name = currentNameHandle.GetStringOrNull(reader);
                 names.Add(name);
@@ -33,7 +37,8 @@ namespace System.Reflection.Runtime.General
                     break;
                 if (handleType == HandleType.NamespaceDefinition)
                 {
-                    NamespaceDefinitionHandle nsHandle = currentNamespaceHandle.ToNamespaceDefinitionHandle(reader);
+                    NamespaceDefinitionHandle nsHandle =
+                        currentNamespaceHandle.ToNamespaceDefinitionHandle(reader);
                     currentNamespaceDefinition = nsHandle.GetNamespaceDefinition(reader);
                     currentNameHandle = currentNamespaceDefinition.Name;
                     continue;

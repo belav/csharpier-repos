@@ -14,10 +14,15 @@ namespace System.Linq.Expressions.Tests
         {
             if (obj is DynamicMethod dm)
             {
-                return new ILReader(new DynamicMethodILProvider(dm), new DynamicScopeTokenResolver(dm));
+                return new ILReader(
+                    new DynamicMethodILProvider(dm),
+                    new DynamicScopeTokenResolver(dm)
+                );
             }
 
-            throw new NotSupportedException($"Reading IL from type '{obj.GetType()}' is currently not supported.");
+            throw new NotSupportedException(
+                $"Reading IL from type '{obj.GetType()}' is currently not supported."
+            );
         }
     }
 }

@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
-public interface IHtmlHelper<TModel>
-{
-}
+public interface IHtmlHelper<TModel> { }

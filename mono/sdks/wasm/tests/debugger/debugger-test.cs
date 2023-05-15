@@ -31,14 +31,19 @@ public partial class Math
     {
         Func<Math, bool> fn_func = (Math m) => m == null;
         Func<Math, bool> fn_func_null = null;
-        Func<Math, bool>[] fn_func_arr = new Func<Math, bool>[] {
-            (Math m) => m == null };
+        Func<Math, bool>[] fn_func_arr = new Func<Math, bool>[] { (Math m) => m == null };
 
         Math.IsMathNull fn_del = Math.IsMathNullDelegateTarget;
         var fn_del_arr = new Math.IsMathNull[] { Math.IsMathNullDelegateTarget };
         var m_obj = new Math();
         Math.IsMathNull fn_del_null = null;
-        bool res = fn_func(m_obj) && fn_del(m_obj) && fn_del_arr[0](m_obj) && fn_del_null == null && fn_func_null == null && fn_func_arr[0] != null;
+        bool res =
+            fn_func(m_obj)
+            && fn_del(m_obj)
+            && fn_del_arr[0](m_obj)
+            && fn_del_null == null
+            && fn_func_null == null
+            && fn_func_arr[0] != null;
 
         // Unused locals
 
@@ -59,7 +64,10 @@ public partial class Math
         var list = new System.Collections.Generic.Dictionary<Math[], IsMathNull>();
         System.Collections.Generic.Dictionary<Math[], IsMathNull> list_null = null;
 
-        var list_arr = new System.Collections.Generic.Dictionary<Math[], IsMathNull>[] { new System.Collections.Generic.Dictionary<Math[], IsMathNull>() };
+        var list_arr = new System.Collections.Generic.Dictionary<Math[], IsMathNull>[]
+        {
+            new System.Collections.Generic.Dictionary<Math[], IsMathNull>()
+        };
         System.Collections.Generic.Dictionary<Math[], IsMathNull>[] list_arr_null = null;
 
         Console.WriteLine($"list_arr.Length: {list_arr.Length}, list.Count: {list.Count}");
@@ -69,7 +77,10 @@ public partial class Math
         var list_unused = new System.Collections.Generic.Dictionary<Math[], IsMathNull>();
         System.Collections.Generic.Dictionary<Math[], IsMathNull> list_null_unused = null;
 
-        var list_arr_unused = new System.Collections.Generic.Dictionary<Math[], IsMathNull>[] { new System.Collections.Generic.Dictionary<Math[], IsMathNull>() };
+        var list_arr_unused = new System.Collections.Generic.Dictionary<Math[], IsMathNull>[]
+        {
+            new System.Collections.Generic.Dictionary<Math[], IsMathNull>()
+        };
         System.Collections.Generic.Dictionary<Math[], IsMathNull>[] list_arr_null_unused = null;
 
         OuterMethod();
@@ -114,6 +125,7 @@ public partial class Math
         }
 
         Math m = new Math();
+
         public async System.Threading.Tasks.Task<bool> AsyncMethod0(string s, int i)
         {
             string local0 = "value0";
@@ -158,29 +170,50 @@ public partial class Math
 
     public static int DelegatesSignatureTest()
     {
-        Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>> fn_func = (m, gs) => new GenericStruct<bool[]>();
-        Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>> fn_func_del = GenericStruct<int>.DelegateTargetForSignatureTest;
+        Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>> fn_func = (m, gs) =>
+            new GenericStruct<bool[]>();
+        Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>> fn_func_del =
+            GenericStruct<int>.DelegateTargetForSignatureTest;
         Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>> fn_func_null = null;
-        Func<bool> fn_func_only_ret = () => { Console.WriteLine($"hello"); return true; };
-        var fn_func_arr = new Func<Math, GenericStruct<GenericStruct<int[]>>, GenericStruct<bool[]>>[] {
-                (m, gs) => new GenericStruct<bool[]> () };
+        Func<bool> fn_func_only_ret = () =>
+        {
+            Console.WriteLine($"hello");
+            return true;
+        };
+        var fn_func_arr = new Func<
+            Math,
+            GenericStruct<GenericStruct<int[]>>,
+            GenericStruct<bool[]>
+        >[]
+        {
+            (m, gs) => new GenericStruct<bool[]>()
+        };
 
         Math.DelegateForSignatureTest fn_del = GenericStruct<int>.DelegateTargetForSignatureTest;
-        Math.DelegateForSignatureTest fn_del_l = (m, gs) => new GenericStruct<bool[]> { StringField = "fn_del_l#lambda" };
-        var fn_del_arr = new Math.DelegateForSignatureTest[] { GenericStruct<int>.DelegateTargetForSignatureTest, (m, gs) => new GenericStruct<bool[]> { StringField = "fn_del_arr#1#lambda" } };
+        Math.DelegateForSignatureTest fn_del_l = (m, gs) =>
+            new GenericStruct<bool[]> { StringField = "fn_del_l#lambda" };
+        var fn_del_arr = new Math.DelegateForSignatureTest[]
+        {
+            GenericStruct<int>.DelegateTargetForSignatureTest,
+            (m, gs) =>
+                new GenericStruct<bool[]> { StringField = "fn_del_arr#1#lambda" }
+        };
         var m_obj = new Math();
         Math.DelegateForSignatureTest fn_del_null = null;
         var gs_gs = new GenericStruct<GenericStruct<int[]>>
         {
             List = new System.Collections.Generic.List<GenericStruct<int[]>>
             {
-            new GenericStruct<int[]> { StringField = "gs#List#0#StringField" },
-            new GenericStruct<int[]> { StringField = "gs#List#1#StringField" }
+                new GenericStruct<int[]> { StringField = "gs#List#0#StringField" },
+                new GenericStruct<int[]> { StringField = "gs#List#1#StringField" }
             }
         };
 
         Math.DelegateWithVoidReturn fn_void_del = Math.DelegateTargetWithVoidReturn;
-        var fn_void_del_arr = new Math.DelegateWithVoidReturn[] { Math.DelegateTargetWithVoidReturn };
+        var fn_void_del_arr = new Math.DelegateWithVoidReturn[]
+        {
+            Math.DelegateTargetWithVoidReturn
+        };
         Math.DelegateWithVoidReturn fn_void_del_null = null;
 
         var rets = new GenericStruct<bool[]>[]
@@ -197,7 +230,8 @@ public partial class Math
         fn_void_del(gs);
         fn_void_del_arr[0](gs);
         fn_func_only_ret();
-        foreach (var ret in rets) Console.WriteLine($"ret: {ret}");
+        foreach (var ret in rets)
+            Console.WriteLine($"ret: {ret}");
         OuterMethod();
         Console.WriteLine($"- {gs_gs.List[0].StringField}");
         return 0;
@@ -227,12 +261,23 @@ public partial class Math
 
     public static int NestedDelegatesTest()
     {
-        Func<Func<int, bool>, bool> fn_func = (_) => { return true; };
+        Func<Func<int, bool>, bool> fn_func = (_) =>
+        {
+            return true;
+        };
         Func<Func<int, bool>, bool> fn_func_null = null;
-        var fn_func_arr = new Func<Func<int, bool>, bool>[] {
-                (gs) => { return true; } };
+        var fn_func_arr = new Func<Func<int, bool>, bool>[]
+        {
+            (gs) =>
+            {
+                return true;
+            }
+        };
 
-        var fn_del_arr = new Func<Func<int, bool>, bool>[] { DelegateTargetForNestedFunc<Func<int, bool>> };
+        var fn_del_arr = new Func<Func<int, bool>, bool>[]
+        {
+            DelegateTargetForNestedFunc<Func<int, bool>>
+        };
         var m_obj = new Math();
         Func<Func<int, bool>, bool> fn_del_null = null;
         Func<int, bool> fs = (i) => i == 0;
@@ -256,8 +301,11 @@ public partial class Math
         new Math().MethodWithDelegateArgs(_dst_arr, _fn_func, _fn_action);
     }
 
-    void MethodWithDelegateArgs(Math.DelegateForSignatureTest[] dst_arr, Func<char[], bool> fn_func,
-        Action<GenericStruct<int>[]> fn_action)
+    void MethodWithDelegateArgs(
+        Math.DelegateForSignatureTest[] dst_arr,
+        Func<char[], bool> fn_func,
+        Action<GenericStruct<int>[]> fn_action
+    )
     {
         Console.WriteLine($"Placeholder for breakpoint");
         OuterMethod();
@@ -283,9 +331,14 @@ public partial class Math
     }
 
     public delegate void DelegateWithVoidReturn(GenericStruct<int[]> gs);
+
     public static void DelegateTargetWithVoidReturn(GenericStruct<int[]> gs) { }
 
-    delegate GenericStruct<bool[]> DelegateForSignatureTest(Math m, GenericStruct<GenericStruct<int[]>> gs);
+    delegate GenericStruct<bool[]> DelegateForSignatureTest(
+        Math m,
+        GenericStruct<GenericStruct<int[]>> gs
+    );
+
     static bool DelegateTargetForNestedFunc<T>(T arg) => true;
 
     public struct SimpleStruct
@@ -299,9 +352,11 @@ public partial class Math
         public System.Collections.Generic.List<T> List;
         public string StringField;
 
-        public static GenericStruct<bool[]> DelegateTargetForSignatureTest(Math m, GenericStruct<GenericStruct<T[]>> gs) => new GenericStruct<bool[]>();
+        public static GenericStruct<bool[]> DelegateTargetForSignatureTest(
+            Math m,
+            GenericStruct<GenericStruct<T[]>> gs
+        ) => new GenericStruct<bool[]>();
     }
-
 }
 
 public class DebuggerTest

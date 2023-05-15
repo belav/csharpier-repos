@@ -31,104 +31,128 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms
 {
-	[TestFixture]
-	public class SelectionRangeTest : TestHelper
-	{
+    [TestFixture]
+    public class SelectionRangeTest : TestHelper
+    {
+        [Test]
+        public void DefaultConstructor()
+        {
+            SelectionRange sr = new SelectionRange();
+            Assert.AreEqual(DateTime.MinValue, sr.Start, "Start");
+            // "9999-12-31 00:00:00", note not 23:59:59.
+            Assert.AreEqual(DateTime.MaxValue.Date, sr.End, "End");
 
-		[Test]
-		public void DefaultConstructor ()
-		{
-			SelectionRange sr = new SelectionRange ();
-			Assert.AreEqual (DateTime.MinValue, sr.Start, "Start");
-			// "9999-12-31 00:00:00", note not 23:59:59.
-			Assert.AreEqual (DateTime.MaxValue.Date, sr.End, "End");
+            Assert.AreEqual(DateTimeKind.Unspecified, sr.Start.Kind, "Start Kind");
+            Assert.AreEqual(DateTimeKind.Unspecified, sr.End.Kind, "End Kind");
+        }
 
-			Assert.AreEqual (DateTimeKind.Unspecified, sr.Start.Kind, "Start Kind");
-			Assert.AreEqual (DateTimeKind.Unspecified, sr.End.Kind, "End Kind");
-		}
+        [Test]
+        public void DefaultConstructor_ToString()
+        {
+            SelectionRange sr = new SelectionRange();
+            // "9999-12-31 00:00:00", note not 23:59:59.
+            Assert.AreEqual(
+                string.Format(
+                    "SelectionRange: Start: {0}, End: {1}",
+                    new DateTime(1, 1, 1).ToString(),
+                    new DateTime(9999, 12, 31).ToString()
+                ),
+                sr.ToString(),
+                "ToString"
+            );
+        }
 
-		[Test]
-		public void DefaultConstructor_ToString ()
-		{
-			SelectionRange sr = new SelectionRange ();
-			// "9999-12-31 00:00:00", note not 23:59:59.
-			Assert.AreEqual (string.Format ("SelectionRange: Start: {0}, End: {1}", new DateTime (1, 1, 1).ToString (), new DateTime (9999, 12, 31).ToString ()),
-			   sr.ToString (), "ToString");
-		}
+        [Test]
+        public void TwoDatesConstructor()
+        {
+            SelectionRange sr = new SelectionRange(
+                new DateTime(2001, 1, 11),
+                new DateTime(2008, 2, 17)
+            );
+            Assert.AreEqual(new DateTime(2001, 1, 11), sr.Start, "Start");
+            Assert.AreEqual(new DateTime(2008, 2, 17), sr.End, "End");
+        }
 
-		[Test]
-		public void TwoDatesConstructor ()
-		{
-			SelectionRange sr = new SelectionRange (new DateTime (2001, 1, 11), new DateTime (2008, 2, 17));
-			Assert.AreEqual (new DateTime (2001, 1, 11), sr.Start, "Start");
-			Assert.AreEqual (new DateTime (2008, 2, 17), sr.End, "End");
-		}
+        [Test]
+        public void TwoDatesConstructor_Backwards() // start > end
+        {
+            SelectionRange sr = new SelectionRange(
+                new DateTime(2008, 2, 17),
+                new DateTime(2001, 1, 11)
+            );
+            Assert.AreEqual(new DateTime(2001, 1, 11), sr.Start, "Start");
+            Assert.AreEqual(new DateTime(2008, 2, 17), sr.End, "End");
+        }
 
-		[Test]
-		public void TwoDatesConstructor_Backwards () // start > end
-		{
-			SelectionRange sr = new SelectionRange (new DateTime (2008, 2, 17), new DateTime (2001, 1, 11));
-			Assert.AreEqual (new DateTime (2001, 1, 11), sr.Start, "Start");
-			Assert.AreEqual (new DateTime (2008, 2, 17), sr.End, "End");
-		}
+        [Test]
+        public void TwoDatesConstructor_WithTime()
+        {
+            // Apparenly any time value is stripped, found while testing PropertyGrid.
+            SelectionRange sr = new SelectionRange(
+                new DateTime(2001, 1, 11, 13, 14, 15),
+                new DateTime(2008, 2, 17)
+            );
+            Assert.AreEqual(new DateTime(2001, 1, 11), sr.Start, "Start");
+            Assert.AreEqual(new DateTime(2008, 2, 17), sr.End, "End");
+        }
 
-		[Test]
-		public void TwoDatesConstructor_WithTime ()
-		{
-			// Apparenly any time value is stripped, found while testing PropertyGrid.
-			SelectionRange sr = new SelectionRange (new DateTime (2001, 1, 11, 13, 14, 15), new DateTime (2008, 2, 17));
-			Assert.AreEqual (new DateTime (2001, 1, 11), sr.Start, "Start");
-			Assert.AreEqual (new DateTime (2008, 2, 17), sr.End, "End");
-		}
+        [Test]
+        public void TwoDatesConstructor_WithTime2()
+        {
+            // Apparenly any time value is stripped, found while testing PropertyGrid.
+            SelectionRange sr = new SelectionRange(
+                new DateTime(2001, 1, 11),
+                new DateTime(2008, 2, 17, 1, 2, 3)
+            );
+            Assert.AreEqual(new DateTime(2001, 1, 11), sr.Start, "Start");
+            Assert.AreEqual(new DateTime(2008, 2, 17), sr.End, "End");
+            Assert.AreEqual(DateTimeKind.Unspecified, sr.Start.Kind, "Start Kind");
+            Assert.AreEqual(DateTimeKind.Unspecified, sr.End.Kind, "End Kind");
+        }
 
-		[Test]
-		public void TwoDatesConstructor_WithTime2 ()
-		{
-			// Apparenly any time value is stripped, found while testing PropertyGrid.
-			SelectionRange sr = new SelectionRange (new DateTime (2001, 1, 11), new DateTime (2008, 2, 17, 1, 2, 3));
-			Assert.AreEqual (new DateTime (2001, 1, 11), sr.Start, "Start");
-			Assert.AreEqual (new DateTime (2008, 2, 17), sr.End, "End");
-			Assert.AreEqual (DateTimeKind.Unspecified, sr.Start.Kind, "Start Kind");
-			Assert.AreEqual (DateTimeKind.Unspecified, sr.End.Kind, "End Kind");
-		}
+        [Test]
+        public void TwoDatesConstructor_WithTimeWithKindLocal()
+        {
+            // Apparenly any time value is stripped, found while testing PropertyGrid.
+            SelectionRange sr = new SelectionRange(
+                new DateTime(2001, 1, 11, 13, 14, 15, DateTimeKind.Local),
+                new DateTime(2008, 2, 17)
+            );
+            Assert.AreEqual(new DateTime(2001, 1, 11), sr.Start, "Start");
+            Assert.AreEqual(new DateTime(2008, 2, 17), sr.End, "End");
+            //
+            Assert.AreEqual(DateTimeKind.Local, sr.Start.Kind, "Start Kind");
+            Assert.AreEqual(DateTimeKind.Unspecified, sr.End.Kind, "End Kind");
+        }
 
-		[Test]
-		public void TwoDatesConstructor_WithTimeWithKindLocal ()
-		{
-			// Apparenly any time value is stripped, found while testing PropertyGrid.
-			SelectionRange sr = new SelectionRange (new DateTime (2001, 1, 11, 13, 14, 15, DateTimeKind.Local), new DateTime (2008, 2, 17));
-			Assert.AreEqual (new DateTime (2001, 1, 11), sr.Start, "Start");
-			Assert.AreEqual (new DateTime (2008, 2, 17), sr.End, "End");
-			//
-			Assert.AreEqual (DateTimeKind.Local, sr.Start.Kind, "Start Kind");
-			Assert.AreEqual (DateTimeKind.Unspecified, sr.End.Kind, "End Kind");
-		}
+        [Test]
+        public void TwoDatesConstructor_WithTime2WithKindUtc()
+        {
+            // Apparenly any time value is stripped, found while testing PropertyGrid.
+            SelectionRange sr = new SelectionRange(
+                new DateTime(2001, 1, 11),
+                new DateTime(2008, 2, 17, 1, 2, 3, DateTimeKind.Utc)
+            );
+            Assert.AreEqual(new DateTime(2001, 1, 11), sr.Start, "Start");
+            Assert.AreEqual(new DateTime(2008, 2, 17), sr.End, "End");
+            //
+            Assert.AreEqual(DateTimeKind.Unspecified, sr.Start.Kind, "Start Kind");
+            Assert.AreEqual(DateTimeKind.Utc, sr.End.Kind, "End Kind");
+        }
 
-		[Test]
-		public void TwoDatesConstructor_WithTime2WithKindUtc ()
-		{
-			// Apparenly any time value is stripped, found while testing PropertyGrid.
-			SelectionRange sr = new SelectionRange (new DateTime (2001, 1, 11), new DateTime (2008, 2, 17, 1, 2, 3, DateTimeKind.Utc));
-			Assert.AreEqual (new DateTime (2001, 1, 11), sr.Start, "Start");
-			Assert.AreEqual (new DateTime (2008, 2, 17), sr.End, "End");
-			//
-			Assert.AreEqual (DateTimeKind.Unspecified, sr.Start.Kind, "Start Kind");
-			Assert.AreEqual (DateTimeKind.Utc, sr.End.Kind, "End Kind");
-		}
-
-		[Test]
-		public void TwoDatesConstructor_WithTwoTimeWithTwoKinds ()
-		{
-			// Apparenly any time value is stripped, found while testing PropertyGrid.
-			SelectionRange sr = new SelectionRange (
-			    new DateTime (2001, 1, 11, 1, 2, 3, DateTimeKind.Utc),
-			    new DateTime (2008, 2, 17, 1, 2, 3, DateTimeKind.Local));
-			Assert.AreEqual (new DateTime (2001, 1, 11), sr.Start, "Start");
-			Assert.AreEqual (new DateTime (2008, 2, 17), sr.End, "End");
-			//
-			Assert.AreEqual (DateTimeKind.Utc, sr.Start.Kind, "Start Kind");
-			Assert.AreEqual (DateTimeKind.Local, sr.End.Kind, "End Kind");
-		}
-
-	}
+        [Test]
+        public void TwoDatesConstructor_WithTwoTimeWithTwoKinds()
+        {
+            // Apparenly any time value is stripped, found while testing PropertyGrid.
+            SelectionRange sr = new SelectionRange(
+                new DateTime(2001, 1, 11, 1, 2, 3, DateTimeKind.Utc),
+                new DateTime(2008, 2, 17, 1, 2, 3, DateTimeKind.Local)
+            );
+            Assert.AreEqual(new DateTime(2001, 1, 11), sr.Start, "Start");
+            Assert.AreEqual(new DateTime(2008, 2, 17), sr.End, "End");
+            //
+            Assert.AreEqual(DateTimeKind.Utc, sr.Start.Kind, "Start Kind");
+            Assert.AreEqual(DateTimeKind.Local, sr.End.Kind, "End Kind");
+        }
+    }
 }

@@ -19,7 +19,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
     // use HostDiagnosticUpdateSource when abstract one is not needed for testing purpose
     [Export(typeof(AbstractHostDiagnosticUpdateSource))]
     [Export(typeof(HostDiagnosticUpdateSource))]
-    internal sealed class HostDiagnosticUpdateSource : AbstractHostDiagnosticUpdateSource, IProjectSystemDiagnosticSource
+    internal sealed class HostDiagnosticUpdateSource
+        : AbstractHostDiagnosticUpdateSource,
+            IProjectSystemDiagnosticSource
     {
         private readonly Lazy<VisualStudioWorkspace> _workspace;
 
@@ -27,8 +29,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
         private readonly Dictionary<ProjectId, HashSet<object>> _diagnosticMap = new();
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public HostDiagnosticUpdateSource(Lazy<VisualStudioWorkspace> workspace, IDiagnosticUpdateSourceRegistrationService registrationService)
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public HostDiagnosticUpdateSource(
+            Lazy<VisualStudioWorkspace> workspace,
+            IDiagnosticUpdateSourceRegistrationService registrationService
+        )
         {
             _workspace = workspace;
 
@@ -37,13 +46,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
         public override Workspace Workspace
         {
-            get
-            {
-                return _workspace.Value;
-            }
+            get { return _workspace.Value; }
         }
 
-        private void RaiseDiagnosticsCreatedForProject(ProjectId projectId, object key, IEnumerable<DiagnosticData> items)
+        private void RaiseDiagnosticsCreatedForProject(
+            ProjectId projectId,
+            object key,
+            IEnumerable<DiagnosticData> items
+        )
         {
             var args = DiagnosticsUpdatedArgs.DiagnosticsCreated(
                 CreateId(projectId, key),
@@ -51,7 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 solution: null,
                 projectId: projectId,
                 documentId: null,
-                diagnostics: items.AsImmutableOrEmpty());
+                diagnostics: items.AsImmutableOrEmpty()
+            );
 
             RaiseDiagnosticsUpdated(args);
         }
@@ -63,14 +74,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 Workspace,
                 solution: null,
                 projectId: projectId,
-                documentId: null);
+                documentId: null
+            );
 
             RaiseDiagnosticsUpdated(args);
         }
 
-        private object CreateId(ProjectId projectId, object key) => Tuple.Create(this, projectId, key);
+        private object CreateId(ProjectId projectId, object key) =>
+            Tuple.Create(this, projectId, key);
 
-        public void UpdateDiagnosticsForProject(ProjectId projectId, object key, IEnumerable<DiagnosticData> items)
+        public void UpdateDiagnosticsForProject(
+            ProjectId projectId,
+            object key,
+            IEnumerable<DiagnosticData> items
+        )
         {
             Contract.ThrowIfNull(projectId);
             Contract.ThrowIfNull(key);
@@ -128,9 +145,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             }
         }
 
-        public DiagnosticData CreateAnalyzerLoadFailureDiagnostic(AnalyzerLoadFailureEventArgs e, string fullPath, ProjectId projectId, string language)
+        public DiagnosticData CreateAnalyzerLoadFailureDiagnostic(
+            AnalyzerLoadFailureEventArgs e,
+            string fullPath,
+            ProjectId projectId,
+            string language
+        )
         {
-            return DocumentAnalysisExecutor.CreateAnalyzerLoadFailureDiagnostic(e, fullPath, projectId, language);
+            return DocumentAnalysisExecutor.CreateAnalyzerLoadFailureDiagnostic(
+                e,
+                fullPath,
+                projectId,
+                language
+            );
         }
     }
 }

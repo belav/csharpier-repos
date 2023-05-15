@@ -38,7 +38,11 @@ namespace CoreFXTestLibrary
         ///     </para>
         ///     <see cref="ArgumentException.ParamName"/> is not equal to <paramref name="parameterName"/> .
         /// </exception>
-        public static ArgumentNullException ThrowsArgumentNullException(string parameterName, Action action, string message = null)
+        public static ArgumentNullException ThrowsArgumentNullException(
+            string parameterName,
+            Action action,
+            string message = null
+        )
         {
             return ThrowsArgumentException<ArgumentNullException>(parameterName, action, message);
         }
@@ -65,7 +69,11 @@ namespace CoreFXTestLibrary
         ///     </para>
         ///     <see cref="ArgumentException.ParamName"/> is not equal to <paramref name="parameterName"/> .
         /// </exception>
-        public static ArgumentException ThrowsArgumentException(string parameterName, Action action, string message = null)
+        public static ArgumentException ThrowsArgumentException(
+            string parameterName,
+            Action action,
+            string message = null
+        )
         {
             return ThrowsArgumentException<ArgumentException>(parameterName, action, message);
         }
@@ -92,7 +100,11 @@ namespace CoreFXTestLibrary
         ///     </para>
         ///     <see cref="ArgumentException.ParamName"/> is not equal to <paramref name="parameterName"/> .
         /// </exception>
-        public static T ThrowsArgumentException<T>(string parameterName, Action action, string message = null)
+        public static T ThrowsArgumentException<T>(
+            string parameterName,
+            Action action,
+            string message = null
+        )
             where T : ArgumentException
         {
             T exception = Throws<T>(action, message);
@@ -100,7 +112,14 @@ namespace CoreFXTestLibrary
 #if DEBUG
             // ParamName's not available on ret builds
             if (parameterName != null)
-                Assert.AreEqual(parameterName, exception.ParamName, "Expected '{0}.ParamName' to be '{1}'. {2}", typeof(T), parameterName, message);
+                Assert.AreEqual(
+                    parameterName,
+                    exception.ParamName,
+                    "Expected '{0}.ParamName' to be '{1}'. {2}",
+                    typeof(T),
+                    parameterName,
+                    message
+                );
 #endif
 
             return exception;
@@ -124,16 +143,26 @@ namespace CoreFXTestLibrary
         ///     </para>
         ///     <see cref="AggregateException.GetBaseException()"/> is not of type <typeparam name="TBase"/>.
         /// </exception>
-        public static TBase ThrowsAggregateException<TBase>(Action action, string message = "") where TBase : Exception
+        public static TBase ThrowsAggregateException<TBase>(Action action, string message = "")
+            where TBase : Exception
         {
             AggregateException exception = Throws<AggregateException>(action, message);
 
             Exception baseException = exception.GetBaseException();
             if (baseException == null)
-                Assert.Fail("Expected 'AggregateException.GetBaseException()' to be '{0}', however it is null. {1}", typeof(TBase), message);
+                Assert.Fail(
+                    "Expected 'AggregateException.GetBaseException()' to be '{0}', however it is null. {1}",
+                    typeof(TBase),
+                    message
+                );
 
             if (baseException.GetType() != typeof(TBase))
-                Assert.Fail("Expected 'AggregateException.GetBaseException()', to be '{0}', however, '{1}' is. {2}", typeof(TBase), baseException.GetType(), message);
+                Assert.Fail(
+                    "Expected 'AggregateException.GetBaseException()', to be '{0}', however, '{1}' is. {2}",
+                    typeof(TBase),
+                    baseException.GetType(),
+                    message
+                );
 
             return (TBase)baseException;
         }
@@ -156,7 +185,8 @@ namespace CoreFXTestLibrary
         /// <exception cref="AssertFailedException">
         ///     <see cref="Exception"/> of type <typeparam name="T"/> was not thrown.
         /// </exception>
-        public static T Throws<T>(Action action, string format, params Object[] args) where T : Exception
+        public static T Throws<T>(Action action, string format, params Object[] args)
+            where T : Exception
         {
             return Throws<T>(action, String.Format(format, args));
         }
@@ -179,7 +209,12 @@ namespace CoreFXTestLibrary
         /// <exception cref="AssertFailedException">
         ///     <see cref="Exception"/> of type <typeparam name="T"/> was not thrown.
         /// </exception>
-        public static T Throws<T>(Action action, string message = "", AssertThrowsOptions options = AssertThrowsOptions.None) where T : Exception
+        public static T Throws<T>(
+            Action action,
+            string message = "",
+            AssertThrowsOptions options = AssertThrowsOptions.None
+        )
+            where T : Exception
         {
             Exception exception = RunWithCatch(action);
 
@@ -187,7 +222,12 @@ namespace CoreFXTestLibrary
                 Assert.Fail("Expected '{0}' to be thrown. {1}", typeof(T).ToString(), message);
 
             if (!IsOfExceptionType<T>(exception, options))
-                Assert.Fail("Expected '{0}' to be thrown, however '{1}' was thrown. {2}", typeof(T), exception.GetType(), message);
+                Assert.Fail(
+                    "Expected '{0}' to be thrown, however '{1}' was thrown. {2}",
+                    typeof(T),
+                    exception.GetType(),
+                    message
+                );
 
             return (T)exception;
         }
@@ -210,7 +250,12 @@ namespace CoreFXTestLibrary
         /// <exception cref="AssertFailedException">
         ///     <see cref="Exception"/> of type <typeparam name="T"/> was not thrown.
         /// </exception>
-        public static async Task<T> ThrowsAsync<T>(Func<Task> action, string message = "", AssertThrowsOptions options = AssertThrowsOptions.None) where T : Exception
+        public static async Task<T> ThrowsAsync<T>(
+            Func<Task> action,
+            string message = "",
+            AssertThrowsOptions options = AssertThrowsOptions.None
+        )
+            where T : Exception
         {
             Exception exception = await RunWithCatchAsync(action);
 
@@ -218,7 +263,12 @@ namespace CoreFXTestLibrary
                 Assert.Fail("Expected '{0}' to be thrown. {1}", typeof(T).ToString(), message);
 
             if (!IsOfExceptionType<T>(exception, options))
-                Assert.Fail("Expected '{0}' to be thrown, however '{1}' was thrown. {2}", typeof(T), exception.GetType(), message);
+                Assert.Fail(
+                    "Expected '{0}' to be thrown, however '{1}' was thrown. {2}",
+                    typeof(T),
+                    exception.GetType(),
+                    message
+                );
 
             return (T)exception;
         }
@@ -246,21 +296,35 @@ namespace CoreFXTestLibrary
         ///     </para>
         ///     <see cref="Exception.InnerException"/> is not of type <typeparam name="TInner"/>.
         /// </exception>
-        public static TInner Throws<T, TInner>(Action action, string message = "", AssertThrowsOptions options = AssertThrowsOptions.None)
+        public static TInner Throws<T, TInner>(
+            Action action,
+            string message = "",
+            AssertThrowsOptions options = AssertThrowsOptions.None
+        )
             where T : Exception
             where TInner : Exception
         {
             T outerException = Throws<T>(action, message, options);
 
             if (outerException.InnerException == null)
-                Assert.Fail("Expected '{0}.InnerException' to be '{1}', however it is null. {2}", typeof(T), typeof(TInner), message);
+                Assert.Fail(
+                    "Expected '{0}.InnerException' to be '{1}', however it is null. {2}",
+                    typeof(T),
+                    typeof(TInner),
+                    message
+                );
 
             if (!IsOfExceptionType<TInner>(outerException.InnerException, options))
-                Assert.Fail("Expected '{0}.InnerException', to be '{1}', however, '{2}' is. {3}", typeof(T), typeof(TInner), outerException.InnerException.GetType(), message);
+                Assert.Fail(
+                    "Expected '{0}.InnerException', to be '{1}', however, '{2}' is. {3}",
+                    typeof(T),
+                    typeof(TInner),
+                    outerException.InnerException.GetType(),
+                    message
+                );
 
             return (TInner)outerException.InnerException;
         }
-
 
         /// <summary>
         /// Tests whether the specified condition is true and throws an exception
@@ -409,7 +473,12 @@ namespace CoreFXTestLibrary
 
             if (!Object.Equals(expected, actual))
             {
-                string finalMessage = String.Format(EXPECTED_MSG, message, (object)expected ?? "NULL", (object)actual ?? "NULL");
+                string finalMessage = String.Format(
+                    EXPECTED_MSG,
+                    message,
+                    (object)expected ?? "NULL",
+                    (object)actual ?? "NULL"
+                );
                 Assert.HandleFail("Assert.AreEqual", finalMessage);
             }
         }
@@ -437,9 +506,12 @@ namespace CoreFXTestLibrary
         {
             if (Object.Equals(notExpected, actual))
             {
-                String finalMessage =
-                    String.Format(@"Expected any value except:[{1}]. Actual:[{2}]. {0}",
-                    message, notExpected, actual);
+                String finalMessage = String.Format(
+                    @"Expected any value except:[{1}]. Actual:[{2}]. {0}",
+                    message,
+                    notExpected,
+                    actual
+                );
 
                 Assert.HandleFail("Assert.AreNotEqual", finalMessage);
             }
@@ -452,7 +524,12 @@ namespace CoreFXTestLibrary
         /// <param name="notExpected">Expected object that we do not want it to be.</param>
         /// <param name="actual">Actual object.</param>
         /// <param name="message">Message to display upon failure.</param>
-        public static void AreNotEqual<T>(T notExpected, T actual, string format, params Object[] args)
+        public static void AreNotEqual<T>(
+            T notExpected,
+            T actual,
+            string format,
+            params Object[] args
+        )
         {
             AreNotEqual<T>(notExpected, actual, String.Format(format, args));
         }
@@ -479,7 +556,12 @@ namespace CoreFXTestLibrary
         /// <param name="expected">Expected list.</param>
         /// <param name="actual">Actual list.</param>
         /// <param name="message">Message to display upon failure.</param>
-        public static void AreAllEqual<T>(T[] expected, T[] actual, string format, params Object[] args)
+        public static void AreAllEqual<T>(
+            T[] expected,
+            T[] actual,
+            string format,
+            params Object[] args
+        )
         {
             AreAllEqual<T>(expected, actual, String.Format(format, args));
         }
@@ -506,7 +588,10 @@ namespace CoreFXTestLibrary
                     if (!removedFromActual[j])
                     {
                         T item2 = actual[j];
-                        if ((item1 == null && item2 == null) || (item1 != null && item1.Equals(item2)))
+                        if (
+                            (item1 == null && item2 == null)
+                            || (item1 != null && item1.Equals(item2))
+                        )
                         {
                             foundMatch = true;
                             removedFromActual[j] = true;
@@ -515,7 +600,10 @@ namespace CoreFXTestLibrary
                     }
                 }
                 if (!foundMatch)
-                    Assert.HandleFail("Assert.AreAllEqualUnordered", "First array has element not found in second array: " + item1);
+                    Assert.HandleFail(
+                        "Assert.AreAllEqualUnordered",
+                        "First array has element not found in second array: " + item1
+                    );
             }
             return;
         }
@@ -527,7 +615,11 @@ namespace CoreFXTestLibrary
         /// <param name="expected">Expected enumerables.</param>
         /// <param name="actual">Actual enumerables.</param>
         /// <param name="message">Message to display upon failure.</param>
-        public static void AreAllEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, string message = "")
+        public static void AreAllEqual<T>(
+            IEnumerable<T> expected,
+            IEnumerable<T> actual,
+            string message = ""
+        )
         {
             AreAllEqual(CopyToArray(expected), CopyToArray(actual), message);
         }
@@ -539,7 +631,11 @@ namespace CoreFXTestLibrary
         /// <param name="expected">Expected enumerable.</param>
         /// <param name="actual">Actual enumerable.</param>
         /// <param name="message">Message to display upon failure.</param>
-        public static void AreAllEqualUnordered<T>(IEnumerable<T> expected, IEnumerable<T> actual, string message = "")
+        public static void AreAllEqualUnordered<T>(
+            IEnumerable<T> expected,
+            IEnumerable<T> actual,
+            string message = ""
+        )
         {
             AreAllEqualUnordered(CopyToArray(expected), CopyToArray(actual), message);
         }
@@ -576,7 +672,6 @@ namespace CoreFXTestLibrary
             Array.Copy(items, 0, finalItems, 0, count);
             return finalItems;
         }
-
 
         /// <summary>
         /// Tests whether the specified objects both refer to the same object and
@@ -725,7 +820,6 @@ namespace CoreFXTestLibrary
             throw new AssertTestException(assertionName + ": " + message);
         }
 
-
         [Obsolete("Did you mean to call Assert.AreEqual()")]
         public static new bool Equals(Object o1, Object o2)
         {
@@ -774,19 +868,16 @@ namespace CoreFXTestLibrary
     public class AssertTestException : Exception
     {
         public AssertTestException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public AssertTestException()
-            : base()
-        {
-        }
+            : base() { }
     }
 
     public static class ExceptionAssert
     {
-        public static void Throws<T>(String message, Action a) where T : Exception
+        public static void Throws<T>(String message, Action a)
+            where T : Exception
         {
             Assert.Throws<T>(a, message);
         }

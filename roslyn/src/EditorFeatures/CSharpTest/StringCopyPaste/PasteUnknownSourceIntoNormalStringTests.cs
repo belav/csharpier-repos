@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """
                 var x = "\n[||]"
                 """,
-                afterUndo: "var x = \"\n[||]\"");
+                afterUndo: "var x = \"\n[||]\""
+            );
         }
 
         [WpfFact]
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 afterUndo: """
                 var x = "
                 [||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """
                 var x = "\t[||]"
                 """,
-                afterUndo: "var x = \"\t[||]\"");
+                afterUndo: "var x = \"\t[||]\""
+            );
         }
 
         [WpfFact]
@@ -71,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = "[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -87,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = "[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -105,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = ""[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -119,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """
                 var x = "\t\"\"\t[||]"
                 """,
-                afterUndo: "var x = \"\t\"\"\t[||]\"");
+                afterUndo: "var x = \"\t\"\"\t[||]\""
+            );
         }
 
         [WpfFact]
@@ -135,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = "[||]"
-                """);
+                """
+            );
         }
     }
 }

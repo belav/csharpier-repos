@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Threading;
+
 //Regression for DevDiv Bugs 48020
 namespace ExchangeAdd
 {
@@ -10,26 +11,27 @@ namespace ExchangeAdd
         static int Main(string[] args)
         {
             // Check number of args
-            if(args.Length != 2)
+            if (args.Length != 2)
             {
-                Console.WriteLine("USAGE:  InterlockedAddLongWithSubtract " +
-                    "/loops:<int> /addVal:<int>");
+                Console.WriteLine(
+                    "USAGE:  InterlockedAddLongWithSubtract " + "/loops:<int> /addVal:<int>"
+                );
                 return -1;
             }
 
             // Get the args
-            int loops=100;
+            int loops = 100;
             long valueToAdd = 0;
-        
-            for(int i=0;i<args.Length;i++)
+
+            for (int i = 0; i < args.Length; i++)
             {
-                if(args[i].ToLower().StartsWith("/loops:"))
+                if (args[i].ToLower().StartsWith("/loops:"))
                 {
                     loops = Convert.ToInt32(args[i].Substring(7));
                     continue;
                 }
 
-                if(args[i].ToLower().StartsWith("/addval:"))
+                if (args[i].ToLower().StartsWith("/addval:"))
                 {
                     valueToAdd = Convert.ToInt32(args[i].Substring(8));
                     continue;
@@ -66,13 +68,16 @@ namespace ExchangeAdd
         private int numberOfIterations;
         private long valueToAdd;
         private long valueToSubtract;
-        public ThreadSafe(): this(100,100) { }
+
+        public ThreadSafe()
+            : this(100, 100) { }
+
         public ThreadSafe(int loops, long iAdd)
         {
             signal = new ManualResetEvent(false);
             numberOfIterations = loops;
             valueToAdd = iAdd;
-            valueToSubtract = 0-iAdd;
+            valueToSubtract = 0 - iAdd;
         }
 
         public void Signal()
@@ -88,14 +93,11 @@ namespace ExchangeAdd
                 Interlocked.Add(ref totalValue, valueToAdd);
                 Interlocked.Add(ref totalValue, valueToSubtract);
             }
-
         }
+
         public long Expected
         {
-            get
-            {
-                return (0);
-            }
+            get { return (0); }
         }
         public long Total
         {

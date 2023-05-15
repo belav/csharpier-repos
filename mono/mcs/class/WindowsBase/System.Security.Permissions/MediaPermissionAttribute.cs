@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,36 +26,44 @@
 using System;
 using System.Security;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Struct
+            | AttributeTargets.Class
+            | AttributeTargets.Assembly
+    )]
+    public sealed class MediaPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        public MediaPermissionAttribute(SecurityAction action)
+            : base(action)
+        {
+            throw new NotImplementedException();
+        }
 
-	[AttributeUsage (AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly)]
-	public sealed class MediaPermissionAttribute : CodeAccessSecurityAttribute
-	{
-		public MediaPermissionAttribute (SecurityAction action)
-			: base (action)
-		{
-			throw new NotImplementedException ();
-		}
+        public MediaPermissionAudio Audio
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public MediaPermissionAudio Audio {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public MediaPermissionVideo Video
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public MediaPermissionVideo Video {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public MediaPermissionImage Image
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public MediaPermissionImage Image {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
-
-		public override IPermission CreatePermission ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
-
+        public override IPermission CreatePermission()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

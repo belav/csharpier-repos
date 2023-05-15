@@ -1,12 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="ISupportInitialize.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-    
-
+namespace System.ComponentModel
+{
     using System.Diagnostics;
 
     using System;
@@ -17,7 +16,8 @@ namespace System.ComponentModel {
     ///       transacted notification for batch initialization.</para>
     /// </devdoc>
     [SRDescription(SR.ISupportInitializeDescr)]
-    public interface ISupportInitialize {
+    public interface ISupportInitialize
+    {
         /// <devdoc>
         ///    <para>
         ///       Signals

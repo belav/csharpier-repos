@@ -10,10 +10,9 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
     {
         public readonly string Name;
 
-        public RQErrorType(string name)
-            => Name = name;
+        public RQErrorType(string name) => Name = name;
 
-        public override SimpleTreeNode ToSimpleTree()
-            => new SimpleGroupNode(RQNameStrings.Error, Name);
+        public override SimpleTreeNode ToSimpleTree() =>
+            new SimpleGroupNode(RQNameStrings.Error, Name);
     }
 }

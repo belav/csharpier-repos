@@ -56,33 +56,59 @@
 //---------------------------------------------------------------------------
 using System;
 
-namespace RabbitMQ.Client.Exceptions {
+namespace RabbitMQ.Client.Exceptions
+{
     ///<summary>Thrown to indicate that the peer does not support the
     ///wire protocol version we requested immediately after opening
     ///the TCP socket.</summary>
-    public class ProtocolVersionMismatchException: System.Net.ProtocolViolationException {
+    public class ProtocolVersionMismatchException : System.Net.ProtocolViolationException
+    {
         private readonly int m_clientMajor;
         private readonly int m_clientMinor;
         private readonly int m_serverMajor;
         private readonly int m_serverMinor;
 
         ///<summary>The client's AMQP specification major version.</summary>
-        public int ClientMajor { get { return m_clientMajor; } }
+        public int ClientMajor
+        {
+            get { return m_clientMajor; }
+        }
+
         ///<summary>The client's AMQP specification minor version.</summary>
-        public int ClientMinor { get { return m_clientMinor; } }
+        public int ClientMinor
+        {
+            get { return m_clientMinor; }
+        }
+
         ///<summary>The peer's AMQP specification major version.</summary>
-        public int ServerMajor { get { return m_serverMajor; } }
+        public int ServerMajor
+        {
+            get { return m_serverMajor; }
+        }
+
         ///<summary>The peer's AMQP specification minor version.</summary>
-        public int ServerMinor { get { return m_serverMinor; } }
+        public int ServerMinor
+        {
+            get { return m_serverMinor; }
+        }
 
         ///<summary>Fills the new instance's properties with the values passed in.</summary>
-        public ProtocolVersionMismatchException(int clientMajor,
-                                                int clientMinor,
-                                                int serverMajor,
-                                                int serverMinor)
-            : base("AMQP server protocol negotiation failure: server version "+
-                   serverMajor + "-" + serverMinor +
-                   ", client version " + clientMajor + "-" + clientMinor)
+        public ProtocolVersionMismatchException(
+            int clientMajor,
+            int clientMinor,
+            int serverMajor,
+            int serverMinor
+        )
+            : base(
+                "AMQP server protocol negotiation failure: server version "
+                    + serverMajor
+                    + "-"
+                    + serverMinor
+                    + ", client version "
+                    + clientMajor
+                    + "-"
+                    + clientMinor
+            )
         {
             m_clientMajor = clientMajor;
             m_clientMinor = clientMinor;

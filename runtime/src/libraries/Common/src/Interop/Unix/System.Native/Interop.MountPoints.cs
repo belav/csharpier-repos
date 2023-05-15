@@ -14,7 +14,10 @@ internal static partial class Interop
     internal static partial class Sys
     {
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetAllMountPoints")]
-        private static unsafe partial int GetAllMountPoints(delegate* unmanaged<void*, byte*, void> onFound, void* context);
+        private static unsafe partial int GetAllMountPoints(
+            delegate* unmanaged<void*, byte*, void> onFound,
+            void* context
+        );
 
         private struct AllMountPointsContext
         {
@@ -40,7 +43,6 @@ internal static partial class Interop
         {
             AllMountPointsContext context = default;
             context._results = new List<string>();
-
             unsafe
             {
                 GetAllMountPoints(&AddMountPoint, &context);

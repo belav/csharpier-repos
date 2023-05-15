@@ -14,51 +14,74 @@ namespace System.Reflection.Emit.Tests
         [InlineData(TypeAttributes.Abstract | TypeAttributes.Interface | TypeAttributes.Public)]
         public void AddInterfaceImplementation(TypeAttributes typeAttributes)
         {
-            TypeBuilder interfaceBuilder = Helpers.DynamicType(TypeAttributes.Abstract | TypeAttributes.Interface | TypeAttributes.Public);
-            interfaceBuilder.DefineMethod("TestMethod",
+            TypeBuilder interfaceBuilder = Helpers.DynamicType(
+                TypeAttributes.Abstract | TypeAttributes.Interface | TypeAttributes.Public
+            );
+            interfaceBuilder.DefineMethod(
+                "TestMethod",
                 MethodAttributes.Abstract | MethodAttributes.Virtual | MethodAttributes.Public,
                 typeof(int),
-                new Type[] { typeof(int), typeof(int) });
+                new Type[] { typeof(int), typeof(int) }
+            );
             Type createdInterface = interfaceBuilder.CreateType();
 
             TypeBuilder type = Helpers.DynamicType(typeAttributes);
             type.AddInterfaceImplementation(createdInterface);
 
             Type createdType = type.CreateType();
-            Assert.Equal(createdInterface, createdType.GetTypeInfo().ImplementedInterfaces.Single(i => i.Name == createdInterface.Name));
+            Assert.Equal(
+                createdInterface,
+                createdType
+                    .GetTypeInfo()
+                    .ImplementedInterfaces.Single(i => i.Name == createdInterface.Name)
+            );
         }
 
         [Fact]
         public void AddInterfaceImplementation_GeneralClass()
         {
-            TypeBuilder interfaceBuilder = Helpers.DynamicType(TypeAttributes.Abstract | TypeAttributes.Interface | TypeAttributes.Public);
-            interfaceBuilder.DefineMethod("TestMethod",
+            TypeBuilder interfaceBuilder = Helpers.DynamicType(
+                TypeAttributes.Abstract | TypeAttributes.Interface | TypeAttributes.Public
+            );
+            interfaceBuilder.DefineMethod(
+                "TestMethod",
                 MethodAttributes.Abstract | MethodAttributes.Virtual | MethodAttributes.Public,
                 typeof(int),
-                new Type[] { typeof(int), typeof(int) });
+                new Type[] { typeof(int), typeof(int) }
+            );
 
             Type createdInterface = interfaceBuilder.CreateType();
 
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
             type.AddInterfaceImplementation(createdInterface);
-            MethodBuilder methodBuilder = type.DefineMethod(createdInterface.Name,
+            MethodBuilder methodBuilder = type.DefineMethod(
+                createdInterface.Name,
                 MethodAttributes.Public | MethodAttributes.Virtual,
                 typeof(int),
-                new Type[] { typeof(int), typeof(int) });
+                new Type[] { typeof(int), typeof(int) }
+            );
             methodBuilder.GetILGenerator().Emit(OpCodes.Ret);
 
             MethodInfo createdMethod = createdInterface.GetMethod("TestMethod");
             type.DefineMethodOverride(methodBuilder, createdMethod);
 
             Type createdType = type.CreateType();
-            Assert.Equal(createdInterface, createdType.GetTypeInfo().ImplementedInterfaces.Single(i => i.Name == createdInterface.Name));
+            Assert.Equal(
+                createdInterface,
+                createdType
+                    .GetTypeInfo()
+                    .ImplementedInterfaces.Single(i => i.Name == createdInterface.Name)
+            );
         }
 
         [Fact]
         public void AddInterfaceImplementation_NullInterfaceType_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>("interfaceType", () => type.AddInterfaceImplementation(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "interfaceType",
+                () => type.AddInterfaceImplementation(null)
+            );
         }
 
         [Fact]
@@ -67,7 +90,9 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.CreateType();
 
-            Assert.Throws<InvalidOperationException>(() => type.AddInterfaceImplementation(typeof(EmptyNonGenericInterface1)));
+            Assert.Throws<InvalidOperationException>(
+                () => type.AddInterfaceImplementation(typeof(EmptyNonGenericInterface1))
+            );
         }
 
         public static IEnumerable<object[]> NonInterfaceTypes_TestData()
@@ -87,7 +112,9 @@ namespace System.Reflection.Emit.Tests
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         [MemberData(nameof(NonInterfaceTypes_TestData))]
-        public void AddInterfaceImplementation_TypeNotInterface_ThrowsTypeLoadExceptionOnCreation(Type interfaceType)
+        public void AddInterfaceImplementation_TypeNotInterface_ThrowsTypeLoadExceptionOnCreation(
+            Type interfaceType
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.AddInterfaceImplementation(interfaceType);
@@ -98,7 +125,9 @@ namespace System.Reflection.Emit.Tests
         [Theory]
         [InlineData(typeof(EmptyGenericInterface<>))]
         [InlineData(typeof(EmptyGenericClass<>))]
-        public void AddInterfaceImplementation_OpenGenericType_ThrowsBadImageFormatExceptionOnCreation(Type interfaceType)
+        public void AddInterfaceImplementation_OpenGenericType_ThrowsBadImageFormatExceptionOnCreation(
+            Type interfaceType
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.AddInterfaceImplementation(interfaceType);
@@ -120,7 +149,9 @@ namespace System.Reflection.Emit.Tests
         public void AddInterfaceImplementation_InterfaceNotCreated_ThrowsTypeLoadExceptionOnCreation()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            type.AddInterfaceImplementation(Helpers.DynamicType(TypeAttributes.Interface | TypeAttributes.Abstract).AsType());
+            type.AddInterfaceImplementation(
+                Helpers.DynamicType(TypeAttributes.Interface | TypeAttributes.Abstract).AsType()
+            );
 
             Assert.Throws<TypeLoadException>(() => type.CreateTypeInfo());
         }

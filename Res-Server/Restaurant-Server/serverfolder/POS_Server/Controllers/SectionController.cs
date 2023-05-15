@@ -17,14 +17,15 @@ namespace POS_Server.Controllers
     public class SectionController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller>
         [HttpPost]
         [Route("Get")]
         public string Get(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             Boolean canDelete = false;
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -33,47 +34,52 @@ var strP = TokenManager.GetPrincipal(token);
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var sectionList =(from L in entity.sections join b in entity.branches on L.branchId equals b.branchId into lj
-                                      from v in lj.DefaultIfEmpty()
-                                      select new SectionModel()
-                                        {
-                                          sectionId=  L.sectionId,
-                                            name=   L.name,
-                                            isActive=  L.isActive,
-                                            isFreeZone=  L.isFreeZone,
-                                          branchId =  L.branchId,
-                                            notes=   L.notes,
-                                            branchName = v.name,
-                                            createDate=  L.createDate,
-                                            updateDate=    L.updateDate,
-                                            createUserId=  L.createUserId,
-                                            updateUserId=  L.updateUserId,
-                                            type=L.type,
-                       
-                                        })
-                                        .ToList();
+                    var sectionList = (
+                        from L in entity.sections
+                        join b in entity.branches on L.branchId equals b.branchId into lj
+                        from v in lj.DefaultIfEmpty()
+                        select new SectionModel()
+                        {
+                            sectionId = L.sectionId,
+                            name = L.name,
+                            isActive = L.isActive,
+                            isFreeZone = L.isFreeZone,
+                            branchId = L.branchId,
+                            notes = L.notes,
+                            branchName = v.name,
+                            createDate = L.createDate,
+                            updateDate = L.updateDate,
+                            createUserId = L.createUserId,
+                            updateUserId = L.updateUserId,
+                            type = L.type,
+                        }
+                    ).ToList();
 
                     if (sectionList.Count > 0)
-                    {// for each 
+                    { // for each
                         for (int i = 0; i < sectionList.Count; i++)
                         {
                             if (sectionList[i].isActive == 1)
                             {
                                 long sectionId = (long)sectionList[i].sectionId;
-                                var LocationL = entity.locations.Where(x => x.sectionId == sectionId).Select(b => new { b.locationId }).FirstOrDefault();
+                                var LocationL = entity.locations
+                                    .Where(x => x.sectionId == sectionId)
+                                    .Select(b => new { b.locationId })
+                                    .FirstOrDefault();
                                 //var itemsTransferL = entity.itemsTransfer.Where(x => x.locationIdNew == locationId || x.locationIdOld == locationId).Select(x => new { x.itemsTransId }).FirstOrDefault();
-                               
-                                if ((LocationL is null)  )
+
+                                if ((LocationL is null))
                                     canDelete = true;
                             }
                             sectionList[i].canDelete = canDelete;
                         }
                     }
-                     
+
                     return TokenManager.GenerateToken(sectionList);
                 }
             }
         }
+
         [HttpPost]
         [Route("getBranchSections")]
         public string getBranchSections(string token)
@@ -98,38 +104,42 @@ var strP = TokenManager.GetPrincipal(token);
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var sectionList =(from L in entity.sections where L.branchId == branchId && L.isFreeZone != 1 && L.isKitchen != 1
-                                      join b in entity.branches on L.branchId equals b.branchId into lj
-                                      from v in lj.DefaultIfEmpty()
-                                      select new SectionModel()
-                                        {
-                                          sectionId=  L.sectionId,
-                                            name=   L.name,
-                                            isActive=  L.isActive,
-                                            isFreeZone=  L.isFreeZone,
-                                          branchId =  L.branchId,
-                                            notes=   L.notes,
-                                            branchName = v.name,
-                                            createDate=  L.createDate,
-                                            updateDate=    L.updateDate,
-                                            createUserId=  L.createUserId,
-                                            updateUserId=  L.updateUserId,
-                                          type = L.type,
-
-                                      })
-                                        .ToList();
+                    var sectionList = (
+                        from L in entity.sections
+                        where L.branchId == branchId && L.isFreeZone != 1 && L.isKitchen != 1
+                        join b in entity.branches on L.branchId equals b.branchId into lj
+                        from v in lj.DefaultIfEmpty()
+                        select new SectionModel()
+                        {
+                            sectionId = L.sectionId,
+                            name = L.name,
+                            isActive = L.isActive,
+                            isFreeZone = L.isFreeZone,
+                            branchId = L.branchId,
+                            notes = L.notes,
+                            branchName = v.name,
+                            createDate = L.createDate,
+                            updateDate = L.updateDate,
+                            createUserId = L.createUserId,
+                            updateUserId = L.updateUserId,
+                            type = L.type,
+                        }
+                    ).ToList();
 
                     if (sectionList.Count > 0)
-                    {// for each 
+                    { // for each
                         for (int i = 0; i < sectionList.Count; i++)
                         {
                             if (sectionList[i].isActive == 1)
                             {
                                 long sectionId = (long)sectionList[i].sectionId;
-                                var LocationL = entity.locations.Where(x => x.sectionId == sectionId).Select(b => new { b.locationId }).FirstOrDefault();
+                                var LocationL = entity.locations
+                                    .Where(x => x.sectionId == sectionId)
+                                    .Select(b => new { b.locationId })
+                                    .FirstOrDefault();
                                 //var itemsTransferL = entity.itemsTransfer.Where(x => x.locationIdNew == locationId || x.locationIdOld == locationId).Select(x => new { x.itemsTransId }).FirstOrDefault();
-                               
-                                if ((LocationL is null)  )
+
+                                if ((LocationL is null))
                                     canDelete = true;
                             }
                             sectionList[i].canDelete = canDelete;
@@ -140,13 +150,14 @@ var strP = TokenManager.GetPrincipal(token);
                 }
             }
         }
+
         // GET api/<controller>
         [HttpPost]
         [Route("GetSectionByID")]
         public string GetSectionByID(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
-var strP = TokenManager.GetPrincipal(token);
+            token = TokenManager.readToken(HttpContext.Current.Request);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -165,36 +176,38 @@ var strP = TokenManager.GetPrincipal(token);
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var location = entity.sections
-                   .Where(u => u.sectionId == sectionId)
-                   .Select(L => new SectionModel
-                   {
-                       sectionId = L.sectionId,
-                       name = L.name,
-                       isActive = L.isActive,
-                       isFreeZone = L.isFreeZone,
-                       branchId = L.branchId,
-                       notes = L.notes,
-                      
-                       createDate = L.createDate,
-                       updateDate = L.updateDate,
-                       createUserId = L.createUserId,
-                       updateUserId = L.updateUserId,
-                       type = L.type,
-
-                   })
-                   .FirstOrDefault();
+                        .Where(u => u.sectionId == sectionId)
+                        .Select(
+                            L =>
+                                new SectionModel
+                                {
+                                    sectionId = L.sectionId,
+                                    name = L.name,
+                                    isActive = L.isActive,
+                                    isFreeZone = L.isFreeZone,
+                                    branchId = L.branchId,
+                                    notes = L.notes,
+                                    createDate = L.createDate,
+                                    updateDate = L.updateDate,
+                                    createUserId = L.createUserId,
+                                    updateUserId = L.updateUserId,
+                                    type = L.type,
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(location);
                 }
             }
-         }
+        }
+
         // add or update location
         [HttpPost]
         [Route("Save")]
         public string Save(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -210,7 +223,10 @@ var strP = TokenManager.GetPrincipal(token);
                     {
                         sectionObject = c.Value.Replace("\\", string.Empty);
                         sectionObject = sectionObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<sections>(sectionObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<sections>(
+                            sectionObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -236,8 +252,8 @@ var strP = TokenManager.GetPrincipal(token);
                         var sectionEntity = entity.Set<sections>();
                         if (newObject.sectionId == 0)
                         {
-                            newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             newObject.updateUserId = newObject.createUserId;
 
                             sectionEntity.Add(newObject);
@@ -246,19 +262,20 @@ var strP = TokenManager.GetPrincipal(token);
                         }
                         else
                         {
-                            var tmpSection = entity.sections.Where(p => p.sectionId == newObject.sectionId).FirstOrDefault();
+                            var tmpSection = entity.sections
+                                .Where(p => p.sectionId == newObject.sectionId)
+                                .FirstOrDefault();
                             tmpSection.name = newObject.name;
                             tmpSection.branchId = newObject.branchId;
                             tmpSection.isActive = newObject.isActive;
                             tmpSection.isFreeZone = newObject.isFreeZone;
                             tmpSection.notes = newObject.notes;
-                            tmpSection.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpSection.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpSection.updateUserId = newObject.updateUserId;
                             tmpSection.type = newObject.type;
                             entity.SaveChanges();
-                            message = tmpSection.sectionId.ToString(); 
+                            message = tmpSection.sectionId.ToString();
                         }
-                      
                     }
                 }
                 catch
@@ -268,13 +285,14 @@ var strP = TokenManager.GetPrincipal(token);
             }
             return TokenManager.GenerateToken(message);
         }
+
         [HttpPost]
         [Route("Delete")]
         public string Delete(string token)
         {
-token = TokenManager.readToken(HttpContext.Current.Request);
+            token = TokenManager.readToken(HttpContext.Current.Request);
             string message = "";
-var strP = TokenManager.GetPrincipal(token);
+            var strP = TokenManager.GetPrincipal(token);
             if (strP != "0") //invalid authorization
             {
                 return TokenManager.GenerateToken(strP);
@@ -328,7 +346,7 @@ var strP = TokenManager.GetPrincipal(token);
 
                             sectionDelete.isActive = 0;
                             sectionDelete.updateUserId = userId;
-                            sectionDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            sectionDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             message = entity.SaveChanges().ToString();
                             return TokenManager.GenerateToken(message);
                         }

@@ -18,9 +18,13 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             StackFrameSimpleNameNode methodNode,
             StackFrameParameterList methodArguments,
             StackFrameTypeArgumentList? methodTypeArguments,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
-        protected static bool MatchTypeArguments(ImmutableArray<ITypeSymbol> typeArguments, StackFrameTypeArgumentList? stackFrameTypeArgumentList)
+        protected static bool MatchTypeArguments(
+            ImmutableArray<ITypeSymbol> typeArguments,
+            StackFrameTypeArgumentList? stackFrameTypeArgumentList
+        )
         {
             if (stackFrameTypeArgumentList is null)
             {
@@ -49,7 +53,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 
                 // Iterate through each array expression and make sure the dimensions
                 // match the element types in an array.
-                // Ex: string[,][] 
+                // Ex: string[,][]
                 // [,] is a 2 dimension array with element type string[]
                 // [] is a 1 dimension array with element type string
                 foreach (var arrayExpression in arrayTypeNode.ArrayRankSpecifiers)
@@ -80,7 +84,10 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             return type.Name == stackFrameType.ToString();
         }
 
-        protected static bool MatchParameters(ImmutableArray<IParameterSymbol> parameters, StackFrameParameterList stackFrameParameters)
+        protected static bool MatchParameters(
+            ImmutableArray<IParameterSymbol> parameters,
+            StackFrameParameterList stackFrameParameters
+        )
         {
             if (parameters.Length != stackFrameParameters.Parameters.Length)
             {
@@ -106,10 +113,12 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             return true;
         }
 
-        protected static IMethodSymbol? TryGetBestMatch(ImmutableArray<IMethodSymbol> candidateFunctions,
+        protected static IMethodSymbol? TryGetBestMatch(
+            ImmutableArray<IMethodSymbol> candidateFunctions,
             StackFrameTypeArgumentList? methodTypeArguments,
-            StackFrameParameterList methodArguments)
-            => candidateFunctions
+            StackFrameParameterList methodArguments
+        ) =>
+            candidateFunctions
                 .Where(m => MatchTypeArguments(m.TypeArguments, methodTypeArguments))
                 .FirstOrDefault(m => MatchParameters(m.Parameters, methodArguments));
     }

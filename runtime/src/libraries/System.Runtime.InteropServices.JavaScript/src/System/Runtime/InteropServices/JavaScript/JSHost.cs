@@ -19,10 +19,7 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public static JSObject GlobalThis
         {
-            get
-            {
-                return JavaScriptImports.GetGlobalThis();
-            }
+            get { return JavaScriptImports.GetGlobalThis(); }
         }
 
         /// <summary>
@@ -30,10 +27,7 @@ namespace System.Runtime.InteropServices.JavaScript
         /// </summary>
         public static JSObject DotnetInstance
         {
-            get
-            {
-                return JavaScriptImports.GetDotnetInstance();
-            }
+            get { return JavaScriptImports.GetDotnetInstance(); }
         }
 
         /// <summary>
@@ -45,7 +39,11 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A proxy for the JavaScript object that contains the module's exports.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Task<JSObject> ImportAsync(string moduleName, string moduleUrl, CancellationToken cancellationToken = default)
+        public static Task<JSObject> ImportAsync(
+            string moduleName,
+            string moduleUrl,
+            CancellationToken cancellationToken = default
+        )
         {
             return JSHostImplementation.ImportAsync(moduleName, moduleUrl, cancellationToken);
         }

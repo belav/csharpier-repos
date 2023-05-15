@@ -14,9 +14,7 @@ internal sealed class InputParser
     private readonly IISRewriteMapCollection? _rewriteMaps;
     private readonly bool _alwaysUseManagedServerVariables;
 
-    public InputParser()
-    {
-    }
+    public InputParser() { }
 
     public InputParser(IISRewriteMapCollection? rewriteMaps, bool alwaysUseManagedServerVariables)
     {
@@ -64,7 +62,9 @@ internal sealed class InputParser
                 if (!context.Next())
                 {
                     // missing {
-                    throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
+                    throw new FormatException(
+                        Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                    );
                 }
                 ParseParameter(context, results, uriMatchPart);
             }
@@ -82,7 +82,11 @@ internal sealed class InputParser
         return new Pattern(results);
     }
 
-    private void ParseParameter(ParserContext context, IList<PatternSegment> results, UriMatchPart uriMatchPart)
+    private void ParseParameter(
+        ParserContext context,
+        IList<PatternSegment> results,
+        UriMatchPart uriMatchPart
+    )
     {
         context.Mark();
         // Four main cases:
@@ -98,7 +102,14 @@ internal sealed class InputParser
             {
                 // This is just a server variable, so we do a lookup and verify the server variable exists.
                 parameter = context.Capture();
-                results.Add(ServerVariables.FindServerVariable(parameter!, context, uriMatchPart, _alwaysUseManagedServerVariables));
+                results.Add(
+                    ServerVariables.FindServerVariable(
+                        parameter!,
+                        context,
+                        uriMatchPart,
+                        _alwaysUseManagedServerVariables
+                    )
+                );
                 return;
             }
             else if (context.Current == Colon)
@@ -109,53 +120,59 @@ internal sealed class InputParser
                 switch (parameter)
                 {
                     case "ToLower":
-                        {
-                            var pattern = ParseString(context, uriMatchPart);
-                            results.Add(new ToLowerSegment(pattern));
+                    {
+                        var pattern = ParseString(context, uriMatchPart);
+                        results.Add(new ToLowerSegment(pattern));
 
-                            // at this point, we expect our context to be on the ending closing brace,
-                            // because the ParseString() call will increment the context until it
-                            // has processed the new string.
-                            if (context.Current != CloseBrace)
-                            {
-                                throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
-                            }
-                            return;
+                        // at this point, we expect our context to be on the ending closing brace,
+                        // because the ParseString() call will increment the context until it
+                        // has processed the new string.
+                        if (context.Current != CloseBrace)
+                        {
+                            throw new FormatException(
+                                Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                            );
                         }
+                        return;
+                    }
                     case "UrlDecode":
-                        {
-                            var pattern = ParseString(context, uriMatchPart);
-                            results.Add(new UrlDecodeSegment(pattern));
+                    {
+                        var pattern = ParseString(context, uriMatchPart);
+                        results.Add(new UrlDecodeSegment(pattern));
 
-                            if (context.Current != CloseBrace)
-                            {
-                                throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
-                            }
-                            return;
+                        if (context.Current != CloseBrace)
+                        {
+                            throw new FormatException(
+                                Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                            );
                         }
+                        return;
+                    }
                     case "UrlEncode":
-                        {
-                            var pattern = ParseString(context, uriMatchPart);
-                            results.Add(new UrlEncodeSegment(pattern));
+                    {
+                        var pattern = ParseString(context, uriMatchPart);
+                        results.Add(new UrlEncodeSegment(pattern));
 
-                            if (context.Current != CloseBrace)
-                            {
-                                throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
-                            }
-                            return;
+                        if (context.Current != CloseBrace)
+                        {
+                            throw new FormatException(
+                                Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                            );
                         }
+                        return;
+                    }
                     case "R":
-                        {
-                            var index = GetBackReferenceIndex(context);
-                            results.Add(new RuleMatchSegment(index));
-                            return;
-                        }
+                    {
+                        var index = GetBackReferenceIndex(context);
+                        results.Add(new RuleMatchSegment(index));
+                        return;
+                    }
                     case "C":
-                        {
-                            var index = GetBackReferenceIndex(context);
-                            results.Add(new ConditionMatchSegment(index));
-                            return;
-                        }
+                    {
+                        var index = GetBackReferenceIndex(context);
+                        results.Add(new ConditionMatchSegment(index));
+                        return;
+                    }
                     default:
                         var rewriteMap = _rewriteMaps?[parameter!];
                         if (rewriteMap != null)
@@ -164,18 +181,27 @@ internal sealed class InputParser
                             results.Add(new RewriteMapSegment(rewriteMap, pattern));
                             return;
                         }
-                        throw new FormatException(Resources.FormatError_InputParserUnrecognizedParameter(parameter, context.Index));
+                        throw new FormatException(
+                            Resources.FormatError_InputParserUnrecognizedParameter(
+                                parameter,
+                                context.Index
+                            )
+                        );
                 }
             }
         }
-        throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
+        throw new FormatException(
+            Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+        );
     }
 
     private static int GetBackReferenceIndex(ParserContext context)
     {
         if (!context.Next())
         {
-            throw new FormatException(Resources.FormatError_InputParserNoBackreference(context.Index));
+            throw new FormatException(
+                Resources.FormatError_InputParserNoBackreference(context.Index)
+            );
         }
 
         context.Mark();
@@ -183,7 +209,9 @@ internal sealed class InputParser
         {
             if (!context.Next())
             {
-                throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
+                throw new FormatException(
+                    Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                );
             }
         }
 
@@ -191,12 +219,16 @@ internal sealed class InputParser
         int index;
         if (!int.TryParse(res, NumberStyles.None, CultureInfo.InvariantCulture, out index))
         {
-            throw new FormatException(Resources.FormatError_InputParserInvalidInteger(res, context.Index));
+            throw new FormatException(
+                Resources.FormatError_InputParserInvalidInteger(res, context.Index)
+            );
         }
 
         if (index > 9 || index < 0)
         {
-            throw new FormatException(Resources.FormatError_InputParserIndexOutOfRange(res, context.Index));
+            throw new FormatException(
+                Resources.FormatError_InputParserIndexOutOfRange(res, context.Index)
+            );
         }
         return index;
     }

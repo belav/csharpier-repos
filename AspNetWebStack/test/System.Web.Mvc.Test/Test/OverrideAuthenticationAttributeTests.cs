@@ -11,7 +11,7 @@ namespace System.Web.Mvc.Test
         {
             get { return typeof(IAuthenticationFilter); }
         }
-        
+
         protected override Type ProductUnderTestType
         {
             get { return typeof(OverrideAuthenticationAttribute); }

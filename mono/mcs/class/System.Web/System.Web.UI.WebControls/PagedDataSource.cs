@@ -1,7 +1,7 @@
 // System.Web.UI.WebControls.PagedDataSource.cs
 //
 // Author: Duncan Mak (duncan@novell.com)
-//	   Jackson Harper  (jackson@ximian.com)	
+//	   Jackson Harper  (jackson@ximian.com)
 //
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,228 +29,262 @@ using System.Collections;
 using System.ComponentModel;
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    // CAS - no inheritance demand required because the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class PagedDataSource : ICollection, IEnumerable, ITypedList
+    {
+        int page_size,
+            current_page_index,
+            virtual_count;
+        bool allow_paging,
+            allow_custom_paging;
+        IEnumerable source;
 
-	// CAS - no inheritance demand required because the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class PagedDataSource : ICollection, IEnumerable, ITypedList
-	{
-		int page_size, current_page_index, virtual_count;
-		bool allow_paging, allow_custom_paging;
-		IEnumerable source;
-		
-		bool allow_server_paging;
-		
-		public PagedDataSource ()
-		{
-			page_size = 10;
-		}
+        bool allow_server_paging;
 
-		public bool AllowCustomPaging {
-			get { return allow_custom_paging; }
-			set { 
-				allow_custom_paging = value; 
-				// AllowCustomPaging and AllowServerPaging are mutually exclusive
-				if (allow_custom_paging)
-					allow_server_paging = false;
-			}
-		}
+        public PagedDataSource()
+        {
+            page_size = 10;
+        }
 
-		public bool AllowPaging {
-			get { return allow_paging; }
-			set { allow_paging = value; }
-		}
+        public bool AllowCustomPaging
+        {
+            get { return allow_custom_paging; }
+            set
+            {
+                allow_custom_paging = value;
+                // AllowCustomPaging and AllowServerPaging are mutually exclusive
+                if (allow_custom_paging)
+                    allow_server_paging = false;
+            }
+        }
 
-		public int Count {
-			get {
-				if (source == null)
-					return 0;
-				
-				if (IsPagingEnabled) {
-					if (IsCustomPagingEnabled || !IsLastPage)
-						return page_size;
-					return DataSourceCount - FirstIndexInPage;
-				}
+        public bool AllowPaging
+        {
+            get { return allow_paging; }
+            set { allow_paging = value; }
+        }
 
-				return DataSourceCount;
-			}
-		}						
+        public int Count
+        {
+            get
+            {
+                if (source == null)
+                    return 0;
 
-		public int CurrentPageIndex {
-			get { return current_page_index; }
-			set { current_page_index = value; }
-		}
+                if (IsPagingEnabled)
+                {
+                    if (IsCustomPagingEnabled || !IsLastPage)
+                        return page_size;
+                    return DataSourceCount - FirstIndexInPage;
+                }
 
-		public IEnumerable DataSource {
-			get { return source; }
-			set { source = value; }
-		}
+                return DataSourceCount;
+            }
+        }
 
-		public int DataSourceCount {
-			get {
-				if (source == null)
-					return 0;
-				
-				if (IsCustomPagingEnabled 
-				    || IsServerPagingEnabled
-				)
-					return virtual_count;
+        public int CurrentPageIndex
+        {
+            get { return current_page_index; }
+            set { current_page_index = value; }
+        }
 
-				if (source is ICollection)
-					return ((ICollection) source).Count;
+        public IEnumerable DataSource
+        {
+            get { return source; }
+            set { source = value; }
+        }
 
-				throw new HttpException ("The data source must implement ICollection");
-			}
-		}
+        public int DataSourceCount
+        {
+            get
+            {
+                if (source == null)
+                    return 0;
 
-		public int FirstIndexInPage {
-			get {
-				if (!IsPagingEnabled || IsCustomPagingEnabled || 
-				    IsServerPagingEnabled || 
-				    source == null)
-					return 0;
-				
-				return current_page_index * page_size;
-			}
-		}
+                if (IsCustomPagingEnabled || IsServerPagingEnabled)
+                    return virtual_count;
 
-		public bool IsCustomPagingEnabled {
-			get { return IsPagingEnabled && allow_custom_paging; }
-		}
+                if (source is ICollection)
+                    return ((ICollection)source).Count;
 
-		public bool IsServerPagingEnabled {
-			get { return IsPagingEnabled && allow_server_paging; }
-		}
+                throw new HttpException("The data source must implement ICollection");
+            }
+        }
 
-		public bool IsFirstPage {
-			get { 
-				if (!allow_paging)
-					return true;
-				
-				return current_page_index == 0; 
-			}
-		}
+        public int FirstIndexInPage
+        {
+            get
+            {
+                if (
+                    !IsPagingEnabled
+                    || IsCustomPagingEnabled
+                    || IsServerPagingEnabled
+                    || source == null
+                )
+                    return 0;
 
-		public bool IsLastPage {
-			get {
-				if (!allow_paging || page_size == 0)
-					return true;
+                return current_page_index * page_size;
+            }
+        }
 
-				return  (current_page_index == (PageCount - 1));
-			}
-		}
+        public bool IsCustomPagingEnabled
+        {
+            get { return IsPagingEnabled && allow_custom_paging; }
+        }
 
-		public bool IsPagingEnabled {
-			get { return (allow_paging && page_size != 0); }
-		}
+        public bool IsServerPagingEnabled
+        {
+            get { return IsPagingEnabled && allow_server_paging; }
+        }
 
-		public bool IsReadOnly {
-			get { return false; } // as documented
-		}
+        public bool IsFirstPage
+        {
+            get
+            {
+                if (!allow_paging)
+                    return true;
 
-		public bool IsSynchronized {
-			get { return false; } // as documented
-		}
+                return current_page_index == 0;
+            }
+        }
 
-		public int PageCount {
-			get {
-				if (source == null)
-					return 0;
-				
-				if (!IsPagingEnabled || DataSourceCount == 0 || page_size == 0)
-					return 1;
-				
-				return (DataSourceCount + page_size - 1) / page_size;
-			}
-		}
-		
-		public int PageSize {
-			get { return page_size; }
-			set { page_size = value; }
-		}
+        public bool IsLastPage
+        {
+            get
+            {
+                if (!allow_paging || page_size == 0)
+                    return true;
 
-		public object SyncRoot {
-			get { return this; }
-		}
+                return (current_page_index == (PageCount - 1));
+            }
+        }
 
-		public int VirtualCount {
-			get { return virtual_count; }
-			set { virtual_count = value; }
-		}
-		public bool AllowServerPaging {
-			get {
-				return allow_server_paging;
-			}
-			set {
-				allow_server_paging = value;
-				// AllowCustomPaging and AllowServerPaging are mutually exclusive
-				if (allow_server_paging)
-					allow_custom_paging = false;
-			}
-		}
+        public bool IsPagingEnabled
+        {
+            get { return (allow_paging && page_size != 0); }
+        }
 
-		public void CopyTo (Array array, int index)
-		{
-			foreach (object o in source)
-				array.SetValue (o, index++);
-		}
+        public bool IsReadOnly
+        {
+            get { return false; } // as documented
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			// IList goes first, as it implements ICollection
-			IList list = source as IList;
-			int first = 0;
-			int count;
-			int limit;
-			if (list != null) {
-				first = FirstIndexInPage;
-				count = ((ICollection) source).Count;
-				limit = ((first + page_size) > count) ? (count - first) : page_size;
-				return GetListEnum (list, first, first + limit);
-			}
+        public bool IsSynchronized
+        {
+            get { return false; } // as documented
+        }
 
-			ICollection col = source as ICollection;
-			if (col != null) {
-				first = FirstIndexInPage;
-				count = col.Count;
-				limit = ((first + page_size) > count) ? (count - first) : page_size;
-				return GetEnumeratorEnum (col.GetEnumerator (), first, first + page_size);
-			}
+        public int PageCount
+        {
+            get
+            {
+                if (source == null)
+                    return 0;
 
-			return source.GetEnumerator ();
-		}
+                if (!IsPagingEnabled || DataSourceCount == 0 || page_size == 0)
+                    return 1;
 
-		public PropertyDescriptorCollection GetItemProperties (PropertyDescriptor [] listAccessors)
-		{
-			ITypedList typed = source as ITypedList;
-			if (typed == null)
-				return null;
-			return typed.GetItemProperties (listAccessors);
-		}
+                return (DataSourceCount + page_size - 1) / page_size;
+            }
+        }
 
-		public string GetListName (PropertyDescriptor [] listAccessors)
-		{
-			return String.Empty; // as documented
-		}
+        public int PageSize
+        {
+            get { return page_size; }
+            set { page_size = value; }
+        }
 
-		IEnumerator GetListEnum (IList list, int start, int end)
-		{
-			if (!AllowPaging)
-				end = list.Count;
-			else if (start >= list.Count)
-				yield break;
-			
-			for (int i = start; i < end; i++)
-				yield return list [i];
-		}
+        public object SyncRoot
+        {
+            get { return this; }
+        }
 
-		IEnumerator GetEnumeratorEnum (IEnumerator e, int start, int end)
-		{
-			for (int i = 0; i < start; i++)
-				e.MoveNext ();
-			for (int i = start; (!allow_paging || i < end) && e.MoveNext (); i++)
-				yield return e.Current;
-		}
-	}
+        public int VirtualCount
+        {
+            get { return virtual_count; }
+            set { virtual_count = value; }
+        }
+        public bool AllowServerPaging
+        {
+            get { return allow_server_paging; }
+            set
+            {
+                allow_server_paging = value;
+                // AllowCustomPaging and AllowServerPaging are mutually exclusive
+                if (allow_server_paging)
+                    allow_custom_paging = false;
+            }
+        }
+
+        public void CopyTo(Array array, int index)
+        {
+            foreach (object o in source)
+                array.SetValue(o, index++);
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            // IList goes first, as it implements ICollection
+            IList list = source as IList;
+            int first = 0;
+            int count;
+            int limit;
+            if (list != null)
+            {
+                first = FirstIndexInPage;
+                count = ((ICollection)source).Count;
+                limit = ((first + page_size) > count) ? (count - first) : page_size;
+                return GetListEnum(list, first, first + limit);
+            }
+
+            ICollection col = source as ICollection;
+            if (col != null)
+            {
+                first = FirstIndexInPage;
+                count = col.Count;
+                limit = ((first + page_size) > count) ? (count - first) : page_size;
+                return GetEnumeratorEnum(col.GetEnumerator(), first, first + page_size);
+            }
+
+            return source.GetEnumerator();
+        }
+
+        public PropertyDescriptorCollection GetItemProperties(PropertyDescriptor[] listAccessors)
+        {
+            ITypedList typed = source as ITypedList;
+            if (typed == null)
+                return null;
+            return typed.GetItemProperties(listAccessors);
+        }
+
+        public string GetListName(PropertyDescriptor[] listAccessors)
+        {
+            return String.Empty; // as documented
+        }
+
+        IEnumerator GetListEnum(IList list, int start, int end)
+        {
+            if (!AllowPaging)
+                end = list.Count;
+            else if (start >= list.Count)
+                yield break;
+
+            for (int i = start; i < end; i++)
+                yield return list[i];
+        }
+
+        IEnumerator GetEnumeratorEnum(IEnumerator e, int start, int end)
+        {
+            for (int i = 0; i < start; i++)
+                e.MoveNext();
+            for (int i = start; (!allow_paging || i < end) && e.MoveNext(); i++)
+                yield return e.Current;
+        }
+    }
 }
-

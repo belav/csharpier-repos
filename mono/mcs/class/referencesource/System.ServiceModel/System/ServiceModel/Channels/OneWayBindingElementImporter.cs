@@ -10,11 +10,12 @@ namespace System.ServiceModel.Channels
 
     public class OneWayBindingElementImporter : IPolicyImportExtension
     {
-        public OneWayBindingElementImporter()
-        {
-        }
+        public OneWayBindingElementImporter() { }
 
-        void IPolicyImportExtension.ImportPolicy(MetadataImporter importer, PolicyConversionContext context)
+        void IPolicyImportExtension.ImportPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext context
+        )
         {
             if (importer == null)
             {
@@ -26,8 +27,12 @@ namespace System.ServiceModel.Channels
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            XmlElement oneWayAssertion = PolicyConversionContext.FindAssertion(context.GetBindingAssertions(),
-                OneWayPolicyConstants.OneWay, OneWayPolicyConstants.Namespace, true);
+            XmlElement oneWayAssertion = PolicyConversionContext.FindAssertion(
+                context.GetBindingAssertions(),
+                OneWayPolicyConstants.OneWay,
+                OneWayPolicyConstants.Namespace,
+                true
+            );
 
             if (oneWayAssertion != null)
             {
@@ -37,17 +42,22 @@ namespace System.ServiceModel.Channels
                 for (int i = 0; i < oneWayAssertion.ChildNodes.Count; i++)
                 {
                     XmlNode currentNode = oneWayAssertion.ChildNodes[i];
-                    if (currentNode != null
+                    if (
+                        currentNode != null
                         && currentNode.NodeType == XmlNodeType.Element
                         && currentNode.NamespaceURI == OneWayPolicyConstants.Namespace
-                        && currentNode.LocalName == OneWayPolicyConstants.PacketRoutable)
+                        && currentNode.LocalName == OneWayPolicyConstants.PacketRoutable
+                    )
                     {
                         bindingElement.PacketRoutable = true;
                         break;
                     }
                 }
             }
-            else if (WsdlImporter.WSAddressingHelper.DetermineSupportedAddressingMode(importer, context) == SupportedAddressingMode.NonAnonymous)
+            else if (
+                WsdlImporter.WSAddressingHelper.DetermineSupportedAddressingMode(importer, context)
+                == SupportedAddressingMode.NonAnonymous
+            )
             {
                 context.BindingElements.Add(new OneWayBindingElement());
             }

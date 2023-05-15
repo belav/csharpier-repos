@@ -43,7 +43,6 @@ using NUnit.Framework;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 {
-
     #region Types
     public class XmlJsonWriter : JsonWriter
     {
@@ -334,16 +333,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                 Name = "James",
                 Age = 30,
                 Enabled = true,
-                Roles = new[]
-                {
-                    "Publisher",
-                    "Administrator"
-                }
+                Roles = new[] { "Publisher", "Administrator" }
             };
 
             StringWriter sw = new StringWriter();
 
-            using (XmlWriter xmlWriter = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true }))
+            using (
+                XmlWriter xmlWriter = XmlWriter.Create(
+                    sw,
+                    new XmlWriterSettings { OmitXmlDeclaration = true }
+                )
+            )
             using (XmlJsonWriter writer = new XmlJsonWriter(xmlWriter))
             {
                 writer.Formatting = Formatting.Indented;
@@ -366,7 +366,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
 
             sw = new StringWriter();
 
-            using (XmlWriter xmlWriter = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true }))
+            using (
+                XmlWriter xmlWriter = XmlWriter.Create(
+                    sw,
+                    new XmlWriterSettings { OmitXmlDeclaration = true }
+                )
+            )
             using (XmlJsonWriter writer = new XmlJsonWriter(xmlWriter))
             {
                 writer.Formatting = Formatting.Indented;
@@ -389,7 +394,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                 writer.WriteValue(new DateTime(2001, 2, 22, 20, 59, 59, DateTimeKind.Utc));
 
                 writer.WritePropertyName("DateTimeOffset");
-                writer.WriteValue(new DateTimeOffset(2001, 2, 22, 20, 59, 59, TimeSpan.FromHours(12)));
+                writer.WriteValue(
+                    new DateTimeOffset(2001, 2, 22, 20, 59, 59, TimeSpan.FromHours(12))
+                );
 
                 writer.WritePropertyName("Float");
                 writer.WriteValue(1.1f);

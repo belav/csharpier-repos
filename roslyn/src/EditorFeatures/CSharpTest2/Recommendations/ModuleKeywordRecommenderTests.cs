@@ -14,194 +14,207 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"class C { }
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"class C { }
+$$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"System.Console.WriteLine();
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"System.Console.WriteLine();
+$$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"int i = 0;
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"int i = 0;
+$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestNotInAttributeInsideClass()
         {
             await VerifyAbsenceAsync(
-@"class C {
-    [$$");
+                @"class C {
+    [$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInAttributeAfterAttributeInsideClass()
         {
             await VerifyAbsenceAsync(
-@"class C {
+                @"class C {
     [Goo]
-    [$$");
+    [$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInAttributeAfterMethod()
         {
             await VerifyAbsenceAsync(
-@"class C {
+                @"class C {
     void Goo() {
     }
-    [$$");
+    [$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInAttributeAfterProperty()
         {
             await VerifyAbsenceAsync(
-@"class C {
+                @"class C {
     int Goo {
         get;
     }
-    [$$");
+    [$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInAttributeAfterField()
         {
             await VerifyAbsenceAsync(
-@"class C {
+                @"class C {
     int Goo;
-    [$$");
+    [$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInAttributeAfterEvent()
         {
             await VerifyAbsenceAsync(
-@"class C {
+                @"class C {
     event Action<int> Goo;
-    [$$");
+    [$$"
+            );
         }
 
         [Fact]
         public async Task TestInOuterAttribute()
         {
-            await VerifyKeywordAsync(
-@"[$$");
+            await VerifyKeywordAsync(@"[$$");
         }
 
         [Fact]
         public async Task TestNotInOuterAttributeInNamespace()
         {
             await VerifyAbsenceAsync(
-@"namespace Goo {
-     [$$");
+                @"namespace Goo {
+     [$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInParameterAttribute()
         {
             await VerifyAbsenceAsync(
-@"class C {
-    void Goo([$$");
+                @"class C {
+    void Goo([$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInPropertyAttribute()
         {
             await VerifyAbsenceAsync(
-@"class C {
-    int Goo { [$$");
+                @"class C {
+    int Goo { [$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInEventAttribute()
         {
             await VerifyAbsenceAsync(
-@"class C {
-    event Action<int> Goo { [$$");
+                @"class C {
+    event Action<int> Goo { [$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInClassModuleParameters()
         {
-            await VerifyAbsenceAsync(
-@"class C<[$$");
+            await VerifyAbsenceAsync(@"class C<[$$");
         }
 
         [Fact]
         public async Task TestNotInDelegateModuleParameters()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D<[$$");
+            await VerifyAbsenceAsync(@"delegate void D<[$$");
         }
 
         [Fact]
         public async Task TestNotInMethodModuleParameters()
         {
             await VerifyAbsenceAsync(
-@"class C {
-    void M<[$$");
+                @"class C {
+    void M<[$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInInterface()
         {
             await VerifyAbsenceAsync(
-@"interface I {
-    [$$");
+                @"interface I {
+    [$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInStruct()
         {
             await VerifyAbsenceAsync(
-@"struct S {
-    [$$");
+                @"struct S {
+    [$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInEnum()
         {
             await VerifyAbsenceAsync(
-@"enum E {
-    [$$");
+                @"enum E {
+    [$$"
+            );
         }
     }
 }

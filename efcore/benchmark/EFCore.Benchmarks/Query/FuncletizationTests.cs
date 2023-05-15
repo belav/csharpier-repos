@@ -65,7 +65,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
             var valueHolder = new ValueHolder();
             for (var i = 0; i < FuncletizationIterationCount; i++)
             {
-                _context.Products.Where(p => p.ProductId < valueHolder.SecondLevelProperty).ToList();
+                _context.Products
+                    .Where(p => p.ProductId < valueHolder.SecondLevelProperty)
+                    .ToList();
             }
         }
 

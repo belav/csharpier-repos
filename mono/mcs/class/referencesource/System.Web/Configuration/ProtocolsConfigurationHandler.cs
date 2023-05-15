@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     using System.IO;
     using System.Runtime.Serialization.Formatters;
     using System.Threading;
@@ -28,7 +28,7 @@ namespace System.Web.Configuration {
     /*
         <protocols>
             <add
-                id="<protocolID>" 
+                id="<protocolID>"
                 processHandlerType="<typeName>"
                 appDomainHandlerType="<typeName>"
                 [validate="false"]
@@ -37,17 +37,15 @@ namespace System.Web.Configuration {
         </protocols>
     */
     //
-    public sealed class ProtocolsConfigurationHandler : IConfigurationSectionHandler {
+    public sealed class ProtocolsConfigurationHandler : IConfigurationSectionHandler
+    {
+        public ProtocolsConfigurationHandler() { }
 
-        public ProtocolsConfigurationHandler() {
-        }
-
-        public object Create(Object parent, Object configContextObj, XmlNode section) {
+        public object Create(Object parent, Object configContextObj, XmlNode section)
+        {
             // can be called from client config ( default app domain)
             Debug.Assert(parent == null, "<protocols> config is only allowed in machine.config");
             return new ProtocolsConfiguration(section);
         }
     }
 }
-
-

@@ -12,14 +12,25 @@ public class RouteEndpointBuilderTest
     [Fact]
     public void Constructor_AllowsNullRequestDelegate()
     {
-        var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0);
+        var builder = new RouteEndpointBuilder(
+            requestDelegate: null,
+            RoutePatternFactory.Parse("/"),
+            order: 0
+        );
         Assert.Null(builder.RequestDelegate);
     }
 
     [Fact]
     public void Constructor_DoesNotAllowNullRoutePattern()
     {
-        var ex = Assert.Throws<ArgumentNullException>(() => new RouteEndpointBuilder(context => Task.CompletedTask, routePattern: null, order: 0));
+        var ex = Assert.Throws<ArgumentNullException>(
+            () =>
+                new RouteEndpointBuilder(
+                    context => Task.CompletedTask,
+                    routePattern: null,
+                    order: 0
+                )
+        );
         Assert.Equal("routePattern", ex.ParamName);
     }
 
@@ -30,7 +41,11 @@ public class RouteEndpointBuilderTest
         var metadata = new object();
         RequestDelegate requestDelegate = (d) => null;
 
-        var builder = new RouteEndpointBuilder(requestDelegate, RoutePatternFactory.Parse("/"), defaultOrder)
+        var builder = new RouteEndpointBuilder(
+            requestDelegate,
+            RoutePatternFactory.Parse("/"),
+            defaultOrder
+        )
         {
             DisplayName = "Display name!",
             Metadata = { metadata }
@@ -51,10 +66,18 @@ public class RouteEndpointBuilderTest
         const int defaultOrder = 0;
         static Task RequestDelegate(HttpContext d) => null;
 
-        var builder = new RouteEndpointBuilder(RequestDelegate, RoutePatternFactory.Parse("/"), defaultOrder)
+        var builder = new RouteEndpointBuilder(
+            RequestDelegate,
+            RoutePatternFactory.Parse("/"),
+            defaultOrder
+        )
         {
             DisplayName = "Display name!",
-            Metadata = { new TestCorsMetadata(), new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false) }
+            Metadata =
+            {
+                new TestCorsMetadata(),
+                new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false)
+            }
         };
 
         // Act && Assert
@@ -71,18 +94,29 @@ public class RouteEndpointBuilderTest
         const int defaultOrder = 0;
         static Task RequestDelegate(HttpContext d) => null;
 
-        var builder = new RouteEndpointBuilder(RequestDelegate, RoutePatternFactory.Parse("/"), defaultOrder)
+        var builder = new RouteEndpointBuilder(
+            RequestDelegate,
+            RoutePatternFactory.Parse("/"),
+            defaultOrder
+        )
         {
             DisplayName = "Display name!",
-            Metadata = { new HttpMethodMetadata(new[] { HttpMethods.Get }, acceptCorsPreflight: false), new TestCorsMetadata(), new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false) }
+            Metadata =
+            {
+                new HttpMethodMetadata(new[] { HttpMethods.Get }, acceptCorsPreflight: false),
+                new TestCorsMetadata(),
+                new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false)
+            }
         };
 
         // Act && Assert
         var endpoint = Assert.IsType<RouteEndpoint>(builder.Build());
 
-        Assert.Collection(endpoint.Metadata.GetOrderedMetadata<HttpMethodMetadata>(),
+        Assert.Collection(
+            endpoint.Metadata.GetOrderedMetadata<HttpMethodMetadata>(),
             (metadata) => Assert.False(metadata.AcceptCorsPreflight),
-            (metadata) => Assert.True(metadata.AcceptCorsPreflight));
+            (metadata) => Assert.True(metadata.AcceptCorsPreflight)
+        );
     }
 
     [Fact]
@@ -92,10 +126,17 @@ public class RouteEndpointBuilderTest
         const int defaultOrder = 0;
         static Task RequestDelegate(HttpContext d) => null;
 
-        var builder = new RouteEndpointBuilder(RequestDelegate, RoutePatternFactory.Parse("/"), defaultOrder)
+        var builder = new RouteEndpointBuilder(
+            RequestDelegate,
+            RoutePatternFactory.Parse("/"),
+            defaultOrder
+        )
         {
             DisplayName = "Display name!",
-            Metadata = { new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false) }
+            Metadata =
+            {
+                new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false)
+            }
         };
 
         // Act && Assert
@@ -119,19 +160,25 @@ public class RouteEndpointBuilderTest
             return Task.CompletedTask;
         };
 
-        var builder = new RouteEndpointBuilder(requestDelegate, RoutePatternFactory.Parse("/"), defaultOrder);
+        var builder = new RouteEndpointBuilder(
+            requestDelegate,
+            RoutePatternFactory.Parse("/"),
+            defaultOrder
+        );
 
-        builder.FilterFactories.Add((endopintContext, next) =>
-        {
-            endpointFilterCallCount++;
-
-            return invocationContext =>
+        builder.FilterFactories.Add(
+            (endopintContext, next) =>
             {
-                invocationFilterCallCount++;
+                endpointFilterCallCount++;
 
-                return next(invocationContext);
-            };
-        });
+                return invocationContext =>
+                {
+                    invocationFilterCallCount++;
+
+                    return next(invocationContext);
+                };
+            }
+        );
 
         var endpoint = Assert.IsType<RouteEndpoint>(builder.Build());
 
@@ -142,6 +189,5 @@ public class RouteEndpointBuilderTest
         Assert.Equal(1, invocationCallCount);
     }
 
-    private class TestCorsMetadata : ICorsMetadata
-    { }
+    private class TestCorsMetadata : ICorsMetadata { }
 }

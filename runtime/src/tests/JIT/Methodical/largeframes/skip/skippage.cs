@@ -17,12 +17,12 @@ using Xunit;
 
 namespace BigFrames_skippage
 {
-
     [StructLayout(LayoutKind.Explicit)]
     public struct Struct12288 // Three pages
     {
         [FieldOffset(0)]
         public int i1;
+
         [FieldOffset(12284)]
         public int i2;
     }

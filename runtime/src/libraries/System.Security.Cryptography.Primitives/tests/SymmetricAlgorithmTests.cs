@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.Primitives.Tests
             PaddingMode mode,
             int plaintextSize,
             int expectedCiphertextSize,
-            int alignmentSizeInBits)
+            int alignmentSizeInBits
+        )
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = alignmentSizeInBits };
             int ciphertextSizeCbc = alg.GetCiphertextLengthCbc(plaintextSize, mode);
@@ -30,10 +31,15 @@ namespace System.Security.Cryptography.Primitives.Tests
             PaddingMode mode,
             int plaintextSize,
             int expectedCiphertextSize,
-            int alignmentSizeInBits)
+            int alignmentSizeInBits
+        )
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            int ciphertextSizeCfb = alg.GetCiphertextLengthCfb(plaintextSize, mode, alignmentSizeInBits);
+            int ciphertextSizeCfb = alg.GetCiphertextLengthCfb(
+                plaintextSize,
+                mode,
+                alignmentSizeInBits
+            );
             Assert.Equal(expectedCiphertextSize, ciphertextSizeCfb);
         }
 
@@ -42,9 +48,18 @@ namespace System.Security.Cryptography.Primitives.Tests
         public static void GetCiphertextLength_ThrowsForNegativeInput(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () => alg.GetCiphertextLengthCbc(-1, mode));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () => alg.GetCiphertextLengthEcb(-1, mode));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () => alg.GetCiphertextLengthCfb(-1, mode));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCbc(-1, mode)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthEcb(-1, mode)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCfb(-1, mode)
+            );
         }
 
         [Theory]
@@ -55,8 +70,14 @@ namespace System.Security.Cryptography.Primitives.Tests
         public static void GetCiphertextLengthBlock_ThrowsForOverflow(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () => alg.GetCiphertextLengthCbc(0x7FFFFFF1, mode));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () => alg.GetCiphertextLengthEcb(0x7FFFFFF1, mode));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCbc(0x7FFFFFF1, mode)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthEcb(0x7FFFFFF1, mode)
+            );
         }
 
         [Theory]
@@ -67,8 +88,10 @@ namespace System.Security.Cryptography.Primitives.Tests
         public static void GetCiphertextLengthCfb_ThrowsForOverflow(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () =>
-                alg.GetCiphertextLengthCfb(0x7FFFFFFF, mode, feedbackSizeInBits: 128));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCfb(0x7FFFFFFF, mode, feedbackSizeInBits: 128)
+            );
         }
 
         [Theory]
@@ -85,8 +108,10 @@ namespace System.Security.Cryptography.Primitives.Tests
         public static void GetCiphertextLengthCfb_ThrowsForNonByteFeedbackSize(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
-                alg.GetCiphertextLengthCfb(16, mode, 7));
+            AssertExtensions.Throws<ArgumentException>(
+                "feedbackSizeInBits",
+                () => alg.GetCiphertextLengthCfb(16, mode, 7)
+            );
         }
 
         [Theory]
@@ -103,8 +128,10 @@ namespace System.Security.Cryptography.Primitives.Tests
         public static void GetCiphertextLengthCfb_ThrowsForZeroFeedbackSize(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("feedbackSizeInBits", () =>
-                alg.GetCiphertextLengthCfb(16, mode, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "feedbackSizeInBits",
+                () => alg.GetCiphertextLengthCfb(16, mode, 0)
+            );
         }
 
         [Fact]
@@ -112,25 +139,42 @@ namespace System.Security.Cryptography.Primitives.Tests
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
             PaddingMode mode = (PaddingMode)(-1);
-            Assert.Throws<ArgumentOutOfRangeException>("paddingMode", () => alg.GetCiphertextLengthCbc(16, mode));
-            Assert.Throws<ArgumentOutOfRangeException>("paddingMode", () => alg.GetCiphertextLengthEcb(16, mode));
-            Assert.Throws<ArgumentOutOfRangeException>("paddingMode", () => alg.GetCiphertextLengthCfb(16, mode));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "paddingMode",
+                () => alg.GetCiphertextLengthCbc(16, mode)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "paddingMode",
+                () => alg.GetCiphertextLengthEcb(16, mode)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "paddingMode",
+                () => alg.GetCiphertextLengthCfb(16, mode)
+            );
         }
 
         [Fact]
         public static void GetCiphertextLengthBlock_NoPaddingAndPlaintextSizeNotBlockAligned()
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
-            Assert.Throws<ArgumentException>("plaintextLength", () => alg.GetCiphertextLengthCbc(17, PaddingMode.None));
-            Assert.Throws<ArgumentException>("plaintextLength", () => alg.GetCiphertextLengthEcb(17, PaddingMode.None));
+            Assert.Throws<ArgumentException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCbc(17, PaddingMode.None)
+            );
+            Assert.Throws<ArgumentException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthEcb(17, PaddingMode.None)
+            );
         }
 
         [Fact]
         public static void GetCiphertextLengthCfb_NoPaddingAndPlaintextSizeNotFeedbackAligned()
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            Assert.Throws<ArgumentException>("plaintextLength", () =>
-                alg.GetCiphertextLengthCfb(17, PaddingMode.None, feedbackSizeInBits: 128));
+            Assert.Throws<ArgumentException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCfb(17, PaddingMode.None, feedbackSizeInBits: 128)
+            );
         }
 
         public static IEnumerable<object[]> CiphertextLengthTheories
@@ -139,7 +183,8 @@ namespace System.Security.Cryptography.Primitives.Tests
             {
                 // new object[] { PaddingMode mode, int plaintextSize, int expectedCiphertextSize, int alignmentSizeInBits }
 
-                PaddingMode[] fullPaddings = new[] {
+                PaddingMode[] fullPaddings = new[]
+                {
                     PaddingMode.ANSIX923,
                     PaddingMode.ISO10126,
                     PaddingMode.PKCS7,
@@ -180,12 +225,9 @@ namespace System.Security.Cryptography.Primitives.Tests
                     yield return new object[] { mode, 0x7FFFFFFD, 0x7FFFFFFE, 176 };
                 }
 
-                PaddingMode[] noPadOnAlignSize = new[] {
-                    PaddingMode.Zeros,
-                    PaddingMode.None,
-                };
+                PaddingMode[] noPadOnAlignSize = new[] { PaddingMode.Zeros, PaddingMode.None, };
 
-                foreach(PaddingMode mode in noPadOnAlignSize)
+                foreach (PaddingMode mode in noPadOnAlignSize)
                 {
                     // 128-bit aligned
                     yield return new object[] { mode, 16, 16, 128 };
@@ -226,9 +268,12 @@ namespace System.Security.Cryptography.Primitives.Tests
 
             public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV) =>
                 throw new NotImplementedException();
+
             public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV) =>
                 throw new NotImplementedException();
+
             public override void GenerateIV() => throw new NotImplementedException();
+
             public override void GenerateKey() => throw new NotImplementedException();
         }
     }

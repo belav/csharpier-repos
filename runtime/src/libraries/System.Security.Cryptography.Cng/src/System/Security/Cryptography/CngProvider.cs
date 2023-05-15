@@ -20,7 +20,10 @@ namespace System.Security.Cryptography
             if (provider == null)
                 throw new ArgumentNullException(nameof(provider));
             if (provider.Length == 0)
-                throw new ArgumentException(SR.Format(SR.Cryptography_InvalidProviderName, provider), nameof(provider));
+                throw new ArgumentException(
+                    SR.Format(SR.Cryptography_InvalidProviderName, provider),
+                    nameof(provider)
+                );
 
             _provider = provider;
         }
@@ -30,10 +33,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public string Provider
         {
-            get
-            {
-                return _provider;
-            }
+            get { return _provider; }
         }
 
         public static bool operator ==(CngProvider? left, CngProvider? right)
@@ -95,7 +95,8 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return s_msPlatformKsp ?? (s_msPlatformKsp = new CngProvider("Microsoft Platform Crypto Provider")); // MS_PLATFORM_CRYPTO_PROVIDER
+                return s_msPlatformKsp
+                    ?? (s_msPlatformKsp = new CngProvider("Microsoft Platform Crypto Provider")); // MS_PLATFORM_CRYPTO_PROVIDER
             }
         }
 
@@ -103,7 +104,12 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return s_msSmartCardKsp ?? (s_msSmartCardKsp = new CngProvider("Microsoft Smart Card Key Storage Provider")); // MS_SMART_CARD_KEY_STORAGE_PROVIDER
+                return s_msSmartCardKsp
+                    ?? (
+                        s_msSmartCardKsp = new CngProvider(
+                            "Microsoft Smart Card Key Storage Provider"
+                        )
+                    ); // MS_SMART_CARD_KEY_STORAGE_PROVIDER
             }
         }
 
@@ -111,7 +117,10 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return s_msSoftwareKsp ?? (s_msSoftwareKsp = new CngProvider("Microsoft Software Key Storage Provider")); // MS_KEY_STORAGE_PROVIDER
+                return s_msSoftwareKsp
+                    ?? (
+                        s_msSoftwareKsp = new CngProvider("Microsoft Software Key Storage Provider")
+                    ); // MS_KEY_STORAGE_PROVIDER
             }
         }
 

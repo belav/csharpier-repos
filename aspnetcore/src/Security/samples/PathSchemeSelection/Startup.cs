@@ -33,7 +33,8 @@ public class Startup
     {
         services.AddMvc();
 
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        services
+            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddScheme<AuthenticationSchemeOptions, ApiAuthHandler>("Api", o => { })
             .AddCookie(options =>
             {
@@ -51,15 +52,21 @@ public class Startup
     {
         private readonly ClaimsPrincipal _id;
 
-        public ApiAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
+        public ApiAuthHandler(
+            IOptionsMonitor<AuthenticationSchemeOptions> options,
+            ILoggerFactory logger,
+            UrlEncoder encoder,
+            ISystemClock clock
+        )
+            : base(options, logger, encoder, clock)
         {
             var id = new ClaimsIdentity("Api");
             id.AddClaim(new Claim(ClaimTypes.Name, "Hao", ClaimValueTypes.String, "Api"));
             _id = new ClaimsPrincipal(id);
         }
 
-        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
-            => Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(_id, "Api")));
+        protected override Task<AuthenticateResult> HandleAuthenticateAsync() =>
+            Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(_id, "Api")));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,10 +92,12 @@ public class Startup
         {
             endpoints.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}"
+            );
             endpoints.MapControllerRoute(
                 name: "api",
-                pattern: "api/{controller=Home}/{action=Index}/{id?}");
+                pattern: "api/{controller=Home}/{action=Index}/{id?}"
+            );
         });
     }
 }

@@ -14,29 +14,29 @@ using System.Web.Services.Description;
 
 namespace MonoTests.System.Web.Services.Description
 {
-	[TestFixture]
-	public class DocumentableItemTest
-	{
-		DocumentableItem item;
+    [TestFixture]
+    public class DocumentableItemTest
+    {
+        DocumentableItem item;
 
-		[SetUp]
-		public void InitializeItem()
-		{
-			// workaround for base class
-			item = new Types();
-		}
+        [SetUp]
+        public void InitializeItem()
+        {
+            // workaround for base class
+            item = new Types();
+        }
 
-		[Test]
-		public void TestDefaultProperties()
-		{
-			Assert.AreEqual (String.Empty, item.Documentation);
-		}
-		
-		[Test]
-		public void TestNullDocumentationString()
-		{
-			item.Documentation = null;
-			Assert.AreEqual (String.Empty, item.Documentation);
-		}
-	}
+        [Test]
+        public void TestDefaultProperties()
+        {
+            Assert.AreEqual(String.Empty, item.Documentation);
+        }
+
+        [Test]
+        public void TestNullDocumentationString()
+        {
+            item.Documentation = null;
+            Assert.AreEqual(String.Empty, item.Documentation);
+        }
+    }
 }

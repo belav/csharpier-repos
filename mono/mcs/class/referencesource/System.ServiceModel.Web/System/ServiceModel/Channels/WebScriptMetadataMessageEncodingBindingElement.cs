@@ -18,7 +18,9 @@ namespace System.ServiceModel.Channels
             EncoderDefaults.ReaderQuotas.CopyTo(this.readerQuotas);
         }
 
-        WebScriptMetadataMessageEncodingBindingElement(WebScriptMetadataMessageEncodingBindingElement elementToBeCloned)
+        WebScriptMetadataMessageEncodingBindingElement(
+            WebScriptMetadataMessageEncodingBindingElement elementToBeCloned
+        )
             : base(elementToBeCloned)
         {
             this.readerQuotas = new XmlDictionaryReaderQuotas();
@@ -27,10 +29,7 @@ namespace System.ServiceModel.Channels
 
         public override MessageVersion MessageVersion
         {
-            get
-            {
-                return MessageVersion.None;
-            }
+            get { return MessageVersion.None; }
             set
             {
                 if (value == null)
@@ -39,25 +38,29 @@ namespace System.ServiceModel.Channels
                 }
                 if (value != MessageVersion.None)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR2.GetString(SR2.JsonOnlySupportsMessageVersionNone));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR2.GetString(SR2.JsonOnlySupportsMessageVersionNone)
+                    );
                 }
             }
         }
 
         public XmlDictionaryReaderQuotas ReaderQuotas
         {
-            get
-            {
-                return this.readerQuotas;
-            }
+            get { return this.readerQuotas; }
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             return InternalBuildChannelFactory<TChannel>(context);
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             return InternalBuildChannelListener<TChannel>(context);
         }
@@ -90,7 +93,7 @@ namespace System.ServiceModel.Channels
             }
             if (typeof(T) == typeof(XmlDictionaryReaderQuotas))
             {
-                return (T)(object) this.readerQuotas;
+                return (T)(object)this.readerQuotas;
             }
             else
             {
