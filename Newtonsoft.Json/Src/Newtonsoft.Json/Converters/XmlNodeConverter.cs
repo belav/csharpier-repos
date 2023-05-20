@@ -42,7 +42,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Newtonsoft.Json.Converters
 {
-#region XmlNodeWrappers
+    #region XmlNodeWrappers
 #if HAVE_XML_DOCUMENT
     internal class XmlDocumentWrapper : XmlNodeWrapper, IXmlDocument
     {
@@ -87,9 +87,16 @@ namespace Newtonsoft.Json.Converters
         }
 
 #if HAVE_XML_DOCUMENT_TYPE
-        public IXmlNode CreateXmlDocumentType(string name, string? publicId, string? systemId, string? internalSubset)
+        public IXmlNode CreateXmlDocumentType(
+            string name,
+            string? publicId,
+            string? systemId,
+            string? internalSubset
+        )
         {
-            return new XmlDocumentTypeWrapper(_document.CreateDocumentType(name, publicId, systemId, null));
+            return new XmlDocumentTypeWrapper(
+                _document.CreateDocumentType(name, publicId, systemId, null)
+            );
         }
 #endif
 
@@ -350,9 +357,9 @@ namespace Newtonsoft.Json.Converters
         public string? NamespaceUri => _node.NamespaceURI;
     }
 #endif
-#endregion
+    #endregion
 
-#region Interfaces
+    #region Interfaces
     internal interface IXmlDocument : IXmlNode
     {
         IXmlNode CreateComment(string? text);
@@ -362,7 +369,12 @@ namespace Newtonsoft.Json.Converters
         IXmlNode CreateSignificantWhitespace(string? text);
         IXmlNode CreateXmlDeclaration(string version, string? encoding, string? standalone);
 #if HAVE_XML_DOCUMENT_TYPE
-        IXmlNode CreateXmlDocumentType(string name, string? publicId, string? systemId, string? internalSubset);
+        IXmlNode CreateXmlDocumentType(
+            string name,
+            string? publicId,
+            string? systemId,
+            string? internalSubset
+        );
 #endif
         IXmlNode CreateProcessingInstruction(string target, string data);
         IXmlElement CreateElement(string elementName);
@@ -407,9 +419,9 @@ namespace Newtonsoft.Json.Converters
         string? NamespaceUri { get; }
         object? WrappedNode { get; }
     }
-#endregion
+    #endregion
 
-#region XNodeWrappers
+    #region XNodeWrappers
 #if HAVE_XLINQ
     internal class XDeclarationWrapper : XObjectWrapper, IXmlDeclaration
     {
@@ -949,7 +961,7 @@ namespace Newtonsoft.Json.Converters
         public bool IsEmpty => Element.IsEmpty;
     }
 #endif
-#endregion
+    #endregion
 
     /// <summary>
     /// Converts XML to and from JSON.
@@ -994,7 +1006,7 @@ namespace Newtonsoft.Json.Converters
         /// <value><c>true</c> if special characters are encoded; otherwise, <c>false</c>.</value>
         public bool EncodeSpecialCharacters { get; set; }
 
-#region Writing
+        #region Writing
         /// <summary>
         /// Writes the JSON representation of the object.
         /// </summary>
@@ -1551,9 +1563,9 @@ namespace Newtonsoft.Json.Converters
             }
             return true;
         }
-#endregion
+        #endregion
 
-#region Reading
+        #region Reading
         /// <summary>
         /// Reads the JSON representation of the object.
         /// </summary>
@@ -1711,7 +1723,13 @@ namespace Newtonsoft.Json.Converters
                             return;
                         }
 #if HAVE_XML_DOCUMENT_TYPE
-                        else if (string.Equals(propertyName, "!DOCTYPE", StringComparison.OrdinalIgnoreCase))
+                        else if (
+                            string.Equals(
+                                propertyName,
+                                "!DOCTYPE",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             CreateDocumentType(reader, document, currentNode);
                             return;
@@ -1983,7 +2001,10 @@ namespace Newtonsoft.Json.Converters
 #if !PORTABLE || NETSTANDARD1_3
                     return XmlConvert.ToString(d, DateTimeUtils.ToSerializationMode(d.Kind));
 #else
-                    return d.ToString(DateTimeUtils.ToDateTimeFormat(d.Kind), CultureInfo.InvariantCulture);
+                    return d.ToString(
+                        DateTimeUtils.ToDateTimeFormat(d.Kind),
+                        CultureInfo.InvariantCulture
+                    );
 #endif
                 }
                 case JsonToken.Bytes:
@@ -2291,7 +2312,11 @@ namespace Newtonsoft.Json.Converters
         }
 
 #if HAVE_XML_DOCUMENT_TYPE
-        private void CreateDocumentType(JsonReader reader, IXmlDocument document, IXmlNode currentNode)
+        private void CreateDocumentType(
+            JsonReader reader,
+            IXmlDocument document,
+            IXmlNode currentNode
+        )
         {
             string? name = null;
             string? publicId = null;
@@ -2318,16 +2343,28 @@ namespace Newtonsoft.Json.Converters
                         internalSubset = ConvertTokenToXmlValue(reader);
                         break;
                     default:
-                        throw JsonSerializationException.Create(reader, "Unexpected property name encountered while deserializing XmlDeclaration: " + reader.Value);
+                        throw JsonSerializationException.Create(
+                            reader,
+                            "Unexpected property name encountered while deserializing XmlDeclaration: "
+                                + reader.Value
+                        );
                 }
             }
 
             if (name == null)
             {
-                throw JsonSerializationException.Create(reader, "Name not specified for XML document type.");
+                throw JsonSerializationException.Create(
+                    reader,
+                    "Name not specified for XML document type."
+                );
             }
 
-            IXmlNode documentType = document.CreateXmlDocumentType(name, publicId, systemId, internalSubset);
+            IXmlNode documentType = document.CreateXmlDocumentType(
+                name,
+                publicId,
+                systemId,
+                internalSubset
+            );
             currentNode.AppendChild(documentType);
         }
 #endif
@@ -2505,7 +2542,7 @@ namespace Newtonsoft.Json.Converters
 
             return false;
         }
-#endregion
+        #endregion
 
         /// <summary>
         /// Determines whether this instance can convert the specified value type.

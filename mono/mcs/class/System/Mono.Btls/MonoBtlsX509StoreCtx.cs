@@ -44,12 +44,12 @@ namespace Mono.Btls
             }
 
 #if FIXME
-			internal BoringX509StoreCtxHandle (IntPtr handle)
-				: base ()
-			{
-				base.handle = handle;
-				this.dontFree = true;
-			}
+            internal BoringX509StoreCtxHandle(IntPtr handle)
+                : base()
+            {
+                base.handle = handle;
+                this.dontFree = true;
+            }
 #endif
 
             protected override bool ReleaseHandle()

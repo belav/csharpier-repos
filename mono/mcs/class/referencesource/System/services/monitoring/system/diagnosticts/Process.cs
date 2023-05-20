@@ -2620,7 +2620,9 @@ namespace System.Diagnostics
 #if !FEATURE_PAL
                 return StartWithShellExecuteEx(startInfo);
 #else
-                throw new InvalidOperationException(SR.GetString(SR.net_perm_invalid_val, "StartInfo.UseShellExecute", true));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.net_perm_invalid_val, "StartInfo.UseShellExecute", true)
+                );
 #endif // !FEATURE_PAL
             }
             else
@@ -2997,50 +2999,49 @@ namespace System.Diagnostics
                     else
                     {
 #endif // !FEATURE_PAL
-                        RuntimeHelpers.PrepareConstrainedRegions();
-                        try { }
-                        finally
-                        {
-                            retVal = NativeMethods.CreateProcess(
-                                null, // we don't need this since all the info is in commandLine
-                                commandLine, // pointer to the command line string
-                                null, // pointer to process security attributes, we don't need to inheriat the handle
-                                null, // pointer to thread security attributes
-                                true, // handle inheritance flag
-                                creationFlags, // creation flags
-                                environmentPtr, // pointer to new environment block
-                                workingDirectory, // pointer to current directory name
-                                startupInfo, // pointer to STARTUPINFO
-                                processInfo // pointer to PROCESS_INFORMATION
-                            );
-                            if (!retVal)
-                                errorCode = Marshal.GetLastWin32Error();
-                            if (
-                                processInfo.hProcess != (IntPtr)0
-                                && processInfo.hProcess
-                                    != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
-                            )
-                                procSH.InitialSetHandle(processInfo.hProcess);
-                            if (
-                                processInfo.hThread != (IntPtr)0
-                                && processInfo.hThread != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
-                            )
-                                threadSH.InitialSetHandle(processInfo.hThread);
-                        }
+                    RuntimeHelpers.PrepareConstrainedRegions();
+                    try { }
+                    finally
+                    {
+                        retVal = NativeMethods.CreateProcess(
+                            null, // we don't need this since all the info is in commandLine
+                            commandLine, // pointer to the command line string
+                            null, // pointer to process security attributes, we don't need to inheriat the handle
+                            null, // pointer to thread security attributes
+                            true, // handle inheritance flag
+                            creationFlags, // creation flags
+                            environmentPtr, // pointer to new environment block
+                            workingDirectory, // pointer to current directory name
+                            startupInfo, // pointer to STARTUPINFO
+                            processInfo // pointer to PROCESS_INFORMATION
+                        );
                         if (!retVal)
+                            errorCode = Marshal.GetLastWin32Error();
+                        if (
+                            processInfo.hProcess != (IntPtr)0
+                            && processInfo.hProcess != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
+                        )
+                            procSH.InitialSetHandle(processInfo.hProcess);
+                        if (
+                            processInfo.hThread != (IntPtr)0
+                            && processInfo.hThread != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
+                        )
+                            threadSH.InitialSetHandle(processInfo.hThread);
+                    }
+                    if (!retVal)
+                    {
+                        if (
+                            errorCode == NativeMethods.ERROR_BAD_EXE_FORMAT
+                            || errorCode == NativeMethods.ERROR_EXE_MACHINE_TYPE_MISMATCH
+                        )
                         {
-                            if (
-                                errorCode == NativeMethods.ERROR_BAD_EXE_FORMAT
-                                || errorCode == NativeMethods.ERROR_EXE_MACHINE_TYPE_MISMATCH
-                            )
-                            {
-                                throw new Win32Exception(
-                                    errorCode,
-                                    SR.GetString(SR.InvalidApplication)
-                                );
-                            }
-                            throw new Win32Exception(errorCode);
+                            throw new Win32Exception(
+                                errorCode,
+                                SR.GetString(SR.InvalidApplication)
+                            );
                         }
+                        throw new Win32Exception(errorCode);
+                    }
 #if !FEATURE_PAL
                     }
 #endif

@@ -26,9 +26,11 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(
+    options =>
 #if (UseLocalDB)
-    options.UseSqlServer(connectionString));
+        options.UseSqlServer(connectionString)
+);
 #else
         options.UseSqlite(connectionString));
 #endif
@@ -47,14 +49,14 @@ builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
-        .EnableTokenAcquisitionToCallDownstreamApi()
+    .EnableTokenAcquisitionToCallDownstreamApi()
 #if (GenerateApi)
             .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
 #endif
 #if (GenerateGraph)
             .AddMicrosoftGraph(builder.Configuration.GetSection("DownstreamApi"))
 #endif
-            .AddInMemoryTokenCaches();
+    .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 #endif
@@ -63,9 +65,9 @@ builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApi)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"))
-        .EnableTokenAcquisitionToCallDownstreamApi()
-            .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
-            .AddInMemoryTokenCaches();
+    .EnableTokenAcquisitionToCallDownstreamApi()
+    .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
+    .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"));
 #endif

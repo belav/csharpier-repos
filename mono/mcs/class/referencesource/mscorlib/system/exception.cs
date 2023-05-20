@@ -968,7 +968,7 @@ namespace System
         )
         {
 #if MONO
-            captured_traces = (StackTrace[]) exceptionDispatchInfo.BinaryStackTraceArray;
+            captured_traces = (StackTrace[])exceptionDispatchInfo.BinaryStackTraceArray;
             _stackTrace = null;
             _stackTraceString = null;
 #else

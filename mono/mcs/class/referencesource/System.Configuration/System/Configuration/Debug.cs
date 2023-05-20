@@ -952,7 +952,8 @@ A=Exit process R=Debug I=Continue";
         public static void TraceException(String tagName, Exception e)
         {
 #if DBG
-            if (TraceBreak(tagName, null, e, true)) {
+            if (TraceBreak(tagName, null, e, true))
+            {
                 Break();
             }
 #endif
@@ -1268,8 +1269,10 @@ A=Exit process R=Debug I=Continue";
 #if UNUSED_CODE
 
 #if DBG
-        static internal string ToStringMaybeNull(object o) {
-            if (o != null) {
+        static internal string ToStringMaybeNull(object o)
+        {
+            if (o != null)
+            {
                 return o.ToString();
             }
 

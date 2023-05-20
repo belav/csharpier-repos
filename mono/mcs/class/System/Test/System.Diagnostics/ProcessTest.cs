@@ -1074,7 +1074,7 @@ namespace MonoTests.System.Diagnostics
             {
                 string path;
 #if MONODROID
-				path = "/system/bin/ls";
+                path = "/system/bin/ls";
 #else
                 path = "/bin/ls";
 #endif
@@ -1090,7 +1090,7 @@ namespace MonoTests.System.Diagnostics
             {
                 string path;
 #if MONODROID
-				path = "/system/bin/cat";
+                path = "/system/bin/cat";
 #else
                 path = "/bin/cat";
 #endif

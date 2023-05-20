@@ -37,8 +37,8 @@ namespace Company.WebApplication1
             services.AddDbContext<ApplicationDbContext>(
                 options =>
 #if (UseLocalDB)
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
 #else
                     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );

@@ -97,7 +97,7 @@ namespace Mono.Btls
         public static bool HasStore(MonoBtlsX509StoreType type)
         {
 #if MONODROID
-			return false;
+            return false;
 #else
             var path = GetStorePath(type);
             return path != null && Directory.Exists(path);
@@ -107,7 +107,7 @@ namespace Mono.Btls
         public static string GetStorePath(MonoBtlsX509StoreType type)
         {
 #if MONODROID
-			throw new NotSupportedException ();
+            throw new NotSupportedException();
 #else
             Initialize();
             switch (type)

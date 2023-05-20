@@ -296,8 +296,8 @@ namespace Mono.Btls
             ctx = new MonoBtlsSslCtx();
 
 #if MARTIN_DEBUG
-			errbio = MonoBtlsBio.CreateMonoStream (Console.OpenStandardError ());
-			ctx.SetDebugBio (errbio);
+            errbio = MonoBtlsBio.CreateMonoStream(Console.OpenStandardError());
+            ctx.SetDebugBio(errbio);
 #endif
 
             MonoBtlsProvider.SetupCertificateStore(ctx.CertificateStore, Settings, IsServer);

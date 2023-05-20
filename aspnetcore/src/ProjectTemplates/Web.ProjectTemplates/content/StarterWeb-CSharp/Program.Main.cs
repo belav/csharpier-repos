@@ -49,7 +49,8 @@ public class Program
         builder.Services.AddDbContext<ApplicationDbContext>(
             options =>
 #if (UseLocalDB)
-            options.UseSqlServer(connectionString));
+                options.UseSqlServer(connectionString)
+        );
 #else
                 options.UseSqlite(connectionString)
         );
@@ -70,14 +71,14 @@ public class Program
             .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
-                .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+            .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
 #if (GenerateApi)
                     .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
 #endif
 #if (GenerateGraph)
                     .AddMicrosoftGraph(builder.Configuration.GetSection("DownstreamApi"))
 #endif
-                    .AddInMemoryTokenCaches();
+            .AddInMemoryTokenCaches();
 #else
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 #endif
@@ -90,9 +91,9 @@ public class Program
             .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApi)
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"))
-                .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
-                    .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
-                    .AddInMemoryTokenCaches();
+            .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+            .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
+            .AddInMemoryTokenCaches();
 #else
             .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"));
 #endif

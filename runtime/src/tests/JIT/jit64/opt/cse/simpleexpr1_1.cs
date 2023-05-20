@@ -78,11 +78,11 @@ namespace CseTest
             }
 #if LOOP
 #if KILL1
-				 c = return_int(false, -40);
+                    c = return_int(false, -40);
 #endif
                 }
 #if KILL2
-				 a = return_int(false, -27);
+                a = return_int(false, -27);
 #endif
             }
 #endif

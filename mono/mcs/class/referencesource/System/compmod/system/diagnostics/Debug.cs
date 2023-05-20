@@ -703,7 +703,7 @@ namespace System.Diagnostics
         [System.Diagnostics.Conditional("DEBUG")]
         public static void WriteLineIf(bool condition, string message)
         {
-            if(condition)
+            if (condition)
             {
                 WriteLine(message);
             }

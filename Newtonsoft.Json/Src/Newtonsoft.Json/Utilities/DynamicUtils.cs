@@ -162,7 +162,11 @@ namespace Newtonsoft.Json.Utilities
                     _getMemberCall(null, 0, name, context, _getCSharpArgumentInfoArray)!;
 #else
                 return Binder.GetMember(
-                    CSharpBinderFlags.None, name, context, new[] {CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)});
+                    CSharpBinderFlags.None,
+                    name,
+                    context,
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                );
 #endif
             }
 
@@ -176,11 +180,15 @@ namespace Newtonsoft.Json.Utilities
                     _setMemberCall(null, 0, name, context, _setCSharpArgumentInfoArray)!;
 #else
                 return Binder.SetMember(
-                    CSharpBinderFlags.None, name, context, new[]
-                                                               {
-                                                                   CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
-                                                                   CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
-                                                               });
+                    CSharpBinderFlags.None,
+                    name,
+                    context,
+                    new[]
+                    {
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+                    }
+                );
 #endif
             }
         }

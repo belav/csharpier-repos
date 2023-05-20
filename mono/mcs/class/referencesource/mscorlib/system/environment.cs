@@ -1382,10 +1382,9 @@ namespace System
         }
 
 #if FEATURE_COMINTEROP
-        internal static bool IsWinRTSupported {
-            get {
-                return true;
-            }
+        internal static bool IsWinRTSupported
+        {
+            get { return true; }
         }
 #endif // FEATURE_COMINTEROP
 

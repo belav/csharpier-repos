@@ -1074,7 +1074,7 @@ namespace System.Web.UI
             return sw.ToString().Length;
         }
 
-        #region Implementation of IStateFormatter
+#region Implementation of IStateFormatter
         object IStateFormatter.Deserialize(string serializedState)
         {
             return Deserialize(serializedState);
@@ -1086,7 +1086,7 @@ namespace System.Web.UI
             Serialize(writer, state);
             return writer.ToString();
         }
-        #endregion
+#endregion
     }
 }
 

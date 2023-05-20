@@ -77,7 +77,8 @@ namespace System.Reflection.Internal
 #if NETCOREAPP
         internal static int TryReadAll(this Stream stream, Span<byte> buffer)
 #if NET7_0_OR_GREATER
-            => stream.ReadAtLeast(buffer, buffer.Length, throwOnEndOfStream: false);
+            =>
+            stream.ReadAtLeast(buffer, buffer.Length, throwOnEndOfStream: false);
 #else
         {
             int totalBytesRead = 0;

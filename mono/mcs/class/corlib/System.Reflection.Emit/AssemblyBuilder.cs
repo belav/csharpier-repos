@@ -276,19 +276,19 @@ namespace System.Reflection.Emit
         //
         // AssemblyBuilder inherits from Assembly, but the runtime thinks its layout inherits from RuntimeAssembly
         //
-#region Sync with RuntimeAssembly.cs and ReflectionAssembly in object-internals.h
+        #region Sync with RuntimeAssembly.cs and ReflectionAssembly in object-internals.h
 #pragma warning disable 649
         internal IntPtr _mono_assembly;
 #pragma warning restore 649
 #if !MOBILE
         internal Evidence _evidence;
 #else
-		object _evidence;
+        object _evidence;
 #endif
-#endregion
+        #endregion
 
 #pragma warning disable 169, 414, 649
-#region Sync with object-internals.h
+        #region Sync with object-internals.h
         private UIntPtr dynamic_assembly; /* GC-tracked */
         private MethodInfo entry_point;
         private ModuleBuilder[] modules;
@@ -314,7 +314,7 @@ namespace System.Reflection.Emit
         bool corlib_internal;
         Type[] type_forwarders;
         byte[] pktoken;
-#endregion
+        #endregion
 #pragma warning restore 169, 414, 649
 
 #if !MOBILE
@@ -324,7 +324,11 @@ namespace System.Reflection.Emit
         internal PermissionSet _granted; // for the resolved assembly granted permissions
         internal PermissionSet _denied; // for the resolved assembly denied permissions
 #else
-		object _minimum, _optional, _refuse, _granted, _denied;
+        object _minimum,
+            _optional,
+            _refuse,
+            _granted,
+            _denied;
 #endif
         string assemblyName;
         internal Type corlib_object_type = typeof(System.Object);
@@ -1489,7 +1493,7 @@ namespace System.Reflection.Emit
         internal override Evidence UnprotectedGetEvidence()
         {
 #if MOBILE || DISABLE_SECURITY
-			return null;
+            return null;
 #else
             // if the host (runtime) hasn't provided it's own evidence...
             if (_evidence == null)

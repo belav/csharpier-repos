@@ -533,16 +533,22 @@ namespace System.IO
             )
         {
 #if FEATURE_LEGACYNETCF
-            if(CompatibilitySwitches.IsAppEarlierThanWindowsPhone8) {
-                System.Reflection.Assembly callingAssembly = System.Reflection.Assembly.GetCallingAssembly();
-                if(callingAssembly != null && !callingAssembly.IsProfileAssembly) {
+            if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
+            {
+                System.Reflection.Assembly callingAssembly =
+                    System.Reflection.Assembly.GetCallingAssembly();
+                if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
+                {
                     string caller = new System.Diagnostics.StackFrame(1).GetMethod().FullName;
                     string callee = System.Reflection.MethodBase.GetCurrentMethod().FullName;
-                    throw new MethodAccessException(String.Format(
-                        CultureInfo.CurrentCulture,
-                        Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
-                        caller,
-                        callee));
+                    throw new MethodAccessException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
+                            caller,
+                            callee
+                        )
+                    );
                 }
             }
 #endif // FEATURE_LEGACYNETCF
@@ -566,16 +572,22 @@ namespace System.IO
             )
         {
 #if FEATURE_LEGACYNETCF
-            if(CompatibilitySwitches.IsAppEarlierThanWindowsPhone8) {
-                System.Reflection.Assembly callingAssembly = System.Reflection.Assembly.GetCallingAssembly();
-                if(callingAssembly != null && !callingAssembly.IsProfileAssembly) {
+            if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
+            {
+                System.Reflection.Assembly callingAssembly =
+                    System.Reflection.Assembly.GetCallingAssembly();
+                if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
+                {
                     string caller = new System.Diagnostics.StackFrame(1).GetMethod().FullName;
                     string callee = System.Reflection.MethodBase.GetCurrentMethod().FullName;
-                    throw new MethodAccessException(String.Format(
-                        CultureInfo.CurrentCulture,
-                        Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
-                        caller,
-                        callee));
+                    throw new MethodAccessException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
+                            caller,
+                            callee
+                        )
+                    );
                 }
             }
 #endif // FEATURE_LEGACYNETCF
@@ -599,16 +611,22 @@ namespace System.IO
             )
         {
 #if FEATURE_LEGACYNETCF
-            if(CompatibilitySwitches.IsAppEarlierThanWindowsPhone8) {
-                System.Reflection.Assembly callingAssembly = System.Reflection.Assembly.GetCallingAssembly();
-                if(callingAssembly != null && !callingAssembly.IsProfileAssembly) {
+            if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
+            {
+                System.Reflection.Assembly callingAssembly =
+                    System.Reflection.Assembly.GetCallingAssembly();
+                if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
+                {
                     string caller = new System.Diagnostics.StackFrame(1).GetMethod().FullName;
                     string callee = System.Reflection.MethodBase.GetCurrentMethod().FullName;
-                    throw new MethodAccessException(String.Format(
-                        CultureInfo.CurrentCulture,
-                        Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
-                        caller,
-                        callee));
+                    throw new MethodAccessException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
+                            caller,
+                            callee
+                        )
+                    );
                 }
             }
 #endif // FEATURE_LEGACYNETCF

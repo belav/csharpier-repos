@@ -69,7 +69,6 @@ using System.Web.UI.DataVisualization.Charting.ChartTypes;
 
 #if WINFORMS_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting
-
 #else
 namespace System.Web.UI.DataVisualization.Charting
 #endif
@@ -80,17 +79,23 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     [SRDescription("DescriptionAttributeSubAxis_SubAxis"), DefaultProperty("Enabled"),
 #if WINFORMS_CONTROL
-	TypeConverter(typeof(SubAxis.SubAxisConverter)),
+        TypeConverter(typeof(SubAxis.SubAxisConverter)),
 #endif
 
     ]
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class SubAxis : Axis
     {
-#region Fields
+        #region Fields
 
         /// <summary>
         /// Sub-Axis parent axis object.
@@ -107,9 +112,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal double locationOffset = 0.0;
 
-#endregion // Fields
+        #endregion // Fields
 
-#region Constructor
+        #region Constructor
 
         /// <summary>
         /// Default constructor
@@ -130,9 +135,9 @@ namespace System.Web.UI.DataVisualization.Charting
             base.Name = name;
         }
 
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
 
         /// <summary>
         /// Axis automatic scale breaks style.
@@ -145,7 +150,7 @@ namespace System.Web.UI.DataVisualization.Charting
             TypeConverter(typeof(NoNameExpandableObjectConverter)),
             NotifyParentPropertyAttribute(true),
 #if WINFORMS_CONTROL
-		DesignerSerializationVisibility(DesignerSerializationVisibility.Content), 
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
 #else
             PersistenceMode(PersistenceMode.InnerProperty),
 #endif
@@ -331,9 +336,9 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return base.Name; }
         }
 
-#endregion // Properties
+        #endregion // Properties
 
-#region Methods
+        #region Methods
 
         /// <summary>
         /// Find axis position using crossing value.
@@ -371,57 +376,62 @@ namespace System.Web.UI.DataVisualization.Charting
             return 0.0;
         }
 
-#endregion // Methods
+        #endregion // Methods
 
-#region Type converter
+        #region Type converter
 
 #if WINFORMS_CONTROL
 
-		internal class SubAxisConverter : TypeConverter
-		{
-			/// <summary>
-			/// This method overrides CanConvertTo from TypeConverter. This is called when someone
-			/// wants to convert an instance of object to another type.  Here,
-			/// only conversion to an InstanceDescriptor is supported.
-			/// </summary>
-			/// <param name="context">Descriptor context.</param>
-			/// <param name="destinationType">Destination type.</param>
-			/// <returns>True if object can be converted.</returns>
-			public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-			{
-				if (destinationType == typeof(InstanceDescriptor))
-				{
-					return true;
-				}
+        internal class SubAxisConverter : TypeConverter
+        {
+            /// <summary>
+            /// This method overrides CanConvertTo from TypeConverter. This is called when someone
+            /// wants to convert an instance of object to another type.  Here,
+            /// only conversion to an InstanceDescriptor is supported.
+            /// </summary>
+            /// <param name="context">Descriptor context.</param>
+            /// <param name="destinationType">Destination type.</param>
+            /// <returns>True if object can be converted.</returns>
+            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+            {
+                if (destinationType == typeof(InstanceDescriptor))
+                {
+                    return true;
+                }
 
-				// Always call the base to see if it can perform the conversion.
-				return base.CanConvertTo(context, destinationType);
-			}
+                // Always call the base to see if it can perform the conversion.
+                return base.CanConvertTo(context, destinationType);
+            }
 
-			/// <summary>
-			/// This code performs the actual conversion from an object to an InstanceDescriptor.
-			/// </summary>
-			/// <param name="context">Descriptor context.</param>
-			/// <param name="culture">Culture information.</param>
-			/// <param name="value">Object value.</param>
-			/// <param name="destinationType">Destination type.</param>
-			/// <returns>Converted object.</returns>
-			public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-			{
-				if (destinationType == typeof(InstanceDescriptor))
-				{
-					ConstructorInfo ci = typeof(SubAxis).GetConstructor(System.Type.EmptyTypes);
-					return new InstanceDescriptor(ci, null, false);
-				}
+            /// <summary>
+            /// This code performs the actual conversion from an object to an InstanceDescriptor.
+            /// </summary>
+            /// <param name="context">Descriptor context.</param>
+            /// <param name="culture">Culture information.</param>
+            /// <param name="value">Object value.</param>
+            /// <param name="destinationType">Destination type.</param>
+            /// <returns>Converted object.</returns>
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            )
+            {
+                if (destinationType == typeof(InstanceDescriptor))
+                {
+                    ConstructorInfo ci = typeof(SubAxis).GetConstructor(System.Type.EmptyTypes);
+                    return new InstanceDescriptor(ci, null, false);
+                }
 
-				// Always call base, even if you can't convert.
-				return base.ConvertTo(context, culture, value, destinationType);
-			}
-		}
+                // Always call base, even if you can't convert.
+                return base.ConvertTo(context, culture, value, destinationType);
+            }
+        }
 
 #endif //#if WINFORMS_CONTROL
 
-#endregion
+        #endregion
     }
 
     /// <summary>
@@ -430,21 +440,27 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     [SRDescription("DescriptionAttributeSubAxisCollection_SubAxisCollection"),]
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class SubAxisCollection : CollectionBase
     {
-#region Fields
+        #region Fields
 
         /// <summary>
         /// Sub-Axis parent axis object.
         /// </summary>
         internal Axis parentAxis = null;
 
-#endregion
+        #endregion
 
-#region Construction and Initialization
+        #region Construction and Initialization
 
         /// <summary>
         /// Default public constructor.
@@ -471,9 +487,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.parentAxis = parentAxis;
         }
 
-#endregion
+        #endregion
 
-#region Indexer
+        #region Indexer
 
         /// <summary>
         /// SubAxis collection indexer.
@@ -576,9 +592,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-#endregion
+        #endregion
 
-#region Collection Add and Insert methods
+        #region Collection Add and Insert methods
 
         /// <summary>
         /// Removes the SubAxis with the specified name from the collection.
@@ -637,9 +653,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.List.Insert(index, SubAxis);
         }
 
-#endregion
+        #endregion
 
-#region Items Inserting and Removing Notification methods
+        #region Items Inserting and Removing Notification methods
 
         /// <summary>
         /// Called before the new item is inserted.
@@ -720,9 +736,9 @@ namespace System.Web.UI.DataVisualization.Charting
             this.Invalidate();
         }
 
-#endregion
+        #endregion
 
-#region Helper Methods
+        #region Helper Methods
 
         /// <summary>
         /// Invalidates chart the collection belongs to.
@@ -730,11 +746,11 @@ namespace System.Web.UI.DataVisualization.Charting
         private void Invalidate()
         {
 #if WINFORMS_CONTROL
-			if(this.parentAxis != null && this.parentAxis.chart != null)
-			{
-				this.parentAxis.chart.dirtyFlag = true;
-				this.parentAxis.chart.Invalidate();
-			}
+            if (this.parentAxis != null && this.parentAxis.chart != null)
+            {
+                this.parentAxis.chart.dirtyFlag = true;
+                this.parentAxis.chart.Invalidate();
+            }
 #endif
         }
 
@@ -785,7 +801,7 @@ namespace System.Web.UI.DataVisualization.Charting
             return result;
         }
 
-#endregion
+        #endregion
     }
 }
 

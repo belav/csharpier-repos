@@ -1585,7 +1585,10 @@ namespace System.Resources
                     {
 #if _DEBUG
                         if (ResourceManager.DEBUG >= 7)
-                            Console.WriteLine("ResReader: Found a type-safe type to deserialize!  Type name: {0}", typeName);
+                            Console.WriteLine(
+                                "ResReader: Found a type-safe type to deserialize!  Type name: {0}",
+                                typeName
+                            );
 #endif
                         _safeToDeserialize[i] = true;
                         continue;
@@ -1595,7 +1598,10 @@ namespace System.Resources
 #if _DEBUG
                 if (ResourceManager.DEBUG >= 7)
                     if (!_safeToDeserialize[i])
-                        Console.WriteLine("ResReader: Found a type that wasn't safe to deserialize: {0}", typeName);
+                        Console.WriteLine(
+                            "ResReader: Found a type that wasn't safe to deserialize: {0}",
+                            typeName
+                        );
 #endif
             }
         }

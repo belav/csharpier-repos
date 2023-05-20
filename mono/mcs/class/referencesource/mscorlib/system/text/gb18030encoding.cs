@@ -146,12 +146,12 @@ namespace System.Text
 
 #if FEATURE_SERIALIZATION
         // ISerializable implementation
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             // Make sure to get teh base stuff too This throws if info is null
             SerializeEncoding(info, context);
-            Contract.Assert(info!=null, "[GB18030.GetObjectData] Expected null info to throw");
+            Contract.Assert(info != null, "[GB18030.GetObjectData] Expected null info to throw");
 
             // Everett doesn't need more than the basics
         }
@@ -977,11 +977,12 @@ namespace System.Text
 
 #if FEATURE_SERIALIZATION
             // ISerializable implementation, get data for this object
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {
                 // Any info?
-                if (info==null) throw new ArgumentNullException("info");
+                if (info == null)
+                    throw new ArgumentNullException("info");
                 Contract.EndContractBlock();
 
                 // Save Whidbey data

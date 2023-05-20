@@ -221,15 +221,22 @@ namespace System.Security
         }
 
 #if _DEBUG
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         private static void GetTokenHelper(String typeStr)
         {
             new PermissionSet(PermissionState.Unrestricted).Assert();
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            Type type = RuntimeTypeHandle.GetTypeByName( typeStr.Trim().Replace( '\'', '\"' ), ref stackMark);
-            Contract.Assert( (type == null) || (type.Module.Assembly != System.Reflection.Assembly.GetExecutingAssembly()) || (typeStr.IndexOf("mscorlib", StringComparison.Ordinal) < 0),
-                "We should not go through this path for mscorlib based permissions" );
+            Type type = RuntimeTypeHandle.GetTypeByName(
+                typeStr.Trim().Replace('\'', '\"'),
+                ref stackMark
+            );
+            Contract.Assert(
+                (type == null)
+                    || (type.Module.Assembly != System.Reflection.Assembly.GetExecutingAssembly())
+                    || (typeStr.IndexOf("mscorlib", StringComparison.Ordinal) < 0),
+                "We should not go through this path for mscorlib based permissions"
+            );
         }
 #endif
 

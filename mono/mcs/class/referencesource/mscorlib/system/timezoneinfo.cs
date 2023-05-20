@@ -1241,8 +1241,8 @@ namespace System
                         RegistryKey reg = Registry.LocalMachine.OpenSubKey(
                             c_timeZonesRegistryHive,
 #if FEATURE_MACL
-                                        RegistryKeyPermissionCheck.Default,
-                                        System.Security.AccessControl.RegistryRights.ReadKey
+                            RegistryKeyPermissionCheck.Default,
+                            System.Security.AccessControl.RegistryRights.ReadKey
 #else
                             false
 #endif
@@ -1855,8 +1855,8 @@ namespace System
                     RegistryKey key = Registry.LocalMachine.OpenSubKey(
                         c_timeZonesRegistryHive,
 #if FEATURE_MACL
-                                  RegistryKeyPermissionCheck.Default,
-                                  System.Security.AccessControl.RegistryRights.ReadKey
+                        RegistryKeyPermissionCheck.Default,
+                        System.Security.AccessControl.RegistryRights.ReadKey
 #else
                         false
 #endif
@@ -3027,8 +3027,8 @@ namespace System
                             id
                         ),
 #if FEATURE_MACL
-                                   RegistryKeyPermissionCheck.Default,
-                                   System.Security.AccessControl.RegistryRights.ReadKey
+                        RegistryKeyPermissionCheck.Default,
+                        System.Security.AccessControl.RegistryRights.ReadKey
 #else
                         false
 #endif
@@ -3271,8 +3271,8 @@ namespace System
                             id
                         ),
 #if FEATURE_MACL
-                                  RegistryKeyPermissionCheck.Default,
-                                  System.Security.AccessControl.RegistryRights.ReadKey
+                        RegistryKeyPermissionCheck.Default,
+                        System.Security.AccessControl.RegistryRights.ReadKey
 #else
                         false
 #endif
@@ -3651,8 +3651,8 @@ namespace System
                             id
                         ),
 #if FEATURE_MACL
-                                  RegistryKeyPermissionCheck.Default,
-                                  System.Security.AccessControl.RegistryRights.ReadKey
+                        RegistryKeyPermissionCheck.Default,
+                        System.Security.AccessControl.RegistryRights.ReadKey
 #else
                         false
 #endif

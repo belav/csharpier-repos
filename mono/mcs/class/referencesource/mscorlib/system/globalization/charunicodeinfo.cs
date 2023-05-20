@@ -366,7 +366,8 @@ namespace System.Globalization
             // To get around the IA64 alignment issue.  Our double data is aligned in 8-byte boundary, but loader loads the embeded table starting
             // at 4-byte boundary.  This cause a alignment issue since double is 8-byte.
             byte* pSourcePtr = &(s_pNumericValues[pBytePtr[(ch & 0x000f)] * sizeof(double)]);
-            if (((long)pSourcePtr % 8) != 0) {
+            if (((long)pSourcePtr % 8) != 0)
+            {
                 // We are not aligned in 8-byte boundary.  Do a copy.
                 double ret;
                 byte* retPtr = (byte*)&ret;
@@ -538,7 +539,8 @@ namespace System.Globalization
         }
 
 #if MONO
-        public static UnicodeCategory GetUnicodeCategory(int codePoint) => GetUnicodeCategory((char)codePoint);
+        public static UnicodeCategory GetUnicodeCategory(int codePoint) =>
+            GetUnicodeCategory((char)codePoint);
 #endif
 
         public static UnicodeCategory GetUnicodeCategory(String s, int index)

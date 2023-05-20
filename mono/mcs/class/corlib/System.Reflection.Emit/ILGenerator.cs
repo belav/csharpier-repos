@@ -56,11 +56,18 @@ namespace System.Reflection.Emit
         internal void Debug()
         {
 #if NO
-			System.Console.Write ("\ttype="+type.ToString()+" start="+start.ToString()+" len="+len.ToString());
-			if (extype != null)
-				System.Console.WriteLine (" extype="+extype.ToString());
-			else
-				System.Console.WriteLine (String.Empty);
+            System.Console.Write(
+                "\ttype="
+                    + type.ToString()
+                    + " start="
+                    + start.ToString()
+                    + " len="
+                    + len.ToString()
+            );
+            if (extype != null)
+                System.Console.WriteLine(" extype=" + extype.ToString());
+            else
+                System.Console.WriteLine(String.Empty);
 #endif
         }
     }
@@ -154,9 +161,9 @@ namespace System.Reflection.Emit
         internal void Debug(int b)
         {
 #if NO
-			System.Console.WriteLine ("Handler {0} at {1}, len: {2}", b, start, len);
-			for (int i = 0; i < handlers.Length; ++i)
-				handlers [i].Debug ();
+            System.Console.WriteLine("Handler {0} at {1}, len: {2}", b, start, len);
+            for (int i = 0; i < handlers.Length; ++i)
+                handlers[i].Debug();
 #endif
         }
 
@@ -259,7 +266,7 @@ namespace System.Reflection.Emit
             public int maxStack;
         }
 
-#region Sync with reflection.h
+        #region Sync with reflection.h
         private byte[] code;
         private int code_len;
         private int max_stack;
@@ -268,7 +275,7 @@ namespace System.Reflection.Emit
         private ILExceptionInfo[] ex_handlers;
         private int num_token_fixups;
         private ILTokenInfo[] token_fixups;
-#endregion
+        #endregion
 
         private LabelData[] labels;
         private int num_labels;

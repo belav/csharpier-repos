@@ -91,9 +91,9 @@ namespace System.Reflection.Emit
     public partial class ModuleBuilder : Module
     {
 #pragma warning disable 169, 414
-#region Sync with object-internals.h
+        #region Sync with object-internals.h
         // This class inherits from Module, but the runtime expects it to have the same layout as MonoModule
-#region Sync with MonoModule
+        #region Sync with MonoModule
         internal IntPtr _impl; /* a pointer to a MonoImage */
         internal Assembly assembly;
         internal string fqname;
@@ -101,7 +101,7 @@ namespace System.Reflection.Emit
         internal string scopename;
         internal bool is_resource;
         internal int token;
-#endregion
+        #endregion
         private UIntPtr dynamic_image; /* GC-tracked */
         private int num_types;
         private TypeBuilder[] types;
@@ -115,7 +115,7 @@ namespace System.Reflection.Emit
         private MonoResource[] resources;
         private IntPtr unparented_classes;
         private int[] table_indexes;
-#endregion
+        #endregion
 #pragma warning restore 169, 414
 
         private TypeBuilder global_type;

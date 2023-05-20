@@ -29,14 +29,14 @@ public class Program
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))
-                .EnableTokenAcquisitionToCallDownstreamApi()
+            .EnableTokenAcquisitionToCallDownstreamApi()
 #if (GenerateApi)
                     .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
 #endif
 #if (GenerateGraph)
                     .AddMicrosoftGraph(builder.Configuration.GetSection("DownstreamApi"))
 #endif
-                    .AddInMemoryTokenCaches();
+            .AddInMemoryTokenCaches();
 #else
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 #endif
@@ -45,9 +45,9 @@ public class Program
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApi)
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"))
-                .EnableTokenAcquisitionToCallDownstreamApi()
-                    .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
-                    .AddInMemoryTokenCaches();
+            .EnableTokenAcquisitionToCallDownstreamApi()
+            .AddDownstreamWebApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
+            .AddInMemoryTokenCaches();
 #else
             .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAdB2C"));
 #endif
@@ -111,58 +111,32 @@ public class Program
         };
 
 #if (GenerateApi)
-        app.MapGet("/weatherforecast", async (HttpContext httpContext, IDownstreamWebApi downstreamWebApi) =>
-        {
-            httpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
-
-            using var response = await downstreamWebApi.CallWebApiForUserAsync("DownstreamApi").ConfigureAwait(false);
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                var apiResult = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                // Do something
-            }
-            else
-            {
-                var error = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                throw new HttpRequestException($"Invalid status code in the HttpResponseMessage: {response.StatusCode}: {error}");
-            }
-
-            var forecast =  Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                {
-                    Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    TemperatureC = Random.Shared.Next(-20, 55),
-                    Summary = summaries[Random.Shared.Next(summaries.Length)]
-                })
-                .ToArray();
-
-            return forecast;
-#elif (GenerateGraph)
-        app.MapGet("/weatherforecast", async (HttpContext httpContext, Graph.GraphServiceClient graphServiceClient) =>
-        {
-            httpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
-
-            var user = await graphServiceClient.Me.Request().GetAsync();
-
-            var forecast =  Enumerable.Range(1, 5).Select(index =>
-                new WeatherForecast
-                {
-                    Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                    TemperatureC = Random.Shared.Next(-20, 55),
-                    Summary = summaries[Random.Shared.Next(summaries.Length)]
-                })
-                .ToArray();
-
-            return forecast;
-#else
         app.MapGet(
                 "/weatherforecast",
-                (HttpContext httpContext) =>
+                async (HttpContext httpContext, IDownstreamWebApi downstreamWebApi) =>
                 {
-#if (OrganizationalAuth || IndividualB2CAuth)
-            httpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
+                    httpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
 
-#endif
+                    using var response = await downstreamWebApi
+                        .CallWebApiForUserAsync("DownstreamApi")
+                        .ConfigureAwait(false);
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        var apiResult = await response.Content
+                            .ReadAsStringAsync()
+                            .ConfigureAwait(false);
+                        // Do something
+                    }
+                    else
+                    {
+                        var error = await response.Content
+                            .ReadAsStringAsync()
+                            .ConfigureAwait(false);
+                        throw new HttpRequestException(
+                            $"Invalid status code in the HttpResponseMessage: {response.StatusCode}: {error}"
+                        );
+                    }
+
                     var forecast = Enumerable
                         .Range(1, 5)
                         .Select(
@@ -175,23 +149,72 @@ public class Program
                                 }
                         )
                         .ToArray();
+
                     return forecast;
+#elif (GenerateGraph)
+        app.MapGet(
+                "/weatherforecast",
+                async (HttpContext httpContext, Graph.GraphServiceClient graphServiceClient) =>
+                {
+                    httpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
+
+                    var user = await graphServiceClient.Me.Request().GetAsync();
+
+                    var forecast = Enumerable
+                        .Range(1, 5)
+                        .Select(
+                            index =>
+                                new WeatherForecast
+                                {
+                                    Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                                    TemperatureC = Random.Shared.Next(-20, 55),
+                                    Summary = summaries[Random.Shared.Next(summaries.Length)]
+                                }
+                        )
+                        .ToArray();
+
+                    return forecast;
+#else
+        app.MapGet(
+            "/weatherforecast",
+            (HttpContext httpContext) =>
+            {
+#if (OrganizationalAuth || IndividualB2CAuth)
+                    httpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
+
+#endif
+                var forecast = Enumerable
+                    .Range(1, 5)
+                    .Select(
+                        index =>
+                            new WeatherForecast
+                            {
+                                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                                TemperatureC = Random.Shared.Next(-20, 55),
+                                Summary = summaries[Random.Shared.Next(summaries.Length)]
+                            }
+                    )
+                    .ToArray();
+                return forecast;
 #endif
 #if (EnableOpenAPI && !NoAuth)
-        })
-        .WithName("GetWeatherForecast")
-        .WithOpenApi()
-        .RequireAuthorization();
+                }
+            )
+            .WithName("GetWeatherForecast")
+            .WithOpenApi()
+            .RequireAuthorization();
 #elif (EnableOpenAPI && NoAuth)
-        })
-        .WithName("GetWeatherForecast")
-        .WithOpenApi();
+                }
+            )
+            .WithName("GetWeatherForecast")
+            .WithOpenApi();
 #elif (!EnableOpenAPI && !NoAuth)
                 }
             )
             .RequireAuthorization();
 #else
-        });
+            }
+        );
 #endif
 #endif
 #if (UseControllers)

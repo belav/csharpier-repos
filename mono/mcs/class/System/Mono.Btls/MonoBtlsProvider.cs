@@ -398,10 +398,10 @@ namespace Mono.Btls
              */
 
 #if MONODROID
-			AddTrustedRoots (store, settings, server);
-			if (!server)
-				SetupDefaultCertificateStore (store);
-			return;
+            AddTrustedRoots(store, settings, server);
+            if (!server)
+                SetupDefaultCertificateStore(store);
+            return;
 #else
             if (server || settings?.CertificateSearchPaths == null)
             {
@@ -458,8 +458,8 @@ namespace Mono.Btls
         static void SetupDefaultCertificateStore(MonoBtlsX509Store store)
         {
 #if MONODROID
-			store.SetDefaultPaths ();
-			store.AddAndroidLookup ();
+            store.SetDefaultPaths();
+            store.AddAndroidLookup();
 #else
             AddUserStore(store);
             AddMachineStore(store);
@@ -499,7 +499,7 @@ namespace Mono.Btls
         public static string GetSystemStoreLocation()
         {
 #if MONODROID
-			return "/system/etc/security/cacerts";
+            return "/system/etc/security/cacerts";
 #else
             return MonoBtlsX509StoreManager.GetStorePath(MonoBtlsX509StoreType.MachineTrustedRoots);
 #endif

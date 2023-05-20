@@ -475,12 +475,15 @@ namespace System.Collections.Generic
 #if FEATURE_CORECLR
             // In case we hit the collision threshold we'll need to switch to the comparer which is using randomized string hashing
             // in this case will be EqualityComparer<string>.Default.
-            // Note, randomized string hashing is turned on by default on coreclr so EqualityComparer<string>.Default will 
+            // Note, randomized string hashing is turned on by default on coreclr so EqualityComparer<string>.Default will
             // be using randomized string hashing
 
-            if (collisionCount > HashHelpers.HashCollisionThreshold && comparer == NonRandomizedStringEqualityComparer.Default) 
+            if (
+                collisionCount > HashHelpers.HashCollisionThreshold
+                && comparer == NonRandomizedStringEqualityComparer.Default
+            )
             {
-                comparer = (IEqualityComparer<TKey>) EqualityComparer<string>.Default;
+                comparer = (IEqualityComparer<TKey>)EqualityComparer<string>.Default;
                 Resize(entries.Length, true);
             }
 #else

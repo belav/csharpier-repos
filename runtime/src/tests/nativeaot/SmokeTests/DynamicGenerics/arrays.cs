@@ -265,10 +265,18 @@ namespace ArrayTests
             );
 
 #if INTERNAL_CONTRACTS
-            Assert.IsTrue(RuntimeAugments.IsDynamicType(typeofSetArrayValGenStructOfString.TypeHandle));
-            Assert.IsTrue(RuntimeAugments.IsDynamicType(typeofSetArrayValGenStructOfShort.TypeHandle));
-            Assert.IsTrue(RuntimeAugments.IsDynamicType(typeofSetArrayValGenClassOfString.TypeHandle));
-            Assert.IsTrue(RuntimeAugments.IsDynamicType(typeofSetArrayValGenClassOfShort.TypeHandle));
+            Assert.IsTrue(
+                RuntimeAugments.IsDynamicType(typeofSetArrayValGenStructOfString.TypeHandle)
+            );
+            Assert.IsTrue(
+                RuntimeAugments.IsDynamicType(typeofSetArrayValGenStructOfShort.TypeHandle)
+            );
+            Assert.IsTrue(
+                RuntimeAugments.IsDynamicType(typeofSetArrayValGenClassOfString.TypeHandle)
+            );
+            Assert.IsTrue(
+                RuntimeAugments.IsDynamicType(typeofSetArrayValGenClassOfShort.TypeHandle)
+            );
 #endif
 
             Array array_GS_String = Array.CreateInstance(typeofGenStructOfString, 1);

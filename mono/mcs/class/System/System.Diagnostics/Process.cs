@@ -968,7 +968,7 @@ namespace System.Diagnostics
                 MonoIO.Close(stdin_read, out error);
 
 #if MOBILE
-				var stdinEncoding = startInfo.StandardInputEncoding ?? Encoding.Default;
+                var stdinEncoding = startInfo.StandardInputEncoding ?? Encoding.Default;
 #else
                 var stdinEncoding = startInfo.StandardInputEncoding ?? Console.InputEncoding;
 #endif

@@ -732,7 +732,7 @@ namespace System.Xml.Schema
                 // This code is copied from method:
                 // Remove(XmlSchema schema, bool forceCompile)
                 // If you changed anything here go and change the same in Remove(XmlSchema schema, bool forceCompile) method
-                #region Copied from Remove(XmlSchema schema, bool forceCompile)
+    #region Copied from Remove(XmlSchema schema, bool forceCompile)
 
                 RemoveSchemaFromGlobalTables(schema);
                 RemoveSchemaFromCaches(schema);
@@ -747,13 +747,13 @@ namespace System.Xml.Schema
                 }
                 isCompiled = false;
                 compileAll = true; //Force compilation of the whole set; This is when the set is not completely thread-safe
-                #endregion //Copied from Remove(XmlSchema schema, bool forceCompile)
+    #endregion //Copied from Remove(XmlSchema schema, bool forceCompile)
 
 
                 // This code is copied from method:
                 // Add(string targetNamespace, XmlSchema schema)
                 // If you changed anything here go and change the same in Add(string targetNamespace, XmlSchema schema) method
-                #region Copied from Add(string targetNamespace, XmlSchema schema)
+    #region Copied from Add(string targetNamespace, XmlSchema schema)
 
                 if (schema.ErrorCount != 0)
                 { //Schema with parsing errors cannot be loaded
@@ -764,7 +764,7 @@ namespace System.Xml.Schema
                     // This code is copied from method:
                     // AddSchemaToSet(XmlSchema schema)
                     // If you changed anything here go and change the same in AddSchemaToSet(XmlSchema schema) method
-                    #region Copied from AddSchemaToSet(XmlSchema schema)
+    #region Copied from AddSchemaToSet(XmlSchema schema)
 
                     //Add to targetNamespaces table
                     if (targetNamespaces[tns] == null)
@@ -800,10 +800,10 @@ namespace System.Xml.Schema
                             schemaForSchema = schema;
                         }
                     }
-                    #endregion //Copied from AddSchemaToSet(XmlSchema schema)
+    #endregion //Copied from AddSchemaToSet(XmlSchema schema)
                     return schema;
                 }
-                #endregion // Copied from Add(string targetNamespace, XmlSchema schema)
+    #endregion // Copied from Add(string targetNamespace, XmlSchema schema)
 
                 return originalSchema;
             }
@@ -1132,7 +1132,7 @@ namespace System.Xml.Schema
             // This code is copied to method:
             // Reprocess(XmlSchema schema)
             // If you changed anything here go and change the same in Reprocess(XmlSchema schema) method
-            #region This code is copied to Reprocess(XmlSchema schema) method
+    #region This code is copied to Reprocess(XmlSchema schema) method
 
             string tns = GetTargetNamespace(schema);
             if (targetNamespaces[tns] == null)
@@ -1169,7 +1169,7 @@ namespace System.Xml.Schema
                 }
             }
 
-            #endregion // This code is copied to Reprocess(XmlSchema schema) method
+    #endregion // This code is copied to Reprocess(XmlSchema schema) method
         }
 
         private void ProcessNewSubstitutionGroups(
@@ -1265,7 +1265,7 @@ namespace System.Xml.Schema
                     // This code is copied to method:
                     // Reprocess(XmlSchema schema)
                     // If you changed anything here go and change the same in Reprocess(XmlSchema schema) method
-                    #region This code is copied to Reprocess(XmlSchema schema) method
+    #region This code is copied to Reprocess(XmlSchema schema) method
 
                     if (forceCompile)
                     {
@@ -1289,7 +1289,7 @@ namespace System.Xml.Schema
                     }
                     return schema;
 
-                    #endregion // This code is copied to Reprocess(XmlSchema schema) method
+    #endregion // This code is copied to Reprocess(XmlSchema schema) method
                 }
             }
             return null;

@@ -76,14 +76,33 @@ namespace Newtonsoft.Json.Serialization
                 // add this check for unit tests
                 if (value == null)
                 {
-                    if (!ReflectionUtils.IsNullable(ReflectionUtils.GetMemberUnderlyingType(_memberInfo)))
+                    if (
+                        !ReflectionUtils.IsNullable(
+                            ReflectionUtils.GetMemberUnderlyingType(_memberInfo)
+                        )
+                    )
                     {
-                        throw new JsonSerializationException("Incompatible value. Cannot set {0} to null.".FormatWith(CultureInfo.InvariantCulture, _memberInfo));
+                        throw new JsonSerializationException(
+                            "Incompatible value. Cannot set {0} to null.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                _memberInfo
+                            )
+                        );
                     }
                 }
-                else if (!ReflectionUtils.GetMemberUnderlyingType(_memberInfo).IsAssignableFrom(value.GetType()))
+                else if (
+                    !ReflectionUtils
+                        .GetMemberUnderlyingType(_memberInfo)
+                        .IsAssignableFrom(value.GetType())
+                )
                 {
-                    throw new JsonSerializationException("Incompatible value. Cannot set {0} to type {1}.".FormatWith(CultureInfo.InvariantCulture, _memberInfo, value.GetType()));
+                    throw new JsonSerializationException(
+                        "Incompatible value. Cannot set {0} to type {1}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            _memberInfo,
+                            value.GetType()
+                        )
+                    );
                 }
 #endif
 

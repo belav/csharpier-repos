@@ -1116,53 +1116,51 @@ namespace System.Data.Linq.SqlClient
                     stackDepth++;
                     System.Diagnostics.Debug.Assert(stackDepth < 500);
 #endif
-                    switch (node.NodeType)
-                    {
-                        case SqlNodeType.New:
-                            return this.GenerateNew((SqlNew)node);
-                        case SqlNodeType.ColumnRef:
-                            return this.GenerateColumnReference((SqlColumnRef)node);
-                        case SqlNodeType.ClientQuery:
-                            return this.GenerateClientQuery((SqlClientQuery)node, locInstance);
-                        case SqlNodeType.JoinedCollection:
-                            return this.GenerateJoinedCollection((SqlJoinedCollection)node);
-                        case SqlNodeType.Link:
-                            return this.GenerateLink((SqlLink)node, locInstance);
-                        case SqlNodeType.Value:
-                            return this.GenerateValue((SqlValue)node);
-                        case SqlNodeType.ClientParameter:
-                            return this.GenerateClientParameter((SqlClientParameter)node);
-                        case SqlNodeType.ValueOf:
-                            return this.GenerateValueOf((SqlUnary)node);
-                        case SqlNodeType.OptionalValue:
-                            return this.GenerateOptionalValue((SqlOptionalValue)node);
-                        case SqlNodeType.OuterJoinedValue:
-                            return this.Generate(((SqlUnary)node).Operand);
-                        case SqlNodeType.Lift:
-                            return this.GenerateLift((SqlLift)node);
-                        case SqlNodeType.Grouping:
-                            return this.GenerateGrouping((SqlGrouping)node);
-                        case SqlNodeType.ClientArray:
-                            return this.GenerateClientArray((SqlClientArray)node);
-                        case SqlNodeType.UserColumn:
-                            return this.GenerateUserColumn((SqlUserColumn)node);
-                        case SqlNodeType.ClientCase:
-                            return this.GenerateClientCase((SqlClientCase)node, false, locInstance);
-                        case SqlNodeType.SearchedCase:
-                            return this.GenerateSearchedCase((SqlSearchedCase)node);
-                        case SqlNodeType.TypeCase:
-                            return this.GenerateTypeCase((SqlTypeCase)node);
-                        case SqlNodeType.DiscriminatedType:
-                            return this.GenerateDiscriminatedType((SqlDiscriminatedType)node);
-                        case SqlNodeType.Member:
-                            return this.GenerateMember((SqlMember)node);
-                        case SqlNodeType.MethodCall:
-                            return this.GenerateMethodCall((SqlMethodCall)node);
-                        default:
-                            throw Error.CouldNotTranslateExpressionForReading(
-                                node.SourceExpression
-                            );
-                    }
+                switch (node.NodeType)
+                {
+                    case SqlNodeType.New:
+                        return this.GenerateNew((SqlNew)node);
+                    case SqlNodeType.ColumnRef:
+                        return this.GenerateColumnReference((SqlColumnRef)node);
+                    case SqlNodeType.ClientQuery:
+                        return this.GenerateClientQuery((SqlClientQuery)node, locInstance);
+                    case SqlNodeType.JoinedCollection:
+                        return this.GenerateJoinedCollection((SqlJoinedCollection)node);
+                    case SqlNodeType.Link:
+                        return this.GenerateLink((SqlLink)node, locInstance);
+                    case SqlNodeType.Value:
+                        return this.GenerateValue((SqlValue)node);
+                    case SqlNodeType.ClientParameter:
+                        return this.GenerateClientParameter((SqlClientParameter)node);
+                    case SqlNodeType.ValueOf:
+                        return this.GenerateValueOf((SqlUnary)node);
+                    case SqlNodeType.OptionalValue:
+                        return this.GenerateOptionalValue((SqlOptionalValue)node);
+                    case SqlNodeType.OuterJoinedValue:
+                        return this.Generate(((SqlUnary)node).Operand);
+                    case SqlNodeType.Lift:
+                        return this.GenerateLift((SqlLift)node);
+                    case SqlNodeType.Grouping:
+                        return this.GenerateGrouping((SqlGrouping)node);
+                    case SqlNodeType.ClientArray:
+                        return this.GenerateClientArray((SqlClientArray)node);
+                    case SqlNodeType.UserColumn:
+                        return this.GenerateUserColumn((SqlUserColumn)node);
+                    case SqlNodeType.ClientCase:
+                        return this.GenerateClientCase((SqlClientCase)node, false, locInstance);
+                    case SqlNodeType.SearchedCase:
+                        return this.GenerateSearchedCase((SqlSearchedCase)node);
+                    case SqlNodeType.TypeCase:
+                        return this.GenerateTypeCase((SqlTypeCase)node);
+                    case SqlNodeType.DiscriminatedType:
+                        return this.GenerateDiscriminatedType((SqlDiscriminatedType)node);
+                    case SqlNodeType.Member:
+                        return this.GenerateMember((SqlMember)node);
+                    case SqlNodeType.MethodCall:
+                        return this.GenerateMethodCall((SqlMethodCall)node);
+                    default:
+                        throw Error.CouldNotTranslateExpressionForReading(node.SourceExpression);
+                }
 #if DEBUG
                 }
                 finally
@@ -3673,7 +3671,8 @@ namespace System.Data.Linq.SqlClient
             public void Dispose()
             {
 #if PERFORMANCE_BUILD
-                if (this.CollectQueryPerf) {
+                if (this.CollectQueryPerf)
+                {
                     timer.Stop();
                     started = false;
                     pcSqlQueryEnumGetCurrent.IncrementBy(timer.Duration);
@@ -3693,8 +3692,10 @@ namespace System.Data.Linq.SqlClient
             public bool MoveNext()
             {
 #if PERFORMANCE_BUILD
-                if (this.CollectQueryPerf) {
-                    if (!started) {
+                if (this.CollectQueryPerf)
+                {
+                    if (!started)
+                    {
                         started = true;
                         timer.Start();
                     }
@@ -3733,13 +3734,25 @@ namespace System.Data.Linq.SqlClient
             bool collectQueryPerfInitialized = false;
             bool started;
 
-            private bool CollectQueryPerf {
-                get {
-                    if (!collectQueryPerfInitialized) {
+            private bool CollectQueryPerf
+            {
+                get
+                {
+                    if (!collectQueryPerfInitialized)
+                    {
                         collectQueryPerf = this.enumerable.session.context.CollectQueryPerf;
-                        if (collectQueryPerf) {
-                            pcSqlQueryEnumGetCurrent = new PerformanceCounter("DLinq", "SqlQueryEnumGetCurrentElapsedTime", false);
-                            bpcSqlQueryEnumGetCurrent = new PerformanceCounter("DLinq", "SqlQueryEnumGetCurrentElapsedTimeBase", false);
+                        if (collectQueryPerf)
+                        {
+                            pcSqlQueryEnumGetCurrent = new PerformanceCounter(
+                                "DLinq",
+                                "SqlQueryEnumGetCurrentElapsedTime",
+                                false
+                            );
+                            bpcSqlQueryEnumGetCurrent = new PerformanceCounter(
+                                "DLinq",
+                                "SqlQueryEnumGetCurrentElapsedTimeBase",
+                                false
+                            );
                             timer = new PerfTimer();
                         }
                         collectQueryPerfInitialized = true;

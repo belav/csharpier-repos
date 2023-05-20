@@ -100,7 +100,7 @@ namespace System
             }
             Contract.EndContractBlock();
 #if WIN32
-                info.AddValue("value", (long)((int)m_value));
+            info.AddValue("value", (long)((int)m_value));
 #else
             info.AddValue("value", (long)(m_value));
 #endif

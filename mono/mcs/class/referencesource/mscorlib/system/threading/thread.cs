@@ -492,7 +492,7 @@ namespace System.Threading
         /// <internalonly/>
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [DynamicSecurityMethodAttribute()]
 #endif
         [Obsolete(
@@ -504,16 +504,23 @@ namespace System.Threading
                 Environment.GetResourceString("InvalidOperation_ThreadAPIsNotSupported")
             );
         }
-#if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
-        [ResourceExposure(ResourceScope.None)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern IntPtr SetAppDomainStack( SafeCompressedStackHandle csHandle);
 
-        [System.Security.SecurityCritical]  // auto-generated
+#if !MONO
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern void RestoreAppDomainStack( IntPtr appDomainStack);
+        [
+            MethodImplAttribute(MethodImplOptions.InternalCall),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
+        internal extern IntPtr SetAppDomainStack(SafeCompressedStackHandle csHandle);
+
+        [System.Security.SecurityCritical] // auto-generated
+        [ResourceExposure(ResourceScope.None)]
+        [
+            MethodImplAttribute(MethodImplOptions.InternalCall),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
+        internal extern void RestoreAppDomainStack(IntPtr appDomainStack);
 #endif
 
         /// <internalonly/>

@@ -649,8 +649,9 @@ internal static partial class Bid
     //  (More overloads to be provided in assembly-specific file)
     //
 #if BID_AUTOSIG
-    internal static void WriteEx(IntPtr hCtx, uint flags, string fmtPrintfW, params object[] args) {
-        SignatureGenerator.WriteEx (hCtx, flags, fmtPrintfW, args);
+    internal static void WriteEx(IntPtr hCtx, uint flags, string fmtPrintfW, params object[] args)
+    {
+        SignatureGenerator.WriteEx(hCtx, flags, fmtPrintfW, args);
     }
 #endif
 

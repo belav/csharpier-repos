@@ -53,7 +53,10 @@ namespace System.Runtime
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        internal static extern void InternalStartProfile(string profile, IntPtr ptrNativeAssemblyLoadContext);
+        internal static extern void InternalStartProfile(
+            string profile,
+            IntPtr ptrNativeAssemblyLoadContext
+        );
 #endif
 
         [SecurityCritical]

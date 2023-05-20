@@ -327,17 +327,22 @@ namespace System.Xml.XPath.DataBinding
         }
 
 #if DEBUG
-        public string DebugDump() {
+        public string DebugDump()
+        {
             StringBuilder sb = new StringBuilder();
-            DebugDump(sb,"");
+            DebugDump(sb, "");
             return sb.ToString();
         }
-        void DebugDump(StringBuilder sb, String indent) {
+
+        void DebugDump(StringBuilder sb, String indent)
+        {
             sb.AppendFormat("{0}{1} '{2}'", indent, this.BindingType.ToString(), this.Name);
-            if (this.subShapes != null) {
+            if (this.subShapes != null)
+            {
                 sb.AppendLine(" {");
                 string subindent = String.Concat(indent, "  ");
-                foreach (Shape s in this.SubShapes) {
+                foreach (Shape s in this.SubShapes)
+                {
                     s.DebugDump(sb, subindent);
                 }
                 sb.Append(indent);

@@ -808,7 +808,8 @@ namespace System.Globalization
                 // because these fields are thread static, and so do not
                 // require a Thread instance to be accessed.
 #if FEATURE_APPX
-                if(AppDomain.IsAppXModel()) {
+                if (AppDomain.IsAppXModel())
+                {
                     CultureInfo culture = GetCultureInfoForUserPreferredLanguageInAppX();
                     if (culture != null)
                         return culture;
@@ -911,7 +912,8 @@ namespace System.Globalization
                 // because these fields are thread static, and so do not
                 // require a Thread instance to be accessed.
 #if FEATURE_APPX
-                if(AppDomain.IsAppXModel()) {
+                if (AppDomain.IsAppXModel())
+                {
                     CultureInfo culture = GetCultureInfoForUserPreferredLanguageInAppX();
                     if (culture != null)
                         return culture;

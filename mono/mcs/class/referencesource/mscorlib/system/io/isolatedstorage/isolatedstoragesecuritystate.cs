@@ -14,7 +14,8 @@ namespace System.IO.IsolatedStorage
         SetInnerException = 5
     }
 #else  // !FEATURE_LEGACYNETCF
-    public enum IsolatedStorageSecurityOptions {
+    public enum IsolatedStorageSecurityOptions
+    {
         GetRootUserDirectory = 0,
         GetGroupAndIdForApplication = 1,
         GetGroupAndIdForSite = 2,
@@ -98,14 +99,16 @@ namespace System.IO.IsolatedStorage
 #endif
 
 #if FEATURE_LEGACYNETCF
-        internal static IsolatedStorageSecurityState CreateStateToGetAvailableFreeSpace() {
-             IsolatedStorageSecurityState state = new IsolatedStorageSecurityState();
+        internal static IsolatedStorageSecurityState CreateStateToGetAvailableFreeSpace()
+        {
+            IsolatedStorageSecurityState state = new IsolatedStorageSecurityState();
             state.m_Options = IsolatedStorageSecurityOptions.AvailableFreeSpace;
             return state;
         }
 
-        internal static IsolatedStorageSecurityState CreateStateForIsolatedStorageFolderName() {
-             IsolatedStorageSecurityState state = new IsolatedStorageSecurityState();
+        internal static IsolatedStorageSecurityState CreateStateForIsolatedStorageFolderName()
+        {
+            IsolatedStorageSecurityState state = new IsolatedStorageSecurityState();
             state.m_Options = IsolatedStorageSecurityOptions.IsolatedStorageFolderName;
             return state;
         }

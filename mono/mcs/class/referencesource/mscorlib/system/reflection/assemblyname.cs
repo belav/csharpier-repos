@@ -328,7 +328,7 @@ namespace System.Reflection
             info.AddValue("_PublicKey", _PublicKey, typeof(byte[]));
             info.AddValue("_PublicKeyToken", _PublicKeyToken, typeof(byte[]));
 #if FEATURE_USE_LCID
-            info.AddValue("_CultureInfo", (_CultureInfo == null) ? -1 :_CultureInfo.LCID);
+            info.AddValue("_CultureInfo", (_CultureInfo == null) ? -1 : _CultureInfo.LCID);
 #endif
             info.AddValue("_CodeBase", _CodeBase);
             info.AddValue("_Version", _Version);

@@ -1992,8 +1992,14 @@ namespace System.Security
                             {
                                 objectToInsert = CreatePerm(elem);
 #if _DEBUG
-                                PermissionToken tokenDebug = PermissionToken.GetToken( (IPermission)objectToInsert );
-                                Contract.Assert( tokenDebug != null && (tokenDebug.m_type & PermissionTokenType.BuiltIn) != 0, "This should only be called for built-ins" );
+                                PermissionToken tokenDebug = PermissionToken.GetToken(
+                                    (IPermission)objectToInsert
+                                );
+                                Contract.Assert(
+                                    tokenDebug != null
+                                        && (tokenDebug.m_type & PermissionTokenType.BuiltIn) != 0,
+                                    "This should only be called for built-ins"
+                                );
 #endif
                                 if (objectToInsert != null)
                                 {
@@ -2123,9 +2129,17 @@ namespace System.Security
                                 if (objectToInsert != null)
                                 {
 #if _DEBUG
-                                    PermissionToken tokenDebug = PermissionToken.GetToken( (IPermission)objectToInsert );
-                                    Contract.Assert((tokenDebug != null), "PermissionToken.GetToken returned null ");
-                                    Contract.Assert( (tokenDebug.m_type & PermissionTokenType.BuiltIn) != 0, "This should only be called for built-ins" );
+                                    PermissionToken tokenDebug = PermissionToken.GetToken(
+                                        (IPermission)objectToInsert
+                                    );
+                                    Contract.Assert(
+                                        (tokenDebug != null),
+                                        "PermissionToken.GetToken returned null "
+                                    );
+                                    Contract.Assert(
+                                        (tokenDebug.m_type & PermissionTokenType.BuiltIn) != 0,
+                                        "This should only be called for built-ins"
+                                    );
 #endif
                                     Contract.Assert(
                                         objectToInsert.GetType().Module.Assembly
@@ -2205,7 +2219,7 @@ namespace System.Security
                     {
 #if _DEBUG
                         if (debug)
-                            DEBUG_WRITE( "error while decoding permission set =\n" + e.ToString() );
+                            DEBUG_WRITE("error while decoding permission set =\n" + e.ToString());
 #endif
                         if (savedException == null)
                             savedException = e;

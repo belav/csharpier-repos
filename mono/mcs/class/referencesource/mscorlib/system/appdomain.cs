@@ -2481,8 +2481,8 @@ namespace System
                         //
                         return GetDefaultDomain().Evidence;
 #else
-                       Contract.Assert(false,"This code should not be called for core CLR");
-                        
+                        Contract.Assert(false, "This code should not be called for core CLR");
+
                         // This operation is not allowed
                         throw new InvalidOperationException();
 #endif
@@ -2761,10 +2761,14 @@ namespace System
                 return;
             }
 #if FEATURE_CAS_POLICY
-            if (name.Equals("IgnoreSystemPolicy")) {
-                lock (this) {
+            if (name.Equals("IgnoreSystemPolicy"))
+            {
+                lock (this)
+                {
                     if (!_HasSetPolicy)
-                        throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_SetData"));
+                        throw new InvalidOperationException(
+                            Environment.GetResourceString("InvalidOperation_SetData")
+                        );
                 }
                 new PermissionSet(PermissionState.Unrestricted).Demand();
             }
@@ -3671,9 +3675,16 @@ namespace System
 
 #if FEATURE_COMINTEROP
         // Called by VM - code:CLRPrivTypeCacheReflectionOnlyWinRT::RaiseNamespaceResolveEvent
-        private RuntimeAssembly[] OnReflectionOnlyNamespaceResolveEvent(RuntimeAssembly assembly, string namespaceName)
+        private RuntimeAssembly[] OnReflectionOnlyNamespaceResolveEvent(
+            RuntimeAssembly assembly,
+            string namespaceName
+        )
         {
-            return System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.OnReflectionOnlyNamespaceResolveEvent(this, assembly, namespaceName);
+            return System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.OnReflectionOnlyNamespaceResolveEvent(
+                this,
+                assembly,
+                namespaceName
+            );
         }
 #endif // FEATURE_COMINTEROP
 
@@ -3782,23 +3793,26 @@ namespace System
             if (_DefaultPrincipal == null)
             {
 #if FEATURE_CAS_POLICY
-                switch (_PrincipalPolicy) {
-                case PrincipalPolicy.NoPrincipal:
-                    principal = null;
-                    break;
-                case PrincipalPolicy.UnauthenticatedPrincipal:
-                    principal = new GenericPrincipal(new GenericIdentity("", ""),
-                                                     new String[] {""});
-                    break;
+                switch (_PrincipalPolicy)
+                {
+                    case PrincipalPolicy.NoPrincipal:
+                        principal = null;
+                        break;
+                    case PrincipalPolicy.UnauthenticatedPrincipal:
+                        principal = new GenericPrincipal(
+                            new GenericIdentity("", ""),
+                            new String[] { "" }
+                        );
+                        break;
 #if !FEATURE_PAL && FEATURE_IMPERSONATION
-                case PrincipalPolicy.WindowsPrincipal:
-                    principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
-                    break;
+                    case PrincipalPolicy.WindowsPrincipal:
+                        principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+                        break;
 #endif // !FEATURE_PAL && FEATURE_IMPERSONATION
-                default:
-                    principal = null;
-                    break;
-                    }
+                    default:
+                        principal = null;
+                        break;
+                }
 #else
                 principal = new GenericPrincipal(new GenericIdentity("", ""), new String[] { "" });
 
@@ -3878,11 +3892,13 @@ namespace System
         }
 
 #if FEATURE_CAS_POLICY
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute( SecurityAction.Demand, ControlAppDomain = true )]
-        public static AppDomain CreateDomain(String friendlyName,
-                                      Evidence securityInfo,
-                                      AppDomainSetup info)
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(SecurityAction.Demand, ControlAppDomain = true)]
+        public static AppDomain CreateDomain(
+            String friendlyName,
+            Evidence securityInfo,
+            AppDomainSetup info
+        )
         {
             return InternalCreateDomain(friendlyName, securityInfo, info);
         }

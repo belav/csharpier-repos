@@ -200,20 +200,28 @@ namespace System.Text
 
         // ISerializable implementation
 #if FEATURE_SERIALIZATION
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             // Make sure to get teh base stuff too This throws if info is null
             SerializeEncoding(info, context);
-            Contract.Assert(info!=null, "[BaseCodePageEncoding.GetObjectData] Expected null info to throw");
+            Contract.Assert(
+                info != null,
+                "[BaseCodePageEncoding.GetObjectData] Expected null info to throw"
+            );
 
             // Just need Everett maxCharSize (BaseCodePageEncoding) or m_maxByteSize (MLangBaseCodePageEncoding)
-            info.AddValue(m_bUseMlangTypeForSerialization ? "m_maxByteSize" : "maxCharSize",
-                          this.IsSingleByte ? 1 : 2);
+            info.AddValue(
+                m_bUseMlangTypeForSerialization ? "m_maxByteSize" : "maxCharSize",
+                this.IsSingleByte ? 1 : 2
+            );
 
             // Use this class or MLangBaseCodePageEncoding as our deserializer.
-            info.SetType(m_bUseMlangTypeForSerialization ? typeof(MLangCodePageEncoding) :
-                                                           typeof(CodePageEncoding));
+            info.SetType(
+                m_bUseMlangTypeForSerialization
+                    ? typeof(MLangCodePageEncoding)
+                    : typeof(CodePageEncoding)
+            );
         }
 #endif
 

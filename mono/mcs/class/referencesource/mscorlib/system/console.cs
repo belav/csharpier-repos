@@ -388,7 +388,7 @@ namespace System
                         );
                     else
 #endif // _DEBUG
-                    writer = TextWriter.Synchronized(StreamWriter.Null);
+                        writer = TextWriter.Synchronized(StreamWriter.Null);
                 }
                 else
                 {
@@ -429,12 +429,18 @@ namespace System
         {
 #if FEATURE_WIN32_REGISTRY
 
-            new System.Security.Permissions.RegistryPermission(RegistryPermissionAccess.Read | RegistryPermissionAccess.Write, "HKEY_LOCAL_MACHINE").Assert();
-            RegistryKey rk = Registry.LocalMachine;               
-            using (rk = rk.OpenSubKey("Software\\Microsoft\\.NETFramework", false)) {
-                if (rk != null) {
+            new System.Security.Permissions.RegistryPermission(
+                RegistryPermissionAccess.Read | RegistryPermissionAccess.Write,
+                "HKEY_LOCAL_MACHINE"
+            ).Assert();
+            RegistryKey rk = Registry.LocalMachine;
+            using (rk = rk.OpenSubKey("Software\\Microsoft\\.NETFramework", false))
+            {
+                if (rk != null)
+                {
                     Object obj = rk.GetValue("ConsoleSpewToDebugger", 0);
-                    if (obj != null && ((int)obj) != 0) {
+                    if (obj != null && ((int)obj) != 0)
+                    {
                         return true;
                     }
                 }

@@ -128,7 +128,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             return DeserializeJsonNetManual(BenchmarkConstants.JsonText);
         }
 
-#region DeserializeJsonNetManual
+        #region DeserializeJsonNetManual
         private TestClass DeserializeJsonNetManual(string json)
         {
             TestClass c = new TestClass();
@@ -216,7 +216,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             }
             return a;
         }
-#endregion
+        #endregion
 
         [Benchmark]
         public Task<TestClass> JsonNetManualAsync()

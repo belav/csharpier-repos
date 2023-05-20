@@ -287,8 +287,12 @@ namespace System.Security.Cryptography
 #endif // !FEATURE_PAL
 
 #if FEATURE_MACL
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static CryptoKeySecurity GetKeySetSecurityInfo (SafeProvHandle hProv, AccessControlSections accessControlSections) {
+        [System.Security.SecurityCritical] // auto-generated
+        internal static CryptoKeySecurity GetKeySetSecurityInfo(
+            SafeProvHandle hProv,
+            AccessControlSections accessControlSections
+        )
+        {
             SecurityInfos securityInfo = 0;
             Privilege privilege = null;
 
@@ -303,54 +307,81 @@ namespace System.Security.Cryptography
             int error;
 
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
-                if ((accessControlSections & AccessControlSections.Audit) != 0) {
+            try
+            {
+                if ((accessControlSections & AccessControlSections.Audit) != 0)
+                {
                     securityInfo |= SecurityInfos.SystemAcl;
                     privilege = new Privilege("SeSecurityPrivilege");
                     privilege.Enable();
                 }
                 rawSecurityDescriptor = _GetKeySetSecurityInfo(hProv, securityInfo, out error);
             }
-            finally {
+            finally
+            {
                 if (privilege != null)
                     privilege.Revert();
             }
 
             // This means that the object doesn't have a security descriptor. And thus we throw
             // a specific exception for the caller to catch and handle properly.
-            if (error == Win32Native.ERROR_SUCCESS && (rawSecurityDescriptor == null || rawSecurityDescriptor.Length == 0))
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_NoSecurityDescriptor"));
+            if (
+                error == Win32Native.ERROR_SUCCESS
+                && (rawSecurityDescriptor == null || rawSecurityDescriptor.Length == 0)
+            )
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_NoSecurityDescriptor")
+                );
             if (error == Win32Native.ERROR_NOT_ENOUGH_MEMORY)
                 throw new OutOfMemoryException();
             if (error == Win32Native.ERROR_ACCESS_DENIED)
                 throw new UnauthorizedAccessException();
             if (error == Win32Native.ERROR_PRIVILEGE_NOT_HELD)
-                throw new PrivilegeNotHeldException( "SeSecurityPrivilege" );
+                throw new PrivilegeNotHeldException("SeSecurityPrivilege");
             if (error != Win32Native.ERROR_SUCCESS)
                 throw new CryptographicException(error);
 
-            CommonSecurityDescriptor sd = new CommonSecurityDescriptor(false /* isContainer */,
-                                                                       false /* isDS */,
-                                                                       new RawSecurityDescriptor(rawSecurityDescriptor, 0),
-                                                                       true);
+            CommonSecurityDescriptor sd = new CommonSecurityDescriptor(
+                false /* isContainer */
+                ,
+                false /* isDS */
+                ,
+                new RawSecurityDescriptor(rawSecurityDescriptor, 0),
+                true
+            );
             return new CryptoKeySecurity(sd);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static void SetKeySetSecurityInfo (SafeProvHandle hProv, CryptoKeySecurity cryptoKeySecurity, AccessControlSections accessControlSections) {
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void SetKeySetSecurityInfo(
+            SafeProvHandle hProv,
+            CryptoKeySecurity cryptoKeySecurity,
+            AccessControlSections accessControlSections
+        )
+        {
             SecurityInfos securityInfo = 0;
             Privilege privilege = null;
 
-            if ((accessControlSections & AccessControlSections.Owner) != 0 && cryptoKeySecurity._securityDescriptor.Owner != null)
+            if (
+                (accessControlSections & AccessControlSections.Owner) != 0
+                && cryptoKeySecurity._securityDescriptor.Owner != null
+            )
                 securityInfo |= SecurityInfos.Owner;
-            if ((accessControlSections & AccessControlSections.Group) != 0 && cryptoKeySecurity._securityDescriptor.Group != null)
+            if (
+                (accessControlSections & AccessControlSections.Group) != 0
+                && cryptoKeySecurity._securityDescriptor.Group != null
+            )
                 securityInfo |= SecurityInfos.Group;
             if ((accessControlSections & AccessControlSections.Audit) != 0)
                 securityInfo |= SecurityInfos.SystemAcl;
-            if ((accessControlSections & AccessControlSections.Access) != 0 && cryptoKeySecurity._securityDescriptor.IsDiscretionaryAclPresent)
+            if (
+                (accessControlSections & AccessControlSections.Access) != 0
+                && cryptoKeySecurity._securityDescriptor.IsDiscretionaryAclPresent
+            )
                 securityInfo |= SecurityInfos.DiscretionaryAcl;
 
-            if (securityInfo == 0) {
+            if (securityInfo == 0)
+            {
                 // Nothing to persist
                 return;
             }
@@ -358,27 +389,36 @@ namespace System.Security.Cryptography
             int error = 0;
 
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
-                if ((securityInfo & SecurityInfos.SystemAcl) != 0) {
+            try
+            {
+                if ((securityInfo & SecurityInfos.SystemAcl) != 0)
+                {
                     privilege = new Privilege("SeSecurityPrivilege");
                     privilege.Enable();
                 }
 
                 byte[] sd = cryptoKeySecurity.GetSecurityDescriptorBinaryForm();
                 if (sd != null && sd.Length > 0)
-                    error = SetKeySetSecurityInfo (hProv, securityInfo, sd);
+                    error = SetKeySetSecurityInfo(hProv, securityInfo, sd);
             }
-            finally {
+            finally
+            {
                 if (privilege != null)
                     privilege.Revert();
             }
 
-            if (error == Win32Native.ERROR_ACCESS_DENIED || error == Win32Native.ERROR_INVALID_OWNER || error == Win32Native.ERROR_INVALID_PRIMARY_GROUP)
+            if (
+                error == Win32Native.ERROR_ACCESS_DENIED
+                || error == Win32Native.ERROR_INVALID_OWNER
+                || error == Win32Native.ERROR_INVALID_PRIMARY_GROUP
+            )
                 throw new UnauthorizedAccessException();
             else if (error == Win32Native.ERROR_PRIVILEGE_NOT_HELD)
                 throw new PrivilegeNotHeldException("SeSecurityPrivilege");
             else if (error == Win32Native.ERROR_INVALID_HANDLE)
-                throw new NotSupportedException(Environment.GetResourceString("AccessControl_InvalidHandle"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("AccessControl_InvalidHandle")
+                );
             else if (error != Win32Native.ERROR_SUCCESS)
                 throw new CryptographicException(error);
         }
@@ -434,37 +474,63 @@ namespace System.Security.Cryptography
 
 #if FEATURE_MACL
             // If the user wanted to set the security descriptor on the provider context, apply it now.
-            if (parameters.CryptoKeySecurity != null) {
-                KeyContainerPermission kp = new KeyContainerPermission(KeyContainerPermissionFlags.NoFlags);
-                KeyContainerPermissionAccessEntry entry = new KeyContainerPermissionAccessEntry(parameters, KeyContainerPermissionFlags.ChangeAcl);
+            if (parameters.CryptoKeySecurity != null)
+            {
+                KeyContainerPermission kp = new KeyContainerPermission(
+                    KeyContainerPermissionFlags.NoFlags
+                );
+                KeyContainerPermissionAccessEntry entry = new KeyContainerPermissionAccessEntry(
+                    parameters,
+                    KeyContainerPermissionFlags.ChangeAcl
+                );
                 kp.AccessEntries.Add(entry);
                 kp.Demand();
-                SetKeySetSecurityInfo(TempFetchedProvHandle, parameters.CryptoKeySecurity, parameters.CryptoKeySecurity.ChangedAccessControlSections);
+                SetKeySetSecurityInfo(
+                    TempFetchedProvHandle,
+                    parameters.CryptoKeySecurity,
+                    parameters.CryptoKeySecurity.ChangedAccessControlSections
+                );
             }
 #endif //FEATURE_MACL
 
 #if FEATURE_X509_SECURESTRINGS
             // If the user wanted to specify a PIN or HWND for a smart card CSP, apply those settings now.
-            if (parameters.ParentWindowHandle != IntPtr.Zero) {
+            if (parameters.ParentWindowHandle != IntPtr.Zero)
+            {
                 // Copy the value onto the stack.
                 // Then, for versions beyond 4.6.2 take the address of that copy, since &hwnd is what the API wants.
                 IntPtr parentWindowHandle = parameters.ParentWindowHandle;
                 IntPtr pHwnd = parentWindowHandle;
 
-                if (!AppContextSwitches.DoNotAddrOfCspParentWindowHandle) {
-                    unsafe {
+                if (!AppContextSwitches.DoNotAddrOfCspParentWindowHandle)
+                {
+                    unsafe
+                    {
                         pHwnd = new IntPtr(&parentWindowHandle);
                     }
                 }
 
-                SetProviderParameter(TempFetchedProvHandle, parameters.KeyNumber, Constants.CLR_PP_CLIENT_HWND, pHwnd);
+                SetProviderParameter(
+                    TempFetchedProvHandle,
+                    parameters.KeyNumber,
+                    Constants.CLR_PP_CLIENT_HWND,
+                    pHwnd
+                );
             }
-            else if (parameters.KeyPassword != null) {
+            else if (parameters.KeyPassword != null)
+            {
                 IntPtr szPassword = Marshal.SecureStringToCoTaskMemAnsi(parameters.KeyPassword);
-                try {
-                    SetProviderParameter(TempFetchedProvHandle, parameters.KeyNumber, Constants.CLR_PP_PIN, szPassword);
+                try
+                {
+                    SetProviderParameter(
+                        TempFetchedProvHandle,
+                        parameters.KeyNumber,
+                        Constants.CLR_PP_PIN,
+                        szPassword
+                    );
                 }
-                finally {
+                finally
+                {
                     if (szPassword != IntPtr.Zero)
                         Marshal.ZeroFreeCoTaskMemAnsi(szPassword);
                 }
@@ -1065,7 +1131,7 @@ namespace System.Security.Cryptography
 #if MONO
             // It looks like .net managed implementation is buggy. It returns quite different
             // result compare to old mono code, even PSLength calculation is quite different
-            return Mono.Security.Cryptography.PKCS1.Encrypt_OAEP (rsa, hash, rng, data);
+            return Mono.Security.Cryptography.PKCS1.Encrypt_OAEP(rsa, hash, rng, data);
 #else
             int cb = rsa.KeySize / 8;
 
@@ -1132,9 +1198,11 @@ namespace System.Security.Cryptography
         )
         {
 #if MONO
-            var result = Mono.Security.Cryptography.PKCS1.Decrypt_OAEP (rsa, hash, encryptedData);
+            var result = Mono.Security.Cryptography.PKCS1.Decrypt_OAEP(rsa, hash, encryptedData);
             if (result == null)
-                throw new CryptographicException(Environment.GetResourceString("Cryptography_OAEPDecoding"));
+                throw new CryptographicException(
+                    Environment.GetResourceString("Cryptography_OAEPDecoding")
+                );
             return result;
 #else
             int cb = rsa.KeySize / 8;
@@ -1360,7 +1428,10 @@ namespace System.Security.Cryptography
 #if DEBUG
                 // On checked builds, do the slow-path check anyway so it gets exercised.
                 bool foundOverride = DoesRsaKeyOverrideSlowPath(t, methodName, parameterTypes);
-                BCLDebug.Assert(foundOverride, "RSACryptoServiceProvider expected to override " + methodName);
+                BCLDebug.Assert(
+                    foundOverride,
+                    "RSACryptoServiceProvider expected to override " + methodName
+                );
 #endif
                 return true;
             }
@@ -1469,11 +1540,16 @@ namespace System.Security.Cryptography
         );
 
 #if FEATURE_MACL
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
-        private static extern int SetKeySetSecurityInfo(SafeProvHandle hProv, SecurityInfos securityInfo, byte[] sd);
+        private static extern int SetKeySetSecurityInfo(
+            SafeProvHandle hProv,
+            SecurityInfos securityInfo,
+            byte[] sd
+        );
 #endif //FEATURE_MACL
+
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -1621,12 +1697,18 @@ namespace System.Security.Cryptography
         [System.Security.SecurityCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern byte[] _GetKeyParameter(SafeKeyHandle hKey, uint paramID);
+
 #if FEATURE_MACL
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern byte[] _GetKeySetSecurityInfo(SafeProvHandle hProv, SecurityInfos securityInfo, out int error);
+        internal static extern byte[] _GetKeySetSecurityInfo(
+            SafeProvHandle hProv,
+            SecurityInfos securityInfo,
+            out int error
+        );
 #endif //FEATURE_MACL
+
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

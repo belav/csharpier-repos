@@ -95,7 +95,7 @@ namespace System.Reflection.Emit
     public sealed partial class TypeBuilder : TypeInfo
     {
 #pragma warning disable 169
-#region Sync with reflection.h
+        #region Sync with reflection.h
         private string tname; // name in internal form
         private string nspace; // namespace in internal form
         private Type parent;
@@ -120,7 +120,7 @@ namespace System.Reflection.Emit
         private RefEmitPermissionSet[] permissions;
         private TypeInfo created;
         private int state;
-#endregion
+        #endregion
 #pragma warning restore 169
 
         TypeName fullname;

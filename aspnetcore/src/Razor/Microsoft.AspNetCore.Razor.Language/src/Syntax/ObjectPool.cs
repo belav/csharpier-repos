@@ -70,7 +70,7 @@ internal class ObjectPool<T>
         private volatile bool disposed;
 
 #if TRACE_LEAKS
-            internal volatile System.Diagnostics.StackTrace Trace = null;
+        internal volatile System.Diagnostics.StackTrace Trace = null;
 #endif
 
         public void Dispose()
@@ -82,7 +82,7 @@ internal class ObjectPool<T>
         private string GetTrace()
         {
 #if TRACE_LEAKS
-                return Trace == null? "": Trace.ToString();
+            return Trace == null ? "" : Trace.ToString();
 #else
             return "Leak tracing information is disabled. Define TRACE_LEAKS on ObjectPool`1.cs to get more info \n";
 #endif
@@ -164,8 +164,8 @@ internal class ObjectPool<T>
         leakTrackers.Add(inst, tracker);
 
 #if TRACE_LEAKS
-            var frame = new System.Diagnostics.StackTrace(false);
-            tracker.Trace = frame;
+        var frame = new System.Diagnostics.StackTrace(false);
+        tracker.Trace = frame;
 #endif
 #endif
 

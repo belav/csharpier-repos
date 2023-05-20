@@ -204,8 +204,11 @@ namespace System.Runtime.Serialization
             {
 #if MONO
                 // This should never happen
-                if (t1 == null) {
-                    throw new InvalidOperationException($"Type '{parentType}' of type '{parentType?.GetType()}' does not derive from System.Object");
+                if (t1 == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Type '{parentType}' of type '{parentType?.GetType()}' does not derive from System.Object"
+                    );
                 }
 #endif
 
@@ -407,7 +410,7 @@ namespace System.Runtime.Serialization
 #endif
 #if FEATURE_SERIALIZATION
 #if MONO
-        static bool GetEnableUnsafeTypeForwarders ()
+        static bool GetEnableUnsafeTypeForwarders()
         {
             return false;
         }

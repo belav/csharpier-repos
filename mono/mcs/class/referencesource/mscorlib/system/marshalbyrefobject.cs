@@ -45,12 +45,13 @@ namespace System
             get { return __identity; }
             set { __identity = value; }
         }
+
 #if FEATURE_COMINTEROP
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal IntPtr GetComIUnknown(bool fIsBeingMarshalled)
         {
             IntPtr pUnk;
-            if(RemotingServices.IsTransparentProxy(this))
+            if (RemotingServices.IsTransparentProxy(this))
             {
                 pUnk = RemotingServices.GetRealProxy(this).GetCOMIUnknown(fIsBeingMarshalled);
             }
@@ -61,7 +62,7 @@ namespace System
             return pUnk;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern IntPtr GetComIUnknown(MarshalByRefObject o);

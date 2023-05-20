@@ -110,7 +110,7 @@ namespace System
             rl_starty = -1;
         byte[] control_characters; // Indexed by ControlCharacters.XXXXXX
 #if DEBUG
-		StreamWriter logger;
+        StreamWriter logger;
 #endif
 
         static string TryTermInfoDir(string dir, string term)
@@ -166,8 +166,8 @@ namespace System
         public TermInfoDriver(string term)
         {
 #if DEBUG
-			File.Delete ("console.log");
-			logger = new StreamWriter (File.OpenWrite ("console.log"));
+            File.Delete("console.log");
+            logger = new StreamWriter(File.OpenWrite("console.log"));
 #endif
             this.term = term;
 
@@ -303,8 +303,13 @@ namespace System
 
                     GetCursorPosition();
 #if DEBUG
-					logger.WriteLine ("noGetPosition: {0} left: {1} top: {2}", noGetPosition, cursorLeft, cursorTop);
-					logger.Flush ();
+                    logger.WriteLine(
+                        "noGetPosition: {0} left: {1} top: {2}",
+                        noGetPosition,
+                        cursorLeft,
+                        cursorTop
+                    );
+                    logger.Flush();
 #endif
                     if (noGetPosition)
                     {
@@ -353,8 +358,8 @@ namespace System
                         SetCursorPosition(cursorLeft, cursorTop);
                     }
 #if DEBUG
-				logger.WriteLine ("BS left: {0} top: {1}", cursorLeft, cursorTop);
-				logger.Flush ();
+                    logger.WriteLine("BS left: {0} top: {1}", cursorLeft, cursorTop);
+                    logger.Flush();
 #endif
                     break;
                 case ConsoleKey.Tab:
@@ -376,8 +381,8 @@ namespace System
                     break;
             }
 #if DEBUG
-			logger.WriteLine ("left: {0} top: {1}", cursorLeft, cursorTop);
-			logger.Flush ();
+            logger.WriteLine("left: {0} top: {1}", cursorLeft, cursorTop);
+            logger.Flush();
 #endif
         }
 
@@ -575,8 +580,8 @@ namespace System
             }
 
 #if DEBUG
-			logger.WriteLine ("GetCursorPosition: {0}, {1}", col, row);
-			logger.Flush ();
+            logger.WriteLine("GetCursorPosition: {0}, {1}", col, row);
+            logger.Flush();
 #endif
 
             cursorLeft = col;
@@ -1202,7 +1207,7 @@ namespace System
             return (ConsoleKeyInfo)o;
         }
 
-#region Input echoing optimization
+        #region Input echoing optimization
         bool InputPending()
         {
             // check if we've got pending input we can read immediately
@@ -1253,7 +1258,7 @@ namespace System
             stdout.InternalWriteChars(echobuf, echon);
             echon = 0;
         }
-#endregion
+        #endregion
 
         public int Read([In, Out] char[] dest, int index, int count)
         {

@@ -1520,7 +1520,7 @@ namespace System
                 1e80
             };
 
-        #region Decimal Math Helpers
+            #region Decimal Math Helpers
 
             private static unsafe uint GetExponent(float f)
             {
@@ -1989,19 +1989,49 @@ namespace System
                                 break;
 #if BIT64
                             case 5:
-                                power = DivByConst(result, hiRes, out quotient, out remainder, 100000);
+                                power = DivByConst(
+                                    result,
+                                    hiRes,
+                                    out quotient,
+                                    out remainder,
+                                    100000
+                                );
                                 break;
                             case 6:
-                                power = DivByConst(result, hiRes, out quotient, out remainder, 1000000);
+                                power = DivByConst(
+                                    result,
+                                    hiRes,
+                                    out quotient,
+                                    out remainder,
+                                    1000000
+                                );
                                 break;
                             case 7:
-                                power = DivByConst(result, hiRes, out quotient, out remainder, 10000000);
+                                power = DivByConst(
+                                    result,
+                                    hiRes,
+                                    out quotient,
+                                    out remainder,
+                                    10000000
+                                );
                                 break;
                             case 8:
-                                power = DivByConst(result, hiRes, out quotient, out remainder, 100000000);
+                                power = DivByConst(
+                                    result,
+                                    hiRes,
+                                    out quotient,
+                                    out remainder,
+                                    100000000
+                                );
                                 break;
                             default:
-                                power = DivByConst(result, hiRes, out quotient, out remainder, TenToPowerNine);
+                                power = DivByConst(
+                                    result,
+                                    hiRes,
+                                    out quotient,
+                                    out remainder,
+                                    TenToPowerNine
+                                );
                                 break;
 #else
                             default:
@@ -2606,7 +2636,7 @@ namespace System
                 return;
             }
 
-        #endregion
+            #endregion
 
             /// <summary>
             /// Convert Decimal to Currency (similar to OleAut32 api.)

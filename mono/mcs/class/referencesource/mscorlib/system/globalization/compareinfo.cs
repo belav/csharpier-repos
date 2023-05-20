@@ -292,11 +292,12 @@ namespace System.Globalization
         // don't change/remove the names/types of these fields.
 #if FEATURE_USE_LCID || MONO
 #pragma warning disable 169
-                [OptionalField(VersionAdded = 1)]
-                private int win32LCID;             // mapped sort culture id of this instance
+        [OptionalField(VersionAdded = 1)]
+        private int win32LCID; // mapped sort culture id of this instance
 #pragma warning restore
-                private int culture;               // the culture ID used to create this instance.
+        private int culture; // the culture ID used to create this instance.
 #endif
+
         [OnDeserializing]
         private void OnDeserializing(StreamingContext ctx)
         {

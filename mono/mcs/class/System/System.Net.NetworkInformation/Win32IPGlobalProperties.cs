@@ -423,7 +423,7 @@ namespace System.Net.NetworkInformation
         {
 #if MONO
 #if WIN_PLATFORM
-			return new Win32IPGlobalProperties ();
+            return new Win32IPGlobalProperties();
 #else
 			return null;
 #endif

@@ -7065,7 +7065,10 @@ namespace System.Diagnostics.Tracing
             foreach (var wrEtwSession in s_etwSessions)
             {
 #if ES_BUILD_STANDALONE
-                if ((etwSession = (EtwSession) wrEtwSession.Target) != null && etwSession.m_etwSessionId == etwSessionId)
+                if (
+                    (etwSession = (EtwSession)wrEtwSession.Target) != null
+                    && etwSession.m_etwSessionId == etwSessionId
+                )
                     return etwSession;
 #else
                 if (
@@ -7110,8 +7113,8 @@ namespace System.Diagnostics.Tracing
                 {
                     EtwSession session;
 #if ES_BUILD_STANDALONE
-                    return (session = (EtwSession) wrEtwSession.Target) != null &&
-                           (session.m_etwSessionId == etwSession.m_etwSessionId);
+                    return (session = (EtwSession)wrEtwSession.Target) != null
+                        && (session.m_etwSessionId == etwSession.m_etwSessionId);
 #else
                     return wrEtwSession.TryGetTarget(out session)
                         && (session.m_etwSessionId == etwSession.m_etwSessionId);

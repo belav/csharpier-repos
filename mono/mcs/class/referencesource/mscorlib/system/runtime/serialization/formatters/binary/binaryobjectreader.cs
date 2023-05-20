@@ -176,7 +176,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
             Contract.EndContractBlock();
 
 #if _DEBUG
-            SerTrace.Log( this, "Deserialize Entry handler", handler);
+            SerTrace.Log(this, "Deserialize Entry handler", handler);
 #endif
             bFullDeserialization = false;
             TopObject = null;
@@ -201,7 +201,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
             serParser.Run();
 
 #if _DEBUG
-            SerTrace.Log( this, "Deserialize Finished Parsing DoFixups");
+            SerTrace.Log(this, "Deserialize Finished Parsing DoFixups");
 #endif
 
             if (bFullDeserialization)

@@ -2187,7 +2187,7 @@ namespace System.Reflection
                 an.Version = null;
                 return nLoad(an, null, null, null, ref stackMark,
 #if FEATURE_HOSTED_BINDER
-                       IntPtr.Zero,
+                    IntPtr.Zero,
 #endif
                     false, false, false);
             }
@@ -2229,11 +2229,19 @@ namespace System.Reflection
             RuntimeAssembly result = null;
             try
             {
-                result = nLoad(an, null, securityEvidence, null, ref stackMark,
+                result = nLoad(
+                    an,
+                    null,
+                    securityEvidence,
+                    null,
+                    ref stackMark,
 #if FEATURE_HOSTED_BINDER
-                               IntPtr.Zero,
+                    IntPtr.Zero,
 #endif
-                    true, false, false);
+                    true,
+                    false,
+                    false
+                );
             }
             catch (Exception e)
             {
@@ -2271,7 +2279,7 @@ namespace System.Reflection
                         null,
                         ref stackMark,
 #if FEATURE_HOSTED_BINDER
-                                   IntPtr.Zero,
+                        IntPtr.Zero,
 #endif
                         false,
                         false,

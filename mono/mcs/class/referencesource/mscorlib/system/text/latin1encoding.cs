@@ -40,12 +40,15 @@ namespace System.Text
 
 #if FEATURE_SERIALIZATION
         // ISerializable implementation, serialize it as a CodePageEncoding
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             // Make sure to get teh base stuff too This throws if info is null
             SerializeEncoding(info, context);
-            Contract.Assert(info!=null, "[Latin1Encoding.GetObjectData] Expected null info to throw");
+            Contract.Assert(
+                info != null,
+                "[Latin1Encoding.GetObjectData] Expected null info to throw"
+            );
 
             // In Everett this is a CodePageEncoding, so it needs maxCharSize
             info.AddValue("CodePageEncoding+maxCharSize", 1);

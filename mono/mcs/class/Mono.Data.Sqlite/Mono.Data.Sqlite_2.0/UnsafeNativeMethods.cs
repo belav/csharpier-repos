@@ -243,21 +243,21 @@ namespace Mono.Data.Sqlite
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern int sqlite3_close(IntPtr db);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern int sqlite3_close_v2(IntPtr db);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern int sqlite3_create_function(
             IntPtr db,
@@ -273,7 +273,7 @@ namespace Mono.Data.Sqlite
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-		[DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern int sqlite3_create_function_v2(
             IntPtr db,
@@ -290,14 +290,14 @@ namespace Mono.Data.Sqlite
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern int sqlite3_finalize(IntPtr stmt);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern int sqlite3_open_v2(
             byte[] utf8Filename,
@@ -310,7 +310,7 @@ namespace Mono.Data.Sqlite
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern int sqlite3_open(byte[] utf8Filename, out IntPtr db);
 
@@ -321,21 +321,21 @@ namespace Mono.Data.Sqlite
             CharSet = CharSet.Unicode
         )]
 #else
-    [DllImport(SQLITE_DLL, CharSet = CharSet.Unicode)]
+        [DllImport(SQLITE_DLL, CharSet = CharSet.Unicode)]
 #endif
         internal static extern int sqlite3_open16(string fileName, out IntPtr db);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern int sqlite3_reset(IntPtr stmt);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_bind_parameter_name(IntPtr stmt, int index);
 
@@ -344,14 +344,14 @@ namespace Mono.Data.Sqlite
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_database_name(IntPtr stmt, int index);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_database_name16(IntPtr stmt, int index);
 #endif
@@ -359,28 +359,28 @@ namespace Mono.Data.Sqlite
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_decltype(IntPtr stmt, int index);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_decltype16(IntPtr stmt, int index);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_name(IntPtr stmt, int index);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_name16(IntPtr stmt, int index);
 
@@ -388,28 +388,28 @@ namespace Mono.Data.Sqlite
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_origin_name(IntPtr stmt, int index);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_origin_name16(IntPtr stmt, int index);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_table_name(IntPtr stmt, int index);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_table_name16(IntPtr stmt, int index);
 #endif // !MONOTOUCH
@@ -417,28 +417,28 @@ namespace Mono.Data.Sqlite
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_text(IntPtr stmt, int index);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_column_text16(IntPtr stmt, int index);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_errmsg(IntPtr db);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern int sqlite3_prepare(
             IntPtr db,
@@ -451,7 +451,7 @@ namespace Mono.Data.Sqlite
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern int sqlite3_table_column_metadata(
             IntPtr db,
@@ -468,14 +468,14 @@ namespace Mono.Data.Sqlite
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_value_text(IntPtr p);
 
 #if !PLATFORM_COMPACTFRAMEWORK
         [DllImport(SQLITE_DLL, CallingConvention = CallingConvention.Cdecl)]
 #else
-    [DllImport(SQLITE_DLL)]
+        [DllImport(SQLITE_DLL)]
 #endif
         internal static extern IntPtr sqlite3_value_text16(IntPtr p);
 #endif

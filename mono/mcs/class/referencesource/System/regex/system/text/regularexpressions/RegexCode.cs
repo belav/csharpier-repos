@@ -302,7 +302,8 @@ namespace System.Text.RegularExpressions
             "Prune",
             "Stop",
 #if ECMA
-            "ECMABoundary", "NonECMABoundary",
+            "ECMABoundary",
+            "NonECMABoundary",
 #endif
         };
 

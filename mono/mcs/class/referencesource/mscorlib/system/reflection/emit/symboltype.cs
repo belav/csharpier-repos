@@ -37,7 +37,7 @@ namespace System.Reflection.Emit
         }
 
 #if !MONO
-#region Static Members
+        #region Static Members
         internal static Type FormCompoundType(char[] bFormat, Type baseType, int curIndex)
         {
             // This function takes a string to describe the compound type, such as "[,][]", and a baseType.
@@ -225,9 +225,9 @@ namespace System.Reflection.Emit
             return null;
         }
 
-#endregion
+        #endregion
 
-#region Data Members
+        #region Data Members
         internal TypeKind m_typeKind;
         internal Type m_baseType;
         internal int m_cRank; // count of dimension
@@ -238,9 +238,9 @@ namespace System.Reflection.Emit
         internal int[] m_iaUpperBound; // count of dimension
         private char[] m_bFormat; // format string to form the full name.
         private bool m_isSzArray = true;
-#endregion
+        #endregion
 
-#region Constructor
+        #region Constructor
         internal SymbolType(TypeKind typeKind)
         {
             m_typeKind = typeKind;
@@ -248,9 +248,9 @@ namespace System.Reflection.Emit
             m_iaUpperBound = new int[4];
         }
 
-#endregion
+        #endregion
 
-#region Internal Members
+        #region Internal Members
         internal void SetElementType(Type baseType)
         {
             if (baseType == null)
@@ -290,9 +290,9 @@ namespace System.Reflection.Emit
             Array.Copy(bFormat, curIndex, bFormatTemp, 0, length);
             m_bFormat = bFormatTemp;
         }
-#endregion
+        #endregion
 #endif
-#region Type Overrides
+        #region Type Overrides
 #if !MONO
         internal override bool IsSzArray
         {
@@ -726,7 +726,7 @@ namespace System.Reflection.Emit
                 Environment.GetResourceString("NotSupported_NonReflectedType")
             );
         }
-#endregion
+        #endregion
     }
 }
 #endif

@@ -630,7 +630,7 @@ namespace System.Data.OracleClient.Oci
         )
         {
 #if TRACE
-			Trace.WriteLineIf(traceOci, string.Format("OCIPasswordChange"), "OCI");
+            Trace.WriteLineIf(traceOci, string.Format("OCIPasswordChange"), "OCI");
 #endif
             return OciNativeCalls.OCIPasswordChange(
                 svchp,

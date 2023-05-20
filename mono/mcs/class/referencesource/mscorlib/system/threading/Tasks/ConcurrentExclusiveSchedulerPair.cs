@@ -988,7 +988,7 @@ namespace System.Threading.Tasks
             Contract.Requires(syncObj != null, "The monitor object to check must be provided.");
 #if PRENET45
 #if DEBUG
-            // PRENET45 
+            // PRENET45
 
             if (ShouldCheckMonitorStatus)
             {
@@ -998,8 +998,14 @@ namespace System.Threading.Tasks
                     Monitor.Pulse(syncObj); // throws a SynchronizationLockException if the monitor isn't held by this thread
                     exceptionThrown = false;
                 }
-                catch (SynchronizationLockException) { exceptionThrown = true; }
-                Contract.Assert(held == !exceptionThrown, "The locking scheme was not correctly followed.");
+                catch (SynchronizationLockException)
+                {
+                    exceptionThrown = true;
+                }
+                Contract.Assert(
+                    held == !exceptionThrown,
+                    "The locking scheme was not correctly followed."
+                );
             }
 #endif
 #else

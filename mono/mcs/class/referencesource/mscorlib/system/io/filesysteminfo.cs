@@ -101,7 +101,8 @@ namespace System.IO
         public virtual string FullName
         {
             [SecuritySafeCritical]
-            get {
+            get
+            {
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
                 FileSecurityState sourceState = new FileSecurityState(
@@ -114,7 +115,8 @@ namespace System.IO
                 FileIOPermission.QuickDemand(FileIOPermissionAccess.PathDiscovery, FullPath);
 #endif
 #endif
-                return FullPath; }
+                return FullPath;
+            }
         }
 
         internal virtual string UnsafeGetFullName

@@ -46,8 +46,8 @@ namespace System
         delegate void FreeInterfaceAddressesDelegate(IntPtr ifap);
 
 #if SECURITY_DEP
-		static readonly Converter<List <byte[]>, bool> trustEvaluateSsl;
-		static readonly Func<long, bool, byte[]> certStoreLookup;
+        static readonly Converter<List<byte[]>, bool> trustEvaluateSsl;
+        static readonly Func<long, bool, byte[]> certStoreLookup;
 #endif  // SECURITY_DEP
         static readonly Func<IWebProxy> getDefaultProxy;
         static readonly GetInterfaceAddressesDelegate getInterfaceAddresses;
@@ -60,12 +60,15 @@ namespace System
                 throwOnError: true
             );
 #if SECURITY_DEP
-			trustEvaluateSsl = (Converter<List<byte[]>, bool>)
-				Delegate.CreateDelegate (typeof (Converter<List<byte[]>, bool>),
-							t,
-							"TrustEvaluateSsl",
-							ignoreCase:false,
-							throwOnBindFailure:true);
+            trustEvaluateSsl =
+                (Converter<List<byte[]>, bool>)
+                    Delegate.CreateDelegate(
+                        typeof(Converter<List<byte[]>, bool>),
+                        t,
+                        "TrustEvaluateSsl",
+                        ignoreCase: false,
+                        throwOnBindFailure: true
+                    );
 #if MONO_FEATURE_BTLS
 			certStoreLookup = (Func<long, bool, byte[]>)
 				Delegate.CreateDelegate (typeof (Func<long, bool, byte[]>),
@@ -74,7 +77,7 @@ namespace System
 							ignoreCase:false,
 							throwOnBindFailure:true);
 #endif  // MONO_FEATURE_BTLS
-			SystemDependencyProvider.Initialize ();
+            SystemDependencyProvider.Initialize();
 #endif  // SECURITY_DEP
             getDefaultProxy =
                 (Func<IWebProxy>)
@@ -106,13 +109,13 @@ namespace System
         }
 
 #if SECURITY_DEP
-		internal static bool TrustEvaluateSsl (X509CertificateCollection collection)
-		{
-			var certsRawData = new List <byte[]> (collection.Count);
-			foreach (var cert in collection)
-				certsRawData.Add (cert.GetRawCertData ());
-			return trustEvaluateSsl (certsRawData);
-		}
+        internal static bool TrustEvaluateSsl(X509CertificateCollection collection)
+        {
+            var certsRawData = new List<byte[]>(collection.Count);
+            foreach (var cert in collection)
+                certsRawData.Add(cert.GetRawCertData());
+            return trustEvaluateSsl(certsRawData);
+        }
 
 #if MONO_FEATURE_BTLS
 		internal static MonoBtlsX509 CertStoreLookup (MonoBtlsX509Name name)

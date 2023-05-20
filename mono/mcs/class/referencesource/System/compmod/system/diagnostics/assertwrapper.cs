@@ -23,30 +23,43 @@ namespace System.Diagnostics
     internal static class AssertWrapper
     {
 #if DEBUG && !FEATURE_PAL && !SILVERLIGHT
-        static BooleanSwitch DisableVsAssert = new BooleanSwitch("DisableVsAssert", "Switch to disable usage of VSASSERT for DefaultTraceListener.");
+        static BooleanSwitch DisableVsAssert = new BooleanSwitch(
+            "DisableVsAssert",
+            "Switch to disable usage of VSASSERT for DefaultTraceListener."
+        );
         static volatile bool vsassertPresent = true;
         static Hashtable ignoredAsserts = new Hashtable(StringComparer.OrdinalIgnoreCase);
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        private static void ShowVsAssert(string stackTrace, StackFrame frame, string message, string detailMessage) {
+        private static void ShowVsAssert(
+            string stackTrace,
+            StackFrame frame,
+            string message,
+            string detailMessage
+        )
+        {
             int[] disable = new int[1];
-            try {
+            try
+            {
                 string detailMessage2;
-                
+
                 if (detailMessage == null)
-                    detailMessage2 = stackTrace; 
+                    detailMessage2 = stackTrace;
                 else
-                    detailMessage2 = detailMessage + Environment.NewLine + stackTrace;                
+                    detailMessage2 = detailMessage + Environment.NewLine + stackTrace;
                 string fileName = (frame == null) ? string.Empty : frame.GetFileName();
-                if (fileName == null) {
+                if (fileName == null)
+                {
                     fileName = string.Empty;
                 }
 
                 int lineNumber = (frame == null) ? 0 : frame.GetFileLineNumber();
                 int returnCode = VsAssert(detailMessage2, message, fileName, lineNumber, disable);
-                if (returnCode != 0) {
-                    if (!System.Diagnostics.Debugger.IsAttached) {
+                if (returnCode != 0)
+                {
+                    if (!System.Diagnostics.Debugger.IsAttached)
+                    {
                         System.Diagnostics.Debugger.Launch();
                     }
                     System.Diagnostics.Debugger.Break();
@@ -54,29 +67,62 @@ namespace System.Diagnostics
                 if (disable[0] != 0)
                     ignoredAsserts[MakeAssertKey(fileName, lineNumber)] = null;
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 vsassertPresent = false;
             }
         }
 
-        [DllImport(ExternDll.Fxassert, CharSet=System.Runtime.InteropServices.CharSet.Ansi, BestFitMapping=true)]
+        [DllImport(
+            ExternDll.Fxassert,
+            CharSet = System.Runtime.InteropServices.CharSet.Ansi,
+            BestFitMapping = true
+        )]
         [ResourceExposure(ResourceScope.None)]
-        [SuppressMessage("Microsoft.Globalization","CA2101:SpecifyMarshalingForPInvokeStringArguments", MessageId="0", Justification="Microsoft: VsAssert isn't making a security decision here and they don't provide Unicode versions, also it is internal to MS")]
-        [SuppressMessage("Microsoft.Globalization","CA2101:SpecifyMarshalingForPInvokeStringArguments", MessageId="1", Justification="Microsoft: VsAssert isn't making a security decision here and they don't provide Unicode versions, also it is internal to MS")]
-        [SuppressMessage("Microsoft.Globalization","CA2101:SpecifyMarshalingForPInvokeStringArguments", MessageId="2", Justification="Microsoft: VsAssert isn't making a security decision here and they don't provide Unicode versions, also it is internal to MS")]
-        public static extern int VsAssert(string message, string assert, string file, int line, [In, Out]int[] pfDisable);
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA2101:SpecifyMarshalingForPInvokeStringArguments",
+            MessageId = "0",
+            Justification = "Microsoft: VsAssert isn't making a security decision here and they don't provide Unicode versions, also it is internal to MS"
+        )]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA2101:SpecifyMarshalingForPInvokeStringArguments",
+            MessageId = "1",
+            Justification = "Microsoft: VsAssert isn't making a security decision here and they don't provide Unicode versions, also it is internal to MS"
+        )]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA2101:SpecifyMarshalingForPInvokeStringArguments",
+            MessageId = "2",
+            Justification = "Microsoft: VsAssert isn't making a security decision here and they don't provide Unicode versions, also it is internal to MS"
+        )]
+        public static extern int VsAssert(
+            string message,
+            string assert,
+            string file,
+            int line,
+            [In, Out] int[] pfDisable
+        );
 
         [ResourceExposure(ResourceScope.None)]
-        public static void ShowAssert(string stackTrace, StackFrame frame, string message, string detailMessage) {
+        public static void ShowAssert(
+            string stackTrace,
+            StackFrame frame,
+            string message,
+            string detailMessage
+        )
+        {
             bool userInteractive = Environment.UserInteractive;
 
             string fileName = (frame == null) ? string.Empty : frame.GetFileName();
-            if (fileName == null) {
+            if (fileName == null)
+            {
                 fileName = string.Empty;
             }
 
             int lineNumber = (frame == null) ? 0 : frame.GetFileLineNumber();
-            
+
             if (ignoredAsserts.ContainsKey(MakeAssertKey(fileName, lineNumber)))
                 return;
 
@@ -90,7 +136,8 @@ namespace System.Diagnostics
                 ShowMessageBoxAssert(stackTrace, message, detailMessage);
         }
 
-        private static string MakeAssertKey(string fileName, int lineNumber) {
+        private static string MakeAssertKey(string fileName, int lineNumber)
+        {
             return fileName + ":" + lineNumber.ToString(CultureInfo.InvariantCulture);
         }
 

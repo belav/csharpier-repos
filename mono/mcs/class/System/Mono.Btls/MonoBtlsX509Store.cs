@@ -220,12 +220,12 @@ namespace Mono.Btls
         }
 
 #if MONODROID
-		public void AddAndroidLookup ()
-		{
-			var androidLookup = new MonoBtlsX509LookupAndroid ();
-			var lookup = new MonoBtlsX509Lookup (this, MonoBtlsX509LookupType.MONO);
-			lookup.AddMono (androidLookup);
-		}
+        public void AddAndroidLookup()
+        {
+            var androidLookup = new MonoBtlsX509LookupAndroid();
+            var lookup = new MonoBtlsX509Lookup(this, MonoBtlsX509LookupType.MONO);
+            lookup.AddMono(androidLookup);
+        }
 #endif
 
         protected override void Close()

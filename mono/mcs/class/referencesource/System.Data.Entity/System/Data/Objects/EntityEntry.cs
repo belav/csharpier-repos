@@ -1677,9 +1677,9 @@ namespace System.Data.Objects
             {
                 Debug.Assert(false, "shadowstate not supported");
 #if SupportShadowState
-                            Debug.Assert(null != _currentValues, "shadow state without values");
-                            _currentValues.TryGetValue(member.CLayerName, out retValue); // try to get it from shadow state if exists
-                            // we don't support CSpace only complex type
+                Debug.Assert(null != _currentValues, "shadow state without values");
+                _currentValues.TryGetValue(member.CLayerName, out retValue); // try to get it from shadow state if exists
+                // we don't support CSpace only complex type
 #endif
             }
 #endif

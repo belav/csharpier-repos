@@ -611,8 +611,8 @@ namespace System.Reflection.Emit
                     else
                         return UnmanagedMarshal.DefineLPArray(subtype);
 #if FEATURE_COMINTEROP
-			case UnmanagedType.SafeArray:
-				return UnmanagedMarshal.DefineSafeArray (subtype);
+                case UnmanagedType.SafeArray:
+                    return UnmanagedMarshal.DefineSafeArray(subtype);
 #endif
                 case UnmanagedType.ByValArray:
                     if (!is_field)
@@ -624,8 +624,13 @@ namespace System.Reflection.Emit
                 case UnmanagedType.ByValTStr:
                     return UnmanagedMarshal.DefineByValTStr(sizeConst);
 #if FEATURE_COMINTEROP
-			case UnmanagedType.CustomMarshaler:
-				return UnmanagedMarshal.DefineCustom (marshalTypeRef, marshalCookie, marshalTypeName, Guid.Empty);
+                case UnmanagedType.CustomMarshaler:
+                    return UnmanagedMarshal.DefineCustom(
+                        marshalTypeRef,
+                        marshalCookie,
+                        marshalTypeName,
+                        Guid.Empty
+                    );
 #endif
                 default:
                     return UnmanagedMarshal.DefineUnmanagedMarshal((UnmanagedType)utype);

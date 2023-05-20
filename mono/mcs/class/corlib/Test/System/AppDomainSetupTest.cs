@@ -256,7 +256,7 @@ namespace MonoTests.System
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
         [Test]
 #if MOBILE
-		[Category ("NotWorking")]
+        [Category("NotWorking")]
 #endif
         public void AppDomainInitializer1()
         {
@@ -286,7 +286,7 @@ namespace MonoTests.System
 #if MONO_FEATURE_MULTIPLE_APPDOMAINS
         [Test]
 #if MOBILE
-		[Category ("NotWorking")]
+        [Category("NotWorking")]
 #else
         [ExpectedException(typeof(ArgumentException))]
 #endif

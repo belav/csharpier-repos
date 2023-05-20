@@ -1400,7 +1400,11 @@ namespace System.ComponentModel
             private object CreateInstance(Type type)
             {
 #if MONO_FEATURE_CAS
-                if ((!(type.IsPublic || type.IsNestedPublic)) && (type.Assembly == typeof(DebugTypeDescriptor).Assembly)) {
+                if (
+                    (!(type.IsPublic || type.IsNestedPublic))
+                    && (type.Assembly == typeof(DebugTypeDescriptor).Assembly)
+                )
+                {
                     IntSecurity.FullReflection.Demand();
                 }
 #endif

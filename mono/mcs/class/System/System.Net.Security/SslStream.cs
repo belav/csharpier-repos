@@ -130,11 +130,17 @@ namespace System.Net.Security
             : base(innerStream, leaveInnerStreamOpen)
         {
 #if WASM
-			try {
-				provider = GetProvider ();
-			} catch (Exception ex) {
-				throw new PlatformNotSupportedException ("System.Net.Security.SslStream is not supported on the current platform.", ex);
-			}
+            try
+            {
+                provider = GetProvider();
+            }
+            catch (Exception ex)
+            {
+                throw new PlatformNotSupportedException(
+                    "System.Net.Security.SslStream is not supported on the current platform.",
+                    ex
+                );
+            }
 #else
             provider = GetProvider();
 #endif
@@ -158,11 +164,17 @@ namespace System.Net.Security
             : base(innerStream, leaveInnerStreamOpen)
         {
 #if WASM
-			try {
-				provider = GetProvider ();
-			} catch (Exception ex) {
-				throw new PlatformNotSupportedException ("System.Net.Security.SslStream is not supported on the current platform.", ex);
-			}
+            try
+            {
+                provider = GetProvider();
+            }
+            catch (Exception ex)
+            {
+                throw new PlatformNotSupportedException(
+                    "System.Net.Security.SslStream is not supported on the current platform.",
+                    ex
+                );
+            }
 #else
             provider = GetProvider();
 #endif

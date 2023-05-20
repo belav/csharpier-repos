@@ -569,7 +569,11 @@ namespace System.ServiceModel.Dispatcher
 #if DEBUG_FILTER
         public override string ToString()
         {
-            return string.Format("{0} XPathMessageVariable: {1}", base.ToString(), this.variable.ToString());
+            return string.Format(
+                "{0} XPathMessageVariable: {1}",
+                base.ToString(),
+                this.variable.ToString()
+            );
         }
 #endif
     }

@@ -39,7 +39,8 @@ namespace System.Configuration
         {
 #if PERF
             _enabled = enabled;
-            if (_enabled) {
+            if (_enabled)
+            {
                 _counters = new long[SIZE];
                 _totals = new long[SIZE];
                 _names = new string[SIZE];
@@ -57,10 +58,12 @@ namespace System.Configuration
         internal void Record(string name)
         {
 #if PERF
-            if (_enabled && _current < _counters.Length) {
+            if (_enabled && _current < _counters.Length)
+            {
                 _names[_current] = name;
                 Microsoft.Win32.SafeNativeMethods.QueryPerformanceCounter(out _counters[_current]);
-                if (_current > 0) {
+                if (_current > 0)
+                {
                     _totals[_current] += _counters[_current] - _counters[_current - 1];
                 }
 
@@ -72,13 +75,15 @@ namespace System.Configuration
         void DoPrint()
         {
 #if PERF
-            if (_enabled) {
+            if (_enabled)
+            {
                 long lfreq = 0;
                 Microsoft.Win32.SafeNativeMethods.QueryPerformanceFrequency(out lfreq);
-                double freq = (double) lfreq;
+                double freq = (double)lfreq;
                 double grandtotal = 0;
 
-                for (int i = 0; i < _current; i++) {
+                for (int i = 0; i < _current; i++)
+                {
                     double time = ((double)_totals[i]) / freq;
                     grandtotal += time;
                     Console.WriteLine("{0,-20} : {1:F6}", _names[i], time);

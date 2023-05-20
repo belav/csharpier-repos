@@ -351,12 +351,14 @@ namespace Internal.Runtime
 
 #if UNIX_AMD64_ABI
         public ReturnBlock m_returnBlock;
+
         public static unsafe int GetOffsetOfReturnValuesBlock()
         {
             return 0;
         }
 
         public ArgumentRegisters m_argumentRegisters;
+
         public static unsafe int GetOffsetOfArgumentRegisters()
         {
             return sizeof(ReturnBlock);

@@ -42,7 +42,7 @@ namespace DbLinq.Oracle
         public OracleDataContext(string connStr)
             : base(
 #if ODP
-            new Oracle.DataAccess.Client.OracleConnection(connStr) 
+                new Oracle.DataAccess.Client.OracleConnection(connStr)
 #else
                 new System.Data.OracleClient.OracleConnection(connStr)
 #endif

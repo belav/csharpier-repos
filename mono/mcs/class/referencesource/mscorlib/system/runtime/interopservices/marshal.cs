@@ -2838,7 +2838,10 @@ namespace System.Runtime.InteropServices
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void InitializeManagedWinRTFactoryObject(object o, RuntimeType runtimeClassType);
+        internal static extern void InitializeManagedWinRTFactoryObject(
+            object o,
+            RuntimeType runtimeClassType
+        );
 #endif
 
         //========================================================================

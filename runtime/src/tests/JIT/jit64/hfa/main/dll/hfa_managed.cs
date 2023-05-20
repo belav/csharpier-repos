@@ -438,7 +438,9 @@ namespace HFATest
 #endif
         Sum3_HFA08(float v1, long v2, HFA08 hfa)
         {
-            return (float)v1 + (float)v2 +
+            return (float)v1
+                + (float)v2
+                +
 #if NESTED_HFA
                 Sum_HFA03(hfa.hfa03) + Sum_HFA05(hfa.hfa05);
 #else
@@ -460,7 +462,9 @@ namespace HFATest
 #endif
         Sum3_HFA11(float v1, long v2, HFA11 hfa)
         {
-            return (float)v1 + (float)v2 +
+            return (float)v1
+                + (float)v2
+                +
 #if NESTED_HFA
                 Sum_HFA03(hfa.hfa03) + Sum_HFA08(hfa.hfa08);
 #else
@@ -485,7 +489,9 @@ namespace HFATest
 #endif
         Sum3_HFA19(float v1, long v2, HFA19 hfa)
         {
-            return (float)v1 + (float)v2 +
+            return (float)v1
+                + (float)v2
+                +
 #if NESTED_HFA
                 Sum_HFA08(hfa.hfa08) + Sum_HFA11(hfa.hfa11);
 #else
@@ -547,11 +553,7 @@ namespace HFATest
 #endif
         Sum5_HFA03(long v1, double v2, int v3, sbyte v4, HFA03 hfa)
         {
-            return (float)v1
-                + (float)v2
-                + (float)v3
-                + (float)v4
-                +
+            return (float)v1 + (float)v2 + (float)v3 + (float)v4 +
 #if NESTED_HFA
                 Sum_HFA01(hfa.hfa01)
                 + Sum_HFA02(hfa.hfa02);
@@ -700,12 +702,7 @@ namespace HFATest
 #endif
         Sum8_HFA02(float v1, double v2, long v3, sbyte v4, double v5, HFA02 hfa)
         {
-            return (float)v1
-                + (float)v2
-                + (float)v3
-                + (float)v4
-                + (float)v5
-                +
+            return (float)v1 + (float)v2 + (float)v3 + (float)v4 + (float)v5 +
 #if NESTED_HFA
                 Sum_HFA01(hfa.hfa01)
                 + hfa.f2;

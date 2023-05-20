@@ -53,8 +53,8 @@ namespace Company.WebApplication1
             services.AddDbContext<ApplicationDbContext>(
                 options =>
 #if (UseLocalDB)
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
 #else
                     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );
@@ -74,14 +74,14 @@ namespace Company.WebApplication1
                 .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
-                    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+                .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
 #if (GenerateApi)
                         .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
 #endif
 #if (GenerateGraph)
                         .AddMicrosoftGraph(Configuration.GetSection("DownstreamApi"))
 #endif
-                        .AddInMemoryTokenCaches();
+                .AddInMemoryTokenCaches();
 #else
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
 #endif
@@ -94,9 +94,9 @@ namespace Company.WebApplication1
                 .AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApi)
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAdB2C"))
-                    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
-                        .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
-                        .AddInMemoryTokenCaches();
+                .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+                .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
+                .AddInMemoryTokenCaches();
 #else
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAdB2C"));
 #endif

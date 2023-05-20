@@ -167,7 +167,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             return SerializeJsonNetLinq(TestClass);
         }
 
-#region SerializeJsonNetManual
+        #region SerializeJsonNetManual
         private string SerializeJsonNetLinq(TestClass c)
         {
             JObject o = new JObject(
@@ -204,7 +204,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
             return o.ToString(Formatting.None);
         }
-#endregion
+        #endregion
 
         [Benchmark]
         public string JsonNetManual()
@@ -212,7 +212,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             return SerializeJsonNetManual(TestClass);
         }
 
-#region SerializeJsonNetManual
+        #region SerializeJsonNetManual
         private string SerializeJsonNetManual(TestClass c)
         {
             StringWriter sw = new StringWriter();
@@ -267,7 +267,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             writer.Flush();
             return sw.ToString();
         }
-#endregion
+        #endregion
 
         [Benchmark]
         public Task<string> JsonNetManualAsync()

@@ -619,11 +619,12 @@ namespace System.Net
             res.Add(new WebRequestPrefixElement("file", new FileWebRequestCreator()));
             res.Add(new WebRequestPrefixElement("ftp", new FtpWebRequestCreator()));
 #else
-            object cfg = ConfigurationManager.GetSection ("system.net/webRequestModules");
+            object cfg = ConfigurationManager.GetSection("system.net/webRequestModules");
             WebRequestModulesSection s = cfg as WebRequestModulesSection;
-            if (s != null) {
+            if (s != null)
+            {
                 foreach (WebRequestModuleElement el in s.WebRequestModules)
-                    res.Add (new WebRequestPrefixElement(el.Prefix, el.Type));
+                    res.Add(new WebRequestPrefixElement(el.Prefix, el.Type));
             }
 #endif
             return res;

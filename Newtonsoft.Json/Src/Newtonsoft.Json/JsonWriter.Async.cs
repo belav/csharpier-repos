@@ -785,7 +785,9 @@ namespace Newtonsoft.Json
                     ValidationUtils.ArgumentNotNull(value, nameof(value));
                     return
 #if HAVE_BIG_INTEGER
-                        value is BigInteger integer ? WriteValueAsync(integer, cancellationToken) :
+                        value is BigInteger integer
+                        ? WriteValueAsync(integer, cancellationToken)
+                        :
 #endif
                     WriteValueAsync(
                         Convert.ToInt64(value, CultureInfo.InvariantCulture),
@@ -2095,7 +2097,10 @@ namespace Newtonsoft.Json
                     case PrimitiveTypeCode.BigIntegerNullable:
 
                         // this will call to WriteValueAsync(object)
-                        return writer.WriteValueAsync(value == null ? (BigInteger?)null : (BigInteger)value, cancellationToken);
+                        return writer.WriteValueAsync(
+                            value == null ? (BigInteger?)null : (BigInteger)value,
+                            cancellationToken
+                        );
 #endif
                     case PrimitiveTypeCode.Uri:
                         return writer.WriteValueAsync((Uri)value, cancellationToken);

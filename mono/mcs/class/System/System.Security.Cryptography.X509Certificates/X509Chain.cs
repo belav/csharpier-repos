@@ -141,7 +141,7 @@ namespace System.Security.Cryptography.X509Certificates
         public static X509Chain Create()
         {
 #if FULL_AOT_RUNTIME
-			return new X509Chain ();
+            return new X509Chain();
 #else
             return (X509Chain)CryptoConfig.CreateFromName("X509Chain");
 #endif

@@ -14,7 +14,12 @@ namespace System.Diagnostics
     internal class TypedElement : ConfigurationElement
     {
 #if BOOTSTRAP_BASIC
-        protected static readonly ConfigurationProperty _propTypeName = new ConfigurationProperty("type", typeof(string), String.Empty, ConfigurationPropertyOptions.IsRequired);
+        protected static readonly ConfigurationProperty _propTypeName = new ConfigurationProperty(
+            "type",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.IsRequired
+        );
 #else
         protected static readonly ConfigurationProperty _propTypeName = new ConfigurationProperty(
             "type",

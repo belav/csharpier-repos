@@ -31,7 +31,7 @@ namespace System
 
         public const string Kernel32 = DLLPREFIX + "rotor_pal" + DLLSUFFIX;
         public const string User32 = DLLPREFIX + "rotor_pal" + DLLSUFFIX;
-        public const string Mscoree  = DLLPREFIX + "sscoree" + DLLSUFFIX;
+        public const string Mscoree = DLLPREFIX + "sscoree" + DLLSUFFIX;
 
 #elif FEATURE_PAL && SILVERLIGHT
 

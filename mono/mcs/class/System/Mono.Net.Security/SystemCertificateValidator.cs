@@ -41,9 +41,9 @@ namespace Mono.Net.Security
         static SystemCertificateValidator()
         {
 #if MONOTOUCH
-			is_macosx = true;
+            is_macosx = true;
 #elif (MONODROID || ORBIS) && !MOBILE_DESKTOP_HOST
-			is_macosx = false;
+            is_macosx = false;
 #else
             is_macosx =
                 Environment.OSVersion.Platform != PlatformID.Win32NT
@@ -84,7 +84,7 @@ namespace Mono.Net.Security
         )
         {
 #if MOBILE
-			return false;
+            return false;
 #else
             if (is_macosx)
                 return false;
@@ -164,26 +164,32 @@ namespace Mono.Net.Security
             bool result;
 
 #if MONODROID && !MOBILE_DESKTOP_HOST
-			try {
-				result = AndroidPlatform.TrustEvaluateSsl (certs);
-				if (result) {
-					// FIXME: check whether this is still correct.
-					//
-					// chain.Build() + GetErrorsFromChain() (above) will ALWAYS fail on
-					// Android (there are no mozroots or preinstalled root certificates),
-					// thus `errors` will ALWAYS have RemoteCertificateChainErrors.
-					// Android just verified the chain; clear RemoteCertificateChainErrors.
-					errors  &= ~SslPolicyErrors.RemoteCertificateChainErrors;
-				} else {
-					errors |= SslPolicyErrors.RemoteCertificateChainErrors;
-					status11 = unchecked((int)0x800B010B);
-				}
-			} catch {
-				result = false;
-				errors |= SslPolicyErrors.RemoteCertificateChainErrors;
-				status11 = unchecked((int)0x800B010B);
-				// Ignore
-			}
+            try
+            {
+                result = AndroidPlatform.TrustEvaluateSsl(certs);
+                if (result)
+                {
+                    // FIXME: check whether this is still correct.
+                    //
+                    // chain.Build() + GetErrorsFromChain() (above) will ALWAYS fail on
+                    // Android (there are no mozroots or preinstalled root certificates),
+                    // thus `errors` will ALWAYS have RemoteCertificateChainErrors.
+                    // Android just verified the chain; clear RemoteCertificateChainErrors.
+                    errors &= ~SslPolicyErrors.RemoteCertificateChainErrors;
+                }
+                else
+                {
+                    errors |= SslPolicyErrors.RemoteCertificateChainErrors;
+                    status11 = unchecked((int)0x800B010B);
+                }
+            }
+            catch
+            {
+                result = false;
+                errors |= SslPolicyErrors.RemoteCertificateChainErrors;
+                status11 = unchecked((int)0x800B010B);
+                // Ignore
+            }
 #else
             if (is_macosx)
             {
@@ -257,7 +263,7 @@ namespace Mono.Net.Security
         internal static bool NeedsChain(MonoTlsSettings settings)
         {
 #if MOBILE
-			return false;
+            return false;
 #else
             if (!is_macosx)
                 return true;

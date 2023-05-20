@@ -1175,7 +1175,9 @@ namespace Newtonsoft.Json
 
             await _writer.WriteAsync(_quoteChar).ConfigureAwait(false);
 #if HAVE_CHAR_TO_STRING_WITH_CULTURE
-            await _writer.WriteAsync(value.ToString("D", CultureInfo.InvariantCulture), cancellationToken).ConfigureAwait(false);
+            await _writer
+                .WriteAsync(value.ToString("D", CultureInfo.InvariantCulture), cancellationToken)
+                .ConfigureAwait(false);
 #else
             await _writer.WriteAsync(value.ToString("D"), cancellationToken).ConfigureAwait(false);
 #endif
@@ -1296,7 +1298,11 @@ namespace Newtonsoft.Json
 #if HAVE_BIG_INTEGER
         internal Task WriteValueAsync(BigInteger value, CancellationToken cancellationToken)
         {
-            return WriteValueInternalAsync(JsonToken.Integer, value.ToString(CultureInfo.InvariantCulture), cancellationToken);
+            return WriteValueInternalAsync(
+                JsonToken.Integer,
+                value.ToString(CultureInfo.InvariantCulture),
+                cancellationToken
+            );
         }
 #endif
 

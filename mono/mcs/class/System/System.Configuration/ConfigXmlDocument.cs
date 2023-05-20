@@ -44,7 +44,7 @@ namespace System.Configuration
     [PermissionSet(SecurityAction.LinkDemand, Unrestricted = true)]
     public sealed class ConfigXmlDocument : XmlDocument, IConfigXmlNode
 #if CONFIGURATION_DEP
-		, IConfigErrorInfo
+            , IConfigErrorInfo
 #endif
     {
         XmlTextReader reader;
@@ -136,13 +136,15 @@ namespace System.Configuration
         }
 
 #if CONFIGURATION_DEP
-		string System.Configuration.Internal.IConfigErrorInfo.Filename {
-			get { return Filename; }
-		}
+        string System.Configuration.Internal.IConfigErrorInfo.Filename
+        {
+            get { return Filename; }
+        }
 
-		int System.Configuration.Internal.IConfigErrorInfo.LineNumber {
-			get { return LineNumber; }
-		}
+        int System.Configuration.Internal.IConfigErrorInfo.LineNumber
+        {
+            get { return LineNumber; }
+        }
 #endif
 
         string IConfigXmlNode.Filename
@@ -160,7 +162,7 @@ namespace System.Configuration
         //
         class ConfigXmlAttribute : XmlAttribute, IConfigXmlNode
 #if CONFIGURATION_DEP
-			, IConfigErrorInfo
+                , IConfigErrorInfo
 #endif
         {
             string fileName;
@@ -205,7 +207,7 @@ namespace System.Configuration
 
         class ConfigXmlCDataSection : XmlCDataSection, IConfigXmlNode
 #if CONFIGURATION_DEP
-			, IConfigErrorInfo
+                , IConfigErrorInfo
 #endif
         {
             string fileName;
@@ -282,7 +284,7 @@ namespace System.Configuration
 
         class ConfigXmlElement : XmlElement, IConfigXmlNode
 #if CONFIGURATION_DEP
-			, IConfigErrorInfo
+                , IConfigErrorInfo
 #endif
         {
             string fileName;
@@ -327,7 +329,7 @@ namespace System.Configuration
 
         class ConfigXmlText : XmlText, IConfigXmlNode
 #if CONFIGURATION_DEP
-			, IConfigErrorInfo
+                , IConfigErrorInfo
 #endif
         {
             string fileName;

@@ -1525,11 +1525,22 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                     ApplicationBase = appBase,
                 };
 
-                AppDomain hostDomain = AppDomain.CreateDomain(Environment.GetResourceString("WinRTHostDomainName", appBase), null, hostDomainSetup);
-                WinRTClassActivator activator = (WinRTClassActivator)hostDomain.CreateInstanceAndUnwrap(typeof(WinRTClassActivator).Assembly.FullName, typeof(WinRTClassActivator).FullName);
+                AppDomain hostDomain = AppDomain.CreateDomain(
+                    Environment.GetResourceString("WinRTHostDomainName", appBase),
+                    null,
+                    hostDomainSetup
+                );
+                WinRTClassActivator activator = (WinRTClassActivator)
+                    hostDomain.CreateInstanceAndUnwrap(
+                        typeof(WinRTClassActivator).Assembly.FullName,
+                        typeof(WinRTClassActivator).FullName
+                    );
                 IntPtr pActivator = activator.GetIWinRTClassActivator();
 
-                if (Interlocked.CompareExchange(ref s_pClassActivator, pActivator, IntPtr.Zero) != IntPtr.Zero)
+                if (
+                    Interlocked.CompareExchange(ref s_pClassActivator, pActivator, IntPtr.Zero)
+                    != IntPtr.Zero
+                )
                 {
                     Marshal.Release(pActivator);
                     activator = null;

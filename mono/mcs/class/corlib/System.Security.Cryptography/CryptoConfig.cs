@@ -472,13 +472,13 @@ namespace System.Security.Cryptography
             unresolved_algorithms.Add(nameECDsa_3, defaultECDsa);
 
 #if MONODROID || XAMARIN_MODERN
-		algorithms.Add (nameSHA1Cng, defaultSHA1);
-		algorithms.Add (nameSHA256Cng, defaultSHA256);
-		algorithms.Add (nameSHA256Provider, defaultSHA256);
-		algorithms.Add (nameSHA384Cng, defaultSHA384);
-		algorithms.Add (nameSHA384Provider, defaultSHA384);
-		algorithms.Add (nameSHA512Cng, defaultSHA512);
-		algorithms.Add (nameSHA512Provider, defaultSHA512);
+            algorithms.Add(nameSHA1Cng, defaultSHA1);
+            algorithms.Add(nameSHA256Cng, defaultSHA256);
+            algorithms.Add(nameSHA256Provider, defaultSHA256);
+            algorithms.Add(nameSHA384Cng, defaultSHA384);
+            algorithms.Add(nameSHA384Provider, defaultSHA384);
+            algorithms.Add(nameSHA512Cng, defaultSHA512);
+            algorithms.Add(nameSHA512Provider, defaultSHA512);
 #else
             unresolved_algorithms.Add(nameSHA1Cng, defaultSHA1Cng);
             unresolved_algorithms.Add(nameSHA256Cng, defaultSHA256Cng);

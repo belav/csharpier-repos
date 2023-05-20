@@ -30,8 +30,7 @@ namespace System.Text.Json.Serialization.Metadata
             public TValue GetOrAdd<TValue>(TKey key, Func<TKey, TValue> valueFactory)
                 where TValue : class?
             {
-                CacheEntry entry = _cache.GetOrAdd(
-                    key,
+                CacheEntry entry = _cache.GetOrAdd(key,
 #if NETCOREAPP
                     static (TKey key, Func<TKey, TValue> valueFactory) => new(valueFactory(key)),
                     valueFactory

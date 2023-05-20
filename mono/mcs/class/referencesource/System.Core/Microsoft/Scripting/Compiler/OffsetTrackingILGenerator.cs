@@ -68,7 +68,7 @@ namespace System.Linq.Expressions.Compiler {
             }
         }
 
-#region Simple Instructions
+        #region Simple Instructions
 
         internal void Emit(OpCode opcode)
         {
@@ -261,9 +261,9 @@ namespace System.Linq.Expressions.Compiler {
             AssertOffsetMatches();
         }
 
-#endregion
+        #endregion
 
-#region Exception Handling
+        #region Exception Handling
 
         private enum ExceptionState
         {
@@ -358,9 +358,9 @@ namespace System.Linq.Expressions.Compiler {
             AssertOffsetMatches();
         }
 
-#endregion
+        #endregion
 
-#region Labels and Locals
+        #region Labels and Locals
 
         internal Label DefineLabel()
         {
@@ -388,9 +388,9 @@ namespace System.Linq.Expressions.Compiler {
             _ilg.MarkSequencePoint(document, startLine, startColumn, endLine, endColumn);
         }
 
-#endregion
+        #endregion
 
-#region Assertions
+        #region Assertions
 
 #if STRESS_DEBUG
         private FieldInfo _ilgOffsetField;
@@ -405,27 +405,36 @@ namespace System.Linq.Expressions.Compiler {
         private void AssertOffsetMatches()
         {
 #if STRESS_DEBUG
-            if (!_checkOffset) {
+            if (!_checkOffset)
+            {
                 return;
             }
 
             int m_length = -1;
-            try {
-                if (_ilgOffsetField == null) {
-                    _ilgOffsetField = typeof(ILGenerator).GetField("m_length", BindingFlags.NonPublic | BindingFlags.Instance);
+            try
+            {
+                if (_ilgOffsetField == null)
+                {
+                    _ilgOffsetField = typeof(ILGenerator).GetField(
+                        "m_length",
+                        BindingFlags.NonPublic | BindingFlags.Instance
+                    );
                 }
                 m_length = (int)_ilgOffsetField.GetValue(_ilg);
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 _checkOffset = false;
             }
 
-            if (_checkOffset) {
+            if (_checkOffset)
+            {
                 Debug.Assert(m_length == _offset);
             }
 #endif
         }
 
-#endregion
+        #endregion
     }
 }
 

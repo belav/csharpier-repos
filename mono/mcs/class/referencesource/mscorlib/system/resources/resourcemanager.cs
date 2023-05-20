@@ -1838,33 +1838,44 @@ namespace System.Resources
 #if FEATURE_FUSION
 
             String fileName = AppDomain.CurrentDomain.FusionStore.ConfigurationFileInternal;
-            if (fileName == null) {
+            if (fileName == null)
+            {
                 return null;
             }
 
-            // Don't do a security assert.  We need to support semi-trusted 
+            // Don't do a security assert.  We need to support semi-trusted
             // scenarios, but asserting here causes infinite resource lookups
             // while initializing security & looking up mscorlib's config file.
             // Use internal methods to bypass security checks.
 
-            // If we're dealing with a local file name or a UNC path instead 
+            // If we're dealing with a local file name or a UNC path instead
             // of a URL, check to see if the file exists here for perf (avoids
             // throwing a FileNotFoundException).
-            if (fileName.Length >= 2 && 
-                ((fileName[1] == Path.VolumeSeparatorChar) || (fileName[0] == Path.DirectorySeparatorChar && fileName[1] == Path.DirectorySeparatorChar)) &&
-                !File.InternalExists(fileName))
+            if (
+                fileName.Length >= 2
+                && (
+                    (fileName[1] == Path.VolumeSeparatorChar)
+                    || (
+                        fileName[0] == Path.DirectorySeparatorChar
+                        && fileName[1] == Path.DirectorySeparatorChar
+                    )
+                )
+                && !File.InternalExists(fileName)
+            )
                 return null;
 
             ConfigTreeParser parser = new ConfigTreeParser();
             String queryPath = "/configuration/satelliteassemblies";
             ConfigNode node = null;
             // Catch exceptions in case a web app doesn't have a config file.
-            try {
+            try
+            {
                 node = parser.Parse(fileName, queryPath, true);
             }
-            catch(Exception) {}
+            catch (Exception) { }
 
-            if (node == null) {
+            if (node == null)
+            {
                 return null;
             }
 
@@ -1884,31 +1895,59 @@ namespace System.Resources
             //    </satelliteassemblies>
             // </configuration>
             Hashtable satelliteInfo = new Hashtable(StringComparer.OrdinalIgnoreCase);
-            foreach(ConfigNode assemblyNode in node.Children) {
+            foreach (ConfigNode assemblyNode in node.Children)
+            {
                 if (!String.Equals(assemblyNode.Name, "assembly"))
-                    throw new ApplicationException(Environment.GetResourceString("XMLSyntax_InvalidSyntaxSatAssemTag", Path.GetFileName(fileName), assemblyNode.Name));
+                    throw new ApplicationException(
+                        Environment.GetResourceString(
+                            "XMLSyntax_InvalidSyntaxSatAssemTag",
+                            Path.GetFileName(fileName),
+                            assemblyNode.Name
+                        )
+                    );
 
                 if (assemblyNode.Attributes.Count == 0)
-                    throw new ApplicationException(Environment.GetResourceString("XMLSyntax_InvalidSyntaxSatAssemTagNoAttr", Path.GetFileName(fileName)));
+                    throw new ApplicationException(
+                        Environment.GetResourceString(
+                            "XMLSyntax_InvalidSyntaxSatAssemTagNoAttr",
+                            Path.GetFileName(fileName)
+                        )
+                    );
 
-                DictionaryEntry de = (DictionaryEntry) assemblyNode.Attributes[0];
-                String assemblyName = (String) de.Value;
-                if (!String.Equals(de.Key, "name") || String.IsNullOrEmpty(assemblyName) || assemblyNode.Attributes.Count > 1) 
-                    throw new ApplicationException(Environment.GetResourceString("XMLSyntax_InvalidSyntaxSatAssemTagBadAttr", Path.GetFileName(fileName), de.Key, de.Value));
+                DictionaryEntry de = (DictionaryEntry)assemblyNode.Attributes[0];
+                String assemblyName = (String)de.Value;
+                if (
+                    !String.Equals(de.Key, "name")
+                    || String.IsNullOrEmpty(assemblyName)
+                    || assemblyNode.Attributes.Count > 1
+                )
+                    throw new ApplicationException(
+                        Environment.GetResourceString(
+                            "XMLSyntax_InvalidSyntaxSatAssemTagBadAttr",
+                            Path.GetFileName(fileName),
+                            de.Key,
+                            de.Value
+                        )
+                    );
 
                 ArrayList list = new ArrayList(5);
-                foreach(ConfigNode child in assemblyNode.Children)
+                foreach (ConfigNode child in assemblyNode.Children)
                     if (child.Value != null)
                         list.Add(child.Value);
 
                 String[] satellites = new String[list.Count];
-                for(int i=0; i<satellites.Length; i++) {
+                for (int i = 0; i < satellites.Length; i++)
+                {
                     String cultureName = (String)list[i];
                     satellites[i] = cultureName;
 #if !FEATURE_CORECLR && !MONO
                     if (FrameworkEventSource.IsInitialized)
                     {
-                        FrameworkEventSource.Log.ResourceManagerAddingCultureFromConfigFile(BaseNameField, MainAssembly, cultureName);
+                        FrameworkEventSource.Log.ResourceManagerAddingCultureFromConfigFile(
+                            BaseNameField,
+                            MainAssembly,
+                            cultureName
+                        );
                     }
 #endif
                 }

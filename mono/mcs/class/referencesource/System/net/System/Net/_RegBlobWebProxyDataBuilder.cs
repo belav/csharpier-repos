@@ -333,9 +333,15 @@ namespace System.Net
             {
 #if TRAVE
                 SYSTEMTIME st = new SYSTEMTIME();
-                bool f = SafeNclNativeMethods.FileTimeToSystemTime(ref ftLastKnownDetectTime, ref st);
+                bool f = SafeNclNativeMethods.FileTimeToSystemTime(
+                    ref ftLastKnownDetectTime,
+                    ref st
+                );
                 if (f)
-                    GlobalLog.Print("RegBlobWebProxyDataBuilder::BuildInternal() ftLastKnownDetectTime:" + ValidationHelper.ToString(st));
+                    GlobalLog.Print(
+                        "RegBlobWebProxyDataBuilder::BuildInternal() ftLastKnownDetectTime:"
+                            + ValidationHelper.ToString(st)
+                    );
 #endif // TRAVE
                 GlobalLog.Print(
                     "RegBlobWebProxyDataBuilder::BuildInternal() Ignoring Timed out lkgScriptLocation:"

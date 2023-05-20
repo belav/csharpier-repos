@@ -989,7 +989,10 @@ namespace Internal.Runtime.CallConverter
                 {
                     case CallingConvention.StdCall:
                         _numRegistersUsed = ArchitectureConstants.NUM_ARGUMENT_REGISTERS;
-                        _curOfs = TransitionBlock.GetOffsetOfArgs() + numRegistersUsed * IntPtr.Size + initialArgOffset;
+                        _curOfs =
+                            TransitionBlock.GetOffsetOfArgs()
+                            + numRegistersUsed * IntPtr.Size
+                            + initialArgOffset;
                         break;
 
                     case CallingConvention.ManagedStatic:
@@ -1089,7 +1092,10 @@ namespace Internal.Runtime.CallConverter
 
 #if TARGET_X86
 #if FEATURE_INTERPRETER
-            if (_interpreterCallingConvention != CallingConvention.ManagedStatic && _interpreterCallingConvention != CallingConvention.ManagedInstance)
+            if (
+                _interpreterCallingConvention != CallingConvention.ManagedStatic
+                && _interpreterCallingConvention != CallingConvention.ManagedInstance
+            )
             {
                 argOfs = _curOfs;
                 _curOfs += ArchitectureConstants.StackElemSize(argSize);
@@ -1553,8 +1559,8 @@ namespace Internal.Runtime.CallConverter
                 if (numRegistersUsed < ArchitectureConstants.NUM_ARGUMENT_REGISTERS)
                 {
                     numRegistersUsed++;
-                    paramTypeLoc = (numRegistersUsed == 1) ?
-                        ParamTypeLocation.Ecx : ParamTypeLocation.Edx;
+                    paramTypeLoc =
+                        (numRegistersUsed == 1) ? ParamTypeLocation.Ecx : ParamTypeLocation.Edx;
                 }
                 else
                 {

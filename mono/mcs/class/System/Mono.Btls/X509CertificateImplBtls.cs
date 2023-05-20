@@ -215,7 +215,7 @@ namespace Mono.Btls
             }
         }
 
-#region X509Certificate2Impl
+        #region X509Certificate2Impl
 
         internal override X509Certificate2Impl FallbackImpl =>
             throw new InvalidOperationException();
@@ -374,7 +374,7 @@ namespace Mono.Btls
             intermediateCerts = null;
         }
 
-#endregion
+        #endregion
     }
 }
 #endif

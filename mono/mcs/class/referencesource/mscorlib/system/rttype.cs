@@ -5859,14 +5859,14 @@ namespace System
             #endregion
 
 #if FEATURE_REMOTING
-                if(!RemotingServices.IsTransparentProxy(target))
+                if (!RemotingServices.IsTransparentProxy(target))
 #endif
                 {
             #region Non-TransparentProxy case
                     if (name == null)
                         throw new ArgumentNullException("name");
 #if MONO
-                    throw new NotImplementedException ();
+                    throw new NotImplementedException();
 #else
                     bool[] isByRef = modifiers == null ? null : modifiers[0].IsByRefArray;
 
@@ -5892,7 +5892,15 @@ namespace System
                     throw new NotImplementedException ();
 #else
             #region TransparentProxy case
-                    return ((MarshalByRefObject)target).InvokeMember(name, bindingFlags, binder, providedArgs, modifiers, culture, namedParams);
+                    return ((MarshalByRefObject)target).InvokeMember(
+                        name,
+                        bindingFlags,
+                        binder,
+                        providedArgs,
+                        modifiers,
+                        culture,
+                        namedParams
+                    );
             #endregion
 #endif
                 }
@@ -6737,16 +6745,25 @@ namespace System
                             // In CoreCLR, CAS is not exposed externally. So what we really are looking
                             // for is to see if the external caller of this API is transparent or not.
                             // We get that information from the fact that a Demand will succeed only if
-                            // the external caller is not transparent. 
+                            // the external caller is not transparent.
                             try
                             {
 #pragma warning disable 618
-                                new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+                                new SecurityPermission(
+                                    SecurityPermissionFlag.UnmanagedCode
+                                ).Demand();
 #pragma warning restore 618
                             }
                             catch
                             {
-                                throw new NotSupportedException(String.Format(CultureInfo.CurrentCulture, Environment.GetResourceString("NotSupported_DelegateCreationFromPT")));
+                                throw new NotSupportedException(
+                                    String.Format(
+                                        CultureInfo.CurrentCulture,
+                                        Environment.GetResourceString(
+                                            "NotSupported_DelegateCreationFromPT"
+                                        )
+                                    )
+                                );
                             }
 #else // FEATURE_CORECLR
                             new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
@@ -7192,15 +7209,23 @@ namespace System
         );
 
 #if FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern Type GetTypeFromProgIDImpl(String progID, String server, bool throwOnError);
+        internal static extern Type GetTypeFromProgIDImpl(
+            String progID,
+            String server,
+            bool throwOnError
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern Type GetTypeFromCLSIDImpl(Guid clsid, String server, bool throwOnError);
+        internal static extern Type GetTypeFromCLSIDImpl(
+            Guid clsid,
+            String server,
+            bool throwOnError
+        );
 #else // FEATURE_COMINTEROP_UNMANAGED_ACTIVATION
         internal static Type GetTypeFromProgIDImpl(String progID, String server, bool throwOnError)
         {

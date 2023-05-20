@@ -1513,7 +1513,7 @@ namespace System.Security.Permissions
         {
             Encoding[] encodings = new Encoding[] { Encoding.UTF8,
 #if FEATURE_ASCII
-                                                    Encoding.ASCII, 
+                Encoding.ASCII,
 #endif
                 Encoding.Unicode };
 

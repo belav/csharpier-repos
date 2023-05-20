@@ -547,7 +547,7 @@ namespace Mono.Net.Security
             MonoTlsProviderFactory.Debug($"MobileAuthenticatedStream({ID}): {message}");
         }
 
-#region Called back from native code via SslConnection
+        #region Called back from native code via SslConnection
 
         /*
          * Called from within SSLRead() and SSLHandshake().  We only access tha managed byte[] here.
@@ -743,9 +743,9 @@ namespace Mono.Net.Security
             return true;
         }
 
-#endregion
+        #endregion
 
-#region Inner Stream
+        #region Inner Stream
 
         /*
          * Read / write data from the inner stream; we're only called from managed code and only manipulate
@@ -836,9 +836,9 @@ namespace Mono.Net.Security
             writeBuffer.Offset = writeBuffer.Size = 0;
         }
 
-#endregion
+        #endregion
 
-#region Main async I/O loop
+        #region Main async I/O loop
 
         internal AsyncOperationStatus ProcessHandshake(
             AsyncOperationStatus status,
@@ -972,7 +972,7 @@ namespace Mono.Net.Security
             }
         }
 
-#endregion
+        #endregion
 
         public override bool IsServer
         {

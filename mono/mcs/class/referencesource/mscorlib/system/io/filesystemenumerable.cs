@@ -297,9 +297,17 @@ namespace System.IO
 #if FEATURE_CORECLR
                 if (checkHost)
                 {
-                    FileSecurityState state1 = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandPaths[0]);
+                    FileSecurityState state1 = new FileSecurityState(
+                        FileSecurityStateAccess.PathDiscovery,
+                        String.Empty,
+                        demandPaths[0]
+                    );
                     state1.EnsureState();
-                    FileSecurityState state2 = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandPaths[1]);
+                    FileSecurityState state2 = new FileSecurityState(
+                        FileSecurityStateAccess.PathDiscovery,
+                        String.Empty,
+                        demandPaths[1]
+                    );
                     state2.EnsureState();
                 }
 #else
@@ -441,11 +449,19 @@ namespace System.IO
                 demandPaths[1] = Directory.GetDemandDir(normalizedSearchPath, true);
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
-                if (checkHost) 
+                if (checkHost)
                 {
-                    FileSecurityState state1 = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandPaths[0]);
+                    FileSecurityState state1 = new FileSecurityState(
+                        FileSecurityStateAccess.PathDiscovery,
+                        String.Empty,
+                        demandPaths[0]
+                    );
                     state1.EnsureState();
-                    FileSecurityState state2 = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandPaths[1]);
+                    FileSecurityState state2 = new FileSecurityState(
+                        FileSecurityStateAccess.PathDiscovery,
+                        String.Empty,
+                        demandPaths[1]
+                    );
                     state2.EnsureState();
                 }
 #else
@@ -813,9 +829,14 @@ namespace System.IO
         {
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
-            if(_checkHost) {
+            if (_checkHost)
+            {
                 String demandDir = Directory.GetDemandDir(fullPathToDemand, true);
-                FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandDir);
+                FileSecurityState state = new FileSecurityState(
+                    FileSecurityStateAccess.PathDiscovery,
+                    String.Empty,
+                    demandDir
+                );
                 state.EnsureState();
             }
 #else
@@ -942,7 +963,11 @@ namespace System.IO
             String name = result.FullPath;
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
-            FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, String.Empty, name);
+            FileSecurityState state = new FileSecurityState(
+                FileSecurityStateAccess.Read,
+                String.Empty,
+                name
+            );
             state.EnsureState();
 #else
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, name, false, false);
@@ -971,7 +996,11 @@ namespace System.IO
             String permissionName = name + "\\.";
 
 #if FEATURE_CORECLR
-            FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, String.Empty, permissionName);
+            FileSecurityState state = new FileSecurityState(
+                FileSecurityStateAccess.Read,
+                String.Empty,
+                permissionName
+            );
             state.EnsureState();
 #else
             FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, permissionName, false, false);
@@ -1016,7 +1045,11 @@ namespace System.IO
                 String permissionName = name + "\\.";
 
 #if FEATURE_CORECLR
-                FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, String.Empty, permissionName);
+                FileSecurityState state = new FileSecurityState(
+                    FileSecurityStateAccess.Read,
+                    String.Empty,
+                    permissionName
+                );
                 state.EnsureState();
 #else
                 FileIOPermission.QuickDemand(
@@ -1042,7 +1075,11 @@ namespace System.IO
 
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
-                FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, String.Empty, name);
+                FileSecurityState state = new FileSecurityState(
+                    FileSecurityStateAccess.Read,
+                    String.Empty,
+                    name
+                );
                 state.EnsureState();
 #else
                 FileIOPermission.QuickDemand(FileIOPermissionAccess.Read, name, false, false);

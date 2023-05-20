@@ -138,7 +138,13 @@ namespace System.Net.Security
 #if MONO
         private readonly SSPIConfiguration _Configuration;
 
-        internal SslState(Stream innerStream, RemoteCertValidationCallback certValidationCallback, LocalCertSelectionCallback  certSelectionCallback, EncryptionPolicy encryptionPolicy, SSPIConfiguration config)
+        internal SslState(
+            Stream innerStream,
+            RemoteCertValidationCallback certValidationCallback,
+            LocalCertSelectionCallback certSelectionCallback,
+            EncryptionPolicy encryptionPolicy,
+            SSPIConfiguration config
+        )
             : this(innerStream, certValidationCallback, certSelectionCallback, encryptionPolicy)
         {
             _Configuration = config;
@@ -245,8 +251,20 @@ namespace System.Net.Security
             try
             {
 #if MONO
-                _Context = new SecureChannel(targetHost, isServer, (SchProtocols)((int)enabledSslProtocols), serverCertificate, clientCertificates, remoteCertRequired,
-                    checkCertName, checkCertRevocationStatus, _EncryptionPolicy, _CertSelectionDelegate, _CertValidationDelegate, _Configuration);
+                _Context = new SecureChannel(
+                    targetHost,
+                    isServer,
+                    (SchProtocols)((int)enabledSslProtocols),
+                    serverCertificate,
+                    clientCertificates,
+                    remoteCertRequired,
+                    checkCertName,
+                    checkCertRevocationStatus,
+                    _EncryptionPolicy,
+                    _CertSelectionDelegate,
+                    _CertValidationDelegate,
+                    _Configuration
+                );
 #else
                 _Context = new SecureChannel(
                     targetHost,
@@ -1305,8 +1323,15 @@ namespace System.Net.Security
             }
             catch (Exception exception)
             {
-                if (!NclUtilities.IsFatal(exception)){
-                    GlobalLog.Assert("SslState::WriteCallback", "Exception while decoding context. type:" + exception.GetType().ToString() + " message:" + exception.Message);
+                if (!NclUtilities.IsFatal(exception))
+                {
+                    GlobalLog.Assert(
+                        "SslState::WriteCallback",
+                        "Exception while decoding context. type:"
+                            + exception.GetType().ToString()
+                            + " message:"
+                            + exception.Message
+                    );
                 }
                 throw;
             }
@@ -1902,7 +1927,10 @@ namespace System.Net.Security
                 }
 #if TRAVE
                 if (bytes[1] != 3)
-                    GlobalLog.Print("WARNING: SslState::DetectFraming() SSL protocol is > 3, trying SSL3 framing in retail = " + bytes[1].ToString("x", NumberFormatInfo.InvariantInfo));
+                    GlobalLog.Print(
+                        "WARNING: SslState::DetectFraming() SSL protocol is > 3, trying SSL3 framing in retail = "
+                            + bytes[1].ToString("x", NumberFormatInfo.InvariantInfo)
+                    );
 #endif
 
                 version = (bytes[1] << 8) | bytes[2];
@@ -1918,7 +1946,10 @@ namespace System.Net.Security
 #if TRAVE
             if ((bytes[0] & 0x80) == 0)
                 // We have a three-byte header format
-                GlobalLog.Print("WARNING: SslState::DetectFraming() SSL v <=2 HELLO has no high bit set for 3 bytes header, we are broken, received byte = " + bytes[0].ToString("x", NumberFormatInfo.InvariantInfo));
+                GlobalLog.Print(
+                    "WARNING: SslState::DetectFraming() SSL v <=2 HELLO has no high bit set for 3 bytes header, we are broken, received byte = "
+                        + bytes[0].ToString("x", NumberFormatInfo.InvariantInfo)
+                );
 #endif
 
             if (length < 3)
@@ -2134,7 +2165,8 @@ namespace System.Net.Security
 
 #if TRAVE
         [System.Diagnostics.Conditional("TRAVE")]
-        internal void DebugMembers() {
+        internal void DebugMembers()
+        {
             GlobalLog.Print("_HandshakeCompleted: " + _HandshakeCompleted);
             GlobalLog.Print("_CertValidationFailed: " + _CertValidationFailed);
             GlobalLog.Print("_Context: ");

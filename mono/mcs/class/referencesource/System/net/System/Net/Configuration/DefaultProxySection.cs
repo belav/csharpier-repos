@@ -315,33 +315,39 @@ namespace System.Net.Configuration
         static IWebProxy GetDefaultProxy_UsingOldMonoCode()
         {
 #if CONFIGURATION_DEP
-            DefaultProxySection sec = ConfigurationManager.GetSection ("system.net/defaultProxy") as DefaultProxySection;
+            DefaultProxySection sec =
+                ConfigurationManager.GetSection("system.net/defaultProxy") as DefaultProxySection;
             WebProxy p;
-            
+
             if (sec == null)
-                return GetSystemWebProxy ();
-            
+                return GetSystemWebProxy();
+
             ProxyElement pe = sec.Proxy;
-            
-            if ((pe.UseSystemDefault != ProxyElement.UseSystemDefaultValues.False) && (pe.ProxyAddress == null)) {
-                IWebProxy proxy = GetSystemWebProxy ();
-                
+
+            if (
+                (pe.UseSystemDefault != ProxyElement.UseSystemDefaultValues.False)
+                && (pe.ProxyAddress == null)
+            )
+            {
+                IWebProxy proxy = GetSystemWebProxy();
+
                 if (!(proxy is WebProxy))
                     return proxy;
-                
-                p = (WebProxy) proxy;
-            } else
-                p = new WebProxy ();
-            
+
+                p = (WebProxy)proxy;
+            }
+            else
+                p = new WebProxy();
+
             if (pe.ProxyAddress != null)
                 p.Address = pe.ProxyAddress;
-            
+
             if (pe.BypassOnLocal != ProxyElement.BypassOnLocalValues.Unspecified)
                 p.BypassProxyOnLocal = (pe.BypassOnLocal == ProxyElement.BypassOnLocalValues.True);
-                
-            foreach(BypassElement elem in sec.BypassList)
+
+            foreach (BypassElement elem in sec.BypassList)
                 p.BypassArrayList.Add(elem.Address);
-            
+
             return p;
 #else
             return GetSystemWebProxy();

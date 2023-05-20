@@ -200,7 +200,11 @@ namespace System.IO
                 {
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
-                    FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Read, DisplayPath, FullPath);
+                    FileSecurityState state = new FileSecurityState(
+                        FileSecurityStateAccess.Read,
+                        DisplayPath,
+                        FullPath
+                    );
                     state.EnsureState();
 #else
                     FileIOPermission.QuickDemand(
@@ -378,7 +382,11 @@ namespace System.IO
         {
 #if MONO_FEATURE_CAS
 #if FEATURE_CORECLR
-            FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Write, DisplayPath, FullPath);
+            FileSecurityState state = new FileSecurityState(
+                FileSecurityStateAccess.Write,
+                DisplayPath,
+                FullPath
+            );
             state.EnsureState();
 #else
             // For security check, path should be resolved to an absolute path.

@@ -48,7 +48,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-#region Scroll bar enumerations
+    #region Scroll bar enumerations
 
     /// <summary>
     /// An enumeration of scrollbar button types.
@@ -113,7 +113,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         All = SmallScroll | ResetZoom
     }
 
-#endregion
+    #endregion
 
     /// <summary>
     /// AxisScrollBar class represents the axis scrollbar. It is exposed as the
@@ -122,7 +122,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
     /// </summary>
     public class AxisScrollBar : IDisposable
     {
-#region Scroll bar fields
+        #region Scroll bar fields
 
         // Reference to the axis data scaleView class
         internal Axis axis = null;
@@ -166,9 +166,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
         // Position of the scrollbar (true - edge of PlotArea, false - edge of chart area)
         private bool _isPositionedInside = true;
 
-#endregion
+        #endregion
 
-#region Scroll bar constructors and initialization
+        #region Scroll bar constructors and initialization
 
         /// <summary>
         /// AxisScrollBar constructor.
@@ -190,9 +190,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// </summary>
         internal void Initialize() { }
 
-#endregion
+        #endregion
 
-#region Scroll bar properties
+        #region Scroll bar properties
 
         /// <summary>
         /// Gets or sets a flag which indicates whether scroll bar is positioned inside or outside of chart area.
@@ -279,7 +279,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
             SRCategory("CategoryAttributeAxisView"),
             Bindable(true),
 #if WEB_OLAP
-        DefaultValue(ScrollBarButtonStyle.SmallScroll),
+            DefaultValue(ScrollBarButtonStyle.SmallScroll),
 #else
             DefaultValue(ScrollBarButtonStyles.All),
 #endif
@@ -418,9 +418,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             }
         }
 
-#endregion
+        #endregion
 
-#region Scroll bar public methods
+        #region Scroll bar public methods
 
         /// <summary>
         /// This method returns true if the scrollbar is visible.
@@ -450,11 +450,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
                 }
 
 #if SUBAXES
-			// Scrollbar is not supported on the sub axis
-			if(this.axis.IsSubAxis)
-			{
-				return false;
-			}
+                // Scrollbar is not supported on the sub axis
+                if (this.axis.IsSubAxis)
+                {
+                    return false;
+                }
 #endif // SUBAXES
 
                 // Check if data scaleView size in percentage is less than 100%
@@ -462,9 +462,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             }
         }
 
-#endregion
+        #endregion
 
-#region Scroll bar painting methods
+        #region Scroll bar painting methods
 
         /// <summary>
         /// Draws axis scroll bar.
@@ -482,11 +482,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
             }
 
 #if SUBAXES
-			// Scrollbar not supported on sub axis
-			if( this.axis != null &&  this.axis.IsSubAxis)
-			{
-				return;
-			}
+            // Scrollbar not supported on sub axis
+            if (this.axis != null && this.axis.IsSubAxis)
+            {
+                return;
+            }
 #endif //SUBAXES
 
             // Set current scroll bar colors
@@ -955,9 +955,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             }
         }
 
-#endregion
+        #endregion
 
-#region Mouse events handling for the Scroll Bar
+        #region Mouse events handling for the Scroll Bar
 
         /// <summary>
         /// Mouse down event handler.
@@ -1399,9 +1399,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             return false;
         }
 
-#endregion
+        #endregion
 
-#region Scroll bar helper methods
+        #region Scroll bar helper methods
 
         /// <summary>
         /// Returns scroll bar button rectangle position in relative coordinates.
@@ -1858,11 +1858,11 @@ namespace System.Windows.Forms.DataVisualization.Charting
             }
 
 #if SUBAXES
-			// Scrollbar not supported on sub axis
-			if( this.axis != null &&  this.axis.IsSubAxis)
-			{
-				return 0.0;
-			}
+            // Scrollbar not supported on sub axis
+            if (this.axis != null && this.axis.IsSubAxis)
+            {
+                return 0.0;
+            }
 #endif //SUBAXES
 
             // Get scroll bar relative size depending on the axis location
@@ -2036,9 +2036,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             return buttonNumber;
         }
 
-#endregion
+        #endregion
 
-#region Coordinate convertion methods
+        #region Coordinate convertion methods
 
         /// <summary>
         /// Converts Relative size to Absolute size
@@ -2074,9 +2074,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             return relative;
         }
 
-#endregion
+        #endregion
 
-#region IDisposable Members
+        #region IDisposable Members
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
@@ -2104,7 +2104,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
             GC.SuppressFinalize(this);
         }
 
-#endregion
+        #endregion
     }
 
     /// <summary>
@@ -2112,7 +2112,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
     /// </summary>
     public class ScrollBarEventArgs : EventArgs
     {
-#region Private fields
+        #region Private fields
 
         // Private fields for properties values storage
         private Axis _axis = null;
@@ -2121,9 +2121,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
         private int _mousePositionY = 0;
         private ScrollBarButtonType _buttonType = ScrollBarButtonType.ThumbTracker;
 
-#endregion
+        #endregion
 
-#region Constructors
+        #region Constructors
 
         /// <summary>
         /// ScrollBarEventArgs constructor.
@@ -2145,9 +2145,9 @@ namespace System.Windows.Forms.DataVisualization.Charting
             this._buttonType = buttonType;
         }
 
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
 
         /// <summary>
         /// Axis containing the scrollbar of the event.
@@ -2204,7 +2204,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
             get { return _mousePositionY; }
         }
 
-#endregion
+        #endregion
     }
 }
 

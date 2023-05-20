@@ -484,7 +484,12 @@ namespace System.Diagnostics.Tracing
             );
 
 #if FEATURE_PERFTRACING
-            IntPtr eventHandle = nameInfo.GetOrCreateEventHandle(m_eventPipeProvider, m_eventHandleTable, descriptor, eventTypes);
+            IntPtr eventHandle = nameInfo.GetOrCreateEventHandle(
+                m_eventPipeProvider,
+                m_eventHandleTable,
+                descriptor,
+                eventTypes
+            );
             Debug.Assert(eventHandle != IntPtr.Zero);
 #else
             IntPtr eventHandle = IntPtr.Zero;
@@ -605,7 +610,12 @@ namespace System.Diagnostics.Tracing
                 }
 
 #if FEATURE_PERFTRACING
-                IntPtr eventHandle = nameInfo.GetOrCreateEventHandle(m_eventPipeProvider, m_eventHandleTable, descriptor, eventTypes);
+                IntPtr eventHandle = nameInfo.GetOrCreateEventHandle(
+                    m_eventPipeProvider,
+                    m_eventHandleTable,
+                    descriptor,
+                    eventTypes
+                );
                 Debug.Assert(eventHandle != IntPtr.Zero);
 #else
                 IntPtr eventHandle = IntPtr.Zero;
@@ -718,47 +728,47 @@ namespace System.Diagnostics.Tracing
                         descriptors[2].SetMetadata(pMetadata2, eventTypes.typeMetadata.Length, 1);
 #endif // FEATURE_MANAGED_ETW
 
-                    EventOpcode opcode = (EventOpcode)descriptor.Opcode;
+                        EventOpcode opcode = (EventOpcode)descriptor.Opcode;
 
-                    Guid activityId = Guid.Empty;
-                    Guid relatedActivityId = Guid.Empty;
-                    if (
-                        pActivityId == null
-                        && pRelatedActivityId == null
-                        && ((options.ActivityOptions & EventActivityOptions.Disable) == 0)
-                    )
-                    {
-                        if (opcode == EventOpcode.Start)
+                        Guid activityId = Guid.Empty;
+                        Guid relatedActivityId = Guid.Empty;
+                        if (
+                            pActivityId == null
+                            && pRelatedActivityId == null
+                            && ((options.ActivityOptions & EventActivityOptions.Disable) == 0)
+                        )
                         {
-                            Debug.Assert(
-                                eventName != null,
-                                "GetOpcodeWithDefault should not returned Start when eventName is null"
-                            );
-                            m_activityTracker.OnStart(
-                                m_name,
-                                eventName,
-                                0,
-                                ref activityId,
-                                ref relatedActivityId,
-                                options.ActivityOptions
-                            );
+                            if (opcode == EventOpcode.Start)
+                            {
+                                Debug.Assert(
+                                    eventName != null,
+                                    "GetOpcodeWithDefault should not returned Start when eventName is null"
+                                );
+                                m_activityTracker.OnStart(
+                                    m_name,
+                                    eventName,
+                                    0,
+                                    ref activityId,
+                                    ref relatedActivityId,
+                                    options.ActivityOptions
+                                );
+                            }
+                            else if (opcode == EventOpcode.Stop)
+                            {
+                                Debug.Assert(
+                                    eventName != null,
+                                    "GetOpcodeWithDefault should not returned Stop when eventName is null"
+                                );
+                                m_activityTracker.OnStop(m_name, eventName, 0, ref activityId);
+                            }
+                            if (activityId != Guid.Empty)
+                                pActivityId = &activityId;
+                            if (relatedActivityId != Guid.Empty)
+                                pRelatedActivityId = &relatedActivityId;
                         }
-                        else if (opcode == EventOpcode.Stop)
-                        {
-                            Debug.Assert(
-                                eventName != null,
-                                "GetOpcodeWithDefault should not returned Stop when eventName is null"
-                            );
-                            m_activityTracker.OnStop(m_name, eventName, 0, ref activityId);
-                        }
-                        if (activityId != Guid.Empty)
-                            pActivityId = &activityId;
-                        if (relatedActivityId != Guid.Empty)
-                            pRelatedActivityId = &relatedActivityId;
-                    }
 
-                    try
-                    {
+                        try
+                        {
 #if FEATURE_MANAGED_ETW
                             DataCollector.ThreadInstance.Enable(
                                 scratch,
@@ -783,27 +793,29 @@ namespace System.Diagnostics.Tracing
                             );
 #endif // FEATURE_MANAGED_ETW
 
-                        // TODO enable filtering for listeners.
-                        if (m_Dispatchers != null)
-                        {
-                            var eventData = (EventPayload?)(eventTypes.typeInfos[0].GetData(data));
-                            WriteToAllListeners(
-                                eventName,
-                                ref descriptor,
-                                nameInfo.tags,
-                                pActivityId,
-                                pRelatedActivityId,
-                                eventData
-                            );
+                            // TODO enable filtering for listeners.
+                            if (m_Dispatchers != null)
+                            {
+                                var eventData = (EventPayload?)(
+                                    eventTypes.typeInfos[0].GetData(data)
+                                );
+                                WriteToAllListeners(
+                                    eventName,
+                                    ref descriptor,
+                                    nameInfo.tags,
+                                    pActivityId,
+                                    pRelatedActivityId,
+                                    eventData
+                                );
+                            }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        if (ex is EventSourceException)
-                            throw;
-                        else
-                            ThrowEventSourceException(eventName, ex);
-                    }
+                        catch (Exception ex)
+                        {
+                            if (ex is EventSourceException)
+                                throw;
+                            else
+                                ThrowEventSourceException(eventName, ex);
+                        }
 #if FEATURE_MANAGED_ETW
                         finally
                         {

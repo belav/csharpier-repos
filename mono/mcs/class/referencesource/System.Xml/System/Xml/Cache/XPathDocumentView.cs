@@ -511,7 +511,9 @@ namespace System.Xml.XPath.DataBinding
                 default:
                     // should not map to a row
 #if DEBUG
-                    throw new NotSupportedException("Unable to bind row to: "+shape.BindingType.ToString());
+                    throw new NotSupportedException(
+                        "Unable to bind row to: " + shape.BindingType.ToString()
+                    );
 #else
                     throw new NotSupportedException();
 #endif

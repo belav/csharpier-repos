@@ -624,7 +624,8 @@ namespace System.Diagnostics.Tracing
             // Set the activity id via ETW.
             Interop.Advapi32.EventActivityIdControl(
                 Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_SET_ID,
-                ref activityId);
+                ref activityId
+            );
 #endif // TARGET_WINDOWS
 #endif // FEATURE_MANAGED_ETW
         }
@@ -648,7 +649,8 @@ namespace System.Diagnostics.Tracing
 #if TARGET_WINDOWS
                 Interop.Advapi32.EventActivityIdControl(
                     Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_GET_ID,
-                    ref retVal);
+                    ref retVal
+                );
 #elif FEATURE_PERFTRACING
                 EventPipeEventProvider.EventActivityIdControl(
                     Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_GET_ID,
@@ -698,7 +700,8 @@ namespace System.Diagnostics.Tracing
 #if FEATURE_PERFTRACING && TARGET_WINDOWS
             EventPipeEventProvider.EventActivityIdControl(
                 Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_SET_ID,
-                    ref oldActivityThatWillContinue);
+                ref oldActivityThatWillContinue
+            );
 #elif FEATURE_PERFTRACING
             EventPipeEventProvider.EventActivityIdControl(
                 Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_GET_SET_ID,
@@ -709,7 +712,8 @@ namespace System.Diagnostics.Tracing
 #if TARGET_WINDOWS
             Interop.Advapi32.EventActivityIdControl(
                 Interop.Advapi32.ActivityControl.EVENT_ACTIVITY_CTRL_GET_SET_ID,
-                    ref oldActivityThatWillContinue);
+                ref oldActivityThatWillContinue
+            );
 #endif // TARGET_WINDOWS
 #endif // FEATURE_MANAGED_ETW
 
@@ -1797,7 +1801,10 @@ namespace System.Diagnostics.Tracing
 #if TARGET_WINDOWS
                 // API available on OS >= Win 8 and patched Win 7.
                 // Disable only for FrameworkEventSource to avoid recursion inside exception handling.
-                if (this.Name != "System.Diagnostics.Eventing.FrameworkEventSource" || Environment.IsWindows8OrAbove)
+                if (
+                    this.Name != "System.Diagnostics.Eventing.FrameworkEventSource"
+                    || Environment.IsWindows8OrAbove
+                )
                 {
                     var providerMetadata = ProviderMetadata;
                     fixed (byte* pMetadata = providerMetadata)
@@ -1805,7 +1812,8 @@ namespace System.Diagnostics.Tracing
                         m_etwProvider.SetInformation(
                             Interop.Advapi32.EVENT_INFO_CLASS.SetTraits,
                             pMetadata,
-                            (uint)providerMetadata.Length);
+                            (uint)providerMetadata.Length
+                        );
                     }
                 }
 #endif // TARGET_WINDOWS
@@ -5080,13 +5088,13 @@ namespace System.Diagnostics.Tracing
                 try
                 {
 #endif
-                // Add every existing dispatcher to the new EventSource
-                for (
-                    EventListener? listener = s_Listeners;
-                    listener != null;
-                    listener = listener.m_Next
-                )
-                    newEventSource.AddListener(listener);
+                    // Add every existing dispatcher to the new EventSource
+                    for (
+                        EventListener? listener = s_Listeners;
+                        listener != null;
+                        listener = listener.m_Next
+                    )
+                        newEventSource.AddListener(listener);
 #if DEBUG
                 }
                 finally
@@ -5319,17 +5327,17 @@ namespace System.Diagnostics.Tracing
                         try
                         {
 #endif
-                        for (int i = 0; i < eventSourcesSnapshot.Length; i++)
-                        {
-                            WeakReference<EventSource> eventSourceRef = eventSourcesSnapshot[i];
-                            if (eventSourceRef.TryGetTarget(out EventSource? eventSource))
+                            for (int i = 0; i < eventSourcesSnapshot.Length; i++)
                             {
-                                EventSourceCreatedEventArgs args =
-                                    new EventSourceCreatedEventArgs();
-                                args.EventSource = eventSource;
-                                callback(this, args);
+                                WeakReference<EventSource> eventSourceRef = eventSourcesSnapshot[i];
+                                if (eventSourceRef.TryGetTarget(out EventSource? eventSource))
+                                {
+                                    EventSourceCreatedEventArgs args =
+                                        new EventSourceCreatedEventArgs();
+                                    args.EventSource = eventSource;
+                                    callback(this, args);
+                                }
                             }
-                        }
 #if DEBUG
                         }
                         finally

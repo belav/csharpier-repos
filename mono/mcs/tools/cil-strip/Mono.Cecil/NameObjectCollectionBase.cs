@@ -178,8 +178,8 @@ namespace System.Collections.Specialized
         {
             m_readonly = false;
 #if NET_1_0
-			m_hashprovider = CaseInsensitiveHashCodeProvider.Default;
-			m_comparer = CaseInsensitiveComparer.Default;
+            m_hashprovider = CaseInsensitiveHashCodeProvider.Default;
+            m_comparer = CaseInsensitiveComparer.Default;
 #else
             m_hashprovider = CaseInsensitiveHashCodeProvider.DefaultInvariant;
             m_comparer = CaseInsensitiveComparer.DefaultInvariant;
@@ -192,8 +192,8 @@ namespace System.Collections.Specialized
         {
             m_readonly = false;
 #if NET_1_0
-			m_hashprovider = CaseInsensitiveHashCodeProvider.Default;
-			m_comparer = CaseInsensitiveComparer.Default;
+            m_hashprovider = CaseInsensitiveHashCodeProvider.Default;
+            m_comparer = CaseInsensitiveComparer.Default;
 #else
             m_hashprovider = CaseInsensitiveHashCodeProvider.DefaultInvariant;
             m_comparer = CaseInsensitiveComparer.DefaultInvariant;

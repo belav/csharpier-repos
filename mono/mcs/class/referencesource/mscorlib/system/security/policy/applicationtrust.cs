@@ -217,13 +217,16 @@ namespace System.Security.Policy
             elRoot.AddAttribute("version", "1");
 
 #if FEATURE_CLICKONCE
-            if (m_appId != null) {
+            if (m_appId != null)
+            {
                 elRoot.AddAttribute("FullName", SecurityElement.Escape(m_appId.FullName));
             }
-            if (m_appTrustedToRun) {
+            if (m_appTrustedToRun)
+            {
                 elRoot.AddAttribute("TrustedToRun", "true");
             }
-            if (m_persist) {
+            if (m_persist)
+            {
                 elRoot.AddAttribute("Persist", "true");
             }
 #endif // FEATURE_CLICKONCE
@@ -244,7 +247,8 @@ namespace System.Security.Policy
             }
 
 #if FEATURE_CLICKONCE
-            if (ExtraInfo != null) {
+            if (ExtraInfo != null)
+            {
                 elRoot.AddChild(ObjectToXml("ExtraInfo", ExtraInfo));
             }
 #endif // FEATURE_CLICKONCE
@@ -261,19 +265,25 @@ namespace System.Security.Policy
 #if FEATURE_CLICKONCE
             m_appTrustedToRun = false;
             string isAppTrustedToRun = element.Attribute("TrustedToRun");
-            if (isAppTrustedToRun != null && String.Compare(isAppTrustedToRun, "true", StringComparison.Ordinal) == 0) {
+            if (
+                isAppTrustedToRun != null
+                && String.Compare(isAppTrustedToRun, "true", StringComparison.Ordinal) == 0
+            )
+            {
                 m_appTrustedToRun = true;
             }
 
             m_persist = false;
             string persist = element.Attribute("Persist");
-            if (persist != null && String.Compare(persist, "true", StringComparison.Ordinal) == 0) {
+            if (persist != null && String.Compare(persist, "true", StringComparison.Ordinal) == 0)
+            {
                 m_persist = true;
             }
 
             m_appId = null;
             string fullName = element.Attribute("FullName");
-            if (fullName != null && fullName.Length > 0) {
+            if (fullName != null && fullName.Length > 0)
+            {
                 m_appId = new ApplicationIdentity(fullName);
             }
 #endif // FEATURE_CLICKONCE
@@ -321,16 +331,20 @@ namespace System.Security.Policy
         }
 
 #if FEATURE_CLICKONCE
-        private static SecurityElement ObjectToXml (string tag, Object obj) {
+        private static SecurityElement ObjectToXml(string tag, Object obj)
+        {
             BCLDebug.Assert(obj != null, "You need to pass in an object");
 
             ISecurityEncodable encodableObj = obj as ISecurityEncodable;
 
             SecurityElement elObject;
-            if (encodableObj != null) {
+            if (encodableObj != null)
+            {
                 elObject = encodableObj.ToXml();
                 if (!elObject.Tag.Equals(tag))
-                    throw new ArgumentException(Environment.GetResourceString("Argument_InvalidXML"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_InvalidXML")
+                    );
             }
 
             MemoryStream stream = new MemoryStream();
@@ -343,12 +357,16 @@ namespace System.Security.Policy
             return elObject;
         }
 
-        private static Object ObjectFromXml (SecurityElement elObject) {
+        private static Object ObjectFromXml(SecurityElement elObject)
+        {
             BCLDebug.Assert(elObject != null, "You need to pass in a security element");
 
-            if (elObject.Attribute("class") != null) {
-                ISecurityEncodable encodableObj = XMLUtil.CreateCodeGroup(elObject) as ISecurityEncodable;
-                if (encodableObj != null) {
+            if (elObject.Attribute("class") != null)
+            {
+                ISecurityEncodable encodableObj =
+                    XMLUtil.CreateCodeGroup(elObject) as ISecurityEncodable;
+                if (encodableObj != null)
+                {
                     encodableObj.FromXml(elObject);
                     return encodableObj;
                 }

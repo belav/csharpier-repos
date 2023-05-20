@@ -38,7 +38,7 @@ namespace System.IO
         public override Encoding Encoding
         {
 #if FEATURE_CORECLR
-            [System.Security.SecuritySafeCritical] 
+            [System.Security.SecuritySafeCritical]
 #endif
             get
             {

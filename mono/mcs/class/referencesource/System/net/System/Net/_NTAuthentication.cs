@@ -466,7 +466,11 @@ namespace System.Net
             {
                 //
 #if DEBUG
-                GlobalLog.Assert(context == null || context.IdentityRequested, "NTAuthentication#{0}::.ctor|Authentication required when it wasn't expected.  (Maybe Credentials was changed on another thread?)", ValidationHelper.HashString(this));
+                GlobalLog.Assert(
+                    context == null || context.IdentityRequested,
+                    "NTAuthentication#{0}::.ctor|Authentication required when it wasn't expected.  (Maybe Credentials was changed on another thread?)",
+                    ValidationHelper.HashString(this)
+                );
 #endif
 
                 WindowsIdentity w = context == null ? null : context.Identity;
@@ -862,14 +866,23 @@ namespace System.Net
             {
                 SecurityStatus statusCode;
 #if TRAVE
-                try {
+                try
+                {
 #endif
                 decodedOutgoingBlob = GetOutgoingBlob(decodedIncomingBlob, true, out statusCode);
 #if TRAVE
-                } catch (Exception exception) {
-                    if (NclUtilities.IsFatal(exception)) throw;
+                }
+                catch (Exception exception)
+                {
+                    if (NclUtilities.IsFatal(exception))
+                        throw;
 
-                    GlobalLog.LeaveException("NTAuthentication#" + ValidationHelper.HashString(this) + "::GetOutgoingBlob", exception);
+                    GlobalLog.LeaveException(
+                        "NTAuthentication#"
+                            + ValidationHelper.HashString(this)
+                            + "::GetOutgoingBlob",
+                        exception
+                    );
                     throw;
                 }
 #endif
@@ -1190,17 +1203,38 @@ namespace System.Net
                     else
                     {
 #if WDIGEST_PREAUTH
-                        inSecurityBuffers = new SecurityBuffer[] {
+                        inSecurityBuffers = new SecurityBuffer[]
+                        {
                             new SecurityBuffer(null, BufferType.Token),
-                            new SecurityBuffer(WebHeaderCollection.HeaderEncoding.GetBytes(requestMethod), BufferType.Parameters),
-                            new SecurityBuffer(WebHeaderCollection.HeaderEncoding.GetBytes(requestedUri), BufferType.Parameters),
+                            new SecurityBuffer(
+                                WebHeaderCollection.HeaderEncoding.GetBytes(requestMethod),
+                                BufferType.Parameters
+                            ),
+                            new SecurityBuffer(
+                                WebHeaderCollection.HeaderEncoding.GetBytes(requestedUri),
+                                BufferType.Parameters
+                            ),
                             new SecurityBuffer(null, BufferType.Parameters),
                             outSecurityBuffer,
                         };
 
-                        statusCode = (SecurityStatus) SSPIWrapper.MakeSignature(GlobalSSPI.SSPIAuth, m_SecurityContext, inSecurityBuffers, 0);
+                        statusCode = (SecurityStatus)
+                            SSPIWrapper.MakeSignature(
+                                GlobalSSPI.SSPIAuth,
+                                m_SecurityContext,
+                                inSecurityBuffers,
+                                0
+                            );
 
-                        GlobalLog.Print("NTAuthentication#" + ValidationHelper.HashString(this) + "::GetOutgoingDigestBlob() SSPIWrapper.MakeSignature() returns statusCode:0x" + ((int) statusCode).ToString("x8", NumberFormatInfo.InvariantInfo) + " (" + statusCode.ToString() + ")");
+                        GlobalLog.Print(
+                            "NTAuthentication#"
+                                + ValidationHelper.HashString(this)
+                                + "::GetOutgoingDigestBlob() SSPIWrapper.MakeSignature() returns statusCode:0x"
+                                + ((int)statusCode).ToString("x8", NumberFormatInfo.InvariantInfo)
+                                + " ("
+                                + statusCode.ToString()
+                                + ")"
+                        );
 #else
                         statusCode = SecurityStatus.OK;
                         GlobalLog.Assert(

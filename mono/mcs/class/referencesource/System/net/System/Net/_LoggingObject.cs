@@ -777,8 +777,15 @@ namespace System.Net
         {
 #if MONO_FEATURE_WEB_STACK
 #if DEBUG
-            if (GetSwitchValue("SystemNetLogging", "System.Net logging module", false) &&
-                GetSwitchValue("SystemNetLog_ConnectionMonitor", "System.Net connection monitor thread", false)) {
+            if (
+                GetSwitchValue("SystemNetLogging", "System.Net logging module", false)
+                && GetSwitchValue(
+                    "SystemNetLog_ConnectionMonitor",
+                    "System.Net connection monitor thread",
+                    false
+                )
+            )
+            {
                 InitConnectionMonitor();
             }
 #endif // DEBUG
@@ -1145,7 +1152,7 @@ namespace System.Net
 
         // Default value for hang timer
 #if FEATURE_PAL // ROTORTODO - after speedups (like real JIT and GC) remove this
-        public const int DefaultTickValue = 1000*60*5; // 5 minutes
+        public const int DefaultTickValue = 1000 * 60 * 5; // 5 minutes
 #else
         public const int DefaultTickValue = 1000 * 60; // 60 secs
 #endif // FEATURE_PAL
@@ -1344,20 +1351,23 @@ namespace System.Net
 #if MONO_FEATURE_WEB_STACK
 
 #if DEBUG
-        private class HttpWebRequestComparer : IComparer {
-            public int Compare(
-                   object x1,
-                   object y1
-                   ) {
+        private class HttpWebRequestComparer : IComparer
+        {
+            public int Compare(object x1, object y1)
+            {
+                HttpWebRequest x = (HttpWebRequest)x1;
+                HttpWebRequest y = (HttpWebRequest)y1;
 
-                HttpWebRequest x = (HttpWebRequest) x1;
-                HttpWebRequest y = (HttpWebRequest) y1;
-
-                if (x.GetHashCode() == y.GetHashCode()) {
+                if (x.GetHashCode() == y.GetHashCode())
+                {
                     return 0;
-                } else if (x.GetHashCode() < y.GetHashCode()) {
+                }
+                else if (x.GetHashCode() < y.GetHashCode())
+                {
                     return -1;
-                } else if (x.GetHashCode() > y.GetHashCode()) {
+                }
+                else if (x.GetHashCode() > y.GetHashCode())
+                {
                     return 1;
                 }
 
@@ -1365,13 +1375,15 @@ namespace System.Net
             }
         }
 
-        private class ConnectionMonitorEntry {
+        private class ConnectionMonitorEntry
+        {
             public HttpWebRequest m_Request;
             public int m_Flags;
             public DateTime m_TimeAdded;
             public Connection m_Connection;
 
-            public ConnectionMonitorEntry(HttpWebRequest request, Connection connection, int flags) {
+            public ConnectionMonitorEntry(HttpWebRequest request, Connection connection, int flags)
+            {
                 m_Request = request;
                 m_Connection = connection;
                 m_Flags = flags;
@@ -1386,21 +1398,25 @@ namespace System.Net
 #endif
 
 #if DEBUG
-        private static void ConnectionMonitor() {
-            while(! s_ShutdownEvent.WaitOne(DefaultTickValue, false)) {
-                if (GlobalLog.EnableMonitorThread) {
+        private static void ConnectionMonitor()
+        {
+            while (!s_ShutdownEvent.WaitOne(DefaultTickValue, false))
+            {
+                if (GlobalLog.EnableMonitorThread)
+                {
 #if TRAVE
                     GlobalLog.Logobject.LoggingMonitorTick();
 #endif
                 }
 
                 int hungCount = 0;
-                lock (s_RequestList) {
+                lock (s_RequestList)
+                {
                     DateTime dateNow = DateTime.Now;
                     DateTime dateExpired = dateNow.AddSeconds(-DefaultTickValue);
-                    foreach (ConnectionMonitorEntry monitorEntry in s_RequestList.GetValueList() ) {
-                        if (monitorEntry != null &&
-                            (dateExpired > monitorEntry.m_TimeAdded))
+                    foreach (ConnectionMonitorEntry monitorEntry in s_RequestList.GetValueList())
+                    {
+                        if (monitorEntry != null && (dateExpired > monitorEntry.m_TimeAdded))
                         {
                             hungCount++;
 #if TRAVE
@@ -1410,25 +1426,34 @@ namespace System.Net
                                 " flags:" + monitorEntry.m_Flags);
 
 #endif
-                            monitorEntry.m_Connection.DebugMembers(monitorEntry.m_Request.GetHashCode());
+                            monitorEntry.m_Connection.DebugMembers(
+                                monitorEntry.m_Request.GetHashCode()
+                            );
                         }
                     }
                 }
-                Assert(hungCount == 0, "Warning: Hang Detected on Connection(s) of greater than {0} ms.  {1} request(s) hung.|Please Dump System.Net.GlobalLog.s_RequestList for pending requests, make sure your streams are calling Close(), and that your destination server is up.", DefaultTickValue, hungCount);
+                Assert(
+                    hungCount == 0,
+                    "Warning: Hang Detected on Connection(s) of greater than {0} ms.  {1} request(s) hung.|Please Dump System.Net.GlobalLog.s_RequestList for pending requests, make sure your streams are calling Close(), and that your destination server is up.",
+                    DefaultTickValue,
+                    hungCount
+                );
             }
         }
 #endif // DEBUG
 
 #if DEBUG
         [ReliabilityContract(Consistency.MayCorruptAppDomain, Cer.None)]
-        internal static void AppDomainUnloadEvent(object sender, EventArgs e) {
+        internal static void AppDomainUnloadEvent(object sender, EventArgs e)
+        {
             s_ShutdownEvent.Set();
         }
 #endif
 
 #if DEBUG
         [System.Diagnostics.Conditional("DEBUG")]
-        private static void InitConnectionMonitor() {
+        private static void InitConnectionMonitor()
+        {
             s_RequestList = new SortedList(new HttpWebRequestComparer(), 10);
             s_ShutdownEvent = new ManualResetEvent(false);
             AppDomain.CurrentDomain.DomainUnload += new EventHandler(AppDomainUnloadEvent);
@@ -1448,19 +1473,27 @@ namespace System.Net
         {
 #if DEBUG
             // null if the connection monitor is off
-            if(s_RequestList == null)
+            if (s_RequestList == null)
                 return;
 
-            lock(s_RequestList) {
-                Assert(!s_RequestList.ContainsKey(request), "s_RequestList.ContainsKey(request)|A HttpWebRequest should not be submitted twice.");
+            lock (s_RequestList)
+            {
+                Assert(
+                    !s_RequestList.ContainsKey(request),
+                    "s_RequestList.ContainsKey(request)|A HttpWebRequest should not be submitted twice."
+                );
 
-                ConnectionMonitorEntry requestEntry =
-                    new ConnectionMonitorEntry(request, connection, flags);
+                ConnectionMonitorEntry requestEntry = new ConnectionMonitorEntry(
+                    request,
+                    connection,
+                    flags
+                );
 
-                try {
+                try
+                {
                     s_RequestList.Add(request, requestEntry);
-                } catch {
                 }
+                catch { }
             }
 #endif
         }
@@ -1470,16 +1503,21 @@ namespace System.Net
         {
 #if DEBUG
             // null if the connection monitor is off
-            if(s_RequestList == null)
+            if (s_RequestList == null)
                 return;
 
-            lock(s_RequestList) {
-                Assert(s_RequestList.ContainsKey(request), "!s_RequestList.ContainsKey(request)|A HttpWebRequest should not be removed twice.");
+            lock (s_RequestList)
+            {
+                Assert(
+                    s_RequestList.ContainsKey(request),
+                    "!s_RequestList.ContainsKey(request)|A HttpWebRequest should not be removed twice."
+                );
 
-                try {
+                try
+                {
                     s_RequestList.Remove(request);
-                } catch {
                 }
+                catch { }
             }
 #endif
         }
@@ -1493,22 +1531,28 @@ namespace System.Net
         {
 #if DEBUG
             // null if the connection monitor is off
-            if(s_RequestList == null)
+            if (s_RequestList == null)
                 return;
 
-            lock(s_RequestList) {
-                if(!s_RequestList.ContainsKey(request)) {
+            lock (s_RequestList)
+            {
+                if (!s_RequestList.ContainsKey(request))
+                {
                     return;
                 }
 
-                ConnectionMonitorEntry requestEntry =
-                    new ConnectionMonitorEntry(request, connection, flags);
+                ConnectionMonitorEntry requestEntry = new ConnectionMonitorEntry(
+                    request,
+                    connection,
+                    flags
+                );
 
-                try {
+                try
+                {
                     s_RequestList.Remove(request);
                     s_RequestList.Add(request, requestEntry);
-                } catch {
                 }
+                catch { }
             }
 #endif
         }

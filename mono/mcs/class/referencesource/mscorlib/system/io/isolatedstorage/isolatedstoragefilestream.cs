@@ -259,7 +259,9 @@ namespace System.IO.IsolatedStorage
                         try
                         {
 #if FEATURE_ISOSTORE_LIGHT
-                            oldFileSize = IsolatedStorageFile.RoundToBlockSize((ulong)(FileInfo.UnsafeCreateFileInfo(m_FullPath).Length));
+                            oldFileSize = IsolatedStorageFile.RoundToBlockSize(
+                                (ulong)(FileInfo.UnsafeCreateFileInfo(m_FullPath).Length)
+                            );
 #else
                             oldFileSize = IsolatedStorageFile.RoundToBlockSize(
                                 (ulong)LongPathFile.GetLength(m_FullPath)
@@ -290,19 +292,19 @@ namespace System.IO.IsolatedStorage
 #endif
 
 #if FEATURE_ISOSTORE_LIGHT
-                m_fs = new FileStream(
-                    m_FullPath,
-                    mode,
-                    access,
-                    share,
-                    bufferSize,
-                    FileOptions.None,
-                    m_GivenPath,
-                    true
-                );
-            }
-            catch (Exception e)
-            {
+                    m_fs = new FileStream(
+                        m_FullPath,
+                        mode,
+                        access,
+                        share,
+                        bufferSize,
+                        FileOptions.None,
+                        m_GivenPath,
+                        true
+                    );
+                }
+                catch (Exception e)
+                {
 #else
                 m_fs = new FileStream(
                     m_FullPath,
@@ -325,18 +327,18 @@ namespace System.IO.IsolatedStorage
                         m_isf.UnreserveOneBlock();
 #endif // FEATURE_ISOLATED_STORAGE_QUOTA_ENFORCEMENT
 #if FEATURE_ISOSTORE_LIGHT
-                // IsoStore generally does not let arbitrary exceptions flow out: a
-                // IsolatedStorageException is thrown instead (see examples in IsolatedStorageFile.cs
-                // Keeping this scoped to coreclr just because changing the exception type thrown is a
-                // breaking change and that should not be introduced into the desktop without deliberation.
-                //
-                // Note that GetIsolatedStorageException may set InnerException. To the real exception
-                // Today it always does this, for debug and chk builds, and for other builds asks the host
-                // if it is okay to do so.
-                throw IsolatedStorageFile.GetIsolatedStorageException(
-                    "IsolatedStorage_Operation_ISFS",
-                    e
-                );
+                    // IsoStore generally does not let arbitrary exceptions flow out: a
+                    // IsolatedStorageException is thrown instead (see examples in IsolatedStorageFile.cs
+                    // Keeping this scoped to coreclr just because changing the exception type thrown is a
+                    // breaking change and that should not be introduced into the desktop without deliberation.
+                    //
+                    // Note that GetIsolatedStorageException may set InnerException. To the real exception
+                    // Today it always does this, for debug and chk builds, and for other builds asks the host
+                    // if it is okay to do so.
+                    throw IsolatedStorageFile.GetIsolatedStorageException(
+                        "IsolatedStorage_Operation_ISFS",
+                        e
+                    );
 #else
                 throw;
 #endif // FEATURE_ISOSTORE_LIGHT

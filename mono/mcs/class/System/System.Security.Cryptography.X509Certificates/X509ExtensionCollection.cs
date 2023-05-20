@@ -74,21 +74,34 @@ namespace System.Security.Cryptography.X509Certificates
 
                 X509Extension newt = null;
 #if FULL_AOT_RUNTIME
-				// non-extensible
-				switch (oid) {
-				case "2.5.29.14":
-					newt = new X509SubjectKeyIdentifierExtension (new AsnEncodedData (oid, raw_data), critical);
-					break;
-				case "2.5.29.15":
-					newt = new X509KeyUsageExtension (new AsnEncodedData (oid, raw_data), critical);
-					break;
-				case "2.5.29.19":
-					newt = new X509BasicConstraintsExtension (new AsnEncodedData (oid, raw_data), critical);
-					break;
-				case "2.5.29.37":
-					newt = new X509EnhancedKeyUsageExtension (new AsnEncodedData (oid, raw_data), critical);
-					break;
-				}
+                // non-extensible
+                switch (oid)
+                {
+                    case "2.5.29.14":
+                        newt = new X509SubjectKeyIdentifierExtension(
+                            new AsnEncodedData(oid, raw_data),
+                            critical
+                        );
+                        break;
+                    case "2.5.29.15":
+                        newt = new X509KeyUsageExtension(
+                            new AsnEncodedData(oid, raw_data),
+                            critical
+                        );
+                        break;
+                    case "2.5.29.19":
+                        newt = new X509BasicConstraintsExtension(
+                            new AsnEncodedData(oid, raw_data),
+                            critical
+                        );
+                        break;
+                    case "2.5.29.37":
+                        newt = new X509EnhancedKeyUsageExtension(
+                            new AsnEncodedData(oid, raw_data),
+                            critical
+                        );
+                        break;
+                }
 #else
                 object[] parameters = new object[2];
                 parameters[0] = new AsnEncodedData(oid, raw_data ?? Empty);

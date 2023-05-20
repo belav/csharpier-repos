@@ -488,21 +488,28 @@ namespace System.Diagnostics
             string type = null;
 
 #if CONFIGURATION_DEP
-			type = GetAttribute (attributes, "type", false, child);
-			if (type == null) {
-				// indicated by name.
-				TraceListener shared = GetSharedListeners (d) [name];
-				if (shared == null)
-					throw new ConfigurationException (String.Format ("Shared trace listener {0} does not exist.", name));
-				if (attributes.Count != 0)
-					throw new ConfigurationErrorsException (string.Format (
-						"Listener '{0}' references a shared " +
-						"listener and can only have a 'Name' " +
-						"attribute.", name));
-				shared.IndentSize = configValues.IndentSize;
-				listeners.Add (shared);
-				return;
-			}
+            type = GetAttribute(attributes, "type", false, child);
+            if (type == null)
+            {
+                // indicated by name.
+                TraceListener shared = GetSharedListeners(d)[name];
+                if (shared == null)
+                    throw new ConfigurationException(
+                        String.Format("Shared trace listener {0} does not exist.", name)
+                    );
+                if (attributes.Count != 0)
+                    throw new ConfigurationErrorsException(
+                        string.Format(
+                            "Listener '{0}' references a shared "
+                                + "listener and can only have a 'Name' "
+                                + "attribute.",
+                            name
+                        )
+                    );
+                shared.IndentSize = configValues.IndentSize;
+                listeners.Add(shared);
+                return;
+            }
 #else
             type = GetAttribute(attributes, "type", true, child);
 #endif
@@ -540,36 +547,43 @@ namespace System.Diagnostics
             l.Name = name;
 
 #if CONFIGURATION_DEP
-			string trace = GetAttribute (attributes, "traceOutputOptions", false, child);
-			if (trace != null) {
-				if (trace != trace.Trim ())
-					throw new ConfigurationErrorsException (string.Format (
-						"Invalid value '{0}' for 'traceOutputOptions'.",
-						trace), child);
+            string trace = GetAttribute(attributes, "traceOutputOptions", false, child);
+            if (trace != null)
+            {
+                if (trace != trace.Trim())
+                    throw new ConfigurationErrorsException(
+                        string.Format("Invalid value '{0}' for 'traceOutputOptions'.", trace),
+                        child
+                    );
 
-				TraceOptions trace_options;
-	
-				try {
-					trace_options = (TraceOptions) Enum.Parse (
-						typeof (TraceOptions), trace);
-				} catch (ArgumentException) {
-					throw new ConfigurationErrorsException (string.Format (
-						"Invalid value '{0}' for 'traceOutputOptions'.",
-						trace), child);
-				}
+                TraceOptions trace_options;
 
-				l.TraceOutputOptions = trace_options;
-			}
+                try
+                {
+                    trace_options = (TraceOptions)Enum.Parse(typeof(TraceOptions), trace);
+                }
+                catch (ArgumentException)
+                {
+                    throw new ConfigurationErrorsException(
+                        string.Format("Invalid value '{0}' for 'traceOutputOptions'.", trace),
+                        child
+                    );
+                }
 
-			string [] supported_attributes = l.GetSupportedAttributes ();
-			if (supported_attributes != null) {
-				for (int i = 0; i < supported_attributes.Length; i++) {
-					string key = supported_attributes [i];
-					string value = GetAttribute (attributes, key, false, child);
-					if (value != null)
-						l.Attributes.Add (key, value);
-				}
-			}
+                l.TraceOutputOptions = trace_options;
+            }
+
+            string[] supported_attributes = l.GetSupportedAttributes();
+            if (supported_attributes != null)
+            {
+                for (int i = 0; i < supported_attributes.Length; i++)
+                {
+                    string key = supported_attributes[i];
+                    string value = GetAttribute(attributes, key, false, child);
+                    if (value != null)
+                        l.Attributes.Add(key, value);
+                }
+            }
 #endif
 
             l.IndentSize = configValues.IndentSize;

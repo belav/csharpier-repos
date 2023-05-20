@@ -43,14 +43,14 @@ namespace Company.WebApplication1
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"))
-                    .EnableTokenAcquisitionToCallDownstreamApi()
+                .EnableTokenAcquisitionToCallDownstreamApi()
 #if (GenerateApi)
                         .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
 #endif
 #if (GenerateGraph)
                         .AddMicrosoftGraph(Configuration.GetSection("DownstreamApi"))
 #endif
-                        .AddInMemoryTokenCaches();
+                .AddInMemoryTokenCaches();
 #else
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
 #endif
@@ -59,9 +59,9 @@ namespace Company.WebApplication1
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #if (GenerateApi)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"))
-                    .EnableTokenAcquisitionToCallDownstreamApi()
-                        .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
-                        .AddInMemoryTokenCaches();
+                .EnableTokenAcquisitionToCallDownstreamApi()
+                .AddDownstreamWebApi("DownstreamApi", Configuration.GetSection("DownstreamApi"))
+                .AddInMemoryTokenCaches();
 #else
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"));
 #endif

@@ -843,7 +843,7 @@ namespace System.Security.Util
                     else if (className[classNameStart] == 'S')
 #else
                     // SiteMembershipCondition
-                    // ZoneMembershipCondition                                                                                                                                                              
+                    // ZoneMembershipCondition
                     if (className[classNameStart] == 'S')
 #endif // !FEATURE_PAL
                     {
@@ -894,7 +894,7 @@ namespace System.Security.Util
                         return new PublisherMembershipCondition();
                     else
 #endif // !FEATURE_PAL
-                        goto USEREFLECTION;
+                    goto USEREFLECTION;
 
                 case 29:
                     // StrongNameMembershipCondition

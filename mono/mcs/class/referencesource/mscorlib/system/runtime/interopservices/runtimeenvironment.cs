@@ -169,7 +169,8 @@ namespace System.Runtime.InteropServices
         [SuppressUnmanagedCodeSecurity]
         private static extern IntPtr GetRuntimeInterfaceImpl(
             [In, MarshalAs(UnmanagedType.LPStruct)] Guid clsid,
-            [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid);
+            [In, MarshalAs(UnmanagedType.LPStruct)] Guid riid
+        );
 #endif
 
         //

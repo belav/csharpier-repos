@@ -206,7 +206,12 @@ namespace System.Threading
             else
             {
 #endif
-            myHandle = SafeNativeMethods.CreateSemaphore(null, initialCount, maximumCount, name);
+                myHandle = SafeNativeMethods.CreateSemaphore(
+                    null,
+                    initialCount,
+                    maximumCount,
+                    name
+                );
 #if !FEATURE_PAL && !FEATURE_NETCORE
             }
 #endif
@@ -352,11 +357,13 @@ namespace System.Threading
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
 #endif
-        private static OpenExistingResult OpenExistingWorker(string name,
+        private static OpenExistingResult OpenExistingWorker(
+            string name,
 #if !FEATURE_PAL && !FEATURE_NETCORE
             SemaphoreRights rights,
 #endif
-            out Semaphore result)
+            out Semaphore result
+        )
         {
             if (name == null)
             {
