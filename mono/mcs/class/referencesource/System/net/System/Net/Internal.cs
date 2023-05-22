@@ -343,7 +343,7 @@ namespace System.Net
         {
 #if MONO
 #pragma warning disable 618
-            return Dns.GetHostByName (Dns.GetHostName ());
+            return Dns.GetHostByName(Dns.GetHostName());
 #pragma warning restore
 #else
             //

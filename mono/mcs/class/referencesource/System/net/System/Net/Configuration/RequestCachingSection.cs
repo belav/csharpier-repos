@@ -240,7 +240,10 @@ namespace System.Net.Configuration
 #if CORIOLIS
             if (section.DisableAllCaching)
             {
-                this.httpRequestCacheValidator = new HttpRequestCacheValidator(false, this.UnspecifiedMaximumAge);
+                this.httpRequestCacheValidator = new HttpRequestCacheValidator(
+                    false,
+                    this.UnspecifiedMaximumAge
+                );
                 this.disableAllCaching = true;
             }
             else

@@ -47,7 +47,7 @@ namespace System.Web.Compilation
             // Add the CodeCompileUnit to the compilation
             assemblyBuilder.AddCodeCompileUnit(this, codeCompileUnit);
 #else   // !FEATURE_PAL
-        throw new NotImplementedException("System.Configuration.Design - ROTORTODO");
+            throw new NotImplementedException("System.Configuration.Design - ROTORTODO");
 #endif  // !FEATURE_PAL
         }
     }

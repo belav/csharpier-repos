@@ -36,7 +36,7 @@ namespace System
 #if !FEATURE_LEGACYNETCF
             | MacOSX
 #else // FEATURE_LEGACYNETCF
-| NokiaS60
+            | NokiaS60
 #endif // FEATURE_LEGACYNETCF
     }
 }

@@ -66,7 +66,9 @@ public class Program
         {
             builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
 #if (Hosted)
-            options.ProviderOptions.DefaultAccessTokenScopes.Add("https://qualified.domain.name/api.id.uri/api-scope");
+            options.ProviderOptions.DefaultAccessTokenScopes.Add(
+                "https://qualified.domain.name/api.id.uri/api-scope"
+            );
 #endif
         });
 #endif
